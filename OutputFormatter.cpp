@@ -179,6 +179,6 @@ std::string DLDL::OutputFormatter::MakeMakeFile() const
 		"	\n"
 		"clean:\n"
 		"	rm -f *.o\n"
-		"   rm -f *.out\n"
+		"	rm -f *.out\n"
 		"	printf \"Done\\n\"";
 }
