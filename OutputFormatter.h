@@ -18,11 +18,13 @@ namespace DLDL
 		DLDL_AstVisitor ast_visitor_;
 		std::string LanguageName;
 		OutputFormatter(const DLDL_AstVisitor& ast_visitor, const std::string& language_name);
-		std::string LanguageCompilation() const;
-		std::string LanguageInit() const;
 		std::string Format() const;
 		std::string MakeMakeFile() const;
+		std::string LanguageInit() const;
 		std::string LanguageGrammer() const;
+		std::string RetrieveLanguageDefinition() const;
+		std::string LanguageThreatAnalysis() const;
+		std::string LanguageCompilation() const;
 	private:
 		
 	};

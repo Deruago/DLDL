@@ -11,6 +11,8 @@ std::string DLDL::OutputFormatter::Format() const
 	return
 	LanguageInit() +
 	LanguageGrammer() +
+	RetrieveLanguageDefinition() +
+	LanguageThreatAnalysis() +
 	LanguageCompilation();
 }
 
@@ -23,6 +25,8 @@ std::string DLDL::OutputFormatter::LanguageInit() const
 	"#include \"Deamer/LanguageGen/LanguageDefMacros.h\"\n"
 	"#include \"Deamer/AstGen/AstGen.h\"\n"
 	"#include \"Deamer/AstGen/AstNodeDataStructures/AstBuilderType.h\"\n"
+	"#include \"Deamer/ThreatAnalyzer/Printer/ThreatPrinter.h\"\n"
+	"#include \"Deamer/ThreatAnalyzer/LanguageDefinition/LanguageDefinitionThreatAnalyzer.h\"\n"
 	"#include <iostream>\n"
 	"using namespace deamer;\n"
 	"\n"
@@ -55,11 +59,37 @@ std::string DLDL::OutputFormatter::LanguageGrammer() const
 			language_rules;
 }
 
-std::string DLDL::OutputFormatter::LanguageCompilation() const
+std::string DLDL::OutputFormatter::LanguageThreatAnalysis() const
+{
+	return
+			"    auto langThreatAnalyzer = deamer::threat::analyzer::languagedefinition::LanguageDefinitionThreatAnalyzer();\n"
+			"    auto threatData = langThreatAnalyzer.AnalyseLanguageDefinition(language_definition);\n"
+			"\n"
+			"    if (threatData.empty())\n"
+			"    {\n"
+			"        std::cout << \"No errors or warnings! Continuing with generation!\" << std::endl;\n"
+			"    }\n"
+			"    else\n"
+			"    {\n"
+			"        auto threatPrinter = deamer::threat::ThreatPrinter(threatData);\n"
+			"        threatPrinter.Print();\n"
+			"        if (langThreatAnalyzer.DoesThreatDataContainErrors(threatData))\n"
+			"        {\n"
+			"            return -1; // We found fatal errors so we wont continue\n"
+			"        }\n"
+			"    }\n";
+}
+
+std::string DLDL::OutputFormatter::RetrieveLanguageDefinition() const
 {
 	return 
 			"    language_definition_builder.SetLanguageName(\"" + LanguageName +"\");\n"
-			"    LanguageDefinition language_definition = language_definition_builder.GetLanguageDefinition();\n"
+			"    LanguageDefinition language_definition = language_definition_builder.GetLanguageDefinition();\n";
+}
+
+std::string DLDL::OutputFormatter::LanguageCompilation() const
+{
+	return
 			"    auto languageGen = new LanguageGen(LexerType_t::flex, ParserType_t::bison, language_definition);\n"
 			"    languageGen->DirTarget(\"\");\n"
 			"\n"
