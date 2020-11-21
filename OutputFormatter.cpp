@@ -38,7 +38,8 @@ std::string DLDL::OutputFormatter::LanguageInit() const
     "    #define currentLangDef language_definition_builder\n"
 	"\n"
     "    LanguageDefinitionBuilder language_definition_builder = LanguageDefinitionBuilder();\n"
-	"    language_definition_builder.SetTypeContinuation(TypeContinuation_t::vector);\n";
+	"    language_definition_builder.SetTypeContinuation(TypeContinuation_t::vector);\n"
+	"\n";
 }
 
 std::string DLDL::OutputFormatter::LanguageGrammer() const
@@ -77,14 +78,16 @@ std::string DLDL::OutputFormatter::LanguageThreatAnalysis() const
 			"        {\n"
 			"            return -1; // We found fatal errors so we wont continue\n"
 			"        }\n"
-			"    }\n";
+			"    }\n"
+			"\n";
 }
 
 std::string DLDL::OutputFormatter::RetrieveLanguageDefinition() const
 {
 	return 
 			"    language_definition_builder.SetLanguageName(\"" + LanguageName +"\");\n"
-			"    LanguageDefinition language_definition = language_definition_builder.GetLanguageDefinition();\n";
+			"    LanguageDefinition language_definition = language_definition_builder.GetLanguageDefinition();\n"
+			"\n";
 }
 
 std::string DLDL::OutputFormatter::LanguageCompilation() const
@@ -176,5 +179,6 @@ std::string DLDL::OutputFormatter::MakeMakeFile() const
 		"	\n"
 		"clean:\n"
 		"	rm -f *.o\n"
+		"   rm -f *.out\n"
 		"	printf \"Done\\n\"";
 }
