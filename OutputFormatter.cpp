@@ -57,7 +57,8 @@ std::string DLDL::OutputFormatter::LanguageGrammer() const
 	}
 	return	language_symbols +
 			"\n" +
-			language_rules;
+			language_rules +
+			"\n";
 }
 
 std::string DLDL::OutputFormatter::LanguageThreatAnalysis() const
@@ -158,7 +159,7 @@ std::string DLDL::OutputFormatter::MakeMakeFile() const
 		"	./$(LANGUAGE)CompilerGenerator.out\n"
 		"\n"
 		"Executable: $(LANGUAGE)Compiler.out\n"
-		"	$(CC) $(ARGS) $(wildcard AstNodes/AstVisitor/*.cpp) Compiler.cpp $(LANGUAGE)Compiler.out $(INTERNAL_INCLUDES) $(EXT_LIBS) -o $(LANGUAGE).out\n"
+		"	$(CC) $(ARGS) $(wildcard AstNodes/AstVisitor/*.cpp) Compiler.cpp $(LANGUAGE)Compiler.out $(INTERNAL_INCLUDES) $(EXT_LIBS) -o $(LANGUAGE)Compiler\n"
 		"	make clean\n"
 		"\n"
 		"$(LANGUAGE)Compiler.out: all\n"
