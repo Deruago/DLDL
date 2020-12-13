@@ -64,8 +64,8 @@ std::string DLDL::OutputFormatter::LanguageGrammer() const
 std::string DLDL::OutputFormatter::LanguageThreatAnalysis() const
 {
 	return
-			"    auto langThreatAnalyzer = deamer::threat::analyzer::languagedefinition::LanguageDefinitionThreatAnalyzer();\n"
-			"    auto threatData = langThreatAnalyzer.AnalyseLanguageDefinition(language_definition);\n"
+			"    auto langThreatAnalyzer = deamer::threat::analyzer::languagedefinition::LanguageDefinitionThreatAnalyzer(*language_definition);\n"
+			"    auto threatData = langThreatAnalyzer.AnalyseLanguageDefinition();\n"
 			"\n"
 			"    if (threatData.empty())\n"
 			"    {\n"
@@ -87,22 +87,23 @@ std::string DLDL::OutputFormatter::RetrieveLanguageDefinition() const
 {
 	return 
 			"    language_definition_builder.SetLanguageName(\"" + LanguageName +"\");\n"
-			"    LanguageDefinition language_definition = language_definition_builder.GetLanguageDefinition();\n"
+			"    auto language_definition = language_definition_builder.GetLanguageDefinition();\n"
 			"\n";
 }
 
 std::string DLDL::OutputFormatter::LanguageCompilation() const
 {
 	return
-			"    auto languageGen = new LanguageGen(LexerType_t::flex, ParserType_t::bison, language_definition);\n"
+			"    auto languageGen = new LanguageGen(LexerType_t::flex, ParserType_t::bison, *language_definition);\n"
 			"    languageGen->DirTarget(\"\");\n"
 			"\n"
-			"    LanguageDefinitionPrinter().Print(language_definition);\n"
+			"    LanguageDefinitionPrinter().Print(*language_definition);\n"
 			"\n"
 			"    languageGen->Finish();\n"
 			"\n"
-			"    auto astGen = new AstGen(language_definition, AstBuilderType::visitor);\n"
+			"    auto astGen = new AstGen(*language_definition, AstBuilderType::visitor);\n"
 			"    astGen->CreateAstNodes();\n"
+			"    delete language_definition;\n"
 			"    return 0;\n"
 			"}\n";
 }
