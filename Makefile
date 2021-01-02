@@ -52,8 +52,12 @@ Executable: $(LANGUAGE)Compiler.out
 	sudo rm -f /bin/DLDL
 	sudo cp ./DLDL.out /bin/DLDL
 
-$(LANGUAGE)Compiler.out: all
+install: Executable
 
+uninstall:
+	sudo rm -f /bin/DLDL
+
+$(LANGUAGE)Compiler.out: all
 
 GeneratorClean:
 	rm -r -f Parser/
