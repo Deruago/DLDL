@@ -2,7 +2,7 @@
 
 ## Overview
 
-DLDL is a language made for creating compilers and languages. Its backend is supported by the Deamer compiler generator. DLDL contains a lot of tools/languages to create C++ deamer cc compatible code.
+DLDL is a language made for creating compilers and languages. Its backend is supported by the [Deamer compiler generator](https://github.com/Deruago/theDeamerProject). DLDL contains tools/languages to create C++ deamer cc compatible code.
 
 ## Functionality
 
@@ -14,7 +14,6 @@ DLDL supports abstractions such as:
 - IGNORE
 - GROUP
 - TERMINAL
-- NONTERMINAL
 
 It also supports threat analysis (using Deamer) giving useful compiler errors and warnings.
 
