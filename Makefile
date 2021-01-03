@@ -49,12 +49,14 @@ CompilerGenerator: full_clean GeneratorClean
 Executable: $(LANGUAGE)Compiler.out
 	$(CC) $(ARGS) $(wildcard AstNodes/AstVisitor/*.cpp) OutputFormatter.cpp Compiler.cpp $(LANGUAGE)Compiler.out $(INTERNAL_INCLUDES) $(EXT_LIBS) -o $(LANGUAGE).out
 	make clean
-	sudo rm -f /bin/DLDL
-	sudo cp ./DLDL.out /bin/DLDL
 
 install: Executable
 
-uninstall:
+install_and_put_in_bin_dir: install
+	sudo rm -f /bin/DLDL
+	sudo cp ./DLDL.out /bin/DLDL
+	
+uninstall_from_bin_dir:
 	sudo rm -f /bin/DLDL
 
 $(LANGUAGE)Compiler.out: all
