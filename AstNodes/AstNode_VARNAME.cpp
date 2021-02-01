@@ -3,6 +3,7 @@
 #include <Deamer/AstGen/AstInformation.h>
 #include <vector>
 #include <Deamer/AstGen/AstVisitor.h>
+
 DLDL::AstNode_VARNAME::AstNode_VARNAME(bool isNode, std::string astNodeName) : deamer::AstNode::AstNode(true, "VARNAME")
 
 {
@@ -27,12 +28,6 @@ DLDL::AstNode_VARNAME::AstNode_VARNAME(deamer::AstInformation* astInformation) :
 				{
 					newContent[newContent.size() - 1] = ' ';
 				}
-				/*
-				else if (slashEncountered == 2)
-				{
-					newContent[newContent.size() -1] = curChar;
-				}
-				*/
 				else
 				{
 					newContent += curChar;

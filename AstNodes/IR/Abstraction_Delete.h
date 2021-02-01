@@ -13,7 +13,7 @@ namespace DLDL
 		
 		std::vector<std::string> MakeFunctionCall() const override
 		{
-			return {"DELETENODE(" + Name + ", \"" + MakeRegex() + "\");\n"};
+			return {"DELETENODE(" + Name + ", \"" + MakeRegex(Regex) + "\");\n"};
 		}
 		Abstraction_Delete(std::vector<std::string> input, std::vector<std::string> content) : AbstractionSymbol(input, content)
 		{
@@ -26,24 +26,6 @@ namespace DLDL
 					Regex +=  + " ";
 				}
 			}
-		}
-		
-		std::string MakeRegex() const
-		{			
-			std::string updated_regex;
-			for(const char character : Regex)
-			{
-				switch(character)
-				{
-				case '\\':
-					updated_regex += "\\\\";
-					break;
-				default:
-					updated_regex += character;
-					break;
-				}
-			}
-			return updated_regex;
 		}
 	};
 }

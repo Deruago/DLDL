@@ -13,7 +13,7 @@ namespace DLDL
 		
 		std::vector<std::string> MakeFunctionCall() const override
 		{
-			return {"IGNORENODE(" + Name + ", \"" + MakeRegex() + "\");\n"};
+			return {"IGNORENODE(" + Name + ", \"" + MakeRegex(Regex) + "\");\n"};
 		}
 		std::vector<std::string> MakeImplementationPart() const override
 		{
@@ -30,24 +30,6 @@ namespace DLDL
 					Regex +=  + " ";
 				}
 			}
-		}
-		
-		std::string MakeRegex() const
-		{			
-			std::string updated_regex;
-			for(const char character : Regex)
-			{
-				switch(character)
-				{
-				case '\\':
-					updated_regex += "\\\\";
-					break;
-				default:
-					updated_regex += character;
-					break;
-				}
-			}
-			return updated_regex;
 		}
 	};
 }
