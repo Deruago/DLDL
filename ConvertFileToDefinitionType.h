@@ -1,0 +1,11 @@
+#ifndef DLDL_CONVERTFILETODEFINITIONTYPE_H
+#define DLDL_CONVERTFILETODEFINITIONTYPE_H
+
+namespace DLDL {
+	class ConvertFileToDefinitionType
+	{
+		
+	};
+}
+
+#endif //DLDL_CONVERTFILETODEFINITIONTYPE_H

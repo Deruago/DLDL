@@ -47,7 +47,7 @@ CompilerGenerator: full_clean GeneratorClean
 	./$(LANGUAGE)CompilerGenerator.out
 
 Executable: $(LANGUAGE)Compiler.out
-	$(CC) $(ARGS) $(wildcard AstNodes/AstVisitor/*.cpp) OutputFormatter.cpp Compiler.cpp $(LANGUAGE)Compiler.out $(INTERNAL_INCLUDES) $(EXT_LIBS) -o $(LANGUAGE).out
+	$(CC) $(ARGS) $(wildcard AstNodes/AstVisitor/*.cpp) $(wildcard Console/*.cpp) OutputFormatter.cpp Compiler.cpp $(LANGUAGE)Compiler.out $(INTERNAL_INCLUDES) $(EXT_LIBS) -o $(LANGUAGE).out
 	make clean
 
 install: Executable

@@ -7,6 +7,7 @@
 #include <Deamer/AstGen/AstTree.h>
 #include <Console/Argument.h>
 #include <Console/ArgumentType_t.h>
+#include <Console/ArgumentParser.h>
 #include <vector>
 
 namespace DLDL
@@ -14,6 +15,8 @@ namespace DLDL
     class DLDLCompiler : public deamer::DeamerCompilerAPI
     {
         private:
+            const ArgumentParser argumentParser;
+    	
 			const std::vector<DLDL::Argument> Arguments;
 			bool IsArgumentActive(const DLDL::ArgumentType_t type) const;
 			

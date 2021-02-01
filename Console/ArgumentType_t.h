@@ -14,6 +14,7 @@ namespace DLDL {
 		addThreatAnalysis,
 		allArguments,
 		autoCompile,
+		help,
 		
 		//reserved arguments
 		debugInformation,

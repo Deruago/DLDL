@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <Console/ArgumentParser.h>
 
 std::string RetrieveFilenameFromFileLocation(std::string fileLocation)
 {
@@ -27,25 +28,6 @@ std::string RetrieveFilenameFromFileLocation(std::string fileLocation)
 	}
 	
 	return fileLocation;
-}
-
-bool DLDL::DLDLCompiler::IsArgumentActive(const DLDL::ArgumentType_t type) const
-{
-	for(const auto argument : Arguments)
-	{
-		if (argument.type == type)
-		{
-			return argument.activated;
-		}
-		
-		// All arguments, activates every argument, thus encountering returns true
-		if (argument.type == DLDL::ArgumentType_t::allArguments)
-		{
-			return true;
-		}
-	}
-	
-	return false;
 }
 
 DLDL::DLDLCompiler::DLDLCompiler(const std::vector<DLDL::Argument>& arguments)
@@ -97,7 +79,7 @@ deamer::CompiledObject* DLDL::DLDLCompiler::CompileFile(std::string fileLocation
 
 void DLDL::DLDLCompiler::TryCompilingNewCompiler()
 {
-	if (IsArgumentActive(DLDL::ArgumentType_t::autoCompile))
+	if (argumentParser.IsArgumentActivatedInArguments(DLDL::ArgumentType_t::autoCompile, Arguments))
 	{
 		std::system("make CompilerGenerator && make Executable");
 	}
@@ -105,7 +87,7 @@ void DLDL::DLDLCompiler::TryCompilingNewCompiler()
 
 void DLDL::DLDLCompiler::PrintReformattedCode(const std::string reformatted_code)
 {
-	if (IsArgumentActive(DLDL::ArgumentType_t::showTextAfterFilePreProcessor))
+	if (argumentParser.IsArgumentActivatedInArguments(DLDL::ArgumentType_t::showTextAfterFilePreProcessor, Arguments))
 	{
 		PrintToConsole(reformatted_code);
 	}
@@ -113,7 +95,7 @@ void DLDL::DLDLCompiler::PrintReformattedCode(const std::string reformatted_code
 
 void DLDL::DLDLCompiler::PrintAST(deamer::AstNode* astnode)
 {
-	if (IsArgumentActive(DLDL::ArgumentType_t::showAST))
+	if (argumentParser.IsArgumentActivatedInArguments(DLDL::ArgumentType_t::showAST, Arguments))
 	{
 		DLDL_AstPrinter ast_printer = DLDL_AstPrinter();
 		ast_printer.Dispatch(*astnode);
@@ -135,7 +117,7 @@ void DLDL::DLDLCompiler::WriteToFile(const std::string& file_location, const std
 
 void DLDL::DLDLCompiler::PrintToConsole(const std::string& text)
 {
-	if (IsArgumentActive(DLDL::ArgumentType_t::showtext))
+	if (argumentParser.IsArgumentActivatedInArguments(DLDL::ArgumentType_t::showtext, Arguments))
 	{
 		std::cout << text << std::endl;
 	}
