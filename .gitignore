@@ -2,3 +2,7 @@
 *.out
 CppProperties.json
 .vs/*
+
+*build/*
+*out/*
+*build*/*
