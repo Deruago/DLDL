@@ -1,0 +1,6 @@
+#ifndef {{header_guard}}
+#define {{header_guard}}
+
+
+
+#endif // {{header_guard}}
