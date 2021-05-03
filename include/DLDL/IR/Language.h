@@ -1,0 +1,158 @@
+#ifndef DLDL_IR_LANGUAGE_H
+#define DLDL_IR_LANGUAGE_H
+
+#include "DLDL/IR/Type.h"
+#include <string>
+#include <vector>
+
+#include "IR.h"
+#include "IR_Config.h"
+#include "LPD.h"
+
+namespace DLDL::ir
+{
+	/*	\class Language
+	 *
+	 *	\brief Language contains references to its children and parents.
+	 *	It also contains information about its own LPD's;
+	 */
+	class Language
+	{
+	private:
+		std::string name;
+
+		mutable Language* parent = nullptr;
+		std::vector<Language*> children;
+
+		// IR and IR_Config combined makes an complete generatable LPD
+		std::vector<IR*> IRs;
+		std::vector<IR_Config*> IR_Configs;
+		
+	public:
+		Language(std::string name_) : name(name_)
+		{
+		}
+		virtual ~Language() = default;
+
+	public:
+		std::string GetName() const
+		{
+			return name;
+		}
+	public:
+		bool DoesIRExist(Type getType) const
+		{
+			for (auto* currentIR : IRs)
+			{
+				if (currentIR->GetType() == getType)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+		
+		bool DoesIR_ConfigExist(Type getType) const
+		{
+			for (auto* currentConfig : IR_Configs)
+			{
+				if (currentConfig->GetType() == getType)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		void AddIR(IR* newIR)
+		{
+			if (DoesIRExist(newIR->GetType()))
+			{
+				return;
+			}
+
+			IRs.push_back(newIR);
+		}
+
+		void AddIR_Config(IR_Config* newConfig)
+		{
+			if (DoesIR_ConfigExist(newConfig->GetType()))
+			{
+				return;
+			}
+
+			IR_Configs.push_back(newConfig);
+		}
+
+		void AddLanguage(Language* newLanguage)
+		{
+			newLanguage->parent = this;
+			children.push_back(newLanguage);
+		}
+
+		std::vector<IR*> GetIRs() const
+		{
+			return IRs;
+		}
+
+		std::vector<IR_Config*> GetIR_Configs() const
+		{
+			return IR_Configs;
+		}
+
+		std::vector<LPD> GetCurrentLPDs()
+		{
+			std::vector<LPD> LPDs;
+			
+			for (auto* ir : IRs)
+			{
+				bool found = false;
+				for (auto* ir_config : IR_Configs)
+				{
+					if (ir->GetType() == ir_config->GetType())
+					{
+						found = true;
+						LPDs.emplace_back(ir, ir_config);
+					}
+				}
+
+				if (!found)
+				{
+					auto* newIR_Config = new IR_Config(ir->GetType());
+					AddIR_Config(newIR_Config);
+					LPDs.emplace_back(ir, newIR_Config);
+				}
+			}
+
+			return LPDs;
+		}
+
+		std::vector<Language*> GetChildren() const
+		{
+			return children;
+		}
+
+		Language* GetParent() const
+		{
+			return parent;
+		}
+
+		std::vector<const Language*> GetParentPath() const
+		{
+			std::vector<const Language*> parentPath;
+			
+			const Language* currentLanguage = this;
+			while (currentLanguage != nullptr)
+			{
+				parentPath.push_back(currentLanguage);
+				currentLanguage = currentLanguage->parent;
+			}
+
+			return parentPath;
+		}
+	};
+}
+
+#endif // DLDL_IR_LANGUAGE_H

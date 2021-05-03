@@ -1,0 +1,10 @@
+Novalue: delete_abstraction		[Dd]elete:[ ]*
+Novalue: ignore_abstraction		[Ii]gnore:[ ]*
+Novalue: crash_abstraction		[Cc]rash:[ ]*
+Novalue: novalue_abstraction	[Nno]o[Vv]alue:[ ]*
+Novalue: standard_abstraction	[Ss]tandard:[ ]*
+Novalue: unknown_abstraction	[a-zA-Z0-9_\\\\$?!-+=]*[:][ ]*
+
+Standard: terminal		[a-zA-Z_]+
+Standard: regex			[ ][^\r\n]*
+Delete: escape_chars	[\n\r\t\f\b\a\v]
