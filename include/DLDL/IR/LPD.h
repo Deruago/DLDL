@@ -29,6 +29,16 @@ namespace DLDL::ir
 		{
 			return ir->GetType();
 		}
+
+		IR* GetIR() const
+		{
+			return ir;
+		}
+
+		IR_Config* GetIR_Config() const
+		{
+			return config;
+		}
 	};
 }
 

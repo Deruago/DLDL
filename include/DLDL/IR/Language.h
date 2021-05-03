@@ -39,6 +39,27 @@ namespace DLDL::ir
 		{
 			return name;
 		}
+
+		std::vector<std::string> GetParents() const
+		{
+			std::vector<std::string> path;
+			return GetParents(path);
+		}
+		
+		std::vector<std::string> GetParents(std::vector<std::string>& current) const
+		{
+			if (parent != nullptr)
+			{
+				parent->GetParents(current);
+				current.push_back(GetName());
+			}
+			else
+			{
+				current.push_back(GetName());
+			}
+
+			return current;
+		}
 	public:
 		bool DoesIRExist(Type getType) const
 		{

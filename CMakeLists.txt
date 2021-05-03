@@ -9,7 +9,7 @@ add_subdirectory(${DLDL_SOURCE_DIR}/DLDL_GRAMMAR)
 add_subdirectory(${DLDL_SOURCE_DIR}/extern/DST)
 
 add_library(DLDL_external_libraries STATIC "${DLDL_SOURCE_DIR}/lib/DLDL.cpp")
-target_link_libraries(DLDL_external_libraries PUBLIC Deamer DST_static_library)
+target_link_libraries(DLDL_external_libraries PUBLIC Deamer DST_static_library DLDL_LEXER_static_library DLDL_GRAMMAR_static_library)
 target_include_directories(DLDL_external_libraries PUBLIC "${DLDL_SOURCE_DIR}/extern" "${DLDL_SOURCE_DIR}/include"  "${DLDL_LEXER_SOURCE_DIR}/include" "${DLDL_GRAMMAR_SOURCE_DIR}/include")
 
 function(DLDL_add_external_library external_library_name source_files)
@@ -30,4 +30,4 @@ add_subdirectory(extern)
 add_subdirectory(lib)
 
 add_executable(DLDL_Main "main.cpp")
-target_link_libraries(DLDL_Main DLDL_static_library DLDL_LEXER_static_library DLDL_GRAMMAR_static_library)
+target_link_libraries(DLDL_Main DLDL_static_library)
