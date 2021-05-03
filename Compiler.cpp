@@ -10,19 +10,6 @@
 #include "./Console/ArgumentParser.h"
 #include "Console/FileTarget.h"
 
-#define if_in(check_value, vector_value, vector_member)\
-auto found_index = -1;\
-bool return_check = false;\
-for (auto i = 0; i < vector_value.size(); i++)\
-{\
-    if (vector_value[i]vector_member == check_value)\
-    {\
-        found_index = i;\
-        return_check = true;\
-    }\
-}\
-if (return_check)
-
 int main(int argc, char **argv)
 {
 	if (argc <= 1)
