@@ -17,33 +17,8 @@ namespace DLDL::generate::sub
 			auto* construction = DST::user::ConstructionGenerator().GenerateConstructionFromPath("./Template/Definition/Lexicon/lexicon.h.dst", "./Template/Definition/Lexicon/lexicon.h.setting.dst");
 
 			auto* lexicon = static_cast<ir::Lexicon*>(lpd.GetIR());
-			std::cout << "language full names\n";
-			std::string language_full_name_underscore;
-			for (auto lang : language->GetParents())
-			{
-				language_full_name_underscore += lang + "_";
-			}
 
-			if (!language_full_name_underscore.empty())
-			{
-				language_full_name_underscore.pop_back();
-			}
-			std::cout << language_full_name_underscore << '\n';
-			
-			std::string language_full_name;
-			for (auto lang : language->GetParents())
-			{
-				language_full_name += lang + "::";
-			}
-			if (!language_full_name.empty())
-			{
-				language_full_name.pop_back();
-				language_full_name.pop_back();
-			}
-			std::cout << language_full_name << '\n';
-
-			construction->SetVariable("language_full_name_underscore", "", { language_full_name_underscore });
-			construction->SetVariable("language_full_name", "", { language_full_name });
+			FillInDefaultVariablesInConstruction(*construction, language);
 			
 			for (const auto& terminal : lexicon->GetTerminals())
 			{
@@ -90,19 +65,6 @@ namespace DLDL::generate::sub
 			deamer::file::tool::File file("Lexicon", "cpp", "");
 
 			return file;
-		}
-
-	private:
-		std::string ReadInFile(const std::string& file)
-		{
-			const std::ifstream inputFile(file);
-
-			std::ostringstream sstr;
-			sstr << inputFile.rdbuf();
-
-			std::string input = sstr.str();
-
-			return input;
 		}
 	};
 }

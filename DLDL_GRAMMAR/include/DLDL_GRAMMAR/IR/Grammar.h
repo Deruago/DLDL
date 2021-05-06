@@ -13,10 +13,11 @@ namespace DLDL::ir
 {
 	struct ProductionRule
 	{
+		std::string nonterminal;
 		std::vector<std::string> tokens;
 
-		ProductionRule(std::vector<std::string> tokens_)
-			: tokens(std::move(tokens_))
+		ProductionRule(std::string nonterminal_, std::vector<std::string> tokens_)
+			: nonterminal(nonterminal_), tokens(std::move(tokens_))
 		{
 		}
 	};
@@ -92,7 +93,7 @@ namespace DLDL::ir
 			}
 		}
 
-		ProductionRule ConvertToProductionRule(std::string text)
+		ProductionRule ConvertToProductionRule(std::string text, std::string nonterminal)
 		{
 			std::vector<std::string> tokens;
 
@@ -118,9 +119,9 @@ namespace DLDL::ir
 			// DLDL way for defining nothing is using empty, but epsilon may also be used.
 			if (textLowered == "empty" || textLowered == "epsilon")
 			{
-				return ProductionRule({});
+				return ProductionRule(nonterminal, {});
 			}
-			
+			std::cout << "\n\n\n\n\n\t\t\tText: " << text << "\n\n\n\n\n\n\n\n";
 			for (auto character : text)
 			{
 				switch (character)
@@ -145,7 +146,7 @@ namespace DLDL::ir
 				tmp.clear();
 			}
 
-			return ProductionRule(tokens);
+			return ProductionRule(nonterminal, tokens);
 		}
 
 		void AddProductionRules(const std::string& nonterminal, const std::string& productionrule)
@@ -153,7 +154,7 @@ namespace DLDL::ir
 			// If the input line is not a production rule it internally throws an error.
 			try
 			{
-				const auto productionRuleConverted = ConvertToProductionRule(productionrule);
+				const auto productionRuleConverted = ConvertToProductionRule(productionrule, nonterminal);
 
 				GetNonTerminal(nonterminal).AddProduction(productionRuleConverted);
 				productionRules.push_back(productionRuleConverted);
@@ -178,7 +179,7 @@ namespace DLDL::ir
 		{
 			size_t index = 0;
 			bool found = false;
-			for (auto& nonterminal : nonterminals)
+			for (const auto& nonterminal : nonterminals)
 			{
 				if (nonterminal.name == name)
 				{
@@ -190,7 +191,7 @@ namespace DLDL::ir
 
 			if (found)
 			{
-				const auto nonterminal = nonterminals[index];
+				const auto& nonterminal = nonterminals[index];
 				nonterminals.erase(nonterminals.begin() + index);
 				nonterminals.push_front(nonterminal);
 			}

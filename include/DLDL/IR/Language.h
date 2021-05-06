@@ -8,6 +8,8 @@
 #include "IR.h"
 #include "IR_Config.h"
 #include "LPD.h"
+#include "SpecialDefinition/Generation.h"
+#include "SpecialDefinition/Identity.h"
 
 namespace DLDL::ir
 {
@@ -31,6 +33,28 @@ namespace DLDL::ir
 	public:
 		Language(std::string name_) : name(name_)
 		{
+			auto* defaultIdentity = new special::Identity(name);
+			defaultIdentity->SetAsDefaultImplementedByDLDL();
+			
+			AddIR(defaultIdentity);
+
+			auto* defaultGeneration = new special::Generation();
+			defaultGeneration->SetAsDefaultImplementedByDLDL();
+
+			// This is the tool for DeamerAst with C++ as target.
+			defaultGeneration->AddTool({ "CPP", special::ToolType::Ast });
+
+			defaultGeneration->AddTool({ "Flex", special::ToolType::Lexer });
+			defaultGeneration->AddIntegration("Flex", "Bison");
+			defaultGeneration->AddIntegration("Flex", "DeamerAST");
+			defaultGeneration->AddArgument("Flex", "Output-terminal-objects");
+			// defaultGeneration->AddArgument("Flex", "Debug");
+			defaultGeneration->AddTool({ "Bison", special::ToolType::Parser });
+			defaultGeneration->AddIntegration("Bison", "DeamerAST");
+			defaultGeneration->AddArgument("Bison", "Declare-deleted-terminals");
+			// defaultGeneration->AddArgument("Bison", "Debug");
+
+			AddIR(defaultGeneration);
 		}
 		virtual ~Language() = default;
 
@@ -63,15 +87,20 @@ namespace DLDL::ir
 	public:
 		bool DoesIRExist(Type getType) const
 		{
+			return GetIRIfExists(getType) != nullptr;
+		}
+
+		IR* GetIRIfExists(Type getType) const
+		{
 			for (auto* currentIR : IRs)
 			{
 				if (currentIR->GetType() == getType)
 				{
-					return true;
+					return currentIR;
 				}
 			}
 
-			return false;
+			return nullptr;
 		}
 		
 		bool DoesIR_ConfigExist(Type getType) const
@@ -87,10 +116,35 @@ namespace DLDL::ir
 			return false;
 		}
 
+		void ReplaceIR(IR* ir)
+		{
+			size_t index = 0;
+			bool found = false;
+			for (auto* ir_ : GetIRs())
+			{
+				if (ir_ == ir)
+				{
+					delete ir_;
+					found = true;
+					break;
+				}
+				index++;
+			}
+
+			if (!found)
+			{
+				return;
+			}
+			
+			IRs.erase(IRs.begin() + index);
+			AddIR(ir);
+		}
+
 		void AddIR(IR* newIR)
 		{
 			if (DoesIRExist(newIR->GetType()))
 			{
+				ReplaceIR(newIR);
 				return;
 			}
 

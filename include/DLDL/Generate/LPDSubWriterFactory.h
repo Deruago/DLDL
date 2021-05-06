@@ -4,6 +4,10 @@
 #include "DLDL/Generate/SubWriter.h"
 #include "DLDL/Generate/SubWriter/LexiconLPDWriter.h"
 #include "DLDL/Generate/SubWriter/GrammarLPDWriter.h"
+#include "DLDL/Generate/SubWriter/PrecedenceLPDWriter.h"
+#include "DLDL/Generate/SubWriter/AssociativityLPDWriter.h"
+#include "DLDL/Generate/SubWriter/GenerationLPDWriter.h"
+#include "DLDL/Generate/SubWriter/IdentityLPDWriter.h"
 
 #include "DLDL/IR/Type.h"
 #include <stdexcept>
@@ -22,13 +26,13 @@ namespace DLDL::generate
 			case ir::Type::Grammar:
 				return new sub::GrammarLPDWriter();
 			case ir::Type::Precedence:
-				break;
+				return new sub::PrecedenceLPDWriter();
 			case ir::Type::Associativity:
-				break;
+				return new sub::AssociativityLPDWriter();
 			case ir::Type::Generation:
-				break;
+				return new sub::GenerationLPDWriter();
 			case ir::Type::Identity:
-				break;
+				return new sub::IdentityLPDWriter();
 			case ir::Type::AstOptimization:
 				break;
 			case ir::Type::AstTranslation:

@@ -58,6 +58,9 @@ namespace DLDL::generate
 		{
 			deamer::file::tool::Directory includeDir("include");
 			deamer::file::tool::Directory libDir("lib");
+
+			CompilerGenerator.AddFile(LPDWriter::GetMain(languages));
+			CompilerGenerator.AddFile(LPDWriter::GetCMakeLists(languages));
 			
 			for (auto* language : languages)
 			{
@@ -77,6 +80,7 @@ namespace DLDL::generate
 				auto LPDs = language->GetCurrentLPDs();
 				for (auto& LPD : LPDs)
 				{
+					std::cout << static_cast<size_t>(LPD.GetType()) << '\n';
 					deamer::file::tool::File source =
 						LPDWriter::GetFileContentSourceFile(language, LPD);
 					languageSourceDir.AddFile(source);
