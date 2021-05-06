@@ -21,8 +21,8 @@ stmt
 	abstraction_declaration
 
 definition
-	abstraction NONTERMINAL production_rules NONTERMINAL_BLOCK_BREAK
-	NONTERMINAL production_rules NONTERMINAL_BLOCK_BREAK
+	abstraction NONTERMINAL production_rules
+	NONTERMINAL production_rules
 
 abstraction_declaration
 	abstraction NONTERMINAL
