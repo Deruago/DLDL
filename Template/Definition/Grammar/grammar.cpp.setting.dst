@@ -1,0 +1,5 @@
+{{nonterminal_initialization}}    = <{{nonterminal}}.Set(::deamer::language::type::definition::object::main::NonTerminal("{{nonterminal}}", { {{productionrule_references}} }));>
+{{productionrule_initialization}} = <{{productionrule}}.Set(::deamer::language::type::definition::object::main::ProductionRule({{token_references}}));>
+
+{{nonterminal_add_object}}    = <AddObject({{nonterminal}});>
+{{productionrule_add_object}} = <AddObject({{productionrule}});>

@@ -1,0 +1,50 @@
+#ifndef {{header_guard}}
+#define {{header_guard}}
+
+#include "Deamer/Compiler/Generator/Compiler.h"
+#include "{{language_full_name_slash}}/Language.h"
+
+{{children_compilergenerator_include.Variable_Field}}
+{{tool_includes.Variable_Field}}
+
+namespace {{language_full_name}}
+{
+	/*!	\class CompilerGenerator
+	 *
+	 *	\brief This contains the CompilerGenerator of the language {{language_full_name}}
+	 *
+	 *	\details The CompilerGenerator class generates the compiler and various ecosystems.
+	 *
+	 *	\note This is auto-generated via the DLDL definitions.
+	 */
+	class CompilerGenerator : public ::deamer::compiler::generator::Compiler<::{{language_full_name}}::Language>
+	{{children_compilergenerator_bases.Variable_Field}}
+	{
+	public:
+		CompilerGenerator()
+			: deamer::compiler::generator::Compiler<::{{language_full_name}}::Language>()
+			{{children_compilergenerator_bases_ctor.Variable_Field}}
+		{
+		}
+
+		deamer::file::compiler::Output Generate() override
+		{
+			// Retrieve the Language Definition (LD)
+			::deamer::file::compiler::Output output(::deamer::compiler::generator::Compiler<::{{language_full_name}}::Language>::GetLanguageDefinition());
+
+			{{add_children_compilergenerators.Variable_Field}}
+
+			// Initialize language outputs
+			{{language_output_initialization.Variable_Field}}
+
+			// The language generation targets
+			{{add_language_outputs.Variable_Field}}
+
+			return output;
+		}
+
+		~CompilerGenerator() override = default;
+	};
+}
+
+#endif // {{header_guard}}

@@ -1,0 +1,9 @@
+{{root_language_includes.Variable_Field}}
+#include "Deamer/File/Generate/Compiler.h"
+
+int main(int argc, char* argv[])
+{
+	{{generate_root_language.Variable_Field}}
+
+	return 0;
+}

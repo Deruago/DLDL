@@ -1,0 +1,13 @@
+{{header_guard}} = <{{language_full_name_underscore.Upper}}_GENERATION_H>
+
+{{generate_tools_declaration}} = <::deamer::type::SafeReserve{{left_angle_bracket}}::deamer::language::type::definition::object::main::Generate{{right_angle_bracket}} generate_{{generate_tool}};>
+{{integration_declaration}} = <::deamer::type::SafeReserve{{left_angle_bracket}}::deamer::language::type::definition::object::main::Integrate{{right_angle_bracket}} integrate_{{generate_tool_source}}And{{generate_tool_target}};>
+{{argument_declaration}} = <::deamer::type::SafeReserve{{left_angle_bracket}}::deamer::language::type::definition::object::main::GenerateArgument{{right_angle_bracket}} argument_{{generate_tool}}_{{argument}};>
+
+{{generate_tools_implementation}} = <generate_{{generate_tool}}.Set(::deamer::language::type::definition::object::main::Generate(::deamer::tool::type::Tool::{{generate_tool}}));>
+{{integration_implementation}} = <integrate_{{generate_tool_source}}And{{generate_tool_target}}.Set(::deamer::language::type::definition::object::main::Integrate(::deamer::tool::type::Tool::{{generate_tool_source}}, ::deamer::tool::type::Tool::{{generate_tool_target}}));>
+{{argument_implementation}} = <argument_{{generate_tool}}_{{argument}}.Set(::deamer::language::type::definition::object::main::GenerateArgument(::deamer::tool::type::Tool::{{generate_tool}}, "{{argument_string}}"));>
+
+{{generate_tools_add_object}} = <AddObject(generate_{{generate_tool}});>
+{{integration_add_object}} = <AddObject(integrate_{{generate_tool_source}}And{{generate_tool_target}});>
+{{argument_add_object}} = <AddObject(argument_{{generate_tool}}_{{argument}});>

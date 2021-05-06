@@ -1,0 +1,6 @@
+{{header_guard}} = <{{language_full_name_underscore.Upper}}_LANGUAGE_H>
+
+{{lpd_includes}} = <#include "{{language_full_name_slash}}/{{lpd}}.h">
+{{lpd_bases}} = <, ::{{language_full_name}}::{{lpd}}>
+{{lpd_public_bases}} = <, public ::{{language_full_name}}::{{lpd}}>
+{{lpd_bases_ctor}} = <, ::{{language_full_name}}::{{lpd}}::{{lpd}}(this)>

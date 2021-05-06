@@ -1,0 +1,7 @@
+{{root_language_includes}} = <#include "{{root_language}}/CompilerGenerator.h">
+
+{{generate_root_language}} =
+<	// Generate: {{root_language}}
+	::{{root_language}}::CompilerGenerator {{root_language}}_compiler;
+	::deamer::file::generate::Compiler {{root_language}}_WriteToDisk({{root_language}}_compiler.Generate());
+	{{root_language}}_WriteToDisk.Generate();>
