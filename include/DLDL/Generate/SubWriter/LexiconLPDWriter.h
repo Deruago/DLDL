@@ -1,7 +1,7 @@
 #ifndef DLDL_GENERATE_SUBWRITER_LEXICONLPDWRITER_H
 #define DLDL_GENERATE_SUBWRITER_LEXICONLPDWRITER_H
 
-#include "DST/User/ConstructionGenerator.h"
+#include "DLDL/Template/Definition/Lexicon/LexiconTemplate.h"
 
 namespace DLDL::generate::sub
 {
@@ -14,16 +14,17 @@ namespace DLDL::generate::sub
 		{
 			deamer::file::tool::File file("Lexicon", "h", "");
 
-			auto* construction = DST::user::ConstructionGenerator().GenerateConstructionFromPath("./Template/Definition/Lexicon/lexicon.h.dst", "./Template/Definition/Lexicon/lexicon.h.setting.dst");
-
 			auto* lexicon = static_cast<ir::Lexicon*>(lpd.GetIR());
 
-			FillInDefaultVariablesInConstruction(*construction, language);
+			auto generator = DLDL::filetemplate::LexiconTemplate();
+			
+			FillInDefaultVariablesInConstruction(generator, language);
 			
 			for (const auto& terminal : lexicon->GetTerminals())
 			{
-				construction->SetVariable("variable_name", "", { terminal.Name });
-				construction->SetVariable("variable_regex", "", { terminal.Regex });
+				generator.variable_name_->Set(terminal.Name);
+				generator.variable_regex_->Set(terminal.Regex);
+				
 				std::string abstraction = "::deamer::language::type::definition::object::main::SpecialType::Standard";
 				switch (terminal.Special)
 				{
@@ -45,17 +46,14 @@ namespace DLDL::generate::sub
 				default:
 					break;
 				}
-				construction->SetVariable("variable_abstraction", "", { abstraction });
+				generator.variable_abstraction_->Set(abstraction);
 
-				construction->ExpandVariableField("variable_declaration");
-				construction->ExpandVariableField("variable_initialization");
-				construction->ExpandVariableField("add_object");
+				generator.variable_declaration_->ExpandVariableField();
+				generator.variable_initialization_->ExpandVariableField();
+				generator.add_object_->ExpandVariableField();
 			}
 
-			file.SetFileContent(construction->Output());
-			std::cout << construction->Output();
-
-			delete construction;
+			file.SetFileContent(generator.GetOutput());
 			
 			return file;
 		}

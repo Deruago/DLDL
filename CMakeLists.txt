@@ -29,5 +29,7 @@ endfunction()
 add_subdirectory(extern)
 add_subdirectory(lib)
 
-add_executable(DLDL_Main "main.cpp")
-target_link_libraries(DLDL_Main DLDL_static_library)
+add_executable(DLDL "main.cpp")
+target_link_libraries(DLDL DLDL_static_library)
+
+install (TARGETS DLDL)

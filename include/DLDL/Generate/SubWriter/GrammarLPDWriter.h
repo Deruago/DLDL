@@ -1,6 +1,9 @@
 #ifndef DLDL_GENERATE_SUBWRITER_GRAMMARLPDWRITER_H
 #define DLDL_GENERATE_SUBWRITER_GRAMMARLPDWRITER_H
 
+#include "DLDL/Template/Definition/Grammar/GrammarHTemplate.h"
+#include "DLDL/Template/Definition/Grammar/GrammarCPPTemplate.h"
+
 namespace DLDL::generate::sub
 {
 	class GrammarLPDWriter : public SubWriter
@@ -14,16 +17,17 @@ namespace DLDL::generate::sub
 		{
 			deamer::file::tool::File file("Grammar", "h", "");
 
-			auto* construction = DST::user::ConstructionGenerator().GenerateConstructionFromPath("./Template/Definition/Grammar/grammar.h.dst", "./Template/Definition/Grammar/grammar.h.setting.dst");
-
 			auto* grammar = static_cast<ir::Grammar*>(lpd.GetIR());
 
-			FillInDefaultVariablesInConstruction(*construction, language);
+			auto generator = DLDL::filetemplate::GrammarTemplate();
+			
+			FillInDefaultVariablesInConstruction(generator, language);
 
 			for (const auto& nonterminal : grammar->GetNonTerminals())
 			{
-				construction->SetVariable("nonterminal", "", {nonterminal.name});
-				construction->ExpandVariableField("nonterminal_declaration");
+				generator.nonterminal_->Set(nonterminal.name);
+
+				generator.nonterminal_declaration_->ExpandVariableField();
 			}
 			
 			for (const auto& productionrule : grammar->GetProductionRules())
@@ -38,14 +42,12 @@ namespace DLDL::generate::sub
 					name += "_EMPTY";
 				}
 
-				construction->SetVariable("productionrule", "", { name });
-				construction->ExpandVariableField("productionrule_declaration");
+				generator.productionrule_->Set(name);
+				
+				generator.productionrule_declaration_->ExpandVariableField();
 			}
 
-			file.SetFileContent(construction->Output());
-			std::cout << construction->Output() << '\n';
-
-			delete construction;
+			file.SetFileContent(generator.GetOutput());
 			
 			return file;
 		}
@@ -55,10 +57,11 @@ namespace DLDL::generate::sub
 		{
 			deamer::file::tool::File file("Grammar", "cpp", "");
 
-			auto* construction = DST::user::ConstructionGenerator().GenerateConstructionFromPath("./Template/Definition/Grammar/grammar.cpp.dst", "./Template/Definition/Grammar/grammar.cpp.setting.dst");
-
 			auto* grammar = static_cast<ir::Grammar*>(lpd.GetIR());
-			FillInDefaultVariablesInConstruction(*construction, language);
+
+			auto generator = DLDL::filetemplate::GrammarCPPTemplate();
+			
+			FillInDefaultVariablesInConstruction(generator, language);
 
 			for (const auto& nonterminal : grammar->GetNonTerminals())
 			{
@@ -82,12 +85,12 @@ namespace DLDL::generate::sub
 				{
 					productionrule_references.pop_back();
 				}
-				
-				construction->SetVariable("nonterminal", "", { nonterminal.name });
-				construction->SetVariable("productionrule_references", "", { productionrule_references });
 
-				construction->ExpandVariableField("nonterminal_add_object");
-				construction->ExpandVariableField("nonterminal_initialization");
+				generator.nonterminal_->Set(nonterminal.name);
+				generator.productionrule_references_->Set(productionrule_references);
+
+				generator.nonterminal_add_object_->ExpandVariableField();
+				generator.nonterminal_initialization_->ExpandVariableField();
 			}
 
 			for (const auto& productionrule : grammar->GetProductionRules())
@@ -113,17 +116,15 @@ namespace DLDL::generate::sub
 					token_references.pop_back();
 					token_references += " }";
 				}
-				
-				construction->SetVariable("token_references", "", { token_references });
 
-				construction->SetVariable("productionrule", "", { name });
-				construction->ExpandVariableField("productionrule_add_object");
-				construction->ExpandVariableField("productionrule_initialization");
+				generator.token_references_->Set(token_references);
+				generator.productionrule_->Set(name);
+
+				generator.productionrule_add_object_->ExpandVariableField();
+				generator.productionrule_initialization_->ExpandVariableField();
 			}
 			
-			file.SetFileContent(construction->Output());
-
-			delete construction;
+			file.SetFileContent(generator.GetOutput());
 			
 			return file;
 		}

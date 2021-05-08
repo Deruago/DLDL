@@ -13,7 +13,7 @@ Standard: UNKNOWN_ABSTRACTION	[a-zA-Z0-9_\\$?!-+=]*[:][ \t]*
 
 / value nodes
 Standard: NONTERMINAL			[a-zA-Z_]+
-Standard: PRODUCTION_RULE		[ \t]+[^\r\n]*
+Standard: PRODUCTION_RULE		[ \t]+[^\n]*
 
 DELETE: ESCAPE_CHARS [\n\r\b\v\a\f\t ]*
 

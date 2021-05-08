@@ -67,9 +67,6 @@ namespace DLDL::generate
 				deamer::file::tool::Directory languageHeaderDir(language->GetName());
 				deamer::file::tool::Directory languageSourceDir(language->GetName());
 
-				std::cout << languageHeaderDir.GetThisDirectory() << '\n';
-				std::cout << languageSourceDir.GetThisDirectory() << '\n';
-
 				deamer::file::tool::File languageFile = LPDWriter::GetLanguage(language);
 				deamer::file::tool::File compilerGenerator =
 					LPDWriter::GetCompilerGenerator(language);
@@ -82,12 +79,11 @@ namespace DLDL::generate
 				{
 					std::cout << static_cast<size_t>(LPD.GetType()) << '\n';
 					deamer::file::tool::File source =
-						LPDWriter::GetFileContentSourceFile(language, LPD);
+						LPDWriter().GetFileContentSourceFile(language, LPD);
 					languageSourceDir.AddFile(source);
-					std::cout << "aaa\n";
 
 					deamer::file::tool::File header =
-						LPDWriter::GetFileContentHeaderFile(language, LPD);
+						LPDWriter().GetFileContentHeaderFile(language, LPD);
 					languageHeaderDir.AddFile(header);
 				}
 
@@ -106,6 +102,19 @@ namespace DLDL::generate
 			return CompilerGenerator;
 			// TODO: Add CMakeLists.txt and main.cpp to allow actual multi-compiler generation;
 			// TODO: Actually write to disk;
+		}
+
+		std::string GetLanguageTarget()
+		{
+			std::string output;
+			for (auto* language : languages)
+			{
+				output += language->GetName();
+			}
+
+			output += "_CompilerGenerator_Main";
+			
+			return output;
 		}
 
 	private:
@@ -128,11 +137,11 @@ namespace DLDL::generate
 			for (auto& LPD : LPDs)
 			{
 				deamer::file::tool::File source =
-					LPDWriter::GetFileContentSourceFile(language_, LPD);
+					LPDWriter().GetFileContentSourceFile(language_, LPD);
 				languageSourceDir.AddFile(source);
 
 				deamer::file::tool::File header =
-					LPDWriter::GetFileContentHeaderFile(language_, LPD);
+					LPDWriter().GetFileContentHeaderFile(language_, LPD);
 				languageHeaderDir.AddFile(header);
 			}
 

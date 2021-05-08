@@ -2,7 +2,6 @@
 #define DLDL_GENERATE_SUBWRITER_PRECEDENCELPDWRITER_H
 
 #include "DLDL/Generate/SubWriter.h"
-#include "DST/User/ConstructionGenerator.h"
 
 namespace DLDL::generate::sub
 {
@@ -15,13 +14,7 @@ namespace DLDL::generate::sub
 		{
 			deamer::file::tool::File file("Precedence", "h", "");
 
-			auto* construction = DST::user::ConstructionGenerator().GenerateConstructionFromPath("./Template/Definition/Precedence/precedence.h.dst", "./Template/Definition/Precedence/precedence.h.setting.dst");
-
 			//auto* precedence = static_cast<ir::Precedence*>(lpd.GetIR());
-
-			FillInDefaultVariablesInConstruction(*construction, language);
-
-			delete construction;
 			
 			return file;
 		}

@@ -32,7 +32,7 @@ int main()
 	{
 		std::cout << "Terminal:\n"
 				<< "\tName: " << terminal.Name << "\n\tRegex: " << terminal.Regex
-				  << "\n\tType: " << static_cast<size_t>(terminal.Special) << "\n\n";
+				  << "\n\tType: " << static_cast<size_t>(terminal.Special) << "\n";
 	}
 	
 	return 0;

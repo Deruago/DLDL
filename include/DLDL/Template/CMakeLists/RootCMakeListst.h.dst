@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.16)
+
+project({{project_name}}
+                      DESCRIPTION "Project for the language(s): {{languages}}"
+                      LANGUAGES CXX)
+
+find_package(Deamer REQUIRED)
+
+add_subdirectory(CompilerGenerator)
+{{language_directory.Variable_Field}}

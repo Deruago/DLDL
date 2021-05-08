@@ -121,7 +121,7 @@ namespace DLDL::ir
 			{
 				return ProductionRule(nonterminal, {});
 			}
-			std::cout << "\n\n\n\n\n\t\t\tText: " << text << "\n\n\n\n\n\n\n\n";
+			std::cout << "\n\n\n\t\t\tText: " << text << "\n\n\n\n";
 			for (auto character : text)
 			{
 				switch (character)

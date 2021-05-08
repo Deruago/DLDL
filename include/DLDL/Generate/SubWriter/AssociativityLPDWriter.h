@@ -2,7 +2,6 @@
 #define DLDL_GENERATE_SUBWRITER_ASSOCIATIVITYLPDWRITER_H
 
 #include "DLDL/Generate/SubWriter.h"
-#include "DST/User/ConstructionGenerator.h"
 
 namespace DLDL::generate::sub
 {
@@ -15,13 +14,7 @@ namespace DLDL::generate::sub
 		{
 			deamer::file::tool::File file("Associativity", "h", "");
 
-			auto* construction = DST::user::ConstructionGenerator().GenerateConstructionFromPath("./Template/Definition/Associativity/associativity.h.dst", "./Template/Definition/Associativity/associativity.h.setting.dst");
-
 			//auto* associativity = static_cast<ir::Associativity*>(lpd.GetIR());
-
-			FillInDefaultVariablesInConstruction(*construction, language);
-
-			delete construction;
 
 			return file;
 		}

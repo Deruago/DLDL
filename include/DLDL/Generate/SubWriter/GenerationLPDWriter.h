@@ -2,7 +2,7 @@
 #define DLDL_GENERATE_SUBWRITER_GENERATIONLPDWRITER_H
 
 #include "DLDL/Generate/SubWriter.h"
-#include "DST/User/ConstructionGenerator.h"
+#include "DLDL/Template/Definition/Generation/GenerationHTemplate.h"
 
 namespace DLDL::generate::sub
 {
@@ -15,52 +15,50 @@ namespace DLDL::generate::sub
 		{
 			deamer::file::tool::File file("Generation", "h", "");
 
-			auto* construction = DST::user::ConstructionGenerator().GenerateConstructionFromPath("./Template/Definition/Generation/generation.h.dst", "./Template/Definition/Generation/generation.h.setting.dst");
-
 			auto* generation = static_cast<ir::special::Generation*>(lpd.GetIR());
 
-			FillInDefaultVariablesInConstruction(*construction, language);
+			auto generator = DLDL::filetemplate::GenerationTemplate();
+
+			FillInDefaultVariablesInConstruction(generator, language);
 
 			for (auto tool : generation->GetTools())
 			{
 				std::string sourcetool;
-						  if (tool.type == ir::special::ToolType::Ast && tool.name == "CPP") {
-							  sourcetool = "DeamerAST";
-						  }
-						  else {
-							  sourcetool = tool.name;
-						  }
+				if (tool.type == ir::special::ToolType::Ast && tool.name == "CPP") {
+					sourcetool = "DeamerAST";
+				}
+				else {
+					sourcetool = tool.name;
+				}
 
-				construction->SetVariable("generate_tool", "", { sourcetool });
-				
+				generator.generate_tool_->Set(sourcetool);
+
 				for (auto integration : tool.integrations)
 				{
-					construction->SetVariable("generate_tool_source", "", { sourcetool });
-					construction->SetVariable("generate_tool_target", "", { integration.name });
+					generator.generate_tool_source_->Set(sourcetool);
+					generator.generate_tool_target_->Set(integration.name);
 
-					construction->ExpandVariableField("integration_declaration");
-					construction->ExpandVariableField("integration_implementation");
-					construction->ExpandVariableField("integration_add_object");
+					generator.integration_declaration_->ExpandVariableField();
+					generator.integration_implementation_->ExpandVariableField();
+					generator.integration_add_object_->ExpandVariableField();
 				}
-				
+
 				for (auto argument : tool.arguments)
 				{
-					construction->SetVariable("argument", "", { argument.GetArgumentNameUnderscored() });
-					construction->SetVariable("argument_string", "", { argument.GetArgumentName() });
+					generator.argument_->Set(argument.GetArgumentNameUnderscored());
+					generator.argument_string_->Set(argument.GetArgumentName());
 
-					construction->ExpandVariableField("argument_declaration");
-					construction->ExpandVariableField("argument_implementation");
-					construction->ExpandVariableField("argument_add_object");
+					generator.argument_declaration_->ExpandVariableField();
+					generator.argument_implementation_->ExpandVariableField();
+					generator.argument_add_object_->ExpandVariableField();
 				}
 
-				construction->ExpandVariableField("generate_tools_declaration");
-				construction->ExpandVariableField("generate_tools_implementation");
-				construction->ExpandVariableField("generate_tools_add_object");
+				generator.generate_tools_declaration_->ExpandVariableField();
+				generator.generate_tools_implementation_->ExpandVariableField();
+				generator.generate_tools_add_object_->ExpandVariableField();
 			}
-			
-			file.SetFileContent(construction->Output());
-			
-			delete construction;
+
+			file.SetFileContent(generator.GetOutput());
 
 			return file;
 		}

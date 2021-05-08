@@ -44,7 +44,7 @@ START_ABSTRACTION	([Ss]tart[:][ \t]*)
 GROUP_ABSTRACTION	([Gg]roup[:][ \t]*)
 UNKNOWN_ABSTRACTION	([a-zA-Z0-9_\\$?!-+=]*[:][ \t]*)
 NONTERMINAL	([a-zA-Z_]+)
-PRODUCTION_RULE	([ \t]+[^\r\n]*)
+PRODUCTION_RULE	([ \t]+[^\n]*)
 ESCAPE_CHARS	([\n\r\b\v\a\f\t ])
 
 %%

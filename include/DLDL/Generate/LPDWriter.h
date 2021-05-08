@@ -5,12 +5,17 @@
 #include "LPDSubWriterFactory.h"
 #include <Deamer/File/Tool/File.h>
 
+#include "DLDL/Template/Language/languageTemplate.h"
+#include "DLDL/Template/CompilerGenerator/compilergeneratorTemplate.h"
+#include "DLDL/Template/Main/MainTemplate.h"
+#include "DLDL/Template/CMakeLists/CMakeListsTemplate.h"
+
 namespace DLDL::generate
 {
 	class LPDWriter : public SubWriter
 	{
 	private:
-	private:
+	public:
 		LPDWriter() = default;
 		~LPDWriter() = default;
 
@@ -19,23 +24,21 @@ namespace DLDL::generate
 		{
 			deamer::file::tool::File file("Language", "h", "");
 
-			auto* construction = DST::user::ConstructionGenerator().GenerateConstructionFromPath("./Template/Language/language.h.dst", "./Template/Language/language.h.setting.dst");
+			auto generator = DLDL::filetemplate::languageTemplate();
 
-			FillInDefaultVariablesInConstruction(*construction, language);
+			FillInDefaultVariablesInConstruction(generator, language);
 
 			for (auto* ir : language->GetIRs())
 			{
-				construction->SetVariable("lpd", "", { GetTextFromIREnum(ir->GetType()) });
+				generator.lpd_->Set(GetTextFromIREnum(ir->GetType()));
 
-				construction->ExpandVariableField("lpd_includes");
-				construction->ExpandVariableField("lpd_bases");
-				construction->ExpandVariableField("lpd_public_bases");
-				construction->ExpandVariableField("lpd_bases_ctor");
+				generator.lpd_includes_->ExpandVariableField();
+				generator.lpd_bases_->ExpandVariableField();
+				generator.lpd_public_bases_->ExpandVariableField();
+				generator.lpd_bases_ctor_->ExpandVariableField();
 			}
 			
-			file.SetFileContent(construction->Output());
-
-			delete construction;
+			file.SetFileContent(generator.GetOutput());
 
 			return file;
 		}
@@ -44,18 +47,19 @@ namespace DLDL::generate
 		{
 			deamer::file::tool::File file("CompilerGenerator", "h", "");
 
-			auto* construction = DST::user::ConstructionGenerator().GenerateConstructionFromPath("./Template/CompilerGenerator/compilergenerator.h.dst", "./Template/CompilerGenerator/compilergenerator.h.setting.dst");
+			auto generator = DLDL::filetemplate::compilergeneratorTemplate();
 
-			FillInDefaultVariablesInConstruction(*construction, language);
+			FillInDefaultVariablesInConstruction(generator, language);
 
 			for (auto* childLanguage : language->GetChildren())
 			{
-				construction->SetVariable("child", "", { childLanguage->GetName() });
+				generator.child_->Set(childLanguage->GetName());
+				generator.Reset(generator.child_);
 				
-				construction->ExpandVariableField("children_compilergenerator_include");
-				construction->ExpandVariableField("children_compilergenerator_bases");
-				construction->ExpandVariableField("children_compilergenerator_bases_ctor");
-				construction->ExpandVariableField("add_children_compilergenerators");
+				generator.children_compilergenerator_include_->ExpandVariableField();
+				generator.children_compilergenerator_bases_->ExpandVariableField();
+				generator.children_compilergenerator_bases_ctor_->ExpandVariableField();
+				generator.add_children_compilergenerators_->ExpandVariableField();
 			}
 
 			for (auto tool : static_cast<ir::special::Generation*>(language->GetIRIfExists(ir::Type::Generation))->GetTools())
@@ -72,20 +76,20 @@ namespace DLDL::generate
 				{
 					continue;
 				}
+				generator.tool_->Set(tool.name);
+				generator.tool_include_path_->Set(tool.path);
+				generator.tool_namespace_->Set(tool.namespace_);
+				generator.Reset(generator.tool_);
+				generator.Reset(generator.tool_include_path_);
+				generator.Reset(generator.tool_namespace_);
 				
-				construction->SetVariable("tool", "", { tool.name });
-				construction->SetVariable("tool_include_path", "", { tool.path });
-				construction->SetVariable("tool_namespace", "", { tool.namespace_ });
-
-				construction->ExpandVariableField("tool_includes");
-				construction->ExpandVariableField("add_language_outputs");
-				construction->ExpandVariableField("language_output_initialization");
+				generator.tool_includes_->ExpandVariableField();
+				generator.add_language_outputs_->ExpandVariableField();
+				generator.language_output_initialization_->ExpandVariableField();
 			}
 			
-			file.SetFileContent(construction->Output());
+			file.SetFileContent(generator.GetOutput());
 			
-			delete construction;
-
 			return file;
 		}
 
@@ -93,24 +97,23 @@ namespace DLDL::generate
 		{
 			deamer::file::tool::File file("Main", "cpp", "");
 
-			auto* construction = DST::user::ConstructionGenerator().GenerateConstructionFromPath("./Template/Main/main.cpp.dst", "./Template/Main/main.cpp.setting.dst");
+			auto generator = DLDL::filetemplate::mainTemplate();
 
 			for (auto* language : languages)
 			{
-				construction->SetVariable("root_language", "", { language->GetName() });
-				construction->ExpandVariableField("root_language_includes");
-				construction->ExpandVariableField("generate_root_language");
+				generator.root_language_->Set(language->GetName());
+
+				generator.root_language_includes_->ExpandVariableField();
+				generator.generate_root_language_->ExpandVariableField();
 			}
 			
-			file.SetFileContent(construction->Output());
-
-			delete construction;
+			file.SetFileContent(generator.GetOutput());
 
 			return file;
 		}
 
-		static deamer::file::tool::File GetFileContentSourceFile(ir::Language* language,
-																 const ir::LPD& lpd)
+		deamer::file::tool::File GetFileContentSourceFile(ir::Language* language,
+																 const ir::LPD& lpd) override
 		{
 			deamer::file::tool::File file = LPDSubWriterFactory::GetLPDSubWriter(lpd.GetType())
 												->GetFileContentSourceFile(language, lpd);
@@ -118,8 +121,8 @@ namespace DLDL::generate
 			return file;
 		}
 
-		static deamer::file::tool::File GetFileContentHeaderFile(ir::Language* language,
-																 const ir::LPD& lpd)
+		deamer::file::tool::File GetFileContentHeaderFile(ir::Language* language,
+																 const ir::LPD& lpd) override
 		{
 			deamer::file::tool::File file = LPDSubWriterFactory::GetLPDSubWriter(lpd.GetType())
 												->GetFileContentHeaderFile(language, lpd);
@@ -166,8 +169,8 @@ namespace DLDL::generate
 		{
 			deamer::file::tool::File file("CMakeLists", "txt", "");
 
-			auto* construction = DST::user::ConstructionGenerator().GenerateConstructionFromPath("./Template/CMakeLists/CMakeLists.txt.dst", "./Template/CMakeLists/CMakeLists.txt.setting.dst");
-
+			auto generator = DLDL::filetemplate::CMakeListsTemplate();
+			
 			std::string languages_string;
 			std::string languages_string_comma;
 			for (auto* language : languages)
@@ -187,12 +190,10 @@ namespace DLDL::generate
 				languages_string_comma.pop_back();
 			}
 
-			construction->SetVariable("languages", "", { languages_string });
-			construction->SetVariable("languages_comma", "", { languages_string_comma });
+			generator.languages_->Set(languages_string);
+			generator.languages_comma_->Set(languages_string_comma);
 
-			file.SetFileContent(construction->Output());
-
-			delete construction;
+			file.SetFileContent(generator.GetOutput());
 
 			return file;
 		}

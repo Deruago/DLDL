@@ -4,8 +4,6 @@
 #include "DLDL/IR/Language.h"
 #include <Deamer/File/Tool/File.h>
 
-#include "DST/Type/IR/Construction.h"
-
 namespace DLDL::generate
 {
 	class SubWriter
@@ -14,19 +12,21 @@ namespace DLDL::generate
 		SubWriter() = default;
 		virtual ~SubWriter() = default;
 	public:
-		static void FillInDefaultVariablesInConstruction(DST::type::ir::Construction& construction, ir::Language* language)
+		template<typename T>
+		static void FillInDefaultVariablesInConstruction(T& generator, ir::Language* language)
 		{
 			const std::string language_full_name = GetLanguageFullName(language);
 			const std::string language_full_name_double_colon = GetLanguageFullName(language);
 			const std::string language_full_name_underscore = GetLanguageFullName(language, "_");
 			const std::string language_full_name_slash = GetLanguageFullName(language, "/");
 			const std::string language_full_name_backslash = GetLanguageFullName(language, "\\");
-			
-			construction.SetVariable("language_full_name", "", { language_full_name });
-			construction.SetVariable("language_full_name_double_colon", "", { language_full_name_double_colon });
-			construction.SetVariable("language_full_name_underscore", "", { language_full_name_underscore });
-			construction.SetVariable("language_full_name_slash", "", { language_full_name_slash });
-			construction.SetVariable("language_full_name_backslash", "", { language_full_name_backslash });
+
+			generator.language_full_name_->Set(language_full_name);
+			generator.language_full_name_underscore_->Set(language_full_name_underscore);
+			generator.language_full_name_slash_->Set(language_full_name_slash);
+			generator.language_full_name_->Upper();
+			generator.language_full_name_underscore_->Upper();
+			generator.language_full_name_slash_->Upper();
 		}
 		
 		static std::string GetLanguageFullName(ir::Language* language, std::string separator = "::")

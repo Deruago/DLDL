@@ -2,7 +2,7 @@
 #define DLDL_GENERATE_SUBWRITER_IDENTITYLPDWRITER_H
 
 #include "DLDL/Generate/SubWriter.h"
-#include "DST/User/ConstructionGenerator.h"
+#include "DLDL/Template/Definition/Identity/IdentityTemplate.h"
 
 namespace DLDL::generate::sub
 {
@@ -15,20 +15,18 @@ namespace DLDL::generate::sub
 		{
 			deamer::file::tool::File file("Identity", "h", "");
 
-			auto* construction = DST::user::ConstructionGenerator().GenerateConstructionFromPath("./Template/Definition/Identity/identity.h.dst", "./Template/Definition/Identity/identity.h.setting.dst");
-
 			auto* identity = static_cast<ir::special::Identity*>(lpd.GetIR());
 
-			FillInDefaultVariablesInConstruction(*construction, language);
+			auto generator = DLDL::filetemplate::IdentityTemplate();
+			
+			FillInDefaultVariablesInConstruction(generator, language);
 
 			if (!identity->IsDefaultImplementedByDLDL())
 			{
-				construction->SetVariable("identity_name", "", { identity->GetName() });
+				generator.identity_name_->Set(identity->GetName());
 			}
 
-			file.SetFileContent(construction->Output());
-			
-			delete construction;
+			file.SetFileContent(generator.GetOutput());
 
 			return file;
 		}

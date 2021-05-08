@@ -40,7 +40,7 @@ static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_ob
 #endif //yyval
 %}
 
-COMMENT	([/][^\r\n]*)
+COMMENT	([/][^\n]*)
 DELETE_ABSTRACTION	([Dd]elete[:][ ]*)
 IGNORE_ABSTRACTION	([Ii]gnore[:][ ]*)
 NOVALUE_ABSTRACTION	((([Nn]o[Vv]alue)|([Vv]alue[Ll]ess))[:][ ]*)
@@ -48,7 +48,7 @@ CRASH_ABSTRACTION	([Cc]rash[:][ ]*)
 STANDARD_ABSTRACTION	([Ss]tandard[:][ ]*)
 UNKNOWN_ABSTRACTION	([a-zA-Z0-9_\\$?!-+=]*[:][ ]*)
 TERMINAL	([a-zA-Z_]+)
-REGEX	([ \t][^\r\n]*)
+REGEX	([ \t][^\n]*)
 ESCAPE_CHARS	([\n\r\t\f\b\a\v])
 
 %%
