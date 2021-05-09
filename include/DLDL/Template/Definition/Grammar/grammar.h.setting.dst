@@ -1,3 +1,5 @@
+{{file.namespace}} = <DLDL::filetemplate>
+
 {{header_guard}} = <{{language_full_name_underscore.Upper}}_GRAMMAR_H>
 
 {{nonterminal_declaration}} = <::deamer::type::SafeReserve{{left_angle_bracket}}::deamer::language::type::definition::object::main::NonTerminal{{right_angle_bracket}} {{nonterminal}};>

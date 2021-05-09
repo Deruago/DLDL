@@ -27,10 +27,12 @@ namespace DLDL::ir
 	private:
 		std::string relativeDirectory;
 		std::vector<Language*> languages;
+		const std::string definitionMap;
 
 	public:
-		ConstructLanguage(const std::string& relativeDirectory_)
-			: relativeDirectory(relativeDirectory_)
+		ConstructLanguage(const std::string& relativeDirectory_, const std::string& definitionMap_ = "definition")
+			:	relativeDirectory(relativeDirectory_),
+				definitionMap(definitionMap_)
 		{
 			/*if (relativeDirectory.rfind("./", 0) != 0)
 			{
@@ -58,7 +60,7 @@ namespace DLDL::ir
 					loweredPath += ::tolower(character);
 				}
 
-				if (loweredPath == "definition")
+				if (loweredPath == definitionMap)
 				{
 					relativeDirectory += loweredPath + "/";
 					return;
@@ -89,7 +91,6 @@ namespace DLDL::ir
 				std::string languageDirectory =
 					relativeDirectory +
 					item.path().generic_string().erase(0, relativeDirectory.size());
-				std::cout << languageDirectory << '\n';
 
 				Language* language = GetLanguageFromMap(languageDirectory);
 				rootLanguages.push_back(language);

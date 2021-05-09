@@ -18,6 +18,7 @@ function(DLDL_GRAMMAR_add_external_library external_library_name source_files)
 	target_include_directories(${external_library_full_name} PRIVATE "${DLDL_GRAMMAR_SOURCE_DIR}/extern" "${DLDL_GRAMMAR_SOURCE_DIR}/include")
 	target_compile_features(${external_library_full_name} PUBLIC cxx_std_17)
 	set_target_properties(${external_library_full_name} PROPERTIES LINKED_LANGUAGE CXX)
+	set_property(TARGET ${external_library_full_name} PROPERTY POSITION_INDEPENDENT_CODE ON)
 	
 	target_link_libraries(DLDL_GRAMMAR_external_libraries PUBLIC ${external_library_full_name})
 	

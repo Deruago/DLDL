@@ -892,7 +892,7 @@ namespace DLDL::filetemplate
 
 
 	public:
-		static std::vector<VariableBase*> variables_to_delete;
+		inline static std::vector<VariableBase*> variables_to_delete = std::vector<VariableBase*>();
 
 	public:
 		std::vector<VariableBase*> variables_;
@@ -974,9 +974,6 @@ namespace DLDL::filetemplate
 
 	public:
 	};
-
-	std::vector<DLDL::filetemplate::RootCMakeListstTemplate::VariableBase*> DLDL::filetemplate::RootCMakeListstTemplate::variables_to_delete;
-
 }
 
 #endif // DST_ROOTCMAKELISTSTTEMPLATE_h

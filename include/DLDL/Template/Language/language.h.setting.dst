@@ -1,3 +1,5 @@
+{{file.namespace}} = <DLDL::filetemplate>
+
 {{header_guard}} = <{{language_full_name_underscore.Upper}}_LANGUAGE_H>
 
 {{lpd_includes}} = <#include "{{language_full_name_slash}}/{{lpd}}.h">

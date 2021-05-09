@@ -1,6 +1,10 @@
 #ifndef DLDL_GENERATE_PROJECT_H
 #define DLDL_GENERATE_PROJECT_H
 
+#include <filesystem>
+#include <fstream>
+
+
 #include "DLDL/IR/Language.h"
 #include "Deamer/File/Tool/Directory.h"
 #include "Deamer/File/Tool/File.h"
@@ -77,7 +81,6 @@ namespace DLDL::generate
 				auto LPDs = language->GetCurrentLPDs();
 				for (auto& LPD : LPDs)
 				{
-					std::cout << static_cast<size_t>(LPD.GetType()) << '\n';
 					deamer::file::tool::File source =
 						LPDWriter().GetFileContentSourceFile(language, LPD);
 					languageSourceDir.AddFile(source);
@@ -100,8 +103,6 @@ namespace DLDL::generate
 			CompilerGenerator += includeDir;
 			
 			return CompilerGenerator;
-			// TODO: Add CMakeLists.txt and main.cpp to allow actual multi-compiler generation;
-			// TODO: Actually write to disk;
 		}
 
 		std::string GetLanguageTarget()
@@ -109,10 +110,10 @@ namespace DLDL::generate
 			std::string output;
 			for (auto* language : languages)
 			{
-				output += language->GetName();
+				output += language->GetName() + "_";
 			}
 
-			output += "_CompilerGenerator_Main";
+			output += "CompilerGenerator_Main";
 			
 			return output;
 		}
@@ -125,9 +126,6 @@ namespace DLDL::generate
 			deamer::file::tool::Directory languageHeaderDir(language_->GetName());
 			deamer::file::tool::Directory languageSourceDir(language_->GetName());
 
-			std::cout << languageHeaderDir.GetThisDirectory() << '\n';
-			std::cout << languageSourceDir.GetThisDirectory() << '\n';
-			
 			deamer::file::tool::File languageFile = LPDWriter::GetLanguage(language_);
 			deamer::file::tool::File compilerGenerator = LPDWriter::GetCompilerGenerator(language_);
 

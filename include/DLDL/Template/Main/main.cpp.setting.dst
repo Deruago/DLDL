@@ -1,3 +1,5 @@
+{{file.namespace}} = <DLDL::filetemplate>
+
 {{root_language_includes}} = <#include "{{root_language}}/CompilerGenerator.h">
 
 {{generate_root_language}} =

@@ -1,3 +1,5 @@
+{{file.namespace}} = <DLDL::filetemplate>
+
 {{header_guard}} = <{{language_full_name_underscore.Upper}}_GENERATION_H>
 
 {{generate_tools_declaration}} = <::deamer::type::SafeReserve{{left_angle_bracket}}::deamer::language::type::definition::object::main::Generate{{right_angle_bracket}} generate_{{generate_tool}};>

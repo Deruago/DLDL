@@ -3,7 +3,6 @@
 
 #include "DLDL_GRAMMAR/Ast/Listener/Listener.h"
 #include "DLDL_GRAMMAR/IR/Grammar.h"
-#include <iostream>
 
 namespace DLDL_GRAMMAR::ast::listener::user
 {

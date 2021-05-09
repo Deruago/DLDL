@@ -1,3 +1,5 @@
+{{file.namespace}} = <DLDL::filetemplate>
+
 {{project_name}} = <{{languages}}_CompilerGenerator>
 
 {{language_generation_target}} = <{{languages}}_CompilerGenerator_Main>

@@ -1,3 +1,5 @@
+{{file.namespace}} = <DLDL::filetemplate>
+
 {{header_guard}} = <{{language_full_name_underscore.Upper}}_COMPILERGENERATOR_H>
 
 {{tool_includes}} = <#include "{{tool_include_path}}">

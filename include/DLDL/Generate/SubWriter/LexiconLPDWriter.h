@@ -1,6 +1,7 @@
 #ifndef DLDL_GENERATE_SUBWRITER_LEXICONLPDWRITER_H
 #define DLDL_GENERATE_SUBWRITER_LEXICONLPDWRITER_H
 
+#include "DLDL_LEXER/IR/Lexicon.h"
 #include "DLDL/Template/Definition/Lexicon/LexiconTemplate.h"
 
 namespace DLDL::generate::sub

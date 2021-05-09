@@ -1432,7 +1432,7 @@ namespace DLDL::filetemplate
 
 
 	public:
-		static std::vector<VariableBase*> variables_to_delete;
+		inline static std::vector<VariableBase*> variables_to_delete = std::vector<VariableBase*>();
 
 	public:
 		std::vector<VariableBase*> variables_;
@@ -1557,9 +1557,6 @@ namespace DLDL::filetemplate
 			scope->Lower();
 		}
 	};
-
-	std::vector<DLDL::filetemplate::compilergeneratorTemplate::VariableBase*> DLDL::filetemplate::compilergeneratorTemplate::variables_to_delete;
-
 }
 
 #endif // DST_COMPILERGENERATORTEMPLATE_h

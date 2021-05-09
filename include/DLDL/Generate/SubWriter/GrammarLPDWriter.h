@@ -1,6 +1,7 @@
 #ifndef DLDL_GENERATE_SUBWRITER_GRAMMARLPDWRITER_H
 #define DLDL_GENERATE_SUBWRITER_GRAMMARLPDWRITER_H
 
+#include "DLDL_GRAMMAR/IR/Grammar.h"
 #include "DLDL/Template/Definition/Grammar/GrammarHTemplate.h"
 #include "DLDL/Template/Definition/Grammar/GrammarCPPTemplate.h"
 

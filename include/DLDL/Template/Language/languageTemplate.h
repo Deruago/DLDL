@@ -1117,7 +1117,7 @@ namespace DLDL::filetemplate
 
 
 	public:
-		static std::vector<VariableBase*> variables_to_delete;
+		inline static std::vector<VariableBase*> variables_to_delete = std::vector<VariableBase*>();
 
 	public:
 		std::vector<VariableBase*> variables_;
@@ -1216,9 +1216,6 @@ namespace DLDL::filetemplate
 
 	public:
 	};
-
-	std::vector<DLDL::filetemplate::languageTemplate::VariableBase*> DLDL::filetemplate::languageTemplate::variables_to_delete;
-
 }
 
 #endif // DST_LANGUAGETEMPLATE_h

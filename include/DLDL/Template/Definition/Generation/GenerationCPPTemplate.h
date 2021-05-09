@@ -19,195 +19,195 @@ namespace DST
 	{
 	public:
 		enum class Type
-{
-Unknown,
-Scope,
+		{
+			Unknown,
+			Scope,
 
-// User defined types
-argument_,
-argument_add_object_,
-argument_declaration_,
-argument_implementation_,
-argument_string_,
-file_,
-generate_tool_,
-generate_tool_source_,
-generate_tool_target_,
-generate_tools_add_object_,
-generate_tools_declaration_,
-generate_tools_implementation_,
-header_guard_,
-high_level_operation_,
-integration_add_object_,
-integration_declaration_,
-integration_implementation_,
-language_full_name_,
-language_full_name_underscore_,
-left_angle_bracket_,
-left_bracket_,
-left_curly_bracket_,
-right_angle_bracket_,
-right_bracket_,
-right_curly_bracket_,
+			// User defined types
+			argument_,
+			argument_add_object_,
+			argument_declaration_,
+			argument_implementation_,
+			argument_string_,
+			file_,
+			generate_tool_,
+			generate_tool_source_,
+			generate_tool_target_,
+			generate_tools_add_object_,
+			generate_tools_declaration_,
+			generate_tools_implementation_,
+			header_guard_,
+			high_level_operation_,
+			integration_add_object_,
+			integration_declaration_,
+			integration_implementation_,
+			language_full_name_,
+			language_full_name_underscore_,
+			left_angle_bracket_,
+			left_bracket_,
+			left_curly_bracket_,
+			right_angle_bracket_,
+			right_bracket_,
+			right_curly_bracket_,
 
 
-};
+		};
 
 
 		enum class ScopeType
-{
-Unknown,
+		{
+			Unknown,
 
-// Default
-Default_,
-Upper_,
-Lower_,
-Variable_Field_,
-Variable_Field_Separator_,
-Function_Field_,
-Function_Field_Separator_,
+			// Default
+			Default_,
+			Upper_,
+			Lower_,
+			Variable_Field_,
+			Variable_Field_Separator_,
+			Function_Field_,
+			Function_Field_Separator_,
 
 
-};
+		};
 
 
 		static constexpr const char* ConvertEnumToName(::DST::GenerationTemplate::Type enumerationValue)
-{
-	switch(enumerationValue)
-	{
-	case ::DST::GenerationTemplate::Type::argument_:
-{
-	return "argument";
-}
+		{
+			switch (enumerationValue)
+			{
+			case ::DST::GenerationTemplate::Type::argument_:
+			{
+				return "argument";
+			}
 
-case ::DST::GenerationTemplate::Type::argument_add_object_:
-{
-	return "argument_add_object";
-}
+			case ::DST::GenerationTemplate::Type::argument_add_object_:
+			{
+				return "argument_add_object";
+			}
 
-case ::DST::GenerationTemplate::Type::argument_declaration_:
-{
-	return "argument_declaration";
-}
+			case ::DST::GenerationTemplate::Type::argument_declaration_:
+			{
+				return "argument_declaration";
+			}
 
-case ::DST::GenerationTemplate::Type::argument_implementation_:
-{
-	return "argument_implementation";
-}
+			case ::DST::GenerationTemplate::Type::argument_implementation_:
+			{
+				return "argument_implementation";
+			}
 
-case ::DST::GenerationTemplate::Type::argument_string_:
-{
-	return "argument_string";
-}
+			case ::DST::GenerationTemplate::Type::argument_string_:
+			{
+				return "argument_string";
+			}
 
-case ::DST::GenerationTemplate::Type::file_:
-{
-	return "file";
-}
+			case ::DST::GenerationTemplate::Type::file_:
+			{
+				return "file";
+			}
 
-case ::DST::GenerationTemplate::Type::generate_tool_:
-{
-	return "generate_tool";
-}
+			case ::DST::GenerationTemplate::Type::generate_tool_:
+			{
+				return "generate_tool";
+			}
 
-case ::DST::GenerationTemplate::Type::generate_tool_source_:
-{
-	return "generate_tool_source";
-}
+			case ::DST::GenerationTemplate::Type::generate_tool_source_:
+			{
+				return "generate_tool_source";
+			}
 
-case ::DST::GenerationTemplate::Type::generate_tool_target_:
-{
-	return "generate_tool_target";
-}
+			case ::DST::GenerationTemplate::Type::generate_tool_target_:
+			{
+				return "generate_tool_target";
+			}
 
-case ::DST::GenerationTemplate::Type::generate_tools_add_object_:
-{
-	return "generate_tools_add_object";
-}
+			case ::DST::GenerationTemplate::Type::generate_tools_add_object_:
+			{
+				return "generate_tools_add_object";
+			}
 
-case ::DST::GenerationTemplate::Type::generate_tools_declaration_:
-{
-	return "generate_tools_declaration";
-}
+			case ::DST::GenerationTemplate::Type::generate_tools_declaration_:
+			{
+				return "generate_tools_declaration";
+			}
 
-case ::DST::GenerationTemplate::Type::generate_tools_implementation_:
-{
-	return "generate_tools_implementation";
-}
+			case ::DST::GenerationTemplate::Type::generate_tools_implementation_:
+			{
+				return "generate_tools_implementation";
+			}
 
-case ::DST::GenerationTemplate::Type::header_guard_:
-{
-	return "header_guard";
-}
+			case ::DST::GenerationTemplate::Type::header_guard_:
+			{
+				return "header_guard";
+			}
 
-case ::DST::GenerationTemplate::Type::high_level_operation_:
-{
-	return "high_level_operation";
-}
+			case ::DST::GenerationTemplate::Type::high_level_operation_:
+			{
+				return "high_level_operation";
+			}
 
-case ::DST::GenerationTemplate::Type::integration_add_object_:
-{
-	return "integration_add_object";
-}
+			case ::DST::GenerationTemplate::Type::integration_add_object_:
+			{
+				return "integration_add_object";
+			}
 
-case ::DST::GenerationTemplate::Type::integration_declaration_:
-{
-	return "integration_declaration";
-}
+			case ::DST::GenerationTemplate::Type::integration_declaration_:
+			{
+				return "integration_declaration";
+			}
 
-case ::DST::GenerationTemplate::Type::integration_implementation_:
-{
-	return "integration_implementation";
-}
+			case ::DST::GenerationTemplate::Type::integration_implementation_:
+			{
+				return "integration_implementation";
+			}
 
-case ::DST::GenerationTemplate::Type::language_full_name_:
-{
-	return "language_full_name";
-}
+			case ::DST::GenerationTemplate::Type::language_full_name_:
+			{
+				return "language_full_name";
+			}
 
-case ::DST::GenerationTemplate::Type::language_full_name_underscore_:
-{
-	return "language_full_name_underscore";
-}
+			case ::DST::GenerationTemplate::Type::language_full_name_underscore_:
+			{
+				return "language_full_name_underscore";
+			}
 
-case ::DST::GenerationTemplate::Type::left_angle_bracket_:
-{
-	return "left_angle_bracket";
-}
+			case ::DST::GenerationTemplate::Type::left_angle_bracket_:
+			{
+				return "left_angle_bracket";
+			}
 
-case ::DST::GenerationTemplate::Type::left_bracket_:
-{
-	return "left_bracket";
-}
+			case ::DST::GenerationTemplate::Type::left_bracket_:
+			{
+				return "left_bracket";
+			}
 
-case ::DST::GenerationTemplate::Type::left_curly_bracket_:
-{
-	return "left_curly_bracket";
-}
+			case ::DST::GenerationTemplate::Type::left_curly_bracket_:
+			{
+				return "left_curly_bracket";
+			}
 
-case ::DST::GenerationTemplate::Type::right_angle_bracket_:
-{
-	return "right_angle_bracket";
-}
+			case ::DST::GenerationTemplate::Type::right_angle_bracket_:
+			{
+				return "right_angle_bracket";
+			}
 
-case ::DST::GenerationTemplate::Type::right_bracket_:
-{
-	return "right_bracket";
-}
+			case ::DST::GenerationTemplate::Type::right_bracket_:
+			{
+				return "right_bracket";
+			}
 
-case ::DST::GenerationTemplate::Type::right_curly_bracket_:
-{
-	return "right_curly_bracket";
-}
-
-
-	}
-
-	return "";
-}
+			case ::DST::GenerationTemplate::Type::right_curly_bracket_:
+			{
+				return "right_curly_bracket";
+			}
 
 
-		
+			}
+
+			return "";
+		}
+
+
+
 	public:
 		struct VariableBase
 		{
@@ -382,7 +382,7 @@ case ::DST::GenerationTemplate::Type::right_curly_bracket_:
 			return variable;
 		}
 
-		
+
 		static VariableBase* GenerateVariable(const std::string& variable)
 		{
 			return new VariableBase(variable);
@@ -484,1045 +484,1045 @@ case ::DST::GenerationTemplate::Type::right_curly_bracket_:
 		};
 
 	public:
-		
-struct Variable_argument_ : public VariableScopes
-{
 
-static constexpr auto name = "argument_";
+		struct Variable_argument_ : public VariableScopes
+		{
 
+			static constexpr auto name = "argument_";
 
 
-Variable_argument_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::argument_;
-}
 
-virtual ~Variable_argument_() override = default;
+			Variable_argument_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::argument_;
+			}
 
-Variable_argument_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::argument_;
+			virtual ~Variable_argument_() override = default;
 
-}
+			Variable_argument_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::argument_;
 
+			}
 
 
-Variable_argument_& operator=(const Variable_argument_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
 
-	value = variable.value;
-	isString = variable.isString;
+			Variable_argument_& operator=(const Variable_argument_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-	
+				value = variable.value;
+				isString = variable.isString;
 
-	return *this;
-}
 
-};
 
-struct Variable_argument_add_object_ : public VariableScopes
-{
+				return *this;
+			}
 
-static constexpr auto name = "argument_add_object_";
+		};
 
+		struct Variable_argument_add_object_ : public VariableScopes
+		{
 
+			static constexpr auto name = "argument_add_object_";
 
-Variable_argument_add_object_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::argument_add_object_;
-}
 
-virtual ~Variable_argument_add_object_() override = default;
 
-Variable_argument_add_object_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::argument_add_object_;
+			Variable_argument_add_object_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::argument_add_object_;
+			}
 
-}
+			virtual ~Variable_argument_add_object_() override = default;
 
+			Variable_argument_add_object_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::argument_add_object_;
 
+			}
 
-Variable_argument_add_object_& operator=(const Variable_argument_add_object_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
 
-	value = variable.value;
-	isString = variable.isString;
 
-	
+			Variable_argument_add_object_& operator=(const Variable_argument_add_object_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-	return *this;
-}
+				value = variable.value;
+				isString = variable.isString;
 
-};
 
-struct Variable_argument_declaration_ : public VariableScopes
-{
 
-static constexpr auto name = "argument_declaration_";
+				return *this;
+			}
 
+		};
 
+		struct Variable_argument_declaration_ : public VariableScopes
+		{
 
-Variable_argument_declaration_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::argument_declaration_;
-}
+			static constexpr auto name = "argument_declaration_";
 
-virtual ~Variable_argument_declaration_() override = default;
 
-Variable_argument_declaration_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::argument_declaration_;
 
-}
+			Variable_argument_declaration_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::argument_declaration_;
+			}
 
+			virtual ~Variable_argument_declaration_() override = default;
 
+			Variable_argument_declaration_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::argument_declaration_;
 
-Variable_argument_declaration_& operator=(const Variable_argument_declaration_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+			}
 
-	value = variable.value;
-	isString = variable.isString;
 
-	
 
-	return *this;
-}
+			Variable_argument_declaration_& operator=(const Variable_argument_declaration_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-};
+				value = variable.value;
+				isString = variable.isString;
 
-struct Variable_argument_implementation_ : public VariableScopes
-{
 
-static constexpr auto name = "argument_implementation_";
 
+				return *this;
+			}
 
+		};
 
-Variable_argument_implementation_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::argument_implementation_;
-}
+		struct Variable_argument_implementation_ : public VariableScopes
+		{
 
-virtual ~Variable_argument_implementation_() override = default;
+			static constexpr auto name = "argument_implementation_";
 
-Variable_argument_implementation_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::argument_implementation_;
 
-}
 
+			Variable_argument_implementation_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::argument_implementation_;
+			}
 
+			virtual ~Variable_argument_implementation_() override = default;
 
-Variable_argument_implementation_& operator=(const Variable_argument_implementation_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+			Variable_argument_implementation_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::argument_implementation_;
 
-	value = variable.value;
-	isString = variable.isString;
+			}
 
-	
 
-	return *this;
-}
 
-};
+			Variable_argument_implementation_& operator=(const Variable_argument_implementation_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-struct Variable_argument_string_ : public VariableScopes
-{
+				value = variable.value;
+				isString = variable.isString;
 
-static constexpr auto name = "argument_string_";
 
 
+				return *this;
+			}
 
-Variable_argument_string_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::argument_string_;
-}
+		};
 
-virtual ~Variable_argument_string_() override = default;
+		struct Variable_argument_string_ : public VariableScopes
+		{
 
-Variable_argument_string_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::argument_string_;
+			static constexpr auto name = "argument_string_";
 
-}
 
 
+			Variable_argument_string_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::argument_string_;
+			}
 
-Variable_argument_string_& operator=(const Variable_argument_string_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+			virtual ~Variable_argument_string_() override = default;
 
-	value = variable.value;
-	isString = variable.isString;
+			Variable_argument_string_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::argument_string_;
 
-	
+			}
 
-	return *this;
-}
 
-};
 
-struct Variable_file_ : public VariableScopes
-{
+			Variable_argument_string_& operator=(const Variable_argument_string_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-static constexpr auto name = "file_";
+				value = variable.value;
+				isString = variable.isString;
 
-VariableBase* Content_ = GenerateVariable("");
-VariableBase* Class_postfix_ = GenerateVariable("");
-VariableBase* Extension_ = GenerateVariable("");
-VariableBase* File_name_ = GenerateVariable("");
-VariableBase* Namespace_ = GenerateVariable("");
-VariableBase* Target_language_ = GenerateVariable("");
 
 
-Variable_file_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::file_;
-}
+				return *this;
+			}
 
-virtual ~Variable_file_() override = default;
+		};
 
-Variable_file_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::file_;
-*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("#ifndef "), GenerateVariable(_->header_guard_->This()), GenerateVariable("\n#define "), GenerateVariable(_->header_guard_->This()), GenerateVariable("\n#include \"Deamer/Language/Generator/Definition/Property/User/Special/Generation"), GenerateVariable("."), GenerateVariable("h\"\nnamespace "), GenerateVariable(_->language_full_name_->This()), GenerateVariable("\n"), GenerateVariable("{"), GenerateVariable("\n\tclass Language;\n\t/*!\t"), GenerateVariable("\\"), GenerateVariable("class Generation\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("brief This contains the generation LPD of the language "), GenerateVariable(_->language_full_name_->This()), GenerateVariable("\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("note This is auto-generated via the DLDL definition"), GenerateVariable("."), GenerateVariable("\n\t */\n\tclass Generation : public ::deamer::language::generator::definition::property::user::Generation<\n\t\t\t\t\t\t\t\t::"), GenerateVariable(_->language_full_name_->This()), GenerateVariable("::Language>\n\t"), GenerateVariable("{"), GenerateVariable("\n\tpublic:\n\t\t"), GenerateVariable(_->generate_tools_declaration_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable(_->integration_declaration_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable(_->argument_declaration_->Variable_Field()), GenerateVariable("\n\t\n\tpublic:\n\t\tGeneration("), GenerateVariable(_->language_full_name_->This()), GenerateVariable("::Language* language)\n\t\t\t:\t::deamer::language::generator::definition::property::user::Generation<\n\t\t\t\t\t::"), GenerateVariable(_->language_full_name_->This()), GenerateVariable("::Language>(language)\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\tvoid GenerateObjects() override\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t"), GenerateVariable(_->generate_tools_implementation_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(_->integration_implementation_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(_->argument_implementation_->Variable_Field()), GenerateVariable("\n\t\t\t// Add object calls\n\t\t\t// AddObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\n\t\t\t"), GenerateVariable(_->generate_tools_add_object_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(_->integration_add_object_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(_->argument_add_object_->Variable_Field()), GenerateVariable("\n\t\t\t// Place higher level operations here"), GenerateVariable("."), GenerateVariable("\n\t\t\t// ReplaceObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(", "), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\n\t\t\t// DeleteObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(", "), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\n\t\t\t"), GenerateVariable(_->high_level_operation_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\t"), GenerateVariable("}"), GenerateVariable(";\n"), GenerateVariable("}"), GenerateVariable("\n#endif // "), GenerateVariable(_->header_guard_->This()), GenerateVariable("\n") }));
-Content_->type = ::DST::GenerationTemplate::Type::Scope;
+		struct Variable_file_ : public VariableScopes
+		{
 
-*static_cast<VariableBase*>(Class_postfix_) = VariableBase(std::vector<VariableBase*>({  }));
-Class_postfix_->type = ::DST::GenerationTemplate::Type::Scope;
+			static constexpr auto name = "file_";
 
-*static_cast<VariableBase*>(Extension_) = VariableBase(std::vector<VariableBase*>({  }));
-Extension_->type = ::DST::GenerationTemplate::Type::Scope;
+			VariableBase* Content_ = GenerateVariable("");
+			VariableBase* Class_postfix_ = GenerateVariable("");
+			VariableBase* Extension_ = GenerateVariable("");
+			VariableBase* File_name_ = GenerateVariable("");
+			VariableBase* Namespace_ = GenerateVariable("");
+			VariableBase* Target_language_ = GenerateVariable("");
 
-*static_cast<VariableBase*>(File_name_) = VariableBase(std::vector<VariableBase*>({  }));
-File_name_->type = ::DST::GenerationTemplate::Type::Scope;
 
-*static_cast<VariableBase*>(Namespace_) = VariableBase(std::vector<VariableBase*>({  }));
-Namespace_->type = ::DST::GenerationTemplate::Type::Scope;
+			Variable_file_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::file_;
+			}
 
-*static_cast<VariableBase*>(Target_language_) = VariableBase(std::vector<VariableBase*>({  }));
-Target_language_->type = ::DST::GenerationTemplate::Type::Scope;
+			virtual ~Variable_file_() override = default;
 
+			Variable_file_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::file_;
+				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("#ifndef "), GenerateVariable(_->header_guard_->This()), GenerateVariable("\n#define "), GenerateVariable(_->header_guard_->This()), GenerateVariable("\n#include \"Deamer/Language/Generator/Definition/Property/User/Special/Generation"), GenerateVariable("."), GenerateVariable("h\"\nnamespace "), GenerateVariable(_->language_full_name_->This()), GenerateVariable("\n"), GenerateVariable("{"), GenerateVariable("\n\tclass Language;\n\t/*!\t"), GenerateVariable("\\"), GenerateVariable("class Generation\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("brief This contains the generation LPD of the language "), GenerateVariable(_->language_full_name_->This()), GenerateVariable("\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("note This is auto-generated via the DLDL definition"), GenerateVariable("."), GenerateVariable("\n\t */\n\tclass Generation : public ::deamer::language::generator::definition::property::user::Generation<\n\t\t\t\t\t\t\t\t::"), GenerateVariable(_->language_full_name_->This()), GenerateVariable("::Language>\n\t"), GenerateVariable("{"), GenerateVariable("\n\tpublic:\n\t\t"), GenerateVariable(_->generate_tools_declaration_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable(_->integration_declaration_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable(_->argument_declaration_->Variable_Field()), GenerateVariable("\n\t\n\tpublic:\n\t\tGeneration("), GenerateVariable(_->language_full_name_->This()), GenerateVariable("::Language* language)\n\t\t\t:\t::deamer::language::generator::definition::property::user::Generation<\n\t\t\t\t\t::"), GenerateVariable(_->language_full_name_->This()), GenerateVariable("::Language>(language)\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\tvoid GenerateObjects() override\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t"), GenerateVariable(_->generate_tools_implementation_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(_->integration_implementation_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(_->argument_implementation_->Variable_Field()), GenerateVariable("\n\t\t\t// Add object calls\n\t\t\t// AddObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\n\t\t\t"), GenerateVariable(_->generate_tools_add_object_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(_->integration_add_object_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(_->argument_add_object_->Variable_Field()), GenerateVariable("\n\t\t\t// Place higher level operations here"), GenerateVariable("."), GenerateVariable("\n\t\t\t// ReplaceObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(", "), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\n\t\t\t// DeleteObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(", "), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\n\t\t\t"), GenerateVariable(_->high_level_operation_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\t"), GenerateVariable("}"), GenerateVariable(";\n"), GenerateVariable("}"), GenerateVariable("\n#endif // "), GenerateVariable(_->header_guard_->This()), GenerateVariable("\n") }));
+				Content_->type = ::DST::GenerationTemplate::Type::Scope;
 
-}
+				*static_cast<VariableBase*>(Class_postfix_) = VariableBase(std::vector<VariableBase*>({  }));
+				Class_postfix_->type = ::DST::GenerationTemplate::Type::Scope;
 
+				*static_cast<VariableBase*>(Extension_) = VariableBase(std::vector<VariableBase*>({  }));
+				Extension_->type = ::DST::GenerationTemplate::Type::Scope;
 
-VariableBase* Content() const
-{
-	return Content_;
-}
+				*static_cast<VariableBase*>(File_name_) = VariableBase(std::vector<VariableBase*>({  }));
+				File_name_->type = ::DST::GenerationTemplate::Type::Scope;
 
-VariableBase* Class_postfix() const
-{
-	return Class_postfix_;
-}
+				*static_cast<VariableBase*>(Namespace_) = VariableBase(std::vector<VariableBase*>({  }));
+				Namespace_->type = ::DST::GenerationTemplate::Type::Scope;
 
-VariableBase* Extension() const
-{
-	return Extension_;
-}
+				*static_cast<VariableBase*>(Target_language_) = VariableBase(std::vector<VariableBase*>({  }));
+				Target_language_->type = ::DST::GenerationTemplate::Type::Scope;
 
-VariableBase* File_name() const
-{
-	return File_name_;
-}
 
-VariableBase* Namespace() const
-{
-	return Namespace_;
-}
+			}
 
-VariableBase* Target_language() const
-{
-	return Target_language_;
-}
 
+			VariableBase* Content() const
+			{
+				return Content_;
+			}
 
-Variable_file_& operator=(const Variable_file_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+			VariableBase* Class_postfix() const
+			{
+				return Class_postfix_;
+			}
 
-	value = variable.value;
-	isString = variable.isString;
+			VariableBase* Extension() const
+			{
+				return Extension_;
+			}
 
-	*Content_ = *variable.Content_;
-*Class_postfix_ = *variable.Class_postfix_;
-*Extension_ = *variable.Extension_;
-*File_name_ = *variable.File_name_;
-*Namespace_ = *variable.Namespace_;
-*Target_language_ = *variable.Target_language_;
+			VariableBase* File_name() const
+			{
+				return File_name_;
+			}
 
+			VariableBase* Namespace() const
+			{
+				return Namespace_;
+			}
 
-	return *this;
-}
+			VariableBase* Target_language() const
+			{
+				return Target_language_;
+			}
 
-};
 
-struct Variable_generate_tool_ : public VariableScopes
-{
+			Variable_file_& operator=(const Variable_file_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-static constexpr auto name = "generate_tool_";
+				value = variable.value;
+				isString = variable.isString;
 
+				*Content_ = *variable.Content_;
+				*Class_postfix_ = *variable.Class_postfix_;
+				*Extension_ = *variable.Extension_;
+				*File_name_ = *variable.File_name_;
+				*Namespace_ = *variable.Namespace_;
+				*Target_language_ = *variable.Target_language_;
 
 
-Variable_generate_tool_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::generate_tool_;
-}
+				return *this;
+			}
 
-virtual ~Variable_generate_tool_() override = default;
+		};
 
-Variable_generate_tool_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::generate_tool_;
+		struct Variable_generate_tool_ : public VariableScopes
+		{
 
-}
+			static constexpr auto name = "generate_tool_";
 
 
 
-Variable_generate_tool_& operator=(const Variable_generate_tool_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+			Variable_generate_tool_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::generate_tool_;
+			}
 
-	value = variable.value;
-	isString = variable.isString;
+			virtual ~Variable_generate_tool_() override = default;
 
-	
+			Variable_generate_tool_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::generate_tool_;
 
-	return *this;
-}
+			}
 
-};
 
-struct Variable_generate_tool_source_ : public VariableScopes
-{
 
-static constexpr auto name = "generate_tool_source_";
+			Variable_generate_tool_& operator=(const Variable_generate_tool_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
+				value = variable.value;
+				isString = variable.isString;
 
 
-Variable_generate_tool_source_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::generate_tool_source_;
-}
 
-virtual ~Variable_generate_tool_source_() override = default;
+				return *this;
+			}
 
-Variable_generate_tool_source_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::generate_tool_source_;
+		};
 
-}
+		struct Variable_generate_tool_source_ : public VariableScopes
+		{
 
+			static constexpr auto name = "generate_tool_source_";
 
 
-Variable_generate_tool_source_& operator=(const Variable_generate_tool_source_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
 
-	value = variable.value;
-	isString = variable.isString;
+			Variable_generate_tool_source_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::generate_tool_source_;
+			}
 
-	
+			virtual ~Variable_generate_tool_source_() override = default;
 
-	return *this;
-}
+			Variable_generate_tool_source_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::generate_tool_source_;
 
-};
+			}
 
-struct Variable_generate_tool_target_ : public VariableScopes
-{
 
-static constexpr auto name = "generate_tool_target_";
 
+			Variable_generate_tool_source_& operator=(const Variable_generate_tool_source_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
+				value = variable.value;
+				isString = variable.isString;
 
-Variable_generate_tool_target_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::generate_tool_target_;
-}
 
-virtual ~Variable_generate_tool_target_() override = default;
 
-Variable_generate_tool_target_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::generate_tool_target_;
+				return *this;
+			}
 
-}
+		};
 
+		struct Variable_generate_tool_target_ : public VariableScopes
+		{
 
+			static constexpr auto name = "generate_tool_target_";
 
-Variable_generate_tool_target_& operator=(const Variable_generate_tool_target_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
 
-	value = variable.value;
-	isString = variable.isString;
 
-	
+			Variable_generate_tool_target_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::generate_tool_target_;
+			}
 
-	return *this;
-}
+			virtual ~Variable_generate_tool_target_() override = default;
 
-};
+			Variable_generate_tool_target_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::generate_tool_target_;
 
-struct Variable_generate_tools_add_object_ : public VariableScopes
-{
+			}
 
-static constexpr auto name = "generate_tools_add_object_";
 
 
+			Variable_generate_tool_target_& operator=(const Variable_generate_tool_target_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-Variable_generate_tools_add_object_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::generate_tools_add_object_;
-}
+				value = variable.value;
+				isString = variable.isString;
 
-virtual ~Variable_generate_tools_add_object_() override = default;
 
-Variable_generate_tools_add_object_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::generate_tools_add_object_;
 
-}
+				return *this;
+			}
 
+		};
 
+		struct Variable_generate_tools_add_object_ : public VariableScopes
+		{
 
-Variable_generate_tools_add_object_& operator=(const Variable_generate_tools_add_object_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+			static constexpr auto name = "generate_tools_add_object_";
 
-	value = variable.value;
-	isString = variable.isString;
 
-	
 
-	return *this;
-}
+			Variable_generate_tools_add_object_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::generate_tools_add_object_;
+			}
 
-};
+			virtual ~Variable_generate_tools_add_object_() override = default;
 
-struct Variable_generate_tools_declaration_ : public VariableScopes
-{
+			Variable_generate_tools_add_object_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::generate_tools_add_object_;
 
-static constexpr auto name = "generate_tools_declaration_";
+			}
 
 
 
-Variable_generate_tools_declaration_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::generate_tools_declaration_;
-}
+			Variable_generate_tools_add_object_& operator=(const Variable_generate_tools_add_object_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-virtual ~Variable_generate_tools_declaration_() override = default;
+				value = variable.value;
+				isString = variable.isString;
 
-Variable_generate_tools_declaration_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::generate_tools_declaration_;
 
-}
 
+				return *this;
+			}
 
+		};
 
-Variable_generate_tools_declaration_& operator=(const Variable_generate_tools_declaration_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+		struct Variable_generate_tools_declaration_ : public VariableScopes
+		{
 
-	value = variable.value;
-	isString = variable.isString;
+			static constexpr auto name = "generate_tools_declaration_";
 
-	
 
-	return *this;
-}
 
-};
+			Variable_generate_tools_declaration_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::generate_tools_declaration_;
+			}
 
-struct Variable_generate_tools_implementation_ : public VariableScopes
-{
+			virtual ~Variable_generate_tools_declaration_() override = default;
 
-static constexpr auto name = "generate_tools_implementation_";
+			Variable_generate_tools_declaration_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::generate_tools_declaration_;
 
+			}
 
 
-Variable_generate_tools_implementation_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::generate_tools_implementation_;
-}
 
-virtual ~Variable_generate_tools_implementation_() override = default;
+			Variable_generate_tools_declaration_& operator=(const Variable_generate_tools_declaration_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-Variable_generate_tools_implementation_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::generate_tools_implementation_;
+				value = variable.value;
+				isString = variable.isString;
 
-}
 
 
+				return *this;
+			}
 
-Variable_generate_tools_implementation_& operator=(const Variable_generate_tools_implementation_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+		};
 
-	value = variable.value;
-	isString = variable.isString;
+		struct Variable_generate_tools_implementation_ : public VariableScopes
+		{
 
-	
+			static constexpr auto name = "generate_tools_implementation_";
 
-	return *this;
-}
 
-};
 
-struct Variable_header_guard_ : public VariableScopes
-{
+			Variable_generate_tools_implementation_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::generate_tools_implementation_;
+			}
 
-static constexpr auto name = "header_guard_";
+			virtual ~Variable_generate_tools_implementation_() override = default;
 
+			Variable_generate_tools_implementation_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::generate_tools_implementation_;
 
+			}
 
-Variable_header_guard_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::header_guard_;
-}
 
-virtual ~Variable_header_guard_() override = default;
 
-Variable_header_guard_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::header_guard_;
+			Variable_generate_tools_implementation_& operator=(const Variable_generate_tools_implementation_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-}
+				value = variable.value;
+				isString = variable.isString;
 
 
 
-Variable_header_guard_& operator=(const Variable_header_guard_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+				return *this;
+			}
 
-	value = variable.value;
-	isString = variable.isString;
+		};
 
-	
+		struct Variable_header_guard_ : public VariableScopes
+		{
 
-	return *this;
-}
+			static constexpr auto name = "header_guard_";
 
-};
 
-struct Variable_high_level_operation_ : public VariableScopes
-{
 
-static constexpr auto name = "high_level_operation_";
+			Variable_header_guard_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::header_guard_;
+			}
 
+			virtual ~Variable_header_guard_() override = default;
 
+			Variable_header_guard_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::header_guard_;
 
-Variable_high_level_operation_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::high_level_operation_;
-}
+			}
 
-virtual ~Variable_high_level_operation_() override = default;
 
-Variable_high_level_operation_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::high_level_operation_;
 
-}
+			Variable_header_guard_& operator=(const Variable_header_guard_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
+				value = variable.value;
+				isString = variable.isString;
 
 
-Variable_high_level_operation_& operator=(const Variable_high_level_operation_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
 
-	value = variable.value;
-	isString = variable.isString;
+				return *this;
+			}
 
-	
+		};
 
-	return *this;
-}
+		struct Variable_high_level_operation_ : public VariableScopes
+		{
 
-};
+			static constexpr auto name = "high_level_operation_";
 
-struct Variable_integration_add_object_ : public VariableScopes
-{
 
-static constexpr auto name = "integration_add_object_";
 
+			Variable_high_level_operation_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::high_level_operation_;
+			}
 
+			virtual ~Variable_high_level_operation_() override = default;
 
-Variable_integration_add_object_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::integration_add_object_;
-}
+			Variable_high_level_operation_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::high_level_operation_;
 
-virtual ~Variable_integration_add_object_() override = default;
+			}
 
-Variable_integration_add_object_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::integration_add_object_;
 
-}
 
+			Variable_high_level_operation_& operator=(const Variable_high_level_operation_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
+				value = variable.value;
+				isString = variable.isString;
 
-Variable_integration_add_object_& operator=(const Variable_integration_add_object_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
 
-	value = variable.value;
-	isString = variable.isString;
 
-	
+				return *this;
+			}
 
-	return *this;
-}
+		};
 
-};
+		struct Variable_integration_add_object_ : public VariableScopes
+		{
 
-struct Variable_integration_declaration_ : public VariableScopes
-{
+			static constexpr auto name = "integration_add_object_";
 
-static constexpr auto name = "integration_declaration_";
 
 
+			Variable_integration_add_object_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::integration_add_object_;
+			}
 
-Variable_integration_declaration_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::integration_declaration_;
-}
+			virtual ~Variable_integration_add_object_() override = default;
 
-virtual ~Variable_integration_declaration_() override = default;
+			Variable_integration_add_object_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::integration_add_object_;
 
-Variable_integration_declaration_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::integration_declaration_;
+			}
 
-}
 
 
+			Variable_integration_add_object_& operator=(const Variable_integration_add_object_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-Variable_integration_declaration_& operator=(const Variable_integration_declaration_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+				value = variable.value;
+				isString = variable.isString;
 
-	value = variable.value;
-	isString = variable.isString;
 
-	
 
-	return *this;
-}
+				return *this;
+			}
 
-};
+		};
 
-struct Variable_integration_implementation_ : public VariableScopes
-{
+		struct Variable_integration_declaration_ : public VariableScopes
+		{
 
-static constexpr auto name = "integration_implementation_";
+			static constexpr auto name = "integration_declaration_";
 
 
 
-Variable_integration_implementation_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::integration_implementation_;
-}
+			Variable_integration_declaration_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::integration_declaration_;
+			}
 
-virtual ~Variable_integration_implementation_() override = default;
+			virtual ~Variable_integration_declaration_() override = default;
 
-Variable_integration_implementation_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::integration_implementation_;
+			Variable_integration_declaration_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::integration_declaration_;
 
-}
+			}
 
 
 
-Variable_integration_implementation_& operator=(const Variable_integration_implementation_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+			Variable_integration_declaration_& operator=(const Variable_integration_declaration_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-	value = variable.value;
-	isString = variable.isString;
+				value = variable.value;
+				isString = variable.isString;
 
-	
 
-	return *this;
-}
 
-};
+				return *this;
+			}
 
-struct Variable_language_full_name_ : public VariableScopes
-{
+		};
 
-static constexpr auto name = "language_full_name_";
+		struct Variable_integration_implementation_ : public VariableScopes
+		{
 
+			static constexpr auto name = "integration_implementation_";
 
 
-Variable_language_full_name_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::language_full_name_;
-}
 
-virtual ~Variable_language_full_name_() override = default;
+			Variable_integration_implementation_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::integration_implementation_;
+			}
 
-Variable_language_full_name_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::language_full_name_;
+			virtual ~Variable_integration_implementation_() override = default;
 
-}
+			Variable_integration_implementation_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::integration_implementation_;
 
+			}
 
 
-Variable_language_full_name_& operator=(const Variable_language_full_name_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
 
-	value = variable.value;
-	isString = variable.isString;
+			Variable_integration_implementation_& operator=(const Variable_integration_implementation_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-	
+				value = variable.value;
+				isString = variable.isString;
 
-	return *this;
-}
 
-};
 
-struct Variable_language_full_name_underscore_ : public VariableScopes
-{
+				return *this;
+			}
 
-static constexpr auto name = "language_full_name_underscore_";
+		};
 
+		struct Variable_language_full_name_ : public VariableScopes
+		{
 
+			static constexpr auto name = "language_full_name_";
 
-Variable_language_full_name_underscore_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::language_full_name_underscore_;
-}
 
-virtual ~Variable_language_full_name_underscore_() override = default;
 
-Variable_language_full_name_underscore_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::language_full_name_underscore_;
+			Variable_language_full_name_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::language_full_name_;
+			}
 
-}
+			virtual ~Variable_language_full_name_() override = default;
 
+			Variable_language_full_name_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::language_full_name_;
 
+			}
 
-Variable_language_full_name_underscore_& operator=(const Variable_language_full_name_underscore_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
 
-	value = variable.value;
-	isString = variable.isString;
 
-	
+			Variable_language_full_name_& operator=(const Variable_language_full_name_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-	return *this;
-}
+				value = variable.value;
+				isString = variable.isString;
 
-};
 
-struct Variable_left_angle_bracket_ : public VariableScopes
-{
 
-static constexpr auto name = "left_angle_bracket_";
+				return *this;
+			}
 
+		};
 
+		struct Variable_language_full_name_underscore_ : public VariableScopes
+		{
 
-Variable_left_angle_bracket_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::left_angle_bracket_;
-}
+			static constexpr auto name = "language_full_name_underscore_";
 
-virtual ~Variable_left_angle_bracket_() override = default;
 
-Variable_left_angle_bracket_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::left_angle_bracket_;
 
-}
+			Variable_language_full_name_underscore_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::language_full_name_underscore_;
+			}
 
+			virtual ~Variable_language_full_name_underscore_() override = default;
 
+			Variable_language_full_name_underscore_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::language_full_name_underscore_;
 
-Variable_left_angle_bracket_& operator=(const Variable_left_angle_bracket_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+			}
 
-	value = variable.value;
-	isString = variable.isString;
 
-	
 
-	return *this;
-}
+			Variable_language_full_name_underscore_& operator=(const Variable_language_full_name_underscore_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-};
+				value = variable.value;
+				isString = variable.isString;
 
-struct Variable_left_bracket_ : public VariableScopes
-{
 
-static constexpr auto name = "left_bracket_";
 
+				return *this;
+			}
 
+		};
 
-Variable_left_bracket_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::left_bracket_;
-}
+		struct Variable_left_angle_bracket_ : public VariableScopes
+		{
 
-virtual ~Variable_left_bracket_() override = default;
+			static constexpr auto name = "left_angle_bracket_";
 
-Variable_left_bracket_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::left_bracket_;
 
-}
 
+			Variable_left_angle_bracket_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::left_angle_bracket_;
+			}
 
+			virtual ~Variable_left_angle_bracket_() override = default;
 
-Variable_left_bracket_& operator=(const Variable_left_bracket_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+			Variable_left_angle_bracket_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::left_angle_bracket_;
 
-	value = variable.value;
-	isString = variable.isString;
+			}
 
-	
 
-	return *this;
-}
 
-};
+			Variable_left_angle_bracket_& operator=(const Variable_left_angle_bracket_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-struct Variable_left_curly_bracket_ : public VariableScopes
-{
+				value = variable.value;
+				isString = variable.isString;
 
-static constexpr auto name = "left_curly_bracket_";
 
 
+				return *this;
+			}
 
-Variable_left_curly_bracket_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::left_curly_bracket_;
-}
+		};
 
-virtual ~Variable_left_curly_bracket_() override = default;
+		struct Variable_left_bracket_ : public VariableScopes
+		{
 
-Variable_left_curly_bracket_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::left_curly_bracket_;
+			static constexpr auto name = "left_bracket_";
 
-}
 
 
+			Variable_left_bracket_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::left_bracket_;
+			}
 
-Variable_left_curly_bracket_& operator=(const Variable_left_curly_bracket_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+			virtual ~Variable_left_bracket_() override = default;
 
-	value = variable.value;
-	isString = variable.isString;
+			Variable_left_bracket_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::left_bracket_;
 
-	
+			}
 
-	return *this;
-}
 
-};
 
-struct Variable_right_angle_bracket_ : public VariableScopes
-{
+			Variable_left_bracket_& operator=(const Variable_left_bracket_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
-static constexpr auto name = "right_angle_bracket_";
+				value = variable.value;
+				isString = variable.isString;
 
 
 
-Variable_right_angle_bracket_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::right_angle_bracket_;
-}
+				return *this;
+			}
 
-virtual ~Variable_right_angle_bracket_() override = default;
+		};
 
-Variable_right_angle_bracket_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::right_angle_bracket_;
+		struct Variable_left_curly_bracket_ : public VariableScopes
+		{
 
-}
+			static constexpr auto name = "left_curly_bracket_";
 
 
 
-Variable_right_angle_bracket_& operator=(const Variable_right_angle_bracket_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
+			Variable_left_curly_bracket_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::left_curly_bracket_;
+			}
 
-	value = variable.value;
-	isString = variable.isString;
+			virtual ~Variable_left_curly_bracket_() override = default;
 
-	
+			Variable_left_curly_bracket_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::left_curly_bracket_;
 
-	return *this;
-}
+			}
 
-};
 
-struct Variable_right_bracket_ : public VariableScopes
-{
 
-static constexpr auto name = "right_bracket_";
+			Variable_left_curly_bracket_& operator=(const Variable_left_curly_bracket_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
+				value = variable.value;
+				isString = variable.isString;
 
 
-Variable_right_bracket_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::right_bracket_;
-}
 
-virtual ~Variable_right_bracket_() override = default;
+				return *this;
+			}
 
-Variable_right_bracket_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::right_bracket_;
+		};
 
-}
+		struct Variable_right_angle_bracket_ : public VariableScopes
+		{
 
+			static constexpr auto name = "right_angle_bracket_";
 
 
-Variable_right_bracket_& operator=(const Variable_right_bracket_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
 
-	value = variable.value;
-	isString = variable.isString;
+			Variable_right_angle_bracket_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::right_angle_bracket_;
+			}
 
-	
+			virtual ~Variable_right_angle_bracket_() override = default;
 
-	return *this;
-}
+			Variable_right_angle_bracket_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::right_angle_bracket_;
 
-};
+			}
 
-struct Variable_right_curly_bracket_ : public VariableScopes
-{
 
-static constexpr auto name = "right_curly_bracket_";
 
+			Variable_right_angle_bracket_& operator=(const Variable_right_angle_bracket_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
 
+				value = variable.value;
+				isString = variable.isString;
 
-Variable_right_curly_bracket_() : VariableScopes()
-{
-	type = ::DST::GenerationTemplate::Type::right_curly_bracket_;
-}
 
-virtual ~Variable_right_curly_bracket_() override = default;
 
-Variable_right_curly_bracket_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DST::GenerationTemplate::Type::right_curly_bracket_;
+				return *this;
+			}
 
-}
+		};
 
+		struct Variable_right_bracket_ : public VariableScopes
+		{
 
+			static constexpr auto name = "right_bracket_";
 
-Variable_right_curly_bracket_& operator=(const Variable_right_curly_bracket_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
 
-	value = variable.value;
-	isString = variable.isString;
 
-	
+			Variable_right_bracket_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::right_bracket_;
+			}
 
-	return *this;
-}
+			virtual ~Variable_right_bracket_() override = default;
 
-};
+			Variable_right_bracket_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::right_bracket_;
+
+			}
+
+
+
+			Variable_right_bracket_& operator=(const Variable_right_bracket_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+
+
+				return *this;
+			}
+
+		};
+
+		struct Variable_right_curly_bracket_ : public VariableScopes
+		{
+
+			static constexpr auto name = "right_curly_bracket_";
+
+
+
+			Variable_right_curly_bracket_() : VariableScopes()
+			{
+				type = ::DST::GenerationTemplate::Type::right_curly_bracket_;
+			}
+
+			virtual ~Variable_right_curly_bracket_() override = default;
+
+			Variable_right_curly_bracket_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DST::GenerationTemplate::Type::right_curly_bracket_;
+
+			}
+
+
+
+			Variable_right_curly_bracket_& operator=(const Variable_right_curly_bracket_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+
+
+				return *this;
+			}
+
+		};
 
 
 	public:
-		static std::vector<VariableBase*> variables_to_delete;
+		inline static std::vector<VariableBase*> variables_to_delete = std::vector<VariableBase*>();
 
 	public:
 		std::vector<VariableBase*> variables_;
@@ -1531,93 +1531,93 @@ Variable_right_curly_bracket_& operator=(const Variable_right_curly_bracket_& va
 		// Members that one can directly access.
 		// e.g. GenerationTemplate.member = "auto-generated";
 		Variable_argument_* argument_ = new Variable_argument_();
-Variable_argument_add_object_* argument_add_object_ = new Variable_argument_add_object_();
-Variable_argument_declaration_* argument_declaration_ = new Variable_argument_declaration_();
-Variable_argument_implementation_* argument_implementation_ = new Variable_argument_implementation_();
-Variable_argument_string_* argument_string_ = new Variable_argument_string_();
-Variable_file_* file_ = new Variable_file_();
-Variable_generate_tool_* generate_tool_ = new Variable_generate_tool_();
-Variable_generate_tool_source_* generate_tool_source_ = new Variable_generate_tool_source_();
-Variable_generate_tool_target_* generate_tool_target_ = new Variable_generate_tool_target_();
-Variable_generate_tools_add_object_* generate_tools_add_object_ = new Variable_generate_tools_add_object_();
-Variable_generate_tools_declaration_* generate_tools_declaration_ = new Variable_generate_tools_declaration_();
-Variable_generate_tools_implementation_* generate_tools_implementation_ = new Variable_generate_tools_implementation_();
-Variable_header_guard_* header_guard_ = new Variable_header_guard_();
-Variable_high_level_operation_* high_level_operation_ = new Variable_high_level_operation_();
-Variable_integration_add_object_* integration_add_object_ = new Variable_integration_add_object_();
-Variable_integration_declaration_* integration_declaration_ = new Variable_integration_declaration_();
-Variable_integration_implementation_* integration_implementation_ = new Variable_integration_implementation_();
-Variable_language_full_name_* language_full_name_ = new Variable_language_full_name_();
-Variable_language_full_name_underscore_* language_full_name_underscore_ = new Variable_language_full_name_underscore_();
-Variable_left_angle_bracket_* left_angle_bracket_ = new Variable_left_angle_bracket_();
-Variable_left_bracket_* left_bracket_ = new Variable_left_bracket_();
-Variable_left_curly_bracket_* left_curly_bracket_ = new Variable_left_curly_bracket_();
-Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
-Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
-Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_bracket_();
+		Variable_argument_add_object_* argument_add_object_ = new Variable_argument_add_object_();
+		Variable_argument_declaration_* argument_declaration_ = new Variable_argument_declaration_();
+		Variable_argument_implementation_* argument_implementation_ = new Variable_argument_implementation_();
+		Variable_argument_string_* argument_string_ = new Variable_argument_string_();
+		Variable_file_* file_ = new Variable_file_();
+		Variable_generate_tool_* generate_tool_ = new Variable_generate_tool_();
+		Variable_generate_tool_source_* generate_tool_source_ = new Variable_generate_tool_source_();
+		Variable_generate_tool_target_* generate_tool_target_ = new Variable_generate_tool_target_();
+		Variable_generate_tools_add_object_* generate_tools_add_object_ = new Variable_generate_tools_add_object_();
+		Variable_generate_tools_declaration_* generate_tools_declaration_ = new Variable_generate_tools_declaration_();
+		Variable_generate_tools_implementation_* generate_tools_implementation_ = new Variable_generate_tools_implementation_();
+		Variable_header_guard_* header_guard_ = new Variable_header_guard_();
+		Variable_high_level_operation_* high_level_operation_ = new Variable_high_level_operation_();
+		Variable_integration_add_object_* integration_add_object_ = new Variable_integration_add_object_();
+		Variable_integration_declaration_* integration_declaration_ = new Variable_integration_declaration_();
+		Variable_integration_implementation_* integration_implementation_ = new Variable_integration_implementation_();
+		Variable_language_full_name_* language_full_name_ = new Variable_language_full_name_();
+		Variable_language_full_name_underscore_* language_full_name_underscore_ = new Variable_language_full_name_underscore_();
+		Variable_left_angle_bracket_* left_angle_bracket_ = new Variable_left_angle_bracket_();
+		Variable_left_bracket_* left_bracket_ = new Variable_left_bracket_();
+		Variable_left_curly_bracket_* left_curly_bracket_ = new Variable_left_curly_bracket_();
+		Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
+		Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
+		Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_bracket_();
 
 
 	public:
 		GenerationTemplate()
 		{
 			*argument_ = Variable_argument_(this, std::vector<VariableBase*>({  }));
-*argument_add_object_ = Variable_argument_add_object_(this, std::vector<VariableBase*>({ GenerateVariable("AddObject(argument_"), GenerateVariable(generate_tool_->This()), GenerateVariable("_"), GenerateVariable(argument_->This()), GenerateVariable(");") }));
-*argument_declaration_ = Variable_argument_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("::deamer::type::SafeReserve"), GenerateVariable(left_angle_bracket_->This()), GenerateVariable("::deamer::language::type::definition::object::main::GenerateArgument"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable(" argument_"), GenerateVariable(generate_tool_->This()), GenerateVariable("_"), GenerateVariable(argument_->This()), GenerateVariable(";") }));
-*argument_implementation_ = Variable_argument_implementation_(this, std::vector<VariableBase*>({ GenerateVariable("argument_"), GenerateVariable(generate_tool_->This()), GenerateVariable("_"), GenerateVariable(argument_->This()), GenerateVariable("."), GenerateVariable("Set(::deamer::language::type::definition::object::main::GenerateArgument(::deamer::tool::type::Tool::"), GenerateVariable(generate_tool_->This()), GenerateVariable(", \""), GenerateVariable(argument_string_->This()), GenerateVariable("\"));") }));
-*argument_string_ = Variable_argument_string_(this, std::vector<VariableBase*>({  }));
-*file_ = Variable_file_(this, std::vector<VariableBase*>({  }));
-*generate_tool_ = Variable_generate_tool_(this, std::vector<VariableBase*>({  }));
-*generate_tool_source_ = Variable_generate_tool_source_(this, std::vector<VariableBase*>({  }));
-*generate_tool_target_ = Variable_generate_tool_target_(this, std::vector<VariableBase*>({  }));
-*generate_tools_add_object_ = Variable_generate_tools_add_object_(this, std::vector<VariableBase*>({ GenerateVariable("AddObject(generate_"), GenerateVariable(generate_tool_->This()), GenerateVariable(");") }));
-*generate_tools_declaration_ = Variable_generate_tools_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("::deamer::type::SafeReserve"), GenerateVariable(left_angle_bracket_->This()), GenerateVariable("::deamer::language::type::definition::object::main::Generate"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable(" generate_"), GenerateVariable(generate_tool_->This()), GenerateVariable(";") }));
-*generate_tools_implementation_ = Variable_generate_tools_implementation_(this, std::vector<VariableBase*>({ GenerateVariable("generate_"), GenerateVariable(generate_tool_->This()), GenerateVariable("."), GenerateVariable("Set(::deamer::language::type::definition::object::main::Generate(::deamer::tool::type::Tool::"), GenerateVariable(generate_tool_->This()), GenerateVariable("));") }));
-*header_guard_ = Variable_header_guard_(this, std::vector<VariableBase*>({ GenerateVariable(language_full_name_underscore_->Upper()), GenerateVariable("_GENERATION_H") }));
-*high_level_operation_ = Variable_high_level_operation_(this, std::vector<VariableBase*>({  }));
-*integration_add_object_ = Variable_integration_add_object_(this, std::vector<VariableBase*>({ GenerateVariable("AddObject(integrate_"), GenerateVariable(generate_tool_source_->This()), GenerateVariable("And"), GenerateVariable(generate_tool_target_->This()), GenerateVariable(");") }));
-*integration_declaration_ = Variable_integration_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("::deamer::type::SafeReserve"), GenerateVariable(left_angle_bracket_->This()), GenerateVariable("::deamer::language::type::definition::object::main::Integrate"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable(" integrate_"), GenerateVariable(generate_tool_source_->This()), GenerateVariable("And"), GenerateVariable(generate_tool_target_->This()), GenerateVariable(";") }));
-*integration_implementation_ = Variable_integration_implementation_(this, std::vector<VariableBase*>({ GenerateVariable("integrate_"), GenerateVariable(generate_tool_source_->This()), GenerateVariable("And"), GenerateVariable(generate_tool_target_->This()), GenerateVariable("."), GenerateVariable("Set(::deamer::language::type::definition::object::main::Integrate(::deamer::tool::type::Tool::"), GenerateVariable(generate_tool_source_->This()), GenerateVariable(", ::deamer::tool::type::Tool::"), GenerateVariable(generate_tool_target_->This()), GenerateVariable("));") }));
-*language_full_name_ = Variable_language_full_name_(this, std::vector<VariableBase*>({  }));
-*language_full_name_underscore_ = Variable_language_full_name_underscore_(this, std::vector<VariableBase*>({  }));
-*left_angle_bracket_ = Variable_left_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("<") }));
-*left_bracket_ = Variable_left_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("{") }));
-*left_curly_bracket_ = Variable_left_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("(") }));
-*right_angle_bracket_ = Variable_right_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(">") }));
-*right_bracket_ = Variable_right_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("}") }));
-*right_curly_bracket_ = Variable_right_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(")") }));
+			*argument_add_object_ = Variable_argument_add_object_(this, std::vector<VariableBase*>({ GenerateVariable("AddObject(argument_"), GenerateVariable(generate_tool_->This()), GenerateVariable("_"), GenerateVariable(argument_->This()), GenerateVariable(");") }));
+			*argument_declaration_ = Variable_argument_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("::deamer::type::SafeReserve"), GenerateVariable(left_angle_bracket_->This()), GenerateVariable("::deamer::language::type::definition::object::main::GenerateArgument"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable(" argument_"), GenerateVariable(generate_tool_->This()), GenerateVariable("_"), GenerateVariable(argument_->This()), GenerateVariable(";") }));
+			*argument_implementation_ = Variable_argument_implementation_(this, std::vector<VariableBase*>({ GenerateVariable("argument_"), GenerateVariable(generate_tool_->This()), GenerateVariable("_"), GenerateVariable(argument_->This()), GenerateVariable("."), GenerateVariable("Set(::deamer::language::type::definition::object::main::GenerateArgument(::deamer::tool::type::Tool::"), GenerateVariable(generate_tool_->This()), GenerateVariable(", \""), GenerateVariable(argument_string_->This()), GenerateVariable("\"));") }));
+			*argument_string_ = Variable_argument_string_(this, std::vector<VariableBase*>({  }));
+			*file_ = Variable_file_(this, std::vector<VariableBase*>({  }));
+			*generate_tool_ = Variable_generate_tool_(this, std::vector<VariableBase*>({  }));
+			*generate_tool_source_ = Variable_generate_tool_source_(this, std::vector<VariableBase*>({  }));
+			*generate_tool_target_ = Variable_generate_tool_target_(this, std::vector<VariableBase*>({  }));
+			*generate_tools_add_object_ = Variable_generate_tools_add_object_(this, std::vector<VariableBase*>({ GenerateVariable("AddObject(generate_"), GenerateVariable(generate_tool_->This()), GenerateVariable(");") }));
+			*generate_tools_declaration_ = Variable_generate_tools_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("::deamer::type::SafeReserve"), GenerateVariable(left_angle_bracket_->This()), GenerateVariable("::deamer::language::type::definition::object::main::Generate"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable(" generate_"), GenerateVariable(generate_tool_->This()), GenerateVariable(";") }));
+			*generate_tools_implementation_ = Variable_generate_tools_implementation_(this, std::vector<VariableBase*>({ GenerateVariable("generate_"), GenerateVariable(generate_tool_->This()), GenerateVariable("."), GenerateVariable("Set(::deamer::language::type::definition::object::main::Generate(::deamer::tool::type::Tool::"), GenerateVariable(generate_tool_->This()), GenerateVariable("));") }));
+			*header_guard_ = Variable_header_guard_(this, std::vector<VariableBase*>({ GenerateVariable(language_full_name_underscore_->Upper()), GenerateVariable("_GENERATION_H") }));
+			*high_level_operation_ = Variable_high_level_operation_(this, std::vector<VariableBase*>({  }));
+			*integration_add_object_ = Variable_integration_add_object_(this, std::vector<VariableBase*>({ GenerateVariable("AddObject(integrate_"), GenerateVariable(generate_tool_source_->This()), GenerateVariable("And"), GenerateVariable(generate_tool_target_->This()), GenerateVariable(");") }));
+			*integration_declaration_ = Variable_integration_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("::deamer::type::SafeReserve"), GenerateVariable(left_angle_bracket_->This()), GenerateVariable("::deamer::language::type::definition::object::main::Integrate"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable(" integrate_"), GenerateVariable(generate_tool_source_->This()), GenerateVariable("And"), GenerateVariable(generate_tool_target_->This()), GenerateVariable(";") }));
+			*integration_implementation_ = Variable_integration_implementation_(this, std::vector<VariableBase*>({ GenerateVariable("integrate_"), GenerateVariable(generate_tool_source_->This()), GenerateVariable("And"), GenerateVariable(generate_tool_target_->This()), GenerateVariable("."), GenerateVariable("Set(::deamer::language::type::definition::object::main::Integrate(::deamer::tool::type::Tool::"), GenerateVariable(generate_tool_source_->This()), GenerateVariable(", ::deamer::tool::type::Tool::"), GenerateVariable(generate_tool_target_->This()), GenerateVariable("));") }));
+			*language_full_name_ = Variable_language_full_name_(this, std::vector<VariableBase*>({  }));
+			*language_full_name_underscore_ = Variable_language_full_name_underscore_(this, std::vector<VariableBase*>({  }));
+			*left_angle_bracket_ = Variable_left_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("<") }));
+			*left_bracket_ = Variable_left_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("{") }));
+			*left_curly_bracket_ = Variable_left_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("(") }));
+			*right_angle_bracket_ = Variable_right_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(">") }));
+			*right_bracket_ = Variable_right_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("}") }));
+			*right_curly_bracket_ = Variable_right_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(")") }));
 
 
 			variables_.emplace_back(argument_);
-variables_.emplace_back(argument_add_object_);
-variables_.emplace_back(argument_declaration_);
-variables_.emplace_back(argument_implementation_);
-variables_.emplace_back(argument_string_);
-variables_.emplace_back(file_);
-variables_.emplace_back(generate_tool_);
-variables_.emplace_back(generate_tool_source_);
-variables_.emplace_back(generate_tool_target_);
-variables_.emplace_back(generate_tools_add_object_);
-variables_.emplace_back(generate_tools_declaration_);
-variables_.emplace_back(generate_tools_implementation_);
-variables_.emplace_back(header_guard_);
-variables_.emplace_back(high_level_operation_);
-variables_.emplace_back(integration_add_object_);
-variables_.emplace_back(integration_declaration_);
-variables_.emplace_back(integration_implementation_);
-variables_.emplace_back(language_full_name_);
-variables_.emplace_back(language_full_name_underscore_);
-variables_.emplace_back(left_angle_bracket_);
-variables_.emplace_back(left_bracket_);
-variables_.emplace_back(left_curly_bracket_);
-variables_.emplace_back(right_angle_bracket_);
-variables_.emplace_back(right_bracket_);
-variables_.emplace_back(right_curly_bracket_);
+			variables_.emplace_back(argument_add_object_);
+			variables_.emplace_back(argument_declaration_);
+			variables_.emplace_back(argument_implementation_);
+			variables_.emplace_back(argument_string_);
+			variables_.emplace_back(file_);
+			variables_.emplace_back(generate_tool_);
+			variables_.emplace_back(generate_tool_source_);
+			variables_.emplace_back(generate_tool_target_);
+			variables_.emplace_back(generate_tools_add_object_);
+			variables_.emplace_back(generate_tools_declaration_);
+			variables_.emplace_back(generate_tools_implementation_);
+			variables_.emplace_back(header_guard_);
+			variables_.emplace_back(high_level_operation_);
+			variables_.emplace_back(integration_add_object_);
+			variables_.emplace_back(integration_declaration_);
+			variables_.emplace_back(integration_implementation_);
+			variables_.emplace_back(language_full_name_);
+			variables_.emplace_back(language_full_name_underscore_);
+			variables_.emplace_back(left_angle_bracket_);
+			variables_.emplace_back(left_bracket_);
+			variables_.emplace_back(left_curly_bracket_);
+			variables_.emplace_back(right_angle_bracket_);
+			variables_.emplace_back(right_bracket_);
+			variables_.emplace_back(right_curly_bracket_);
 
 		}
 
 		virtual ~GenerationTemplate()
 		{
-			for(auto* variable : variables_to_delete)
+			for (auto* variable : variables_to_delete)
 			{
 				delete variable;
 			}
@@ -1646,9 +1646,6 @@ variables_.emplace_back(right_curly_bracket_);
 
 	public:
 	};
-	
-	std::vector<DST::GenerationTemplate::VariableBase*> DST::GenerationTemplate::variables_to_delete;
-
 }
 
 #endif // DST_GENERATIONTEMPLATE_h
