@@ -1,0 +1,39 @@
+/ Grammar of DLDL-Grammar DSL
+/
+/ Created by Thimo Bohmer.
+/ At 2021
+
+Start: program
+Group: stmt
+Group: abstraction
+
+program
+	stmts
+
+stmts
+    stmt stmts
+	EMPTY
+	
+/ You can forward declare common abstraction
+/ But you are also able to declare them when first encountered.
+stmt
+	definition
+	abstraction_declaration
+
+definition
+	abstraction NONTERMINAL production_rules
+	NONTERMINAL production_rules
+
+abstraction_declaration
+	abstraction NONTERMINAL
+
+abstraction
+	START_ABSTRACTION
+	GROUP_ABSTRACTION
+	UNKNOWN_ABSTRACTION
+
+production_rules
+	PRODUCTION_RULE production_rules
+	PRODUCTION_RULE
+
+/

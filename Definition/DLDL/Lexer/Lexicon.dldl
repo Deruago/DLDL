@@ -1,0 +1,10 @@
+Novalue: DELETE_ABSTRACTION		[Dd]elete:[ ]*
+Novalue: IGNORE_ABSTRACTION		[Ii]gnore:[ ]*
+Novalue: CRASH_ABSTRACTION		[Cc]rash:[ ]*
+Novalue: NOVALUE_ABSTRACTION	[Nno]o[Vv]alue:[ ]*
+Novalue: STANDARD_ABSTRACTION	[Ss]tandard:[ ]*
+Novalue: UNKNOWN_ABSTRACTION	[a-zA-Z0-9_\\\\$?!-+=]*[:][ ]*
+
+Standard: TERMINAL		[a-zA-Z_]+
+Standard: REGEX			[ ][^\n]*
+Delete: ESCAPE_CHARS	[\n\r\t\f\b\a\v]

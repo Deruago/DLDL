@@ -1,0 +1,32 @@
+/ Grammar of DLDL-Grammar DSL
+/
+/ Created by Thimo Bohmer.
+/ At 2021
+
+START: program
+GROUP: stmt
+GROUP: abstraction
+
+program
+	stmts
+
+stmts
+    stmt stmts
+	EMPTY
+
+stmt
+	token_declaration
+
+token_declaration
+	abstraction TERMINAL REGEX
+	TERMINAL REGEX
+
+abstraction
+	DELETE_ABSTRACTION
+	IGNORE_ABSTRACTION
+	CRASH_ABSTRACTION
+	NOVALUE_ABSTRACTION
+	STANDARD_ABSTRACTION
+	UNKNOWN_ABSTRACTION
+
+/
