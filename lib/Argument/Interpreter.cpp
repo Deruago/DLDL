@@ -38,7 +38,7 @@ std::string GenerateRootCMakeLists(std::vector<DLDL::ir::Language*> languages)
 deamer::file::tool::Directory InitialiseLanguageDirectory(DLDL::ir::Language* language)
 {
 	auto directory = deamer::file::tool::Directory(language->GetName());
-	directory.AddFile({ "CMakeLists","txt" });
+	directory.AddFile({ "CMakeLists", "txt", "", deamer::file::tool::GenerationLevel::Dont_generate_if_file_already_exists });
 
 	return directory;
 }
