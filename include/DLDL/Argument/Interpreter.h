@@ -10,6 +10,8 @@ namespace DLDL::argument
 	class Interpreter
 	{
 	private:
+		::deamer::file::tool::OSType os = ::deamer::file::tool::os_used;
+		
 		Parser parser;
 	private:
 		std::string DefinitionMap = "definition";

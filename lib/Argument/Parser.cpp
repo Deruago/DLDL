@@ -117,7 +117,8 @@ DLDL::argument::Type DLDL::argument::Parser::GetTypeFromString(const std::string
 		{"print-parser-output", Type::print_parse_result},
 		{"compatible", Type::compatible},
 		{"supported-grammars", Type::supported_grammars},
-		{"about", Type::about}
+		{"about", Type::about},
+		{"target-os", Type::target_os},
 	};
 
 	std::string argumentReworked;

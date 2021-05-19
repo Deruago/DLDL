@@ -20,6 +20,7 @@ namespace {{language_full_name}}
 		{{generate_tools_declaration.Variable_Field}}
 		{{integration_declaration.Variable_Field}}
 		{{argument_declaration.Variable_Field}}
+		{{os_declaration}}
 	
 	public:
 		Generation({{language_full_name}}::Language* language)
@@ -33,12 +34,14 @@ namespace {{language_full_name}}
 			{{generate_tools_implementation.Variable_Field}}
 			{{integration_implementation.Variable_Field}}
 			{{argument_implementation.Variable_Field}}
+			{{os_implementation}}
 
 			// Add object calls
 			// AddObject(...)
 			{{generate_tools_add_object.Variable_Field}}
 			{{integration_add_object.Variable_Field}}
 			{{argument_add_object.Variable_Field}}
+			{{os_add_object}}
 
 			// Place higher level operations here.
 			// ReplaceObject(..., ...)

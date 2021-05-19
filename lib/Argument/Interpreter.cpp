@@ -62,6 +62,26 @@ deamer::file::tool::Directory GenerateRootDirectory(std::vector<DLDL::ir::Langua
 	return rootDirectory;
 }
 
+::deamer::file::tool::OSType ConvertStringToOS(std::string osStr)
+{
+	if (osStr == "windows")
+	{
+		return deamer::file::tool::OSType::os_windows;
+	}
+	else if (osStr == "mac")
+	{
+		return deamer::file::tool::OSType::os_mac;
+	}
+	else if (osStr == "linux")
+	{
+		return deamer::file::tool::OSType::os_linux;
+	}
+	else
+	{
+		return deamer::file::tool::os_used;
+	}
+}
+
 DLDL::argument::Interpreter::Interpreter(size_t count, char* arguments[]) : parser(count, arguments)
 {
 	if (parser.IsArgumentSet(Type::definition_map))
@@ -77,6 +97,11 @@ DLDL::argument::Interpreter::Interpreter(size_t count, char* arguments[]) : pars
 	if (parser.IsArgumentSet(Type::language_name))
 	{
 		language_name = parser.GetArgument(Type::language_name).value;
+	}
+
+	if (parser.IsArgumentSet(Type::target_os))
+	{
+		os = ConvertStringToOS(parser.GetArgument(Type::target_os).value);
 	}
 }
 
@@ -220,6 +245,8 @@ void DLDL::argument::Interpreter::Help()
 		"	-target-language, tl                        ; Sets the 'target language', by default this is C++.\n"
 		"	-build-map, -bm                             ; Specify the build map. Default: './build'\n"
 		"	-definition-map, -dm                        ; Specify the definition map. Default: './Definition'\n"
+		"	-target-os                                  ; Specifies which OS should be targeted when generating the compiler.\n"
+		"	                                            ; Default is the OS this executable is installed in.\n"
 		"\n"
 		"Debug options:\n"
 		"	-debug-dldl                                 ; Allow DLDL to output debug messages from DLDL.\n"
@@ -371,7 +398,7 @@ bool DLDL::argument::Interpreter::InitializeLanguages()
 	try
 	{
 		DLDL::ir::ConstructLanguage constructLanguage("./", DefinitionMap);
-		constructLanguage.Construct();
+		constructLanguage.Construct(os);
 		languages = constructLanguage.GetLanguages();
 	}
 	catch (const std::logic_error&)
