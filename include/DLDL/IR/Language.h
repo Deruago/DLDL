@@ -62,7 +62,29 @@ namespace DLDL::ir {
 
 			AddIR(defaultGeneration);
 		}
-		virtual ~Language() = default;
+		virtual ~Language()
+		{
+			for (auto* child : children)
+			{
+				delete child;
+			}
+
+			for (auto* ir : IRs)
+			{
+				delete ir;
+			}
+
+			for (auto* ir_config : IR_Configs)
+			{
+				delete ir_config;
+			}
+		}
+
+		Language(const Language&) = delete;
+		Language(Language&&) noexcept = delete;
+
+		Language& operator=(const Language&) = delete;
+		Language& operator=(Language&&) noexcept = delete;
 
 	public:
 		std::string GetName() const { return name; }

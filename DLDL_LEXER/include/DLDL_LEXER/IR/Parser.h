@@ -25,6 +25,8 @@ namespace DLDL::ir::lexer
 
 			auto* lexiconIr = lexiconListener.GetLexicon();
 
+			delete tree;
+			
 			return lexiconIr;
 		}
 	};

@@ -26,6 +26,8 @@ namespace DLDL::ir::grammar
 
 			auto* grammarIr = grammarListener.GetGrammar();
 
+			delete tree;
+			
 			return grammarIr;
 		}
 	};

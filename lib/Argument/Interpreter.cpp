@@ -107,6 +107,11 @@ DLDL::argument::Interpreter::Interpreter(size_t count, char* arguments[]) : pars
 
 DLDL::argument::Interpreter::~Interpreter()
 {
+	for (auto* language : languages)
+	{
+		delete language;
+	}
+	
 	delete projectGeneration;
 }
 
