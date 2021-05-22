@@ -1,4 +1,9 @@
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b5738e6d64d046ac92740d54194bc127)](https://www.codacy.com/gh/Deruago/DLDL/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Deruago/DLDL&amp;utm_campaign=Badge_Grade)
+
+[![](https://tokei.rs/b1/github/Deruago/DLDL)](https://github.com/Deruago/DLDL)
+
 # DLDL
+
 DLDL is a front-end of Deamer CC. It contains specialized DSL's to generate Deamer CC code. The outputted code can be compiled using Deamer CC to create a compiler generator.
 
 When ran this compiler generator, generates the defined language in DLDL.
@@ -6,6 +11,7 @@ When ran this compiler generator, generates the defined language in DLDL.
 ## Installing DLDL for Linux
 
 **Getting the source code**
+
 ```bash
 git clone https://github.com/Deruago/DLDL.git
 cd DLDL
@@ -108,3 +114,8 @@ Git maintaince arguments:
 Clang format arguments:
         -clang-format-default                       ; Initializes default clang format style (Deamer CC style).
 ```
+
+## Examples
+
+For examples take a look at the example repo: https://github.com/Deruago/DeamerExample
+
