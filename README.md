@@ -6,9 +6,11 @@
 
 DLDL is a front-end of Deamer CC. It contains specialized DSL's to generate Deamer CC code. The outputted code can be compiled using Deamer CC to create a compiler generator.
 
-When ran this compiler generator, generates the defined language in DLDL.
+When ran this compiler generator generates the language, which was defined using DLDL.
 
 ## Installing DLDL for Linux
+
+As DLDL uses Deamer, it is recommended to also install Deamer Project: https://github.com/Deruago/theDeamerProject.
 
 **Getting the source code**
 
@@ -29,14 +31,14 @@ cmake ..
 cmake --build . --target install
 ```
 
-## Starting a Deamer project
-When installed, you can initialize a Deamer and DLDL project. Do this by using the following command:
+## Starting a Deamer language project
+When installed, you can initialize a Deamer language project. Do this by using the following command:
 ```bash
 DLDL -init -language-name=MyNewLanguage
 ```
 
 This will generate a Definition directory with a "MyNewLanguage" directory inside.
-The "MyNewLanguage" directory contains default generated files, these files are empty and can be overriden by writing your DLDL definitions in it.
+The "MyNewLanguage" directory contains default generated files, these files are empty and can be overridden by writing your DLDL definitions in it.
 
 When you are done defining your language, go back to the root directory of your project, and generate the compilergenerator.
 
@@ -46,6 +48,7 @@ Note: information about the definitions can be found in this wiki.
 
 When you have created a Definition folder and implemented at least the lexicon and grammar.
 You can run the following command to generate the compilergenerator:
+
 ```bash
 DLDL -g
 ```
@@ -65,10 +68,17 @@ And if you want to do this all in 1 go:
 DLDL -g -ac -ar
 ```
 
+## Examples
+
+For examples take a look at the example repo: https://github.com/Deruago/DeamerExample
+
+The example repo contains varies tutorials and examples to help you get started using Deamer.
+
 ## DLDL Commands
 
 DLDL has several arguments available to modify what DLDL does.
 To get a full list of these arguments run:
+
 ```bash
 DLDL -h
 ```
@@ -115,7 +125,13 @@ Clang format arguments:
         -clang-format-default                       ; Initializes default clang format style (Deamer CC style).
 ```
 
-## Examples
+## Current implemented definitions (LPD's)
 
-For examples take a look at the example repo: https://github.com/Deruago/DeamerExample
+As Deamer grows more LPD's get added, these definitions take time to become available in DLDL, as we need to define a DSL and create the appropriate back-end for it.
 
+| LPD        | User definable | DLDL default implementation |
+| ---------- | -------------- | --------------------------- |
+| Lexicon    | Yes            | No                          |
+| Grammar    | Yes            | No                          |
+| Generation | No             | Yes (by default)            |
+| Identity   | No             | Yes (by default)            |
