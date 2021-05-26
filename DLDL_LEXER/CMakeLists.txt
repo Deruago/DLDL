@@ -7,7 +7,7 @@ find_package(Deamer REQUIRED)
 
 add_library(DLDL_LEXER_external_libraries STATIC "${DLDL_LEXER_SOURCE_DIR}/lib/DLDL_LEXER.cpp")
 set_property(TARGET DLDL_LEXER_external_libraries PROPERTY POSITION_INDEPENDENT_CODE ON)
-target_link_libraries(DLDL_LEXER_external_libraries PUBLIC Deamer)
+target_link_libraries(DLDL_LEXER_external_libraries PUBLIC Deamer Deamer_External)
 target_include_directories(DLDL_LEXER_external_libraries PUBLIC "${DLDL_LEXER_SOURCE_DIR}/extern" "${DLDL_LEXER_SOURCE_DIR}/include" "${DLDL_SOURCE_DIR}/include")
 
 function(DLDL_LEXER_add_external_library external_library_name source_files)
@@ -15,7 +15,7 @@ function(DLDL_LEXER_add_external_library external_library_name source_files)
 
 	add_library(${external_library_full_name} STATIC ${source_files})
 
-	target_link_libraries(${external_library_full_name} PUBLIC Deamer)
+	target_link_libraries(${external_library_full_name} PUBLIC Deamer Deamer_External)
 	target_include_directories(${external_library_full_name} PRIVATE "${DLDL_LEXER_SOURCE_DIR}/extern" "${DLDL_LEXER_SOURCE_DIR}/include")
 	target_compile_features(${external_library_full_name} PUBLIC cxx_std_17)
 	set_target_properties(${external_library_full_name} PROPERTIES LINKED_LANGUAGE CXX)

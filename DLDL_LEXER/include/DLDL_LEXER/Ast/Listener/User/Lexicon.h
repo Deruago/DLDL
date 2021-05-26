@@ -50,7 +50,7 @@ namespace DLDL_LEXER::ast::listener::user
 			return newRegex;
 		}
 
-		void Listen(const DLDL_LEXER::ast::node::tokendeclaration* node) const override
+		void Listen(const DLDL_LEXER::ast::node::tokendeclaration* node) override
 		{
 			deamer::language::type::definition::object::main::SpecialType abstractionType;
 			auto abstraction = node->Get(DLDL_LEXER::ast::Type::abstraction);

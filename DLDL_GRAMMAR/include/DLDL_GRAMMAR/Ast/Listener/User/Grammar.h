@@ -20,7 +20,7 @@ namespace DLDL_GRAMMAR::ast::listener::user
 		~Grammar() override = default;
 
 	public:
-		void Listen(const DLDL_GRAMMAR::ast::node::abstraction_declaration* node) const override
+		void Listen(const DLDL_GRAMMAR::ast::node::abstraction_declaration* node) override
 		{
 			const auto name = node->Get(Type::NONTERMINAL)[0]->GetValue();
 			const auto abstraction = node->Get(Type::abstraction)[0]->GetNodes()[0]->GetType();
@@ -43,7 +43,7 @@ namespace DLDL_GRAMMAR::ast::listener::user
 			grammar->SetAbstraction(name, abstractionType);
 		}
 
-		void Listen(const DLDL_GRAMMAR::ast::node::definition* node) const override
+		void Listen(const DLDL_GRAMMAR::ast::node::definition* node) override
 		{
 			const auto name = node->Get(Type::NONTERMINAL)[0]->GetValue();
 			const auto abstraction_ = node->Get(Type::abstraction);
@@ -74,7 +74,7 @@ namespace DLDL_GRAMMAR::ast::listener::user
 			currentNonTerminal = name;
 		}
 
-		void Listen(const DLDL_GRAMMAR::ast::node::PRODUCTION_RULE* node) const override
+		void Listen(const DLDL_GRAMMAR::ast::node::PRODUCTION_RULE* node) override
 		{
 			grammar->AddProductionRules(currentNonTerminal, node->GetValue());
 		}

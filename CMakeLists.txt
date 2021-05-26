@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.18)
 project(DLDL)
 
 find_package(Deamer REQUIRED)
+find_package(Deamer_External REQUIRED)
 
 include(deamer.cmake)
 
