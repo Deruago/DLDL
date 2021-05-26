@@ -70,7 +70,7 @@ DLDL -g -ac -ar
 
 ## Examples
 
-For examples take a look at the example repo: https://github.com/Deruago/DeamerExample
+For examples take a look at the example repo: https://github.com/Deruago/DeamerExamples
 
 The example repo contains varies tutorials and examples to help you get started using Deamer.
 
