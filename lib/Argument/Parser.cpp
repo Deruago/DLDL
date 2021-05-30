@@ -1,7 +1,7 @@
 #include "DLDL/Argument/Parser.h"
 #include <map>
 
-DLDL::argument::Parser::Parser(size_t totalArguments, char* input[])
+DLDL::argument::Parser::Parser(size_t totalArguments, const char* input[])
 {
 	for (int i = 1; i < totalArguments; i++)
 	{

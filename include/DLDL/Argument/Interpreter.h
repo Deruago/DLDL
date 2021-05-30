@@ -24,7 +24,7 @@ namespace DLDL::argument
 		std::vector<DLDL::ir::Language*> languages;
 		DLDL::generate::Project* projectGeneration = nullptr;
 	public:
-		Interpreter(size_t count, char* arguments[]);
+		Interpreter(size_t count, const char* arguments[]);
 		~Interpreter();
 		void AutoRun();
 		void AutoCompile();

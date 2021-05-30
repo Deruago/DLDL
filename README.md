@@ -4,7 +4,7 @@
 
 # DLDL
 
-DLDL is a front-end of Deamer CC. It contains specialized DSL's to generate Deamer CC code. The outputted code can be compiled using Deamer CC to create a compiler generator.
+DLDL is a front-end of Deamer CC. It contains specialized DSL's to generate Deamer CC definitions. The outputted code can be compiled using Deamer CC to create a compiler generator.
 
 When ran this compiler generator generates the language, which was defined using DLDL.
 

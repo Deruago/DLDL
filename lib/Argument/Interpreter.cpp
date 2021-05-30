@@ -82,7 +82,7 @@ deamer::file::tool::Directory GenerateRootDirectory(std::vector<DLDL::ir::Langua
 	}
 }
 
-DLDL::argument::Interpreter::Interpreter(size_t count, char* arguments[]) : parser(count, arguments)
+DLDL::argument::Interpreter::Interpreter(size_t count, const char* arguments[]) : parser(count, arguments)
 {
 	if (parser.IsArgumentSet(Type::definition_map))
 	{

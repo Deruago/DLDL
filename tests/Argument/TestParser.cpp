@@ -38,7 +38,7 @@ TEST_F(TestParser, GetValueFromArgumentWithoutValue_ShouldReturnEmptyString)
 
 TEST_F(TestParser, InputArgument_ShouldReturnArgumentWhenAsked)
 {
-	char* text[] = { "", "-language-name=\"TestLanguage\"" };
+	const char* text[] = { "", "-language-name=\"TestLanguage\"" };
 	DLDL::argument::Parser parser(2, text);
 
 	const auto argument = parser.GetArgument(DLDL::argument::Type::language_name);
@@ -49,7 +49,7 @@ TEST_F(TestParser, InputArgument_ShouldReturnArgumentWhenAsked)
 
 TEST_F(TestParser, InputNoArgument_AskArgumentNotEntered_ShouldReturnUnknownType)
 {
-	char* text[] = { "" };
+	const char* text[] = { "" };
 	DLDL::argument::Parser parser(1, text);
 
 	const auto argument = parser.GetArgument(DLDL::argument::Type::auto_compile);
@@ -60,7 +60,7 @@ TEST_F(TestParser, InputNoArgument_AskArgumentNotEntered_ShouldReturnUnknownType
 
 TEST_F(TestParser, InputArgument_AskArgumentNotEntered_ShouldReturnUnknownType)
 {
-	char* text[] = { "", "-init" };
+	const char* text[] = { "", "-init" };
 	DLDL::argument::Parser parser(2, text);
 
 	const auto argument = parser.GetArgument(DLDL::argument::Type::auto_compile);
@@ -71,7 +71,7 @@ TEST_F(TestParser, InputArgument_AskArgumentNotEntered_ShouldReturnUnknownType)
 
 TEST_F(TestParser, InputArguments_ShouldReturnArgumentWhenAsked)
 {
-	char* text[] = { "", "-language-name=\"TestLanguage\"", "-init", "-ln", "-help" };
+	const char* text[] = { "", "-language-name=\"TestLanguage\"", "-init", "-ln", "-help" };
 	DLDL::argument::Parser parser(5, text);
 
 	const auto argument = parser.GetArgument(DLDL::argument::Type::language_name);
@@ -82,7 +82,7 @@ TEST_F(TestParser, InputArguments_ShouldReturnArgumentWhenAsked)
 
 TEST_F(TestParser, InputArguments_AskArgumentNotEntered_ShouldReturnUnknownType)
 {
-	char* text[] = { "", "-init", "-ln", "-tl", "-about" };
+	const char* text[] = { "", "-init", "-ln", "-tl", "-about" };
 	DLDL::argument::Parser parser(5, text);
 
 	const auto argument = parser.GetArgument(DLDL::argument::Type::auto_compile);
