@@ -19,7 +19,7 @@ namespace DLDL::argument
 		std::string language_name;
 		std::vector<std::string> supportedGrammars = {"Lexicon ; Used to define lexicons.", "Grammar ; Used to define context free grammars."};
 		static constexpr const char* compatibleDeamerCC_Versions = "Deamer v2.0.0";
-		static constexpr const char* version = "v2.0.0 pre-release";
+		static constexpr const char* version = "v2.0.0";
 	private:
 		std::vector<DLDL::ir::Language*> languages;
 		DLDL::generate::Project* projectGeneration = nullptr;
