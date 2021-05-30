@@ -4,13 +4,13 @@
 
 # DLDL
 
-DLDL is a front-end of Deamer CC. It contains specialized DSL's to generate Deamer CC definitions. The outputted code can be compiled using Deamer CC to create a compiler generator.
-
-When ran this compiler generator generates the language, which was defined using DLDL.
+[DLDL](https://github.com/Deruago/DLDL) is a front-end of [Deamer CC](https://github.com/Deruago/theDeamerProject). It contains specialized DSL's to generate [Deamer CC](https://github.com/Deruago/theDeamerProject) definitions. The outputted code can be compiled using [Deamer CC](https://github.com/Deruago/theDeamerProject) to create a compiler generator. When ran this compiler generator generates the language, which was defined using [DLDL](https://github.com/Deruago/DLDL).
 
 ## Installing DLDL for Linux
 
 As DLDL uses Deamer, it is recommended to also install Deamer Project: https://github.com/Deruago/theDeamerProject.
+
+It also uses Deamer External, you can install that here: https://github.com/Deruago/DeamerExternal
 
 **Getting the source code**
 
@@ -42,8 +42,6 @@ The "MyNewLanguage" directory contains default generated files, these files are 
 
 When you are done defining your language, go back to the root directory of your project, and generate the compilergenerator.
 
-Note: information about the definitions can be found in this wiki.
-
 ## Generating the CompilerGenerator
 
 When you have created a Definition folder and implemented at least the lexicon and grammar.
@@ -67,6 +65,16 @@ And if you want to do this all in 1 go:
 ```bash
 DLDL -g -ac -ar
 ```
+
+## Target specific OS
+
+It is possible to target a specific OS, you can do so by using the following argument:
+
+```bash
+DLDL -target-os=windows
+```
+
+You can replace "windows" with "linux" or a different supported OS.
 
 ## Examples
 
