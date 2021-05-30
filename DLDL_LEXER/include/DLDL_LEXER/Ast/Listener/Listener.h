@@ -30,7 +30,7 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 		Listener() = default;
 		~Listener() override = default;
 	public:
-		void Dispatch(const ::deamer::external::cpp::ast::Node* node) const override
+		void Dispatch(const ::deamer::external::cpp::ast::Node* node) override
 		{
 			const auto enumeratedValue = static_cast<DLDL_LEXER::ast::Type>(node->GetType());
 			switch(enumeratedValue)
@@ -118,54 +118,54 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 			}
 			}
 		}
-		virtual void Listen(const DLDL_LEXER::ast::node::COMMENT* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::COMMENT* node)
 		{
 		}
-		virtual void Listen(const DLDL_LEXER::ast::node::DELETE_ABSTRACTION* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::DELETE_ABSTRACTION* node)
 		{
 		}
-		virtual void Listen(const DLDL_LEXER::ast::node::IGNORE_ABSTRACTION* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::IGNORE_ABSTRACTION* node)
 		{
 		}
-		virtual void Listen(const DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION* node)
 		{
 		}
-		virtual void Listen(const DLDL_LEXER::ast::node::CRASH_ABSTRACTION* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::CRASH_ABSTRACTION* node)
 		{
 		}
-		virtual void Listen(const DLDL_LEXER::ast::node::STANDARD_ABSTRACTION* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::STANDARD_ABSTRACTION* node)
 		{
 		}
-		virtual void Listen(const DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION* node)
 		{
 		}
-		virtual void Listen(const DLDL_LEXER::ast::node::TERMINAL* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::TERMINAL* node)
 		{
 		}
-		virtual void Listen(const DLDL_LEXER::ast::node::REGEX* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::REGEX* node)
 		{
 		}
-		virtual void Listen(const DLDL_LEXER::ast::node::ESCAPE_CHARS* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::ESCAPE_CHARS* node)
 		{
 		}
 
-		virtual void Listen(const DLDL_LEXER::ast::node::program* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::program* node)
 		{
 		}
-		virtual void Listen(const DLDL_LEXER::ast::node::stmts* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::stmts* node)
 		{
 		}
-		virtual void Listen(const DLDL_LEXER::ast::node::stmt* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::stmt* node)
 		{
 		}
-		virtual void Listen(const DLDL_LEXER::ast::node::tokendeclaration* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::tokendeclaration* node)
 		{
 		}
-		virtual void Listen(const DLDL_LEXER::ast::node::abstraction* node) const
+		virtual void Listen(const DLDL_LEXER::ast::node::abstraction* node)
 		{
 		}
 	private:
-		void DefaultAction(const ::deamer::external::cpp::ast::Node* node) const
+		void DefaultAction(const ::deamer::external::cpp::ast::Node* node)
 		{
 			for(const auto* child : node->GetNodes())
 			{

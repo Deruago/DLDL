@@ -23,7 +23,8 @@ namespace DLDL::argument
 	private:
 		std::vector<Argument> arguments;
 	public:
-		Parser(size_t totalArguments, char* input[]);
+		Parser() = default;
+		Parser(size_t totalArguments, const char* input[]);
 		~Parser() = default;
 		
 	public:

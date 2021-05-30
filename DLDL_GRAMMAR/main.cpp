@@ -23,7 +23,7 @@ int main()
 	const auto parser = DLDL_GRAMMAR::parser::Parser();
 	auto* tree = parser.Parse(ReadInFile("Grammar.dldl"));
 
-	const auto grammarListener = DLDL_GRAMMAR::ast::listener::user::Grammar();
+	auto grammarListener = DLDL_GRAMMAR::ast::listener::user::Grammar();
 	grammarListener.Dispatch(tree->GetStartNode());
 
 	auto* grammarIr = grammarListener.GetGrammar();

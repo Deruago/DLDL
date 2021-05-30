@@ -21,11 +21,13 @@ namespace DLDL::ir::grammar
 			const auto parser = DLDL_GRAMMAR::parser::Parser();
 			auto* tree = parser.Parse(text);
 
-			const auto grammarListener = DLDL_GRAMMAR::ast::listener::user::Grammar();
+			auto grammarListener = DLDL_GRAMMAR::ast::listener::user::Grammar();
 			grammarListener.Dispatch(tree->GetStartNode());
 
 			auto* grammarIr = grammarListener.GetGrammar();
 
+			delete tree;
+			
 			return grammarIr;
 		}
 	};

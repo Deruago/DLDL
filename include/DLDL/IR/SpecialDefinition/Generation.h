@@ -6,6 +6,7 @@
 #include "DLDL/IR/IR.h"
 #include <string>
 #include <vector>
+#include <Deamer/File/Tool/OSType.h>
 
 namespace DLDL::ir::special
 {
@@ -100,9 +101,11 @@ namespace DLDL::ir::special
 	class Generation : public IR
 	{
 	private:
+		::deamer::file::tool::OSType os;
+		
 		std::vector<Tool> tools;
 	public:
-		Generation() : IR(Type::Generation)
+		Generation(::deamer::file::tool::OSType os_ = ::deamer::file::tool::os_used) : IR(Type::Generation), os(os_)
 		{
 		}
 		
@@ -162,6 +165,11 @@ namespace DLDL::ir::special
 		std::vector<Tool> GetTools() const
 		{
 			return tools;
+		}
+
+		deamer::file::tool::OSType GetOs() const
+		{
+			return os;
 		}
 	};
 }

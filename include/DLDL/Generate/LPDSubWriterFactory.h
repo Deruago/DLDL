@@ -17,22 +17,22 @@ namespace DLDL::generate
 	class LPDSubWriterFactory
 	{
 	public:
-		static SubWriter* GetLPDSubWriter(ir::Type type)
+		static std::shared_ptr<SubWriter> GetLPDSubWriter(ir::Type type)
 		{
 			switch (type)
 			{
 			case ir::Type::Lexicon:
-				return new sub::LexiconLPDWriter();
+				return std::make_shared<sub::LexiconLPDWriter>();
 			case ir::Type::Grammar:
-				return new sub::GrammarLPDWriter();
+				return std::make_shared<sub::GrammarLPDWriter>();
 			case ir::Type::Precedence:
-				return new sub::PrecedenceLPDWriter();
+				return std::make_shared<sub::PrecedenceLPDWriter>();
 			case ir::Type::Associativity:
-				return new sub::AssociativityLPDWriter();
+				return std::make_shared<sub::AssociativityLPDWriter>();
 			case ir::Type::Generation:
-				return new sub::GenerationLPDWriter();
+				return std::make_shared<sub::GenerationLPDWriter>();
 			case ir::Type::Identity:
-				return new sub::IdentityLPDWriter();
+				return std::make_shared<sub::IdentityLPDWriter>();
 			case ir::Type::AstOptimization:
 				break;
 			case ir::Type::AstTranslation:

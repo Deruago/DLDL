@@ -11,6 +11,25 @@ namespace DLDL::generate::sub
 	public:
 		GenerationLPDWriter() = default;
 	public:
+		static constexpr const char* ConvertOSToString(deamer::file::tool::OSType os)
+		{
+			switch (os)
+			{
+			case deamer::file::tool::OSType::unknown:
+				return ConvertOSToString(deamer::file::tool::os_used);
+			case deamer::file::tool::OSType::all:
+				return ConvertOSToString(deamer::file::tool::os_used);
+			case deamer::file::tool::OSType::os_linux:
+				return "linux";
+			case deamer::file::tool::OSType::os_windows:
+				return "windows";
+			case deamer::file::tool::OSType::os_mac:
+				return "mac";
+			default:
+				return ConvertOSToString(deamer::file::tool::os_used);
+			}
+		}
+
 		deamer::file::tool::File GetFileContentHeaderFile(ir::Language* language, const ir::LPD& lpd) override
 		{
 			deamer::file::tool::File file("Generation", "h", "");
@@ -57,6 +76,8 @@ namespace DLDL::generate::sub
 				generator.generate_tools_implementation_->ExpandVariableField();
 				generator.generate_tools_add_object_->ExpandVariableField();
 			}
+
+			generator.os_type_->Set(ConvertOSToString(generation->GetOs()));
 
 			file.SetFileContent(generator.GetOutput());
 

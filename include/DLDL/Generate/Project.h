@@ -39,7 +39,7 @@ namespace DLDL::generate
 
 				if (file.GetGenerationLevel() ==
 						::deamer::file::tool::GenerationLevel::Dont_generate_if_file_already_exists &&
-					std::filesystem::exists(filePath))
+					std::filesystem::exists(filePath) && !std::filesystem::is_empty(filePath))
 				{
 					return;
 				}

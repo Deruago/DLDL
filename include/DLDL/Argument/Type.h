@@ -30,6 +30,7 @@ namespace DLDL::argument
 		compatible,
 		supported_grammars,
 		about,
+		target_os,
 		
 		git_initialize,
 	};

@@ -78,7 +78,7 @@ namespace DLDL::ir
 		 *
 		 *	\note Call GetLanguages to retrieve the constructed language.
 		 */
-		void Construct()
+		void Construct(::deamer::file::tool::OSType os = ::deamer::file::tool::os_used)
 		{
 			std::vector<Language*> rootLanguages;
 			for (const auto& item : std::filesystem::directory_iterator(relativeDirectory))
@@ -92,10 +92,10 @@ namespace DLDL::ir
 					relativeDirectory +
 					item.path().generic_string().erase(0, relativeDirectory.size());
 
-				Language* language = GetLanguageFromMap(languageDirectory);
+				Language* language = GetLanguageFromMap(languageDirectory, os);
 				rootLanguages.push_back(language);
 
-				Construct(language, languageDirectory);
+				Construct(language, languageDirectory, os);
 			}
 
 			languages = rootLanguages;
@@ -107,7 +107,7 @@ namespace DLDL::ir
 		}
 
 	private:
-		void Construct(Language* parentLanguage, std::string path)
+		void Construct(Language* parentLanguage, std::string path, ::deamer::file::tool::OSType os = ::deamer::file::tool::os_used)
 		{
 			for (auto& item : std::filesystem::directory_iterator(path))
 			{
@@ -120,19 +120,19 @@ namespace DLDL::ir
 					path + item.path().generic_string().erase(0, path.size());
 				std::cout << languageDirectory << '\n';
 				
-				Language* currentLanguage = GetLanguageFromMap(languageDirectory);
+				Language* currentLanguage = GetLanguageFromMap(languageDirectory, os);
 				parentLanguage->AddLanguage(currentLanguage);
 
-				Construct(currentLanguage, languageDirectory);
+				Construct(currentLanguage, languageDirectory, os);
 			}
 		}
 
-		Language* GetLanguageFromMap(const std::string& path)
+		Language* GetLanguageFromMap(const std::string& path, deamer::file::tool::OSType os = deamer::file::tool::os_used)
 		{
 			const std::string languageName =
 				*(deamer::file::tool::Directory(path).SplitDirectoryName().end() - 1);
 
-			auto* newLanguage = new Language(languageName);
+			auto* newLanguage = new Language(languageName, os);
 			for (const auto& item : std::filesystem::directory_iterator(path))
 			{
 				if (item.is_directory())

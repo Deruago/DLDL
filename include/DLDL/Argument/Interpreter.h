@@ -10,6 +10,8 @@ namespace DLDL::argument
 	class Interpreter
 	{
 	private:
+		::deamer::file::tool::OSType os = ::deamer::file::tool::os_used;
+		
 		Parser parser;
 	private:
 		std::string DefinitionMap = "definition";
@@ -22,7 +24,7 @@ namespace DLDL::argument
 		std::vector<DLDL::ir::Language*> languages;
 		DLDL::generate::Project* projectGeneration = nullptr;
 	public:
-		Interpreter(size_t count, char* arguments[]);
+		Interpreter(size_t count, const char* arguments[]);
 		~Interpreter();
 		void AutoRun();
 		void AutoCompile();

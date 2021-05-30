@@ -20,11 +20,13 @@ namespace DLDL::ir::lexer
 			const auto parser = DLDL_LEXER::parser::Parser();
 			auto* tree = parser.Parse(text);
 
-			const auto lexiconListener = DLDL_LEXER::ast::listener::user::Lexicon();
+			auto lexiconListener = DLDL_LEXER::ast::listener::user::Lexicon();
 			lexiconListener.Dispatch(tree->GetStartNode());
 
 			auto* lexiconIr = lexiconListener.GetLexicon();
 
+			delete tree;
+			
 			return lexiconIr;
 		}
 	};

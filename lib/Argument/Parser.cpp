@@ -1,8 +1,7 @@
 #include "DLDL/Argument/Parser.h"
-
 #include <map>
 
-DLDL::argument::Parser::Parser(size_t totalArguments, char* input[])
+DLDL::argument::Parser::Parser(size_t totalArguments, const char* input[])
 {
 	for (int i = 1; i < totalArguments; i++)
 	{
@@ -81,6 +80,7 @@ DLDL::argument::Type DLDL::argument::Parser::GetTypeFromString(const std::string
 		{"init", Type::initialize},
 		{"initial", Type::initialize},
 		{"initialize", Type::initialize},
+		{"ln", Type::language_name},
 		{"lang-name", Type::language_name},
 		{"language-name", Type::language_name},
 		{"g", Type::generate},
@@ -107,7 +107,6 @@ DLDL::argument::Type DLDL::argument::Parser::GetTypeFromString(const std::string
 		{"information", Type::information},
 		{"target-language", Type::target_language},
 		{"tl", Type::target_language},
-		{"target-language", Type::target_language},
 		{"git-init", Type::git_initialize},
 		{"git-initialize", Type::git_initialize},
 		{"dm", Type::definition_map},
@@ -117,7 +116,8 @@ DLDL::argument::Type DLDL::argument::Parser::GetTypeFromString(const std::string
 		{"print-parser-output", Type::print_parse_result},
 		{"compatible", Type::compatible},
 		{"supported-grammars", Type::supported_grammars},
-		{"about", Type::about}
+		{"about", Type::about},
+		{"target-os", Type::target_os},
 	};
 
 	std::string argumentReworked;

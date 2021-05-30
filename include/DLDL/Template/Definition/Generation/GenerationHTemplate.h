@@ -1,5 +1,5 @@
-#ifndef DST_generationtemplate_h
-#define DST_generationtemplate_h
+#ifndef DLDL_FILETEMPLATE_GENERATIONTEMPLATE_h
+#define DLDL_FILETEMPLATE_GENERATIONTEMPLATE_h
 
 #include <variant>
 #include <vector>
@@ -46,6 +46,10 @@ namespace DLDL::filetemplate
 			left_angle_bracket_,
 			left_bracket_,
 			left_curly_bracket_,
+			os_add_object_,
+			os_declaration_,
+			os_implementation_,
+			os_type_,
 			right_angle_bracket_,
 			right_bracket_,
 			right_curly_bracket_,
@@ -62,6 +66,13 @@ namespace DLDL::filetemplate
 			Default_,
 			Upper_,
 			Lower_,
+
+			Snake_,
+			Slash_,
+			BackSlash_,
+			Colon_,
+			DoubleColon_,
+
 			Variable_Field_,
 			Variable_Field_Separator_,
 			Function_Field_,
@@ -185,6 +196,26 @@ namespace DLDL::filetemplate
 				return "left_curly_bracket";
 			}
 
+			case ::DLDL::filetemplate::GenerationTemplate::Type::os_add_object_:
+			{
+				return "os_add_object";
+			}
+
+			case ::DLDL::filetemplate::GenerationTemplate::Type::os_declaration_:
+			{
+				return "os_declaration";
+			}
+
+			case ::DLDL::filetemplate::GenerationTemplate::Type::os_implementation_:
+			{
+				return "os_implementation";
+			}
+
+			case ::DLDL::filetemplate::GenerationTemplate::Type::os_type_:
+			{
+				return "os_type";
+			}
+
 			case ::DLDL::filetemplate::GenerationTemplate::Type::right_angle_bracket_:
 			{
 				return "right_angle_bracket";
@@ -247,7 +278,7 @@ namespace DLDL::filetemplate
 				return this;
 			}
 
-			std::string GetValue()
+			virtual std::string GetValue()
 			{
 				if (isString)
 				{
@@ -409,12 +440,199 @@ namespace DLDL::filetemplate
 			}
 		};
 
+		struct Variable_ReservedScope_Upper : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Upper(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::GenerationTemplate::ScopeType::Upper_, true),
+				base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string upperVariant;
+				std::string currentValue = base->GetValue();
+
+				for (const auto character : currentValue)
+				{
+					upperVariant += std::toupper(character);
+				}
+
+				return upperVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Lower : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Lower(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::GenerationTemplate::ScopeType::Lower_, true),
+				base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string lowerVariant;
+				std::string currentValue = base->GetValue();
+
+				for (const auto character : currentValue)
+				{
+					lowerVariant += std::tolower(character);
+				}
+
+				return lowerVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Snake : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Snake(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::GenerationTemplate::ScopeType::Snake_, true),
+				base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string snakeVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						snakeVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						snakeVariant += '_';
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!snakeVariant.empty() && lastWasNonAlpha)
+				{
+					snakeVariant.pop_back();
+				}
+
+				return snakeVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Slash : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Slash(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::GenerationTemplate::ScopeType::Slash_, true),
+				base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string slashVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						slashVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						slashVariant += '/';
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!slashVariant.empty() && lastWasNonAlpha)
+				{
+					slashVariant.pop_back();
+				}
+
+				return slashVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_DoubleColon : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_DoubleColon(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::GenerationTemplate::ScopeType::DoubleColon_, true),
+				base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string doubleColonVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						doubleColonVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						doubleColonVariant += "::";
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!doubleColonVariant.empty() && lastWasNonAlpha)
+				{
+					doubleColonVariant.pop_back();
+					doubleColonVariant.pop_back();
+				}
+
+				return doubleColonVariant;
+			}
+		};
+
 		struct VariableScopes : public VariableBase
 		{
 			// Default scopes
 			VariableBase* default_ = new VariableScope(::DLDL::filetemplate::GenerationTemplate::ScopeType::Default_, true);
-			VariableBase* upper_ = new VariableScope(::DLDL::filetemplate::GenerationTemplate::ScopeType::Upper_, true);
-			VariableBase* lower_ = new VariableScope(::DLDL::filetemplate::GenerationTemplate::ScopeType::Lower_, true);
+			VariableBase* upper_ = new Variable_ReservedScope_Upper(this);
+			VariableBase* lower_ = new Variable_ReservedScope_Lower(this);
+
+			VariableBase* snake_ = new Variable_ReservedScope_Snake(this);
+			VariableBase* slash_ = new Variable_ReservedScope_Slash(this);
+			VariableBase* double_colon_ = new Variable_ReservedScope_DoubleColon(this);
+
 			VariableBase* variable_field_ = new VariableScope(::DLDL::filetemplate::GenerationTemplate::ScopeType::Variable_Field_, true);
 			VariableBase* variable_field_separator_ = new VariableScope("\n", ::DLDL::filetemplate::GenerationTemplate::ScopeType::Variable_Field_Separator_, true);
 
@@ -437,32 +655,32 @@ namespace DLDL::filetemplate
 			}
 			VariableBase* Upper()
 			{
-				std::string upperVariant;
-				std::string currentValue = GetValue();
-
-				for (const auto character : currentValue)
-				{
-					upperVariant += std::toupper(character);
-				}
-
-				*upper_ = upperVariant;
-
 				return upper_;
 			}
 
 			VariableBase* Lower()
 			{
-				std::string lowerVariant;
-				std::string currentValue = GetValue();
-
-				for (const auto character : currentValue)
-				{
-					lowerVariant += std::tolower(character);
-				}
-
-				*lower_ = lowerVariant;
-
 				return lower_;
+			}
+
+			VariableBase* Underscore()
+			{
+				return snake_;
+			}
+
+			VariableBase* Snake()
+			{
+				return snake_;
+			}
+
+			VariableBase* Slash()
+			{
+				return slash_;
+			}
+
+			VariableBase* DoubleColon()
+			{
+				return double_colon_;
 			}
 
 			VariableBase* Variable_Field()
@@ -703,7 +921,7 @@ namespace DLDL::filetemplate
 			Variable_file_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::GenerationTemplate::Type::file_;
-				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("#ifndef "), GenerateVariable(generationtemplate_->header_guard_->This()), GenerateVariable("\n#define "), GenerateVariable(generationtemplate_->header_guard_->This()), GenerateVariable("\n#include \"Deamer/Language/Generator/Definition/Property/User/Special/Generation"), GenerateVariable("."), GenerateVariable("h\"\nnamespace "), GenerateVariable(generationtemplate_->language_full_name_->This()), GenerateVariable("\n"), GenerateVariable("{"), GenerateVariable("\n\tclass Language;\n\t/*!\t"), GenerateVariable("\\"), GenerateVariable("class Generation\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("brief This contains the generation LPD of the language "), GenerateVariable(generationtemplate_->language_full_name_->This()), GenerateVariable("\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("note This is auto-generated via the DLDL definition"), GenerateVariable("."), GenerateVariable("\n\t */\n\tclass Generation : public ::deamer::language::generator::definition::property::user::Generation<\n\t\t\t\t\t\t\t\t::"), GenerateVariable(generationtemplate_->language_full_name_->This()), GenerateVariable("::Language>\n\t"), GenerateVariable("{"), GenerateVariable("\n\tpublic:\n\t\t"), GenerateVariable(generationtemplate_->generate_tools_declaration_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable(generationtemplate_->integration_declaration_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable(generationtemplate_->argument_declaration_->Variable_Field()), GenerateVariable("\n\t\n\tpublic:\n\t\tGeneration("), GenerateVariable(generationtemplate_->language_full_name_->This()), GenerateVariable("::Language* language)\n\t\t\t:\t::deamer::language::generator::definition::property::user::Generation<\n\t\t\t\t\t::"), GenerateVariable(generationtemplate_->language_full_name_->This()), GenerateVariable("::Language>(language)\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\tvoid GenerateObjects() override\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t"), GenerateVariable(generationtemplate_->generate_tools_implementation_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(generationtemplate_->integration_implementation_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(generationtemplate_->argument_implementation_->Variable_Field()), GenerateVariable("\n\t\t\t// Add object calls\n\t\t\t// AddObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\n\t\t\t"), GenerateVariable(generationtemplate_->generate_tools_add_object_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(generationtemplate_->integration_add_object_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(generationtemplate_->argument_add_object_->Variable_Field()), GenerateVariable("\n\t\t\t// Place higher level operations here"), GenerateVariable("."), GenerateVariable("\n\t\t\t// ReplaceObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(", "), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\n\t\t\t// DeleteObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(", "), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\n\t\t\t"), GenerateVariable(generationtemplate_->high_level_operation_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\t"), GenerateVariable("}"), GenerateVariable(";\n"), GenerateVariable("}"), GenerateVariable("\n#endif // "), GenerateVariable(generationtemplate_->header_guard_->This()), GenerateVariable("\n") }));
+				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("#ifndef "), GenerateVariable(generationtemplate_->header_guard_->This()), GenerateVariable("\n#define "), GenerateVariable(generationtemplate_->header_guard_->This()), GenerateVariable("\n\n#include \"Deamer/Language/Generator/Definition/Property/User/Special/Generation"), GenerateVariable("."), GenerateVariable("h\"\n\nnamespace "), GenerateVariable(generationtemplate_->language_full_name_->This()), GenerateVariable("\n"), GenerateVariable("{"), GenerateVariable("\n\tclass Language;\n\n\t/*!\t"), GenerateVariable("\\"), GenerateVariable("class Generation\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("brief This contains the generation LPD of the language "), GenerateVariable(generationtemplate_->language_full_name_->This()), GenerateVariable("\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("note This is auto-generated via the DLDL definition"), GenerateVariable("."), GenerateVariable("\n\t */\n\tclass Generation : public ::deamer::language::generator::definition::property::user::Generation<\n\t\t\t\t\t\t\t\t::"), GenerateVariable(generationtemplate_->language_full_name_->This()), GenerateVariable("::Language>\n\t"), GenerateVariable("{"), GenerateVariable("\n\tpublic:\n\t\t"), GenerateVariable(generationtemplate_->generate_tools_declaration_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable(generationtemplate_->integration_declaration_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable(generationtemplate_->argument_declaration_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable(generationtemplate_->os_declaration_->This()), GenerateVariable("\n\t\n\tpublic:\n\t\tGeneration("), GenerateVariable(generationtemplate_->language_full_name_->This()), GenerateVariable("::Language* language)\n\t\t\t:\t::deamer::language::generator::definition::property::user::Generation<\n\t\t\t\t\t::"), GenerateVariable(generationtemplate_->language_full_name_->This()), GenerateVariable("::Language>(language)\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\n\t\tvoid GenerateObjects() override\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t"), GenerateVariable(generationtemplate_->generate_tools_implementation_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(generationtemplate_->integration_implementation_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(generationtemplate_->argument_implementation_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(generationtemplate_->os_implementation_->This()), GenerateVariable("\n\n\t\t\t// Add object calls\n\t\t\t// AddObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\n\t\t\t"), GenerateVariable(generationtemplate_->generate_tools_add_object_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(generationtemplate_->integration_add_object_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(generationtemplate_->argument_add_object_->Variable_Field()), GenerateVariable("\n\t\t\t"), GenerateVariable(generationtemplate_->os_add_object_->This()), GenerateVariable("\n\n\t\t\t// Place higher level operations here"), GenerateVariable("."), GenerateVariable("\n\t\t\t// ReplaceObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(", "), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\n\t\t\t// DeleteObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(", "), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\n\t\t\t"), GenerateVariable(generationtemplate_->high_level_operation_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\t"), GenerateVariable("}"), GenerateVariable(";\n"), GenerateVariable("}"), GenerateVariable("\n\n#endif // "), GenerateVariable(generationtemplate_->header_guard_->This()), GenerateVariable("\n") }));
 				Content_->type = ::DLDL::filetemplate::GenerationTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Class_postfix_) = VariableBase(std::vector<VariableBase*>({  }));
@@ -715,7 +933,7 @@ namespace DLDL::filetemplate
 				*static_cast<VariableBase*>(File_name_) = VariableBase(std::vector<VariableBase*>({  }));
 				File_name_->type = ::DLDL::filetemplate::GenerationTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(Namespace_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(Namespace_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("DLDL::filetemplate") }));
 				Namespace_->type = ::DLDL::filetemplate::GenerationTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Target_language_) = VariableBase(std::vector<VariableBase*>({  }));
@@ -1403,6 +1621,162 @@ namespace DLDL::filetemplate
 
 		};
 
+		struct Variable_os_add_object_ : public VariableScopes
+		{
+
+			static constexpr auto name = "os_add_object_";
+
+
+
+			Variable_os_add_object_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::GenerationTemplate::Type::os_add_object_;
+			}
+
+			virtual ~Variable_os_add_object_() override = default;
+
+			Variable_os_add_object_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::GenerationTemplate::Type::os_add_object_;
+
+			}
+
+
+
+			Variable_os_add_object_& operator=(const Variable_os_add_object_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+
+
+				return *this;
+			}
+
+		};
+
+		struct Variable_os_declaration_ : public VariableScopes
+		{
+
+			static constexpr auto name = "os_declaration_";
+
+
+
+			Variable_os_declaration_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::GenerationTemplate::Type::os_declaration_;
+			}
+
+			virtual ~Variable_os_declaration_() override = default;
+
+			Variable_os_declaration_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::GenerationTemplate::Type::os_declaration_;
+
+			}
+
+
+
+			Variable_os_declaration_& operator=(const Variable_os_declaration_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+
+
+				return *this;
+			}
+
+		};
+
+		struct Variable_os_implementation_ : public VariableScopes
+		{
+
+			static constexpr auto name = "os_implementation_";
+
+
+
+			Variable_os_implementation_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::GenerationTemplate::Type::os_implementation_;
+			}
+
+			virtual ~Variable_os_implementation_() override = default;
+
+			Variable_os_implementation_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::GenerationTemplate::Type::os_implementation_;
+
+			}
+
+
+
+			Variable_os_implementation_& operator=(const Variable_os_implementation_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+
+
+				return *this;
+			}
+
+		};
+
+		struct Variable_os_type_ : public VariableScopes
+		{
+
+			static constexpr auto name = "os_type_";
+
+
+
+			Variable_os_type_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::GenerationTemplate::Type::os_type_;
+			}
+
+			virtual ~Variable_os_type_() override = default;
+
+			Variable_os_type_(GenerationTemplate* generationtemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::GenerationTemplate::Type::os_type_;
+
+			}
+
+
+
+			Variable_os_type_& operator=(const Variable_os_type_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+
+
+				return *this;
+			}
+
+		};
+
 		struct Variable_right_angle_bracket_ : public VariableScopes
 		{
 
@@ -1548,11 +1922,15 @@ namespace DLDL::filetemplate
 		Variable_integration_declaration_* integration_declaration_ = new Variable_integration_declaration_();
 		Variable_integration_implementation_* integration_implementation_ = new Variable_integration_implementation_();
 		Variable_language_full_name_* language_full_name_ = new Variable_language_full_name_();
-		VariableScopes* language_full_name_slash_= new VariableScopes();
+		VariableScopes* language_full_name_slash_ = new VariableScopes();
 		Variable_language_full_name_underscore_* language_full_name_underscore_ = new Variable_language_full_name_underscore_();
 		Variable_left_angle_bracket_* left_angle_bracket_ = new Variable_left_angle_bracket_();
 		Variable_left_bracket_* left_bracket_ = new Variable_left_bracket_();
 		Variable_left_curly_bracket_* left_curly_bracket_ = new Variable_left_curly_bracket_();
+		Variable_os_add_object_* os_add_object_ = new Variable_os_add_object_();
+		Variable_os_declaration_* os_declaration_ = new Variable_os_declaration_();
+		Variable_os_implementation_* os_implementation_ = new Variable_os_implementation_();
+		Variable_os_type_* os_type_ = new Variable_os_type_();
 		Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
 		Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
 		Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_bracket_();
@@ -1583,6 +1961,10 @@ namespace DLDL::filetemplate
 			*left_angle_bracket_ = Variable_left_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("<") }));
 			*left_bracket_ = Variable_left_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("{") }));
 			*left_curly_bracket_ = Variable_left_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("(") }));
+			*os_add_object_ = Variable_os_add_object_(this, std::vector<VariableBase*>({ GenerateVariable("AddObject(os_"), GenerateVariable(os_type_->This()), GenerateVariable(");") }));
+			*os_declaration_ = Variable_os_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("::deamer::type::SafeReserve"), GenerateVariable(left_angle_bracket_->This()), GenerateVariable("::deamer::language::type::definition::object::main::OSTarget"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable(" os_"), GenerateVariable(os_type_->This()), GenerateVariable(";") }));
+			*os_implementation_ = Variable_os_implementation_(this, std::vector<VariableBase*>({ GenerateVariable("os_"), GenerateVariable(os_type_->This()), GenerateVariable("."), GenerateVariable("Set(::deamer::language::type::definition::object::main::OSTarget(::deamer::file::tool::OSType::os_"), GenerateVariable(os_type_->This()), GenerateVariable("));") }));
+			*os_type_ = Variable_os_type_(this, std::vector<VariableBase*>({  }));
 			*right_angle_bracket_ = Variable_right_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(">") }));
 			*right_bracket_ = Variable_right_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("}") }));
 			*right_curly_bracket_ = Variable_right_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(")") }));
@@ -1610,6 +1992,10 @@ namespace DLDL::filetemplate
 			variables_.emplace_back(left_angle_bracket_);
 			variables_.emplace_back(left_bracket_);
 			variables_.emplace_back(left_curly_bracket_);
+			variables_.emplace_back(os_add_object_);
+			variables_.emplace_back(os_declaration_);
+			variables_.emplace_back(os_implementation_);
+			variables_.emplace_back(os_type_);
 			variables_.emplace_back(right_angle_bracket_);
 			variables_.emplace_back(right_bracket_);
 			variables_.emplace_back(right_curly_bracket_);
@@ -1622,6 +2008,7 @@ namespace DLDL::filetemplate
 			{
 				delete variable;
 			}
+
 			variables_to_delete.clear();
 		}
 
@@ -1650,4 +2037,4 @@ namespace DLDL::filetemplate
 	};
 }
 
-#endif // DST_generationtemplate_h
+#endif // DLDL_FILETEMPLATE_GENERATIONTEMPLATE_h

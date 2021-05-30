@@ -38,7 +38,7 @@ std::string GenerateRootCMakeLists(std::vector<DLDL::ir::Language*> languages)
 deamer::file::tool::Directory InitialiseLanguageDirectory(DLDL::ir::Language* language)
 {
 	auto directory = deamer::file::tool::Directory(language->GetName());
-	directory.AddFile({ "CMakeLists","txt" });
+	directory.AddFile({ "CMakeLists", "txt", "", deamer::file::tool::GenerationLevel::Dont_generate_if_file_already_exists });
 
 	return directory;
 }
@@ -62,7 +62,27 @@ deamer::file::tool::Directory GenerateRootDirectory(std::vector<DLDL::ir::Langua
 	return rootDirectory;
 }
 
-DLDL::argument::Interpreter::Interpreter(size_t count, char* arguments[]) : parser(count, arguments)
+::deamer::file::tool::OSType ConvertStringToOS(std::string osStr)
+{
+	if (osStr == "windows")
+	{
+		return deamer::file::tool::OSType::os_windows;
+	}
+	else if (osStr == "mac")
+	{
+		return deamer::file::tool::OSType::os_mac;
+	}
+	else if (osStr == "linux")
+	{
+		return deamer::file::tool::OSType::os_linux;
+	}
+	else
+	{
+		return deamer::file::tool::os_used;
+	}
+}
+
+DLDL::argument::Interpreter::Interpreter(size_t count, const char* arguments[]) : parser(count, arguments)
 {
 	if (parser.IsArgumentSet(Type::definition_map))
 	{
@@ -78,10 +98,20 @@ DLDL::argument::Interpreter::Interpreter(size_t count, char* arguments[]) : pars
 	{
 		language_name = parser.GetArgument(Type::language_name).value;
 	}
+
+	if (parser.IsArgumentSet(Type::target_os))
+	{
+		os = ConvertStringToOS(parser.GetArgument(Type::target_os).value);
+	}
 }
 
 DLDL::argument::Interpreter::~Interpreter()
 {
+	for (auto* language : languages)
+	{
+		delete language;
+	}
+	
 	delete projectGeneration;
 }
 
@@ -220,6 +250,8 @@ void DLDL::argument::Interpreter::Help()
 		"	-target-language, tl                        ; Sets the 'target language', by default this is C++.\n"
 		"	-build-map, -bm                             ; Specify the build map. Default: './build'\n"
 		"	-definition-map, -dm                        ; Specify the definition map. Default: './Definition'\n"
+		"	-target-os                                  ; Specifies which OS should be targeted when generating the compiler.\n"
+		"	                                            ; Default is the OS this executable is installed in.\n"
 		"\n"
 		"Debug options:\n"
 		"	-debug-dldl                                 ; Allow DLDL to output debug messages from DLDL.\n"
@@ -371,7 +403,7 @@ bool DLDL::argument::Interpreter::InitializeLanguages()
 	try
 	{
 		DLDL::ir::ConstructLanguage constructLanguage("./", DefinitionMap);
-		constructLanguage.Construct();
+		constructLanguage.Construct(os);
 		languages = constructLanguage.GetLanguages();
 	}
 	catch (const std::logic_error&)
