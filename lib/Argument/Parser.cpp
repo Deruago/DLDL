@@ -89,6 +89,7 @@ DLDL::argument::Type DLDL::argument::Parser::GetTypeFromString(const std::string
 		{"v", Type::version},
 		{"version", Type::version},
 		{"copyright", Type::copyright},
+		{"license", Type::copyright},
 		{"h", Type::help},
 		{"help", Type::help},
 		{"ac", Type::auto_compile},

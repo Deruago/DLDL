@@ -315,6 +315,15 @@ void DLDL::argument::Interpreter::License()
 		"along with this program; if not, write to the Free Software Foundation,\n"
 		"Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n"
 		"\n";
+		
+	PrintUsedLicenses();
+}
+
+void DLDL::argument::Interpreter::PrintUsedLicenses() const
+{
+	std::cout << "Dependencies:\n";
+	std::cout << DeamerCC.GetLicenseMessage(1) << "\t----------------------------\n";
+	std::cout << DeamerExternal.GetLicenseMessage(1) << "\n";
 }
 
 void DLDL::argument::Interpreter::Exit()
