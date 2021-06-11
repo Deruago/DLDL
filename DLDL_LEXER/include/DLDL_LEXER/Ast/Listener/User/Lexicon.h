@@ -41,6 +41,10 @@ namespace DLDL_LEXER::ast::listener::user
 					newRegex += "\\";
 					newRegex += character;
 					break;
+				case '"':
+					newRegex += "\\";
+					newRegex += character;
+					break;
 				default:
 					newRegex += character;
 					break;
