@@ -777,13 +777,15 @@ void showError();
 extern int DLDL_GRAMMARlex();
 
 static bool local_store = false;
+static int column = 0;
+static int handleColumn(const std::string& text);
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject);
 static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_objects;
 #ifndef yyval
 #define yyval yytext
 #endif //yyval
-#line 786 "lex.DLDL_GRAMMAR.c"
-#line 787 "lex.DLDL_GRAMMAR.c"
+#line 788 "lex.DLDL_GRAMMAR.c"
+#line 789 "lex.DLDL_GRAMMAR.c"
 
 #define INITIAL 0
 
@@ -1000,10 +1002,10 @@ YY_DECL
 		}
 
 	{
-#line 50 "./DLDL_GRAMMAR_lexer.l"
+#line 52 "./DLDL_GRAMMAR_lexer.l"
 
 
-#line 1007 "lex.DLDL_GRAMMAR.c"
+#line 1009 "lex.DLDL_GRAMMAR.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1068,46 +1070,46 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 52 "./DLDL_GRAMMAR_lexer.l"
-{if (!local_store) ;}
+#line 54 "./DLDL_GRAMMAR_lexer.l"
+{handleColumn(yyval);if (!local_store) ;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 53 "./DLDL_GRAMMAR_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno);;if (!local_store) return (START_ABSTRACTION);;}
+#line 55 "./DLDL_GRAMMAR_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (START_ABSTRACTION);;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 54 "./DLDL_GRAMMAR_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno);;if (!local_store) return (GROUP_ABSTRACTION);;}
+#line 56 "./DLDL_GRAMMAR_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (GROUP_ABSTRACTION);;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 55 "./DLDL_GRAMMAR_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (UNKNOWN_ABSTRACTION);;}
+#line 57 "./DLDL_GRAMMAR_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (UNKNOWN_ABSTRACTION);;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 56 "./DLDL_GRAMMAR_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (NONTERMINAL);;}
+#line 58 "./DLDL_GRAMMAR_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (NONTERMINAL);;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 57 "./DLDL_GRAMMAR_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (PRODUCTION_RULE);;}
+#line 59 "./DLDL_GRAMMAR_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (PRODUCTION_RULE);;}
 	YY_BREAK
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 58 "./DLDL_GRAMMAR_lexer.l"
-{if (!local_store) ;}
+#line 60 "./DLDL_GRAMMAR_lexer.l"
+{handleColumn(yyval);if (!local_store) ;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 60 "./DLDL_GRAMMAR_lexer.l"
+#line 62 "./DLDL_GRAMMAR_lexer.l"
 ECHO;
 	YY_BREAK
-#line 1111 "lex.DLDL_GRAMMAR.c"
+#line 1113 "lex.DLDL_GRAMMAR.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2125,7 +2127,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 60 "./DLDL_GRAMMAR_lexer.l"
+#line 62 "./DLDL_GRAMMAR_lexer.l"
 
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject)
 {
@@ -2137,9 +2139,26 @@ static void clear()
 	local_objects.clear();
 }
 
+static int handleColumn(const std::string& text)
+{
+	int currentColumn = column;
+	currentColumn += text.size();
+	for (auto character : text)
+	{
+		if (character == '\n')
+		{
+			currentColumn = 0;
+			break;
+		}
+	}
+	
+	return currentColumn;
+}
+
 std::vector<const deamer::external::cpp::lexer::TerminalObject*> DLDL_GRAMMAR::lexer::Lexer::Tokenize(const std::string& text) const
 {
 	local_store = true;
+	column = 0;
 
 	YY_BUFFER_STATE buf;
 	buf = yy_scan_string(text.c_str());

@@ -2,12 +2,11 @@
 #define DLDL_LEXER_AST_NODE_IGNORE_ABSTRACTION_H
 
 #include "DLDL_LEXER/Ast/Node/DLDL_LEXER.h"
-#include "DLDL_LEXER/Ast/Node/abstraction.h"
 #include <Deamer/External/Cpp/Ast/Node.h>
 
 namespace DLDL_LEXER { namespace ast { namespace node {
 
-	class IGNORE_ABSTRACTION : public DLDL_LEXER<IGNORE_ABSTRACTION>, public ::DLDL_LEXER::ast::common::node::abstraction
+	class IGNORE_ABSTRACTION : public DLDL_LEXER<IGNORE_ABSTRACTION>
 	{
 	private:
 	public:

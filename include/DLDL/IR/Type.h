@@ -6,12 +6,12 @@ namespace DLDL::ir
 	enum class Type
 	{
 		Unknown = 0,
-		
+
 		Lexicon,
 		Grammar,
 		Precedence,
 		Associativity,
-		
+
 		Generation,
 		Identity,
 
@@ -21,6 +21,7 @@ namespace DLDL::ir
 		Coloring,
 		Formatting,
 		Documentation,
+		Threat,
 	};
 }
 

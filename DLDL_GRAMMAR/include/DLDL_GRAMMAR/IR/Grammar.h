@@ -28,7 +28,7 @@ namespace DLDL::ir
 		std::vector<ProductionRule> productionRules;
 		deamer::language::type::definition::object::main::NonTerminalAbstraction abstraction;
 
-		NonTerminal(const std::string& name_, deamer::language::type::definition::object::main::NonTerminalAbstraction abstraction_ = deamer::language::type::definition::object::main::NonTerminalAbstraction::Standard)
+		NonTerminal(const std::string& name_, ::deamer::language::type::definition::object::main::NonTerminalAbstraction abstraction_ = deamer::language::type::definition::object::main::NonTerminalAbstraction::Standard)
 			: name(name_), abstraction(abstraction_)
 		{
 		}
@@ -39,7 +39,7 @@ namespace DLDL::ir
 		}
 	};
 	
-	class Grammar : public DLDL::ir::IR
+	class Grammar : public ::DLDL::ir::IR
 	{
 	private:
 		std::deque<NonTerminal> nonterminals;
@@ -158,7 +158,7 @@ namespace DLDL::ir
 				GetNonTerminal(nonterminal).AddProduction(productionRuleConverted);
 				productionRules.push_back(productionRuleConverted);
 			}
-			catch(std::logic_error)
+			catch(std::logic_error&)
 			{
 				return;
 			}

@@ -2,14 +2,15 @@
 #define DLDL_GENERATE_LPDSUBWRITERFACTORY_H
 
 #include "DLDL/Generate/SubWriter.h"
-#include "DLDL/Generate/SubWriter/LexiconLPDWriter.h"
-#include "DLDL/Generate/SubWriter/GrammarLPDWriter.h"
-#include "DLDL/Generate/SubWriter/PrecedenceLPDWriter.h"
 #include "DLDL/Generate/SubWriter/AssociativityLPDWriter.h"
 #include "DLDL/Generate/SubWriter/GenerationLPDWriter.h"
+#include "DLDL/Generate/SubWriter/GrammarLPDWriter.h"
 #include "DLDL/Generate/SubWriter/IdentityLPDWriter.h"
-
+#include "DLDL/Generate/SubWriter/LexiconLPDWriter.h"
+#include "DLDL/Generate/SubWriter/PrecedenceLPDWriter.h"
+#include "DLDL/Generate/SubWriter/ThreatLPDWriter.h"
 #include "DLDL/IR/Type.h"
+#include <memory>
 #include <stdexcept>
 
 namespace DLDL::generate
@@ -33,6 +34,8 @@ namespace DLDL::generate
 				return std::make_shared<sub::GenerationLPDWriter>();
 			case ir::Type::Identity:
 				return std::make_shared<sub::IdentityLPDWriter>();
+			case ir::Type::Threat:
+				return std::make_shared<sub::ThreatLPDWriter>();
 			case ir::Type::AstOptimization:
 				break;
 			case ir::Type::AstTranslation:

@@ -6,7 +6,6 @@ namespace DLDL_LEXER { namespace ast {
 	enum class Type
 	{
 		// Terminals
-		COMMENT,
 		DELETE_ABSTRACTION,
 		IGNORE_ABSTRACTION,
 		NOVALUE_ABSTRACTION,
@@ -16,6 +15,7 @@ namespace DLDL_LEXER { namespace ast {
 		TERMINAL,
 		REGEX,
 		ESCAPE_CHARS,
+		COMMENT,
 
 		// Non-Terminals
 		program,

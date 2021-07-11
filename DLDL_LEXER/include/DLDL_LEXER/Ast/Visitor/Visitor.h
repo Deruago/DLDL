@@ -4,7 +4,6 @@
 #include <Deamer/External/Cpp/Ast/Visitor.h>
 #include "DLDL_LEXER/Ast/Node/DLDL_LEXER.h"
 #include "DLDL_LEXER/Ast/Enum/Type.h"
-#include "DLDL_LEXER/Ast/Node/COMMENT.h"
 #include "DLDL_LEXER/Ast/Node/DELETE_ABSTRACTION.h"
 #include "DLDL_LEXER/Ast/Node/IGNORE_ABSTRACTION.h"
 #include "DLDL_LEXER/Ast/Node/NOVALUE_ABSTRACTION.h"
@@ -14,6 +13,7 @@
 #include "DLDL_LEXER/Ast/Node/TERMINAL.h"
 #include "DLDL_LEXER/Ast/Node/REGEX.h"
 #include "DLDL_LEXER/Ast/Node/ESCAPE_CHARS.h"
+#include "DLDL_LEXER/Ast/Node/COMMENT.h"
 
 #include "DLDL_LEXER/Ast/Node/program.h"
 #include "DLDL_LEXER/Ast/Node/stmts.h"
@@ -30,16 +30,11 @@ namespace DLDL_LEXER { namespace ast { namespace Visitor {
 		Visitor() = default;
 		~Visitor() override = default;
 	public:
-		void Dispatch(const ::deamer::external::cpp::ast::Node* node) const override
+		void Dispatch(const ::deamer::external::cpp::ast::Node* node) override
 		{
 			const auto enumeratedValue = static_cast<DLDL_LEXER::ast::Type>(node->GetType());
 			switch(enumeratedValue)
 			{
-			case DLDL_LEXER::ast::Type::COMMENT:
-			{
-				Visit(static_cast<const DLDL_LEXER::ast::node::COMMENT*>(node));
-				break;
-			}
 			case DLDL_LEXER::ast::Type::DELETE_ABSTRACTION:
 			{
 				Visit(static_cast<const DLDL_LEXER::ast::node::DELETE_ABSTRACTION*>(node));
@@ -85,6 +80,11 @@ namespace DLDL_LEXER { namespace ast { namespace Visitor {
 				Visit(static_cast<const DLDL_LEXER::ast::node::ESCAPE_CHARS*>(node));
 				break;
 			}
+			case DLDL_LEXER::ast::Type::COMMENT:
+			{
+				Visit(static_cast<const DLDL_LEXER::ast::node::COMMENT*>(node));
+				break;
+			}
 
 			case DLDL_LEXER::ast::Type::program:
 			{
@@ -113,50 +113,50 @@ namespace DLDL_LEXER { namespace ast { namespace Visitor {
 			}
 			}
 		}
-		virtual void Visit(const DLDL_LEXER::ast::node::COMMENT* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::DELETE_ABSTRACTION* node)
 		{
 		}
-		virtual void Visit(const DLDL_LEXER::ast::node::DELETE_ABSTRACTION* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::IGNORE_ABSTRACTION* node)
 		{
 		}
-		virtual void Visit(const DLDL_LEXER::ast::node::IGNORE_ABSTRACTION* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION* node)
 		{
 		}
-		virtual void Visit(const DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::CRASH_ABSTRACTION* node)
 		{
 		}
-		virtual void Visit(const DLDL_LEXER::ast::node::CRASH_ABSTRACTION* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::STANDARD_ABSTRACTION* node)
 		{
 		}
-		virtual void Visit(const DLDL_LEXER::ast::node::STANDARD_ABSTRACTION* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION* node)
 		{
 		}
-		virtual void Visit(const DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::TERMINAL* node)
 		{
 		}
-		virtual void Visit(const DLDL_LEXER::ast::node::TERMINAL* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::REGEX* node)
 		{
 		}
-		virtual void Visit(const DLDL_LEXER::ast::node::REGEX* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::ESCAPE_CHARS* node)
 		{
 		}
-		virtual void Visit(const DLDL_LEXER::ast::node::ESCAPE_CHARS* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::COMMENT* node)
 		{
 		}
 
-		virtual void Visit(const DLDL_LEXER::ast::node::program* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::program* node)
 		{
 		}
-		virtual void Visit(const DLDL_LEXER::ast::node::stmts* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::stmts* node)
 		{
 		}
-		virtual void Visit(const DLDL_LEXER::ast::node::stmt* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::stmt* node)
 		{
 		}
-		virtual void Visit(const DLDL_LEXER::ast::node::tokendeclaration* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::tokendeclaration* node)
 		{
 		}
-		virtual void Visit(const DLDL_LEXER::ast::node::abstraction* node) const
+		virtual void Visit(const DLDL_LEXER::ast::node::abstraction* node)
 		{
 		}
 	};

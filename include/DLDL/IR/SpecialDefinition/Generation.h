@@ -1,12 +1,12 @@
 #ifndef DLDL_IR_SPECIALDEFINITION_GENERATION_H
 #define DLDL_IR_SPECIALDEFINITION_GENERATION_H
 
-#include <stdexcept>
 
 #include "DLDL/IR/IR.h"
+#include <Deamer/File/Tool/OSType.h>
+#include <stdexcept>
 #include <string>
 #include <vector>
-#include <Deamer/File/Tool/OSType.h>
 
 namespace DLDL::ir::special
 {

@@ -87,7 +87,6 @@
 #include "Flex/DLDL_LEXER_lexer.h"
 #undef YY_NO_UNISTD_H
 #include "DLDL_LEXER/Ast/Enum/Type.h"
-#include "DLDL_LEXER/Ast/Node/COMMENT.h"
 #include "DLDL_LEXER/Ast/Node/DELETE_ABSTRACTION.h"
 #include "DLDL_LEXER/Ast/Node/IGNORE_ABSTRACTION.h"
 #include "DLDL_LEXER/Ast/Node/NOVALUE_ABSTRACTION.h"
@@ -97,6 +96,7 @@
 #include "DLDL_LEXER/Ast/Node/TERMINAL.h"
 #include "DLDL_LEXER/Ast/Node/REGEX.h"
 #include "DLDL_LEXER/Ast/Node/ESCAPE_CHARS.h"
+#include "DLDL_LEXER/Ast/Node/COMMENT.h"
 
 #include "DLDL_LEXER/Ast/Node/program.h"
 #include "DLDL_LEXER/Ast/Node/stmts.h"

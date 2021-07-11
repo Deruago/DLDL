@@ -2,12 +2,11 @@
 #define DLDL_LEXER_AST_NODE_NOVALUE_ABSTRACTION_H
 
 #include "DLDL_LEXER/Ast/Node/DLDL_LEXER.h"
-#include "DLDL_LEXER/Ast/Node/abstraction.h"
 #include <Deamer/External/Cpp/Ast/Node.h>
 
 namespace DLDL_LEXER { namespace ast { namespace node {
 
-	class NOVALUE_ABSTRACTION : public DLDL_LEXER<NOVALUE_ABSTRACTION>, public ::DLDL_LEXER::ast::common::node::abstraction
+	class NOVALUE_ABSTRACTION : public DLDL_LEXER<NOVALUE_ABSTRACTION>
 	{
 	private:
 	public:

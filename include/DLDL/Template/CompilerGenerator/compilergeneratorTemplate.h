@@ -1,13 +1,12 @@
-#ifndef DST_COMPILERGENERATORTEMPLATE_h
-#define DST_COMPILERGENERATORTEMPLATE_h
+#ifndef DLDL_FILETEMPLATE_COMPILERGENERATORTEMPLATE_h
+#define DLDL_FILETEMPLATE_COMPILERGENERATORTEMPLATE_h
 
+#include <string>
 #include <variant>
 #include <vector>
-#include <string>
 
 namespace DLDL::filetemplate
 {
-
 	/*!	\class compilergeneratorTemplate
 	 *
 	 *	\brief Generates code for "compilergeneratorTemplate"
@@ -40,6 +39,7 @@ namespace DLDL::filetemplate
 			left_angle_bracket_,
 			left_bracket_,
 			left_curly_bracket_,
+			print_threats_,
 			right_angle_bracket_,
 			right_bracket_,
 			right_curly_bracket_,
@@ -48,9 +48,7 @@ namespace DLDL::filetemplate
 			tool_includes_,
 			tool_namespace_,
 
-
 		};
-
 
 		enum class ScopeType
 		{
@@ -60,141 +58,130 @@ namespace DLDL::filetemplate
 			Default_,
 			Upper_,
 			Lower_,
+
+			Snake_,
+			Slash_,
+			BackSlash_,
+			Colon_,
+			DoubleColon_,
+
 			Variable_Field_,
 			Variable_Field_Separator_,
 			Function_Field_,
 			Function_Field_Separator_,
 
-
 		};
 
-
-		static constexpr const char* ConvertEnumToName(::DLDL::filetemplate::compilergeneratorTemplate::Type enumerationValue)
+		static constexpr const char*
+		ConvertEnumToName(::DLDL::filetemplate::compilergeneratorTemplate::Type enumerationValue)
 		{
 			switch (enumerationValue)
 			{
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::add_children_compilergenerators_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+				add_children_compilergenerators_: {
 				return "add_children_compilergenerators";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::add_language_outputs_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::add_language_outputs_: {
 				return "add_language_outputs";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::child_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::child_: {
 				return "child";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::child_class_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::child_class_: {
 				return "child_class";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::children_compilergenerator_bases_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+				children_compilergenerator_bases_: {
 				return "children_compilergenerator_bases";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::children_compilergenerator_bases_ctor_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+				children_compilergenerator_bases_ctor_: {
 				return "children_compilergenerator_bases_ctor";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::children_compilergenerator_include_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+				children_compilergenerator_include_: {
 				return "children_compilergenerator_include";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::file_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::file_: {
 				return "file";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::header_guard_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::header_guard_: {
 				return "header_guard";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::language_full_name_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::language_full_name_: {
 				return "language_full_name";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::language_full_name_slash_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::language_full_name_slash_: {
 				return "language_full_name_slash";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::language_full_name_underscore_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+				language_full_name_underscore_: {
 				return "language_full_name_underscore";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::language_output_initialization_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+				language_output_initialization_: {
 				return "language_output_initialization";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::left_angle_bracket_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::left_angle_bracket_: {
 				return "left_angle_bracket";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::left_bracket_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::left_bracket_: {
 				return "left_bracket";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::left_curly_bracket_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::left_curly_bracket_: {
 				return "left_curly_bracket";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::right_angle_bracket_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::print_threats_: {
+				return "print_threats";
+			}
+
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::right_angle_bracket_: {
 				return "right_angle_bracket";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::right_bracket_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::right_bracket_: {
 				return "right_bracket";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::right_curly_bracket_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::right_curly_bracket_: {
 				return "right_curly_bracket";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::tool_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::tool_: {
 				return "tool";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::tool_include_path_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::tool_include_path_: {
 				return "tool_include_path";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::tool_includes_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::tool_includes_: {
 				return "tool_includes";
 			}
 
-			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::tool_namespace_:
-			{
+			case ::DLDL::filetemplate::compilergeneratorTemplate::Type::tool_namespace_: {
 				return "tool_namespace";
 			}
-
-
 			}
 
 			return "";
 		}
-
-
 
 	public:
 		struct VariableBase
@@ -204,7 +191,8 @@ namespace DLDL::filetemplate
 			std::variant<std::string, std::vector<VariableBase*>> value;
 			bool isString = true;
 
-			::DLDL::filetemplate::compilergeneratorTemplate::Type type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::Unknown;
+			::DLDL::filetemplate::compilergeneratorTemplate::Type type =
+				::DLDL::filetemplate::compilergeneratorTemplate::Type::Unknown;
 
 			VariableBase() : VariableBase(std::vector<VariableBase*>())
 			{
@@ -235,7 +223,7 @@ namespace DLDL::filetemplate
 				return this;
 			}
 
-			std::string GetValue()
+			virtual std::string GetValue()
 			{
 				if (isString)
 				{
@@ -330,7 +318,7 @@ namespace DLDL::filetemplate
 					// then create a vector.
 					auto& currentValue = std::get<std::string>(value);
 					auto* currentValueAsVariableBase = new VariableBase(currentValue);
-					value = std::vector<VariableBase*>({ currentValueAsVariableBase, variable });
+					value = std::vector<VariableBase*>({currentValueAsVariableBase, variable});
 
 					isString = false;
 				}
@@ -370,7 +358,6 @@ namespace DLDL::filetemplate
 			return variable;
 		}
 
-
 		static VariableBase* GenerateVariable(const std::string& variable)
 		{
 			return new VariableBase(variable);
@@ -378,42 +365,264 @@ namespace DLDL::filetemplate
 
 		struct VariableScope : public VariableBase
 		{
-			::DLDL::filetemplate::compilergeneratorTemplate::ScopeType scope_type = ::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::Unknown;
+			::DLDL::filetemplate::compilergeneratorTemplate::ScopeType scope_type =
+				::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::Unknown;
 			bool isReserved = false;
 
-			VariableScope(::DLDL::filetemplate::compilergeneratorTemplate::ScopeType scope_type_, bool isReserved_ = false) : VariableBase(), scope_type(scope_type_), isReserved(isReserved_)
+			VariableScope(::DLDL::filetemplate::compilergeneratorTemplate::ScopeType scope_type_,
+						  bool isReserved_ = false)
+				: VariableBase(),
+				  scope_type(scope_type_),
+				  isReserved(isReserved_)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::Scope;
 			}
 
-			VariableScope(const char* text, ::DLDL::filetemplate::compilergeneratorTemplate::ScopeType scope_type_, bool isReserved_ = false) : VariableBase(text), scope_type(scope_type_), isReserved(isReserved_)
+			VariableScope(const char* text,
+						  ::DLDL::filetemplate::compilergeneratorTemplate::ScopeType scope_type_,
+						  bool isReserved_ = false)
+				: VariableBase(text),
+				  scope_type(scope_type_),
+				  isReserved(isReserved_)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::Scope;
 			}
 
-			VariableScope(std::vector<VariableBase*> variable, ::DLDL::filetemplate::compilergeneratorTemplate::ScopeType scope_type_, bool isReserved_ = false) : VariableBase(variable), scope_type(scope_type_), isReserved(isReserved_)
+			VariableScope(std::vector<VariableBase*> variable,
+						  ::DLDL::filetemplate::compilergeneratorTemplate::ScopeType scope_type_,
+						  bool isReserved_ = false)
+				: VariableBase(variable),
+				  scope_type(scope_type_),
+				  isReserved(isReserved_)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::Scope;
+			}
+		};
+
+		struct Variable_ReservedScope_Upper : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Upper(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::Upper_,
+								true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string upperVariant;
+				std::string currentValue = base->GetValue();
+
+				for (const auto character : currentValue)
+				{
+					upperVariant += std::toupper(character);
+				}
+
+				return upperVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Lower : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Lower(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::Lower_,
+								true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string lowerVariant;
+				std::string currentValue = base->GetValue();
+
+				for (const auto character : currentValue)
+				{
+					lowerVariant += std::tolower(character);
+				}
+
+				return lowerVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Snake : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Snake(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::Snake_,
+								true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string snakeVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						snakeVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						snakeVariant += '_';
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!snakeVariant.empty() && lastWasNonAlpha)
+				{
+					snakeVariant.pop_back();
+				}
+
+				return snakeVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Slash : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Slash(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::Slash_,
+								true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string slashVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						slashVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						slashVariant += '/';
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!slashVariant.empty() && lastWasNonAlpha)
+				{
+					slashVariant.pop_back();
+				}
+
+				return slashVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_DoubleColon : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_DoubleColon(VariableBase* base_)
+				: VariableScope(
+					  ::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::DoubleColon_,
+					  true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string doubleColonVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						doubleColonVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						doubleColonVariant += "::";
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!doubleColonVariant.empty() && lastWasNonAlpha)
+				{
+					doubleColonVariant.pop_back();
+					doubleColonVariant.pop_back();
+				}
+
+				return doubleColonVariant;
 			}
 		};
 
 		struct VariableScopes : public VariableBase
 		{
 			// Default scopes
-			VariableBase* default_ = new VariableScope(::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::Default_, true);
-			VariableBase* upper_ = new VariableScope(::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::Upper_, true);
-			VariableBase* lower_ = new VariableScope(::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::Lower_, true);
-			VariableBase* variable_field_ = new VariableScope(::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::Variable_Field_, true);
-			VariableBase* variable_field_separator_ = new VariableScope("\n", ::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::Variable_Field_Separator_, true);
+			VariableBase* default_ = new VariableScope(
+				::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::Default_, true);
+			VariableBase* upper_ = new Variable_ReservedScope_Upper(this);
+			VariableBase* lower_ = new Variable_ReservedScope_Lower(this);
+
+			VariableBase* snake_ = new Variable_ReservedScope_Snake(this);
+			VariableBase* slash_ = new Variable_ReservedScope_Slash(this);
+			VariableBase* double_colon_ = new Variable_ReservedScope_DoubleColon(this);
+
+			VariableBase* variable_field_ = new VariableScope(
+				::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::Variable_Field_, true);
+			VariableBase* variable_field_separator_ =
+				new VariableScope("\n",
+								  ::DLDL::filetemplate::compilergeneratorTemplate::ScopeType::
+									  Variable_Field_Separator_,
+								  true);
 
 			// Ctor
-			VariableScopes() : VariableBase() {}
+			VariableScopes() : VariableBase()
+			{
+			}
 
-			VariableScopes(const char* text) : VariableBase(text) {}
+			VariableScopes(const char* text) : VariableBase(text)
+			{
+			}
 
-			VariableScopes(const std::string& text) : VariableBase(text) {}
+			VariableScopes(const std::string& text) : VariableBase(text)
+			{
+			}
 
-			VariableScopes(std::vector<VariableBase*> variables) : VariableBase(variables) {}
+			VariableScopes(std::vector<VariableBase*> variables) : VariableBase(variables)
+			{
+			}
 
 			// Dtor
 			virtual ~VariableScopes() override = default;
@@ -425,32 +634,32 @@ namespace DLDL::filetemplate
 			}
 			VariableBase* Upper()
 			{
-				std::string upperVariant;
-				std::string currentValue = GetValue();
-
-				for (const auto character : currentValue)
-				{
-					upperVariant += std::toupper(character);
-				}
-
-				*upper_ = upperVariant;
-
 				return upper_;
 			}
 
 			VariableBase* Lower()
 			{
-				std::string lowerVariant;
-				std::string currentValue = GetValue();
-
-				for (const auto character : currentValue)
-				{
-					lowerVariant += std::tolower(character);
-				}
-
-				*lower_ = lowerVariant;
-
 				return lower_;
+			}
+
+			VariableBase* Underscore()
+			{
+				return snake_;
+			}
+
+			VariableBase* Snake()
+			{
+				return snake_;
+			}
+
+			VariableBase* Slash()
+			{
+				return slash_;
+			}
+
+			VariableBase* DoubleColon()
+			{
+				return double_colon_;
 			}
 
 			VariableBase* Variable_Field()
@@ -472,30 +681,29 @@ namespace DLDL::filetemplate
 		};
 
 	public:
-
 		struct Variable_add_children_compilergenerators_ : public VariableScopes
 		{
-
 			static constexpr auto name = "add_children_compilergenerators_";
-
-
 
 			Variable_add_children_compilergenerators_() : VariableScopes()
 			{
-				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::add_children_compilergenerators_;
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+					add_children_compilergenerators_;
 			}
 
 			virtual ~Variable_add_children_compilergenerators_() override = default;
 
-			Variable_add_children_compilergenerators_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_add_children_compilergenerators_(
+				compilergeneratorTemplate* compilergeneratortemplate_,
+				const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
-				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::add_children_compilergenerators_;
-
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+					add_children_compilergenerators_;
 			}
 
-
-
-			Variable_add_children_compilergenerators_& operator=(const Variable_add_children_compilergenerators_& variable)
+			Variable_add_children_compilergenerators_&
+			operator=(const Variable_add_children_compilergenerators_& variable)
 			{
 				if (&variable == this)
 				{
@@ -505,19 +713,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_add_language_outputs_ : public VariableScopes
 		{
-
 			static constexpr auto name = "add_language_outputs_";
-
-
 
 			Variable_add_language_outputs_() : VariableScopes()
 			{
@@ -526,15 +728,15 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_add_language_outputs_() override = default;
 
-			Variable_add_language_outputs_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_add_language_outputs_(compilergeneratorTemplate* compilergeneratortemplate_,
+										   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::add_language_outputs_;
-
 			}
 
-
-
-			Variable_add_language_outputs_& operator=(const Variable_add_language_outputs_& variable)
+			Variable_add_language_outputs_&
+			operator=(const Variable_add_language_outputs_& variable)
 			{
 				if (&variable == this)
 				{
@@ -544,19 +746,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_child_ : public VariableScopes
 		{
-
 			static constexpr auto name = "child_";
-
-
 
 			Variable_child_() : VariableScopes()
 			{
@@ -565,13 +761,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_child_() override = default;
 
-			Variable_child_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_child_(compilergeneratorTemplate* compilergeneratortemplate_,
+							const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::child_;
-
 			}
-
-
 
 			Variable_child_& operator=(const Variable_child_& variable)
 			{
@@ -583,19 +778,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_child_class_ : public VariableScopes
 		{
-
 			static constexpr auto name = "child_class_";
-
-
 
 			Variable_child_class_() : VariableScopes()
 			{
@@ -604,13 +793,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_child_class_() override = default;
 
-			Variable_child_class_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_child_class_(compilergeneratorTemplate* compilergeneratortemplate_,
+								  const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::child_class_;
-
 			}
-
-
 
 			Variable_child_class_& operator=(const Variable_child_class_& variable)
 			{
@@ -622,36 +810,33 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_children_compilergenerator_bases_ : public VariableScopes
 		{
-
 			static constexpr auto name = "children_compilergenerator_bases_";
-
-
 
 			Variable_children_compilergenerator_bases_() : VariableScopes()
 			{
-				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::children_compilergenerator_bases_;
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+					children_compilergenerator_bases_;
 			}
 
 			virtual ~Variable_children_compilergenerator_bases_() override = default;
 
-			Variable_children_compilergenerator_bases_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_children_compilergenerator_bases_(
+				compilergeneratorTemplate* compilergeneratortemplate_,
+				const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
-				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::children_compilergenerator_bases_;
-
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+					children_compilergenerator_bases_;
 			}
 
-
-
-			Variable_children_compilergenerator_bases_& operator=(const Variable_children_compilergenerator_bases_& variable)
+			Variable_children_compilergenerator_bases_&
+			operator=(const Variable_children_compilergenerator_bases_& variable)
 			{
 				if (&variable == this)
 				{
@@ -661,36 +846,33 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_children_compilergenerator_bases_ctor_ : public VariableScopes
 		{
-
 			static constexpr auto name = "children_compilergenerator_bases_ctor_";
-
-
 
 			Variable_children_compilergenerator_bases_ctor_() : VariableScopes()
 			{
-				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::children_compilergenerator_bases_ctor_;
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+					children_compilergenerator_bases_ctor_;
 			}
 
 			virtual ~Variable_children_compilergenerator_bases_ctor_() override = default;
 
-			Variable_children_compilergenerator_bases_ctor_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_children_compilergenerator_bases_ctor_(
+				compilergeneratorTemplate* compilergeneratortemplate_,
+				const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
-				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::children_compilergenerator_bases_ctor_;
-
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+					children_compilergenerator_bases_ctor_;
 			}
 
-
-
-			Variable_children_compilergenerator_bases_ctor_& operator=(const Variable_children_compilergenerator_bases_ctor_& variable)
+			Variable_children_compilergenerator_bases_ctor_&
+			operator=(const Variable_children_compilergenerator_bases_ctor_& variable)
 			{
 				if (&variable == this)
 				{
@@ -700,36 +882,33 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_children_compilergenerator_include_ : public VariableScopes
 		{
-
 			static constexpr auto name = "children_compilergenerator_include_";
-
-
 
 			Variable_children_compilergenerator_include_() : VariableScopes()
 			{
-				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::children_compilergenerator_include_;
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+					children_compilergenerator_include_;
 			}
 
 			virtual ~Variable_children_compilergenerator_include_() override = default;
 
-			Variable_children_compilergenerator_include_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_children_compilergenerator_include_(
+				compilergeneratorTemplate* compilergeneratortemplate_,
+				const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
-				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::children_compilergenerator_include_;
-
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+					children_compilergenerator_include_;
 			}
 
-
-
-			Variable_children_compilergenerator_include_& operator=(const Variable_children_compilergenerator_include_& variable)
+			Variable_children_compilergenerator_include_&
+			operator=(const Variable_children_compilergenerator_include_& variable)
 			{
 				if (&variable == this)
 				{
@@ -739,16 +918,12 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_file_ : public VariableScopes
 		{
-
 			static constexpr auto name = "file_";
 
 			VariableBase* Content_ = GenerateVariable("");
@@ -758,7 +933,6 @@ namespace DLDL::filetemplate
 			VariableBase* Namespace_ = GenerateVariable("");
 			VariableBase* Target_language_ = GenerateVariable("");
 
-
 			Variable_file_() : VariableScopes()
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::file_;
@@ -766,30 +940,119 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_file_() override = default;
 
-			Variable_file_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_file_(compilergeneratorTemplate* compilergeneratortemplate_,
+						   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::file_;
-				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("#ifndef "), GenerateVariable(compilergeneratortemplate_->header_guard_->This()), GenerateVariable("\n#define "), GenerateVariable(compilergeneratortemplate_->header_guard_->This()), GenerateVariable("\n#include \"Deamer/Compiler/Generator/Compiler"), GenerateVariable("."), GenerateVariable("h\"\n#include \""), GenerateVariable(compilergeneratortemplate_->language_full_name_slash_->This()), GenerateVariable("/Language"), GenerateVariable("."), GenerateVariable("h\"\n"), GenerateVariable(compilergeneratortemplate_->children_compilergenerator_include_->Variable_Field()), GenerateVariable("\n"), GenerateVariable(compilergeneratortemplate_->tool_includes_->Variable_Field()), GenerateVariable("\nnamespace "), GenerateVariable(compilergeneratortemplate_->language_full_name_->This()), GenerateVariable("\n"), GenerateVariable("{"), GenerateVariable("\n\t/*!\t"), GenerateVariable("\\"), GenerateVariable("class CompilerGenerator\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("brief This contains the CompilerGenerator of the language "), GenerateVariable(compilergeneratortemplate_->language_full_name_->This()), GenerateVariable("\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("details The CompilerGenerator class generates the compiler and various ecosystems"), GenerateVariable("."), GenerateVariable("\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("note This is auto-generated via the DLDL definitions"), GenerateVariable("."), GenerateVariable("\n\t */\n\tclass CompilerGenerator : public ::deamer::compiler::generator::Compiler<::"), GenerateVariable(compilergeneratortemplate_->language_full_name_->This()), GenerateVariable("::Language>\n\t"), GenerateVariable(compilergeneratortemplate_->children_compilergenerator_bases_->Variable_Field()), GenerateVariable("\n\t"), GenerateVariable("{"), GenerateVariable("\n\tpublic:\n\t\tCompilerGenerator()\n\t\t\t: deamer::compiler::generator::Compiler<::"), GenerateVariable(compilergeneratortemplate_->language_full_name_->This()), GenerateVariable("::Language>()\n\t\t\t"), GenerateVariable(compilergeneratortemplate_->children_compilergenerator_bases_ctor_->Variable_Field()), GenerateVariable("\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\tdeamer::file::compiler::Output Generate() override\n\t\t"), GenerateVariable("{"), GenerateVariable("\n\t\t\t// Retrieve the Language Definition (LD)\n\t\t\t::deamer::file::compiler::Output output(::deamer::compiler::generator::Compiler<::"), GenerateVariable(compilergeneratortemplate_->language_full_name_->This()), GenerateVariable("::Language>::GetLanguageDefinition());\n\t\t\t"), GenerateVariable(compilergeneratortemplate_->add_children_compilergenerators_->Variable_Field()), GenerateVariable("\n\t\t\t// Initialize language outputs\n\t\t\t"), GenerateVariable(compilergeneratortemplate_->language_output_initialization_->Variable_Field()), GenerateVariable("\n\t\t\t// The language generation targets\n\t\t\t"), GenerateVariable(compilergeneratortemplate_->add_language_outputs_->Variable_Field()), GenerateVariable("\n\t\t\treturn output;\n\t\t"), GenerateVariable("}"), GenerateVariable("\n\t\t~CompilerGenerator() override = default;\n\t"), GenerateVariable("}"), GenerateVariable(";\n"), GenerateVariable("}"), GenerateVariable("\n#endif // "), GenerateVariable(compilergeneratortemplate_->header_guard_->This()), GenerateVariable("\n") }));
+				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>(
+					{GenerateVariable("#ifndef "),
+					 GenerateVariable(compilergeneratortemplate_->header_guard_->This()),
+					 GenerateVariable("\n#define "),
+					 GenerateVariable(compilergeneratortemplate_->header_guard_->This()),
+					 GenerateVariable("\n\n#include \"Deamer/Compiler/Generator/Compiler"),
+					 GenerateVariable("."),
+					 GenerateVariable(
+						 "h\"\n#include \"Deamer/Language/Reference/PropertyDefinition"),
+					 GenerateVariable("."),
+					 GenerateVariable("h\"\n#include \""),
+					 GenerateVariable(
+						 compilergeneratortemplate_->language_full_name_slash_->This()),
+					 GenerateVariable("/Language"),
+					 GenerateVariable("."),
+					 GenerateVariable("h\"\n\n"),
+					 GenerateVariable(compilergeneratortemplate_
+										  ->children_compilergenerator_include_->Variable_Field()),
+					 GenerateVariable("\n"),
+					 GenerateVariable(compilergeneratortemplate_->tool_includes_->Variable_Field()),
+					 GenerateVariable("\n\nnamespace "),
+					 GenerateVariable(compilergeneratortemplate_->language_full_name_->This()),
+					 GenerateVariable("\n"),
+					 GenerateVariable("{"),
+					 GenerateVariable("\n\t/*!\t"),
+					 GenerateVariable("\\"),
+					 GenerateVariable("class CompilerGenerator\n\t *\n\t *\t"),
+					 GenerateVariable("\\"),
+					 GenerateVariable("brief This contains the CompilerGenerator of the language "),
+					 GenerateVariable(compilergeneratortemplate_->language_full_name_->This()),
+					 GenerateVariable("\n\t *\n\t *\t"),
+					 GenerateVariable("\\"),
+					 GenerateVariable("details The CompilerGenerator class generates the compiler "
+									  "and various ecosystems"),
+					 GenerateVariable("."),
+					 GenerateVariable("\n\t *\n\t *\t"),
+					 GenerateVariable("\\"),
+					 GenerateVariable("note This is auto-generated via the DLDL definitions"),
+					 GenerateVariable("."),
+					 GenerateVariable("\n\t */\n\tclass CompilerGenerator : public "
+									  "::deamer::compiler::generator::Compiler<::"),
+					 GenerateVariable(compilergeneratortemplate_->language_full_name_->This()),
+					 GenerateVariable("::Language>\n\t"),
+					 GenerateVariable(compilergeneratortemplate_->children_compilergenerator_bases_
+										  ->Variable_Field()),
+					 GenerateVariable("\n\t"),
+					 GenerateVariable("{"),
+					 GenerateVariable("\n\tpublic:\n\t\tCompilerGenerator()\n\t\t\t: "
+									  "deamer::compiler::generator::Compiler<::"),
+					 GenerateVariable(compilergeneratortemplate_->language_full_name_->This()),
+					 GenerateVariable("::Language>()\n\t\t\t"),
+					 GenerateVariable(
+						 compilergeneratortemplate_->children_compilergenerator_bases_ctor_
+							 ->Variable_Field()),
+					 GenerateVariable("\n\t\t"),
+					 GenerateVariable("{"),
+					 GenerateVariable("\n\t\t"),
+					 GenerateVariable("}"),
+					 GenerateVariable(
+						 "\n\n\t\tdeamer::file::compiler::Output Generate() override\n\t\t"),
+					 GenerateVariable("{"),
+					 GenerateVariable("\n\t\t\t// Retrieve the Language Definition "
+									  "(LD)\n\t\t\t::deamer::file::compiler::Output "
+									  "output(::deamer::compiler::generator::Compiler<::"),
+					 GenerateVariable(compilergeneratortemplate_->language_full_name_->This()),
+					 GenerateVariable("::Language>::GetLanguageDefinition());\n\t\t\t"),
+					 GenerateVariable(compilergeneratortemplate_->print_threats_->This()),
+					 GenerateVariable("\n\n\t\t\t"),
+					 GenerateVariable(compilergeneratortemplate_->add_children_compilergenerators_
+										  ->Variable_Field()),
+					 GenerateVariable("\n\n\t\t\t// Initialize language outputs\n\t\t\t"),
+					 GenerateVariable(compilergeneratortemplate_->language_output_initialization_
+										  ->Variable_Field()),
+					 GenerateVariable("\n\n\t\t\t// The language generation targets\n\t\t\t"),
+					 GenerateVariable(
+						 compilergeneratortemplate_->add_language_outputs_->Variable_Field()),
+					 GenerateVariable("\n\n\t\t\treturn output;\n\t\t"),
+					 GenerateVariable("}"),
+					 GenerateVariable("\n\n\t\t~CompilerGenerator() override = default;\n\t"),
+					 GenerateVariable("}"),
+					 GenerateVariable(";\n"),
+					 GenerateVariable("}"),
+					 GenerateVariable("\n\n#endif // "),
+					 GenerateVariable(compilergeneratortemplate_->header_guard_->This()),
+					 GenerateVariable("\n")}));
 				Content_->type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(Class_postfix_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(Class_postfix_) =
+					VariableBase(std::vector<VariableBase*>({}));
 				Class_postfix_->type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(Extension_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(Extension_) =
+					VariableBase(std::vector<VariableBase*>({}));
 				Extension_->type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(File_name_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(File_name_) =
+					VariableBase(std::vector<VariableBase*>({}));
 				File_name_->type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(Namespace_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(Namespace_) = VariableBase(
+					std::vector<VariableBase*>({GenerateVariable("DLDL::filetemplate")}));
 				Namespace_->type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(Target_language_) = VariableBase(std::vector<VariableBase*>({  }));
-				Target_language_->type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::Scope;
-
-
+				*static_cast<VariableBase*>(Target_language_) =
+					VariableBase(std::vector<VariableBase*>({}));
+				Target_language_->type =
+					::DLDL::filetemplate::compilergeneratorTemplate::Type::Scope;
 			}
-
 
 			VariableBase* Content() const
 			{
@@ -821,7 +1084,6 @@ namespace DLDL::filetemplate
 				return Target_language_;
 			}
 
-
 			Variable_file_& operator=(const Variable_file_& variable)
 			{
 				if (&variable == this)
@@ -839,18 +1101,13 @@ namespace DLDL::filetemplate
 				*Namespace_ = *variable.Namespace_;
 				*Target_language_ = *variable.Target_language_;
 
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_header_guard_ : public VariableScopes
 		{
-
 			static constexpr auto name = "header_guard_";
-
-
 
 			Variable_header_guard_() : VariableScopes()
 			{
@@ -859,13 +1116,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_header_guard_() override = default;
 
-			Variable_header_guard_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_header_guard_(compilergeneratorTemplate* compilergeneratortemplate_,
+								   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::header_guard_;
-
 			}
-
-
 
 			Variable_header_guard_& operator=(const Variable_header_guard_& variable)
 			{
@@ -877,19 +1133,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_language_full_name_ : public VariableScopes
 		{
-
 			static constexpr auto name = "language_full_name_";
-
-
 
 			Variable_language_full_name_() : VariableScopes()
 			{
@@ -898,13 +1148,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_language_full_name_() override = default;
 
-			Variable_language_full_name_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_language_full_name_(compilergeneratorTemplate* compilergeneratortemplate_,
+										 const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::language_full_name_;
-
 			}
-
-
 
 			Variable_language_full_name_& operator=(const Variable_language_full_name_& variable)
 			{
@@ -916,36 +1165,33 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_language_full_name_slash_ : public VariableScopes
 		{
-
 			static constexpr auto name = "language_full_name_slash_";
-
-
 
 			Variable_language_full_name_slash_() : VariableScopes()
 			{
-				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::language_full_name_slash_;
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+					language_full_name_slash_;
 			}
 
 			virtual ~Variable_language_full_name_slash_() override = default;
 
-			Variable_language_full_name_slash_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_language_full_name_slash_(
+				compilergeneratorTemplate* compilergeneratortemplate_,
+				const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
-				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::language_full_name_slash_;
-
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+					language_full_name_slash_;
 			}
 
-
-
-			Variable_language_full_name_slash_& operator=(const Variable_language_full_name_slash_& variable)
+			Variable_language_full_name_slash_&
+			operator=(const Variable_language_full_name_slash_& variable)
 			{
 				if (&variable == this)
 				{
@@ -955,36 +1201,33 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_language_full_name_underscore_ : public VariableScopes
 		{
-
 			static constexpr auto name = "language_full_name_underscore_";
-
-
 
 			Variable_language_full_name_underscore_() : VariableScopes()
 			{
-				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::language_full_name_underscore_;
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+					language_full_name_underscore_;
 			}
 
 			virtual ~Variable_language_full_name_underscore_() override = default;
 
-			Variable_language_full_name_underscore_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_language_full_name_underscore_(
+				compilergeneratorTemplate* compilergeneratortemplate_,
+				const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
-				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::language_full_name_underscore_;
-
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+					language_full_name_underscore_;
 			}
 
-
-
-			Variable_language_full_name_underscore_& operator=(const Variable_language_full_name_underscore_& variable)
+			Variable_language_full_name_underscore_&
+			operator=(const Variable_language_full_name_underscore_& variable)
 			{
 				if (&variable == this)
 				{
@@ -994,36 +1237,33 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_language_output_initialization_ : public VariableScopes
 		{
-
 			static constexpr auto name = "language_output_initialization_";
-
-
 
 			Variable_language_output_initialization_() : VariableScopes()
 			{
-				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::language_output_initialization_;
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+					language_output_initialization_;
 			}
 
 			virtual ~Variable_language_output_initialization_() override = default;
 
-			Variable_language_output_initialization_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_language_output_initialization_(
+				compilergeneratorTemplate* compilergeneratortemplate_,
+				const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
-				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::language_output_initialization_;
-
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::
+					language_output_initialization_;
 			}
 
-
-
-			Variable_language_output_initialization_& operator=(const Variable_language_output_initialization_& variable)
+			Variable_language_output_initialization_&
+			operator=(const Variable_language_output_initialization_& variable)
 			{
 				if (&variable == this)
 				{
@@ -1033,19 +1273,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_left_angle_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "left_angle_bracket_";
-
-
 
 			Variable_left_angle_bracket_() : VariableScopes()
 			{
@@ -1054,13 +1288,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_left_angle_bracket_() override = default;
 
-			Variable_left_angle_bracket_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_left_angle_bracket_(compilergeneratorTemplate* compilergeneratortemplate_,
+										 const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::left_angle_bracket_;
-
 			}
-
-
 
 			Variable_left_angle_bracket_& operator=(const Variable_left_angle_bracket_& variable)
 			{
@@ -1072,19 +1305,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_left_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "left_bracket_";
-
-
 
 			Variable_left_bracket_() : VariableScopes()
 			{
@@ -1093,13 +1320,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_left_bracket_() override = default;
 
-			Variable_left_bracket_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_left_bracket_(compilergeneratorTemplate* compilergeneratortemplate_,
+								   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::left_bracket_;
-
 			}
-
-
 
 			Variable_left_bracket_& operator=(const Variable_left_bracket_& variable)
 			{
@@ -1111,19 +1337,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_left_curly_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "left_curly_bracket_";
-
-
 
 			Variable_left_curly_bracket_() : VariableScopes()
 			{
@@ -1132,13 +1352,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_left_curly_bracket_() override = default;
 
-			Variable_left_curly_bracket_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_left_curly_bracket_(compilergeneratorTemplate* compilergeneratortemplate_,
+										 const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::left_curly_bracket_;
-
 			}
-
-
 
 			Variable_left_curly_bracket_& operator=(const Variable_left_curly_bracket_& variable)
 			{
@@ -1150,19 +1369,45 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
+				return *this;
+			}
+		};
 
+		struct Variable_print_threats_ : public VariableScopes
+		{
+			static constexpr auto name = "print_threats_";
+
+			Variable_print_threats_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::print_threats_;
+			}
+
+			virtual ~Variable_print_threats_() override = default;
+
+			Variable_print_threats_(compilergeneratorTemplate* compilergeneratortemplate_,
+									const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::print_threats_;
+			}
+
+			Variable_print_threats_& operator=(const Variable_print_threats_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
 
 				return *this;
 			}
-
 		};
 
 		struct Variable_right_angle_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "right_angle_bracket_";
-
-
 
 			Variable_right_angle_bracket_() : VariableScopes()
 			{
@@ -1171,13 +1416,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_right_angle_bracket_() override = default;
 
-			Variable_right_angle_bracket_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_right_angle_bracket_(compilergeneratorTemplate* compilergeneratortemplate_,
+										  const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::right_angle_bracket_;
-
 			}
-
-
 
 			Variable_right_angle_bracket_& operator=(const Variable_right_angle_bracket_& variable)
 			{
@@ -1189,19 +1433,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_right_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "right_bracket_";
-
-
 
 			Variable_right_bracket_() : VariableScopes()
 			{
@@ -1210,13 +1448,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_right_bracket_() override = default;
 
-			Variable_right_bracket_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_right_bracket_(compilergeneratorTemplate* compilergeneratortemplate_,
+									const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::right_bracket_;
-
 			}
-
-
 
 			Variable_right_bracket_& operator=(const Variable_right_bracket_& variable)
 			{
@@ -1228,19 +1465,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_right_curly_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "right_curly_bracket_";
-
-
 
 			Variable_right_curly_bracket_() : VariableScopes()
 			{
@@ -1249,13 +1480,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_right_curly_bracket_() override = default;
 
-			Variable_right_curly_bracket_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_right_curly_bracket_(compilergeneratorTemplate* compilergeneratortemplate_,
+										  const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::right_curly_bracket_;
-
 			}
-
-
 
 			Variable_right_curly_bracket_& operator=(const Variable_right_curly_bracket_& variable)
 			{
@@ -1267,19 +1497,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_tool_ : public VariableScopes
 		{
-
 			static constexpr auto name = "tool_";
-
-
 
 			Variable_tool_() : VariableScopes()
 			{
@@ -1288,13 +1512,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_tool_() override = default;
 
-			Variable_tool_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_tool_(compilergeneratorTemplate* compilergeneratortemplate_,
+						   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::tool_;
-
 			}
-
-
 
 			Variable_tool_& operator=(const Variable_tool_& variable)
 			{
@@ -1306,19 +1529,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_tool_include_path_ : public VariableScopes
 		{
-
 			static constexpr auto name = "tool_include_path_";
-
-
 
 			Variable_tool_include_path_() : VariableScopes()
 			{
@@ -1327,13 +1544,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_tool_include_path_() override = default;
 
-			Variable_tool_include_path_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_tool_include_path_(compilergeneratorTemplate* compilergeneratortemplate_,
+										const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::tool_include_path_;
-
 			}
-
-
 
 			Variable_tool_include_path_& operator=(const Variable_tool_include_path_& variable)
 			{
@@ -1345,19 +1561,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_tool_includes_ : public VariableScopes
 		{
-
 			static constexpr auto name = "tool_includes_";
-
-
 
 			Variable_tool_includes_() : VariableScopes()
 			{
@@ -1366,13 +1576,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_tool_includes_() override = default;
 
-			Variable_tool_includes_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_tool_includes_(compilergeneratorTemplate* compilergeneratortemplate_,
+									const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::tool_includes_;
-
 			}
-
-
 
 			Variable_tool_includes_& operator=(const Variable_tool_includes_& variable)
 			{
@@ -1384,19 +1593,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_tool_namespace_ : public VariableScopes
 		{
-
 			static constexpr auto name = "tool_namespace_";
-
-
 
 			Variable_tool_namespace_() : VariableScopes()
 			{
@@ -1405,13 +1608,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_tool_namespace_() override = default;
 
-			Variable_tool_namespace_(compilergeneratorTemplate* compilergeneratortemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_tool_namespace_(compilergeneratorTemplate* compilergeneratortemplate_,
+									 const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::tool_namespace_;
-
 			}
-
-
 
 			Variable_tool_namespace_& operator=(const Variable_tool_namespace_& variable)
 			{
@@ -1423,13 +1625,9 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
-
 
 	public:
 		inline static std::vector<VariableBase*> variables_to_delete = std::vector<VariableBase*>();
@@ -1440,22 +1638,31 @@ namespace DLDL::filetemplate
 	public:
 		// Members that one can directly access.
 		// e.g. compilergeneratorTemplate.member = "auto-generated";
-		Variable_add_children_compilergenerators_* add_children_compilergenerators_ = new Variable_add_children_compilergenerators_();
-		Variable_add_language_outputs_* add_language_outputs_ = new Variable_add_language_outputs_();
+		Variable_add_children_compilergenerators_* add_children_compilergenerators_ =
+			new Variable_add_children_compilergenerators_();
+		Variable_add_language_outputs_* add_language_outputs_ =
+			new Variable_add_language_outputs_();
 		Variable_child_* child_ = new Variable_child_();
 		Variable_child_class_* child_class_ = new Variable_child_class_();
-		Variable_children_compilergenerator_bases_* children_compilergenerator_bases_ = new Variable_children_compilergenerator_bases_();
-		Variable_children_compilergenerator_bases_ctor_* children_compilergenerator_bases_ctor_ = new Variable_children_compilergenerator_bases_ctor_();
-		Variable_children_compilergenerator_include_* children_compilergenerator_include_ = new Variable_children_compilergenerator_include_();
+		Variable_children_compilergenerator_bases_* children_compilergenerator_bases_ =
+			new Variable_children_compilergenerator_bases_();
+		Variable_children_compilergenerator_bases_ctor_* children_compilergenerator_bases_ctor_ =
+			new Variable_children_compilergenerator_bases_ctor_();
+		Variable_children_compilergenerator_include_* children_compilergenerator_include_ =
+			new Variable_children_compilergenerator_include_();
 		Variable_file_* file_ = new Variable_file_();
 		Variable_header_guard_* header_guard_ = new Variable_header_guard_();
 		Variable_language_full_name_* language_full_name_ = new Variable_language_full_name_();
-		Variable_language_full_name_slash_* language_full_name_slash_ = new Variable_language_full_name_slash_();
-		Variable_language_full_name_underscore_* language_full_name_underscore_ = new Variable_language_full_name_underscore_();
-		Variable_language_output_initialization_* language_output_initialization_ = new Variable_language_output_initialization_();
+		Variable_language_full_name_slash_* language_full_name_slash_ =
+			new Variable_language_full_name_slash_();
+		Variable_language_full_name_underscore_* language_full_name_underscore_ =
+			new Variable_language_full_name_underscore_();
+		Variable_language_output_initialization_* language_output_initialization_ =
+			new Variable_language_output_initialization_();
 		Variable_left_angle_bracket_* left_angle_bracket_ = new Variable_left_angle_bracket_();
 		Variable_left_bracket_* left_bracket_ = new Variable_left_bracket_();
 		Variable_left_curly_bracket_* left_curly_bracket_ = new Variable_left_curly_bracket_();
+		Variable_print_threats_* print_threats_ = new Variable_print_threats_();
 		Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
 		Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
 		Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_bracket_();
@@ -1464,34 +1671,100 @@ namespace DLDL::filetemplate
 		Variable_tool_includes_* tool_includes_ = new Variable_tool_includes_();
 		Variable_tool_namespace_* tool_namespace_ = new Variable_tool_namespace_();
 
-
 	public:
 		compilergeneratorTemplate()
 		{
-			*add_children_compilergenerators_ = Variable_add_children_compilergenerators_(this, std::vector<VariableBase*>({ GenerateVariable("output"), GenerateVariable("."), GenerateVariable("AddCompilerOutput("), GenerateVariable(child_class_->This()), GenerateVariable("::CompilerGenerator::Generate());") }));
-			*add_language_outputs_ = Variable_add_language_outputs_(this, std::vector<VariableBase*>({ GenerateVariable("output"), GenerateVariable("."), GenerateVariable("AddLanguageToolOutput("), GenerateVariable(tool_->This()), GenerateVariable("."), GenerateVariable("Generate());") }));
-			*child_ = Variable_child_(this, std::vector<VariableBase*>({  }));
-			*child_class_ = Variable_child_class_(this, std::vector<VariableBase*>({ GenerateVariable("::"), GenerateVariable(language_full_name_->This()), GenerateVariable("::"), GenerateVariable(child_->This()) }));
-			*children_compilergenerator_bases_ = Variable_children_compilergenerator_bases_(this, std::vector<VariableBase*>({ GenerateVariable(", public "), GenerateVariable(child_class_->This()), GenerateVariable("::CompilerGenerator") }));
-			*children_compilergenerator_bases_ctor_ = Variable_children_compilergenerator_bases_ctor_(this, std::vector<VariableBase*>({ GenerateVariable(", "), GenerateVariable(child_class_->This()), GenerateVariable("::CompilerGenerator()") }));
-			*children_compilergenerator_include_ = Variable_children_compilergenerator_include_(this, std::vector<VariableBase*>({ GenerateVariable("#include \""), GenerateVariable(language_full_name_slash_->This()), GenerateVariable("/"), GenerateVariable(child_->This()), GenerateVariable("//CompilerGenerator"), GenerateVariable("."), GenerateVariable("h\"") }));
-			*file_ = Variable_file_(this, std::vector<VariableBase*>({  }));
-			*header_guard_ = Variable_header_guard_(this, std::vector<VariableBase*>({ GenerateVariable(language_full_name_underscore_->Upper()), GenerateVariable("_COMPILERGENERATOR_H") }));
-			*language_full_name_ = Variable_language_full_name_(this, std::vector<VariableBase*>({  }));
-			*language_full_name_slash_ = Variable_language_full_name_slash_(this, std::vector<VariableBase*>({  }));
-			*language_full_name_underscore_ = Variable_language_full_name_underscore_(this, std::vector<VariableBase*>({  }));
-			*language_output_initialization_ = Variable_language_output_initialization_(this, std::vector<VariableBase*>({ GenerateVariable(tool_namespace_->This()), GenerateVariable("::"), GenerateVariable(tool_->Lower()), GenerateVariable("::"), GenerateVariable(tool_->This()), GenerateVariable(" "), GenerateVariable(tool_->This()), GenerateVariable("(::deamer::compiler::generator::Compiler"), GenerateVariable(left_angle_bracket_->This()), GenerateVariable("::"), GenerateVariable(language_full_name_->This()), GenerateVariable("::Language"), GenerateVariable(right_angle_bracket_->This()), GenerateVariable("::GetLanguageDefinition());") }));
-			*left_angle_bracket_ = Variable_left_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("<") }));
-			*left_bracket_ = Variable_left_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("{") }));
-			*left_curly_bracket_ = Variable_left_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("(") }));
-			*right_angle_bracket_ = Variable_right_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(">") }));
-			*right_bracket_ = Variable_right_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("}") }));
-			*right_curly_bracket_ = Variable_right_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(")") }));
-			*tool_ = Variable_tool_(this, std::vector<VariableBase*>({  }));
-			*tool_include_path_ = Variable_tool_include_path_(this, std::vector<VariableBase*>({  }));
-			*tool_includes_ = Variable_tool_includes_(this, std::vector<VariableBase*>({ GenerateVariable("#include \""), GenerateVariable(tool_include_path_->This()), GenerateVariable("\"") }));
-			*tool_namespace_ = Variable_tool_namespace_(this, std::vector<VariableBase*>({  }));
-
+			*add_children_compilergenerators_ = Variable_add_children_compilergenerators_(
+				this,
+				std::vector<VariableBase*>(
+					{GenerateVariable("output"), GenerateVariable("."),
+					 GenerateVariable("AddCompilerOutput("), GenerateVariable(child_class_->This()),
+					 GenerateVariable("::CompilerGenerator::Generate());")}));
+			*add_language_outputs_ = Variable_add_language_outputs_(
+				this,
+				std::vector<VariableBase*>({GenerateVariable("output"), GenerateVariable("."),
+											GenerateVariable("AddLanguageToolOutput("),
+											GenerateVariable(tool_->This()), GenerateVariable("."),
+											GenerateVariable("Generate());")}));
+			*child_ = Variable_child_(this, std::vector<VariableBase*>({}));
+			*child_class_ = Variable_child_class_(
+				this, std::vector<VariableBase*>(
+						  {GenerateVariable("::"), GenerateVariable(language_full_name_->This()),
+						   GenerateVariable("::"), GenerateVariable(child_->This())}));
+			*children_compilergenerator_bases_ = Variable_children_compilergenerator_bases_(
+				this, std::vector<VariableBase*>({GenerateVariable(", public "),
+												  GenerateVariable(child_class_->This()),
+												  GenerateVariable("::CompilerGenerator")}));
+			*children_compilergenerator_bases_ctor_ =
+				Variable_children_compilergenerator_bases_ctor_(
+					this, std::vector<VariableBase*>({GenerateVariable(", "),
+													  GenerateVariable(child_class_->This()),
+													  GenerateVariable("::CompilerGenerator()")}));
+			*children_compilergenerator_include_ = Variable_children_compilergenerator_include_(
+				this,
+				std::vector<VariableBase*>({GenerateVariable("#include \""),
+											GenerateVariable(language_full_name_slash_->This()),
+											GenerateVariable("/"), GenerateVariable(child_->This()),
+											GenerateVariable("//CompilerGenerator"),
+											GenerateVariable("."), GenerateVariable("h\"")}));
+			*file_ = Variable_file_(this, std::vector<VariableBase*>({}));
+			*header_guard_ = Variable_header_guard_(
+				this, std::vector<VariableBase*>(
+						  {GenerateVariable(language_full_name_underscore_->Upper()),
+						   GenerateVariable("_COMPILERGENERATOR_H")}));
+			*language_full_name_ =
+				Variable_language_full_name_(this, std::vector<VariableBase*>({}));
+			*language_full_name_slash_ =
+				Variable_language_full_name_slash_(this, std::vector<VariableBase*>({}));
+			*language_full_name_underscore_ =
+				Variable_language_full_name_underscore_(this, std::vector<VariableBase*>({}));
+			*language_output_initialization_ = Variable_language_output_initialization_(
+				this,
+				std::vector<VariableBase*>(
+					{GenerateVariable(tool_namespace_->This()), GenerateVariable("::"),
+					 GenerateVariable(tool_->Lower()), GenerateVariable("::"),
+					 GenerateVariable(tool_->This()), GenerateVariable(" "),
+					 GenerateVariable(tool_->This()),
+					 GenerateVariable("(::deamer::compiler::generator::Compiler"),
+					 GenerateVariable(left_angle_bracket_->This()), GenerateVariable("::"),
+					 GenerateVariable(language_full_name_->This()), GenerateVariable("::Language"),
+					 GenerateVariable(right_angle_bracket_->This()),
+					 GenerateVariable("::GetLanguageDefinition());")}));
+			*left_angle_bracket_ = Variable_left_angle_bracket_(
+				this, std::vector<VariableBase*>({GenerateVariable("<")}));
+			*left_bracket_ =
+				Variable_left_bracket_(this, std::vector<VariableBase*>({GenerateVariable("{")}));
+			*left_curly_bracket_ = Variable_left_curly_bracket_(
+				this, std::vector<VariableBase*>({GenerateVariable("(")}));
+			*print_threats_ = Variable_print_threats_(
+				this,
+				std::vector<VariableBase*>(
+					{GenerateVariable("::deamer::language::reference::PropertyDefinition("
+									  "\n\t\t\t\t::deamer::compiler::generator::Compiler"),
+					 GenerateVariable(left_angle_bracket_->This()), GenerateVariable("::"),
+					 GenerateVariable(language_full_name_->This()), GenerateVariable("::Language"),
+					 GenerateVariable(right_angle_bracket_->This()),
+					 GenerateVariable("::GetLanguageDefinition())\n\t\t\t\t"),
+					 GenerateVariable("."), GenerateVariable("GetDefinition"),
+					 GenerateVariable(left_angle_bracket_->This()),
+					 GenerateVariable(
+						 "::deamer::language::type::definition::property::Type::Threat"),
+					 GenerateVariable(right_angle_bracket_->This()),
+					 GenerateVariable("()\n\t\t\t\t"), GenerateVariable("."),
+					 GenerateVariable("PrintThreats();")}));
+			*right_angle_bracket_ = Variable_right_angle_bracket_(
+				this, std::vector<VariableBase*>({GenerateVariable(">")}));
+			*right_bracket_ =
+				Variable_right_bracket_(this, std::vector<VariableBase*>({GenerateVariable("}")}));
+			*right_curly_bracket_ = Variable_right_curly_bracket_(
+				this, std::vector<VariableBase*>({GenerateVariable(")")}));
+			*tool_ = Variable_tool_(this, std::vector<VariableBase*>({}));
+			*tool_include_path_ = Variable_tool_include_path_(this, std::vector<VariableBase*>({}));
+			*tool_includes_ = Variable_tool_includes_(
+				this, std::vector<VariableBase*>({GenerateVariable("#include \""),
+												  GenerateVariable(tool_include_path_->This()),
+												  GenerateVariable("\"")}));
+			*tool_namespace_ = Variable_tool_namespace_(this, std::vector<VariableBase*>({}));
 
 			variables_.emplace_back(add_children_compilergenerators_);
 			variables_.emplace_back(add_language_outputs_);
@@ -1509,6 +1782,7 @@ namespace DLDL::filetemplate
 			variables_.emplace_back(left_angle_bracket_);
 			variables_.emplace_back(left_bracket_);
 			variables_.emplace_back(left_curly_bracket_);
+			variables_.emplace_back(print_threats_);
 			variables_.emplace_back(right_angle_bracket_);
 			variables_.emplace_back(right_bracket_);
 			variables_.emplace_back(right_curly_bracket_);
@@ -1516,7 +1790,6 @@ namespace DLDL::filetemplate
 			variables_.emplace_back(tool_include_path_);
 			variables_.emplace_back(tool_includes_);
 			variables_.emplace_back(tool_namespace_);
-
 		}
 
 		virtual ~compilergeneratorTemplate()
@@ -1551,12 +1824,7 @@ namespace DLDL::filetemplate
 		}
 
 	public:
-		void Reset(VariableScopes* scope)
-		{
-			scope->Upper();
-			scope->Lower();
-		}
 	};
 }
 
-#endif // DST_COMPILERGENERATORTEMPLATE_h
+#endif // DLDL_FILETEMPLATE_COMPILERGENERATORTEMPLATE_h

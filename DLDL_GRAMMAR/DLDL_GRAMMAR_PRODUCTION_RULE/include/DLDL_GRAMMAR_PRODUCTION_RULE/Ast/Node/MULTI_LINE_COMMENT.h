@@ -1,0 +1,21 @@
+#ifndef DLDL_GRAMMAR_PRODUCTION_RULE_AST_NODE_MULTI_LINE_COMMENT_H
+#define DLDL_GRAMMAR_PRODUCTION_RULE_AST_NODE_MULTI_LINE_COMMENT_H
+
+#include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/DLDL_GRAMMAR_PRODUCTION_RULE.h"
+#include <Deamer/External/Cpp/Ast/Node.h>
+
+namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace node {
+
+	class MULTI_LINE_COMMENT : public DLDL_GRAMMAR_PRODUCTION_RULE<MULTI_LINE_COMMENT>
+	{
+	private:
+	public:
+		MULTI_LINE_COMMENT(deamer::external::cpp::ast::NodeInformation information_)
+		: DLDL_GRAMMAR_PRODUCTION_RULE<MULTI_LINE_COMMENT>(information_, {}, {})
+		{
+		}
+	};
+
+}}}
+
+#endif // DLDL_GRAMMAR_PRODUCTION_RULE_AST_NODE_MULTI_LINE_COMMENT_H

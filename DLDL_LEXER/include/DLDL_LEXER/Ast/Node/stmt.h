@@ -2,12 +2,11 @@
 #define DLDL_LEXER_AST_NODE_stmt_H
 
 #include "DLDL_LEXER/Ast/Node/DLDL_LEXER.h"
-#include "DLDL_LEXER/Ast/Common/Node/stmt.h"
 #include <Deamer/External/Cpp/Ast/Node.h>
 
 namespace DLDL_LEXER { namespace ast { namespace node { 
 
-	class stmt : public DLDL_LEXER<stmt>, public ::DLDL_LEXER::ast::common::node::stmt
+	class stmt : public DLDL_LEXER<stmt>
 	{
 	private:
 	public:

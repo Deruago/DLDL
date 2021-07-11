@@ -6,6 +6,11 @@
 
 {{child_class}} = <::{{language_full_name}}::{{child}}>
 
+{{print_threats}} = <::deamer::language::reference::PropertyDefinition(
+				::deamer::compiler::generator::Compiler{{left_angle_bracket}}::{{language_full_name}}::Language{{right_angle_bracket}}::GetLanguageDefinition())
+				.GetDefinition{{left_angle_bracket}}::deamer::language::type::definition::property::Type::Threat{{right_angle_bracket}}()
+				.PrintThreats();>
+
 {{children_compilergenerator_include}} = <#include "{{language_full_name_slash}}/{{child}}//CompilerGenerator.h">
 {{children_compilergenerator_bases}} = <, public {{child_class}}::CompilerGenerator>
 {{children_compilergenerator_bases_ctor}} = <, {{child_class}}::CompilerGenerator()>

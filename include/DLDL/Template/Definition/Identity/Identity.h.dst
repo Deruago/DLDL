@@ -20,7 +20,7 @@ namespace {{language_full_name}}
 		::deamer::type::SafeReserve<::deamer::language::type::definition::object::main::Name> name;
 
 	public:
-		Identity({{language_full_name}}::Language* language)
+		Identity(::{{language_full_name}}::Language* language)
 			:	::deamer::language::generator::definition::property::user::Identity<
 					::{{language_full_name}}::Language>(language)
 		{
