@@ -97,6 +97,7 @@
 #include "DLDL_LEXER/Ast/Node/REGEX.h"
 #include "DLDL_LEXER/Ast/Node/ESCAPE_CHARS.h"
 #include "DLDL_LEXER/Ast/Node/COMMENT.h"
+#include "DLDL_LEXER/Ast/Node/MULTI_LINE_COMMENT.h"
 
 #include "DLDL_LEXER/Ast/Node/program.h"
 #include "DLDL_LEXER/Ast/Node/stmts.h"
@@ -116,7 +117,7 @@ void DLDL_LEXERerror(const char* s);
 int DLDL_LEXERlex();
 static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 
-#line 120 "DLDL_LEXER_parser.tab.c"
+#line 121 "DLDL_LEXER_parser.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -541,8 +542,8 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    82,    82,    90,    94,   101,   108,   112,   119,   123,
-     127,   131,   135,   139
+       0,    84,    84,    92,    96,   103,   110,   114,   121,   125,
+     129,   133,   137,   141
 };
 #endif
 
@@ -1122,116 +1123,116 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: stmts  */
-#line 82 "./DLDL_LEXER_parser.y"
+#line 84 "./DLDL_LEXER_parser.y"
               {
 		auto* const newNode = new DLDL_LEXER::ast::node::program({::DLDL_LEXER::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DLDL_LEXER_stmts) });
 		(yyval.DLDL_LEXER_program) = newNode;
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
-#line 1132 "DLDL_LEXER_parser.tab.c"
+#line 1133 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 3: /* stmts: stmt stmts  */
-#line 90 "./DLDL_LEXER_parser.y"
+#line 92 "./DLDL_LEXER_parser.y"
                    {
 		auto* const newNode = new DLDL_LEXER::ast::node::stmts({::DLDL_LEXER::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DLDL_LEXER_stmt), (yyvsp[0].DLDL_LEXER_stmts) });
 		(yyval.DLDL_LEXER_stmts) = newNode;
 	}
-#line 1141 "DLDL_LEXER_parser.tab.c"
+#line 1142 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 4: /* stmts: %empty  */
-#line 94 "./DLDL_LEXER_parser.y"
+#line 96 "./DLDL_LEXER_parser.y"
           {
 		auto* const newNode = new DLDL_LEXER::ast::node::stmts({::DLDL_LEXER::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
 		(yyval.DLDL_LEXER_stmts) = newNode;
 	}
-#line 1150 "DLDL_LEXER_parser.tab.c"
+#line 1151 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 5: /* stmt: tokendeclaration  */
-#line 101 "./DLDL_LEXER_parser.y"
+#line 103 "./DLDL_LEXER_parser.y"
                          {
 		auto* const newNode = new DLDL_LEXER::ast::node::stmt({::DLDL_LEXER::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DLDL_LEXER_tokendeclaration) });
 		(yyval.DLDL_LEXER_stmt) = newNode;
 	}
-#line 1159 "DLDL_LEXER_parser.tab.c"
+#line 1160 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 6: /* tokendeclaration: abstraction TERMINAL REGEX  */
-#line 108 "./DLDL_LEXER_parser.y"
+#line 110 "./DLDL_LEXER_parser.y"
                                    {
 		auto* const newNode = new DLDL_LEXER::ast::node::tokendeclaration({::DLDL_LEXER::ast::Type::tokendeclaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-2].DLDL_LEXER_abstraction), new DLDL_LEXER::ast::node::TERMINAL({::DLDL_LEXER::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), new DLDL_LEXER::ast::node::REGEX({::DLDL_LEXER::ast::Type::REGEX, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DLDL_LEXER_tokendeclaration) = newNode;
 	}
-#line 1168 "DLDL_LEXER_parser.tab.c"
+#line 1169 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 7: /* tokendeclaration: TERMINAL REGEX  */
-#line 112 "./DLDL_LEXER_parser.y"
+#line 114 "./DLDL_LEXER_parser.y"
                          {
 		auto* const newNode = new DLDL_LEXER::ast::node::tokendeclaration({::DLDL_LEXER::ast::Type::tokendeclaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::TERMINAL({::DLDL_LEXER::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), new DLDL_LEXER::ast::node::REGEX({::DLDL_LEXER::ast::Type::REGEX, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DLDL_LEXER_tokendeclaration) = newNode;
 	}
-#line 1177 "DLDL_LEXER_parser.tab.c"
+#line 1178 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 8: /* abstraction: DELETE_ABSTRACTION  */
-#line 119 "./DLDL_LEXER_parser.y"
+#line 121 "./DLDL_LEXER_parser.y"
                            {
 		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::DELETE_ABSTRACTION({::DLDL_LEXER::ast::Type::DELETE_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DLDL_LEXER_abstraction) = newNode;
 	}
-#line 1186 "DLDL_LEXER_parser.tab.c"
+#line 1187 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 9: /* abstraction: IGNORE_ABSTRACTION  */
-#line 123 "./DLDL_LEXER_parser.y"
+#line 125 "./DLDL_LEXER_parser.y"
                              {
 		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::IGNORE_ABSTRACTION({::DLDL_LEXER::ast::Type::IGNORE_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DLDL_LEXER_abstraction) = newNode;
 	}
-#line 1195 "DLDL_LEXER_parser.tab.c"
+#line 1196 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 10: /* abstraction: CRASH_ABSTRACTION  */
-#line 127 "./DLDL_LEXER_parser.y"
+#line 129 "./DLDL_LEXER_parser.y"
                             {
 		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::CRASH_ABSTRACTION({::DLDL_LEXER::ast::Type::CRASH_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DLDL_LEXER_abstraction) = newNode;
 	}
-#line 1204 "DLDL_LEXER_parser.tab.c"
+#line 1205 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 11: /* abstraction: NOVALUE_ABSTRACTION  */
-#line 131 "./DLDL_LEXER_parser.y"
+#line 133 "./DLDL_LEXER_parser.y"
                               {
 		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {3, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION({::DLDL_LEXER::ast::Type::NOVALUE_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DLDL_LEXER_abstraction) = newNode;
 	}
-#line 1213 "DLDL_LEXER_parser.tab.c"
+#line 1214 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 12: /* abstraction: STANDARD_ABSTRACTION  */
-#line 135 "./DLDL_LEXER_parser.y"
+#line 137 "./DLDL_LEXER_parser.y"
                                {
 		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {4, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::STANDARD_ABSTRACTION({::DLDL_LEXER::ast::Type::STANDARD_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DLDL_LEXER_abstraction) = newNode;
 	}
-#line 1222 "DLDL_LEXER_parser.tab.c"
+#line 1223 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 13: /* abstraction: UNKNOWN_ABSTRACTION  */
-#line 139 "./DLDL_LEXER_parser.y"
+#line 141 "./DLDL_LEXER_parser.y"
                               {
 		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {5, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION({::DLDL_LEXER::ast::Type::UNKNOWN_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DLDL_LEXER_abstraction) = newNode;
 	}
-#line 1231 "DLDL_LEXER_parser.tab.c"
+#line 1232 "DLDL_LEXER_parser.tab.c"
     break;
 
 
-#line 1235 "DLDL_LEXER_parser.tab.c"
+#line 1236 "DLDL_LEXER_parser.tab.c"
 
       default: break;
     }
@@ -1425,7 +1426,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 145 "./DLDL_LEXER_parser.y"
+#line 147 "./DLDL_LEXER_parser.y"
 
 
 void DLDL_LEXERerror(const char* s)

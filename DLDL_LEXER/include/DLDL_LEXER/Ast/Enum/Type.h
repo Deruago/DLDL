@@ -16,6 +16,7 @@ namespace DLDL_LEXER { namespace ast {
 		REGEX,
 		ESCAPE_CHARS,
 		COMMENT,
+		MULTI_LINE_COMMENT,
 
 		// Non-Terminals
 		program,

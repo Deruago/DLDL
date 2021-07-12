@@ -6,8 +6,11 @@
 #include "DLDL_GRAMMAR/Ast/Enum/Type.h"
 
 #include "DLDL_GRAMMAR/Ast/Node/COMMENT.h"
+#include "DLDL_GRAMMAR/Ast/Node/MULTI_LINE_COMMENT.h"
 #include "DLDL_GRAMMAR/Ast/Node/START_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/GROUP_ABSTRACTION.h"
+#include "DLDL_GRAMMAR/Ast/Node/INLINE_ABSTRACTION.h"
+#include "DLDL_GRAMMAR/Ast/Node/INLINE_GROUP_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/UNKNOWN_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/NONTERMINAL.h"
 #include "DLDL_GRAMMAR/Ast/Node/PRODUCTION_RULE.h"
@@ -48,6 +51,14 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 				break;
 			}
 
+			case DLDL_GRAMMAR::ast::Type::MULTI_LINE_COMMENT:
+			{
+				EnterAnything(node);
+				EnterTerminal(node);
+				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::MULTI_LINE_COMMENT*>(node));
+				break;
+			}
+
 			case DLDL_GRAMMAR::ast::Type::START_ABSTRACTION:
 			{
 				EnterAnything(node);
@@ -61,6 +72,22 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION*>(node));
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::INLINE_ABSTRACTION:
+			{
+				EnterAnything(node);
+				EnterTerminal(node);
+				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION*>(node));
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::INLINE_GROUP_ABSTRACTION:
+			{
+				EnterAnything(node);
+				EnterTerminal(node);
+				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION*>(node));
 				break;
 			}
 
@@ -226,11 +253,23 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 		{
 		}
 
+		virtual void ListenEntry(const DLDL_GRAMMAR::ast::node::MULTI_LINE_COMMENT* node) 
+		{
+		}
+
 		virtual void ListenEntry(const DLDL_GRAMMAR::ast::node::START_ABSTRACTION* node) 
 		{
 		}
 
 		virtual void ListenEntry(const DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION* node) 
+		{
+		}
+
+		virtual void ListenEntry(const DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION* node) 
+		{
+		}
+
+		virtual void ListenEntry(const DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION* node) 
 		{
 		}
 

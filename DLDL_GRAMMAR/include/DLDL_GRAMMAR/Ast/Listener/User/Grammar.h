@@ -25,7 +25,8 @@ namespace DLDL_GRAMMAR::ast::listener::user
 			const auto name = node->Get(Type::NONTERMINAL)[0]->GetValue();
 			const auto abstraction = node->Get(Type::abstraction)[0]->GetNodes()[0]->GetType();
 			const auto abstraction_downcast = static_cast<Type>(abstraction);
-			deamer::language::type::definition::object::main::NonTerminalAbstraction abstractionType = deamer::language::type::definition::object::main::NonTerminalAbstraction::Standard;
+			::deamer::language::type::definition::object::main::NonTerminalAbstraction abstractionType = deamer::language::type::definition::object::main::NonTerminalAbstraction::Standard;
+			bool inlineNonTerminal = false;
 			switch (abstraction_downcast)
 			{
 			case Type::GROUP_ABSTRACTION :
@@ -34,6 +35,13 @@ namespace DLDL_GRAMMAR::ast::listener::user
 			case Type::START_ABSTRACTION:
 				grammar->SetStartType(name);
 				break;
+			case Type::INLINE_ABSTRACTION:
+				inlineNonTerminal = true;
+				break;
+			case Type::INLINE_GROUP_ABSTRACTION:
+				inlineNonTerminal = true;
+				abstractionType = deamer::language::type::definition::object::main::NonTerminalAbstraction::Group;
+				break;
 			case Type::UNKNOWN_ABSTRACTION:
 				abstractionType =
 					deamer::language::type::definition::object::main::NonTerminalAbstraction::Standard;
@@ -41,6 +49,7 @@ namespace DLDL_GRAMMAR::ast::listener::user
 			}
 
 			grammar->SetAbstraction(name, abstractionType);
+			grammar->SetInline(name, inlineNonTerminal);
 		}
 
 		void Listen(const DLDL_GRAMMAR::ast::node::definition* node) override
@@ -50,6 +59,8 @@ namespace DLDL_GRAMMAR::ast::listener::user
 			deamer::language::type::definition::object::main::NonTerminalAbstraction
 				abstractionType = deamer::language::type::definition::object::main::
 					NonTerminalAbstraction::Standard;
+			bool inlineNonTerminal = false;
+			
 			if (!abstraction_.empty())
 			{
 				const auto abstraction_downcast = static_cast<Type>(abstraction_[0]->GetNodes()[0]->GetType());
@@ -62,6 +73,13 @@ namespace DLDL_GRAMMAR::ast::listener::user
 				case Type::START_ABSTRACTION:
 					grammar->SetStartType(name);
 					break;
+				case Type::INLINE_ABSTRACTION:
+					inlineNonTerminal = true;
+					break;
+				case Type::INLINE_GROUP_ABSTRACTION:
+					inlineNonTerminal = true;
+					abstractionType = deamer::language::type::definition::object::main::
+						NonTerminalAbstraction::Group;
 				case Type::UNKNOWN_ABSTRACTION:
 					abstractionType = deamer::language::type::definition::object::main::
 						NonTerminalAbstraction::Standard;
@@ -70,6 +88,7 @@ namespace DLDL_GRAMMAR::ast::listener::user
 			}
 			
 			grammar->SetAbstraction(name, abstractionType);
+			grammar->SetInline(name, inlineNonTerminal);
 
 			currentNonTerminal = name;
 		}

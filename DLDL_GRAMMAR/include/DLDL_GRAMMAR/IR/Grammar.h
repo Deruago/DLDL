@@ -4,10 +4,19 @@
 #include "DLDL/IR/IR.h"
 #include <Deamer/Language/Type/Definition/Property/Main/Grammar.h>
 #include <deque>
+#include <optional>
 #include <stdexcept>
 #include <string>
 #include <utility>
 #include <vector>
+
+namespace DLDL_GRAMMAR_PRODUCTION_RULE
+{
+	namespace ir
+	{
+		struct ProductionRule;
+	}
+}
 
 namespace DLDL::ir
 {
@@ -17,188 +26,123 @@ namespace DLDL::ir
 		std::vector<std::string> tokens;
 
 		ProductionRule(std::string nonterminal_, std::vector<std::string> tokens_)
-			: nonterminal(nonterminal_), tokens(std::move(tokens_))
+			: nonterminal(nonterminal_),
+			  tokens(std::move(tokens_))
 		{
 		}
+
+		ProductionRule(std::string nonterminal_,
+					   const DLDL_GRAMMAR_PRODUCTION_RULE::ir::ProductionRule& productionRule);
+
+		bool operator==(const ProductionRule& rhs) const
+		{
+			if (this == &rhs)
+			{
+				return true;
+			}
+
+			if (this->nonterminal != rhs.nonterminal)
+			{
+				return false;
+			}
+
+			if (this->tokens.size() != rhs.tokens.size())
+			{
+				return false;
+			}
+
+			for (auto i = 0; i < this->tokens.size(); i++)
+			{
+				if (this->tokens[i] != rhs.tokens[i])
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
 	};
-	
+
 	struct NonTerminal
 	{
 		std::string name;
 		std::vector<ProductionRule> productionRules;
 		deamer::language::type::definition::object::main::NonTerminalAbstraction abstraction;
+		bool inlineNonTerminal;
 
-		NonTerminal(const std::string& name_, ::deamer::language::type::definition::object::main::NonTerminalAbstraction abstraction_ = deamer::language::type::definition::object::main::NonTerminalAbstraction::Standard)
-			: name(name_), abstraction(abstraction_)
+		NonTerminal(
+			const std::string& name_,
+			deamer::language::type::definition::object::main::NonTerminalAbstraction abstraction_ =
+				deamer::language::type::definition::object::main::NonTerminalAbstraction::Standard,
+			bool inlineNonTerminal_ = false)
+			: name(name_),
+			  abstraction(abstraction_),
+			  inlineNonTerminal(inlineNonTerminal_)
 		{
 		}
-		
+
 		void AddProduction(const ProductionRule& productionRule)
 		{
+			for (const auto& ourProductionRule : productionRules)
+			{
+				if (ourProductionRule == productionRule)
+				{
+					return;
+				}
+			}
+
 			productionRules.push_back(productionRule);
 		}
+
+		bool operator==(const NonTerminal& rhs) const
+		{
+			if (this == &rhs)
+			{
+				return true;
+			}
+
+			return this->name == rhs.name;
+		}
 	};
-	
-	class Grammar : public ::DLDL::ir::IR
+
+	class Grammar : public DLDL::ir::IR
 	{
 	private:
 		std::deque<NonTerminal> nonterminals;
 		std::vector<ProductionRule> productionRules;
-		
-	public:
-		Grammar() : IR(DLDL::ir::Type::Grammar)
-		{
-		}
 
 	public:
-		void
-		AddNonTerminal(const std::string& name,
-		               deamer::language::type::definition::object::main::NonTerminalAbstraction abstraction = deamer::language::type::definition::object::main::NonTerminalAbstraction::Standard)
-		{
-			for (NonTerminal& nonterminal : nonterminals)
-			{
-				if (nonterminal.name == name)
-				{
-					if (nonterminal.abstraction == deamer::language::type::definition::object::
-													   main::NonTerminalAbstraction::Standard)
-					{
-						nonterminal.abstraction = abstraction;
-						return;
-					}
-				}
-			}
-			
-			nonterminals.emplace_back(name, abstraction);
-		}
+		Grammar();
 
-		NonTerminal& GetNonTerminal(const std::string& name)
-		{
-			for (auto& nonterminal : nonterminals)
-			{
-				if (nonterminal.name == name)
-				{
-					return nonterminal;
-				}
-			}
+	public:
+		void AddNonTerminal(
+			const std::string& name,
+			deamer::language::type::definition::object::main::NonTerminalAbstraction abstraction =
+				deamer::language::type::definition::object::main::NonTerminalAbstraction::Standard,
+			bool inlineNonTerminal = false);
 
-			AddNonTerminal(name);
-			return GetNonTerminal(name);
-		}
+		NonTerminal& GetNonTerminal(const std::string& name);
 
-		void SetAbstraction(const std::string& name, deamer::language::type::definition::object::main::NonTerminalAbstraction abstraction)
-		{
-			if (GetNonTerminal(name).abstraction == deamer::language::type::definition::object::main::NonTerminalAbstraction::Standard)
-			{
-				GetNonTerminal(name).abstraction = abstraction;
-			}
-		}
+		void SetAbstraction(
+			const std::string& name,
+			deamer::language::type::definition::object::main::NonTerminalAbstraction abstraction);
 
-		ProductionRule ConvertToProductionRule(std::string text, std::string nonterminal)
-		{
-			std::vector<std::string> tokens;
+		void SetInline(const std::string& name, bool inlineNonTerminal);
 
-			std::string tmp;
+		std::optional<std::vector<DLDL::ir::ProductionRule>>
+		ConvertToProductionRule(std::string text, std::string nonterminal);
 
-			char currentcharacter = text[0];
-			while (currentcharacter == ' ' || currentcharacter == '\t')
-			{
-				text.erase(0, 1);
-				if (text.empty())
-				{
-					throw std::logic_error("It is not a production rule!");
-				}
-				currentcharacter = text[0];
-			}
+		void AddProductionRules(const std::string& nonterminal, const std::string& productionrule);
 
-			std::string textLowered;
-			for (auto character : text)
-			{
-				textLowered += ::tolower(character);
-			}
+		std::deque<NonTerminal> GetNonTerminals() const;
 
-			// DLDL way for defining nothing is using empty, but epsilon may also be used.
-			if (textLowered == "empty" || textLowered == "epsilon")
-			{
-				return ProductionRule(nonterminal, {});
-			}
-			for (auto character : text)
-			{
-				switch (character)
-				{
-				case ' ':
-				case '\t':
-					if (!tmp.empty())
-					{
-						tokens.push_back(tmp);					
-					}
-					tmp.clear();
-					break;
-				default:
-					tmp += character;
-					break;
-				}
-			}
+		std::vector<ProductionRule> GetProductionRules() const;
 
-			if (!tmp.empty())
-			{
-				tokens.push_back(tmp);
-				tmp.clear();
-			}
+		void SetStartType(const std::string& name);
 
-			return ProductionRule(nonterminal, tokens);
-		}
+		bool DoesProductionRuleExist(const ProductionRule& ourProductionRule) const;
 
-		void AddProductionRules(const std::string& nonterminal, const std::string& productionrule)
-		{
-			// If the input line is not a production rule it internally throws an error.
-			try
-			{
-				const auto productionRuleConverted = ConvertToProductionRule(productionrule, nonterminal);
-
-				GetNonTerminal(nonterminal).AddProduction(productionRuleConverted);
-				productionRules.push_back(productionRuleConverted);
-			}
-			catch(std::logic_error&)
-			{
-				return;
-			}
-		}
-
-		std::deque<NonTerminal> GetNonTerminals() const
-		{
-			return nonterminals;
-		}
-
-		std::vector<ProductionRule> GetProductionRules() const
-		{
-			return productionRules;
-		}
-
-		void SetStartType(const std::string& name)
-		{
-			size_t index = 0;
-			bool found = false;
-			for (const auto& nonterminal : nonterminals)
-			{
-				if (nonterminal.name == name)
-				{
-					found = true;
-					break;
-				}
-				index++;
-			}
-
-			if (found)
-			{
-				const auto& nonterminal = nonterminals[index];
-				nonterminals.erase(nonterminals.begin() + index);
-				nonterminals.push_front(nonterminal);
-			}
-			else
-			{
-				nonterminals.emplace_front(name);
-			}
-		}
+		bool DoesNonTerminalExist(const NonTerminal& ourNonTerminal) const;
 	};
 }
 

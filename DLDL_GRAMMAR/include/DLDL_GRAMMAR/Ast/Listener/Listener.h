@@ -5,8 +5,11 @@
 #include "DLDL_GRAMMAR/Ast/Node/DLDL_GRAMMAR.h"
 #include "DLDL_GRAMMAR/Ast/Enum/Type.h"
 #include "DLDL_GRAMMAR/Ast/Node/COMMENT.h"
+#include "DLDL_GRAMMAR/Ast/Node/MULTI_LINE_COMMENT.h"
 #include "DLDL_GRAMMAR/Ast/Node/START_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/GROUP_ABSTRACTION.h"
+#include "DLDL_GRAMMAR/Ast/Node/INLINE_ABSTRACTION.h"
+#include "DLDL_GRAMMAR/Ast/Node/INLINE_GROUP_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/UNKNOWN_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/NONTERMINAL.h"
 #include "DLDL_GRAMMAR/Ast/Node/PRODUCTION_RULE.h"
@@ -39,6 +42,11 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 				Listen(static_cast<const DLDL_GRAMMAR::ast::node::COMMENT*>(node));
 				break;
 			}
+			case DLDL_GRAMMAR::ast::Type::MULTI_LINE_COMMENT:
+			{
+				Listen(static_cast<const DLDL_GRAMMAR::ast::node::MULTI_LINE_COMMENT*>(node));
+				break;
+			}
 			case DLDL_GRAMMAR::ast::Type::START_ABSTRACTION:
 			{
 				Listen(static_cast<const DLDL_GRAMMAR::ast::node::START_ABSTRACTION*>(node));
@@ -47,6 +55,16 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 			case DLDL_GRAMMAR::ast::Type::GROUP_ABSTRACTION:
 			{
 				Listen(static_cast<const DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION*>(node));
+				break;
+			}
+			case DLDL_GRAMMAR::ast::Type::INLINE_ABSTRACTION:
+			{
+				Listen(static_cast<const DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION*>(node));
+				break;
+			}
+			case DLDL_GRAMMAR::ast::Type::INLINE_GROUP_ABSTRACTION:
+			{
+				Listen(static_cast<const DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION*>(node));
 				break;
 			}
 			case DLDL_GRAMMAR::ast::Type::UNKNOWN_ABSTRACTION:
@@ -117,10 +135,19 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 		virtual void Listen(const DLDL_GRAMMAR::ast::node::COMMENT* node)
 		{
 		}
+		virtual void Listen(const DLDL_GRAMMAR::ast::node::MULTI_LINE_COMMENT* node)
+		{
+		}
 		virtual void Listen(const DLDL_GRAMMAR::ast::node::START_ABSTRACTION* node)
 		{
 		}
 		virtual void Listen(const DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION* node)
+		{
+		}
+		virtual void Listen(const DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION* node)
+		{
+		}
+		virtual void Listen(const DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION* node)
 		{
 		}
 		virtual void Listen(const DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION* node)

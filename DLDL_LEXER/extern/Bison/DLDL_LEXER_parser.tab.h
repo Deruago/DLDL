@@ -70,7 +70,7 @@ extern int DLDL_LEXERdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 60 "./DLDL_LEXER_parser.y"
+#line 61 "./DLDL_LEXER_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_LEXER::ast::node::DELETE_ABSTRACTION* DLDL_LEXER_DELETE_ABSTRACTION;
@@ -83,13 +83,14 @@ union YYSTYPE
 	::DLDL_LEXER::ast::node::REGEX* DLDL_LEXER_REGEX;
 	::DLDL_LEXER::ast::node::ESCAPE_CHARS* DLDL_LEXER_ESCAPE_CHARS;
 	::DLDL_LEXER::ast::node::COMMENT* DLDL_LEXER_COMMENT;
+	::DLDL_LEXER::ast::node::MULTI_LINE_COMMENT* DLDL_LEXER_MULTI_LINE_COMMENT;
 	::DLDL_LEXER::ast::node::program* DLDL_LEXER_program;
 	::DLDL_LEXER::ast::node::stmts* DLDL_LEXER_stmts;
 	::DLDL_LEXER::ast::node::stmt* DLDL_LEXER_stmt;
 	::DLDL_LEXER::ast::node::tokendeclaration* DLDL_LEXER_tokendeclaration;
 	::DLDL_LEXER::ast::node::abstraction* DLDL_LEXER_abstraction;
 
-#line 93 "DLDL_LEXER_parser.tab.h"
+#line 94 "DLDL_LEXER_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

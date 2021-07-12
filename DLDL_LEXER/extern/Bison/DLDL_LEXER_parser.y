@@ -20,6 +20,7 @@
 #include "DLDL_LEXER/Ast/Node/REGEX.h"
 #include "DLDL_LEXER/Ast/Node/ESCAPE_CHARS.h"
 #include "DLDL_LEXER/Ast/Node/COMMENT.h"
+#include "DLDL_LEXER/Ast/Node/MULTI_LINE_COMMENT.h"
 
 #include "DLDL_LEXER/Ast/Node/program.h"
 #include "DLDL_LEXER/Ast/Node/stmts.h"
@@ -69,6 +70,7 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_LEXER::ast::node::REGEX* DLDL_LEXER_REGEX;
 	::DLDL_LEXER::ast::node::ESCAPE_CHARS* DLDL_LEXER_ESCAPE_CHARS;
 	::DLDL_LEXER::ast::node::COMMENT* DLDL_LEXER_COMMENT;
+	::DLDL_LEXER::ast::node::MULTI_LINE_COMMENT* DLDL_LEXER_MULTI_LINE_COMMENT;
 	::DLDL_LEXER::ast::node::program* DLDL_LEXER_program;
 	::DLDL_LEXER::ast::node::stmts* DLDL_LEXER_stmts;
 	::DLDL_LEXER::ast::node::stmt* DLDL_LEXER_stmt;

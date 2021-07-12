@@ -20,6 +20,17 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 		{
 		}
 
+		std::vector<std::string> GetStringRepresentation() const
+		{
+			std::vector<std::string> stringVariant;
+			for (const auto* const value : values)
+			{
+				stringVariant.push_back(value->name);
+			}
+
+			return stringVariant;
+		}
+
 		void Print() const
 		{
 			for (const auto* const value : values)

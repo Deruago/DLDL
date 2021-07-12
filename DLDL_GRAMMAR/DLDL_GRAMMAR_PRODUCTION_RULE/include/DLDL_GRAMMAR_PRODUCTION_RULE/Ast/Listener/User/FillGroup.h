@@ -132,7 +132,15 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ast::listener::user
 
 		void ListenEntry(const node::VALUE* node) override
 		{
-			if (node->GetValue() == "EMPTY" || node->GetValue() == "EPSILON")
+			const std::string nodeName = node->GetValue();
+			std::string loweredName;
+			
+			for (const auto& character : nodeName)
+			{
+				loweredName += ::tolower(character);
+			}
+			
+			if (loweredName == "empty" || loweredName == "epsilon")
 			{
 				return;
 			}
