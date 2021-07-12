@@ -104,6 +104,7 @@ DLDL::ir::Grammar::ConvertToProductionRule(std::string text, std::string nonterm
 	const auto* const ast = parser.Parse(text);
 	if (ast == nullptr || ast->GetStartNode() == nullptr)
 	{
+		delete ast;
 		return {};
 	}
 
@@ -140,6 +141,7 @@ DLDL::ir::Grammar::ConvertToProductionRule(std::string text, std::string nonterm
 	}
 	
 	delete group;
+	delete ast;
 	
 	return std::move(newProductionRules);
 }

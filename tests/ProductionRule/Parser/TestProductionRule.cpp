@@ -100,6 +100,8 @@ TEST_F(TestProductionRuleParser,
 	EXPECT_CALL(mockStatementListener, StatementValue("function_type"));
 
 	mockStatementListener.Dispatch(startNode);
+
+	delete result;
 }
 
 TEST_F(TestProductionRuleParser, ParseEBNF_OptionalGroup_ShouldCorrectlyGiveTheOptionalGroup)
@@ -125,6 +127,8 @@ TEST_F(TestProductionRuleParser, ParseEBNF_OptionalGroup_ShouldCorrectlyGiveTheO
 	EXPECT_CALL(mockStatementListener, OptionalStatementValue("function_type"));
 
 	mockStatementListener.Dispatch(startNode);
+
+	delete result;
 }
 
 TEST_F(
@@ -148,6 +152,8 @@ TEST_F(
 	EXPECT_CALL(mockStatementListener, StatementValue("function_type"));
 
 	mockStatementListener.Dispatch(startNode);
+
+	delete result;
 }
 
 TEST_F(
@@ -170,6 +176,8 @@ TEST_F(
 	EXPECT_CALL(mockStatementListener, StatementValue("function_type"));
 
 	mockStatementListener.Dispatch(startNode);
+
+	delete result;
 }
 
 TEST_F(
@@ -193,6 +201,8 @@ TEST_F(
 	EXPECT_CALL(mockStatementListener, StatementValue("function_type"));
 
 	mockStatementListener.Dispatch(startNode);
+
+	delete result;
 }
 
 TEST_F(
@@ -217,6 +227,8 @@ TEST_F(
 	EXPECT_CALL(mockStatementListener, StatementValue("function_type"));
 
 	mockStatementListener.Dispatch(startNode);
+
+	delete result;
 }
 
 TEST_F(
@@ -240,4 +252,6 @@ TEST_F(
 	EXPECT_CALL(mockStatementListener, StatementValue("function_type"));
 
 	mockStatementListener.Dispatch(startNode);
+
+	delete result;
 }

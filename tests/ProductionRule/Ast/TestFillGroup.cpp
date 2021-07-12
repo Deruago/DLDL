@@ -34,6 +34,7 @@ TEST_F(TestFillGroup, GetGroupOfNothingPr_ShouldReturnEmptyGroup)
 	ASSERT_EQ(0, group->GetSubGroups().size());
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestFillGroup, GetGroupOfEMPTYPr_ShouldReturnEmptyGroup)
@@ -53,6 +54,7 @@ TEST_F(TestFillGroup, GetGroupOfEMPTYPr_ShouldReturnEmptyGroup)
 	ASSERT_EQ(0, group->GetSubGroups().size());
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestFillGroup, GetGroupOfEPSILONPr_ShouldReturnEmptyGroup)
@@ -72,6 +74,7 @@ TEST_F(TestFillGroup, GetGroupOfEPSILONPr_ShouldReturnEmptyGroup)
 	ASSERT_EQ(0, group->GetSubGroups().size());
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestFillGroup, GetGroupOfBnfPr_ShouldCorrectlyGiveA_SingleGroupWith5SubGroups)
@@ -91,6 +94,7 @@ TEST_F(TestFillGroup, GetGroupOfBnfPr_ShouldCorrectlyGiveA_SingleGroupWith5SubGr
 	ASSERT_EQ(5, group->GetSubGroups().size());
 
 	delete group;
+	delete result;
 }
 
 TEST_F(
@@ -113,6 +117,7 @@ TEST_F(
 	ASSERT_EQ(2, group->GetSubGroups()[0]->GetSubGroups().size());
 
 	delete group;
+	delete result;
 }
 
 TEST_F(
@@ -136,6 +141,7 @@ TEST_F(
 	ASSERT_EQ(1, group->GetSubGroups()[1]->GetSubGroups().size());
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestFillGroup, EbnfOrGroup_ShouldCorrectlyGiveSubGroups)
@@ -157,6 +163,7 @@ TEST_F(TestFillGroup, EbnfOrGroup_ShouldCorrectlyGiveSubGroups)
 	ASSERT_EQ(2, group->GetSubGroups()[0]->GetSubGroups()[0]->GetSubGroups().size()); // or group
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestFillGroup, EbnfOrGroupMultiple_ShouldCorrectlyGiveSubGroups)
@@ -181,6 +188,7 @@ TEST_F(TestFillGroup, EbnfOrGroupMultiple_ShouldCorrectlyGiveSubGroups)
 		2, group->GetSubGroups()[0]->GetSubGroups()[0]->GetSubGroups()[1]->GetSubGroups().size());
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestFillGroup, EbnfOrGroupWithNestedGroups_ShouldCorrectlyGiveSubGroups)
@@ -214,6 +222,7 @@ TEST_F(TestFillGroup, EbnfOrGroupWithNestedGroups_ShouldCorrectlyGiveSubGroups)
 				  .size()); // nested 2 group
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestFillGroup, EbnfNestedGroups_ShouldCorrectlyGiveSubGroups)
@@ -235,4 +244,5 @@ TEST_F(TestFillGroup, EbnfNestedGroups_ShouldCorrectlyGiveSubGroups)
 	ASSERT_EQ(2, group->GetSubGroups()[1]->GetSubGroups().size());
 
 	delete group;
+	delete result;
 }

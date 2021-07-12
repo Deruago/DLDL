@@ -44,6 +44,7 @@ TEST_F(TestGroup, Bnf_CorrectlyGeneratesProductionRules)
 	EXPECT_EQ("RIGHT_PARAN", generatedEnvironment.currentProductionRules[0].values[4]->name);
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestGroup, BnfEmpty_CorrectlyGeneratesEmptyProductionRule)
@@ -67,6 +68,7 @@ TEST_F(TestGroup, BnfEmpty_CorrectlyGeneratesEmptyProductionRule)
 	EXPECT_EQ(0, generatedEnvironment.currentProductionRules[0].values.size());
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestGroup, EbnfSingleOptional_CorrectlyGeneratesProductionRules)
@@ -93,6 +95,7 @@ TEST_F(TestGroup, EbnfSingleOptional_CorrectlyGeneratesProductionRules)
 	EXPECT_EQ("VARNAME", generatedEnvironment.currentProductionRules[0].values[0]->name);
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestGroup, EbnfSingleOptional_RedundantOptionalNotation_CorrectlyGeneratesProductionRules)
@@ -119,6 +122,7 @@ TEST_F(TestGroup, EbnfSingleOptional_RedundantOptionalNotation_CorrectlyGenerate
 	EXPECT_EQ("VARNAME", generatedEnvironment.currentProductionRules[0].values[0]->name);
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestGroup, EbnfDoubleOptional_CorrectlyGeneratesProductionRules)
@@ -152,6 +156,7 @@ TEST_F(TestGroup, EbnfDoubleOptional_CorrectlyGeneratesProductionRules)
 	EXPECT_EQ("LEFT_PARAN", generatedEnvironment.currentProductionRules[2].values[0]->name);
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestGroup, EbnfDoubleOptionalWithStandardTerminal_CorrectlyGeneratesProductionRules)
@@ -190,6 +195,7 @@ TEST_F(TestGroup, EbnfDoubleOptionalWithStandardTerminal_CorrectlyGeneratesProdu
 	EXPECT_EQ("ALWAYS", generatedEnvironment.currentProductionRules[3].values[0]->name);
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestGroup, EbnfSingleOr_CorrectlyGeneratesProductionRules)
@@ -217,6 +223,7 @@ TEST_F(TestGroup, EbnfSingleOr_CorrectlyGeneratesProductionRules)
 	EXPECT_EQ("TYPENAME", generatedEnvironment.currentProductionRules[1].values[0]->name);
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestGroup, EbnfDoubleOr_CorrectlyGeneratesProductionRules)
@@ -246,6 +253,7 @@ TEST_F(TestGroup, EbnfDoubleOr_CorrectlyGeneratesProductionRules)
 	EXPECT_EQ("CLASSNAME", generatedEnvironment.currentProductionRules[2].values[0]->name);
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestGroup, EbnfOptionalDoubleOr_CorrectlyGeneratesProductionRules)
@@ -276,6 +284,7 @@ TEST_F(TestGroup, EbnfOptionalDoubleOr_CorrectlyGeneratesProductionRules)
 	EXPECT_EQ("CLASSNAME", generatedEnvironment.currentProductionRules[2].values[0]->name);
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestGroup, EbnfOptionalDoubleOrWithNestedGroups_CorrectlyGeneratesProductionRules)
@@ -315,6 +324,7 @@ TEST_F(TestGroup, EbnfOptionalDoubleOrWithNestedGroups_CorrectlyGeneratesProduct
 	EXPECT_EQ("RIGHT_PARAN", generatedEnvironment.currentProductionRules[2].values[2]->name);
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestGroup,
@@ -361,6 +371,7 @@ TEST_F(TestGroup,
 	EXPECT_EQ("RIGHT_PARAN", generatedEnvironment.currentProductionRules[3].values[2]->name);
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestGroup, EbnfSingleStar_CorrectlyGeneratesProductionRules)
@@ -395,6 +406,7 @@ TEST_F(TestGroup, EbnfSingleStar_CorrectlyGeneratesProductionRules)
 	EXPECT_EQ("deamerreserved_star__VARNAME__", generatedEnvironment.nonterminals[0].productionRules[0].values[1]->name);
 
 	delete group;
+	delete result;
 }
 
 TEST_F(TestGroup, EbnfSinglePlus_CorrectlyGeneratesProductionRules)
@@ -434,4 +446,5 @@ TEST_F(TestGroup, EbnfSinglePlus_CorrectlyGeneratesProductionRules)
 
 	
 	delete group;
+	delete result;
 }
