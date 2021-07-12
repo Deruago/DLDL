@@ -102,10 +102,6 @@ stmt:
 		auto* const newNode = new DLDL_LEXER::ast::node::stmt({::DLDL_LEXER::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
 		$$ = newNode;
 	}
-	| {
-		auto* const newNode = new DLDL_LEXER::ast::node::stmt({::DLDL_LEXER::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
-		$$ = newNode;
-	}
 ;
 
 tokendeclaration:
@@ -115,10 +111,6 @@ tokendeclaration:
 	}
 	| TERMINAL REGEX {
 		auto* const newNode = new DLDL_LEXER::ast::node::tokendeclaration({::DLDL_LEXER::ast::Type::tokendeclaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::TERMINAL({::DLDL_LEXER::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), new DLDL_LEXER::ast::node::REGEX({::DLDL_LEXER::ast::Type::REGEX, ::deamer::external::cpp::ast::NodeValue::terminal, $2}) });
-		$$ = newNode;
-	}
-	| {
-		auto* const newNode = new DLDL_LEXER::ast::node::tokendeclaration({::DLDL_LEXER::ast::Type::tokendeclaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
 		$$ = newNode;
 	}
 ;

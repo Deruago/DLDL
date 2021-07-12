@@ -127,11 +127,6 @@ program:
 		$$ = newNode;
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
-	| {
-		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::program({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
-		$$ = newNode;
-		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
-	}
 ;
 
 stmts:
@@ -196,10 +191,6 @@ nested_group:
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::nested_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::nested_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $2 });
 		$$ = newNode;
 	}
-	| {
-		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::nested_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::nested_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
-		$$ = newNode;
-	}
 ;
 
 optional_group:
@@ -216,10 +207,6 @@ optional_group:
 zero_or_more_group:
 	group STAR {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::zero_or_more_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
-		$$ = newNode;
-	}
-	| {
-		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::zero_or_more_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
 		$$ = newNode;
 	}
 ;

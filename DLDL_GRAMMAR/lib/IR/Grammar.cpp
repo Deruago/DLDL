@@ -81,6 +81,23 @@ bool DLDL::ir::Grammar::DoesNonTerminalExist(const NonTerminal& ourNonTerminal) 
 std::optional<std::vector<DLDL::ir::ProductionRule>>
 DLDL::ir::Grammar::ConvertToProductionRule(std::string text, std::string nonterminal)
 {
+	if (text.empty())
+	{
+		return {};
+	}
+	
+	char currentCharacter = text[0];
+	while (::isspace(currentCharacter))
+	{
+		text.erase(0, 1);
+		if (text.empty())
+		{
+			return {};
+		}
+		
+		currentCharacter = text[0];
+	}
+	
 	std::vector<std::string> tokens;
 
 	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
