@@ -1,7 +1,13 @@
 {{file.namespace}} = <DLDL::filetemplate>
 
-{{nonterminal_initialization}}    = <{{nonterminal}}.Set(::deamer::language::type::definition::object::main::NonTerminal("{{nonterminal}}", { {{productionrule_references}} }));>
+{{nonterminal_initialization}}    = <{{nonterminal}}.Set(::deamer::language::type::definition::object::main::NonTerminal("{{nonterminal}}", { {{productionrule_references}} } {{enable_nonterminal_abstraction}} {{enable_nonterminal_inlined}}));>
 {{productionrule_initialization}} = <{{productionrule}}.Set(::deamer::language::type::definition::object::main::ProductionRule({{token_references}}));>
+
+{{enable_nonterminal_abstraction}} = <, ::deamer::language::type::definition::object::main::NonTerminalAbstraction::{{nonterminal_abstraction}}>
+{{nonterminal_abstraction}} = <Standard>
+
+{{enable_nonterminal_inlined}} = <, {{nonterminal_inlined}}>
+{{nonterminal_inlined}} = <false>
 
 {{nonterminal_add_object}}    = <AddObject({{nonterminal}});>
 {{productionrule_add_object}} = <AddObject({{productionrule}});>
