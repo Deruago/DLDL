@@ -22,7 +22,6 @@
 #include "DLDL_LEXER/Ast/Node/REGEX.h"
 #include "DLDL_LEXER/Ast/Node/ESCAPE_CHARS.h"
 #include "DLDL_LEXER/Ast/Node/COMMENT.h"
-#include "DLDL_LEXER/Ast/Node/MULTI_LINE_COMMENT.h"
 
 #include "DLDL_LEXER/Ast/Node/program.h"
 #include "DLDL_LEXER/Ast/Node/stmts.h"
@@ -53,7 +52,6 @@ TERMINAL	([a-zA-Z_]+)
 REGEX	([ \t][^\n\r]*)
 ESCAPE_CHARS	([\n\r\t\f\b\a\v])
 COMMENT	([/][^\n]*)
-MULTI_LINE_COMMENT	([/][/]([/][^/]|[\\][/]*|[^/])*[/][/])
 
 %%
 
@@ -67,7 +65,6 @@ MULTI_LINE_COMMENT	([/][/]([/][^/]|[\\][/]*|[^/])*[/][/])
 {REGEX}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (REGEX);;}
 {ESCAPE_CHARS}	{handleColumn(yyval);if (!local_store) ;}
 {COMMENT}	{handleColumn(yyval);if (!local_store) ;}
-{MULTI_LINE_COMMENT}	{handleColumn(yyval);if (!local_store) ;}
 
 %%
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject)

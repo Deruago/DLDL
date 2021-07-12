@@ -11,7 +11,6 @@
 #undef YY_NO_UNISTD_H
 #include "DLDL_GRAMMAR/Ast/Enum/Type.h"
 #include "DLDL_GRAMMAR/Ast/Node/COMMENT.h"
-#include "DLDL_GRAMMAR/Ast/Node/MULTI_LINE_COMMENT.h"
 #include "DLDL_GRAMMAR/Ast/Node/START_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/GROUP_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/INLINE_ABSTRACTION.h"
@@ -63,7 +62,6 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %union{
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_GRAMMAR::ast::node::COMMENT* DLDL_GRAMMAR_COMMENT;
-	::DLDL_GRAMMAR::ast::node::MULTI_LINE_COMMENT* DLDL_GRAMMAR_MULTI_LINE_COMMENT;
 	::DLDL_GRAMMAR::ast::node::START_ABSTRACTION* DLDL_GRAMMAR_START_ABSTRACTION;
 	::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION* DLDL_GRAMMAR_GROUP_ABSTRACTION;
 	::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION* DLDL_GRAMMAR_INLINE_ABSTRACTION;
@@ -152,6 +150,10 @@ definition:
 		auto* const newNode = new DLDL_GRAMMAR::ast::node::definition({::DLDL_GRAMMAR::ast::Type::definition, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GRAMMAR::ast::node::NONTERMINAL({::DLDL_GRAMMAR::ast::Type::NONTERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), $2 });
 		$$ = newNode;
 	}
+	| {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::definition({::DLDL_GRAMMAR::ast::Type::definition, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+		$$ = newNode;
+	}
 ;
 
 production_rules:
@@ -161,6 +163,10 @@ production_rules:
 	}
 	| PRODUCTION_RULE {
 		auto* const newNode = new DLDL_GRAMMAR::ast::node::production_rules({::DLDL_GRAMMAR::ast::Type::production_rules, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GRAMMAR::ast::node::PRODUCTION_RULE({::DLDL_GRAMMAR::ast::Type::PRODUCTION_RULE, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+		$$ = newNode;
+	}
+	| {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::production_rules({::DLDL_GRAMMAR::ast::Type::production_rules, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
 		$$ = newNode;
 	}
 ;

@@ -5,7 +5,6 @@
 #include "DLDL_GRAMMAR/Ast/Node/DLDL_GRAMMAR.h"
 #include "DLDL_GRAMMAR/Ast/Enum/Type.h"
 #include "DLDL_GRAMMAR/Ast/Node/COMMENT.h"
-#include "DLDL_GRAMMAR/Ast/Node/MULTI_LINE_COMMENT.h"
 #include "DLDL_GRAMMAR/Ast/Node/START_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/GROUP_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/INLINE_ABSTRACTION.h"
@@ -40,11 +39,6 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 			case DLDL_GRAMMAR::ast::Type::COMMENT:
 			{
 				Listen(static_cast<const DLDL_GRAMMAR::ast::node::COMMENT*>(node));
-				break;
-			}
-			case DLDL_GRAMMAR::ast::Type::MULTI_LINE_COMMENT:
-			{
-				Listen(static_cast<const DLDL_GRAMMAR::ast::node::MULTI_LINE_COMMENT*>(node));
 				break;
 			}
 			case DLDL_GRAMMAR::ast::Type::START_ABSTRACTION:
@@ -133,9 +127,6 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 			}
 		}
 		virtual void Listen(const DLDL_GRAMMAR::ast::node::COMMENT* node)
-		{
-		}
-		virtual void Listen(const DLDL_GRAMMAR::ast::node::MULTI_LINE_COMMENT* node)
 		{
 		}
 		virtual void Listen(const DLDL_GRAMMAR::ast::node::START_ABSTRACTION* node)

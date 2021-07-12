@@ -14,7 +14,6 @@
 #include "DLDL_LEXER/Ast/Node/REGEX.h"
 #include "DLDL_LEXER/Ast/Node/ESCAPE_CHARS.h"
 #include "DLDL_LEXER/Ast/Node/COMMENT.h"
-#include "DLDL_LEXER/Ast/Node/MULTI_LINE_COMMENT.h"
 
 #include "DLDL_LEXER/Ast/Node/program.h"
 #include "DLDL_LEXER/Ast/Node/stmts.h"
@@ -86,11 +85,6 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 				Listen(static_cast<const DLDL_LEXER::ast::node::COMMENT*>(node));
 				break;
 			}
-			case DLDL_LEXER::ast::Type::MULTI_LINE_COMMENT:
-			{
-				Listen(static_cast<const DLDL_LEXER::ast::node::MULTI_LINE_COMMENT*>(node));
-				break;
-			}
 
 			case DLDL_LEXER::ast::Type::program:
 			{
@@ -152,9 +146,6 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 		{
 		}
 		virtual void Listen(const DLDL_LEXER::ast::node::COMMENT* node)
-		{
-		}
-		virtual void Listen(const DLDL_LEXER::ast::node::MULTI_LINE_COMMENT* node)
 		{
 		}
 

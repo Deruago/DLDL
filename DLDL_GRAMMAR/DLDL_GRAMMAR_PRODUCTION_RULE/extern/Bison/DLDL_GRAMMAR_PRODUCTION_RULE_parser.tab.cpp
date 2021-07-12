@@ -510,14 +510,14 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  17
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   26
+#define YYLAST   48
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  18
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  12
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  25
+#define YYNRULES  28
 /* YYNSTATES -- Number of states.  */
 #define YYNSTATES  38
 
@@ -568,11 +568,11 @@ static const yytype_int8 yytranslate[] =
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
-       0,   125,   125,   133,   137,   144,   151,   155,   159,   163,
-     167,   171,   175,   179,   183,   190,   197,   201,   208,   215,
-     222,   229,   233,   237,   241,   248
+       0,   125,   125,   130,   138,   142,   149,   156,   160,   164,
+     168,   172,   176,   180,   184,   188,   195,   199,   206,   210,
+     217,   221,   228,   235,   242,   246,   250,   254,   261
 };
 #endif
 
@@ -614,12 +614,12 @@ static const yytype_int16 yytoknum[] =
 };
 #endif
 
-#define YYPACT_NINF (-19)
+#define YYPACT_NINF (-11)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-1)
+#define YYTABLE_NINF (-6)
 
 #define yytable_value_is_error(Yyn) \
   0
@@ -628,10 +628,10 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -2,    -2,    -2,   -19,     5,   -19,    -2,    -3,   -19,   -19,
-     -19,   -19,   -19,   -19,   -19,     3,     9,   -19,   -19,    -2,
-       7,   -19,    -2,   -19,   -19,   -19,   -19,   -19,    -3,     6,
-      -3,   -19,     8,    18,    19,   -19,   -19,   -19
+       2,    21,    23,   -11,     1,   -11,     0,     9,   -11,   -11,
+     -11,   -11,   -11,   -11,   -11,    -2,     4,   -11,   -11,    26,
+     -10,   -11,    26,   -11,   -11,   -11,   -11,   -11,     9,    31,
+       9,   -11,    10,    13,    36,   -11,   -11,   -11
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -639,17 +639,17 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       4,     4,     4,    14,     0,     2,     4,     5,     6,     7,
-       8,     9,    11,    12,    13,     0,     0,     1,     3,     0,
-       0,    17,     0,    18,    19,    10,    15,    16,    20,     0,
-      25,    22,     0,     0,     0,    24,    23,    21
+      17,    17,    17,    15,     0,     2,    17,     6,     7,     8,
+       9,    10,    12,    13,    14,     0,     0,     1,     4,    17,
+       0,    19,    17,    20,    22,    11,    16,    18,    23,     0,
+      28,    25,     0,     0,     0,    27,    26,    24
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -19,   -19,    15,   -19,   -18,   -19,   -19,   -19,   -19,   -19,
-     -19,   -19
+     -11,   -11,    34,   -11,    -8,   -11,   -11,   -11,   -11,   -11,
+     -11,   -11
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -664,16 +664,20 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      19,    28,     1,    20,    30,    17,     2,    21,    26,    22,
-      23,    24,    25,    31,     3,    35,    15,    16,    27,    32,
-      33,    18,     0,    34,    29,    36,    37
+      -5,    17,    -3,    26,     1,    -5,     1,    29,     2,    -5,
+       2,    28,    19,    27,    30,    20,     3,    35,     3,    21,
+      36,    22,    23,    24,    25,     1,    -5,     1,     0,     2,
+       1,     2,    -5,     0,     2,    15,    16,     3,    31,     3,
+      18,     0,     3,    37,    32,    33,     0,     0,    34
 };
 
 static const yytype_int8 yycheck[] =
 {
-       3,    19,     4,     6,    22,     0,     8,    10,     5,    12,
-      13,    14,    15,     7,    16,     7,     1,     2,     9,    13,
-      14,     6,    -1,    17,    17,     7,     7
+       0,     0,     0,     5,     4,     5,     4,    17,     8,     9,
+       8,    19,     3,     9,    22,     6,    16,     7,    16,    10,
+       7,    12,    13,    14,    15,     4,     5,     4,    -1,     8,
+       4,     8,     9,    -1,     8,     1,     2,    16,     7,    16,
+       6,    -1,    16,     7,    13,    14,    -1,    -1,    17
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -689,17 +693,17 @@ static const yytype_int8 yystos[] =
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    18,    19,    20,    20,    21,    22,    22,    22,    22,
-      22,    22,    22,    22,    22,    23,    24,    24,    25,    26,
-      27,    28,    28,    28,    28,    29
+       0,    18,    19,    19,    20,    20,    21,    22,    22,    22,
+      22,    22,    22,    22,    22,    22,    23,    23,    24,    24,
+      25,    25,    26,    27,    28,    28,    28,    28,    29
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     2,     0,     1,     1,     1,     1,     1,
-       2,     1,     1,     1,     1,     3,     3,     2,     2,     2,
-       3,     5,     4,     5,     5,     3
+       0,     2,     1,     0,     2,     0,     1,     1,     1,     1,
+       1,     2,     1,     1,     1,     1,     3,     0,     3,     2,
+       2,     0,     2,     3,     5,     4,     5,     5,     3
 };
 
 
@@ -1173,218 +1177,246 @@ yyreduce:
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_program) = newNode;
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
-#line 1177 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1181 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 3: /* stmts: stmt stmts  */
-#line 133 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 3: /* program: %empty  */
+#line 130 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+          {
+		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::program({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_program) = newNode;
+		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
+	}
+#line 1191 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+    break;
+
+  case 4: /* stmts: stmt stmts  */
+#line 138 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                    {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DLDL_GRAMMAR_PRODUCTION_RULE_stmt), (yyvsp[0].DLDL_GRAMMAR_PRODUCTION_RULE_stmts) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_stmts) = newNode;
 	}
-#line 1186 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1200 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 4: /* stmts: %empty  */
-#line 137 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 5: /* stmts: %empty  */
+#line 142 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
           {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_stmts) = newNode;
 	}
-#line 1195 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1209 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 5: /* stmt: group  */
-#line 144 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 6: /* stmt: group  */
+#line 149 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
               {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmt({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DLDL_GRAMMAR_PRODUCTION_RULE_group) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_stmt) = newNode;
 	}
-#line 1204 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1218 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 6: /* group: nested_group  */
-#line 151 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 7: /* group: nested_group  */
+#line 156 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                      {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DLDL_GRAMMAR_PRODUCTION_RULE_nested_group) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_group) = newNode;
 	}
-#line 1213 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1227 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 7: /* group: optional_group  */
-#line 155 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 8: /* group: optional_group  */
+#line 160 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                          {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DLDL_GRAMMAR_PRODUCTION_RULE_optional_group) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_group) = newNode;
 	}
-#line 1222 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1236 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 8: /* group: zero_or_more_group  */
-#line 159 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 9: /* group: zero_or_more_group  */
+#line 164 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                              {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DLDL_GRAMMAR_PRODUCTION_RULE_zero_or_more_group) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_group) = newNode;
 	}
-#line 1231 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1245 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 9: /* group: one_or_more_group  */
-#line 163 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 10: /* group: one_or_more_group  */
+#line 168 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                             {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {3, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DLDL_GRAMMAR_PRODUCTION_RULE_one_or_more_group) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_group) = newNode;
 	}
-#line 1240 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1254 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 10: /* group: group MINUS  */
-#line 167 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 11: /* group: group MINUS  */
+#line 172 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                       {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {4, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DLDL_GRAMMAR_PRODUCTION_RULE_group) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_group) = newNode;
 	}
-#line 1249 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1263 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 11: /* group: or_group  */
-#line 171 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 12: /* group: or_group  */
+#line 176 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                    {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {5, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DLDL_GRAMMAR_PRODUCTION_RULE_or_group) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_group) = newNode;
 	}
-#line 1258 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1272 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 12: /* group: min_max_group  */
-#line 175 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 13: /* group: min_max_group  */
+#line 180 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                         {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {6, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DLDL_GRAMMAR_PRODUCTION_RULE_min_max_group) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_group) = newNode;
 	}
-#line 1267 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1281 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 13: /* group: extension_group  */
-#line 179 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 14: /* group: extension_group  */
+#line 184 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                           {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {7, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DLDL_GRAMMAR_PRODUCTION_RULE_extension_group) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_group) = newNode;
 	}
-#line 1276 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1290 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 14: /* group: VALUE  */
-#line 183 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 15: /* group: VALUE  */
+#line 188 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                 {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {8, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::VALUE({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_group) = newNode;
 	}
-#line 1285 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1299 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 15: /* nested_group: LEFT_PARANTHESIS stmts RIGHT_PARANTHESIS  */
-#line 190 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 16: /* nested_group: LEFT_PARANTHESIS stmts RIGHT_PARANTHESIS  */
+#line 195 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                                                  {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::nested_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::nested_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DLDL_GRAMMAR_PRODUCTION_RULE_stmts) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_nested_group) = newNode;
 	}
-#line 1294 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1308 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 16: /* optional_group: LEFT_SQUARE_BRACKET stmts RIGHT_SQUARE_BRACKET  */
-#line 197 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 17: /* nested_group: %empty  */
+#line 199 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+          {
+		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::nested_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::nested_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_nested_group) = newNode;
+	}
+#line 1317 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+    break;
+
+  case 18: /* optional_group: LEFT_SQUARE_BRACKET stmts RIGHT_SQUARE_BRACKET  */
+#line 206 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                                                        {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::optional_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::optional_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DLDL_GRAMMAR_PRODUCTION_RULE_stmts) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_optional_group) = newNode;
 	}
-#line 1303 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1326 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 17: /* optional_group: group QUESTION_MARK  */
-#line 201 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 19: /* optional_group: group QUESTION_MARK  */
+#line 210 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                               {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::optional_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::optional_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DLDL_GRAMMAR_PRODUCTION_RULE_group) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_optional_group) = newNode;
 	}
-#line 1312 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1335 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 18: /* zero_or_more_group: group STAR  */
-#line 208 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 20: /* zero_or_more_group: group STAR  */
+#line 217 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                    {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::zero_or_more_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DLDL_GRAMMAR_PRODUCTION_RULE_group) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_zero_or_more_group) = newNode;
 	}
-#line 1321 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1344 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 19: /* one_or_more_group: group PLUS  */
-#line 215 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 21: /* zero_or_more_group: %empty  */
+#line 221 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+          {
+		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::zero_or_more_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_zero_or_more_group) = newNode;
+	}
+#line 1353 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+    break;
+
+  case 22: /* one_or_more_group: group PLUS  */
+#line 228 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                    {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::one_or_more_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::one_or_more_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DLDL_GRAMMAR_PRODUCTION_RULE_group) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_one_or_more_group) = newNode;
 	}
-#line 1330 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1362 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 20: /* or_group: group VERTICAL_SLASH group  */
-#line 222 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 23: /* or_group: group VERTICAL_SLASH group  */
+#line 235 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                                    {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::or_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::or_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-2].DLDL_GRAMMAR_PRODUCTION_RULE_group), (yyvsp[0].DLDL_GRAMMAR_PRODUCTION_RULE_group) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_or_group) = newNode;
 	}
-#line 1339 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1371 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 21: /* min_max_group: group LEFT_BRACKET NUMBER NUMBER RIGHT_BRACKET  */
-#line 229 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 24: /* min_max_group: group LEFT_BRACKET NUMBER NUMBER RIGHT_BRACKET  */
+#line 242 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                                                        {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::min_max_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::min_max_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-4].DLDL_GRAMMAR_PRODUCTION_RULE_group), new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::NUMBER({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::NUMBER, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal)}), new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::NUMBER({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::NUMBER, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_min_max_group) = newNode;
 	}
-#line 1348 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1380 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 22: /* min_max_group: group LEFT_BRACKET NUMBER RIGHT_BRACKET  */
-#line 233 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 25: /* min_max_group: group LEFT_BRACKET NUMBER RIGHT_BRACKET  */
+#line 246 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                                                   {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::min_max_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::min_max_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-3].DLDL_GRAMMAR_PRODUCTION_RULE_group), new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::NUMBER({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::NUMBER, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_min_max_group) = newNode;
 	}
-#line 1357 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1389 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 23: /* min_max_group: group LEFT_BRACKET NUMBER PLUS RIGHT_BRACKET  */
-#line 237 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 26: /* min_max_group: group LEFT_BRACKET NUMBER PLUS RIGHT_BRACKET  */
+#line 250 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                                                        {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::min_max_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::min_max_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-4].DLDL_GRAMMAR_PRODUCTION_RULE_group), new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::NUMBER({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::NUMBER, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal)}) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_min_max_group) = newNode;
 	}
-#line 1366 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1398 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 24: /* min_max_group: group LEFT_BRACKET NUMBER STAR RIGHT_BRACKET  */
-#line 241 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 27: /* min_max_group: group LEFT_BRACKET NUMBER STAR RIGHT_BRACKET  */
+#line 254 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                                                        {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::min_max_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::min_max_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {3, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-4].DLDL_GRAMMAR_PRODUCTION_RULE_group), new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::NUMBER({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::NUMBER, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal)}) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_min_max_group) = newNode;
 	}
-#line 1375 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1407 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
-  case 25: /* extension_group: group ARROW group  */
-#line 248 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+  case 28: /* extension_group: group ARROW group  */
+#line 261 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
                           {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::extension_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::extension_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-2].DLDL_GRAMMAR_PRODUCTION_RULE_group), (yyvsp[0].DLDL_GRAMMAR_PRODUCTION_RULE_group) });
 		(yyval.DLDL_GRAMMAR_PRODUCTION_RULE_extension_group) = newNode;
 	}
-#line 1384 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1416 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
     break;
 
 
-#line 1388 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
+#line 1420 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.c"
 
       default: break;
     }
@@ -1578,7 +1610,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 254 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+#line 267 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
 
 
 void DLDL_GRAMMAR_PRODUCTION_RULEerror(const char* s)

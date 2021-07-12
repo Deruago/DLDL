@@ -6,7 +6,6 @@
 #include "DLDL_GRAMMAR/Ast/Enum/Type.h"
 
 #include "DLDL_GRAMMAR/Ast/Node/COMMENT.h"
-#include "DLDL_GRAMMAR/Ast/Node/MULTI_LINE_COMMENT.h"
 #include "DLDL_GRAMMAR/Ast/Node/START_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/GROUP_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/INLINE_ABSTRACTION.h"
@@ -48,14 +47,6 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::COMMENT*>(node));
-				break;
-			}
-
-			case DLDL_GRAMMAR::ast::Type::MULTI_LINE_COMMENT:
-			{
-				EnterAnything(node);
-				EnterTerminal(node);
-				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::MULTI_LINE_COMMENT*>(node));
 				break;
 			}
 
@@ -250,10 +241,6 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 
 		
 		virtual void ListenEntry(const DLDL_GRAMMAR::ast::node::COMMENT* node) 
-		{
-		}
-
-		virtual void ListenEntry(const DLDL_GRAMMAR::ast::node::MULTI_LINE_COMMENT* node) 
 		{
 		}
 

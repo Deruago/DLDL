@@ -69,11 +69,10 @@ extern int DLDL_GRAMMARdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 63 "./DLDL_GRAMMAR_parser.y"
+#line 62 "./DLDL_GRAMMAR_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_GRAMMAR::ast::node::COMMENT* DLDL_GRAMMAR_COMMENT;
-	::DLDL_GRAMMAR::ast::node::MULTI_LINE_COMMENT* DLDL_GRAMMAR_MULTI_LINE_COMMENT;
 	::DLDL_GRAMMAR::ast::node::START_ABSTRACTION* DLDL_GRAMMAR_START_ABSTRACTION;
 	::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION* DLDL_GRAMMAR_GROUP_ABSTRACTION;
 	::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION* DLDL_GRAMMAR_INLINE_ABSTRACTION;
@@ -90,7 +89,7 @@ union YYSTYPE
 	::DLDL_GRAMMAR::ast::node::definition* DLDL_GRAMMAR_definition;
 	::DLDL_GRAMMAR::ast::node::production_rules* DLDL_GRAMMAR_production_rules;
 
-#line 94 "DLDL_GRAMMAR_parser.tab.h"
+#line 93 "DLDL_GRAMMAR_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

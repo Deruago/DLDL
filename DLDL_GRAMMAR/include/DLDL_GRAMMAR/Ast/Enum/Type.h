@@ -7,7 +7,6 @@ namespace DLDL_GRAMMAR { namespace ast {
 	{
 		// Terminals
 		COMMENT,
-		MULTI_LINE_COMMENT,
 		START_ABSTRACTION,
 		GROUP_ABSTRACTION,
 		INLINE_ABSTRACTION,
