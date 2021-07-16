@@ -5,6 +5,9 @@ namespace DLDL_IDENTITY { namespace ast {
 
 	enum class Type
 	{
+		// Reserved
+		deamerreserved_unknown,
+
 		// Terminals
 		NAME,
 		VALUE,

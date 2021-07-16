@@ -5,6 +5,9 @@ namespace DLDL_ASSOCIATIVITY { namespace ast {
 
 	enum class Type
 	{
+		// Reserved
+		deamerreserved_unknown,
+
 		// Terminals
 		ASSOCIATIVITY,
 

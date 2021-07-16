@@ -5,6 +5,9 @@ namespace DLDL_GRAMMAR { namespace ast {
 
 	enum class Type
 	{
+		// Reserved
+		deamerreserved_unknown,
+
 		// Terminals
 		COMMENT,
 		START_ABSTRACTION,

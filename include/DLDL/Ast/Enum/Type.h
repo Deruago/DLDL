@@ -5,6 +5,9 @@ namespace DLDL { namespace ast {
 
 	enum class Type
 	{
+		// Reserved
+		deamerreserved_unknown,
+
 		// Terminals
 		ANY,
 

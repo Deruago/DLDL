@@ -5,6 +5,9 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast {
 
 	enum class Type
 	{
+		// Reserved
+		deamerreserved_unknown,
+
 		// Terminals
 		VERTICAL_SLASH,
 		LEFT_PARANTHESIS,

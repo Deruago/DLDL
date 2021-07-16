@@ -5,6 +5,9 @@ namespace DLDL_LEXER { namespace ast {
 
 	enum class Type
 	{
+		// Reserved
+		deamerreserved_unknown,
+
 		// Terminals
 		DELETE_ABSTRACTION,
 		IGNORE_ABSTRACTION,

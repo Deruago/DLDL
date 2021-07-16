@@ -5,6 +5,9 @@ namespace DLDL_GENERATION { namespace ast {
 
 	enum class Type
 	{
+		// Reserved
+		deamerreserved_unknown,
+
 		// Terminals
 		GENERATE,
 		INTEGRATE,
