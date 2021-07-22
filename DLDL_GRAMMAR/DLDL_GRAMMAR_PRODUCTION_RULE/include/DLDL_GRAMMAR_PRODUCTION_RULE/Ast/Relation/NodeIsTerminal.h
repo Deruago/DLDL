@@ -8,6 +8,11 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace relation {
 	constexpr static bool NodeIsTerminal(::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type t)
 	{
 		
+		if (t == ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::ENDING_USELESS_SYMBOLS)
+		{
+			return true;
+		}
+
 		if (t == ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::VERTICAL_SLASH)
 		{
 			return true;

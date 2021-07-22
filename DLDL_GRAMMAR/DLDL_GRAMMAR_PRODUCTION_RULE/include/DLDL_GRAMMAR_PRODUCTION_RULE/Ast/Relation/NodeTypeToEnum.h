@@ -16,6 +16,7 @@ class one_or_more_group;
 class or_group;
 class min_max_group;
 class extension_group;
+class ENDING_USELESS_SYMBOLS;
 class VERTICAL_SLASH;
 class LEFT_PARANTHESIS;
 class RIGHT_PARANTHESIS;
@@ -123,6 +124,13 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace relation {
 	{
 		constexpr static auto value = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::extension_group;
 		using type = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::extension_group;
+	};
+
+	template<>
+	struct NodeTypeToEnum<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ENDING_USELESS_SYMBOLS>
+	{
+		constexpr static auto value = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::ENDING_USELESS_SYMBOLS;
+		using type = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ENDING_USELESS_SYMBOLS;
 	};
 
 	template<>

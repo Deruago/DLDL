@@ -632,8 +632,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 20
-#define YY_END_OF_BUFFER 21
+#define YY_NUM_RULES 21
+#define YY_END_OF_BUFFER 22
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -641,12 +641,12 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[36] =
+static const flex_int16_t yy_accept[40] =
     {   0,
-        0,    0,   21,   20,   19,    9,   18,    2,    3,   11,
-       12,   13,   20,   15,    8,   14,    6,    7,    4,    1,
-        5,   10,    0,   16,    0,   15,   14,   14,    0,   16,
-        0,    0,   17,   17,    0
+        0,    0,   22,   21,   20,   20,   10,   19,    3,    4,
+       12,   13,   14,   21,   16,   19,    9,   15,    7,    8,
+        5,    2,    6,    0,    1,   11,    0,   17,    0,   16,
+       15,   15,    0,   17,    0,    0,   18,   18,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -656,15 +656,15 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    2,    4,    5,    1,    1,    1,    1,    5,    6,
         7,    8,    9,    1,   10,    1,   11,   12,   12,   12,
-       12,   12,   12,   12,   12,   12,   12,    5,    5,    1,
-        5,   13,   14,    1,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       16,    1,   17,    1,   15,    1,   15,   15,   15,   15,
+       12,   12,   12,   12,   12,   12,   12,    5,   13,    1,
+        5,   14,   15,    1,   16,   16,   16,   16,   16,   16,
+       16,   16,   16,   16,   16,   16,   16,   16,   16,   16,
+       16,   16,   16,   16,   16,   16,   16,   16,   16,   16,
+       17,    1,   18,    1,   16,    1,   16,   16,   16,   16,
 
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       15,   15,   18,   19,   20,    1,    1,    1,    1,    1,
+       16,   16,   16,   16,   16,   16,   16,   16,   16,   16,
+       16,   16,   16,   16,   16,   16,   16,   16,   16,   16,
+       16,   16,   19,   20,   21,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -681,55 +681,60 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[21] =
+static const YY_CHAR yy_meta[22] =
+    {   0,
+        1,    2,    2,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    2,    1,    1,    1,    1,    1,    1,    2,
+        1
+    } ;
+
+static const flex_int16_t yy_base[43] =
+    {   0,
+        0,    0,   51,   52,   47,   52,   52,   52,   52,   52,
+       52,   52,   35,   19,   36,   44,   52,   12,   52,   52,
+       52,    0,   52,    0,   43,   52,   42,   52,   22,   32,
+       17,   19,   29,   35,   23,   31,   33,   52,   52,   21,
+       37,   39
+    } ;
+
+static const flex_int16_t yy_def[43] =
+    {   0,
+       39,    1,   39,   39,   40,   39,   39,   39,   39,   39,
+       39,   39,   39,   41,   39,   40,   39,   39,   39,   39,
+       39,   16,   39,   16,   39,   39,   41,   39,   42,   39,
+       39,   39,   41,   39,   41,   39,   41,   39,    0,   39,
+       39,   39
+    } ;
+
+static const flex_int16_t yy_nxt[74] =
+    {   0,
+        4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
+       14,   15,   16,    4,   17,   18,   19,   20,   21,   22,
+       23,   28,   24,   31,   34,   28,   29,   32,   31,   27,
+       31,   28,   31,   37,   32,   28,   35,   27,   27,   33,
+       33,   38,   36,   30,   28,   25,   25,   30,   26,   25,
+       39,    3,   39,   39,   39,   39,   39,   39,   39,   39,
+       39,   39,   39,   39,   39,   39,   39,   39,   39,   39,
+       39,   39,   39
+    } ;
+
+static const flex_int16_t yy_chk[74] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1
-    } ;
-
-static const flex_int16_t yy_base[38] =
-    {   0,
-        0,    0,   44,   45,   45,   45,   45,   45,   45,   45,
-       45,   30,   18,   30,   45,   10,   45,   45,   45,   45,
-       45,   45,   38,   45,   20,   28,   12,   17,   27,   30,
-       28,   26,   33,   45,   45,   33,   32
-    } ;
-
-static const flex_int16_t yy_def[38] =
-    {   0,
-       35,    1,   35,   35,   35,   35,   35,   35,   35,   35,
-       35,   35,   36,   35,   35,   35,   35,   35,   35,   35,
-       35,   35,   36,   35,   37,   35,   35,   35,   36,   35,
-       36,   35,   36,   35,    0,   35,   35
-    } ;
-
-static const flex_int16_t yy_nxt[66] =
-    {   0,
-        4,    5,    5,    6,    7,    8,    9,   10,   11,   12,
-       13,   14,    4,   15,   16,   17,   18,   19,   20,   21,
-       24,   27,   30,   27,   28,   25,   27,   23,   27,   24,
-       24,   28,   29,   23,   31,   24,   34,   32,   33,   26,
-       24,   26,   22,   35,    3,   35,   35,   35,   35,   35,
-       35,   35,   35,   35,   35,   35,   35,   35,   35,   35,
-       35,   35,   35,   35,   35
-    } ;
-
-static const flex_int16_t yy_chk[66] =
-    {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-       13,   16,   25,   27,   16,   13,   27,   25,   28,   29,
-       31,   28,   37,   36,   29,   33,   32,   30,   31,   26,
-       23,   14,   12,    3,   35,   35,   35,   35,   35,   35,
-       35,   35,   35,   35,   35,   35,   35,   35,   35,   35,
-       35,   35,   35,   35,   35
+        1,   14,   40,   18,   29,   35,   14,   18,   31,   29,
+       32,   33,   31,   35,   32,   37,   33,   41,   41,   42,
+       42,   36,   34,   30,   27,   25,   16,   15,   13,    5,
+        3,   39,   39,   39,   39,   39,   39,   39,   39,   39,
+       39,   39,   39,   39,   39,   39,   39,   39,   39,   39,
+       39,   39,   39
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[21] =
+static const flex_int32_t yy_rule_can_match_eol[22] =
     {   0,
-0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 
-    0,     };
+1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 
+    1, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -756,6 +761,7 @@ char *yytext;
 #include <Deamer/External/Cpp/Lexer/TerminalObject.h>
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Flex/Lexer.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Enum/Type.h"
+#include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/ENDING_USELESS_SYMBOLS.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/VERTICAL_SLASH.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/LEFT_PARANTHESIS.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/RIGHT_PARANTHESIS.h"
@@ -799,8 +805,8 @@ static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_ob
 #ifndef yyval
 #define yyval yytext
 #endif //yyval
-#line 803 "lex.DLDL_GRAMMAR_PRODUCTION_RULE.c"
-#line 804 "lex.DLDL_GRAMMAR_PRODUCTION_RULE.c"
+#line 809 "lex.DLDL_GRAMMAR_PRODUCTION_RULE.c"
+#line 810 "lex.DLDL_GRAMMAR_PRODUCTION_RULE.c"
 
 #define INITIAL 0
 
@@ -1017,10 +1023,10 @@ YY_DECL
 		}
 
 	{
-#line 80 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+#line 82 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
 
 
-#line 1024 "lex.DLDL_GRAMMAR_PRODUCTION_RULE.c"
+#line 1030 "lex.DLDL_GRAMMAR_PRODUCTION_RULE.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1047,13 +1053,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 36 )
+				if ( yy_current_state >= 40 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_current_state != 35 );
+		while ( yy_current_state != 39 );
 		yy_cp = (yy_last_accepting_cpos);
 		yy_current_state = (yy_last_accepting_state);
 
@@ -1084,109 +1090,115 @@ do_action:	/* This label is used only to access EOF actions. */
 			goto yy_find_action;
 
 case 1:
+/* rule 1 can match eol */
 YY_RULE_SETUP
-#line 82 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (VERTICAL_SLASH);;}
+#line 84 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{handleColumn(yyval);if (!local_store) ;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 83 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (LEFT_PARANTHESIS);;}
+#line 85 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (VERTICAL_SLASH);;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 84 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (RIGHT_PARANTHESIS);;}
+#line 86 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (LEFT_PARANTHESIS);;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 85 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (LEFT_BRACKET);;}
+#line 87 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (RIGHT_PARANTHESIS);;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 86 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (RIGHT_BRACKET);;}
+#line 88 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (LEFT_BRACKET);;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 87 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (LEFT_SQUARE_BRACKET);;}
+#line 89 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (RIGHT_BRACKET);;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 88 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (RIGHT_SQUARE_BRACKET);;}
+#line 90 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (LEFT_SQUARE_BRACKET);;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 89 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (QUESTION_MARK);;}
+#line 91 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (RIGHT_SQUARE_BRACKET);;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 90 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (EXCLAMATION_MARK);;}
+#line 92 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (QUESTION_MARK);;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 91 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (ARROW);;}
+#line 93 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (EXCLAMATION_MARK);;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 92 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (STAR);;}
+#line 94 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (ARROW);;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 93 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (PLUS);;}
+#line 95 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (STAR);;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 94 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (MINUS);;}
+#line 96 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (PLUS);;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 95 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (VALUE);;}
+#line 97 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (MINUS);;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 96 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (NUMBER);;}
+#line 98 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (VALUE);;}
 	YY_BREAK
 case 16:
-/* rule 16 can match eol */
 YY_RULE_SETUP
-#line 97 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{handleColumn(yyval);if (!local_store) ;}
+#line 99 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (NUMBER);;}
 	YY_BREAK
 case 17:
 /* rule 17 can match eol */
 YY_RULE_SETUP
-#line 98 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{handleColumn(yyval);if (!local_store) ;}
-	YY_BREAK
-case 18:
-YY_RULE_SETUP
-#line 99 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
-{handleColumn(yyval);if (!local_store) ;}
-	YY_BREAK
-case 19:
-/* rule 19 can match eol */
-YY_RULE_SETUP
 #line 100 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
 {handleColumn(yyval);if (!local_store) ;}
 	YY_BREAK
-case 20:
+case 18:
+/* rule 18 can match eol */
+YY_RULE_SETUP
+#line 101 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{handleColumn(yyval);if (!local_store) ;}
+	YY_BREAK
+case 19:
 YY_RULE_SETUP
 #line 102 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{handleColumn(yyval);if (!local_store) ;}
+	YY_BREAK
+case 20:
+/* rule 20 can match eol */
+YY_RULE_SETUP
+#line 103 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+{handleColumn(yyval);if (!local_store) ;}
+	YY_BREAK
+case 21:
+YY_RULE_SETUP
+#line 105 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
 ECHO;
 	YY_BREAK
-#line 1190 "lex.DLDL_GRAMMAR_PRODUCTION_RULE.c"
+#line 1202 "lex.DLDL_GRAMMAR_PRODUCTION_RULE.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1484,7 +1496,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 36 )
+			if ( yy_current_state >= 40 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1512,11 +1524,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 36 )
+		if ( yy_current_state >= 40 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 35);
+	yy_is_jam = (yy_current_state == 39);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2204,7 +2216,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 102 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
+#line 105 "./DLDL_GRAMMAR_PRODUCTION_RULE_lexer.l"
 
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject)
 {

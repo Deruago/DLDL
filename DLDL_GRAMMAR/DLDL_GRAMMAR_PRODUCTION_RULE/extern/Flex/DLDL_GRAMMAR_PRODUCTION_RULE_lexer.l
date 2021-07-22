@@ -12,6 +12,7 @@
 #include <Deamer/External/Cpp/Lexer/TerminalObject.h>
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Flex/Lexer.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Enum/Type.h"
+#include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/ENDING_USELESS_SYMBOLS.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/VERTICAL_SLASH.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/LEFT_PARANTHESIS.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/RIGHT_PARANTHESIS.h"
@@ -57,6 +58,7 @@ static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_ob
 #endif //yyval
 %}
 
+ENDING_USELESS_SYMBOLS	([|;\r\b\v\a\f\t ]+[\n]+)
 VERTICAL_SLASH	([|])
 LEFT_PARANTHESIS	([(])
 RIGHT_PARANTHESIS	([)])
@@ -79,6 +81,7 @@ ESCAPE_CHARS	([\n\r\b\v\a\f\t ])
 
 %%
 
+{ENDING_USELESS_SYMBOLS}	{handleColumn(yyval);if (!local_store) ;}
 {VERTICAL_SLASH}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (VERTICAL_SLASH);;}
 {LEFT_PARANTHESIS}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (LEFT_PARANTHESIS);;}
 {RIGHT_PARANTHESIS}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMAR_PRODUCTION_RULElval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (RIGHT_PARANTHESIS);;}

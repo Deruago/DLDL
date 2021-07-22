@@ -9,6 +9,7 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast {
 		deamerreserved_unknown,
 
 		// Terminals
+		ENDING_USELESS_SYMBOLS,
 		VERTICAL_SLASH,
 		LEFT_PARANTHESIS,
 		RIGHT_PARANTHESIS,

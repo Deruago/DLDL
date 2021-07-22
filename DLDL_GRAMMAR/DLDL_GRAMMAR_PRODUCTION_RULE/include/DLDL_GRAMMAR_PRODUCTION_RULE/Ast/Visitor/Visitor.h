@@ -4,6 +4,7 @@
 #include <Deamer/External/Cpp/Ast/Visitor.h>
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/DLDL_GRAMMAR_PRODUCTION_RULE.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Enum/Type.h"
+#include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/ENDING_USELESS_SYMBOLS.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/VERTICAL_SLASH.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/LEFT_PARANTHESIS.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/RIGHT_PARANTHESIS.h"
@@ -50,6 +51,11 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace Visitor {
 			const auto enumeratedValue = static_cast<DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type>(node->GetType());
 			switch(enumeratedValue)
 			{
+			case DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::ENDING_USELESS_SYMBOLS:
+			{
+				Visit(static_cast<const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ENDING_USELESS_SYMBOLS*>(node));
+				break;
+			}
 			case DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::VERTICAL_SLASH:
 			{
 				Visit(static_cast<const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::VERTICAL_SLASH*>(node));
@@ -202,6 +208,9 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace Visitor {
 				break;
 			}
 			}
+		}
+		virtual void Visit(const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ENDING_USELESS_SYMBOLS* node)
+		{
 		}
 		virtual void Visit(const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::VERTICAL_SLASH* node)
 		{

@@ -5,6 +5,7 @@
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/DLDL_GRAMMAR_PRODUCTION_RULE.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Enum/Type.h"
 
+#include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/ENDING_USELESS_SYMBOLS.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/VERTICAL_SLASH.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/LEFT_PARANTHESIS.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/RIGHT_PARANTHESIS.h"
@@ -56,6 +57,14 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace listener {
 			{
 			// Terminal cases
 			
+			case DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::ENDING_USELESS_SYMBOLS:
+			{
+				EnterAnything(node);
+				EnterTerminal(node);
+				ListenEntry(static_cast<const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ENDING_USELESS_SYMBOLS*>(node));
+				break;
+			}
+
 			case DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::VERTICAL_SLASH:
 			{
 				EnterAnything(node);
@@ -402,6 +411,10 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace listener {
 		}
 
 		
+		virtual void ListenEntry(const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ENDING_USELESS_SYMBOLS* node) 
+		{
+		}
+
 		virtual void ListenEntry(const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::VERTICAL_SLASH* node) 
 		{
 		}

@@ -14,6 +14,7 @@
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/or_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/min_max_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/extension_group.h"
+#include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/ENDING_USELESS_SYMBOLS.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/VERTICAL_SLASH.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/LEFT_PARANTHESIS.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/RIGHT_PARANTHESIS.h"
@@ -120,6 +121,13 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace relation {
 	{
 		constexpr static auto value = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::extension_group;
 		using type = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::extension_group;
+	};
+
+	template<>
+	struct NodeEnumToType<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::ENDING_USELESS_SYMBOLS>
+	{
+		constexpr static auto value = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::ENDING_USELESS_SYMBOLS;
+		using type = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ENDING_USELESS_SYMBOLS;
 	};
 
 	template<>
