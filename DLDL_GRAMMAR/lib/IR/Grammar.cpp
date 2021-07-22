@@ -1,5 +1,5 @@
 #include "DLDL_GRAMMAR/IR/Grammar.h"
-#include "../../../DLDL_LEXER/include/DLDL_LEXER/IR/Lexicon.h"
+#include "DLDL_LEXER/IR/Lexicon.h"
 #include "DLDL/IR/Language.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Listener/User/FillGroup.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Bison/Parser.h"
