@@ -20,6 +20,8 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE
 
 namespace DLDL::ir
 {
+	class Language;
+
 	struct ProductionRule
 	{
 		std::string nonterminal;
@@ -110,6 +112,7 @@ namespace DLDL::ir
 	private:
 		std::deque<NonTerminal> nonterminals;
 		std::vector<ProductionRule> productionRules;
+		std::vector<std::string> unknownReferences;
 
 	public:
 		Grammar();
@@ -138,11 +141,15 @@ namespace DLDL::ir
 
 		std::vector<ProductionRule> GetProductionRules() const;
 
+		std::vector<std::string> GetUnknownReferences() const;
+
 		void SetStartType(const std::string& name);
 
 		bool DoesProductionRuleExist(const ProductionRule& ourProductionRule) const;
 
 		bool DoesNonTerminalExist(const NonTerminal& ourNonTerminal) const;
+
+		void FillInUnknownReferences(DLDL::ir::Language* language) override;
 	};
 }
 

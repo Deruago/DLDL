@@ -54,6 +54,8 @@ namespace DLDL::ir
 
 		std::vector<std::string> GetParents(std::vector<std::string>& current) const;
 
+		void FixUnknownReferences();
+		
 	public:
 		bool DoesIRExist(Type getType) const;
 

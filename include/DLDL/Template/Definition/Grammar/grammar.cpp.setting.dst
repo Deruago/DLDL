@@ -1,7 +1,11 @@
+{{file.target_language}} = <C++>
+{{file.file_name}} = <GrammarCPP>
 {{file.namespace}} = <DLDL::filetemplate>
+{{file.extension}} = <h>
 
 {{nonterminal_initialization}}    = <{{nonterminal}}.Set(::deamer::language::type::definition::object::main::NonTerminal("{{nonterminal}}", { {{productionrule_references}} } {{enable_nonterminal_abstraction}} {{enable_nonterminal_inlined}}));>
 {{productionrule_initialization}} = <{{productionrule}}.Set(::deamer::language::type::definition::object::main::ProductionRule({{token_references}}));>
+{{unknown_reference}} = <{{unknown_type}}.Set(::deamer::language::type::definition::object::main::NonTerminal("{{unknown_type}}", { } {{enable_nonterminal_abstraction}} {{enable_nonterminal_inlined}})); {{unknown_type}}-{{right_angle_bracket}}SetAsUninitialized();>
 
 {{enable_nonterminal_abstraction}} = <, ::deamer::language::type::definition::object::main::NonTerminalAbstraction::{{nonterminal_abstraction}}>
 {{nonterminal_abstraction}} = <Standard>
@@ -11,3 +15,7 @@
 
 {{nonterminal_add_object}}    = <AddObject({{nonterminal}});>
 {{productionrule_add_object}} = <AddObject({{productionrule}});>
+{{unknown_reference_add_object}} = <AddObject({{unknown_type}});>
+
+
+{{language_full_name_underscore}} = <>

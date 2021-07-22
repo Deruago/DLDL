@@ -1,4 +1,6 @@
 #include "DLDL/Generate/SubWriter/GrammarLPDWriter.h"
+#include "DLDL/Template/Definition/Grammar/GrammarHTemplate.h"
+#include "DLDL/Template/Definition/Grammar/GrammarCPPTemplate.h"
 #include <Deamer/Deamer.h>
 
 #ifndef DEAMER_CC_V2_RESERVED_MACRO_VALUE_VERSION_NUMBER
@@ -13,7 +15,7 @@ DLDL::generate::sub::GrammarLPDWriter::GetFileContentHeaderFile(ir::Language* la
 
 	auto* grammar = static_cast<ir::Grammar*>(lpd.GetIR());
 
-	auto generator = DLDL::filetemplate::GrammarTemplate();
+	auto generator = DLDL::filetemplate::GrammarHTemplate();
 
 	FillInDefaultVariablesInConstruction(generator, language);
 
@@ -39,6 +41,12 @@ DLDL::generate::sub::GrammarLPDWriter::GetFileContentHeaderFile(ir::Language* la
 		generator.productionrule_->Set(name);
 
 		generator.productionrule_declaration_->ExpandVariableField();
+	}
+
+	for (const auto& unknownReference : grammar->GetUnknownReferences())
+	{
+		generator.unknown_reference_->Set(unknownReference);
+		generator.unknown_reference_declaration_->ExpandVariableField();
 	}
 
 	file.SetFileContent(generator.GetOutput());
@@ -110,7 +118,7 @@ DLDL::generate::sub::GrammarLPDWriter::GetFileContentSourceFile(ir::Language* la
 		{
 			generator.nonterminal_inlined_->Set("false");
 		}
-		
+
 		generator.nonterminal_add_object_->ExpandVariableField();
 		generator.nonterminal_initialization_->ExpandVariableField();
 	}
@@ -144,6 +152,13 @@ DLDL::generate::sub::GrammarLPDWriter::GetFileContentSourceFile(ir::Language* la
 
 		generator.productionrule_add_object_->ExpandVariableField();
 		generator.productionrule_initialization_->ExpandVariableField();
+	}
+
+	for (const auto& unknownReference : grammar->GetUnknownReferences())
+	{
+		generator.unknown_type_->Set(unknownReference);
+		generator.unknown_reference_->ExpandVariableField();
+		generator.unknown_reference_add_object_->ExpandVariableField();
 	}
 
 	file.SetFileContent(generator.GetOutput());

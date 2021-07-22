@@ -22,6 +22,9 @@ namespace {{language_full_name}}
 	
 		// Production-Rule declarations
 		{{productionrule_declaration.Variable_Field}}
+
+		// Unknown reference declarations
+		{{unknown_reference_declaration.Variable_Field}}
 	
 	public:
 		Grammar({{language_full_name}}::Language* language);

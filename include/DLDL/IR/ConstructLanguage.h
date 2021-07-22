@@ -136,6 +136,7 @@ namespace DLDL::ir
 				*(deamer::file::tool::Directory(path).SplitDirectoryName().end() - 1);
 
 			auto* newLanguage = new Language(languageName, os);
+			
 			for (const auto& item : std::filesystem::directory_iterator(path))
 			{
 				if (item.is_directory())
@@ -204,6 +205,8 @@ namespace DLDL::ir
 				}
 			}
 
+			newLanguage->FixUnknownReferences();
+			
 			return newLanguage;
 		}
 

@@ -15,7 +15,7 @@ target_include_directories(DLDL_GRAMMAR_static_library PUBLIC "${DLDL_GRAMMAR_SO
 target_compile_features(DLDL_GRAMMAR_static_library PUBLIC cxx_std_17)
 set_target_properties(DLDL_GRAMMAR_static_library PROPERTIES LINKER_LANGUAGE CXX)
 
-target_link_libraries(DLDL_GRAMMAR_static_library PUBLIC DLDL_GRAMMAR_external_libraries)
+target_link_libraries(DLDL_GRAMMAR_static_library PUBLIC DLDL_GRAMMAR_external_libraries DLDL_LEXER_static_library DLDL_GENERATION_static_library)
 
 add_library(DLDL_GRAMMAR_shared_library SHARED ${SOURCE_LIST})
 
@@ -23,7 +23,7 @@ target_include_directories(DLDL_GRAMMAR_shared_library PUBLIC "${DLDL_GRAMMAR_SO
 target_compile_features(DLDL_GRAMMAR_shared_library PUBLIC cxx_std_17)
 set_target_properties(DLDL_GRAMMAR_shared_library PROPERTIES LINKER_LANGUAGE CXX)
 
-target_link_libraries(DLDL_GRAMMAR_shared_library PUBLIC DLDL_GRAMMAR_external_libraries)
+target_link_libraries(DLDL_GRAMMAR_shared_library PUBLIC DLDL_GRAMMAR_external_libraries DLDL_LEXER_static_library DLDL_GENERATION_static_library)
 
 add_subdirectory(Flex)
 add_subdirectory(Bison)

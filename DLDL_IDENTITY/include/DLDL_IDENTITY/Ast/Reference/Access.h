@@ -421,8 +421,8 @@ Access<::DLDL_IDENTITY::ast::node::stmt> stmt();
 		}
 
 	public:
-		Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
-Access<::DLDL_IDENTITY::ast::node::NAME> NAME();
+		Access<::DLDL_IDENTITY::ast::node::NAME> NAME();
+Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 
 
 		template<typename FunctionType>
@@ -815,20 +815,20 @@ Access<::DLDL_IDENTITY::ast::node::NAME> NAME();
 			return Access<::DLDL_IDENTITY::ast::node::name_declaration>(Get<::DLDL_IDENTITY::ast::Type::name_declaration>(ts));
 		}
 
-		inline Access<::DLDL_IDENTITY::ast::node::VALUE> Access<::DLDL_IDENTITY::ast::node::name_declaration>::VALUE()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return Access<::DLDL_IDENTITY::ast::node::VALUE>(Get<::DLDL_IDENTITY::ast::Type::VALUE>(ts));
-		}
-
 		inline Access<::DLDL_IDENTITY::ast::node::NAME> Access<::DLDL_IDENTITY::ast::node::name_declaration>::NAME()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
 			return Access<::DLDL_IDENTITY::ast::node::NAME>(Get<::DLDL_IDENTITY::ast::Type::NAME>(ts));
+		}
+
+		inline Access<::DLDL_IDENTITY::ast::node::VALUE> Access<::DLDL_IDENTITY::ast::node::name_declaration>::VALUE()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return Access<::DLDL_IDENTITY::ast::node::VALUE>(Get<::DLDL_IDENTITY::ast::Type::VALUE>(ts));
 		}
 
 

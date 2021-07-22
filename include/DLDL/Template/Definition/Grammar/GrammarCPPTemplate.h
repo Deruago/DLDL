@@ -1,5 +1,5 @@
-#ifndef DLDL_FILETEMPLATE_GrammarCPPTemplate_cpp
-#define DLDL_FILETEMPLATE_GrammarCPPTemplate_cpp
+#ifndef DLDL_FILETEMPLATE_GRAMMARCPPTEMPLATE_h
+#define DLDL_FILETEMPLATE_GRAMMARCPPTEMPLATE_h
 
 #include <string>
 #include <variant>
@@ -29,6 +29,7 @@ namespace DLDL::filetemplate
 			high_level_operation_,
 			language_full_name_,
 			language_full_name_slash_,
+			language_full_name_underscore_,
 			left_angle_bracket_,
 			left_bracket_,
 			left_curly_bracket_,
@@ -45,6 +46,9 @@ namespace DLDL::filetemplate
 			right_bracket_,
 			right_curly_bracket_,
 			token_references_,
+			unknown_reference_,
+			unknown_reference_add_object_,
+			unknown_type_,
 
 		};
 
@@ -97,6 +101,10 @@ namespace DLDL::filetemplate
 
 			case ::DLDL::filetemplate::GrammarCPPTemplate::Type::language_full_name_slash_: {
 				return "language_full_name_slash";
+			}
+
+			case ::DLDL::filetemplate::GrammarCPPTemplate::Type::language_full_name_underscore_: {
+				return "language_full_name_underscore";
 			}
 
 			case ::DLDL::filetemplate::GrammarCPPTemplate::Type::left_angle_bracket_: {
@@ -161,6 +169,18 @@ namespace DLDL::filetemplate
 
 			case ::DLDL::filetemplate::GrammarCPPTemplate::Type::token_references_: {
 				return "token_references";
+			}
+
+			case ::DLDL::filetemplate::GrammarCPPTemplate::Type::unknown_reference_: {
+				return "unknown_reference";
+			}
+
+			case ::DLDL::filetemplate::GrammarCPPTemplate::Type::unknown_reference_add_object_: {
+				return "unknown_reference_add_object";
+			}
+
+			case ::DLDL::filetemplate::GrammarCPPTemplate::Type::unknown_type_: {
+				return "unknown_type";
 			}
 			}
 
@@ -671,7 +691,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_enable_nonterminal_abstraction_() override = default;
 
-			Variable_enable_nonterminal_abstraction_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_enable_nonterminal_abstraction_(GrammarCPPTemplate* grammarcpptemplate_,
 													 const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -705,7 +725,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_enable_nonterminal_inlined_() override = default;
 
-			Variable_enable_nonterminal_inlined_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_enable_nonterminal_inlined_(GrammarCPPTemplate* grammarcpptemplate_,
 												 const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -745,53 +765,58 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_file_() override = default;
 
-			Variable_file_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_file_(GrammarCPPTemplate* grammarcpptemplate_,
 						   const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::GrammarCPPTemplate::Type::file_;
 				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>(
 					{GenerateVariable("#include \""),
-					 GenerateVariable(GrammarCPPTemplate_->language_full_name_slash_->This()),
+					 GenerateVariable(grammarcpptemplate_->language_full_name_slash_->This()),
 					 GenerateVariable("/Grammar"),
 					 GenerateVariable("."),
 					 GenerateVariable("h\"\n#include \""),
-					 GenerateVariable(GrammarCPPTemplate_->language_full_name_slash_->This()),
+					 GenerateVariable(grammarcpptemplate_->language_full_name_slash_->This()),
 					 GenerateVariable("/Language"),
 					 GenerateVariable("."),
 					 GenerateVariable("h\"\n\n"),
-					 GenerateVariable(GrammarCPPTemplate_->language_full_name_->This()),
+					 GenerateVariable(grammarcpptemplate_->language_full_name_->This()),
 					 GenerateVariable("::Grammar::Grammar("),
-					 GenerateVariable(GrammarCPPTemplate_->language_full_name_->This()),
+					 GenerateVariable(grammarcpptemplate_->language_full_name_->This()),
 					 GenerateVariable("::Language* "
 									  "language)\n\t\t\t:\t::deamer::language::generator::"
 									  "definition::property::user::Grammar<\n\t\t\t\t\t"),
-					 GenerateVariable(GrammarCPPTemplate_->language_full_name_->This()),
+					 GenerateVariable(grammarcpptemplate_->language_full_name_->This()),
 					 GenerateVariable("::Language>(language)\n"),
 					 GenerateVariable("{"),
 					 GenerateVariable("\n"),
 					 GenerateVariable("}"),
 					 GenerateVariable("\n\nvoid "),
-					 GenerateVariable(GrammarCPPTemplate_->language_full_name_->This()),
+					 GenerateVariable(grammarcpptemplate_->language_full_name_->This()),
 					 GenerateVariable("::Grammar::GenerateObjects()\n"),
 					 GenerateVariable("{"),
 					 GenerateVariable("\n\t// Non-Terminal initialization\n\t"),
 					 GenerateVariable(
-						 GrammarCPPTemplate_->nonterminal_initialization_->Variable_Field()),
+						 grammarcpptemplate_->nonterminal_initialization_->Variable_Field()),
 					 GenerateVariable("\n\n\t// Production-Rule initialization\n\t"),
 					 GenerateVariable(
-						 GrammarCPPTemplate_->productionrule_initialization_->Variable_Field()),
+						 grammarcpptemplate_->productionrule_initialization_->Variable_Field()),
+					 GenerateVariable("\n\n\t// Unknown references\n\t"),
+					 GenerateVariable(grammarcpptemplate_->unknown_reference_->Variable_Field()),
 					 GenerateVariable("\n\n\t// Add object calls\n\t// AddObject("),
 					 GenerateVariable("."),
 					 GenerateVariable("."),
 					 GenerateVariable("."),
 					 GenerateVariable(")\n\t"),
 					 GenerateVariable(
-						 GrammarCPPTemplate_->nonterminal_add_object_->Variable_Field()),
+						 grammarcpptemplate_->nonterminal_add_object_->Variable_Field()),
 					 GenerateVariable("\n\n\t"),
 					 GenerateVariable(
-						 GrammarCPPTemplate_->productionrule_add_object_->Variable_Field()),
-					 GenerateVariable("\n\n\t// Place higher level operations here"),
+						 grammarcpptemplate_->productionrule_add_object_->Variable_Field()),
+					 GenerateVariable("\n\n\t"),
+					 GenerateVariable(
+						 grammarcpptemplate_->unknown_reference_add_object_->Variable_Field()),
+					 GenerateVariable("\n\n\n\t// Place higher level operations here"),
 					 GenerateVariable("."),
 					 GenerateVariable("\n\t// ReplaceObject("),
 					 GenerateVariable("."),
@@ -810,7 +835,7 @@ namespace DLDL::filetemplate
 					 GenerateVariable("."),
 					 GenerateVariable("."),
 					 GenerateVariable(")\n\t"),
-					 GenerateVariable(GrammarCPPTemplate_->high_level_operation_->Variable_Field()),
+					 GenerateVariable(grammarcpptemplate_->high_level_operation_->Variable_Field()),
 					 GenerateVariable("\n"),
 					 GenerateVariable("}"),
 					 GenerateVariable("\n")}));
@@ -821,11 +846,11 @@ namespace DLDL::filetemplate
 				Class_postfix_->type = ::DLDL::filetemplate::GrammarCPPTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Extension_) =
-					VariableBase(std::vector<VariableBase*>({}));
+					VariableBase(std::vector<VariableBase*>({GenerateVariable("h")}));
 				Extension_->type = ::DLDL::filetemplate::GrammarCPPTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(File_name_) =
-					VariableBase(std::vector<VariableBase*>({}));
+					VariableBase(std::vector<VariableBase*>({GenerateVariable("GrammarCPP")}));
 				File_name_->type = ::DLDL::filetemplate::GrammarCPPTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Namespace_) = VariableBase(
@@ -833,7 +858,7 @@ namespace DLDL::filetemplate
 				Namespace_->type = ::DLDL::filetemplate::GrammarCPPTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Target_language_) =
-					VariableBase(std::vector<VariableBase*>({}));
+					VariableBase(std::vector<VariableBase*>({GenerateVariable("C++")}));
 				Target_language_->type = ::DLDL::filetemplate::GrammarCPPTemplate::Type::Scope;
 			}
 
@@ -899,7 +924,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_high_level_operation_() override = default;
 
-			Variable_high_level_operation_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_high_level_operation_(GrammarCPPTemplate* grammarcpptemplate_,
 										   const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -932,7 +957,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_language_full_name_() override = default;
 
-			Variable_language_full_name_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_language_full_name_(GrammarCPPTemplate* grammarcpptemplate_,
 										 const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -964,7 +989,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_language_full_name_slash_() override = default;
 
-			Variable_language_full_name_slash_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_language_full_name_slash_(GrammarCPPTemplate* grammarcpptemplate_,
 											   const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -973,6 +998,41 @@ namespace DLDL::filetemplate
 
 			Variable_language_full_name_slash_&
 			operator=(const Variable_language_full_name_slash_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
+		struct Variable_language_full_name_underscore_ : public VariableScopes
+		{
+			static constexpr auto name = "language_full_name_underscore_";
+
+			Variable_language_full_name_underscore_() : VariableScopes()
+			{
+				type =
+					::DLDL::filetemplate::GrammarCPPTemplate::Type::language_full_name_underscore_;
+			}
+
+			virtual ~Variable_language_full_name_underscore_() override = default;
+
+			Variable_language_full_name_underscore_(GrammarCPPTemplate* grammarcpptemplate_,
+													const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type =
+					::DLDL::filetemplate::GrammarCPPTemplate::Type::language_full_name_underscore_;
+			}
+
+			Variable_language_full_name_underscore_&
+			operator=(const Variable_language_full_name_underscore_& variable)
 			{
 				if (&variable == this)
 				{
@@ -997,7 +1057,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_left_angle_bracket_() override = default;
 
-			Variable_left_angle_bracket_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_left_angle_bracket_(GrammarCPPTemplate* grammarcpptemplate_,
 										 const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1029,7 +1089,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_left_bracket_() override = default;
 
-			Variable_left_bracket_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_left_bracket_(GrammarCPPTemplate* grammarcpptemplate_,
 								   const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1061,7 +1121,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_left_curly_bracket_() override = default;
 
-			Variable_left_curly_bracket_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_left_curly_bracket_(GrammarCPPTemplate* grammarcpptemplate_,
 										 const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1093,7 +1153,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_nonterminal_() override = default;
 
-			Variable_nonterminal_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_nonterminal_(GrammarCPPTemplate* grammarcpptemplate_,
 								  const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1125,7 +1185,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_nonterminal_abstraction_() override = default;
 
-			Variable_nonterminal_abstraction_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_nonterminal_abstraction_(GrammarCPPTemplate* grammarcpptemplate_,
 											  const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1158,7 +1218,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_nonterminal_add_object_() override = default;
 
-			Variable_nonterminal_add_object_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_nonterminal_add_object_(GrammarCPPTemplate* grammarcpptemplate_,
 											 const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1191,7 +1251,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_nonterminal_initialization_() override = default;
 
-			Variable_nonterminal_initialization_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_nonterminal_initialization_(GrammarCPPTemplate* grammarcpptemplate_,
 												 const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1224,7 +1284,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_nonterminal_inlined_() override = default;
 
-			Variable_nonterminal_inlined_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_nonterminal_inlined_(GrammarCPPTemplate* grammarcpptemplate_,
 										  const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1256,7 +1316,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_productionrule_() override = default;
 
-			Variable_productionrule_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_productionrule_(GrammarCPPTemplate* grammarcpptemplate_,
 									 const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1288,7 +1348,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_productionrule_add_object_() override = default;
 
-			Variable_productionrule_add_object_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_productionrule_add_object_(GrammarCPPTemplate* grammarcpptemplate_,
 												const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1322,7 +1382,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_productionrule_initialization_() override = default;
 
-			Variable_productionrule_initialization_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_productionrule_initialization_(GrammarCPPTemplate* grammarcpptemplate_,
 													const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1356,7 +1416,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_productionrule_references_() override = default;
 
-			Variable_productionrule_references_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_productionrule_references_(GrammarCPPTemplate* grammarcpptemplate_,
 												const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1389,7 +1449,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_right_angle_bracket_() override = default;
 
-			Variable_right_angle_bracket_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_right_angle_bracket_(GrammarCPPTemplate* grammarcpptemplate_,
 										  const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1421,7 +1481,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_right_bracket_() override = default;
 
-			Variable_right_bracket_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_right_bracket_(GrammarCPPTemplate* grammarcpptemplate_,
 									const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1453,7 +1513,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_right_curly_bracket_() override = default;
 
-			Variable_right_curly_bracket_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_right_curly_bracket_(GrammarCPPTemplate* grammarcpptemplate_,
 										  const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1485,7 +1545,7 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_token_references_() override = default;
 
-			Variable_token_references_(GrammarCPPTemplate* GrammarCPPTemplate_,
+			Variable_token_references_(GrammarCPPTemplate* grammarcpptemplate_,
 									   const std::vector<VariableBase*>& variables)
 				: VariableScopes(variables)
 			{
@@ -1493,6 +1553,105 @@ namespace DLDL::filetemplate
 			}
 
 			Variable_token_references_& operator=(const Variable_token_references_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
+		struct Variable_unknown_reference_ : public VariableScopes
+		{
+			static constexpr auto name = "unknown_reference_";
+
+			Variable_unknown_reference_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::GrammarCPPTemplate::Type::unknown_reference_;
+			}
+
+			virtual ~Variable_unknown_reference_() override = default;
+
+			Variable_unknown_reference_(GrammarCPPTemplate* grammarcpptemplate_,
+										const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::GrammarCPPTemplate::Type::unknown_reference_;
+			}
+
+			Variable_unknown_reference_& operator=(const Variable_unknown_reference_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
+		struct Variable_unknown_reference_add_object_ : public VariableScopes
+		{
+			static constexpr auto name = "unknown_reference_add_object_";
+
+			Variable_unknown_reference_add_object_() : VariableScopes()
+			{
+				type =
+					::DLDL::filetemplate::GrammarCPPTemplate::Type::unknown_reference_add_object_;
+			}
+
+			virtual ~Variable_unknown_reference_add_object_() override = default;
+
+			Variable_unknown_reference_add_object_(GrammarCPPTemplate* grammarcpptemplate_,
+												   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type =
+					::DLDL::filetemplate::GrammarCPPTemplate::Type::unknown_reference_add_object_;
+			}
+
+			Variable_unknown_reference_add_object_&
+			operator=(const Variable_unknown_reference_add_object_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
+		struct Variable_unknown_type_ : public VariableScopes
+		{
+			static constexpr auto name = "unknown_type_";
+
+			Variable_unknown_type_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::GrammarCPPTemplate::Type::unknown_type_;
+			}
+
+			virtual ~Variable_unknown_type_() override = default;
+
+			Variable_unknown_type_(GrammarCPPTemplate* grammarcpptemplate_,
+								   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::GrammarCPPTemplate::Type::unknown_type_;
+			}
+
+			Variable_unknown_type_& operator=(const Variable_unknown_type_& variable)
 			{
 				if (&variable == this)
 				{
@@ -1520,12 +1679,13 @@ namespace DLDL::filetemplate
 		Variable_enable_nonterminal_inlined_* enable_nonterminal_inlined_ =
 			new Variable_enable_nonterminal_inlined_();
 		Variable_file_* file_ = new Variable_file_();
-		VariableScopes* language_full_name_underscore_ = new VariableScopes();
 		Variable_high_level_operation_* high_level_operation_ =
 			new Variable_high_level_operation_();
 		Variable_language_full_name_* language_full_name_ = new Variable_language_full_name_();
 		Variable_language_full_name_slash_* language_full_name_slash_ =
 			new Variable_language_full_name_slash_();
+		Variable_language_full_name_underscore_* language_full_name_underscore_ =
+			new Variable_language_full_name_underscore_();
 		Variable_left_angle_bracket_* left_angle_bracket_ = new Variable_left_angle_bracket_();
 		Variable_left_bracket_* left_bracket_ = new Variable_left_bracket_();
 		Variable_left_curly_bracket_* left_curly_bracket_ = new Variable_left_curly_bracket_();
@@ -1548,6 +1708,10 @@ namespace DLDL::filetemplate
 		Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
 		Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_bracket_();
 		Variable_token_references_* token_references_ = new Variable_token_references_();
+		Variable_unknown_reference_* unknown_reference_ = new Variable_unknown_reference_();
+		Variable_unknown_reference_add_object_* unknown_reference_add_object_ =
+			new Variable_unknown_reference_add_object_();
+		Variable_unknown_type_* unknown_type_ = new Variable_unknown_type_();
 
 	public:
 		GrammarCPPTemplate()
@@ -1568,6 +1732,8 @@ namespace DLDL::filetemplate
 				Variable_language_full_name_(this, std::vector<VariableBase*>({}));
 			*language_full_name_slash_ =
 				Variable_language_full_name_slash_(this, std::vector<VariableBase*>({}));
+			*language_full_name_underscore_ =
+				Variable_language_full_name_underscore_(this, std::vector<VariableBase*>({}));
 			*left_angle_bracket_ = Variable_left_angle_bracket_(
 				this, std::vector<VariableBase*>({GenerateVariable("<")}));
 			*left_bracket_ =
@@ -1617,6 +1783,25 @@ namespace DLDL::filetemplate
 			*right_curly_bracket_ = Variable_right_curly_bracket_(
 				this, std::vector<VariableBase*>({GenerateVariable(")")}));
 			*token_references_ = Variable_token_references_(this, std::vector<VariableBase*>({}));
+			*unknown_reference_ = Variable_unknown_reference_(
+				this,
+				std::vector<VariableBase*>(
+					{GenerateVariable(unknown_type_->This()), GenerateVariable("."),
+					 GenerateVariable(
+						 "Set(::deamer::language::type::definition::object::main::NonTerminal(\""),
+					 GenerateVariable(unknown_type_->This()), GenerateVariable("\", "),
+					 GenerateVariable("{"), GenerateVariable(" "), GenerateVariable("}"),
+					 GenerateVariable(" "),
+					 GenerateVariable(enable_nonterminal_abstraction_->This()),
+					 GenerateVariable(" "), GenerateVariable(enable_nonterminal_inlined_->This()),
+					 GenerateVariable(")); "), GenerateVariable(unknown_type_->This()),
+					 GenerateVariable("-"), GenerateVariable(right_angle_bracket_->This()),
+					 GenerateVariable("SetAsUninitialized();")}));
+			*unknown_reference_add_object_ = Variable_unknown_reference_add_object_(
+				this, std::vector<VariableBase*>({GenerateVariable("AddObject("),
+												  GenerateVariable(unknown_type_->This()),
+												  GenerateVariable(");")}));
+			*unknown_type_ = Variable_unknown_type_(this, std::vector<VariableBase*>({}));
 
 			variables_.emplace_back(enable_nonterminal_abstraction_);
 			variables_.emplace_back(enable_nonterminal_inlined_);
@@ -1624,6 +1809,7 @@ namespace DLDL::filetemplate
 			variables_.emplace_back(high_level_operation_);
 			variables_.emplace_back(language_full_name_);
 			variables_.emplace_back(language_full_name_slash_);
+			variables_.emplace_back(language_full_name_underscore_);
 			variables_.emplace_back(left_angle_bracket_);
 			variables_.emplace_back(left_bracket_);
 			variables_.emplace_back(left_curly_bracket_);
@@ -1640,6 +1826,9 @@ namespace DLDL::filetemplate
 			variables_.emplace_back(right_bracket_);
 			variables_.emplace_back(right_curly_bracket_);
 			variables_.emplace_back(token_references_);
+			variables_.emplace_back(unknown_reference_);
+			variables_.emplace_back(unknown_reference_add_object_);
+			variables_.emplace_back(unknown_type_);
 		}
 
 		virtual ~GrammarCPPTemplate()
@@ -1677,4 +1866,4 @@ namespace DLDL::filetemplate
 	};
 }
 
-#endif // DLDL_FILETEMPLATE_GrammarCPPTemplate_cpp
+#endif // DLDL_FILETEMPLATE_GRAMMARCPPTEMPLATE_h

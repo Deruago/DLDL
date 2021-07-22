@@ -15,11 +15,17 @@ void {{language_full_name}}::Grammar::GenerateObjects()
 	// Production-Rule initialization
 	{{productionrule_initialization.Variable_Field}}
 
+	// Unknown references
+	{{unknown_reference.Variable_Field}}
+
 	// Add object calls
 	// AddObject(...)
 	{{nonterminal_add_object.Variable_Field}}
 
 	{{productionrule_add_object.Variable_Field}}
+
+	{{unknown_reference_add_object.Variable_Field}}
+
 
 	// Place higher level operations here.
 	// ReplaceObject(..., ...)

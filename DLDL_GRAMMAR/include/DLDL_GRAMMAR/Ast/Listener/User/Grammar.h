@@ -98,8 +98,9 @@ namespace DLDL_GRAMMAR::ast::listener::user
 			grammar->AddProductionRules(currentNonTerminal, node->GetValue());
 		}
 
-		DLDL::ir::Grammar* GetGrammar() const
+		DLDL::ir::Grammar* GetGrammar(DLDL::ir::Language* language = nullptr) const
 		{
+			grammar->FillInUnknownReferences(language);
 			return grammar;
 		}
 	};

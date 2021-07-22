@@ -69,6 +69,14 @@ std::vector<std::string> DLDL::ir::Language::GetParents(std::vector<std::string>
 	return current;
 }
 
+void DLDL::ir::Language::FixUnknownReferences()
+{
+	for (auto* ir : IRs)
+	{
+		ir->FillInUnknownReferences(this);
+	}
+}
+
 bool DLDL::ir::Language::DoesIRExist(Type getType) const
 {
 	return GetIRIfExists(getType) != nullptr;

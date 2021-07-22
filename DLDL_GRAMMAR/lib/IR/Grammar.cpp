@@ -1,4 +1,6 @@
 #include "DLDL_GRAMMAR/IR/Grammar.h"
+#include "../../../DLDL_LEXER/include/DLDL_LEXER/IR/Lexicon.h"
+#include "DLDL/IR/Language.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Listener/User/FillGroup.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Bison/Parser.h"
 
@@ -78,6 +80,48 @@ bool DLDL::ir::Grammar::DoesNonTerminalExist(const NonTerminal& ourNonTerminal) 
 	return false;
 }
 
+void DLDL::ir::Grammar::FillInUnknownReferences(DLDL::ir::Language* language)
+{
+	std::set<std::string> knownReferences;
+	for (auto nonterminal : nonterminals)
+	{
+		knownReferences.insert(nonterminal.name);
+	}
+
+	if (language == nullptr)
+	{
+		return;
+	}
+	
+	DLDL::ir::Lexicon* lexicon =
+		static_cast<DLDL::ir::Lexicon*>(language->GetIRIfExists(Type::Lexicon));
+	if (lexicon == nullptr)
+	{
+		return;
+	}
+
+	for (auto terminal : lexicon->GetTerminals())
+	{
+		knownReferences.insert(terminal.Name);
+	}
+
+	for (auto terminal : lexicon->GetImportedTerminals())
+	{
+		knownReferences.insert(terminal.Name);
+	}
+
+	for (auto productionRule : productionRules)
+	{
+		for (auto token : productionRule.tokens)
+		{
+			if (knownReferences.find(token) == knownReferences.end())
+			{
+				unknownReferences.push_back(token);
+			}
+		}
+	}
+}
+
 std::optional<std::vector<DLDL::ir::ProductionRule>>
 DLDL::ir::Grammar::ConvertToProductionRule(std::string text, std::string nonterminal)
 {
@@ -85,19 +129,21 @@ DLDL::ir::Grammar::ConvertToProductionRule(std::string text, std::string nonterm
 	{
 		return {};
 	}
-	
+
 	char currentCharacter = text[0];
-	while (::isspace(currentCharacter))
+	while (::isspace(currentCharacter) || currentCharacter == '|' // Starting with a | is useless
+		   || currentCharacter == ';'							  // Starting with a ; is useless
+	)
 	{
 		text.erase(0, 1);
 		if (text.empty())
 		{
 			return {};
 		}
-		
+
 		currentCharacter = text[0];
 	}
-	
+
 	std::vector<std::string> tokens;
 
 	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
@@ -119,13 +165,13 @@ DLDL::ir::Grammar::ConvertToProductionRule(std::string text, std::string nonterm
 		{
 			continue;
 		}
-		
+
 		AddNonTerminal(
 			generatedNonTerminal.name,
 			deamer::language::type::definition::object::main::NonTerminalAbstraction::Standard,
 			generatedNonTerminal.vt == DLDL_GRAMMAR_PRODUCTION_RULE::ir::ValueType::generated);
 		NonTerminal& currentNonTerminal = GetNonTerminal(generatedNonTerminal.name);
-		
+
 		for (const auto& productionRule : generatedNonTerminal.productionRules)
 		{
 			const ProductionRule convertedProductionRule(generatedNonTerminal.name, productionRule);
@@ -139,10 +185,10 @@ DLDL::ir::Grammar::ConvertToProductionRule(std::string text, std::string nonterm
 	{
 		newProductionRules.emplace_back(nonterminal, productionRule);
 	}
-	
+
 	delete group;
 	delete ast;
-	
+
 	return std::move(newProductionRules);
 }
 
@@ -161,8 +207,8 @@ void DLDL::ir::Grammar::AddProductionRules(const std::string& nonterminal,
 		{
 			continue;
 		}
-		
-		GetNonTerminal(nonterminal).AddProduction(productionRule);	
+
+		GetNonTerminal(nonterminal).AddProduction(productionRule);
 		productionRules.push_back(productionRule);
 	}
 }
@@ -175,6 +221,11 @@ std::deque<DLDL::ir::NonTerminal> DLDL::ir::Grammar::GetNonTerminals() const
 std::vector<DLDL::ir::ProductionRule> DLDL::ir::Grammar::GetProductionRules() const
 {
 	return productionRules;
+}
+
+std::vector<std::string> DLDL::ir::Grammar::GetUnknownReferences() const
+{
+	return unknownReferences;
 }
 
 void DLDL::ir::Grammar::SetStartType(const std::string& name)

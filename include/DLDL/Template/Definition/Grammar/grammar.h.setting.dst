@@ -1,6 +1,13 @@
+{{file.target_language}} = <C++>
+{{file.file_name}} = <GrammarH>
 {{file.namespace}} = <DLDL::filetemplate>
+{{file.extension}} = <h>
 
 {{header_guard}} = <{{language_full_name_underscore.Upper}}_GRAMMAR_H>
 
 {{nonterminal_declaration}} = <::deamer::type::SafeReserve{{left_angle_bracket}}::deamer::language::type::definition::object::main::NonTerminal{{right_angle_bracket}} {{nonterminal}};>
 {{productionrule_declaration}} = <::deamer::type::SafeReserve{{left_angle_bracket}}::deamer::language::type::definition::object::main::ProductionRule{{right_angle_bracket}} {{productionrule}};>
+{{unknown_reference_declaration}} = <::deamer::type::SafeReserve{{left_angle_bracket}}::deamer::language::type::definition::object::main::NonTerminal{{right_angle_bracket}} {{unknown_reference}};>
+
+{{language_full_name_underscore}} = <>
+{{language_full_name_slash}} = <>

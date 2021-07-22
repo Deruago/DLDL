@@ -33,6 +33,12 @@ namespace DLDL::ir
 		{
 			return terminals;
 		}
+
+		std::vector<deamer::language::type::definition::object::main::Terminal>
+		GetImportedTerminals() const
+		{
+			return {};
+		}
 	};
 }
 
