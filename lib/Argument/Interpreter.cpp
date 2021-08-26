@@ -414,8 +414,7 @@ bool DLDL::argument::Interpreter::InitializeLanguages()
 		DLDL::ir::ConstructLanguage constructLanguage("./", DefinitionMap);
 		constructLanguage.Construct(os);
 		languages = constructLanguage.GetLanguages();
-	}
-	catch (const std::logic_error&)
+	} catch (const std::logic_error&)
 	{
 		std::cout << "Your directory doesn't have a definition directory.\n";
 		return false;

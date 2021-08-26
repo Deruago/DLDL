@@ -84,6 +84,8 @@ namespace DLDL::ir::special
 				namespace_ = "::deamer::ast::generation";
 				break;
 			case ToolType::User:
+				path = "Deamer/Tool/Type/";
+				namespace_ = "::deamer::tool::type";
 				break;
 			default:
 				break;
