@@ -38,12 +38,12 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 				}
 				currentStage = nextStage;
 			}
-
-			for (auto& newProductionRule : currentStage)
+			auto currentStageCopy = currentStage;
+			for (auto& newProductionRule : currentStageCopy)
 			{
 				newProductionRule.values.push_back(GetValue());
+				currentStage.push_back(newProductionRule);
 			}
-			currentStage.push_back(ProductionRule({GetValue()}));
 
 			currentEnvironment.AddNonTerminal(GetReferenceName(), currentStage);
 
