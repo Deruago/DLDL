@@ -1,8 +1,9 @@
 #ifndef DLDL_GENERATION_AST_LISTENER_USER_GENERATION_H
 #define DLDL_GENERATION_AST_LISTENER_USER_GENERATION_H
 
-#include "DLDL_GENERATION/Ast/Listener/Listener.h"
 #include "DLDL/IR/SpecialDefinition/Generation.h"
+#include "DLDL_GENERATION/Ast/Listener/Listener.h"
+#include "DLDL_GENERATION/Ast/Reference/Access.h"
 
 namespace DLDL_GENERATION::ast::listener::user
 {
@@ -47,26 +48,34 @@ namespace DLDL_GENERATION::ast::listener::user
 
 		void Listen(const DLDL_GENERATION::ast::node::generate_declaration* node) override
 		{
-			const auto firstTool = node->Get(::DLDL_GENERATION::ast::Type::tool)[0]->GetChildValue();
-			const auto toolType = GetGenerationType(node->Get(::DLDL_GENERATION::ast::Type::type)[0]->GetChildValue());
-			generation->AddTool({ firstTool, toolType });
+			const auto firstTool =
+				node->Get(::DLDL_GENERATION::ast::Type::tool)[0]->GetChildValue();
+			const auto toolType = GetGenerationType(
+				node->Get(::DLDL_GENERATION::ast::Type::type)[0]->GetChildValue());
+			generation->AddTool({firstTool, toolType});
 		}
 
 		void Listen(const DLDL_GENERATION::ast::node::integrate_declaration* node) override
 		{
-			const auto sourceTool = node->Get(::DLDL_GENERATION::ast::Type::tool)[0]->GetChildValue();
-			const auto targetTool = node->Get(::DLDL_GENERATION::ast::Type::tool)[1]->GetChildValue();
+			const auto sourceTool =
+				node->Get(::DLDL_GENERATION::ast::Type::tool)[0]->GetChildValue();
+			const auto targetTool =
+				node->Get(::DLDL_GENERATION::ast::Type::tool)[1]->GetChildValue();
 			generation->AddIntegration(sourceTool, targetTool);
 		}
 
-		std::string currentTool;
 		void Listen(const DLDL_GENERATION::ast::node::argument_declaration* node) override
 		{
-			currentTool = node->Get(::DLDL_GENERATION::ast::Type::tool)[0]->GetChildValue();
-		}
-		void Listen(const DLDL_GENERATION::ast::node::argument_data* node) override
-		{
-			const auto currentValue = node->Get(::DLDL_GENERATION::ast::Type::VALUE)[0]->GetChildValue();
+			::DLDL_GENERATION::ast::reference::Access<
+				::DLDL_GENERATION::ast::node::argument_declaration>
+				access(node);
+			const ::std::string currentTool = access.tool().VALUE().GetContent()[0]->GetValue();
+			const auto currentValueAccess = access.argument_data().VALUE().GetContent();
+			::std::string currentValue;
+			if (!currentValueAccess.empty())
+			{
+				currentValue = currentValueAccess[0]->GetValue();
+			}
 			generation->AddArgument(currentTool, currentValue);
 		}
 

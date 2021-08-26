@@ -26,7 +26,7 @@
 #include <vector>
 #include <utility>
 
-namespace DLDL_GENERATION { namespace ast { namespace relation { 
+namespace DLDL_GENERATION { namespace ast { namespace reference { 
 
 	struct AccessBase
 	{	
