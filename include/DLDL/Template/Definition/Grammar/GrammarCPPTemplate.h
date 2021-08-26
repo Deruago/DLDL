@@ -1784,19 +1784,18 @@ namespace DLDL::filetemplate
 				this, std::vector<VariableBase*>({GenerateVariable(")")}));
 			*token_references_ = Variable_token_references_(this, std::vector<VariableBase*>({}));
 			*unknown_reference_ = Variable_unknown_reference_(
-				this,
-				std::vector<VariableBase*>(
-					{GenerateVariable(unknown_type_->This()), GenerateVariable("."),
-					 GenerateVariable(
-						 "Set(::deamer::language::type::definition::object::main::NonTerminal(\""),
-					 GenerateVariable(unknown_type_->This()), GenerateVariable("\", "),
-					 GenerateVariable("{"), GenerateVariable(" "), GenerateVariable("}"),
-					 GenerateVariable(" "),
-					 GenerateVariable(enable_nonterminal_abstraction_->This()),
-					 GenerateVariable(" "), GenerateVariable(enable_nonterminal_inlined_->This()),
-					 GenerateVariable(")); "), GenerateVariable(unknown_type_->This()),
-					 GenerateVariable("-"), GenerateVariable(right_angle_bracket_->This()),
-					 GenerateVariable("SetAsUninitialized();")}));
+				this, std::vector<VariableBase*>(
+						  {GenerateVariable(unknown_type_->This()), GenerateVariable("."),
+						   GenerateVariable("Set(::deamer::language::type::definition::object::"
+											"special::Uninitialized"),
+						   GenerateVariable(left_angle_bracket_->This()),
+						   GenerateVariable(
+							   "::deamer::language::type::definition::object::main::NonTerminal"),
+						   GenerateVariable(right_angle_bracket_->This()),
+						   GenerateVariable("(\"NonTerminal\", \""),
+						   GenerateVariable(unknown_type_->This()),
+						   GenerateVariable(
+							   "\", \"Unknown reference to (most likely) a NonTerminal!\"));")}));
 			*unknown_reference_add_object_ = Variable_unknown_reference_add_object_(
 				this, std::vector<VariableBase*>({GenerateVariable("AddObject("),
 												  GenerateVariable(unknown_type_->This()),

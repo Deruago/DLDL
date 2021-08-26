@@ -150,6 +150,8 @@ namespace DLDL::ir
 		bool DoesNonTerminalExist(const NonTerminal& ourNonTerminal) const;
 
 		void FillInUnknownReferences(DLDL::ir::Language* language) override;
+
+		bool IsUnknownReference(const std::string& nonterminal);
 	};
 }
 

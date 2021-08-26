@@ -141,7 +141,15 @@ DLDL::generate::sub::GrammarLPDWriter::GetFileContentSourceFile(ir::Language* la
 			token_references += "{ ";
 			for (const auto& token : productionrule.tokens)
 			{
-				token_references += "Language->" + token + ".Pointer(),";
+				if (grammar->IsUnknownReference(token))
+				{
+					token_references += "this->";
+				}
+				else
+				{
+					token_references += "Language->";
+				}
+				token_references += token + ".Pointer(),";
 			}
 			token_references.pop_back();
 			token_references += " }";

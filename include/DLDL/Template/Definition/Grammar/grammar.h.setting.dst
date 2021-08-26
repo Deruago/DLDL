@@ -5,9 +5,11 @@
 
 {{header_guard}} = <{{language_full_name_underscore.Upper}}_GRAMMAR_H>
 
+{{uninitialized_include}} = <#include "Deamer/Language/Type/Definition/Object/Special/Uninitialized.h">
+
 {{nonterminal_declaration}} = <::deamer::type::SafeReserve{{left_angle_bracket}}::deamer::language::type::definition::object::main::NonTerminal{{right_angle_bracket}} {{nonterminal}};>
 {{productionrule_declaration}} = <::deamer::type::SafeReserve{{left_angle_bracket}}::deamer::language::type::definition::object::main::ProductionRule{{right_angle_bracket}} {{productionrule}};>
-{{unknown_reference_declaration}} = <::deamer::type::SafeReserve{{left_angle_bracket}}::deamer::language::type::definition::object::main::NonTerminal{{right_angle_bracket}} {{unknown_reference}};>
+{{unknown_reference_declaration}} = <::deamer::type::SafeReserve{{left_angle_bracket}}::deamer::language::type::definition::object::special::Uninitialized{{left_angle_bracket}}::deamer::language::type::definition::object::main::NonTerminal{{right_angle_bracket}}{{right_angle_bracket}} {{unknown_reference}};>
 
 {{language_full_name_underscore}} = <>
 {{language_full_name_slash}} = <>

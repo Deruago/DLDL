@@ -1,8 +1,8 @@
 #include "DLDL_GRAMMAR/IR/Grammar.h"
-#include "DLDL_LEXER/IR/Lexicon.h"
 #include "DLDL/IR/Language.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Listener/User/FillGroup.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Bison/Parser.h"
+#include "DLDL_LEXER/IR/Lexicon.h"
 
 DLDL::ir::ProductionRule::ProductionRule(
 	std::string nonterminal_,
@@ -92,7 +92,7 @@ void DLDL::ir::Grammar::FillInUnknownReferences(DLDL::ir::Language* language)
 	{
 		return;
 	}
-	
+
 	DLDL::ir::Lexicon* lexicon =
 		static_cast<DLDL::ir::Lexicon*>(language->GetIRIfExists(Type::Lexicon));
 	if (lexicon == nullptr)
@@ -120,6 +120,19 @@ void DLDL::ir::Grammar::FillInUnknownReferences(DLDL::ir::Language* language)
 			}
 		}
 	}
+}
+
+bool DLDL::ir::Grammar::IsUnknownReference(const std::string& nonterminal)
+{
+	for (auto unknownReference : GetUnknownReferences())
+	{
+		if (unknownReference == nonterminal)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 std::optional<std::vector<DLDL::ir::ProductionRule>>
@@ -156,6 +169,7 @@ DLDL::ir::Grammar::ConvertToProductionRule(std::string text, std::string nonterm
 
 	auto fillGroup = DLDL_GRAMMAR_PRODUCTION_RULE::ast::listener::user::FillGroup();
 	fillGroup.Dispatch(ast->GetStartNode());
+
 	auto* const group = fillGroup.GetGroup();
 	const auto environment = group->GetEnvironment();
 
@@ -186,10 +200,10 @@ DLDL::ir::Grammar::ConvertToProductionRule(std::string text, std::string nonterm
 		newProductionRules.emplace_back(nonterminal, productionRule);
 	}
 
-	delete group;
 	delete ast;
+	delete group;
 
-	return std::move(newProductionRules);
+	return {newProductionRules};
 }
 
 void DLDL::ir::Grammar::AddProductionRules(const std::string& nonterminal,

@@ -38,6 +38,7 @@ namespace DLDL::filetemplate
 			right_angle_bracket_,
 			right_bracket_,
 			right_curly_bracket_,
+			uninitialized_include_,
 			unknown_reference_,
 			unknown_reference_declaration_,
 
@@ -128,6 +129,10 @@ namespace DLDL::filetemplate
 
 			case ::DLDL::filetemplate::GrammarHTemplate::Type::right_curly_bracket_: {
 				return "right_curly_bracket";
+			}
+
+			case ::DLDL::filetemplate::GrammarHTemplate::Type::uninitialized_include_: {
+				return "uninitialized_include";
 			}
 
 			case ::DLDL::filetemplate::GrammarHTemplate::Type::unknown_reference_: {
@@ -665,7 +670,9 @@ namespace DLDL::filetemplate
 						 "\n\n#include "
 						 "\"Deamer/Language/Generator/Definition/Property/User/Main/Grammar"),
 					 GenerateVariable("."),
-					 GenerateVariable("h\"\n\nnamespace "),
+					 GenerateVariable("h\"\n"),
+					 GenerateVariable(grammarhtemplate_->uninitialized_include_->This()),
+					 GenerateVariable("\n\nnamespace "),
 					 GenerateVariable(grammarhtemplate_->language_full_name_->This()),
 					 GenerateVariable("\n"),
 					 GenerateVariable("{"),
@@ -691,7 +698,8 @@ namespace DLDL::filetemplate
 					 GenerateVariable("\n\t\n\t\t// Production-Rule declarations\n\t\t"),
 					 GenerateVariable(
 						 grammarhtemplate_->productionrule_declaration_->Variable_Field()),
-					 GenerateVariable("\n\n\t\t// Unknown reference declarations\n\t\t"),
+					 GenerateVariable(
+						 "\n\t\n\tprivate:\n\t\t// Unknown reference declarations\n\t\t"),
 					 GenerateVariable(
 						 grammarhtemplate_->unknown_reference_declaration_->Variable_Field()),
 					 GenerateVariable("\n\t\n\tpublic:\n\t\tGrammar("),
@@ -1230,6 +1238,39 @@ namespace DLDL::filetemplate
 			}
 		};
 
+		struct Variable_uninitialized_include_ : public VariableScopes
+		{
+			static constexpr auto name = "uninitialized_include_";
+
+			Variable_uninitialized_include_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::GrammarHTemplate::Type::uninitialized_include_;
+			}
+
+			virtual ~Variable_uninitialized_include_() override = default;
+
+			Variable_uninitialized_include_(GrammarHTemplate* grammarhtemplate_,
+											const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::GrammarHTemplate::Type::uninitialized_include_;
+			}
+
+			Variable_uninitialized_include_&
+			operator=(const Variable_uninitialized_include_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
 		struct Variable_unknown_reference_ : public VariableScopes
 		{
 			static constexpr auto name = "unknown_reference_";
@@ -1323,6 +1364,8 @@ namespace DLDL::filetemplate
 		Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
 		Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
 		Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_bracket_();
+		Variable_uninitialized_include_* uninitialized_include_ =
+			new Variable_uninitialized_include_();
 		Variable_unknown_reference_* unknown_reference_ = new Variable_unknown_reference_();
 		Variable_unknown_reference_declaration_* unknown_reference_declaration_ =
 			new Variable_unknown_reference_declaration_();
@@ -1372,15 +1415,26 @@ namespace DLDL::filetemplate
 				Variable_right_bracket_(this, std::vector<VariableBase*>({GenerateVariable("}")}));
 			*right_curly_bracket_ = Variable_right_curly_bracket_(
 				this, std::vector<VariableBase*>({GenerateVariable(")")}));
+			*uninitialized_include_ = Variable_uninitialized_include_(
+				this,
+				std::vector<VariableBase*>(
+					{GenerateVariable(
+						 "#include \"Deamer/Language/Type/Definition/Object/Special/Uninitialized"),
+					 GenerateVariable("."), GenerateVariable("h\"")}));
 			*unknown_reference_ = Variable_unknown_reference_(this, std::vector<VariableBase*>({}));
 			*unknown_reference_declaration_ = Variable_unknown_reference_declaration_(
-				this, std::vector<VariableBase*>(
-						  {GenerateVariable("::deamer::type::SafeReserve"),
-						   GenerateVariable(left_angle_bracket_->This()),
-						   GenerateVariable(
-							   "::deamer::language::type::definition::object::main::NonTerminal"),
-						   GenerateVariable(right_angle_bracket_->This()), GenerateVariable(" "),
-						   GenerateVariable(unknown_reference_->This()), GenerateVariable(";")}));
+				this,
+				std::vector<VariableBase*>(
+					{GenerateVariable("::deamer::type::SafeReserve"),
+					 GenerateVariable(left_angle_bracket_->This()),
+					 GenerateVariable(
+						 "::deamer::language::type::definition::object::special::Uninitialized"),
+					 GenerateVariable(left_angle_bracket_->This()),
+					 GenerateVariable(
+						 "::deamer::language::type::definition::object::main::NonTerminal"),
+					 GenerateVariable(right_angle_bracket_->This()),
+					 GenerateVariable(right_angle_bracket_->This()), GenerateVariable(" "),
+					 GenerateVariable(unknown_reference_->This()), GenerateVariable(";")}));
 
 			variables_.emplace_back(file_);
 			variables_.emplace_back(header_guard_);
@@ -1397,6 +1451,7 @@ namespace DLDL::filetemplate
 			variables_.emplace_back(right_angle_bracket_);
 			variables_.emplace_back(right_bracket_);
 			variables_.emplace_back(right_curly_bracket_);
+			variables_.emplace_back(uninitialized_include_);
 			variables_.emplace_back(unknown_reference_);
 			variables_.emplace_back(unknown_reference_declaration_);
 		}

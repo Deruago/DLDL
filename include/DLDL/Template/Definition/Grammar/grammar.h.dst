@@ -2,6 +2,7 @@
 #define {{header_guard}}
 
 #include "Deamer/Language/Generator/Definition/Property/User/Main/Grammar.h"
+{{uninitialized_include}}
 
 namespace {{language_full_name}}
 {
@@ -22,7 +23,8 @@ namespace {{language_full_name}}
 	
 		// Production-Rule declarations
 		{{productionrule_declaration.Variable_Field}}
-
+	
+	private:
 		// Unknown reference declarations
 		{{unknown_reference_declaration.Variable_Field}}
 	
