@@ -25,6 +25,3 @@ set_target_properties(DLDL_IDENTITY_shared_library PROPERTIES LINKER_LANGUAGE CX
 
 target_link_libraries(DLDL_IDENTITY_shared_library PUBLIC DLDL_IDENTITY_external_libraries)
 
-add_subdirectory(Ast)
-add_subdirectory(Flex)
-add_subdirectory(Bison)

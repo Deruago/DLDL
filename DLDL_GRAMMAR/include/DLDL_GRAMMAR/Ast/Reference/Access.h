@@ -27,7 +27,7 @@
 #include <vector>
 #include <utility>
 
-namespace DLDL_GRAMMAR { namespace ast { namespace relation { 
+namespace DLDL_GRAMMAR { namespace ast { namespace reference { 
 
 	struct AccessBase
 	{	

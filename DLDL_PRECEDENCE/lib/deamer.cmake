@@ -25,6 +25,3 @@ set_target_properties(DLDL_PRECEDENCE_shared_library PROPERTIES LINKER_LANGUAGE 
 
 target_link_libraries(DLDL_PRECEDENCE_shared_library PUBLIC DLDL_PRECEDENCE_external_libraries)
 
-add_subdirectory(Ast)
-add_subdirectory(Flex)
-add_subdirectory(Bison)

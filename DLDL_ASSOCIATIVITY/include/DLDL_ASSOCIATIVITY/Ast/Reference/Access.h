@@ -15,7 +15,7 @@
 #include <vector>
 #include <utility>
 
-namespace DLDL_ASSOCIATIVITY { namespace ast { namespace relation { 
+namespace DLDL_ASSOCIATIVITY { namespace ast { namespace reference { 
 
 	struct AccessBase
 	{	

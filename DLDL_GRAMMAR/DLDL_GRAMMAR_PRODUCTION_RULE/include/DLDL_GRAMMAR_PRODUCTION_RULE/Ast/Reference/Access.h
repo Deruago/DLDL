@@ -42,7 +42,7 @@
 #include <vector>
 #include <utility>
 
-namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace relation { 
+namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace reference { 
 
 	struct AccessBase
 	{	
@@ -490,14 +490,14 @@ Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts> stmts();
 		}
 
 	public:
-		Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::nested_group> nested_group();
-Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::or_group> or_group();
-Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::min_max_group> min_max_group();
-Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::extension_group> extension_group();
-Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group> group();
+		Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group> group();
+Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::nested_group> nested_group();
 Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::optional_group> optional_group();
 Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group> zero_or_more_group();
 Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::one_or_more_group> one_or_more_group();
+Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::or_group> or_group();
+Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::min_max_group> min_max_group();
+Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::extension_group> extension_group();
 Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::MINUS> MINUS();
 Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::VALUE> VALUE();
 
@@ -2892,44 +2892,20 @@ Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ARROW> ARROW();
 			return Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::nested_group> Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>::nested_group()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::nested_group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::nested_group>(ts));
-		}
-
-		inline Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::or_group> Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>::or_group()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::or_group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::or_group>(ts));
-		}
-
-		inline Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::min_max_group> Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>::min_max_group()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::min_max_group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::min_max_group>(ts));
-		}
-
-		inline Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::extension_group> Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>::extension_group()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::extension_group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::extension_group>(ts));
-		}
-
 		inline Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group> Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>::group()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
 			return Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group>(ts));
+		}
+
+		inline Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::nested_group> Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>::nested_group()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::nested_group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::nested_group>(ts));
 		}
 
 		inline Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::optional_group> Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>::optional_group()
@@ -2954,6 +2930,30 @@ Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ARROW> ARROW();
 
 			// Unoptimized search
 			return Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::one_or_more_group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::one_or_more_group>(ts));
+		}
+
+		inline Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::or_group> Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>::or_group()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::or_group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::or_group>(ts));
+		}
+
+		inline Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::min_max_group> Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>::min_max_group()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::min_max_group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::min_max_group>(ts));
+		}
+
+		inline Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::extension_group> Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>::extension_group()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::extension_group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::extension_group>(ts));
 		}
 
 		inline Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::MINUS> Access<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>::MINUS()

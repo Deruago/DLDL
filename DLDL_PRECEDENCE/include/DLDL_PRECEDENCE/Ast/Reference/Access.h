@@ -22,7 +22,7 @@
 #include <vector>
 #include <utility>
 
-namespace DLDL_PRECEDENCE { namespace ast { namespace relation { 
+namespace DLDL_PRECEDENCE { namespace ast { namespace reference { 
 
 	struct AccessBase
 	{	
@@ -431,8 +431,8 @@ Access<::DLDL_PRECEDENCE::ast::node::specific_precedence> specific_precedence();
 		}
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> terminal_one_or_more();
-Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> PRECEDENCE();
+		Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> PRECEDENCE();
+Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> terminal_one_or_more();
 
 
 		template<typename FunctionType>
@@ -519,8 +519,8 @@ Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> PRECEDENCE();
 		}
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> terminal_one_or_more();
-Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> PRECEDENCE();
+		Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> PRECEDENCE();
+Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> terminal_one_or_more();
 Access<::DLDL_PRECEDENCE::ast::node::NUMBER> NUMBER();
 
 
@@ -1096,14 +1096,6 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 			return Access<::DLDL_PRECEDENCE::ast::node::specific_precedence>(Get<::DLDL_PRECEDENCE::ast::Type::specific_precedence>(ts));
 		}
 
-		inline Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> Access<::DLDL_PRECEDENCE::ast::node::localized_precedence>::terminal_one_or_more()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>(Get<::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more>(ts));
-		}
-
 		inline Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> Access<::DLDL_PRECEDENCE::ast::node::localized_precedence>::PRECEDENCE()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
@@ -1112,7 +1104,7 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 			return Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE>(Get<::DLDL_PRECEDENCE::ast::Type::PRECEDENCE>(ts));
 		}
 
-		inline Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> Access<::DLDL_PRECEDENCE::ast::node::specific_precedence>::terminal_one_or_more()
+		inline Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> Access<::DLDL_PRECEDENCE::ast::node::localized_precedence>::terminal_one_or_more()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
@@ -1126,6 +1118,14 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 
 			// Unoptimized search
 			return Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE>(Get<::DLDL_PRECEDENCE::ast::Type::PRECEDENCE>(ts));
+		}
+
+		inline Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> Access<::DLDL_PRECEDENCE::ast::node::specific_precedence>::terminal_one_or_more()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>(Get<::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more>(ts));
 		}
 
 		inline Access<::DLDL_PRECEDENCE::ast::node::NUMBER> Access<::DLDL_PRECEDENCE::ast::node::specific_precedence>::NUMBER()

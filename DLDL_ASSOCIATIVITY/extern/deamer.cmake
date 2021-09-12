@@ -7,6 +7,5 @@
 #
 # This file is part of the directory: extern
 
-add_subdirectory(Ast)
 add_subdirectory(Flex)
 add_subdirectory(Bison)

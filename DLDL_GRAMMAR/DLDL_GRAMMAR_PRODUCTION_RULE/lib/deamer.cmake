@@ -25,6 +25,3 @@ set_target_properties(DLDL_GRAMMAR_PRODUCTION_RULE_shared_library PROPERTIES LIN
 
 target_link_libraries(DLDL_GRAMMAR_PRODUCTION_RULE_shared_library PUBLIC DLDL_GRAMMAR_PRODUCTION_RULE_external_libraries)
 
-add_subdirectory(Ast)
-add_subdirectory(Flex)
-add_subdirectory(Bison)
