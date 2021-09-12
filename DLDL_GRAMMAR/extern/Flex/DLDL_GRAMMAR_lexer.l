@@ -15,6 +15,8 @@
 #include "DLDL_GRAMMAR/Ast/Node/COMMENT.h"
 #include "DLDL_GRAMMAR/Ast/Node/START_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/GROUP_ABSTRACTION.h"
+#include "DLDL_GRAMMAR/Ast/Node/INLINE_ABSTRACTION.h"
+#include "DLDL_GRAMMAR/Ast/Node/INLINE_GROUP_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/UNKNOWN_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/NONTERMINAL.h"
 #include "DLDL_GRAMMAR/Ast/Node/PRODUCTION_RULE.h"
@@ -32,6 +34,8 @@ void showError();
 extern int DLDL_GRAMMARlex();
 
 static bool local_store = false;
+static int column = 0;
+static int handleColumn(const std::string& text);
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject);
 static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_objects;
 #ifndef yyval
@@ -42,20 +46,24 @@ static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_ob
 COMMENT	([/][^\n]*)
 START_ABSTRACTION	([Ss]tart[:][ \t]*)
 GROUP_ABSTRACTION	([Gg]roup[:][ \t]*)
+INLINE_ABSTRACTION	([Ii]nline[:][ \t]*)
+INLINE_GROUP_ABSTRACTION	((([Ii]nline[ ][Gg]roup)|([Gg]roup[ ][Ii]nline))[:][ \t]*)
 UNKNOWN_ABSTRACTION	([a-zA-Z0-9_\\$?!-+=]*[:][ \t]*)
 NONTERMINAL	([a-zA-Z_]+)
-PRODUCTION_RULE	([ \t]+[^\n]*)
+PRODUCTION_RULE	([ \t]+[^\n\r]*)
 ESCAPE_CHARS	([\n\r\b\v\a\f\t ])
 
 %%
 
-{COMMENT}	{if (!local_store) ;}
-{START_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno);;if (!local_store) return (START_ABSTRACTION);;}
-{GROUP_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno);;if (!local_store) return (GROUP_ABSTRACTION);;}
-{UNKNOWN_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (UNKNOWN_ABSTRACTION);;}
-{NONTERMINAL}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (NONTERMINAL);;}
-{PRODUCTION_RULE}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (PRODUCTION_RULE);;}
-{ESCAPE_CHARS}	{if (!local_store) ;}
+{COMMENT}	{handleColumn(yyval);if (!local_store) ;}
+{START_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (START_ABSTRACTION);;}
+{GROUP_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (GROUP_ABSTRACTION);;}
+{INLINE_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (INLINE_ABSTRACTION);;}
+{INLINE_GROUP_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (INLINE_GROUP_ABSTRACTION);;}
+{UNKNOWN_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (UNKNOWN_ABSTRACTION);;}
+{NONTERMINAL}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (NONTERMINAL);;}
+{PRODUCTION_RULE}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (PRODUCTION_RULE);;}
+{ESCAPE_CHARS}	{handleColumn(yyval);if (!local_store) ;}
 
 %%
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject)
@@ -68,9 +76,26 @@ static void clear()
 	local_objects.clear();
 }
 
+static int handleColumn(const std::string& text)
+{
+	int currentColumn = column;
+	currentColumn += text.size();
+	for (auto character : text)
+	{
+		if (character == '\n')
+		{
+			currentColumn = 0;
+			break;
+		}
+	}
+	
+	return currentColumn;
+}
+
 std::vector<const deamer::external::cpp::lexer::TerminalObject*> DLDL_GRAMMAR::lexer::Lexer::Tokenize(const std::string& text) const
 {
 	local_store = true;
+	column = 0;
 
 	YY_BUFFER_STATE buf;
 	buf = yy_scan_string(text.c_str());

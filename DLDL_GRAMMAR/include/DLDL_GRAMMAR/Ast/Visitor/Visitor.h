@@ -7,6 +7,8 @@
 #include "DLDL_GRAMMAR/Ast/Node/COMMENT.h"
 #include "DLDL_GRAMMAR/Ast/Node/START_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/GROUP_ABSTRACTION.h"
+#include "DLDL_GRAMMAR/Ast/Node/INLINE_ABSTRACTION.h"
+#include "DLDL_GRAMMAR/Ast/Node/INLINE_GROUP_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/UNKNOWN_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/NONTERMINAL.h"
 #include "DLDL_GRAMMAR/Ast/Node/PRODUCTION_RULE.h"
@@ -29,7 +31,7 @@ namespace DLDL_GRAMMAR { namespace ast { namespace Visitor {
 		Visitor() = default;
 		~Visitor() override = default;
 	public:
-		void Dispatch(const ::deamer::external::cpp::ast::Node* node) const override
+		void Dispatch(const ::deamer::external::cpp::ast::Node* node) override
 		{
 			const auto enumeratedValue = static_cast<DLDL_GRAMMAR::ast::Type>(node->GetType());
 			switch(enumeratedValue)
@@ -47,6 +49,16 @@ namespace DLDL_GRAMMAR { namespace ast { namespace Visitor {
 			case DLDL_GRAMMAR::ast::Type::GROUP_ABSTRACTION:
 			{
 				Visit(static_cast<const DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION*>(node));
+				break;
+			}
+			case DLDL_GRAMMAR::ast::Type::INLINE_ABSTRACTION:
+			{
+				Visit(static_cast<const DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION*>(node));
+				break;
+			}
+			case DLDL_GRAMMAR::ast::Type::INLINE_GROUP_ABSTRACTION:
+			{
+				Visit(static_cast<const DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION*>(node));
 				break;
 			}
 			case DLDL_GRAMMAR::ast::Type::UNKNOWN_ABSTRACTION:
@@ -107,47 +119,53 @@ namespace DLDL_GRAMMAR { namespace ast { namespace Visitor {
 			}
 			}
 		}
-		virtual void Visit(const DLDL_GRAMMAR::ast::node::COMMENT* node) const
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::COMMENT* node)
 		{
 		}
-		virtual void Visit(const DLDL_GRAMMAR::ast::node::START_ABSTRACTION* node) const
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::START_ABSTRACTION* node)
 		{
 		}
-		virtual void Visit(const DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION* node) const
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION* node)
 		{
 		}
-		virtual void Visit(const DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION* node) const
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION* node)
 		{
 		}
-		virtual void Visit(const DLDL_GRAMMAR::ast::node::NONTERMINAL* node) const
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION* node)
 		{
 		}
-		virtual void Visit(const DLDL_GRAMMAR::ast::node::PRODUCTION_RULE* node) const
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION* node)
 		{
 		}
-		virtual void Visit(const DLDL_GRAMMAR::ast::node::ESCAPE_CHARS* node) const
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::NONTERMINAL* node)
+		{
+		}
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::PRODUCTION_RULE* node)
+		{
+		}
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::ESCAPE_CHARS* node)
 		{
 		}
 
-		virtual void Visit(const DLDL_GRAMMAR::ast::node::program* node) const
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::program* node)
 		{
 		}
-		virtual void Visit(const DLDL_GRAMMAR::ast::node::stmts* node) const
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::stmts* node)
 		{
 		}
-		virtual void Visit(const DLDL_GRAMMAR::ast::node::stmt* node) const
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::stmt* node)
 		{
 		}
-		virtual void Visit(const DLDL_GRAMMAR::ast::node::abstraction_declaration* node) const
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::abstraction_declaration* node)
 		{
 		}
-		virtual void Visit(const DLDL_GRAMMAR::ast::node::abstraction* node) const
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::abstraction* node)
 		{
 		}
-		virtual void Visit(const DLDL_GRAMMAR::ast::node::definition* node) const
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::definition* node)
 		{
 		}
-		virtual void Visit(const DLDL_GRAMMAR::ast::node::production_rules* node) const
+		virtual void Visit(const DLDL_GRAMMAR::ast::node::production_rules* node)
 		{
 		}
 	};

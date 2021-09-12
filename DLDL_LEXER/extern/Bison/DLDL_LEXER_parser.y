@@ -10,7 +10,6 @@
 #include "Flex/DLDL_LEXER_lexer.h"
 #undef YY_NO_UNISTD_H
 #include "DLDL_LEXER/Ast/Enum/Type.h"
-#include "DLDL_LEXER/Ast/Node/COMMENT.h"
 #include "DLDL_LEXER/Ast/Node/DELETE_ABSTRACTION.h"
 #include "DLDL_LEXER/Ast/Node/IGNORE_ABSTRACTION.h"
 #include "DLDL_LEXER/Ast/Node/NOVALUE_ABSTRACTION.h"
@@ -20,6 +19,7 @@
 #include "DLDL_LEXER/Ast/Node/TERMINAL.h"
 #include "DLDL_LEXER/Ast/Node/REGEX.h"
 #include "DLDL_LEXER/Ast/Node/ESCAPE_CHARS.h"
+#include "DLDL_LEXER/Ast/Node/COMMENT.h"
 
 #include "DLDL_LEXER/Ast/Node/program.h"
 #include "DLDL_LEXER/Ast/Node/stmts.h"
@@ -59,7 +59,6 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 
 %union{
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
-	::DLDL_LEXER::ast::node::COMMENT* DLDL_LEXER_COMMENT;
 	::DLDL_LEXER::ast::node::DELETE_ABSTRACTION* DLDL_LEXER_DELETE_ABSTRACTION;
 	::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION* DLDL_LEXER_IGNORE_ABSTRACTION;
 	::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION* DLDL_LEXER_NOVALUE_ABSTRACTION;
@@ -69,6 +68,7 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_LEXER::ast::node::TERMINAL* DLDL_LEXER_TERMINAL;
 	::DLDL_LEXER::ast::node::REGEX* DLDL_LEXER_REGEX;
 	::DLDL_LEXER::ast::node::ESCAPE_CHARS* DLDL_LEXER_ESCAPE_CHARS;
+	::DLDL_LEXER::ast::node::COMMENT* DLDL_LEXER_COMMENT;
 	::DLDL_LEXER::ast::node::program* DLDL_LEXER_program;
 	::DLDL_LEXER::ast::node::stmts* DLDL_LEXER_stmts;
 	::DLDL_LEXER::ast::node::stmt* DLDL_LEXER_stmt;

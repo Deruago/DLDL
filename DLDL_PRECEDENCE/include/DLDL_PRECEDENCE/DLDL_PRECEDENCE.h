@@ -1,0 +1,10 @@
+#ifndef DLDL_PRECEDENCE_DLDL_PRECEDENCE_H
+#define DLDL_PRECEDENCE_DLDL_PRECEDENCE_H
+
+// This is a generated file for the language: DLDL_PRECEDENCE
+
+namespace DLDL_PRECEDENCE
+{
+}
+
+#endif // DLDL_PRECEDENCE_DLDL_PRECEDENCE_H

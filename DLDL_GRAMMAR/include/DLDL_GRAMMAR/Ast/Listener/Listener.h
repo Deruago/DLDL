@@ -7,6 +7,8 @@
 #include "DLDL_GRAMMAR/Ast/Node/COMMENT.h"
 #include "DLDL_GRAMMAR/Ast/Node/START_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/GROUP_ABSTRACTION.h"
+#include "DLDL_GRAMMAR/Ast/Node/INLINE_ABSTRACTION.h"
+#include "DLDL_GRAMMAR/Ast/Node/INLINE_GROUP_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/UNKNOWN_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/NONTERMINAL.h"
 #include "DLDL_GRAMMAR/Ast/Node/PRODUCTION_RULE.h"
@@ -47,6 +49,16 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 			case DLDL_GRAMMAR::ast::Type::GROUP_ABSTRACTION:
 			{
 				Listen(static_cast<const DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION*>(node));
+				break;
+			}
+			case DLDL_GRAMMAR::ast::Type::INLINE_ABSTRACTION:
+			{
+				Listen(static_cast<const DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION*>(node));
+				break;
+			}
+			case DLDL_GRAMMAR::ast::Type::INLINE_GROUP_ABSTRACTION:
+			{
+				Listen(static_cast<const DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION*>(node));
 				break;
 			}
 			case DLDL_GRAMMAR::ast::Type::UNKNOWN_ABSTRACTION:
@@ -121,6 +133,12 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 		{
 		}
 		virtual void Listen(const DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION* node)
+		{
+		}
+		virtual void Listen(const DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION* node)
+		{
+		}
+		virtual void Listen(const DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION* node)
 		{
 		}
 		virtual void Listen(const DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION* node)

@@ -73,7 +73,6 @@ union YYSTYPE
 #line 60 "./DLDL_LEXER_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
-	::DLDL_LEXER::ast::node::COMMENT* DLDL_LEXER_COMMENT;
 	::DLDL_LEXER::ast::node::DELETE_ABSTRACTION* DLDL_LEXER_DELETE_ABSTRACTION;
 	::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION* DLDL_LEXER_IGNORE_ABSTRACTION;
 	::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION* DLDL_LEXER_NOVALUE_ABSTRACTION;
@@ -83,6 +82,7 @@ union YYSTYPE
 	::DLDL_LEXER::ast::node::TERMINAL* DLDL_LEXER_TERMINAL;
 	::DLDL_LEXER::ast::node::REGEX* DLDL_LEXER_REGEX;
 	::DLDL_LEXER::ast::node::ESCAPE_CHARS* DLDL_LEXER_ESCAPE_CHARS;
+	::DLDL_LEXER::ast::node::COMMENT* DLDL_LEXER_COMMENT;
 	::DLDL_LEXER::ast::node::program* DLDL_LEXER_program;
 	::DLDL_LEXER::ast::node::stmts* DLDL_LEXER_stmts;
 	::DLDL_LEXER::ast::node::stmt* DLDL_LEXER_stmt;

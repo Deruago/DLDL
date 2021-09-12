@@ -5,6 +5,8 @@
 
 namespace DLDL::ir
 {
+	class Language;
+
 	class IR
 	{
 	private:
@@ -32,6 +34,10 @@ namespace DLDL::ir
 		void SetAsDefaultImplementedByDLDL()
 		{
 			isDefaultImplementedByDLDL = true;
+		}
+
+		virtual void FillInUnknownReferences(DLDL::ir::Language*)
+		{
 		}
 	};
 }

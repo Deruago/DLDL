@@ -632,8 +632,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 8
-#define YY_END_OF_BUFFER 9
+#define YY_NUM_RULES 10
+#define YY_END_OF_BUFFER 11
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -641,12 +641,14 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[33] =
+static const flex_int16_t yy_accept[55] =
     {   0,
-        0,    0,    9,    8,    7,    6,    8,    1,    4,    5,
-        5,    5,    6,    6,    0,    4,    1,    4,    5,    5,
-        5,    5,    5,    5,    5,    5,    5,    3,    2,    3,
-        2,    0
+        0,    0,   11,   10,    9,    8,   10,    1,    6,    7,
+        7,    7,    7,    8,    8,    0,    6,    1,    6,    7,
+        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
+        7,    7,    0,    3,    7,    2,    0,    3,    0,    4,
+        2,    0,    0,    4,    0,    0,    0,    0,    0,    0,
+        0,    5,    5,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -654,17 +656,17 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    2,    2,    3,    4,
         2,    2,    5,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    3,    6,    6,    6,    6,    6,    6,    6,    6,
-        6,    6,    6,    1,    1,    1,    7,    6,    6,    6,
-        6,    6,    6,    6,    6,    6,    6,    8,    1,    1,
-        6,    1,    6,    1,    9,    9,    9,    9,    9,    9,
-       10,    9,    9,    9,    9,    9,    9,    9,    9,    9,
-        9,    9,   11,    9,    9,    9,    9,    9,    9,    9,
-        1,    6,    1,    1,    9,    1,   12,    9,    9,    9,
+        1,    6,    7,    7,    7,    7,    7,    7,    7,    7,
+        7,    7,    7,    1,    1,    1,    8,    7,    7,    7,
+        7,    7,    7,    7,    7,    7,    7,    9,    1,    1,
+        7,    1,    7,    1,   10,   10,   10,   10,   10,   10,
+       11,   10,   12,   10,   10,   10,   10,   10,   10,   10,
+       10,   10,   13,   10,   10,   10,   10,   10,   10,   10,
+        1,    7,    1,    1,   10,    1,   14,   10,   10,   10,
 
-        9,    9,   10,    9,    9,    9,    9,    9,    9,    9,
-       13,   14,    9,   15,   11,   16,   17,    9,    9,    9,
-        9,    9,    1,    1,    1,    1,    1,    1,    1,    1,
+       15,   10,   11,   10,   16,   10,   10,   17,   10,   18,
+       19,   20,   10,   21,   13,   22,   23,   10,   10,   10,
+       10,   10,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -681,56 +683,77 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[18] =
+static const YY_CHAR yy_meta[24] =
     {   0,
-        1,    1,    1,    2,    3,    4,    1,    4,    4,    4,
-        4,    4,    4,    4,    4,    4,    4
+        1,    1,    1,    2,    3,    1,    4,    1,    4,    4,
+        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
+        4,    4,    4
     } ;
 
-static const flex_int16_t yy_base[37] =
+static const flex_int16_t yy_base[59] =
     {   0,
-        0,    0,   59,   60,   60,   55,   49,    0,   53,   12,
-       15,    9,    0,   52,   46,   50,    0,   49,   34,   13,
-        7,   12,   31,   17,   18,   27,   28,   42,   38,   37,
-       36,   60,   43,   34,   47,   33
+        0,    0,  123,  124,  124,   21,  113,    0,   22,   22,
+       23,   27,   26,    0,   34,  112,   35,    0,   36,   40,
+       43,   44,   49,   48,   57,   58,   61,   65,   68,   78,
+       71,   82,   76,   40,   87,   92,  102,   94,  108,   96,
+       98,   99,   92,  100,   96,   90,   64,   53,   54,   40,
+       50,  102,  104,  124,  110,   50,  114,   22
     } ;
 
-static const flex_int16_t yy_def[37] =
+static const flex_int16_t yy_def[59] =
     {   0,
-       32,    1,   32,   32,   32,   33,   34,   35,   32,   36,
-       36,   11,   33,   33,   34,   32,   35,   32,   11,   11,
-       11,   11,   11,   11,   11,   11,   11,   32,   32,   32,
-       32,    0,   32,   32,   32,   32
+       54,    1,   54,   54,   54,   55,   56,   57,   54,   58,
+       58,   58,   58,   55,   55,   56,   54,   57,   54,   58,
+       58,   58,   58,   58,   58,   58,   58,   58,   58,   58,
+       58,   58,   54,   54,   58,   54,   54,   54,   54,   54,
+       54,   54,   54,   54,   54,   54,   54,   54,   54,   54,
+       54,   54,   54,    0,   54,   54,   54,   54
     } ;
 
-static const flex_int16_t yy_nxt[78] =
+static const flex_int16_t yy_nxt[148] =
     {   0,
-        4,    5,    6,    5,    5,    7,    8,    9,   10,   11,
-       12,   10,   10,   10,   10,   10,   10,   15,   23,   16,
-       15,   19,   16,   19,   21,   22,   19,   19,   24,   20,
-       26,   19,   19,   27,   28,   29,   19,   15,   31,   30,
-       31,   19,   19,   13,   30,   25,   13,   17,   19,   17,
-       17,   18,   18,   16,   14,   18,   16,   14,   32,    3,
-       32,   32,   32,   32,   32,   32,   32,   32,   32,   32,
-       32,   32,   32,   32,   32,   32,   32
+        4,    5,    6,    5,    5,    6,    7,    8,    9,   10,
+       11,   12,   13,   10,   10,   12,   10,   10,   10,   10,
+       10,   10,   10,   15,   19,   20,   15,   19,   16,   16,
+       17,   17,   16,   16,   17,   17,   15,   19,   19,   15,
+       19,   19,   38,   21,   22,   38,   16,   23,   17,   16,
+       16,   17,   17,   16,   16,   16,   17,   17,   52,   51,
+       25,   24,   26,   16,   16,   17,   17,   16,   51,   17,
+       27,   16,   28,   17,   16,   50,   17,   16,   29,   17,
+       30,   49,   31,   33,   16,   35,   34,   37,   16,   32,
+       36,   37,   39,   16,   41,   40,   38,   41,   44,   38,
+
+       41,   44,   44,   41,   53,   44,   53,   53,   48,   53,
+       14,   47,   46,   14,   18,   45,   18,   18,   43,   42,
+       17,   17,   54,    3,   54,   54,   54,   54,   54,   54,
+       54,   54,   54,   54,   54,   54,   54,   54,   54,   54,
+       54,   54,   54,   54,   54,   54,   54
     } ;
 
-static const flex_int16_t yy_chk[78] =
+static const flex_int16_t yy_chk[148] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,   10,   21,   10,
-       11,   21,   11,   12,   12,   20,   22,   20,   22,   11,
-       24,   24,   25,   25,   26,   27,   36,   34,   31,   30,
-       29,   26,   27,   33,   28,   23,   33,   35,   19,   35,
-       35,   18,   16,   15,   14,    9,    7,    6,    3,   32,
-       32,   32,   32,   32,   32,   32,   32,   32,   32,   32,
-       32,   32,   32,   32,   32,   32,   32
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    6,    9,   58,    6,    9,   10,   11,
+       10,   11,   13,   12,   13,   12,   15,   17,   19,   15,
+       17,   19,   34,   11,   12,   34,   20,   13,   20,   21,
+       22,   21,   22,   56,   24,   23,   24,   23,   51,   50,
+       22,   21,   23,   25,   26,   25,   26,   27,   49,   27,
+       24,   28,   25,   28,   29,   48,   29,   31,   26,   31,
+       27,   47,   28,   30,   30,   31,   30,   33,   32,   29,
+       32,   33,   35,   35,   36,   35,   38,   36,   40,   38,
+
+       41,   40,   44,   41,   52,   44,   53,   52,   46,   53,
+       55,   45,   43,   55,   57,   42,   57,   57,   39,   37,
+       16,    7,    3,   54,   54,   54,   54,   54,   54,   54,
+       54,   54,   54,   54,   54,   54,   54,   54,   54,   54,
+       54,   54,   54,   54,   54,   54,   54
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[9] =
+static const flex_int32_t yy_rule_can_match_eol[11] =
     {   0,
-0, 0, 0, 0, 0, 0, 1, 0,     };
+0, 0, 0, 0, 0, 0, 0, 0, 1, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -760,6 +783,8 @@ char *yytext;
 #include "DLDL_GRAMMAR/Ast/Node/COMMENT.h"
 #include "DLDL_GRAMMAR/Ast/Node/START_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/GROUP_ABSTRACTION.h"
+#include "DLDL_GRAMMAR/Ast/Node/INLINE_ABSTRACTION.h"
+#include "DLDL_GRAMMAR/Ast/Node/INLINE_GROUP_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/UNKNOWN_ABSTRACTION.h"
 #include "DLDL_GRAMMAR/Ast/Node/NONTERMINAL.h"
 #include "DLDL_GRAMMAR/Ast/Node/PRODUCTION_RULE.h"
@@ -777,13 +802,15 @@ void showError();
 extern int DLDL_GRAMMARlex();
 
 static bool local_store = false;
+static int column = 0;
+static int handleColumn(const std::string& text);
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject);
 static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_objects;
 #ifndef yyval
 #define yyval yytext
 #endif //yyval
-#line 786 "lex.DLDL_GRAMMAR.c"
-#line 787 "lex.DLDL_GRAMMAR.c"
+#line 813 "lex.DLDL_GRAMMAR.c"
+#line 814 "lex.DLDL_GRAMMAR.c"
 
 #define INITIAL 0
 
@@ -1000,10 +1027,10 @@ YY_DECL
 		}
 
 	{
-#line 50 "./DLDL_GRAMMAR_lexer.l"
+#line 56 "./DLDL_GRAMMAR_lexer.l"
 
 
-#line 1007 "lex.DLDL_GRAMMAR.c"
+#line 1034 "lex.DLDL_GRAMMAR.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1030,13 +1057,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 33 )
+				if ( yy_current_state >= 55 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_current_state != 32 );
+		while ( yy_current_state != 54 );
 		yy_cp = (yy_last_accepting_cpos);
 		yy_current_state = (yy_last_accepting_state);
 
@@ -1068,46 +1095,56 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 52 "./DLDL_GRAMMAR_lexer.l"
-{if (!local_store) ;}
+#line 58 "./DLDL_GRAMMAR_lexer.l"
+{handleColumn(yyval);if (!local_store) ;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 53 "./DLDL_GRAMMAR_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno);;if (!local_store) return (START_ABSTRACTION);;}
+#line 59 "./DLDL_GRAMMAR_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (START_ABSTRACTION);;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 54 "./DLDL_GRAMMAR_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno);;if (!local_store) return (GROUP_ABSTRACTION);;}
+#line 60 "./DLDL_GRAMMAR_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (GROUP_ABSTRACTION);;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 55 "./DLDL_GRAMMAR_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (UNKNOWN_ABSTRACTION);;}
+#line 61 "./DLDL_GRAMMAR_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (INLINE_ABSTRACTION);;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 56 "./DLDL_GRAMMAR_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (NONTERMINAL);;}
+#line 62 "./DLDL_GRAMMAR_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (INLINE_GROUP_ABSTRACTION);;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 57 "./DLDL_GRAMMAR_lexer.l"
-{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (PRODUCTION_RULE);;}
+#line 63 "./DLDL_GRAMMAR_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (UNKNOWN_ABSTRACTION);;}
 	YY_BREAK
 case 7:
-/* rule 7 can match eol */
 YY_RULE_SETUP
-#line 58 "./DLDL_GRAMMAR_lexer.l"
-{if (!local_store) ;}
+#line 64 "./DLDL_GRAMMAR_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (NONTERMINAL);;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 60 "./DLDL_GRAMMAR_lexer.l"
+#line 65 "./DLDL_GRAMMAR_lexer.l"
+{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (PRODUCTION_RULE);;}
+	YY_BREAK
+case 9:
+/* rule 9 can match eol */
+YY_RULE_SETUP
+#line 66 "./DLDL_GRAMMAR_lexer.l"
+{handleColumn(yyval);if (!local_store) ;}
+	YY_BREAK
+case 10:
+YY_RULE_SETUP
+#line 68 "./DLDL_GRAMMAR_lexer.l"
 ECHO;
 	YY_BREAK
-#line 1111 "lex.DLDL_GRAMMAR.c"
+#line 1148 "lex.DLDL_GRAMMAR.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1405,7 +1442,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 33 )
+			if ( yy_current_state >= 55 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1433,11 +1470,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 33 )
+		if ( yy_current_state >= 55 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 32);
+	yy_is_jam = (yy_current_state == 54);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2125,7 +2162,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 60 "./DLDL_GRAMMAR_lexer.l"
+#line 68 "./DLDL_GRAMMAR_lexer.l"
 
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject)
 {
@@ -2137,9 +2174,26 @@ static void clear()
 	local_objects.clear();
 }
 
+static int handleColumn(const std::string& text)
+{
+	int currentColumn = column;
+	currentColumn += text.size();
+	for (auto character : text)
+	{
+		if (character == '\n')
+		{
+			currentColumn = 0;
+			break;
+		}
+	}
+	
+	return currentColumn;
+}
+
 std::vector<const deamer::external::cpp::lexer::TerminalObject*> DLDL_GRAMMAR::lexer::Lexer::Tokenize(const std::string& text) const
 {
 	local_store = true;
+	column = 0;
 
 	YY_BUFFER_STATE buf;
 	buf = yy_scan_string(text.c_str());

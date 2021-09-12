@@ -2,6 +2,7 @@
 #define {{header_guard}}
 
 #include "Deamer/Compiler/Generator/Compiler.h"
+#include "Deamer/Language/Reference/PropertyDefinition.h"
 #include "{{language_full_name_slash}}/Language.h"
 
 {{children_compilergenerator_include.Variable_Field}}
@@ -31,6 +32,7 @@ namespace {{language_full_name}}
 		{
 			// Retrieve the Language Definition (LD)
 			::deamer::file::compiler::Output output(::deamer::compiler::generator::Compiler<::{{language_full_name}}::Language>::GetLanguageDefinition());
+			{{print_threats}}
 
 			{{add_children_compilergenerators.Variable_Field}}
 

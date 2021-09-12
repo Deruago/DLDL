@@ -12,7 +12,6 @@
 #include <Deamer/External/Cpp/Lexer/TerminalObject.h>
 #include "DLDL_LEXER/Flex/Lexer.h"
 #include "DLDL_LEXER/Ast/Enum/Type.h"
-#include "DLDL_LEXER/Ast/Node/COMMENT.h"
 #include "DLDL_LEXER/Ast/Node/DELETE_ABSTRACTION.h"
 #include "DLDL_LEXER/Ast/Node/IGNORE_ABSTRACTION.h"
 #include "DLDL_LEXER/Ast/Node/NOVALUE_ABSTRACTION.h"
@@ -22,6 +21,7 @@
 #include "DLDL_LEXER/Ast/Node/TERMINAL.h"
 #include "DLDL_LEXER/Ast/Node/REGEX.h"
 #include "DLDL_LEXER/Ast/Node/ESCAPE_CHARS.h"
+#include "DLDL_LEXER/Ast/Node/COMMENT.h"
 
 #include "DLDL_LEXER/Ast/Node/program.h"
 #include "DLDL_LEXER/Ast/Node/stmts.h"
@@ -33,6 +33,8 @@ void showError();
 extern int DLDL_LEXERlex();
 
 static bool local_store = false;
+static int column = 0;
+static int handleColumn(const std::string& text);
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject);
 static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_objects;
 #ifndef yyval
@@ -40,29 +42,29 @@ static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_ob
 #endif //yyval
 %}
 
-COMMENT	([/][^\n]*)
-DELETE_ABSTRACTION	([Dd]elete[:][ ]*)
-IGNORE_ABSTRACTION	([Ii]gnore[:][ ]*)
-NOVALUE_ABSTRACTION	((([Nn]o[Vv]alue)|([Vv]alue[Ll]ess))[:][ ]*)
-CRASH_ABSTRACTION	([Cc]rash[:][ ]*)
-STANDARD_ABSTRACTION	([Ss]tandard[:][ ]*)
-UNKNOWN_ABSTRACTION	([a-zA-Z0-9_\\$?!-+=]*[:][ ]*)
+DELETE_ABSTRACTION	([Dd]elete[:][ \t]*)
+IGNORE_ABSTRACTION	([Ii]gnore[:][ \t]*)
+NOVALUE_ABSTRACTION	((([Nn]o[Vv]alue)|([Vv]alue[Ll]ess))[:][ \t]*)
+CRASH_ABSTRACTION	([Cc]rash[:][ \t]*)
+STANDARD_ABSTRACTION	([Ss]tandard[:][ \t]*)
+UNKNOWN_ABSTRACTION	([a-zA-Z0-9_\\$?!-+=]*[:][ \t]*)
 TERMINAL	([a-zA-Z_]+)
-REGEX	([ \t][^\n]*)
+REGEX	([ \t][^\n\r]*)
 ESCAPE_CHARS	([\n\r\t\f\b\a\v])
+COMMENT	([/][^\n]*)
 
 %%
 
-{COMMENT}	{if (!local_store) ;}
-{DELETE_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno);;if (!local_store) return (DELETE_ABSTRACTION);;}
-{IGNORE_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno);;if (!local_store) return (IGNORE_ABSTRACTION);;}
-{NOVALUE_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno);;if (!local_store) return (NOVALUE_ABSTRACTION);;}
-{CRASH_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno);;if (!local_store) return (CRASH_ABSTRACTION);;}
-{STANDARD_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno);;if (!local_store) return (STANDARD_ABSTRACTION);;}
-{UNKNOWN_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (UNKNOWN_ABSTRACTION);;}
-{TERMINAL}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (TERMINAL);;}
-{REGEX}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno);;if (!local_store) return (REGEX);;}
-{ESCAPE_CHARS}	{if (!local_store) ;}
+{DELETE_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (DELETE_ABSTRACTION);;}
+{IGNORE_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (IGNORE_ABSTRACTION);;}
+{NOVALUE_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (NOVALUE_ABSTRACTION);;}
+{CRASH_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (CRASH_ABSTRACTION);;}
+{STANDARD_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (STANDARD_ABSTRACTION);;}
+{UNKNOWN_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (UNKNOWN_ABSTRACTION);;}
+{TERMINAL}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (TERMINAL);;}
+{REGEX}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_LEXERlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (REGEX);;}
+{ESCAPE_CHARS}	{handleColumn(yyval);if (!local_store) ;}
+{COMMENT}	{handleColumn(yyval);if (!local_store) ;}
 
 %%
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject)
@@ -75,9 +77,26 @@ static void clear()
 	local_objects.clear();
 }
 
+static int handleColumn(const std::string& text)
+{
+	int currentColumn = column;
+	currentColumn += text.size();
+	for (auto character : text)
+	{
+		if (character == '\n')
+		{
+			currentColumn = 0;
+			break;
+		}
+	}
+	
+	return currentColumn;
+}
+
 std::vector<const deamer::external::cpp::lexer::TerminalObject*> DLDL_LEXER::lexer::Lexer::Tokenize(const std::string& text) const
 {
 	local_store = true;
+	column = 0;
 
 	YY_BUFFER_STATE buf;
 	buf = yy_scan_string(text.c_str());

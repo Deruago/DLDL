@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.16)
 
 project(DLDL_LEXER)
 
 find_package(Deamer REQUIRED)
-
+find_package(Deamer_External REQUIRED)
 
 add_library(DLDL_LEXER_external_libraries STATIC "${DLDL_LEXER_SOURCE_DIR}/lib/DLDL_LEXER.cpp")
 set_property(TARGET DLDL_LEXER_external_libraries PROPERTY POSITION_INDEPENDENT_CODE ON)

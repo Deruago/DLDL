@@ -4,13 +4,23 @@
 
 # DLDL
 
-[DLDL](https://github.com/Deruago/DLDL) is a front-end of [Deamer CC](https://github.com/Deruago/theDeamerProject). It contains specialized DSL's to generate [Deamer CC](https://github.com/Deruago/theDeamerProject) definitions. The outputted code can be compiled using [Deamer CC](https://github.com/Deruago/theDeamerProject) to create a compiler generator. When ran this compiler generator generates the language, which was defined using [DLDL](https://github.com/Deruago/DLDL).
+[DLDL](https://github.com/Deruago/DLDL) is used to specify definitions in order to generate languages/compilers. It functions as a specialized front-end for [Deamer CC](https://github.com/Deruago/theDeamerProject). 
 
-## Installing DLDL for Linux
+[DLDL](https://github.com/Deruago/DLDL) contains varies DSL's to generate [Deamer CC](https://github.com/Deruago/theDeamerProject) definitions, it supports EBNF and more.
+
+## Examples
+
+For examples take a look at the example repo: https://github.com/Deruago/DeamerExamples
+
+The example repo contains varies tutorials and examples to help you get started using Deamer.
+
+## Installing
 
 As DLDL uses Deamer, it is recommended to also install Deamer Project: https://github.com/Deruago/theDeamerProject.
 
 It also uses Deamer External, you can install that here: https://github.com/Deruago/DeamerExternal
+
+### General installation
 
 **Getting the source code**
 
@@ -20,18 +30,21 @@ cd DLDL
 ```
 
 **Creating the build directory**
+
 ```bash
 mkdir build
 cd build
 ```
 
 **Building and Installing DLDL**
+
 ```bash
 cmake ..
 cmake --build . --target install
 ```
 
 ## Starting a Deamer language project
+
 When installed, you can initialize a Deamer language project. Do this by using the following command:
 ```bash
 DLDL -init -language-name=MyNewLanguage
@@ -76,11 +89,16 @@ DLDL -target-os=windows
 
 You can replace "windows" with "linux" or a different supported OS.
 
-## Examples
+## Current implemented definitions (LPD's)
 
-For examples take a look at the example repo: https://github.com/Deruago/DeamerExamples
+As Deamer grows more LPD's get added, these definitions take time to become available in DLDL, as we need to define a DSL and create the appropriate back-end for it.
 
-The example repo contains varies tutorials and examples to help you get started using Deamer.
+| LPD        | User definable | DLDL default implementation |
+| ---------- | -------------- | --------------------------- |
+| Lexicon    | Yes            | No                          |
+| Grammar    | Yes            | No                          |
+| Generation | Yes            | Yes (by default)            |
+| Identity   | No             | Yes (by default)            |
 
 ## DLDL Commands
 
@@ -133,13 +151,3 @@ Clang format arguments:
         -clang-format-default                       ; Initializes default clang format style (Deamer CC style).
 ```
 
-## Current implemented definitions (LPD's)
-
-As Deamer grows more LPD's get added, these definitions take time to become available in DLDL, as we need to define a DSL and create the appropriate back-end for it.
-
-| LPD        | User definable | DLDL default implementation |
-| ---------- | -------------- | --------------------------- |
-| Lexicon    | Yes            | No                          |
-| Grammar    | Yes            | No                          |
-| Generation | No             | Yes (by default)            |
-| Identity   | No             | Yes (by default)            |

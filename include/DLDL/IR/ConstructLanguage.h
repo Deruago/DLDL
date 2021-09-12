@@ -2,10 +2,9 @@
 #define DLDL_IR_CONSTRUCTLANUAGE_H
 
 #include "DLDL/IR/Language.h"
-
-#include "DLDL_LEXER/IR/Parser.h"
+#include "DLDL_GENERATION/IR/Parser.h"
 #include "DLDL_GRAMMAR/IR/Parser.h"
-
+#include "DLDL_LEXER/IR/Parser.h"
 #include <Deamer/File/Tool/Directory.h>
 #include <filesystem>
 #include <fstream>
@@ -30,16 +29,18 @@ namespace DLDL::ir
 		const std::string definitionMap;
 
 	public:
-		ConstructLanguage(const std::string& relativeDirectory_, const std::string& definitionMap_ = "definition")
-			:	relativeDirectory(relativeDirectory_),
-				definitionMap(definitionMap_)
+		ConstructLanguage(const std::string& relativeDirectory_,
+						  const std::string& definitionMap_ = "definition")
+			: relativeDirectory(relativeDirectory_),
+			  definitionMap(definitionMap_)
 		{
 			/*if (relativeDirectory.rfind("./", 0) != 0)
 			{
 				relativeDirectory = "./" + relativeDirectory_;
 			}*/
 
-			while (relativeDirectory[relativeDirectory.size() - 1] == '/' && relativeDirectory[relativeDirectory.size() - 2] == '/')
+			while (relativeDirectory[relativeDirectory.size() - 1] == '/' &&
+				   relativeDirectory[relativeDirectory.size() - 2] == '/')
 			{
 				relativeDirectory.pop_back();
 			}
@@ -107,7 +108,8 @@ namespace DLDL::ir
 		}
 
 	private:
-		void Construct(Language* parentLanguage, std::string path, ::deamer::file::tool::OSType os = ::deamer::file::tool::os_used)
+		void Construct(Language* parentLanguage, std::string path,
+					   ::deamer::file::tool::OSType os = ::deamer::file::tool::os_used)
 		{
 			for (auto& item : std::filesystem::directory_iterator(path))
 			{
@@ -119,7 +121,7 @@ namespace DLDL::ir
 				std::string languageDirectory =
 					path + item.path().generic_string().erase(0, path.size());
 				std::cout << languageDirectory << '\n';
-				
+
 				Language* currentLanguage = GetLanguageFromMap(languageDirectory, os);
 				parentLanguage->AddLanguage(currentLanguage);
 
@@ -127,12 +129,14 @@ namespace DLDL::ir
 			}
 		}
 
-		Language* GetLanguageFromMap(const std::string& path, deamer::file::tool::OSType os = deamer::file::tool::os_used)
+		Language* GetLanguageFromMap(const std::string& path,
+									 deamer::file::tool::OSType os = deamer::file::tool::os_used)
 		{
 			const std::string languageName =
 				*(deamer::file::tool::Directory(path).SplitDirectoryName().end() - 1);
 
 			auto* newLanguage = new Language(languageName, os);
+			
 			for (const auto& item : std::filesystem::directory_iterator(path))
 			{
 				if (item.is_directory())
@@ -153,7 +157,7 @@ namespace DLDL::ir
 						continue;
 					}
 
-					fileNameWithoutExtension += character;					
+					fileNameWithoutExtension += character;
 				}
 
 				std::string extension;
@@ -183,7 +187,7 @@ namespace DLDL::ir
 						continue;
 					}
 					std::cout << path << '\n';
-					newLanguage->AddIR(GetIR(type, path + fileName));
+					newLanguage->AddIR(GetIR(type, path + fileName, os));
 				}
 				else if (extension == "config.dldl")
 				{
@@ -201,6 +205,8 @@ namespace DLDL::ir
 				}
 			}
 
+			newLanguage->FixUnknownReferences();
+			
 			return newLanguage;
 		}
 
@@ -228,6 +234,14 @@ namespace DLDL::ir
 			{
 				return Type::Precedence;
 			}
+			if (textLowered == "generation")
+			{
+				return Type::Generation;
+			}
+			if (textLowered == "identity")
+			{
+				return Type::Identity;
+			}
 
 			return Type::Unknown;
 		}
@@ -243,14 +257,15 @@ namespace DLDL::ir
 
 			return input;
 		}
-		
-		IR* GetIR(const Type type, const std::string& path)
+
+		IR* GetIR(const Type type, const std::string& path,
+				  deamer::file::tool::OSType os = deamer::file::tool::os_used)
 		{
 			std::cout << path << '\n';
-			
+
 			IR* newIR = nullptr;
 			const std::string fileContent = ReadInFile(path);
-			
+
 			switch (type)
 			{
 			case Type::Unknown:
@@ -266,6 +281,7 @@ namespace DLDL::ir
 			case Type::Associativity:
 				break;
 			case Type::Generation:
+				newIR = ::DLDL::ir::generation::Parser(os).GetIR(fileContent);
 				break;
 			case Type::Identity:
 				break;
@@ -279,7 +295,9 @@ namespace DLDL::ir
 				break;
 			case Type::Documentation:
 				break;
-			default: 
+			case Type::Threat:
+				break;
+			default:
 				break;
 			}
 
