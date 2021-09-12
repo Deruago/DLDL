@@ -86,7 +86,7 @@ deamer::file::tool::File DLDL::generate::LPDWriter::GetCompilerGenerator(ir::Lan
 
 deamer::file::tool::File DLDL::generate::LPDWriter::GetMain(const std::vector<ir::Language*>& languages)
 {
-	deamer::file::tool::File file("Main", "cpp", "");
+	deamer::file::tool::File file("main", "cpp", "");
 
 	auto generator = DLDL::filetemplate::mainTemplate();
 
