@@ -435,13 +435,13 @@ TEST_F(TestGroup, EbnfSinglePlus_CorrectlyGeneratesProductionRules)
 			  generatedEnvironment.currentProductionRules[0].values[0]->name);
 	EXPECT_EQ("deamerreserved_plus__VARNAME__", generatedEnvironment.nonterminals[0].name);
 	EXPECT_EQ(2, generatedEnvironment.nonterminals[0].productionRules.size());
-	EXPECT_EQ(2, generatedEnvironment.nonterminals[0].productionRules[0].values.size());
-	EXPECT_EQ(1, generatedEnvironment.nonterminals[0].productionRules[1].values.size());
+	EXPECT_EQ(1, generatedEnvironment.nonterminals[0].productionRules[0].values.size());
+	EXPECT_EQ(2, generatedEnvironment.nonterminals[0].productionRules[1].values.size());
 
 	EXPECT_EQ("VARNAME", generatedEnvironment.nonterminals[0].productionRules[0].values[0]->name);
 	EXPECT_EQ("deamerreserved_plus__VARNAME__",
-			  generatedEnvironment.nonterminals[0].productionRules[0].values[1]->name);
-	EXPECT_EQ("deamerreserved_plus__VARNAME__",
+			  generatedEnvironment.nonterminals[0].productionRules[1].values[1]->name);
+	EXPECT_EQ("VARNAME",
 			  generatedEnvironment.nonterminals[0].productionRules[1].values[0]->name);
 
 	
