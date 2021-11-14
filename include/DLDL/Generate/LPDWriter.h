@@ -23,13 +23,14 @@ namespace DLDL::generate
 
 		static deamer::file::tool::File GetCompilerGenerator(ir::Language* language);
 
-		static deamer::file::tool::File GetMain(const std::vector<ir::Language*>& languages);
+		static deamer::file::tool::File GetMain(const std::vector<ir::Language*>& languages,
+												bool multiProject);
 
 		deamer::file::tool::File GetFileContentSourceFile(ir::Language* language,
-		                                                  const ir::LPD& lpd) override;
+														  const ir::LPD& lpd) override;
 
 		deamer::file::tool::File GetFileContentHeaderFile(ir::Language* language,
-		                                                  const ir::LPD& lpd) override;
+														  const ir::LPD& lpd) override;
 
 		static std::string GetTextFromIREnum(ir::Type type);
 

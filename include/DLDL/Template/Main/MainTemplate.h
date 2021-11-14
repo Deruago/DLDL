@@ -1,13 +1,12 @@
-#ifndef DST_MAINTEMPLATE_cpp
-#define DST_MAINTEMPLATE_cpp
+#ifndef DLDL_FILETEMPLATE_MAINTEMPLATE_h
+#define DLDL_FILETEMPLATE_MAINTEMPLATE_h
 
+#include <string>
 #include <variant>
 #include <vector>
-#include <string>
 
 namespace DLDL::filetemplate
 {
-
 	/*!	\class mainTemplate
 	 *
 	 *	\brief Generates code for "mainTemplate"
@@ -29,15 +28,16 @@ namespace DLDL::filetemplate
 			left_angle_bracket_,
 			left_bracket_,
 			left_curly_bracket_,
+			optional_project_type_,
+			project_type_,
+			project_type_value_,
 			right_angle_bracket_,
 			right_bracket_,
 			right_curly_bracket_,
 			root_language_,
 			root_language_includes_,
 
-
 		};
-
 
 		enum class ScopeType
 		{
@@ -47,76 +47,80 @@ namespace DLDL::filetemplate
 			Default_,
 			Upper_,
 			Lower_,
+
+			Snake_,
+			Slash_,
+			BackSlash_,
+			Colon_,
+			DoubleColon_,
+
 			Variable_Field_,
 			Variable_Field_Separator_,
 			Function_Field_,
 			Function_Field_Separator_,
 
-
 		};
 
-
-		static constexpr const char* ConvertEnumToName(::DLDL::filetemplate::mainTemplate::Type enumerationValue)
+		static constexpr const char*
+		ConvertEnumToName(::DLDL::filetemplate::mainTemplate::Type enumerationValue)
 		{
 			switch (enumerationValue)
 			{
-			case ::DLDL::filetemplate::mainTemplate::Type::file_:
-			{
+			case ::DLDL::filetemplate::mainTemplate::Type::file_: {
 				return "file";
 			}
 
-			case ::DLDL::filetemplate::mainTemplate::Type::generate_root_language_:
-			{
+			case ::DLDL::filetemplate::mainTemplate::Type::generate_root_language_: {
 				return "generate_root_language";
 			}
 
-			case ::DLDL::filetemplate::mainTemplate::Type::left_angle_bracket_:
-			{
+			case ::DLDL::filetemplate::mainTemplate::Type::left_angle_bracket_: {
 				return "left_angle_bracket";
 			}
 
-			case ::DLDL::filetemplate::mainTemplate::Type::left_bracket_:
-			{
+			case ::DLDL::filetemplate::mainTemplate::Type::left_bracket_: {
 				return "left_bracket";
 			}
 
-			case ::DLDL::filetemplate::mainTemplate::Type::left_curly_bracket_:
-			{
+			case ::DLDL::filetemplate::mainTemplate::Type::left_curly_bracket_: {
 				return "left_curly_bracket";
 			}
 
-			case ::DLDL::filetemplate::mainTemplate::Type::right_angle_bracket_:
-			{
+			case ::DLDL::filetemplate::mainTemplate::Type::optional_project_type_: {
+				return "optional_project_type";
+			}
+
+			case ::DLDL::filetemplate::mainTemplate::Type::project_type_: {
+				return "project_type";
+			}
+
+			case ::DLDL::filetemplate::mainTemplate::Type::project_type_value_: {
+				return "project_type_value";
+			}
+
+			case ::DLDL::filetemplate::mainTemplate::Type::right_angle_bracket_: {
 				return "right_angle_bracket";
 			}
 
-			case ::DLDL::filetemplate::mainTemplate::Type::right_bracket_:
-			{
+			case ::DLDL::filetemplate::mainTemplate::Type::right_bracket_: {
 				return "right_bracket";
 			}
 
-			case ::DLDL::filetemplate::mainTemplate::Type::right_curly_bracket_:
-			{
+			case ::DLDL::filetemplate::mainTemplate::Type::right_curly_bracket_: {
 				return "right_curly_bracket";
 			}
 
-			case ::DLDL::filetemplate::mainTemplate::Type::root_language_:
-			{
+			case ::DLDL::filetemplate::mainTemplate::Type::root_language_: {
 				return "root_language";
 			}
 
-			case ::DLDL::filetemplate::mainTemplate::Type::root_language_includes_:
-			{
+			case ::DLDL::filetemplate::mainTemplate::Type::root_language_includes_: {
 				return "root_language_includes";
 			}
-
-
 			}
 
 			return "";
 		}
-
-
 
 	public:
 		struct VariableBase
@@ -126,7 +130,8 @@ namespace DLDL::filetemplate
 			std::variant<std::string, std::vector<VariableBase*>> value;
 			bool isString = true;
 
-			::DLDL::filetemplate::mainTemplate::Type type = ::DLDL::filetemplate::mainTemplate::Type::Unknown;
+			::DLDL::filetemplate::mainTemplate::Type type =
+				::DLDL::filetemplate::mainTemplate::Type::Unknown;
 
 			VariableBase() : VariableBase(std::vector<VariableBase*>())
 			{
@@ -157,7 +162,7 @@ namespace DLDL::filetemplate
 				return this;
 			}
 
-			std::string GetValue()
+			virtual std::string GetValue()
 			{
 				if (isString)
 				{
@@ -252,7 +257,7 @@ namespace DLDL::filetemplate
 					// then create a vector.
 					auto& currentValue = std::get<std::string>(value);
 					auto* currentValueAsVariableBase = new VariableBase(currentValue);
-					value = std::vector<VariableBase*>({ currentValueAsVariableBase, variable });
+					value = std::vector<VariableBase*>({currentValueAsVariableBase, variable});
 
 					isString = false;
 				}
@@ -292,7 +297,6 @@ namespace DLDL::filetemplate
 			return variable;
 		}
 
-
 		static VariableBase* GenerateVariable(const std::string& variable)
 		{
 			return new VariableBase(variable);
@@ -300,42 +304,256 @@ namespace DLDL::filetemplate
 
 		struct VariableScope : public VariableBase
 		{
-			::DLDL::filetemplate::mainTemplate::ScopeType scope_type = ::DLDL::filetemplate::mainTemplate::ScopeType::Unknown;
+			::DLDL::filetemplate::mainTemplate::ScopeType scope_type =
+				::DLDL::filetemplate::mainTemplate::ScopeType::Unknown;
 			bool isReserved = false;
 
-			VariableScope(::DLDL::filetemplate::mainTemplate::ScopeType scope_type_, bool isReserved_ = false) : VariableBase(), scope_type(scope_type_), isReserved(isReserved_)
+			VariableScope(::DLDL::filetemplate::mainTemplate::ScopeType scope_type_,
+						  bool isReserved_ = false)
+				: VariableBase(),
+				  scope_type(scope_type_),
+				  isReserved(isReserved_)
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::Scope;
 			}
 
-			VariableScope(const char* text, ::DLDL::filetemplate::mainTemplate::ScopeType scope_type_, bool isReserved_ = false) : VariableBase(text), scope_type(scope_type_), isReserved(isReserved_)
+			VariableScope(const char* text,
+						  ::DLDL::filetemplate::mainTemplate::ScopeType scope_type_,
+						  bool isReserved_ = false)
+				: VariableBase(text),
+				  scope_type(scope_type_),
+				  isReserved(isReserved_)
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::Scope;
 			}
 
-			VariableScope(std::vector<VariableBase*> variable, ::DLDL::filetemplate::mainTemplate::ScopeType scope_type_, bool isReserved_ = false) : VariableBase(variable), scope_type(scope_type_), isReserved(isReserved_)
+			VariableScope(std::vector<VariableBase*> variable,
+						  ::DLDL::filetemplate::mainTemplate::ScopeType scope_type_,
+						  bool isReserved_ = false)
+				: VariableBase(variable),
+				  scope_type(scope_type_),
+				  isReserved(isReserved_)
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::Scope;
+			}
+		};
+
+		struct Variable_ReservedScope_Upper : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Upper(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::mainTemplate::ScopeType::Upper_, true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string upperVariant;
+				std::string currentValue = base->GetValue();
+
+				for (const auto character : currentValue)
+				{
+					upperVariant += std::toupper(character);
+				}
+
+				return upperVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Lower : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Lower(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::mainTemplate::ScopeType::Lower_, true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string lowerVariant;
+				std::string currentValue = base->GetValue();
+
+				for (const auto character : currentValue)
+				{
+					lowerVariant += std::tolower(character);
+				}
+
+				return lowerVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Snake : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Snake(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::mainTemplate::ScopeType::Snake_, true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string snakeVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						snakeVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						snakeVariant += '_';
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!snakeVariant.empty() && lastWasNonAlpha)
+				{
+					snakeVariant.pop_back();
+				}
+
+				return snakeVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Slash : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Slash(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::mainTemplate::ScopeType::Slash_, true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string slashVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						slashVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						slashVariant += '/';
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!slashVariant.empty() && lastWasNonAlpha)
+				{
+					slashVariant.pop_back();
+				}
+
+				return slashVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_DoubleColon : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_DoubleColon(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::mainTemplate::ScopeType::DoubleColon_, true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string doubleColonVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						doubleColonVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						doubleColonVariant += "::";
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!doubleColonVariant.empty() && lastWasNonAlpha)
+				{
+					doubleColonVariant.pop_back();
+					doubleColonVariant.pop_back();
+				}
+
+				return doubleColonVariant;
 			}
 		};
 
 		struct VariableScopes : public VariableBase
 		{
 			// Default scopes
-			VariableBase* default_ = new VariableScope(::DLDL::filetemplate::mainTemplate::ScopeType::Default_, true);
-			VariableBase* upper_ = new VariableScope(::DLDL::filetemplate::mainTemplate::ScopeType::Upper_, true);
-			VariableBase* lower_ = new VariableScope(::DLDL::filetemplate::mainTemplate::ScopeType::Lower_, true);
-			VariableBase* variable_field_ = new VariableScope(::DLDL::filetemplate::mainTemplate::ScopeType::Variable_Field_, true);
-			VariableBase* variable_field_separator_ = new VariableScope("\n", ::DLDL::filetemplate::mainTemplate::ScopeType::Variable_Field_Separator_, true);
+			VariableBase* default_ =
+				new VariableScope(::DLDL::filetemplate::mainTemplate::ScopeType::Default_, true);
+			VariableBase* upper_ = new Variable_ReservedScope_Upper(this);
+			VariableBase* lower_ = new Variable_ReservedScope_Lower(this);
+
+			VariableBase* snake_ = new Variable_ReservedScope_Snake(this);
+			VariableBase* slash_ = new Variable_ReservedScope_Slash(this);
+			VariableBase* double_colon_ = new Variable_ReservedScope_DoubleColon(this);
+
+			VariableBase* variable_field_ = new VariableScope(
+				::DLDL::filetemplate::mainTemplate::ScopeType::Variable_Field_, true);
+			VariableBase* variable_field_separator_ = new VariableScope(
+				"\n", ::DLDL::filetemplate::mainTemplate::ScopeType::Variable_Field_Separator_,
+				true);
 
 			// Ctor
-			VariableScopes() : VariableBase() {}
+			VariableScopes() : VariableBase()
+			{
+			}
 
-			VariableScopes(const char* text) : VariableBase(text) {}
+			VariableScopes(const char* text) : VariableBase(text)
+			{
+			}
 
-			VariableScopes(const std::string& text) : VariableBase(text) {}
+			VariableScopes(const std::string& text) : VariableBase(text)
+			{
+			}
 
-			VariableScopes(std::vector<VariableBase*> variables) : VariableBase(variables) {}
+			VariableScopes(std::vector<VariableBase*> variables) : VariableBase(variables)
+			{
+			}
 
 			// Dtor
 			virtual ~VariableScopes() override = default;
@@ -347,32 +565,32 @@ namespace DLDL::filetemplate
 			}
 			VariableBase* Upper()
 			{
-				std::string upperVariant;
-				std::string currentValue = GetValue();
-
-				for (const auto character : currentValue)
-				{
-					upperVariant += std::toupper(character);
-				}
-
-				*upper_ = upperVariant;
-
 				return upper_;
 			}
 
 			VariableBase* Lower()
 			{
-				std::string lowerVariant;
-				std::string currentValue = GetValue();
-
-				for (const auto character : currentValue)
-				{
-					lowerVariant += std::tolower(character);
-				}
-
-				*lower_ = lowerVariant;
-
 				return lower_;
+			}
+
+			VariableBase* Underscore()
+			{
+				return snake_;
+			}
+
+			VariableBase* Snake()
+			{
+				return snake_;
+			}
+
+			VariableBase* Slash()
+			{
+				return slash_;
+			}
+
+			VariableBase* DoubleColon()
+			{
+				return double_colon_;
 			}
 
 			VariableBase* Variable_Field()
@@ -394,10 +612,8 @@ namespace DLDL::filetemplate
 		};
 
 	public:
-
 		struct Variable_file_ : public VariableScopes
 		{
-
 			static constexpr auto name = "file_";
 
 			VariableBase* Content_ = GenerateVariable("");
@@ -407,7 +623,6 @@ namespace DLDL::filetemplate
 			VariableBase* Namespace_ = GenerateVariable("");
 			VariableBase* Target_language_ = GenerateVariable("");
 
-
 			Variable_file_() : VariableScopes()
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::file_;
@@ -415,30 +630,41 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_file_() override = default;
 
-			Variable_file_(mainTemplate* maintemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_file_(mainTemplate* maintemplate_, const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::file_;
-				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable(maintemplate_->root_language_includes_->Variable_Field()), GenerateVariable("\n#include \"Deamer/File/Generate/Compiler"), GenerateVariable("."), GenerateVariable("h\"\nint main(int argc, char* argv[])\n"), GenerateVariable("{"), GenerateVariable("\n\t"), GenerateVariable(maintemplate_->generate_root_language_->Variable_Field()), GenerateVariable("\n\treturn 0;\n"), GenerateVariable("}"), GenerateVariable("\n") }));
+				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>(
+					{GenerateVariable(maintemplate_->root_language_includes_->Variable_Field()),
+					 GenerateVariable("\n#include \"Deamer/File/Generate/Compiler"),
+					 GenerateVariable("."),
+					 GenerateVariable("h\"\n\nint main(int argc, char* argv[])\n"),
+					 GenerateVariable("{"), GenerateVariable("\n\t"),
+					 GenerateVariable(maintemplate_->generate_root_language_->Variable_Field()),
+					 GenerateVariable("\n\n\treturn 0;\n"), GenerateVariable("}"),
+					 GenerateVariable("\n")}));
 				Content_->type = ::DLDL::filetemplate::mainTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(Class_postfix_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(Class_postfix_) =
+					VariableBase(std::vector<VariableBase*>({}));
 				Class_postfix_->type = ::DLDL::filetemplate::mainTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(Extension_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(Extension_) =
+					VariableBase(std::vector<VariableBase*>({GenerateVariable("h")}));
 				Extension_->type = ::DLDL::filetemplate::mainTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(File_name_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(File_name_) =
+					VariableBase(std::vector<VariableBase*>({GenerateVariable("main")}));
 				File_name_->type = ::DLDL::filetemplate::mainTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(Namespace_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(Namespace_) = VariableBase(
+					std::vector<VariableBase*>({GenerateVariable("DLDL::filetemplate")}));
 				Namespace_->type = ::DLDL::filetemplate::mainTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(Target_language_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(Target_language_) =
+					VariableBase(std::vector<VariableBase*>({GenerateVariable("C++")}));
 				Target_language_->type = ::DLDL::filetemplate::mainTemplate::Type::Scope;
-
-
 			}
-
 
 			VariableBase* Content() const
 			{
@@ -470,7 +696,6 @@ namespace DLDL::filetemplate
 				return Target_language_;
 			}
 
-
 			Variable_file_& operator=(const Variable_file_& variable)
 			{
 				if (&variable == this)
@@ -488,18 +713,13 @@ namespace DLDL::filetemplate
 				*Namespace_ = *variable.Namespace_;
 				*Target_language_ = *variable.Target_language_;
 
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_generate_root_language_ : public VariableScopes
 		{
-
 			static constexpr auto name = "generate_root_language_";
-
-
 
 			Variable_generate_root_language_() : VariableScopes()
 			{
@@ -508,15 +728,15 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_generate_root_language_() override = default;
 
-			Variable_generate_root_language_(mainTemplate* maintemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_generate_root_language_(mainTemplate* maintemplate_,
+											 const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::generate_root_language_;
-
 			}
 
-
-
-			Variable_generate_root_language_& operator=(const Variable_generate_root_language_& variable)
+			Variable_generate_root_language_&
+			operator=(const Variable_generate_root_language_& variable)
 			{
 				if (&variable == this)
 				{
@@ -526,19 +746,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_left_angle_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "left_angle_bracket_";
-
-
 
 			Variable_left_angle_bracket_() : VariableScopes()
 			{
@@ -547,13 +761,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_left_angle_bracket_() override = default;
 
-			Variable_left_angle_bracket_(mainTemplate* maintemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_left_angle_bracket_(mainTemplate* maintemplate_,
+										 const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::left_angle_bracket_;
-
 			}
-
-
 
 			Variable_left_angle_bracket_& operator=(const Variable_left_angle_bracket_& variable)
 			{
@@ -565,19 +778,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_left_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "left_bracket_";
-
-
 
 			Variable_left_bracket_() : VariableScopes()
 			{
@@ -586,13 +793,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_left_bracket_() override = default;
 
-			Variable_left_bracket_(mainTemplate* maintemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_left_bracket_(mainTemplate* maintemplate_,
+								   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::left_bracket_;
-
 			}
-
-
 
 			Variable_left_bracket_& operator=(const Variable_left_bracket_& variable)
 			{
@@ -604,19 +810,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_left_curly_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "left_curly_bracket_";
-
-
 
 			Variable_left_curly_bracket_() : VariableScopes()
 			{
@@ -625,13 +825,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_left_curly_bracket_() override = default;
 
-			Variable_left_curly_bracket_(mainTemplate* maintemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_left_curly_bracket_(mainTemplate* maintemplate_,
+										 const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::left_curly_bracket_;
-
 			}
-
-
 
 			Variable_left_curly_bracket_& operator=(const Variable_left_curly_bracket_& variable)
 			{
@@ -643,19 +842,110 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
+				return *this;
+			}
+		};
 
+		struct Variable_optional_project_type_ : public VariableScopes
+		{
+			static constexpr auto name = "optional_project_type_";
+
+			Variable_optional_project_type_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::mainTemplate::Type::optional_project_type_;
+			}
+
+			virtual ~Variable_optional_project_type_() override = default;
+
+			Variable_optional_project_type_(mainTemplate* maintemplate_,
+											const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::mainTemplate::Type::optional_project_type_;
+			}
+
+			Variable_optional_project_type_&
+			operator=(const Variable_optional_project_type_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
 
 				return *this;
 			}
+		};
 
+		struct Variable_project_type_ : public VariableScopes
+		{
+			static constexpr auto name = "project_type_";
+
+			Variable_project_type_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::mainTemplate::Type::project_type_;
+			}
+
+			virtual ~Variable_project_type_() override = default;
+
+			Variable_project_type_(mainTemplate* maintemplate_,
+								   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::mainTemplate::Type::project_type_;
+			}
+
+			Variable_project_type_& operator=(const Variable_project_type_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
+		struct Variable_project_type_value_ : public VariableScopes
+		{
+			static constexpr auto name = "project_type_value_";
+
+			Variable_project_type_value_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::mainTemplate::Type::project_type_value_;
+			}
+
+			virtual ~Variable_project_type_value_() override = default;
+
+			Variable_project_type_value_(mainTemplate* maintemplate_,
+										 const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::mainTemplate::Type::project_type_value_;
+			}
+
+			Variable_project_type_value_& operator=(const Variable_project_type_value_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
 		};
 
 		struct Variable_right_angle_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "right_angle_bracket_";
-
-
 
 			Variable_right_angle_bracket_() : VariableScopes()
 			{
@@ -664,13 +954,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_right_angle_bracket_() override = default;
 
-			Variable_right_angle_bracket_(mainTemplate* maintemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_right_angle_bracket_(mainTemplate* maintemplate_,
+										  const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::right_angle_bracket_;
-
 			}
-
-
 
 			Variable_right_angle_bracket_& operator=(const Variable_right_angle_bracket_& variable)
 			{
@@ -682,19 +971,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_right_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "right_bracket_";
-
-
 
 			Variable_right_bracket_() : VariableScopes()
 			{
@@ -703,13 +986,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_right_bracket_() override = default;
 
-			Variable_right_bracket_(mainTemplate* maintemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_right_bracket_(mainTemplate* maintemplate_,
+									const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::right_bracket_;
-
 			}
-
-
 
 			Variable_right_bracket_& operator=(const Variable_right_bracket_& variable)
 			{
@@ -721,19 +1003,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_right_curly_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "right_curly_bracket_";
-
-
 
 			Variable_right_curly_bracket_() : VariableScopes()
 			{
@@ -742,13 +1018,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_right_curly_bracket_() override = default;
 
-			Variable_right_curly_bracket_(mainTemplate* maintemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_right_curly_bracket_(mainTemplate* maintemplate_,
+										  const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::right_curly_bracket_;
-
 			}
-
-
 
 			Variable_right_curly_bracket_& operator=(const Variable_right_curly_bracket_& variable)
 			{
@@ -760,19 +1035,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_root_language_ : public VariableScopes
 		{
-
 			static constexpr auto name = "root_language_";
-
-
 
 			Variable_root_language_() : VariableScopes()
 			{
@@ -781,13 +1050,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_root_language_() override = default;
 
-			Variable_root_language_(mainTemplate* maintemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_root_language_(mainTemplate* maintemplate_,
+									const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::root_language_;
-
 			}
-
-
 
 			Variable_root_language_& operator=(const Variable_root_language_& variable)
 			{
@@ -799,19 +1067,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_root_language_includes_ : public VariableScopes
 		{
-
 			static constexpr auto name = "root_language_includes_";
-
-
 
 			Variable_root_language_includes_() : VariableScopes()
 			{
@@ -820,15 +1082,15 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_root_language_includes_() override = default;
 
-			Variable_root_language_includes_(mainTemplate* maintemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_root_language_includes_(mainTemplate* maintemplate_,
+											 const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::root_language_includes_;
-
 			}
 
-
-
-			Variable_root_language_includes_& operator=(const Variable_root_language_includes_& variable)
+			Variable_root_language_includes_&
+			operator=(const Variable_root_language_includes_& variable)
 			{
 				if (&variable == this)
 				{
@@ -838,13 +1100,9 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
-
 
 	public:
 		inline static std::vector<VariableBase*> variables_to_delete = std::vector<VariableBase*>();
@@ -856,43 +1114,83 @@ namespace DLDL::filetemplate
 		// Members that one can directly access.
 		// e.g. mainTemplate.member = "auto-generated";
 		Variable_file_* file_ = new Variable_file_();
-		Variable_generate_root_language_* generate_root_language_ = new Variable_generate_root_language_();
+		Variable_generate_root_language_* generate_root_language_ =
+			new Variable_generate_root_language_();
 		Variable_left_angle_bracket_* left_angle_bracket_ = new Variable_left_angle_bracket_();
 		Variable_left_bracket_* left_bracket_ = new Variable_left_bracket_();
 		Variable_left_curly_bracket_* left_curly_bracket_ = new Variable_left_curly_bracket_();
+		Variable_optional_project_type_* optional_project_type_ =
+			new Variable_optional_project_type_();
+		Variable_project_type_* project_type_ = new Variable_project_type_();
+		Variable_project_type_value_* project_type_value_ = new Variable_project_type_value_();
 		Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
 		Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
 		Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_bracket_();
 		Variable_root_language_* root_language_ = new Variable_root_language_();
-		Variable_root_language_includes_* root_language_includes_ = new Variable_root_language_includes_();
-
+		Variable_root_language_includes_* root_language_includes_ =
+			new Variable_root_language_includes_();
 
 	public:
 		mainTemplate()
 		{
-			*file_ = Variable_file_(this, std::vector<VariableBase*>({  }));
-			*generate_root_language_ = Variable_generate_root_language_(this, std::vector<VariableBase*>({ GenerateVariable("\t// Generate: "), GenerateVariable(root_language_->This()), GenerateVariable("\n\t::"), GenerateVariable(root_language_->This()), GenerateVariable("::CompilerGenerator "), GenerateVariable(root_language_->This()), GenerateVariable("_compiler;\n\t::deamer::file::generate::Compiler "), GenerateVariable(root_language_->This()), GenerateVariable("_WriteToDisk("), GenerateVariable(root_language_->This()), GenerateVariable("_compiler"), GenerateVariable("."), GenerateVariable("Generate());\n\t"), GenerateVariable(root_language_->This()), GenerateVariable("_WriteToDisk"), GenerateVariable("."), GenerateVariable("Generate();") }));
-			*left_angle_bracket_ = Variable_left_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("<") }));
-			*left_bracket_ = Variable_left_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("{") }));
-			*left_curly_bracket_ = Variable_left_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("(") }));
-			*right_angle_bracket_ = Variable_right_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(">") }));
-			*right_bracket_ = Variable_right_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("}") }));
-			*right_curly_bracket_ = Variable_right_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(")") }));
-			*root_language_ = Variable_root_language_(this, std::vector<VariableBase*>({  }));
-			*root_language_includes_ = Variable_root_language_includes_(this, std::vector<VariableBase*>({ GenerateVariable("#include \""), GenerateVariable(root_language_->This()), GenerateVariable("/CompilerGenerator"), GenerateVariable("."), GenerateVariable("h\"") }));
-
+			*file_ = Variable_file_(this, std::vector<VariableBase*>({}));
+			*generate_root_language_ = Variable_generate_root_language_(
+				this,
+				std::vector<VariableBase*>(
+					{GenerateVariable("\t// Generate: "), GenerateVariable(root_language_->This()),
+					 GenerateVariable("\n\t::"), GenerateVariable(root_language_->This()),
+					 GenerateVariable("::CompilerGenerator "),
+					 GenerateVariable(root_language_->This()),
+					 GenerateVariable("_compiler;\n\t::deamer::file::generate::Compiler "),
+					 GenerateVariable(root_language_->This()), GenerateVariable("_WriteToDisk("),
+					 GenerateVariable(root_language_->This()), GenerateVariable("_compiler"),
+					 GenerateVariable("."), GenerateVariable("Generate());\n\t"),
+					 GenerateVariable(optional_project_type_->This()), GenerateVariable("\n\t"),
+					 GenerateVariable(root_language_->This()), GenerateVariable("_WriteToDisk"),
+					 GenerateVariable("."), GenerateVariable("Generate();")}));
+			*left_angle_bracket_ = Variable_left_angle_bracket_(
+				this, std::vector<VariableBase*>({GenerateVariable("<")}));
+			*left_bracket_ =
+				Variable_left_bracket_(this, std::vector<VariableBase*>({GenerateVariable("{")}));
+			*left_curly_bracket_ = Variable_left_curly_bracket_(
+				this, std::vector<VariableBase*>({GenerateVariable("(")}));
+			*optional_project_type_ = Variable_optional_project_type_(
+				this, std::vector<VariableBase*>({GenerateVariable(project_type_->This())}));
+			*project_type_ = Variable_project_type_(
+				this, std::vector<VariableBase*>(
+						  {GenerateVariable(root_language_->This()),
+						   GenerateVariable("_WriteToDisk"), GenerateVariable("."),
+						   GenerateVariable(
+							   "SetProjectType(::deamer::file::generate::Compiler::ProjectType::"),
+						   GenerateVariable(project_type_value_->This()), GenerateVariable(");")}));
+			*project_type_value_ =
+				Variable_project_type_value_(this, std::vector<VariableBase*>({}));
+			*right_angle_bracket_ = Variable_right_angle_bracket_(
+				this, std::vector<VariableBase*>({GenerateVariable(">")}));
+			*right_bracket_ =
+				Variable_right_bracket_(this, std::vector<VariableBase*>({GenerateVariable("}")}));
+			*right_curly_bracket_ = Variable_right_curly_bracket_(
+				this, std::vector<VariableBase*>({GenerateVariable(")")}));
+			*root_language_ = Variable_root_language_(this, std::vector<VariableBase*>({}));
+			*root_language_includes_ = Variable_root_language_includes_(
+				this, std::vector<VariableBase*>({GenerateVariable("#include \""),
+												  GenerateVariable(root_language_->This()),
+												  GenerateVariable("/CompilerGenerator"),
+												  GenerateVariable("."), GenerateVariable("h\"")}));
 
 			variables_.emplace_back(file_);
 			variables_.emplace_back(generate_root_language_);
 			variables_.emplace_back(left_angle_bracket_);
 			variables_.emplace_back(left_bracket_);
 			variables_.emplace_back(left_curly_bracket_);
+			variables_.emplace_back(optional_project_type_);
+			variables_.emplace_back(project_type_);
+			variables_.emplace_back(project_type_value_);
 			variables_.emplace_back(right_angle_bracket_);
 			variables_.emplace_back(right_bracket_);
 			variables_.emplace_back(right_curly_bracket_);
 			variables_.emplace_back(root_language_);
 			variables_.emplace_back(root_language_includes_);
-
 		}
 
 		virtual ~mainTemplate()
@@ -930,4 +1228,4 @@ namespace DLDL::filetemplate
 	};
 }
 
-#endif // DST_MAINTEMPLATE_cpp
+#endif // DLDL_FILETEMPLATE_MAINTEMPLATE_h

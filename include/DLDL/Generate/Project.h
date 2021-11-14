@@ -1,14 +1,12 @@
 #ifndef DLDL_GENERATE_PROJECT_H
 #define DLDL_GENERATE_PROJECT_H
 
-#include <filesystem>
-#include <fstream>
-
-
+#include "DLDL/Generate/LPDWriter.h"
 #include "DLDL/IR/Language.h"
 #include "Deamer/File/Tool/Directory.h"
 #include "Deamer/File/Tool/File.h"
-#include "LPDWriter.h"
+#include <filesystem>
+#include <fstream>
 
 namespace DLDL::generate
 {
@@ -17,12 +15,14 @@ namespace DLDL::generate
 	private:
 		std::vector<ir::Language*> languages;
 		deamer::file::tool::Directory CompilerGenerator;
+		bool multiProject;
 
 	public:
-		Project(std::vector<ir::Language*> languages_,
+		Project(std::vector<ir::Language*> languages_, bool multiProject_ = false,
 				const std::string& compilerGeneratorDirName = "CompilerGenerator")
 			: languages(languages_),
-			  CompilerGenerator(compilerGeneratorDirName)
+			  CompilerGenerator(compilerGeneratorDirName),
+			  multiProject(multiProject_)
 		{
 		}
 
@@ -30,15 +30,15 @@ namespace DLDL::generate
 		void WriteToDisk(deamer::file::tool::Directory directoryToWrite, std::string path = "./")
 		{
 			path += directoryToWrite.GetThisDirectory() + "/";
-			
+
 			std::filesystem::create_directories(path);
-			
+
 			for (const auto& file : directoryToWrite.GetFiles())
 			{
 				const auto filePath = path + file.GetCompleteFileName();
 
-				if (file.GetGenerationLevel() ==
-						::deamer::file::tool::GenerationLevel::Dont_generate_if_file_already_exists &&
+				if (file.GetGenerationLevel() == ::deamer::file::tool::GenerationLevel::
+													 Dont_generate_if_file_already_exists &&
 					std::filesystem::exists(filePath) && !std::filesystem::is_empty(filePath))
 				{
 					return;
@@ -51,7 +51,7 @@ namespace DLDL::generate
 
 				outputFile.close();
 			}
-			
+
 			for (const auto& childDirectory : directoryToWrite.GetDirectories())
 			{
 				WriteToDisk(childDirectory, path);
@@ -63,9 +63,9 @@ namespace DLDL::generate
 			deamer::file::tool::Directory includeDir("include");
 			deamer::file::tool::Directory libDir("lib");
 
-			CompilerGenerator.AddFile(LPDWriter::GetMain(languages));
+			CompilerGenerator.AddFile(LPDWriter::GetMain(languages, multiProject));
 			CompilerGenerator.AddFile(LPDWriter::GetCMakeLists(languages));
-			
+
 			for (auto* language : languages)
 			{
 				deamer::file::tool::Directory languageHeaderDir(language->GetName());
@@ -101,7 +101,7 @@ namespace DLDL::generate
 
 			CompilerGenerator += libDir;
 			CompilerGenerator += includeDir;
-			
+
 			return CompilerGenerator;
 		}
 
@@ -114,7 +114,7 @@ namespace DLDL::generate
 			}
 
 			output += "CompilerGenerator_Main";
-			
+
 			return output;
 		}
 
