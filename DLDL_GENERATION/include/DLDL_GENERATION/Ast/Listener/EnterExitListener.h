@@ -1,7 +1,6 @@
 #ifndef DLDL_GENERATION_AST_LISTENER_ENTEREXITLISTENER_H
 #define DLDL_GENERATION_AST_LISTENER_ENTEREXITLISTENER_H
 
-#include <Deamer/External/Cpp/Ast/Listener.h>
 #include "DLDL_GENERATION/Ast/Node/DLDL_GENERATION.h"
 #include "DLDL_GENERATION/Ast/Enum/Type.h"
 
@@ -23,6 +22,8 @@
 #include "DLDL_GENERATION/Ast/Node/tool.h"
 #include "DLDL_GENERATION/Ast/Node/argument_data.h"
 
+#include <Deamer/External/Cpp/Ast/Listener.h>
+#include <Deamer/Algorithm/Tree/DFS.h>
 
 namespace DLDL_GENERATION { namespace ast { namespace listener { 
 
@@ -36,6 +37,16 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 	public:
 		void Dispatch(const ::deamer::external::cpp::ast::Node* node)  override
 		{
+			::deamer::algorithm::tree::DFS::Execute::Heap::Search(node,
+				&::deamer::external::cpp::ast::Node::GetParent,
+				&::deamer::external::cpp::ast::Node::GetNodes,
+				&EnterExitListener::DispatchEntry,
+				&EnterExitListener::DispatchExit,
+				this);
+		}
+
+		void DispatchEntry(const ::deamer::external::cpp::ast::Node* node) 
+		{
 			const auto enumeratedValue = static_cast<DLDL_GENERATION::ast::Type>(node->GetType());
 			switch(enumeratedValue)
 			{
@@ -43,6 +54,7 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 			
 			case DLDL_GENERATION::ast::Type::GENERATE:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::GENERATE*>(node));
@@ -51,6 +63,7 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 
 			case DLDL_GENERATION::ast::Type::INTEGRATE:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::INTEGRATE*>(node));
@@ -59,6 +72,7 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 
 			case DLDL_GENERATION::ast::Type::ARGUMENT:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::ARGUMENT*>(node));
@@ -67,6 +81,7 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 
 			case DLDL_GENERATION::ast::Type::VALUE:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::VALUE*>(node));
@@ -75,6 +90,7 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 
 			case DLDL_GENERATION::ast::Type::SYMBOLS:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::SYMBOLS*>(node));
@@ -83,6 +99,7 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 
 			case DLDL_GENERATION::ast::Type::ESCAPE_CHARS:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::ESCAPE_CHARS*>(node));
@@ -98,14 +115,6 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::program*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_GENERATION::ast::node::program*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -115,14 +124,6 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::stmts*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_GENERATION::ast::node::stmts*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -132,14 +133,6 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::stmt*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_GENERATION::ast::node::stmt*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -149,14 +142,6 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::generate_declaration*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_GENERATION::ast::node::generate_declaration*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -166,14 +151,6 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::integrate_declaration*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_GENERATION::ast::node::integrate_declaration*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -183,14 +160,6 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::argument_declaration*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_GENERATION::ast::node::argument_declaration*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -200,14 +169,6 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::type*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_GENERATION::ast::node::type*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -217,14 +178,6 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::tool*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_GENERATION::ast::node::tool*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -234,10 +187,150 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GENERATION::ast::node::argument_data*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
+				break;
+			}
 
+			}
+		}
+
+		void DispatchExit(const ::deamer::external::cpp::ast::Node* node) 
+		{
+			const auto enumeratedValue = static_cast<DLDL_GENERATION::ast::Type>(node->GetType());
+			switch(enumeratedValue)
+			{
+			// Terminal cases
+			
+			case DLDL_GENERATION::ast::Type::GENERATE:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GENERATION::ast::node::GENERATE*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GENERATION::ast::Type::INTEGRATE:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GENERATION::ast::node::INTEGRATE*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GENERATION::ast::Type::ARGUMENT:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GENERATION::ast::node::ARGUMENT*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GENERATION::ast::Type::VALUE:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GENERATION::ast::node::VALUE*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GENERATION::ast::Type::SYMBOLS:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GENERATION::ast::node::SYMBOLS*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GENERATION::ast::Type::ESCAPE_CHARS:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GENERATION::ast::node::ESCAPE_CHARS*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+
+			// Nonterminal cases
+			
+			case DLDL_GENERATION::ast::Type::program:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_GENERATION::ast::node::program*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GENERATION::ast::Type::stmts:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_GENERATION::ast::node::stmts*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GENERATION::ast::Type::stmt:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_GENERATION::ast::node::stmt*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GENERATION::ast::Type::generate_declaration:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_GENERATION::ast::node::generate_declaration*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GENERATION::ast::Type::integrate_declaration:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_GENERATION::ast::node::integrate_declaration*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GENERATION::ast::Type::argument_declaration:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_GENERATION::ast::node::argument_declaration*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GENERATION::ast::Type::type:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_GENERATION::ast::node::type*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GENERATION::ast::Type::tool:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_GENERATION::ast::node::tool*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GENERATION::ast::Type::argument_data:
+			{
 				// Exit nonterminal
 				ListenExit(static_cast<const DLDL_GENERATION::ast::node::argument_data*>(node));
 				ExitNonTerminal(node);
@@ -274,6 +367,30 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 		}
 
 		
+		virtual void ListenExit(const DLDL_GENERATION::ast::node::GENERATE* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_GENERATION::ast::node::INTEGRATE* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_GENERATION::ast::node::ARGUMENT* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_GENERATION::ast::node::VALUE* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_GENERATION::ast::node::SYMBOLS* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_GENERATION::ast::node::ESCAPE_CHARS* node) 
+		{
+		}
+
 
 		
 		virtual void ListenEntry(const DLDL_GENERATION::ast::node::program* node) 
@@ -373,15 +490,6 @@ namespace DLDL_GENERATION { namespace ast { namespace listener {
 
 		virtual void ExitAnything(const ::deamer::external::cpp::ast::Node* node) 
 		{
-		}
-	
-	private:
-		void DefaultAction(const ::deamer::external::cpp::ast::Node* node) 
-		{
-			for(const auto* child : node->GetNodes())
-			{
-				Dispatch(child);
-			}
 		}
 	};
 

@@ -1,7 +1,6 @@
 #ifndef DLDL_LEXER_AST_LISTENER_ENTEREXITLISTENER_H
 #define DLDL_LEXER_AST_LISTENER_ENTEREXITLISTENER_H
 
-#include <Deamer/External/Cpp/Ast/Listener.h>
 #include "DLDL_LEXER/Ast/Node/DLDL_LEXER.h"
 #include "DLDL_LEXER/Ast/Enum/Type.h"
 
@@ -23,6 +22,8 @@
 #include "DLDL_LEXER/Ast/Node/tokendeclaration.h"
 #include "DLDL_LEXER/Ast/Node/abstraction.h"
 
+#include <Deamer/External/Cpp/Ast/Listener.h>
+#include <Deamer/Algorithm/Tree/DFS.h>
 
 namespace DLDL_LEXER { namespace ast { namespace listener { 
 
@@ -36,6 +37,16 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 	public:
 		void Dispatch(const ::deamer::external::cpp::ast::Node* node)  override
 		{
+			::deamer::algorithm::tree::DFS::Execute::Heap::Search(node,
+				&::deamer::external::cpp::ast::Node::GetParent,
+				&::deamer::external::cpp::ast::Node::GetNodes,
+				&EnterExitListener::DispatchEntry,
+				&EnterExitListener::DispatchExit,
+				this);
+		}
+
+		void DispatchEntry(const ::deamer::external::cpp::ast::Node* node) 
+		{
 			const auto enumeratedValue = static_cast<DLDL_LEXER::ast::Type>(node->GetType());
 			switch(enumeratedValue)
 			{
@@ -43,6 +54,7 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 			
 			case DLDL_LEXER::ast::Type::DELETE_ABSTRACTION:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::DELETE_ABSTRACTION*>(node));
@@ -51,6 +63,7 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 
 			case DLDL_LEXER::ast::Type::IGNORE_ABSTRACTION:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::IGNORE_ABSTRACTION*>(node));
@@ -59,6 +72,7 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 
 			case DLDL_LEXER::ast::Type::NOVALUE_ABSTRACTION:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION*>(node));
@@ -67,6 +81,7 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 
 			case DLDL_LEXER::ast::Type::CRASH_ABSTRACTION:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::CRASH_ABSTRACTION*>(node));
@@ -75,6 +90,7 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 
 			case DLDL_LEXER::ast::Type::STANDARD_ABSTRACTION:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::STANDARD_ABSTRACTION*>(node));
@@ -83,6 +99,7 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 
 			case DLDL_LEXER::ast::Type::UNKNOWN_ABSTRACTION:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION*>(node));
@@ -91,6 +108,7 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 
 			case DLDL_LEXER::ast::Type::TERMINAL:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::TERMINAL*>(node));
@@ -99,6 +117,7 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 
 			case DLDL_LEXER::ast::Type::REGEX:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::REGEX*>(node));
@@ -107,6 +126,7 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 
 			case DLDL_LEXER::ast::Type::ESCAPE_CHARS:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::ESCAPE_CHARS*>(node));
@@ -115,6 +135,7 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 
 			case DLDL_LEXER::ast::Type::COMMENT:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::COMMENT*>(node));
@@ -130,14 +151,6 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::program*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_LEXER::ast::node::program*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -147,14 +160,6 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::stmts*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_LEXER::ast::node::stmts*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -164,14 +169,6 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::stmt*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_LEXER::ast::node::stmt*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -181,14 +178,6 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::tokendeclaration*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_LEXER::ast::node::tokendeclaration*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -198,10 +187,150 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_LEXER::ast::node::abstraction*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
+				break;
+			}
 
+			}
+		}
+
+		void DispatchExit(const ::deamer::external::cpp::ast::Node* node) 
+		{
+			const auto enumeratedValue = static_cast<DLDL_LEXER::ast::Type>(node->GetType());
+			switch(enumeratedValue)
+			{
+			// Terminal cases
+			
+			case DLDL_LEXER::ast::Type::DELETE_ABSTRACTION:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_LEXER::ast::node::DELETE_ABSTRACTION*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LEXER::ast::Type::IGNORE_ABSTRACTION:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_LEXER::ast::node::IGNORE_ABSTRACTION*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LEXER::ast::Type::NOVALUE_ABSTRACTION:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LEXER::ast::Type::CRASH_ABSTRACTION:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_LEXER::ast::node::CRASH_ABSTRACTION*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LEXER::ast::Type::STANDARD_ABSTRACTION:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_LEXER::ast::node::STANDARD_ABSTRACTION*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LEXER::ast::Type::UNKNOWN_ABSTRACTION:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LEXER::ast::Type::TERMINAL:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_LEXER::ast::node::TERMINAL*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LEXER::ast::Type::REGEX:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_LEXER::ast::node::REGEX*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LEXER::ast::Type::ESCAPE_CHARS:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_LEXER::ast::node::ESCAPE_CHARS*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LEXER::ast::Type::COMMENT:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_LEXER::ast::node::COMMENT*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+
+			// Nonterminal cases
+			
+			case DLDL_LEXER::ast::Type::program:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_LEXER::ast::node::program*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LEXER::ast::Type::stmts:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_LEXER::ast::node::stmts*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LEXER::ast::Type::stmt:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_LEXER::ast::node::stmt*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LEXER::ast::Type::tokendeclaration:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_LEXER::ast::node::tokendeclaration*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LEXER::ast::Type::abstraction:
+			{
 				// Exit nonterminal
 				ListenExit(static_cast<const DLDL_LEXER::ast::node::abstraction*>(node));
 				ExitNonTerminal(node);
@@ -254,6 +383,46 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 		}
 
 		
+		virtual void ListenExit(const DLDL_LEXER::ast::node::DELETE_ABSTRACTION* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_LEXER::ast::node::IGNORE_ABSTRACTION* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_LEXER::ast::node::CRASH_ABSTRACTION* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_LEXER::ast::node::STANDARD_ABSTRACTION* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_LEXER::ast::node::TERMINAL* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_LEXER::ast::node::REGEX* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_LEXER::ast::node::ESCAPE_CHARS* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_LEXER::ast::node::COMMENT* node) 
+		{
+		}
+
 
 		
 		virtual void ListenEntry(const DLDL_LEXER::ast::node::program* node) 
@@ -321,15 +490,6 @@ namespace DLDL_LEXER { namespace ast { namespace listener {
 
 		virtual void ExitAnything(const ::deamer::external::cpp::ast::Node* node) 
 		{
-		}
-	
-	private:
-		void DefaultAction(const ::deamer::external::cpp::ast::Node* node) 
-		{
-			for(const auto* child : node->GetNodes())
-			{
-				Dispatch(child);
-			}
 		}
 	};
 

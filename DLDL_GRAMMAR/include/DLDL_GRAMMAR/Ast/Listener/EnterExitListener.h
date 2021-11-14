@@ -1,7 +1,6 @@
 #ifndef DLDL_GRAMMAR_AST_LISTENER_ENTEREXITLISTENER_H
 #define DLDL_GRAMMAR_AST_LISTENER_ENTEREXITLISTENER_H
 
-#include <Deamer/External/Cpp/Ast/Listener.h>
 #include "DLDL_GRAMMAR/Ast/Node/DLDL_GRAMMAR.h"
 #include "DLDL_GRAMMAR/Ast/Enum/Type.h"
 
@@ -24,6 +23,8 @@
 #include "DLDL_GRAMMAR/Ast/Node/definition.h"
 #include "DLDL_GRAMMAR/Ast/Node/production_rules.h"
 
+#include <Deamer/External/Cpp/Ast/Listener.h>
+#include <Deamer/Algorithm/Tree/DFS.h>
 
 namespace DLDL_GRAMMAR { namespace ast { namespace listener { 
 
@@ -37,6 +38,16 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 	public:
 		void Dispatch(const ::deamer::external::cpp::ast::Node* node)  override
 		{
+			::deamer::algorithm::tree::DFS::Execute::Heap::Search(node,
+				&::deamer::external::cpp::ast::Node::GetParent,
+				&::deamer::external::cpp::ast::Node::GetNodes,
+				&EnterExitListener::DispatchEntry,
+				&EnterExitListener::DispatchExit,
+				this);
+		}
+
+		void DispatchEntry(const ::deamer::external::cpp::ast::Node* node) 
+		{
 			const auto enumeratedValue = static_cast<DLDL_GRAMMAR::ast::Type>(node->GetType());
 			switch(enumeratedValue)
 			{
@@ -44,6 +55,7 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 			
 			case DLDL_GRAMMAR::ast::Type::COMMENT:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::COMMENT*>(node));
@@ -52,6 +64,7 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 
 			case DLDL_GRAMMAR::ast::Type::START_ABSTRACTION:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::START_ABSTRACTION*>(node));
@@ -60,6 +73,7 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 
 			case DLDL_GRAMMAR::ast::Type::GROUP_ABSTRACTION:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION*>(node));
@@ -68,6 +82,7 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 
 			case DLDL_GRAMMAR::ast::Type::INLINE_ABSTRACTION:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION*>(node));
@@ -76,6 +91,7 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 
 			case DLDL_GRAMMAR::ast::Type::INLINE_GROUP_ABSTRACTION:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION*>(node));
@@ -84,6 +100,7 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 
 			case DLDL_GRAMMAR::ast::Type::UNKNOWN_ABSTRACTION:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION*>(node));
@@ -92,6 +109,7 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 
 			case DLDL_GRAMMAR::ast::Type::NONTERMINAL:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::NONTERMINAL*>(node));
@@ -100,6 +118,7 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 
 			case DLDL_GRAMMAR::ast::Type::PRODUCTION_RULE:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::PRODUCTION_RULE*>(node));
@@ -108,6 +127,7 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 
 			case DLDL_GRAMMAR::ast::Type::ESCAPE_CHARS:
 			{
+				// Entry terminal
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::ESCAPE_CHARS*>(node));
@@ -123,14 +143,6 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::program*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::program*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -140,14 +152,6 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::stmts*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::stmts*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -157,14 +161,6 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::stmt*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::stmt*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -174,14 +170,6 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::abstraction_declaration*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::abstraction_declaration*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -191,14 +179,6 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::abstraction*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::abstraction*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -208,14 +188,6 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::definition*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
-
-				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::definition*>(node));
-				ExitNonTerminal(node);
-				ExitAnything(node);
 				break;
 			}
 
@@ -225,10 +197,159 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_GRAMMAR::ast::node::production_rules*>(node));
-				
-				// Go through its children
-				DefaultAction(node);
+				break;
+			}
 
+			}
+		}
+
+		void DispatchExit(const ::deamer::external::cpp::ast::Node* node) 
+		{
+			const auto enumeratedValue = static_cast<DLDL_GRAMMAR::ast::Type>(node->GetType());
+			switch(enumeratedValue)
+			{
+			// Terminal cases
+			
+			case DLDL_GRAMMAR::ast::Type::COMMENT:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::COMMENT*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::START_ABSTRACTION:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::START_ABSTRACTION*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::GROUP_ABSTRACTION:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::INLINE_ABSTRACTION:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::INLINE_GROUP_ABSTRACTION:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::UNKNOWN_ABSTRACTION:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::NONTERMINAL:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::NONTERMINAL*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::PRODUCTION_RULE:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::PRODUCTION_RULE*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::ESCAPE_CHARS:
+			{
+				// Exit terminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::ESCAPE_CHARS*>(node));
+				ExitTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+
+			// Nonterminal cases
+			
+			case DLDL_GRAMMAR::ast::Type::program:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::program*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::stmts:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::stmts*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::stmt:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::stmt*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::abstraction_declaration:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::abstraction_declaration*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::abstraction:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::abstraction*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::definition:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::definition*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_GRAMMAR::ast::Type::production_rules:
+			{
 				// Exit nonterminal
 				ListenExit(static_cast<const DLDL_GRAMMAR::ast::node::production_rules*>(node));
 				ExitNonTerminal(node);
@@ -277,6 +398,42 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 		}
 
 		
+		virtual void ListenExit(const DLDL_GRAMMAR::ast::node::COMMENT* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_GRAMMAR::ast::node::START_ABSTRACTION* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_GRAMMAR::ast::node::NONTERMINAL* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_GRAMMAR::ast::node::PRODUCTION_RULE* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_GRAMMAR::ast::node::ESCAPE_CHARS* node) 
+		{
+		}
+
 
 		
 		virtual void ListenEntry(const DLDL_GRAMMAR::ast::node::program* node) 
@@ -360,15 +517,6 @@ namespace DLDL_GRAMMAR { namespace ast { namespace listener {
 
 		virtual void ExitAnything(const ::deamer::external::cpp::ast::Node* node) 
 		{
-		}
-	
-	private:
-		void DefaultAction(const ::deamer::external::cpp::ast::Node* node) 
-		{
-			for(const auto* child : node->GetNodes())
-			{
-				Dispatch(child);
-			}
 		}
 	};
 
