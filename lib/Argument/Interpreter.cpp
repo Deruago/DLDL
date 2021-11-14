@@ -252,6 +252,7 @@ void DLDL::argument::Interpreter::Help()
 		   "	-auto-compile, -ac                          ; Auto compiles the "
 		   "CompilerGenerator.\n"
 		   "	-auto-run, -ar                              ; Auto runs the compiled executable.\n"
+		   "\n"
 		   "Single/Multi Project generation (Single Project is Default):\n"
 		   "	-single-project, -sp                        ; Generate a single project.\n"
 		   "	-multi-project, -mp                         ; Generate a multi project, each language\n"
