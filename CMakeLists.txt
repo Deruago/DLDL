@@ -10,6 +10,9 @@ include(deamer.cmake)
 add_subdirectory(extern)
 add_subdirectory(lib)
 
+target_link_libraries(DLDL_static_library PUBLIC Deamer)
+target_link_libraries(DLDL_shared_library PUBLIC Deamer)
+
 option(PACKAGE_TESTS "Build the tests" ON)
 if(PACKAGE_TESTS)
 	find_package(GTest)

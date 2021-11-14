@@ -119,6 +119,10 @@ DLDL::argument::Type DLDL::argument::Parser::GetTypeFromString(const std::string
 		{"supported-grammars", Type::supported_grammars},
 		{"about", Type::about},
 		{"target-os", Type::target_os},
+		{"sp", Type::single_project},
+		{"single-project", Type::single_project},
+		{"mp", Type::multi_project},
+		{"multi-project", Type::multi_project},
 	};
 
 	std::string argumentReworked;

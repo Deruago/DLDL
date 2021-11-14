@@ -40,7 +40,7 @@ deamer::file::tool::File DLDL::generate::LPDWriter::GetCompilerGenerator(ir::Lan
 	{
 		generator.print_threats_->Set("");
 	}
-	
+
 	for (auto* childLanguage : language->GetChildren())
 	{
 		generator.child_->Set(childLanguage->GetName());
@@ -51,22 +51,19 @@ deamer::file::tool::File DLDL::generate::LPDWriter::GetCompilerGenerator(ir::Lan
 		generator.add_children_compilergenerators_->ExpandVariableField();
 	}
 
-	for (const auto& tool : static_cast<ir::special::Generation*>(
-		     language->GetIRIfExists(ir::Type::Generation))
-	     ->GetTools())
+	for (const auto& tool :
+		 static_cast<ir::special::Generation*>(language->GetIRIfExists(ir::Type::Generation))
+			 ->GetTools())
 	{
-		if (!language->DoesIRExist(ir::Type::Lexicon) &&
-			tool.type == ir::special::ToolType::Lexer)
+		if (!language->DoesIRExist(ir::Type::Lexicon) && tool.type == ir::special::ToolType::Lexer)
 		{
 			continue;
 		}
-		if (!language->DoesIRExist(ir::Type::Grammar) &&
-			tool.type == ir::special::ToolType::Parser)
+		if (!language->DoesIRExist(ir::Type::Grammar) && tool.type == ir::special::ToolType::Parser)
 		{
 			continue;
 		}
-		if (!language->DoesIRExist(ir::Type::Grammar) &&
-			tool.type == ir::special::ToolType::Ast)
+		if (!language->DoesIRExist(ir::Type::Grammar) && tool.type == ir::special::ToolType::Ast)
 		{
 			continue;
 		}
@@ -84,11 +81,28 @@ deamer::file::tool::File DLDL::generate::LPDWriter::GetCompilerGenerator(ir::Lan
 	return file;
 }
 
-deamer::file::tool::File DLDL::generate::LPDWriter::GetMain(const std::vector<ir::Language*>& languages)
+deamer::file::tool::File
+DLDL::generate::LPDWriter::GetMain(const std::vector<ir::Language*>& languages, bool multiProject)
 {
 	deamer::file::tool::File file("main", "cpp", "");
 
 	auto generator = DLDL::filetemplate::mainTemplate();
+
+	if constexpr (DEAMER_CC_V2_RESERVED_MACRO_VALUE_VERSION_NUMBER >= 002'001'001UL)
+	{
+		if (multiProject)
+		{
+			generator.project_type_value_->Set("multi");
+		}
+		else
+		{
+			generator.project_type_value_->Set("single");
+		}
+	}
+	else
+	{
+		generator.optional_project_type_->Set("");
+	}
 
 	for (auto* language : languages)
 	{
@@ -103,18 +117,20 @@ deamer::file::tool::File DLDL::generate::LPDWriter::GetMain(const std::vector<ir
 	return file;
 }
 
-deamer::file::tool::File DLDL::generate::LPDWriter::GetFileContentSourceFile(ir::Language* language, const ir::LPD& lpd)
+deamer::file::tool::File DLDL::generate::LPDWriter::GetFileContentSourceFile(ir::Language* language,
+																			 const ir::LPD& lpd)
 {
 	deamer::file::tool::File file = LPDSubWriterFactory::GetLPDSubWriter(lpd.GetType())
-			->GetFileContentSourceFile(language, lpd);
+										->GetFileContentSourceFile(language, lpd);
 
 	return file;
 }
 
-deamer::file::tool::File DLDL::generate::LPDWriter::GetFileContentHeaderFile(ir::Language* language, const ir::LPD& lpd)
+deamer::file::tool::File DLDL::generate::LPDWriter::GetFileContentHeaderFile(ir::Language* language,
+																			 const ir::LPD& lpd)
 {
 	deamer::file::tool::File file = LPDSubWriterFactory::GetLPDSubWriter(lpd.GetType())
-			->GetFileContentHeaderFile(language, lpd);
+										->GetFileContentHeaderFile(language, lpd);
 
 	return file;
 }
@@ -156,7 +172,8 @@ std::string DLDL::generate::LPDWriter::GetTextFromIREnum(ir::Type type)
 	throw std::logic_error("Unknown IR given!");
 }
 
-deamer::file::tool::File DLDL::generate::LPDWriter::GetCMakeLists(const std::vector<ir::Language*>& languages)
+deamer::file::tool::File
+DLDL::generate::LPDWriter::GetCMakeLists(const std::vector<ir::Language*>& languages)
 {
 	deamer::file::tool::File file("CMakeLists", "txt", "");
 

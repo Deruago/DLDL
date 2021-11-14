@@ -6,7 +6,7 @@ namespace DLDL::argument
 	enum class Type
 	{
 		unknown,
-		
+
 		initialize,
 		language_name,
 		generate,
@@ -31,7 +31,10 @@ namespace DLDL::argument
 		supported_grammars,
 		about,
 		target_os,
-		
+
+		multi_project,
+		single_project,
+
 		git_initialize,
 	};
 }

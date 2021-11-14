@@ -18,7 +18,10 @@ The example repo contains varies tutorials and examples to help you get started 
 
 As DLDL uses Deamer, it is recommended to also install Deamer Project: https://github.com/Deruago/theDeamerProject.
 
-It also uses Deamer External, you can install that here: https://github.com/Deruago/DeamerExternal
+It also uses Deamer External and Deamer Algorithm, you can install those here:
+
+- https://github.com/Deruago/DeamerExternal
+- https://github.com/Deruago/DeamerAlgorithm
 
 ### General installation
 

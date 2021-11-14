@@ -1,3 +1,5 @@
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+set(INSTALL_GTEST off)
 add_subdirectory("${PROJECT_SOURCE_DIR}/extern/googletest" "extern/googletest")
 
 mark_as_advanced(
@@ -33,5 +35,5 @@ macro(package_add_test TESTNAME)
 	target_compile_features(${TESTNAME} PUBLIC cxx_std_17)
 endmacro()
 
-file(GLOB_RECURSE UNIT_TESTS *.cpp)
+file(GLOB_RECURSE UNIT_TESTS ${DLDL_SOURCE_DIR}/tests/*.cpp)
 package_add_test(dldl_unit_tests ${UNIT_TESTS})
