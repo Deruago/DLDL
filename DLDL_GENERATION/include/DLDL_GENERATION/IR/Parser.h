@@ -4,6 +4,7 @@
 #include "DLDL/IR/Parser.h"
 #include "DLDL_GENERATION/Ast/Listener/User/Generation.h"
 #include "DLDL_GENERATION/Bison/Parser.h"
+#include <memory>
 #include <string>
 
 namespace DLDL::ir::generation
@@ -47,14 +48,16 @@ namespace DLDL::ir::generation
 			}
 
 			const auto parser = DLDL_GENERATION::parser::Parser();
-			auto* tree = parser.Parse(text);
+			auto tree = std::unique_ptr<deamer::external::cpp::ast::Tree>(parser.Parse(text));
+			if (tree == nullptr || tree->GetStartNode() == nullptr)
+			{
+				return GetDefaultIR();
+			}
 
 			auto generationListener = DLDL_GENERATION::ast::listener::user::Generation(os);
 			generationListener.Dispatch(tree->GetStartNode());
 
 			auto* generationIr = generationListener.GetGeneration();
-
-			delete tree;
 
 			return generationIr;
 		}
