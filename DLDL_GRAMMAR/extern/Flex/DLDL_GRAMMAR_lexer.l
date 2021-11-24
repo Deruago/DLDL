@@ -49,7 +49,7 @@ GROUP_ABSTRACTION	([Gg]roup[:][ \t]*)
 INLINE_ABSTRACTION	([Ii]nline[:][ \t]*)
 INLINE_GROUP_ABSTRACTION	((([Ii]nline[ ][Gg]roup)|([Gg]roup[ ][Ii]nline))[:][ \t]*)
 UNKNOWN_ABSTRACTION	([a-zA-Z0-9_\\$?!-+=]*[:][ \t]*)
-NONTERMINAL	([a-zA-Z_]+)
+NONTERMINAL	([a-zA-Z_]+[a-zA-Z_0-9]*)
 PRODUCTION_RULE	([ \t]+[^\n\r]*)
 ESCAPE_CHARS	([\n\r\b\v\a\f\t ])
 

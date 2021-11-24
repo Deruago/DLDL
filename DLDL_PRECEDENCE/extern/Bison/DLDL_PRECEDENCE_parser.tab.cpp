@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.7.5.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -46,10 +46,10 @@
    USER NAME SPACE" below.  */
 
 /* Identify Bison output, and Bison version.  */
-#define YYBISON 30705
+#define YYBISON 30802
 
 /* Bison version string.  */
-#define YYBISON_VERSION "3.7.5"
+#define YYBISON_VERSION "3.8.2"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -310,12 +310,18 @@ typedef int yy_state_fast_t;
 # define YY_USE(E) /* empty */
 #endif
 
-#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
-# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                            \
+#if defined __GNUC__ && ! defined __ICC && 406 <= __GNUC__ * 100 + __GNUC_MINOR__
+# if __GNUC__ * 100 + __GNUC_MINOR__ < 407
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
+    _Pragma ("GCC diagnostic push")                                     \
+    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")
+# else
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
     _Pragma ("GCC diagnostic push")                                     \
     _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")              \
     _Pragma ("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
+# endif
 # define YY_IGNORE_MAYBE_UNINITIALIZED_END      \
     _Pragma ("GCC diagnostic pop")
 #else
@@ -530,7 +536,7 @@ static const yytype_int8 yytranslate[] =
 };
 
 #if YYDEBUG
-  /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
+/* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
        0,    70,    70,    78,    82,    89,    93,   100,   107,   114,
@@ -562,15 +568,6 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#ifdef YYPRINT
-/* YYTOKNUM[NUM] -- (External) token number corresponding to the
-   (internal) symbol number NUM (which must be that of a token).  */
-static const yytype_int16 yytoknum[] =
-{
-       0,   256,   257,   258,   259,   260
-};
-#endif
-
 #define YYPACT_NINF (-6)
 
 #define yypact_value_is_default(Yyn) \
@@ -581,38 +578,38 @@ static const yytype_int16 yytoknum[] =
 #define yytable_value_is_error(Yyn) \
   0
 
-  /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
-     STATE-NUM.  */
+/* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
+   STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
        1,    -4,     5,    -6,     1,    -6,    -6,     2,     2,    -6,
       -6,    -6,    -6,    -6
 };
 
-  /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
-     Performed when YYTABLE does not specify something else to do.  Zero
-     means the default is an error.  */
+/* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
+   Performed when YYTABLE does not specify something else to do.  Zero
+   means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
        4,     0,     0,     2,     4,     5,     6,     0,    10,     7,
        1,     3,     8,     9
 };
 
-  /* YYPGOTO[NTERM-NUM].  */
+/* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
       -6,    -6,     4,    -6,    -6,    -6,    -5
 };
 
-  /* YYDEFGOTO[NTERM-NUM].  */
+/* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
        0,     2,     3,     4,     5,     6,     9
 };
 
-  /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
-     positive, shift that token.  If negative, reduce the rule whose
-     number is the opposite.  If YYTABLE_NINF, syntax error.  */
+/* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
+   positive, shift that token.  If negative, reduce the rule whose
+   number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
        7,     8,    12,    13,     1,    10,     0,     8,    11
@@ -623,22 +620,22 @@ static const yytype_int8 yycheck[] =
        4,     5,     7,     8,     3,     0,    -1,     5,     4
 };
 
-  /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
-     symbol of state STATE-NUM.  */
+/* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
+   state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
        0,     3,     7,     8,     9,    10,    11,     4,     5,    12,
        0,     8,    12,    12
 };
 
-  /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
+/* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
        0,     6,     7,     8,     8,     9,     9,    10,    11,    12,
       12
 };
 
-  /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
+/* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     2,     0,     1,     1,     2,     3,     2,
@@ -654,6 +651,7 @@ enum { YYENOMEM = -2 };
 #define YYACCEPT        goto yyacceptlab
 #define YYABORT         goto yyabortlab
 #define YYERROR         goto yyerrorlab
+#define YYNOMEM         goto yyexhaustedlab
 
 
 #define YYRECOVERING()  (!!yyerrstatus)
@@ -694,10 +692,7 @@ do {                                            \
     YYFPRINTF Args;                             \
 } while (0)
 
-/* This macro is provided for backward compatibility. */
-# ifndef YY_LOCATION_PRINT
-#  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
-# endif
+
 
 
 # define YY_SYMBOL_PRINT(Title, Kind, Value, Location)                    \
@@ -724,10 +719,6 @@ yy_symbol_value_print (FILE *yyo,
   YY_USE (yyoutput);
   if (!yyvaluep)
     return;
-# ifdef YYPRINT
-  if (yykind < YYNTOKENS)
-    YYPRINT (yyo, yytoknum[yykind], *yyvaluep);
-# endif
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
   YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
@@ -912,6 +903,7 @@ yyparse (void)
   YYDPRINTF ((stderr, "Starting parse\n"));
 
   yychar = YYEMPTY; /* Cause a token to be read.  */
+
   goto yysetstate;
 
 
@@ -937,7 +929,7 @@ yysetstate:
 
   if (yyss + yystacksize - 1 <= yyssp)
 #if !defined yyoverflow && !defined YYSTACK_RELOCATE
-    goto yyexhaustedlab;
+    YYNOMEM;
 #else
     {
       /* Get the current used size of the three stacks, in elements.  */
@@ -965,7 +957,7 @@ yysetstate:
 # else /* defined YYSTACK_RELOCATE */
       /* Extend the stack our own way.  */
       if (YYMAXDEPTH <= yystacksize)
-        goto yyexhaustedlab;
+        YYNOMEM;
       yystacksize *= 2;
       if (YYMAXDEPTH < yystacksize)
         yystacksize = YYMAXDEPTH;
@@ -976,7 +968,7 @@ yysetstate:
           YY_CAST (union yyalloc *,
                    YYSTACK_ALLOC (YY_CAST (YYSIZE_T, YYSTACK_BYTES (yystacksize))));
         if (! yyptr)
-          goto yyexhaustedlab;
+          YYNOMEM;
         YYSTACK_RELOCATE (yyss_alloc, yyss);
         YYSTACK_RELOCATE (yyvs_alloc, yyvs);
 #  undef YYSTACK_RELOCATE
@@ -997,6 +989,7 @@ yysetstate:
         YYABORT;
     }
 #endif /* !defined yyoverflow && !defined YYSTACK_RELOCATE */
+
 
   if (yystate == YYFINAL)
     YYACCEPT;
@@ -1116,7 +1109,7 @@ yyreduce:
 		(yyval.DLDL_PRECEDENCE_program) = newNode;
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
-#line 1120 "DLDL_PRECEDENCE_parser.tab.c"
+#line 1113 "DLDL_PRECEDENCE_parser.tab.c"
     break;
 
   case 3: /* stmts: stmt stmts  */
@@ -1125,7 +1118,7 @@ yyreduce:
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmts({::DLDL_PRECEDENCE::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DLDL_PRECEDENCE_stmt), (yyvsp[0].DLDL_PRECEDENCE_stmts) });
 		(yyval.DLDL_PRECEDENCE_stmts) = newNode;
 	}
-#line 1129 "DLDL_PRECEDENCE_parser.tab.c"
+#line 1122 "DLDL_PRECEDENCE_parser.tab.c"
     break;
 
   case 4: /* stmts: %empty  */
@@ -1134,7 +1127,7 @@ yyreduce:
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmts({::DLDL_PRECEDENCE::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
 		(yyval.DLDL_PRECEDENCE_stmts) = newNode;
 	}
-#line 1138 "DLDL_PRECEDENCE_parser.tab.c"
+#line 1131 "DLDL_PRECEDENCE_parser.tab.c"
     break;
 
   case 5: /* stmt: localized_precedence  */
@@ -1143,7 +1136,7 @@ yyreduce:
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmt({::DLDL_PRECEDENCE::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DLDL_PRECEDENCE_localized_precedence) });
 		(yyval.DLDL_PRECEDENCE_stmt) = newNode;
 	}
-#line 1147 "DLDL_PRECEDENCE_parser.tab.c"
+#line 1140 "DLDL_PRECEDENCE_parser.tab.c"
     break;
 
   case 6: /* stmt: specific_precedence  */
@@ -1152,7 +1145,7 @@ yyreduce:
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmt({::DLDL_PRECEDENCE::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DLDL_PRECEDENCE_specific_precedence) });
 		(yyval.DLDL_PRECEDENCE_stmt) = newNode;
 	}
-#line 1156 "DLDL_PRECEDENCE_parser.tab.c"
+#line 1149 "DLDL_PRECEDENCE_parser.tab.c"
     break;
 
   case 7: /* localized_precedence: PRECEDENCE terminal_one_or_more  */
@@ -1161,7 +1154,7 @@ yyreduce:
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::localized_precedence({::DLDL_PRECEDENCE::ast::Type::localized_precedence, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_PRECEDENCE::ast::node::PRECEDENCE({::DLDL_PRECEDENCE::ast::Type::PRECEDENCE, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), (yyvsp[0].DLDL_PRECEDENCE_terminal_one_or_more) });
 		(yyval.DLDL_PRECEDENCE_localized_precedence) = newNode;
 	}
-#line 1165 "DLDL_PRECEDENCE_parser.tab.c"
+#line 1158 "DLDL_PRECEDENCE_parser.tab.c"
     break;
 
   case 8: /* specific_precedence: PRECEDENCE NUMBER terminal_one_or_more  */
@@ -1170,7 +1163,7 @@ yyreduce:
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::specific_precedence({::DLDL_PRECEDENCE::ast::Type::specific_precedence, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_PRECEDENCE::ast::node::PRECEDENCE({::DLDL_PRECEDENCE::ast::Type::PRECEDENCE, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal)}), new DLDL_PRECEDENCE::ast::node::NUMBER({::DLDL_PRECEDENCE::ast::Type::NUMBER, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), (yyvsp[0].DLDL_PRECEDENCE_terminal_one_or_more) });
 		(yyval.DLDL_PRECEDENCE_specific_precedence) = newNode;
 	}
-#line 1174 "DLDL_PRECEDENCE_parser.tab.c"
+#line 1167 "DLDL_PRECEDENCE_parser.tab.c"
     break;
 
   case 9: /* terminal_one_or_more: TERMINAL terminal_one_or_more  */
@@ -1179,7 +1172,7 @@ yyreduce:
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::terminal_one_or_more({::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_PRECEDENCE::ast::node::TERMINAL({::DLDL_PRECEDENCE::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), (yyvsp[0].DLDL_PRECEDENCE_terminal_one_or_more) });
 		(yyval.DLDL_PRECEDENCE_terminal_one_or_more) = newNode;
 	}
-#line 1183 "DLDL_PRECEDENCE_parser.tab.c"
+#line 1176 "DLDL_PRECEDENCE_parser.tab.c"
     break;
 
   case 10: /* terminal_one_or_more: TERMINAL  */
@@ -1188,11 +1181,11 @@ yyreduce:
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::terminal_one_or_more({::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_PRECEDENCE::ast::node::TERMINAL({::DLDL_PRECEDENCE::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DLDL_PRECEDENCE_terminal_one_or_more) = newNode;
 	}
-#line 1192 "DLDL_PRECEDENCE_parser.tab.c"
+#line 1185 "DLDL_PRECEDENCE_parser.tab.c"
     break;
 
 
-#line 1196 "DLDL_PRECEDENCE_parser.tab.c"
+#line 1189 "DLDL_PRECEDENCE_parser.tab.c"
 
       default: break;
     }
@@ -1274,6 +1267,7 @@ yyerrorlab:
      label yyerrorlab therefore never appears in user code.  */
   if (0)
     YYERROR;
+  ++yynerrs;
 
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
@@ -1334,7 +1328,7 @@ yyerrlab1:
 `-------------------------------------*/
 yyacceptlab:
   yyresult = 0;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
 /*-----------------------------------.
@@ -1342,24 +1336,22 @@ yyacceptlab:
 `-----------------------------------*/
 yyabortlab:
   yyresult = 1;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
-#if !defined yyoverflow
-/*-------------------------------------------------.
-| yyexhaustedlab -- memory exhaustion comes here.  |
-`-------------------------------------------------*/
+/*-----------------------------------------------------------.
+| yyexhaustedlab -- YYNOMEM (memory exhaustion) comes here.  |
+`-----------------------------------------------------------*/
 yyexhaustedlab:
   yyerror (YY_("memory exhausted"));
   yyresult = 2;
-  goto yyreturn;
-#endif
+  goto yyreturnlab;
 
 
-/*-------------------------------------------------------.
-| yyreturn -- parsing is finished, clean up and return.  |
-`-------------------------------------------------------*/
-yyreturn:
+/*----------------------------------------------------------.
+| yyreturnlab -- parsing is finished, clean up and return.  |
+`----------------------------------------------------------*/
+yyreturnlab:
   if (yychar != YYEMPTY)
     {
       /* Make sure we have latest lookahead translation.  See comments at
