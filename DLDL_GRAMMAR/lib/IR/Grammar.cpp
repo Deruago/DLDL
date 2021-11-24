@@ -116,7 +116,13 @@ void DLDL::ir::Grammar::FillInUnknownReferences(DLDL::ir::Language* language)
 		{
 			if (knownReferences.find(token) == knownReferences.end())
 			{
-				unknownReferences.push_back(token);
+				auto alreadyFound =
+					std::find(std::cbegin(unknownReferences), std::cend(unknownReferences),
+							  token) != std::cend(unknownReferences);
+				if (!alreadyFound)
+				{
+					unknownReferences.push_back(token);
+				}
 			}
 		}
 	}
