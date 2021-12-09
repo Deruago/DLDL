@@ -29,4 +29,6 @@ endif()
 add_executable(DLDL "main.cpp")
 target_link_libraries(DLDL DLDL_static_library)
 
+add_subdirectory(sources)
+
 install (TARGETS DLDL)

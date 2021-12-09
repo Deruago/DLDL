@@ -1,5 +1,5 @@
-#ifndef DLDL_GRAMMAR_AST_REFERENCE_ACCESS_H
-#define DLDL_GRAMMAR_AST_REFERENCE_ACCESS_H
+#ifndef DLDL_GRAMMAR_AST_REFERENCE_ACCESSTEMPLATEBASE_H
+#define DLDL_GRAMMAR_AST_REFERENCE_ACCESSTEMPLATEBASE_H
 
 #include "DLDL_GRAMMAR/Ast/Relation/NodeEnumToType.h"
 #include "DLDL_GRAMMAR/Ast/Relation/NodeTypeToEnum.h"
@@ -65,75 +65,112 @@ namespace DLDL_GRAMMAR { namespace ast { namespace reference {
 		}
 	};
 
-	/*!	\class Access
+	/*!	\class AccessTemplateBase
 	 *
 	 *	\brief Used to access AST nodes. It contains various helper functions to ease navigation through AST nodes.
+	 *
+	 *	\details This class contains the type dependent implementation of Access<T>.
+	 *	Refrain from using this class, as there is no backwards compatibility
+	 *	guarantee of this implementation class,
+	 *	Use Access<T> instead, this is backwards compatible and offers different benefits.
+	 *
+	 *	\see Access
 	 */
 	template<typename T>
-	struct Access : public AccessBase
+	struct AccessTemplateBase : public AccessBase
 	{
-		Access() = delete;
-		~Access() = delete;
+		AccessTemplateBase() = delete;
+		~AccessTemplateBase() = delete;
+	};
+
+	/*! \class Access
+	 *
+	 *	\brief Used to access AST nodes. It contains various helper functions to ease navigation through AST nodes.
+	 *
+	 *	\details Type dispatcher for logic.
+	 *
+	 *	\see AccessTemplateBase
+	 */
+	template<typename T>
+	struct Access : public AccessTemplateBase<T>
+	{
+		Access(std::vector<const T*> ts_) : AccessTemplateBase<T>(ts_)
+		{
+		}
+
+		Access(const T& t) : AccessTemplateBase<T>(t)
+		{
+		}
+
+		Access(const T* t) : AccessTemplateBase<T>(t)
+		{
+		}
+
+		Access(const AccessTemplateBase<T>& rhs) : AccessTemplateBase<T>(rhs)
+		{
+		}
+
+		Access() = default;
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::program>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::program>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::stmts>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmts>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::stmt>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmt>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::abstraction_declaration>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction_declaration>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::abstraction>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::definition>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::definition>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::production_rules>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::production_rules>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::COMMENT>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::COMMENT>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::NONTERMINAL>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE>;
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS>;
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS>;
 
 
 	
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::program> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::program> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::program*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::program*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::program*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::program& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::program& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::program* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::program* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::program>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::program>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -149,7 +186,7 @@ namespace DLDL_GRAMMAR { namespace ast { namespace reference {
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::program>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::program>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -183,11 +220,11 @@ namespace DLDL_GRAMMAR { namespace ast { namespace reference {
 		}
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::stmts> stmts();
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmts> stmts();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::program>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::program>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -196,31 +233,51 @@ namespace DLDL_GRAMMAR { namespace ast { namespace reference {
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::stmts> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmts> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::stmts*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::stmts*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::stmts*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::stmts& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::stmts& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::stmts* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::stmts* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::stmts>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmts>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -236,7 +293,7 @@ namespace DLDL_GRAMMAR { namespace ast { namespace reference {
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::stmts>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmts>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -270,12 +327,12 @@ namespace DLDL_GRAMMAR { namespace ast { namespace reference {
 		}
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::stmts> stmts();
-Access<::DLDL_GRAMMAR::ast::node::stmt> stmt();
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmts> stmts();
+AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmt> stmt();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::stmts>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmts>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -284,31 +341,51 @@ Access<::DLDL_GRAMMAR::ast::node::stmt> stmt();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::stmt> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmt> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::stmt*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::stmt*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::stmt*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::stmt& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::stmt& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::stmt* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::stmt* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::stmt>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmt>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -324,7 +401,7 @@ Access<::DLDL_GRAMMAR::ast::node::stmt> stmt();
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::stmt>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmt>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -358,12 +435,12 @@ Access<::DLDL_GRAMMAR::ast::node::stmt> stmt();
 		}
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::abstraction_declaration> abstraction_declaration();
-Access<::DLDL_GRAMMAR::ast::node::definition> definition();
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction_declaration> abstraction_declaration();
+AccessTemplateBase<::DLDL_GRAMMAR::ast::node::definition> definition();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::stmt>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmt>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -372,31 +449,51 @@ Access<::DLDL_GRAMMAR::ast::node::definition> definition();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::abstraction_declaration> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction_declaration> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::abstraction_declaration*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::abstraction_declaration*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::abstraction_declaration*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::abstraction_declaration& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::abstraction_declaration& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::abstraction_declaration* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::abstraction_declaration* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::abstraction_declaration>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction_declaration>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -412,7 +509,7 @@ Access<::DLDL_GRAMMAR::ast::node::definition> definition();
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::abstraction_declaration>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction_declaration>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -446,12 +543,12 @@ Access<::DLDL_GRAMMAR::ast::node::definition> definition();
 		}
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::abstraction> abstraction();
-Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL> NONTERMINAL();
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction> abstraction();
+AccessTemplateBase<::DLDL_GRAMMAR::ast::node::NONTERMINAL> NONTERMINAL();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::abstraction_declaration>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction_declaration>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -460,31 +557,51 @@ Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL> NONTERMINAL();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::abstraction> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::abstraction*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::abstraction*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::abstraction*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::abstraction& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::abstraction& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::abstraction* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::abstraction* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::abstraction>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -500,7 +617,7 @@ Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL> NONTERMINAL();
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::abstraction>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -534,15 +651,15 @@ Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL> NONTERMINAL();
 		}
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION> START_ABSTRACTION();
-Access<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION> GROUP_ABSTRACTION();
-Access<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION> INLINE_ABSTRACTION();
-Access<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION> INLINE_GROUP_ABSTRACTION();
-Access<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION> START_ABSTRACTION();
+AccessTemplateBase<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION> GROUP_ABSTRACTION();
+AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION> INLINE_ABSTRACTION();
+AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION> INLINE_GROUP_ABSTRACTION();
+AccessTemplateBase<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::abstraction>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -551,31 +668,51 @@ Access<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::definition> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::definition> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::definition*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::definition*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::definition*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::definition& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::definition& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::definition* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::definition* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::definition>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::definition>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -591,7 +728,7 @@ Access<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::definition>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::definition>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -625,13 +762,13 @@ Access<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 		}
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::abstraction> abstraction();
-Access<::DLDL_GRAMMAR::ast::node::production_rules> production_rules();
-Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL> NONTERMINAL();
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction> abstraction();
+AccessTemplateBase<::DLDL_GRAMMAR::ast::node::production_rules> production_rules();
+AccessTemplateBase<::DLDL_GRAMMAR::ast::node::NONTERMINAL> NONTERMINAL();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::definition>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::definition>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -640,31 +777,51 @@ Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL> NONTERMINAL();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::production_rules> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::production_rules> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::production_rules*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::production_rules*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::production_rules*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::production_rules& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::production_rules& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::production_rules* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::production_rules* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::production_rules>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::production_rules>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -680,7 +837,7 @@ Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL> NONTERMINAL();
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::production_rules>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::production_rules>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -714,12 +871,12 @@ Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL> NONTERMINAL();
 		}
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::production_rules> production_rules();
-Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::production_rules> production_rules();
+AccessTemplateBase<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::production_rules>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::production_rules>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -728,31 +885,51 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::COMMENT> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::COMMENT> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::COMMENT*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::COMMENT*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::COMMENT*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::COMMENT& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::COMMENT& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::COMMENT* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::COMMENT* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::COMMENT>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::COMMENT>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -768,7 +945,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::COMMENT>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::COMMENT>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -805,7 +982,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::COMMENT>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::COMMENT>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -814,31 +991,51 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::START_ABSTRACTION*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::START_ABSTRACTION*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::START_ABSTRACTION*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::START_ABSTRACTION& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::START_ABSTRACTION& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::START_ABSTRACTION* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::START_ABSTRACTION* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -854,7 +1051,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -891,7 +1088,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -900,31 +1097,51 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -940,7 +1157,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -977,7 +1194,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -986,31 +1203,51 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1026,7 +1263,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1063,7 +1300,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1072,31 +1309,51 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1112,7 +1369,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1149,7 +1406,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1158,31 +1415,51 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1198,7 +1475,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1235,7 +1512,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1244,31 +1521,51 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::NONTERMINAL> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::NONTERMINAL*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::NONTERMINAL*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::NONTERMINAL*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::NONTERMINAL& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::NONTERMINAL& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::NONTERMINAL* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::NONTERMINAL* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::NONTERMINAL>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1284,7 +1581,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::NONTERMINAL>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1321,7 +1618,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::NONTERMINAL>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1330,31 +1627,51 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1370,7 +1687,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1407,7 +1724,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1416,31 +1733,51 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS> : public AccessBase
+	struct AccessTemplateBase<::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1456,7 +1793,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 			return *this;
 		}
 
-		Access<::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1493,7 +1830,7 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_GRAMMAR::ast::node::ESCAPE_CHARS>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1502,144 +1839,164 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 
 	
-		inline Access<::DLDL_GRAMMAR::ast::node::stmts> Access<::DLDL_GRAMMAR::ast::node::program>::stmts()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmts> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::program>::stmts()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::stmts>(Get<::DLDL_GRAMMAR::ast::Type::stmts>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmts>(Get<::DLDL_GRAMMAR::ast::Type::stmts>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::stmts> Access<::DLDL_GRAMMAR::ast::node::stmts>::stmts()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmts> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmts>::stmts()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::stmts>(Get<::DLDL_GRAMMAR::ast::Type::stmts>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmts>(Get<::DLDL_GRAMMAR::ast::Type::stmts>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::stmt> Access<::DLDL_GRAMMAR::ast::node::stmts>::stmt()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmt> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmts>::stmt()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::stmt>(Get<::DLDL_GRAMMAR::ast::Type::stmt>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmt>(Get<::DLDL_GRAMMAR::ast::Type::stmt>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::abstraction_declaration> Access<::DLDL_GRAMMAR::ast::node::stmt>::abstraction_declaration()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction_declaration> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmt>::abstraction_declaration()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::abstraction_declaration>(Get<::DLDL_GRAMMAR::ast::Type::abstraction_declaration>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction_declaration>(Get<::DLDL_GRAMMAR::ast::Type::abstraction_declaration>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::definition> Access<::DLDL_GRAMMAR::ast::node::stmt>::definition()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::definition> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::stmt>::definition()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::definition>(Get<::DLDL_GRAMMAR::ast::Type::definition>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::definition>(Get<::DLDL_GRAMMAR::ast::Type::definition>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::abstraction> Access<::DLDL_GRAMMAR::ast::node::abstraction_declaration>::abstraction()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction_declaration>::abstraction()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::abstraction>(Get<::DLDL_GRAMMAR::ast::Type::abstraction>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction>(Get<::DLDL_GRAMMAR::ast::Type::abstraction>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL> Access<::DLDL_GRAMMAR::ast::node::abstraction_declaration>::NONTERMINAL()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::NONTERMINAL> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction_declaration>::NONTERMINAL()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL>(Get<::DLDL_GRAMMAR::ast::Type::NONTERMINAL>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::NONTERMINAL>(Get<::DLDL_GRAMMAR::ast::Type::NONTERMINAL>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION> Access<::DLDL_GRAMMAR::ast::node::abstraction>::START_ABSTRACTION()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction>::START_ABSTRACTION()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION>(Get<::DLDL_GRAMMAR::ast::Type::START_ABSTRACTION>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::START_ABSTRACTION>(Get<::DLDL_GRAMMAR::ast::Type::START_ABSTRACTION>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION> Access<::DLDL_GRAMMAR::ast::node::abstraction>::GROUP_ABSTRACTION()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction>::GROUP_ABSTRACTION()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION>(Get<::DLDL_GRAMMAR::ast::Type::GROUP_ABSTRACTION>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION>(Get<::DLDL_GRAMMAR::ast::Type::GROUP_ABSTRACTION>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION> Access<::DLDL_GRAMMAR::ast::node::abstraction>::INLINE_ABSTRACTION()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction>::INLINE_ABSTRACTION()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION>(Get<::DLDL_GRAMMAR::ast::Type::INLINE_ABSTRACTION>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION>(Get<::DLDL_GRAMMAR::ast::Type::INLINE_ABSTRACTION>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION> Access<::DLDL_GRAMMAR::ast::node::abstraction>::INLINE_GROUP_ABSTRACTION()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction>::INLINE_GROUP_ABSTRACTION()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION>(Get<::DLDL_GRAMMAR::ast::Type::INLINE_GROUP_ABSTRACTION>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION>(Get<::DLDL_GRAMMAR::ast::Type::INLINE_GROUP_ABSTRACTION>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION> Access<::DLDL_GRAMMAR::ast::node::abstraction>::UNKNOWN_ABSTRACTION()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction>::UNKNOWN_ABSTRACTION()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION>(Get<::DLDL_GRAMMAR::ast::Type::UNKNOWN_ABSTRACTION>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION>(Get<::DLDL_GRAMMAR::ast::Type::UNKNOWN_ABSTRACTION>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::abstraction> Access<::DLDL_GRAMMAR::ast::node::definition>::abstraction()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::definition>::abstraction()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::abstraction>(Get<::DLDL_GRAMMAR::ast::Type::abstraction>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::abstraction>(Get<::DLDL_GRAMMAR::ast::Type::abstraction>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::production_rules> Access<::DLDL_GRAMMAR::ast::node::definition>::production_rules()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::production_rules> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::definition>::production_rules()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::production_rules>(Get<::DLDL_GRAMMAR::ast::Type::production_rules>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::production_rules>(Get<::DLDL_GRAMMAR::ast::Type::production_rules>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL> Access<::DLDL_GRAMMAR::ast::node::definition>::NONTERMINAL()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::NONTERMINAL> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::definition>::NONTERMINAL()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::NONTERMINAL>(Get<::DLDL_GRAMMAR::ast::Type::NONTERMINAL>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::NONTERMINAL>(Get<::DLDL_GRAMMAR::ast::Type::NONTERMINAL>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::production_rules> Access<::DLDL_GRAMMAR::ast::node::production_rules>::production_rules()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::production_rules> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::production_rules>::production_rules()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::production_rules>(Get<::DLDL_GRAMMAR::ast::Type::production_rules>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::production_rules>(Get<::DLDL_GRAMMAR::ast::Type::production_rules>(ts));
 		}
 
-		inline Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> Access<::DLDL_GRAMMAR::ast::node::production_rules>::PRODUCTION_RULE()
+		inline AccessTemplateBase<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> AccessTemplateBase<::DLDL_GRAMMAR::ast::node::production_rules>::PRODUCTION_RULE()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE>(Get<::DLDL_GRAMMAR::ast::Type::PRODUCTION_RULE>(ts));
+			return AccessTemplateBase<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE>(Get<::DLDL_GRAMMAR::ast::Type::PRODUCTION_RULE>(ts));
 		}
 
 
@@ -1666,4 +2023,4 @@ Access<::DLDL_GRAMMAR::ast::node::PRODUCTION_RULE> PRODUCTION_RULE();
 
 }}}
 
-#endif // DLDL_GRAMMAR_AST_REFERENCE_ACCESS_H
+#endif // DLDL_GRAMMAR_AST_REFERENCE_ACCESSTEMPLATEBASE_H

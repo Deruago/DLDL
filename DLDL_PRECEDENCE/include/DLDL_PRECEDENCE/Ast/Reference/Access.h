@@ -1,5 +1,5 @@
-#ifndef DLDL_PRECEDENCE_AST_REFERENCE_ACCESS_H
-#define DLDL_PRECEDENCE_AST_REFERENCE_ACCESS_H
+#ifndef DLDL_PRECEDENCE_AST_REFERENCE_ACCESSTEMPLATEBASE_H
+#define DLDL_PRECEDENCE_AST_REFERENCE_ACCESSTEMPLATEBASE_H
 
 #include "DLDL_PRECEDENCE/Ast/Relation/NodeEnumToType.h"
 #include "DLDL_PRECEDENCE/Ast/Relation/NodeTypeToEnum.h"
@@ -60,65 +60,102 @@ namespace DLDL_PRECEDENCE { namespace ast { namespace reference {
 		}
 	};
 
-	/*!	\class Access
+	/*!	\class AccessTemplateBase
 	 *
 	 *	\brief Used to access AST nodes. It contains various helper functions to ease navigation through AST nodes.
+	 *
+	 *	\details This class contains the type dependent implementation of Access<T>.
+	 *	Refrain from using this class, as there is no backwards compatibility
+	 *	guarantee of this implementation class,
+	 *	Use Access<T> instead, this is backwards compatible and offers different benefits.
+	 *
+	 *	\see Access
 	 */
 	template<typename T>
-	struct Access : public AccessBase
+	struct AccessTemplateBase : public AccessBase
 	{
-		Access() = delete;
-		~Access() = delete;
+		AccessTemplateBase() = delete;
+		~AccessTemplateBase() = delete;
+	};
+
+	/*! \class Access
+	 *
+	 *	\brief Used to access AST nodes. It contains various helper functions to ease navigation through AST nodes.
+	 *
+	 *	\details Type dispatcher for logic.
+	 *
+	 *	\see AccessTemplateBase
+	 */
+	template<typename T>
+	struct Access : public AccessTemplateBase<T>
+	{
+		Access(std::vector<const T*> ts_) : AccessTemplateBase<T>(ts_)
+		{
+		}
+
+		Access(const T& t) : AccessTemplateBase<T>(t)
+		{
+		}
+
+		Access(const T* t) : AccessTemplateBase<T>(t)
+		{
+		}
+
+		Access(const AccessTemplateBase<T>& rhs) : AccessTemplateBase<T>(rhs)
+		{
+		}
+
+		Access() = default;
 	};
 
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::program>;
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::program>;
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::stmts>;
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmts>;
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::stmt>;
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt>;
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::localized_precedence>;
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence>;
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::specific_precedence>;
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence>;
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>;
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>;
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE>;
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::PRECEDENCE>;
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::NUMBER>;
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::NUMBER>;
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::TERMINAL>;
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::TERMINAL>;
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::SYMBOLS>;
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::SYMBOLS>;
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS>;
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS>;
 
 
 	
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::program> : public AccessBase
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::program> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_PRECEDENCE::ast::node::program*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_PRECEDENCE::ast::node::program*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_PRECEDENCE::ast::node::program*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::program& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::program& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::program* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::program* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::program>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::program>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -134,7 +171,7 @@ namespace DLDL_PRECEDENCE { namespace ast { namespace reference {
 			return *this;
 		}
 
-		Access<::DLDL_PRECEDENCE::ast::node::program>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::program>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -168,11 +205,11 @@ namespace DLDL_PRECEDENCE { namespace ast { namespace reference {
 		}
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::stmts> stmts();
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmts> stmts();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_PRECEDENCE::ast::node::program>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::program>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -181,31 +218,51 @@ namespace DLDL_PRECEDENCE { namespace ast { namespace reference {
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::stmts> : public AccessBase
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmts> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_PRECEDENCE::ast::node::stmts*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_PRECEDENCE::ast::node::stmts*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_PRECEDENCE::ast::node::stmts*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::stmts& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::stmts& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::stmts* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::stmts* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::stmts>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmts>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -221,7 +278,7 @@ namespace DLDL_PRECEDENCE { namespace ast { namespace reference {
 			return *this;
 		}
 
-		Access<::DLDL_PRECEDENCE::ast::node::stmts>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmts>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -255,12 +312,12 @@ namespace DLDL_PRECEDENCE { namespace ast { namespace reference {
 		}
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::stmts> stmts();
-Access<::DLDL_PRECEDENCE::ast::node::stmt> stmt();
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmts> stmts();
+AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt> stmt();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_PRECEDENCE::ast::node::stmts>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmts>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -269,31 +326,51 @@ Access<::DLDL_PRECEDENCE::ast::node::stmt> stmt();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::stmt> : public AccessBase
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_PRECEDENCE::ast::node::stmt*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_PRECEDENCE::ast::node::stmt*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_PRECEDENCE::ast::node::stmt*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::stmt& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::stmt& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::stmt* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::stmt* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::stmt>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -309,7 +386,7 @@ Access<::DLDL_PRECEDENCE::ast::node::stmt> stmt();
 			return *this;
 		}
 
-		Access<::DLDL_PRECEDENCE::ast::node::stmt>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -343,12 +420,12 @@ Access<::DLDL_PRECEDENCE::ast::node::stmt> stmt();
 		}
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::localized_precedence> localized_precedence();
-Access<::DLDL_PRECEDENCE::ast::node::specific_precedence> specific_precedence();
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence> localized_precedence();
+AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence> specific_precedence();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_PRECEDENCE::ast::node::stmt>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -357,31 +434,51 @@ Access<::DLDL_PRECEDENCE::ast::node::specific_precedence> specific_precedence();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::localized_precedence> : public AccessBase
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_PRECEDENCE::ast::node::localized_precedence*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_PRECEDENCE::ast::node::localized_precedence*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_PRECEDENCE::ast::node::localized_precedence*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::localized_precedence& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::localized_precedence& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::localized_precedence* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::localized_precedence* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::localized_precedence>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -397,7 +494,7 @@ Access<::DLDL_PRECEDENCE::ast::node::specific_precedence> specific_precedence();
 			return *this;
 		}
 
-		Access<::DLDL_PRECEDENCE::ast::node::localized_precedence>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -431,12 +528,12 @@ Access<::DLDL_PRECEDENCE::ast::node::specific_precedence> specific_precedence();
 		}
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> PRECEDENCE();
-Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> terminal_one_or_more();
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> PRECEDENCE();
+AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> terminal_one_or_more();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_PRECEDENCE::ast::node::localized_precedence>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -445,31 +542,51 @@ Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> terminal_one_or_more(
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::specific_precedence> : public AccessBase
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_PRECEDENCE::ast::node::specific_precedence*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_PRECEDENCE::ast::node::specific_precedence*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_PRECEDENCE::ast::node::specific_precedence*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::specific_precedence& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::specific_precedence& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::specific_precedence* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::specific_precedence* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::specific_precedence>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -485,7 +602,7 @@ Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> terminal_one_or_more(
 			return *this;
 		}
 
-		Access<::DLDL_PRECEDENCE::ast::node::specific_precedence>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -519,13 +636,13 @@ Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> terminal_one_or_more(
 		}
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> PRECEDENCE();
-Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> terminal_one_or_more();
-Access<::DLDL_PRECEDENCE::ast::node::NUMBER> NUMBER();
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> PRECEDENCE();
+AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> terminal_one_or_more();
+AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::NUMBER> NUMBER();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_PRECEDENCE::ast::node::specific_precedence>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -534,31 +651,51 @@ Access<::DLDL_PRECEDENCE::ast::node::NUMBER> NUMBER();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> : public AccessBase
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_PRECEDENCE::ast::node::terminal_one_or_more*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_PRECEDENCE::ast::node::terminal_one_or_more*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_PRECEDENCE::ast::node::terminal_one_or_more*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::terminal_one_or_more& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::terminal_one_or_more& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::terminal_one_or_more* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::terminal_one_or_more* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -574,7 +711,7 @@ Access<::DLDL_PRECEDENCE::ast::node::NUMBER> NUMBER();
 			return *this;
 		}
 
-		Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -608,12 +745,12 @@ Access<::DLDL_PRECEDENCE::ast::node::NUMBER> NUMBER();
 		}
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> terminal_one_or_more();
-Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> terminal_one_or_more();
+AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -622,31 +759,51 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> : public AccessBase
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_PRECEDENCE::ast::node::PRECEDENCE*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_PRECEDENCE::ast::node::PRECEDENCE*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_PRECEDENCE::ast::node::PRECEDENCE*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::PRECEDENCE& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::PRECEDENCE& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::PRECEDENCE* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::PRECEDENCE* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::PRECEDENCE>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -662,7 +819,7 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 			return *this;
 		}
 
-		Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::PRECEDENCE>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -699,7 +856,7 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::PRECEDENCE>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -708,31 +865,51 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::NUMBER> : public AccessBase
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::NUMBER> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_PRECEDENCE::ast::node::NUMBER*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_PRECEDENCE::ast::node::NUMBER*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_PRECEDENCE::ast::node::NUMBER*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::NUMBER& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::NUMBER& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::NUMBER* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::NUMBER* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::NUMBER>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::NUMBER>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -748,7 +925,7 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 			return *this;
 		}
 
-		Access<::DLDL_PRECEDENCE::ast::node::NUMBER>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::NUMBER>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -785,7 +962,7 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_PRECEDENCE::ast::node::NUMBER>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::NUMBER>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -794,31 +971,51 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> : public AccessBase
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::TERMINAL> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_PRECEDENCE::ast::node::TERMINAL*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_PRECEDENCE::ast::node::TERMINAL*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_PRECEDENCE::ast::node::TERMINAL*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::TERMINAL& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::TERMINAL& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::TERMINAL* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::TERMINAL* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::TERMINAL>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::TERMINAL>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -834,7 +1031,7 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 			return *this;
 		}
 
-		Access<::DLDL_PRECEDENCE::ast::node::TERMINAL>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::TERMINAL>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -871,7 +1068,7 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_PRECEDENCE::ast::node::TERMINAL>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::TERMINAL>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -880,31 +1077,51 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::SYMBOLS> : public AccessBase
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::SYMBOLS> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_PRECEDENCE::ast::node::SYMBOLS*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_PRECEDENCE::ast::node::SYMBOLS*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_PRECEDENCE::ast::node::SYMBOLS*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::SYMBOLS& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::SYMBOLS& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::SYMBOLS* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::SYMBOLS* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::SYMBOLS>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::SYMBOLS>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -920,7 +1137,7 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 			return *this;
 		}
 
-		Access<::DLDL_PRECEDENCE::ast::node::SYMBOLS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::SYMBOLS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -957,7 +1174,7 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_PRECEDENCE::ast::node::SYMBOLS>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::SYMBOLS>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -966,31 +1183,51 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS> : public AccessBase
+	struct AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1006,7 +1243,7 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 			return *this;
 		}
 
-		Access<::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1043,7 +1280,7 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::ESCAPE_CHARS>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1052,104 +1289,124 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 
 	
-		inline Access<::DLDL_PRECEDENCE::ast::node::stmts> Access<::DLDL_PRECEDENCE::ast::node::program>::stmts()
+		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmts> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::program>::stmts()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_PRECEDENCE::ast::node::stmts>(Get<::DLDL_PRECEDENCE::ast::Type::stmts>(ts));
+			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmts>(Get<::DLDL_PRECEDENCE::ast::Type::stmts>(ts));
 		}
 
-		inline Access<::DLDL_PRECEDENCE::ast::node::stmts> Access<::DLDL_PRECEDENCE::ast::node::stmts>::stmts()
+		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmts> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmts>::stmts()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_PRECEDENCE::ast::node::stmts>(Get<::DLDL_PRECEDENCE::ast::Type::stmts>(ts));
+			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmts>(Get<::DLDL_PRECEDENCE::ast::Type::stmts>(ts));
 		}
 
-		inline Access<::DLDL_PRECEDENCE::ast::node::stmt> Access<::DLDL_PRECEDENCE::ast::node::stmts>::stmt()
+		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmts>::stmt()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_PRECEDENCE::ast::node::stmt>(Get<::DLDL_PRECEDENCE::ast::Type::stmt>(ts));
+			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt>(Get<::DLDL_PRECEDENCE::ast::Type::stmt>(ts));
 		}
 
-		inline Access<::DLDL_PRECEDENCE::ast::node::localized_precedence> Access<::DLDL_PRECEDENCE::ast::node::stmt>::localized_precedence()
+		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt>::localized_precedence()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_PRECEDENCE::ast::node::localized_precedence>(Get<::DLDL_PRECEDENCE::ast::Type::localized_precedence>(ts));
+			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence>(Get<::DLDL_PRECEDENCE::ast::Type::localized_precedence>(ts));
 		}
 
-		inline Access<::DLDL_PRECEDENCE::ast::node::specific_precedence> Access<::DLDL_PRECEDENCE::ast::node::stmt>::specific_precedence()
+		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt>::specific_precedence()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_PRECEDENCE::ast::node::specific_precedence>(Get<::DLDL_PRECEDENCE::ast::Type::specific_precedence>(ts));
+			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence>(Get<::DLDL_PRECEDENCE::ast::Type::specific_precedence>(ts));
 		}
 
-		inline Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> Access<::DLDL_PRECEDENCE::ast::node::localized_precedence>::PRECEDENCE()
+		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence>::PRECEDENCE()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE>(Get<::DLDL_PRECEDENCE::ast::Type::PRECEDENCE>(ts));
+			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::PRECEDENCE>(Get<::DLDL_PRECEDENCE::ast::Type::PRECEDENCE>(ts));
 		}
 
-		inline Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> Access<::DLDL_PRECEDENCE::ast::node::localized_precedence>::terminal_one_or_more()
+		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence>::terminal_one_or_more()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>(Get<::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more>(ts));
+			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>(Get<::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more>(ts));
 		}
 
-		inline Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> Access<::DLDL_PRECEDENCE::ast::node::specific_precedence>::PRECEDENCE()
+		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence>::PRECEDENCE()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_PRECEDENCE::ast::node::PRECEDENCE>(Get<::DLDL_PRECEDENCE::ast::Type::PRECEDENCE>(ts));
+			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::PRECEDENCE>(Get<::DLDL_PRECEDENCE::ast::Type::PRECEDENCE>(ts));
 		}
 
-		inline Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> Access<::DLDL_PRECEDENCE::ast::node::specific_precedence>::terminal_one_or_more()
+		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence>::terminal_one_or_more()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>(Get<::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more>(ts));
+			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>(Get<::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more>(ts));
 		}
 
-		inline Access<::DLDL_PRECEDENCE::ast::node::NUMBER> Access<::DLDL_PRECEDENCE::ast::node::specific_precedence>::NUMBER()
+		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::NUMBER> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence>::NUMBER()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_PRECEDENCE::ast::node::NUMBER>(Get<::DLDL_PRECEDENCE::ast::Type::NUMBER>(ts));
+			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::NUMBER>(Get<::DLDL_PRECEDENCE::ast::Type::NUMBER>(ts));
 		}
 
-		inline Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>::terminal_one_or_more()
+		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>::terminal_one_or_more()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>(Get<::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more>(ts));
+			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>(Get<::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more>(ts));
 		}
 
-		inline Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> Access<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>::TERMINAL()
+		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::TERMINAL> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::terminal_one_or_more>::TERMINAL()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_PRECEDENCE::ast::node::TERMINAL>(Get<::DLDL_PRECEDENCE::ast::Type::TERMINAL>(ts));
+			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::TERMINAL>(Get<::DLDL_PRECEDENCE::ast::Type::TERMINAL>(ts));
 		}
 
 
@@ -1176,4 +1433,4 @@ Access<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 
 }}}
 
-#endif // DLDL_PRECEDENCE_AST_REFERENCE_ACCESS_H
+#endif // DLDL_PRECEDENCE_AST_REFERENCE_ACCESSTEMPLATEBASE_H

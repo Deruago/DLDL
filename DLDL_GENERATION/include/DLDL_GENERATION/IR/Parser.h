@@ -37,6 +37,9 @@ namespace DLDL::ir::generation
 			defaultGeneration->AddIntegration("Bison", "DeamerAST");
 			defaultGeneration->AddArgument("Bison", "Declare-deleted-terminals");
 
+			defaultGeneration->AddTool({"DeamerDefaultApplication", special::ToolType::User});
+			
+
 			return defaultGeneration;
 		}
 

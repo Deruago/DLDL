@@ -1,14 +1,16 @@
 #ifndef DLDL_LEXER_AST_ENUM_TYPE_H
 #define DLDL_LEXER_AST_ENUM_TYPE_H
 
-namespace DLDL_LEXER { namespace ast {
+#include <cstddef>
 
-	enum class Type
+namespace DLDL_LEXER { namespace ast { 
+
+	enum class Type : std::size_t
 	{
 		// Reserved
 		deamerreserved_unknown,
 
-		// Terminals
+		// Terminal
 		DELETE_ABSTRACTION,
 		IGNORE_ABSTRACTION,
 		NOVALUE_ABSTRACTION,
@@ -20,14 +22,35 @@ namespace DLDL_LEXER { namespace ast {
 		ESCAPE_CHARS,
 		COMMENT,
 
-		// Non-Terminals
+
+		// NonTerminal
 		program,
 		stmts,
 		stmt,
 		tokendeclaration,
 		abstraction,
+
 	};
 
+	static inline bool operator==(std::size_t lhs, ::DLDL_LEXER::ast::Type rhs)
+	{
+		return lhs == static_cast<std::size_t>(rhs);
+	}
+
+	static inline bool operator==(::DLDL_LEXER::ast::Type lhs, std::size_t rhs)
+	{
+		return static_cast<std::size_t>(lhs) == rhs;
+	}
+
+	static inline bool operator==(int lhs, ::DLDL_LEXER::ast::Type rhs)
+	{
+		return lhs == static_cast<std::size_t>(rhs);
+	}
+
+	static inline bool operator==(::DLDL_LEXER::ast::Type lhs, int rhs)
+	{
+		return static_cast<std::size_t>(lhs) == rhs;
+	}
 }}
 
 #endif // DLDL_LEXER_AST_ENUM_TYPE_H

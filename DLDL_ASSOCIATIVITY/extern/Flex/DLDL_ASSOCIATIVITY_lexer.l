@@ -35,7 +35,7 @@ ASSOCIATIVITY	(Associativity)
 
 %%
 
-{ASSOCIATIVITY}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_ASSOCIATIVITYlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (ASSOCIATIVITY);;}
+{ASSOCIATIVITY}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(1)));else DLDL_ASSOCIATIVITYlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(1));;handleColumn(yyval);if (!local_store) return (ASSOCIATIVITY);;}
 
 %%
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject)

@@ -1,5 +1,5 @@
-#ifndef DLDL_LEXER_AST_REFERENCE_ACCESS_H
-#define DLDL_LEXER_AST_REFERENCE_ACCESS_H
+#ifndef DLDL_LEXER_AST_REFERENCE_ACCESSTEMPLATEBASE_H
+#define DLDL_LEXER_AST_REFERENCE_ACCESSTEMPLATEBASE_H
 
 #include "DLDL_LEXER/Ast/Relation/NodeEnumToType.h"
 #include "DLDL_LEXER/Ast/Relation/NodeTypeToEnum.h"
@@ -64,73 +64,110 @@ namespace DLDL_LEXER { namespace ast { namespace reference {
 		}
 	};
 
-	/*!	\class Access
+	/*!	\class AccessTemplateBase
 	 *
 	 *	\brief Used to access AST nodes. It contains various helper functions to ease navigation through AST nodes.
+	 *
+	 *	\details This class contains the type dependent implementation of Access<T>.
+	 *	Refrain from using this class, as there is no backwards compatibility
+	 *	guarantee of this implementation class,
+	 *	Use Access<T> instead, this is backwards compatible and offers different benefits.
+	 *
+	 *	\see Access
 	 */
 	template<typename T>
-	struct Access : public AccessBase
+	struct AccessTemplateBase : public AccessBase
 	{
-		Access() = delete;
-		~Access() = delete;
+		AccessTemplateBase() = delete;
+		~AccessTemplateBase() = delete;
+	};
+
+	/*! \class Access
+	 *
+	 *	\brief Used to access AST nodes. It contains various helper functions to ease navigation through AST nodes.
+	 *
+	 *	\details Type dispatcher for logic.
+	 *
+	 *	\see AccessTemplateBase
+	 */
+	template<typename T>
+	struct Access : public AccessTemplateBase<T>
+	{
+		Access(std::vector<const T*> ts_) : AccessTemplateBase<T>(ts_)
+		{
+		}
+
+		Access(const T& t) : AccessTemplateBase<T>(t)
+		{
+		}
+
+		Access(const T* t) : AccessTemplateBase<T>(t)
+		{
+		}
+
+		Access(const AccessTemplateBase<T>& rhs) : AccessTemplateBase<T>(rhs)
+		{
+		}
+
+		Access() = default;
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::program>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::program>;
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::stmts>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::stmts>;
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::stmt>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::stmt>;
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::tokendeclaration>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::tokendeclaration>;
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::abstraction>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::abstraction>;
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION>;
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION>;
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION>;
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION>;
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION>;
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION>;
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::TERMINAL>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::TERMINAL>;
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::REGEX>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::REGEX>;
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::ESCAPE_CHARS>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::ESCAPE_CHARS>;
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::COMMENT>;
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::COMMENT>;
 
 
 	
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::program> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::program> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::program*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::program*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::program*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::program& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::program& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::program* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::program* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::program>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::program>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -146,7 +183,7 @@ namespace DLDL_LEXER { namespace ast { namespace reference {
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::program>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::program>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -180,11 +217,11 @@ namespace DLDL_LEXER { namespace ast { namespace reference {
 		}
 
 	public:
-		Access<::DLDL_LEXER::ast::node::stmts> stmts();
+		AccessTemplateBase<::DLDL_LEXER::ast::node::stmts> stmts();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::program>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::program>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -193,31 +230,51 @@ namespace DLDL_LEXER { namespace ast { namespace reference {
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::stmts> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::stmts> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::stmts*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::stmts*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::stmts*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::stmts& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::stmts& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::stmts* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::stmts* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::stmts>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::stmts>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -233,7 +290,7 @@ namespace DLDL_LEXER { namespace ast { namespace reference {
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::stmts>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::stmts>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -267,12 +324,12 @@ namespace DLDL_LEXER { namespace ast { namespace reference {
 		}
 
 	public:
-		Access<::DLDL_LEXER::ast::node::stmts> stmts();
-Access<::DLDL_LEXER::ast::node::stmt> stmt();
+		AccessTemplateBase<::DLDL_LEXER::ast::node::stmts> stmts();
+AccessTemplateBase<::DLDL_LEXER::ast::node::stmt> stmt();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::stmts>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::stmts>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -281,31 +338,51 @@ Access<::DLDL_LEXER::ast::node::stmt> stmt();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::stmt> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::stmt> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::stmt*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::stmt*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::stmt*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::stmt& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::stmt& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::stmt* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::stmt* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::stmt>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::stmt>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -321,7 +398,7 @@ Access<::DLDL_LEXER::ast::node::stmt> stmt();
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::stmt>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::stmt>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -355,11 +432,11 @@ Access<::DLDL_LEXER::ast::node::stmt> stmt();
 		}
 
 	public:
-		Access<::DLDL_LEXER::ast::node::tokendeclaration> tokendeclaration();
+		AccessTemplateBase<::DLDL_LEXER::ast::node::tokendeclaration> tokendeclaration();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::stmt>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::stmt>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -368,31 +445,51 @@ Access<::DLDL_LEXER::ast::node::stmt> stmt();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::tokendeclaration> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::tokendeclaration> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::tokendeclaration*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::tokendeclaration*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::tokendeclaration*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::tokendeclaration& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::tokendeclaration& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::tokendeclaration* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::tokendeclaration* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::tokendeclaration>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::tokendeclaration>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -408,7 +505,7 @@ Access<::DLDL_LEXER::ast::node::stmt> stmt();
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::tokendeclaration>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::tokendeclaration>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -442,13 +539,13 @@ Access<::DLDL_LEXER::ast::node::stmt> stmt();
 		}
 
 	public:
-		Access<::DLDL_LEXER::ast::node::abstraction> abstraction();
-Access<::DLDL_LEXER::ast::node::TERMINAL> TERMINAL();
-Access<::DLDL_LEXER::ast::node::REGEX> REGEX();
+		AccessTemplateBase<::DLDL_LEXER::ast::node::abstraction> abstraction();
+AccessTemplateBase<::DLDL_LEXER::ast::node::TERMINAL> TERMINAL();
+AccessTemplateBase<::DLDL_LEXER::ast::node::REGEX> REGEX();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::tokendeclaration>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::tokendeclaration>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -457,31 +554,51 @@ Access<::DLDL_LEXER::ast::node::REGEX> REGEX();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::abstraction> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::abstraction> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::abstraction*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::abstraction*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::abstraction*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::abstraction& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::abstraction& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::abstraction* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::abstraction* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::abstraction>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::abstraction>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -497,7 +614,7 @@ Access<::DLDL_LEXER::ast::node::REGEX> REGEX();
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::abstraction>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::abstraction>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -531,16 +648,16 @@ Access<::DLDL_LEXER::ast::node::REGEX> REGEX();
 		}
 
 	public:
-		Access<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION> DELETE_ABSTRACTION();
-Access<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION> IGNORE_ABSTRACTION();
-Access<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION> NOVALUE_ABSTRACTION();
-Access<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION> CRASH_ABSTRACTION();
-Access<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION> STANDARD_ABSTRACTION();
-Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
+		AccessTemplateBase<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION> DELETE_ABSTRACTION();
+AccessTemplateBase<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION> IGNORE_ABSTRACTION();
+AccessTemplateBase<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION> NOVALUE_ABSTRACTION();
+AccessTemplateBase<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION> CRASH_ABSTRACTION();
+AccessTemplateBase<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION> STANDARD_ABSTRACTION();
+AccessTemplateBase<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::abstraction>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::abstraction>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -549,31 +666,51 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::DELETE_ABSTRACTION*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::DELETE_ABSTRACTION*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::DELETE_ABSTRACTION*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::DELETE_ABSTRACTION& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::DELETE_ABSTRACTION& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::DELETE_ABSTRACTION* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::DELETE_ABSTRACTION* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -589,7 +726,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -626,7 +763,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -635,31 +772,51 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -675,7 +832,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -712,7 +869,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -721,31 +878,51 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -761,7 +938,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -798,7 +975,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -807,31 +984,51 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::CRASH_ABSTRACTION*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::CRASH_ABSTRACTION*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::CRASH_ABSTRACTION*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::CRASH_ABSTRACTION& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::CRASH_ABSTRACTION& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::CRASH_ABSTRACTION* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::CRASH_ABSTRACTION* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -847,7 +1044,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -884,7 +1081,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -893,31 +1090,51 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -933,7 +1150,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -970,7 +1187,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -979,31 +1196,51 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1019,7 +1256,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1056,7 +1293,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1065,31 +1302,51 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::TERMINAL> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::TERMINAL> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::TERMINAL*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::TERMINAL*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::TERMINAL*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::TERMINAL& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::TERMINAL& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::TERMINAL* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::TERMINAL* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::TERMINAL>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::TERMINAL>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1105,7 +1362,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::TERMINAL>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::TERMINAL>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1142,7 +1399,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::TERMINAL>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::TERMINAL>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1151,31 +1408,51 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::REGEX> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::REGEX> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::REGEX*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::REGEX*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::REGEX*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::REGEX& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::REGEX& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::REGEX* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::REGEX* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::REGEX>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::REGEX>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1191,7 +1468,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::REGEX>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::REGEX>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1228,7 +1505,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::REGEX>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::REGEX>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1237,31 +1514,51 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::ESCAPE_CHARS> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::ESCAPE_CHARS> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::ESCAPE_CHARS*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::ESCAPE_CHARS*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::ESCAPE_CHARS*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::ESCAPE_CHARS& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::ESCAPE_CHARS& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::ESCAPE_CHARS* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::ESCAPE_CHARS* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::ESCAPE_CHARS>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::ESCAPE_CHARS>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1277,7 +1574,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::ESCAPE_CHARS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::ESCAPE_CHARS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1314,7 +1611,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::ESCAPE_CHARS>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::ESCAPE_CHARS>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1323,31 +1620,51 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_LEXER::ast::node::COMMENT> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LEXER::ast::node::COMMENT> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_LEXER::ast::node::COMMENT*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_LEXER::ast::node::COMMENT*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LEXER::ast::node::COMMENT*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::COMMENT& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::COMMENT& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_LEXER::ast::node::COMMENT* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LEXER::ast::node::COMMENT* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_LEXER::ast::node::COMMENT>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::COMMENT>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -1363,7 +1680,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 			return *this;
 		}
 
-		Access<::DLDL_LEXER::ast::node::COMMENT>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::COMMENT>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -1400,7 +1717,7 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_LEXER::ast::node::COMMENT>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LEXER::ast::node::COMMENT>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1409,112 +1726,132 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 
 	
-		inline Access<::DLDL_LEXER::ast::node::stmts> Access<::DLDL_LEXER::ast::node::program>::stmts()
+		inline AccessTemplateBase<::DLDL_LEXER::ast::node::stmts> AccessTemplateBase<::DLDL_LEXER::ast::node::program>::stmts()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_LEXER::ast::node::stmts>(Get<::DLDL_LEXER::ast::Type::stmts>(ts));
+			return AccessTemplateBase<::DLDL_LEXER::ast::node::stmts>(Get<::DLDL_LEXER::ast::Type::stmts>(ts));
 		}
 
-		inline Access<::DLDL_LEXER::ast::node::stmts> Access<::DLDL_LEXER::ast::node::stmts>::stmts()
+		inline AccessTemplateBase<::DLDL_LEXER::ast::node::stmts> AccessTemplateBase<::DLDL_LEXER::ast::node::stmts>::stmts()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_LEXER::ast::node::stmts>(Get<::DLDL_LEXER::ast::Type::stmts>(ts));
+			return AccessTemplateBase<::DLDL_LEXER::ast::node::stmts>(Get<::DLDL_LEXER::ast::Type::stmts>(ts));
 		}
 
-		inline Access<::DLDL_LEXER::ast::node::stmt> Access<::DLDL_LEXER::ast::node::stmts>::stmt()
+		inline AccessTemplateBase<::DLDL_LEXER::ast::node::stmt> AccessTemplateBase<::DLDL_LEXER::ast::node::stmts>::stmt()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_LEXER::ast::node::stmt>(Get<::DLDL_LEXER::ast::Type::stmt>(ts));
+			return AccessTemplateBase<::DLDL_LEXER::ast::node::stmt>(Get<::DLDL_LEXER::ast::Type::stmt>(ts));
 		}
 
-		inline Access<::DLDL_LEXER::ast::node::tokendeclaration> Access<::DLDL_LEXER::ast::node::stmt>::tokendeclaration()
+		inline AccessTemplateBase<::DLDL_LEXER::ast::node::tokendeclaration> AccessTemplateBase<::DLDL_LEXER::ast::node::stmt>::tokendeclaration()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_LEXER::ast::node::tokendeclaration>(Get<::DLDL_LEXER::ast::Type::tokendeclaration>(ts));
+			return AccessTemplateBase<::DLDL_LEXER::ast::node::tokendeclaration>(Get<::DLDL_LEXER::ast::Type::tokendeclaration>(ts));
 		}
 
-		inline Access<::DLDL_LEXER::ast::node::abstraction> Access<::DLDL_LEXER::ast::node::tokendeclaration>::abstraction()
+		inline AccessTemplateBase<::DLDL_LEXER::ast::node::abstraction> AccessTemplateBase<::DLDL_LEXER::ast::node::tokendeclaration>::abstraction()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_LEXER::ast::node::abstraction>(Get<::DLDL_LEXER::ast::Type::abstraction>(ts));
+			return AccessTemplateBase<::DLDL_LEXER::ast::node::abstraction>(Get<::DLDL_LEXER::ast::Type::abstraction>(ts));
 		}
 
-		inline Access<::DLDL_LEXER::ast::node::TERMINAL> Access<::DLDL_LEXER::ast::node::tokendeclaration>::TERMINAL()
+		inline AccessTemplateBase<::DLDL_LEXER::ast::node::TERMINAL> AccessTemplateBase<::DLDL_LEXER::ast::node::tokendeclaration>::TERMINAL()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_LEXER::ast::node::TERMINAL>(Get<::DLDL_LEXER::ast::Type::TERMINAL>(ts));
+			return AccessTemplateBase<::DLDL_LEXER::ast::node::TERMINAL>(Get<::DLDL_LEXER::ast::Type::TERMINAL>(ts));
 		}
 
-		inline Access<::DLDL_LEXER::ast::node::REGEX> Access<::DLDL_LEXER::ast::node::tokendeclaration>::REGEX()
+		inline AccessTemplateBase<::DLDL_LEXER::ast::node::REGEX> AccessTemplateBase<::DLDL_LEXER::ast::node::tokendeclaration>::REGEX()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_LEXER::ast::node::REGEX>(Get<::DLDL_LEXER::ast::Type::REGEX>(ts));
+			return AccessTemplateBase<::DLDL_LEXER::ast::node::REGEX>(Get<::DLDL_LEXER::ast::Type::REGEX>(ts));
 		}
 
-		inline Access<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION> Access<::DLDL_LEXER::ast::node::abstraction>::DELETE_ABSTRACTION()
+		inline AccessTemplateBase<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION> AccessTemplateBase<::DLDL_LEXER::ast::node::abstraction>::DELETE_ABSTRACTION()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION>(Get<::DLDL_LEXER::ast::Type::DELETE_ABSTRACTION>(ts));
+			return AccessTemplateBase<::DLDL_LEXER::ast::node::DELETE_ABSTRACTION>(Get<::DLDL_LEXER::ast::Type::DELETE_ABSTRACTION>(ts));
 		}
 
-		inline Access<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION> Access<::DLDL_LEXER::ast::node::abstraction>::IGNORE_ABSTRACTION()
+		inline AccessTemplateBase<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION> AccessTemplateBase<::DLDL_LEXER::ast::node::abstraction>::IGNORE_ABSTRACTION()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION>(Get<::DLDL_LEXER::ast::Type::IGNORE_ABSTRACTION>(ts));
+			return AccessTemplateBase<::DLDL_LEXER::ast::node::IGNORE_ABSTRACTION>(Get<::DLDL_LEXER::ast::Type::IGNORE_ABSTRACTION>(ts));
 		}
 
-		inline Access<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION> Access<::DLDL_LEXER::ast::node::abstraction>::NOVALUE_ABSTRACTION()
+		inline AccessTemplateBase<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION> AccessTemplateBase<::DLDL_LEXER::ast::node::abstraction>::NOVALUE_ABSTRACTION()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION>(Get<::DLDL_LEXER::ast::Type::NOVALUE_ABSTRACTION>(ts));
+			return AccessTemplateBase<::DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION>(Get<::DLDL_LEXER::ast::Type::NOVALUE_ABSTRACTION>(ts));
 		}
 
-		inline Access<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION> Access<::DLDL_LEXER::ast::node::abstraction>::CRASH_ABSTRACTION()
+		inline AccessTemplateBase<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION> AccessTemplateBase<::DLDL_LEXER::ast::node::abstraction>::CRASH_ABSTRACTION()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION>(Get<::DLDL_LEXER::ast::Type::CRASH_ABSTRACTION>(ts));
+			return AccessTemplateBase<::DLDL_LEXER::ast::node::CRASH_ABSTRACTION>(Get<::DLDL_LEXER::ast::Type::CRASH_ABSTRACTION>(ts));
 		}
 
-		inline Access<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION> Access<::DLDL_LEXER::ast::node::abstraction>::STANDARD_ABSTRACTION()
+		inline AccessTemplateBase<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION> AccessTemplateBase<::DLDL_LEXER::ast::node::abstraction>::STANDARD_ABSTRACTION()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION>(Get<::DLDL_LEXER::ast::Type::STANDARD_ABSTRACTION>(ts));
+			return AccessTemplateBase<::DLDL_LEXER::ast::node::STANDARD_ABSTRACTION>(Get<::DLDL_LEXER::ast::Type::STANDARD_ABSTRACTION>(ts));
 		}
 
-		inline Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> Access<::DLDL_LEXER::ast::node::abstraction>::UNKNOWN_ABSTRACTION()
+		inline AccessTemplateBase<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> AccessTemplateBase<::DLDL_LEXER::ast::node::abstraction>::UNKNOWN_ABSTRACTION()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION>(Get<::DLDL_LEXER::ast::Type::UNKNOWN_ABSTRACTION>(ts));
+			return AccessTemplateBase<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION>(Get<::DLDL_LEXER::ast::Type::UNKNOWN_ABSTRACTION>(ts));
 		}
 
 
@@ -1541,4 +1878,4 @@ Access<::DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION> UNKNOWN_ABSTRACTION();
 
 }}}
 
-#endif // DLDL_LEXER_AST_REFERENCE_ACCESS_H
+#endif // DLDL_LEXER_AST_REFERENCE_ACCESSTEMPLATEBASE_H

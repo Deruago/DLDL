@@ -1,14 +1,16 @@
 #ifndef DLDL_GRAMMAR_AST_ENUM_TYPE_H
 #define DLDL_GRAMMAR_AST_ENUM_TYPE_H
 
-namespace DLDL_GRAMMAR { namespace ast {
+#include <cstddef>
 
-	enum class Type
+namespace DLDL_GRAMMAR { namespace ast { 
+
+	enum class Type : std::size_t
 	{
 		// Reserved
 		deamerreserved_unknown,
 
-		// Terminals
+		// Terminal
 		COMMENT,
 		START_ABSTRACTION,
 		GROUP_ABSTRACTION,
@@ -19,7 +21,8 @@ namespace DLDL_GRAMMAR { namespace ast {
 		PRODUCTION_RULE,
 		ESCAPE_CHARS,
 
-		// Non-Terminals
+
+		// NonTerminal
 		program,
 		stmts,
 		stmt,
@@ -27,8 +30,28 @@ namespace DLDL_GRAMMAR { namespace ast {
 		abstraction,
 		definition,
 		production_rules,
+
 	};
 
+	static inline bool operator==(std::size_t lhs, ::DLDL_GRAMMAR::ast::Type rhs)
+	{
+		return lhs == static_cast<std::size_t>(rhs);
+	}
+
+	static inline bool operator==(::DLDL_GRAMMAR::ast::Type lhs, std::size_t rhs)
+	{
+		return static_cast<std::size_t>(lhs) == rhs;
+	}
+
+	static inline bool operator==(int lhs, ::DLDL_GRAMMAR::ast::Type rhs)
+	{
+		return lhs == static_cast<std::size_t>(rhs);
+	}
+
+	static inline bool operator==(::DLDL_GRAMMAR::ast::Type lhs, int rhs)
+	{
+		return static_cast<std::size_t>(lhs) == rhs;
+	}
 }}
 
 #endif // DLDL_GRAMMAR_AST_ENUM_TYPE_H

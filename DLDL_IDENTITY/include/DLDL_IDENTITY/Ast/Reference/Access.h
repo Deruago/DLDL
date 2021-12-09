@@ -1,5 +1,5 @@
-#ifndef DLDL_IDENTITY_AST_REFERENCE_ACCESS_H
-#define DLDL_IDENTITY_AST_REFERENCE_ACCESS_H
+#ifndef DLDL_IDENTITY_AST_REFERENCE_ACCESSTEMPLATEBASE_H
+#define DLDL_IDENTITY_AST_REFERENCE_ACCESSTEMPLATEBASE_H
 
 #include "DLDL_IDENTITY/Ast/Relation/NodeEnumToType.h"
 #include "DLDL_IDENTITY/Ast/Relation/NodeTypeToEnum.h"
@@ -57,59 +57,96 @@ namespace DLDL_IDENTITY { namespace ast { namespace reference {
 		}
 	};
 
-	/*!	\class Access
+	/*!	\class AccessTemplateBase
 	 *
 	 *	\brief Used to access AST nodes. It contains various helper functions to ease navigation through AST nodes.
+	 *
+	 *	\details This class contains the type dependent implementation of Access<T>.
+	 *	Refrain from using this class, as there is no backwards compatibility
+	 *	guarantee of this implementation class,
+	 *	Use Access<T> instead, this is backwards compatible and offers different benefits.
+	 *
+	 *	\see Access
 	 */
 	template<typename T>
-	struct Access : public AccessBase
+	struct AccessTemplateBase : public AccessBase
 	{
-		Access() = delete;
-		~Access() = delete;
+		AccessTemplateBase() = delete;
+		~AccessTemplateBase() = delete;
+	};
+
+	/*! \class Access
+	 *
+	 *	\brief Used to access AST nodes. It contains various helper functions to ease navigation through AST nodes.
+	 *
+	 *	\details Type dispatcher for logic.
+	 *
+	 *	\see AccessTemplateBase
+	 */
+	template<typename T>
+	struct Access : public AccessTemplateBase<T>
+	{
+		Access(std::vector<const T*> ts_) : AccessTemplateBase<T>(ts_)
+		{
+		}
+
+		Access(const T& t) : AccessTemplateBase<T>(t)
+		{
+		}
+
+		Access(const T* t) : AccessTemplateBase<T>(t)
+		{
+		}
+
+		Access(const AccessTemplateBase<T>& rhs) : AccessTemplateBase<T>(rhs)
+		{
+		}
+
+		Access() = default;
 	};
 
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::program>;
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::program>;
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::stmts>;
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmts>;
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::stmt>;
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmt>;
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::name_declaration>;
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::name_declaration>;
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::NAME>;
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::NAME>;
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::VALUE>;
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::VALUE>;
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::SYMBOLS>;
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::SYMBOLS>;
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::ESCAPE_CHARS>;
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::ESCAPE_CHARS>;
 
 
 	
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::program> : public AccessBase
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::program> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_IDENTITY::ast::node::program*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_IDENTITY::ast::node::program*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_IDENTITY::ast::node::program*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::program& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::program& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::program* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::program* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_IDENTITY::ast::node::program>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::program>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -125,7 +162,7 @@ namespace DLDL_IDENTITY { namespace ast { namespace reference {
 			return *this;
 		}
 
-		Access<::DLDL_IDENTITY::ast::node::program>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::program>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -159,11 +196,11 @@ namespace DLDL_IDENTITY { namespace ast { namespace reference {
 		}
 
 	public:
-		Access<::DLDL_IDENTITY::ast::node::stmts> stmts();
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmts> stmts();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_IDENTITY::ast::node::program>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::program>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -172,31 +209,51 @@ namespace DLDL_IDENTITY { namespace ast { namespace reference {
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::stmts> : public AccessBase
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmts> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_IDENTITY::ast::node::stmts*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_IDENTITY::ast::node::stmts*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_IDENTITY::ast::node::stmts*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::stmts& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::stmts& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::stmts* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::stmts* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_IDENTITY::ast::node::stmts>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmts>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -212,7 +269,7 @@ namespace DLDL_IDENTITY { namespace ast { namespace reference {
 			return *this;
 		}
 
-		Access<::DLDL_IDENTITY::ast::node::stmts>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmts>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -246,12 +303,12 @@ namespace DLDL_IDENTITY { namespace ast { namespace reference {
 		}
 
 	public:
-		Access<::DLDL_IDENTITY::ast::node::stmts> stmts();
-Access<::DLDL_IDENTITY::ast::node::stmt> stmt();
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmts> stmts();
+AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmt> stmt();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_IDENTITY::ast::node::stmts>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmts>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -260,31 +317,51 @@ Access<::DLDL_IDENTITY::ast::node::stmt> stmt();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::stmt> : public AccessBase
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmt> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_IDENTITY::ast::node::stmt*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_IDENTITY::ast::node::stmt*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_IDENTITY::ast::node::stmt*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::stmt& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::stmt& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::stmt* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::stmt* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_IDENTITY::ast::node::stmt>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmt>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -300,7 +377,7 @@ Access<::DLDL_IDENTITY::ast::node::stmt> stmt();
 			return *this;
 		}
 
-		Access<::DLDL_IDENTITY::ast::node::stmt>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmt>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -334,11 +411,11 @@ Access<::DLDL_IDENTITY::ast::node::stmt> stmt();
 		}
 
 	public:
-		Access<::DLDL_IDENTITY::ast::node::name_declaration> name_declaration();
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::name_declaration> name_declaration();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_IDENTITY::ast::node::stmt>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmt>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -347,31 +424,51 @@ Access<::DLDL_IDENTITY::ast::node::stmt> stmt();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::name_declaration> : public AccessBase
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::name_declaration> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_IDENTITY::ast::node::name_declaration*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_IDENTITY::ast::node::name_declaration*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_IDENTITY::ast::node::name_declaration*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::name_declaration& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::name_declaration& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::name_declaration* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::name_declaration* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_IDENTITY::ast::node::name_declaration>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::name_declaration>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -387,7 +484,7 @@ Access<::DLDL_IDENTITY::ast::node::stmt> stmt();
 			return *this;
 		}
 
-		Access<::DLDL_IDENTITY::ast::node::name_declaration>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::name_declaration>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -421,12 +518,12 @@ Access<::DLDL_IDENTITY::ast::node::stmt> stmt();
 		}
 
 	public:
-		Access<::DLDL_IDENTITY::ast::node::NAME> NAME();
-Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::NAME> NAME();
+AccessTemplateBase<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_IDENTITY::ast::node::name_declaration>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::name_declaration>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -435,31 +532,51 @@ Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::NAME> : public AccessBase
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::NAME> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_IDENTITY::ast::node::NAME*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_IDENTITY::ast::node::NAME*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_IDENTITY::ast::node::NAME*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::NAME& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::NAME& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::NAME* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::NAME* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_IDENTITY::ast::node::NAME>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::NAME>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -475,7 +592,7 @@ Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 			return *this;
 		}
 
-		Access<::DLDL_IDENTITY::ast::node::NAME>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::NAME>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -512,7 +629,7 @@ Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_IDENTITY::ast::node::NAME>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::NAME>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -521,31 +638,51 @@ Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::VALUE> : public AccessBase
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::VALUE> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_IDENTITY::ast::node::VALUE*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_IDENTITY::ast::node::VALUE*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_IDENTITY::ast::node::VALUE*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::VALUE& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::VALUE& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::VALUE* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::VALUE* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_IDENTITY::ast::node::VALUE>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::VALUE>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -561,7 +698,7 @@ Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 			return *this;
 		}
 
-		Access<::DLDL_IDENTITY::ast::node::VALUE>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::VALUE>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -598,7 +735,7 @@ Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_IDENTITY::ast::node::VALUE>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::VALUE>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -607,31 +744,51 @@ Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::SYMBOLS> : public AccessBase
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::SYMBOLS> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_IDENTITY::ast::node::SYMBOLS*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_IDENTITY::ast::node::SYMBOLS*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_IDENTITY::ast::node::SYMBOLS*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::SYMBOLS& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::SYMBOLS& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::SYMBOLS* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::SYMBOLS* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_IDENTITY::ast::node::SYMBOLS>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::SYMBOLS>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -647,7 +804,7 @@ Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 			return *this;
 		}
 
-		Access<::DLDL_IDENTITY::ast::node::SYMBOLS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::SYMBOLS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -684,7 +841,7 @@ Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_IDENTITY::ast::node::SYMBOLS>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::SYMBOLS>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -693,31 +850,51 @@ Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_IDENTITY::ast::node::ESCAPE_CHARS> : public AccessBase
+	struct AccessTemplateBase<::DLDL_IDENTITY::ast::node::ESCAPE_CHARS> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_IDENTITY::ast::node::ESCAPE_CHARS*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_IDENTITY::ast::node::ESCAPE_CHARS*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_IDENTITY::ast::node::ESCAPE_CHARS*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::ESCAPE_CHARS& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::ESCAPE_CHARS& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_IDENTITY::ast::node::ESCAPE_CHARS* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_IDENTITY::ast::node::ESCAPE_CHARS* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_IDENTITY::ast::node::ESCAPE_CHARS>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::ESCAPE_CHARS>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -733,7 +910,7 @@ Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 			return *this;
 		}
 
-		Access<::DLDL_IDENTITY::ast::node::ESCAPE_CHARS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::ESCAPE_CHARS>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -770,7 +947,7 @@ Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_IDENTITY::ast::node::ESCAPE_CHARS>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_IDENTITY::ast::node::ESCAPE_CHARS>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -779,56 +956,76 @@ Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 
 	
-		inline Access<::DLDL_IDENTITY::ast::node::stmts> Access<::DLDL_IDENTITY::ast::node::program>::stmts()
+		inline AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmts> AccessTemplateBase<::DLDL_IDENTITY::ast::node::program>::stmts()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_IDENTITY::ast::node::stmts>(Get<::DLDL_IDENTITY::ast::Type::stmts>(ts));
+			return AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmts>(Get<::DLDL_IDENTITY::ast::Type::stmts>(ts));
 		}
 
-		inline Access<::DLDL_IDENTITY::ast::node::stmts> Access<::DLDL_IDENTITY::ast::node::stmts>::stmts()
+		inline AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmts> AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmts>::stmts()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_IDENTITY::ast::node::stmts>(Get<::DLDL_IDENTITY::ast::Type::stmts>(ts));
+			return AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmts>(Get<::DLDL_IDENTITY::ast::Type::stmts>(ts));
 		}
 
-		inline Access<::DLDL_IDENTITY::ast::node::stmt> Access<::DLDL_IDENTITY::ast::node::stmts>::stmt()
+		inline AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmt> AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmts>::stmt()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_IDENTITY::ast::node::stmt>(Get<::DLDL_IDENTITY::ast::Type::stmt>(ts));
+			return AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmt>(Get<::DLDL_IDENTITY::ast::Type::stmt>(ts));
 		}
 
-		inline Access<::DLDL_IDENTITY::ast::node::name_declaration> Access<::DLDL_IDENTITY::ast::node::stmt>::name_declaration()
+		inline AccessTemplateBase<::DLDL_IDENTITY::ast::node::name_declaration> AccessTemplateBase<::DLDL_IDENTITY::ast::node::stmt>::name_declaration()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_IDENTITY::ast::node::name_declaration>(Get<::DLDL_IDENTITY::ast::Type::name_declaration>(ts));
+			return AccessTemplateBase<::DLDL_IDENTITY::ast::node::name_declaration>(Get<::DLDL_IDENTITY::ast::Type::name_declaration>(ts));
 		}
 
-		inline Access<::DLDL_IDENTITY::ast::node::NAME> Access<::DLDL_IDENTITY::ast::node::name_declaration>::NAME()
+		inline AccessTemplateBase<::DLDL_IDENTITY::ast::node::NAME> AccessTemplateBase<::DLDL_IDENTITY::ast::node::name_declaration>::NAME()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_IDENTITY::ast::node::NAME>(Get<::DLDL_IDENTITY::ast::Type::NAME>(ts));
+			return AccessTemplateBase<::DLDL_IDENTITY::ast::node::NAME>(Get<::DLDL_IDENTITY::ast::Type::NAME>(ts));
 		}
 
-		inline Access<::DLDL_IDENTITY::ast::node::VALUE> Access<::DLDL_IDENTITY::ast::node::name_declaration>::VALUE()
+		inline AccessTemplateBase<::DLDL_IDENTITY::ast::node::VALUE> AccessTemplateBase<::DLDL_IDENTITY::ast::node::name_declaration>::VALUE()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_IDENTITY::ast::node::VALUE>(Get<::DLDL_IDENTITY::ast::Type::VALUE>(ts));
+			return AccessTemplateBase<::DLDL_IDENTITY::ast::node::VALUE>(Get<::DLDL_IDENTITY::ast::Type::VALUE>(ts));
 		}
 
 
@@ -855,4 +1052,4 @@ Access<::DLDL_IDENTITY::ast::node::VALUE> VALUE();
 
 }}}
 
-#endif // DLDL_IDENTITY_AST_REFERENCE_ACCESS_H
+#endif // DLDL_IDENTITY_AST_REFERENCE_ACCESSTEMPLATEBASE_H

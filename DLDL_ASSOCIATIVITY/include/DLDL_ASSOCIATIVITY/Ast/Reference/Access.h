@@ -1,5 +1,5 @@
-#ifndef DLDL_ASSOCIATIVITY_AST_REFERENCE_ACCESS_H
-#define DLDL_ASSOCIATIVITY_AST_REFERENCE_ACCESS_H
+#ifndef DLDL_ASSOCIATIVITY_AST_REFERENCE_ACCESSTEMPLATEBASE_H
+#define DLDL_ASSOCIATIVITY_AST_REFERENCE_ACCESSTEMPLATEBASE_H
 
 #include "DLDL_ASSOCIATIVITY/Ast/Relation/NodeEnumToType.h"
 #include "DLDL_ASSOCIATIVITY/Ast/Relation/NodeTypeToEnum.h"
@@ -53,51 +53,88 @@ namespace DLDL_ASSOCIATIVITY { namespace ast { namespace reference {
 		}
 	};
 
-	/*!	\class Access
+	/*!	\class AccessTemplateBase
 	 *
 	 *	\brief Used to access AST nodes. It contains various helper functions to ease navigation through AST nodes.
+	 *
+	 *	\details This class contains the type dependent implementation of Access<T>.
+	 *	Refrain from using this class, as there is no backwards compatibility
+	 *	guarantee of this implementation class,
+	 *	Use Access<T> instead, this is backwards compatible and offers different benefits.
+	 *
+	 *	\see Access
 	 */
 	template<typename T>
-	struct Access : public AccessBase
+	struct AccessTemplateBase : public AccessBase
 	{
-		Access() = delete;
-		~Access() = delete;
+		AccessTemplateBase() = delete;
+		~AccessTemplateBase() = delete;
+	};
+
+	/*! \class Access
+	 *
+	 *	\brief Used to access AST nodes. It contains various helper functions to ease navigation through AST nodes.
+	 *
+	 *	\details Type dispatcher for logic.
+	 *
+	 *	\see AccessTemplateBase
+	 */
+	template<typename T>
+	struct Access : public AccessTemplateBase<T>
+	{
+		Access(std::vector<const T*> ts_) : AccessTemplateBase<T>(ts_)
+		{
+		}
+
+		Access(const T& t) : AccessTemplateBase<T>(t)
+		{
+		}
+
+		Access(const T* t) : AccessTemplateBase<T>(t)
+		{
+		}
+
+		Access(const AccessTemplateBase<T>& rhs) : AccessTemplateBase<T>(rhs)
+		{
+		}
+
+		Access() = default;
 	};
 
 	template<>
-	struct Access<::DLDL_ASSOCIATIVITY::ast::node::program>;
+	struct AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::program>;
 	template<>
-	struct Access<::DLDL_ASSOCIATIVITY::ast::node::stmts>;
+	struct AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmts>;
 	template<>
-	struct Access<::DLDL_ASSOCIATIVITY::ast::node::stmt>;
+	struct AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmt>;
 	template<>
-	struct Access<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY>;
+	struct AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY>;
 
 
 	
 	template<>
-	struct Access<::DLDL_ASSOCIATIVITY::ast::node::program> : public AccessBase
+	struct AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::program> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_ASSOCIATIVITY::ast::node::program*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_ASSOCIATIVITY::ast::node::program*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_ASSOCIATIVITY::ast::node::program*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_ASSOCIATIVITY::ast::node::program& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_ASSOCIATIVITY::ast::node::program& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_ASSOCIATIVITY::ast::node::program* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_ASSOCIATIVITY::ast::node::program* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_ASSOCIATIVITY::ast::node::program>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::program>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -113,7 +150,7 @@ namespace DLDL_ASSOCIATIVITY { namespace ast { namespace reference {
 			return *this;
 		}
 
-		Access<::DLDL_ASSOCIATIVITY::ast::node::program>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::program>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -147,11 +184,11 @@ namespace DLDL_ASSOCIATIVITY { namespace ast { namespace reference {
 		}
 
 	public:
-		Access<::DLDL_ASSOCIATIVITY::ast::node::stmts> stmts();
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmts> stmts();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_ASSOCIATIVITY::ast::node::program>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::program>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -160,31 +197,51 @@ namespace DLDL_ASSOCIATIVITY { namespace ast { namespace reference {
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_ASSOCIATIVITY::ast::node::stmts> : public AccessBase
+	struct AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmts> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_ASSOCIATIVITY::ast::node::stmts*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_ASSOCIATIVITY::ast::node::stmts*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_ASSOCIATIVITY::ast::node::stmts*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_ASSOCIATIVITY::ast::node::stmts& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_ASSOCIATIVITY::ast::node::stmts& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_ASSOCIATIVITY::ast::node::stmts* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_ASSOCIATIVITY::ast::node::stmts* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_ASSOCIATIVITY::ast::node::stmts>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmts>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -200,7 +257,7 @@ namespace DLDL_ASSOCIATIVITY { namespace ast { namespace reference {
 			return *this;
 		}
 
-		Access<::DLDL_ASSOCIATIVITY::ast::node::stmts>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmts>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -234,12 +291,12 @@ namespace DLDL_ASSOCIATIVITY { namespace ast { namespace reference {
 		}
 
 	public:
-		Access<::DLDL_ASSOCIATIVITY::ast::node::stmts> stmts();
-Access<::DLDL_ASSOCIATIVITY::ast::node::stmt> stmt();
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmts> stmts();
+AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmt> stmt();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_ASSOCIATIVITY::ast::node::stmts>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmts>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -248,31 +305,51 @@ Access<::DLDL_ASSOCIATIVITY::ast::node::stmt> stmt();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_ASSOCIATIVITY::ast::node::stmt> : public AccessBase
+	struct AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmt> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_ASSOCIATIVITY::ast::node::stmt*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_ASSOCIATIVITY::ast::node::stmt*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_ASSOCIATIVITY::ast::node::stmt*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_ASSOCIATIVITY::ast::node::stmt& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_ASSOCIATIVITY::ast::node::stmt& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_ASSOCIATIVITY::ast::node::stmt* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_ASSOCIATIVITY::ast::node::stmt* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_ASSOCIATIVITY::ast::node::stmt>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmt>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -288,7 +365,7 @@ Access<::DLDL_ASSOCIATIVITY::ast::node::stmt> stmt();
 			return *this;
 		}
 
-		Access<::DLDL_ASSOCIATIVITY::ast::node::stmt>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmt>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -322,11 +399,11 @@ Access<::DLDL_ASSOCIATIVITY::ast::node::stmt> stmt();
 		}
 
 	public:
-		Access<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY> ASSOCIATIVITY();
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY> ASSOCIATIVITY();
 
 
 		template<typename FunctionType>
-		Access<::DLDL_ASSOCIATIVITY::ast::node::stmt>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmt>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -335,31 +412,51 @@ Access<::DLDL_ASSOCIATIVITY::ast::node::stmt> stmt();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 	template<>
-	struct Access<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY> : public AccessBase
+	struct AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY> : public AccessBase
 	{
 	protected:
 		std::vector<const ::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY*> ts;
 
 	public:
-		Access(std::vector<const ::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		Access(const ::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY& t) : ts({&t})
 		{
 		}
 
-		Access(const ::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY* t) : ts({t})
 		{
 		}
 
-		Access() = default;
+		AccessTemplateBase() = default;
 
 	public:
-		Access<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -375,7 +472,7 @@ Access<::DLDL_ASSOCIATIVITY::ast::node::stmt> stmt();
 			return *this;
 		}
 
-		Access<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -412,7 +509,7 @@ Access<::DLDL_ASSOCIATIVITY::ast::node::stmt> stmt();
 		
 
 		template<typename FunctionType>
-		Access<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -421,40 +518,60 @@ Access<::DLDL_ASSOCIATIVITY::ast::node::stmt> stmt();
 
 			return *this;
 		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
 	};
 
 
 	
-		inline Access<::DLDL_ASSOCIATIVITY::ast::node::stmts> Access<::DLDL_ASSOCIATIVITY::ast::node::program>::stmts()
+		inline AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmts> AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::program>::stmts()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_ASSOCIATIVITY::ast::node::stmts>(Get<::DLDL_ASSOCIATIVITY::ast::Type::stmts>(ts));
+			return AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmts>(Get<::DLDL_ASSOCIATIVITY::ast::Type::stmts>(ts));
 		}
 
-		inline Access<::DLDL_ASSOCIATIVITY::ast::node::stmts> Access<::DLDL_ASSOCIATIVITY::ast::node::stmts>::stmts()
+		inline AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmts> AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmts>::stmts()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_ASSOCIATIVITY::ast::node::stmts>(Get<::DLDL_ASSOCIATIVITY::ast::Type::stmts>(ts));
+			return AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmts>(Get<::DLDL_ASSOCIATIVITY::ast::Type::stmts>(ts));
 		}
 
-		inline Access<::DLDL_ASSOCIATIVITY::ast::node::stmt> Access<::DLDL_ASSOCIATIVITY::ast::node::stmts>::stmt()
+		inline AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmt> AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmts>::stmt()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_ASSOCIATIVITY::ast::node::stmt>(Get<::DLDL_ASSOCIATIVITY::ast::Type::stmt>(ts));
+			return AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmt>(Get<::DLDL_ASSOCIATIVITY::ast::Type::stmt>(ts));
 		}
 
-		inline Access<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY> Access<::DLDL_ASSOCIATIVITY::ast::node::stmt>::ASSOCIATIVITY()
+		inline AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY> AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::stmt>::ASSOCIATIVITY()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return Access<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY>(Get<::DLDL_ASSOCIATIVITY::ast::Type::ASSOCIATIVITY>(ts));
+			return AccessTemplateBase<::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY>(Get<::DLDL_ASSOCIATIVITY::ast::Type::ASSOCIATIVITY>(ts));
 		}
 
 
@@ -481,4 +598,4 @@ Access<::DLDL_ASSOCIATIVITY::ast::node::stmt> stmt();
 
 }}}
 
-#endif // DLDL_ASSOCIATIVITY_AST_REFERENCE_ACCESS_H
+#endif // DLDL_ASSOCIATIVITY_AST_REFERENCE_ACCESSTEMPLATEBASE_H
