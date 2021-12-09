@@ -49,20 +49,20 @@ GROUP_ABSTRACTION	([Gg]roup[:][ \t]*)
 INLINE_ABSTRACTION	([Ii]nline[:][ \t]*)
 INLINE_GROUP_ABSTRACTION	((([Ii]nline[ ][Gg]roup)|([Gg]roup[ ][Ii]nline))[:][ \t]*)
 UNKNOWN_ABSTRACTION	([a-zA-Z0-9_\\$?!-+=]*[:][ \t]*)
-NONTERMINAL	([a-zA-Z_]+)
+NONTERMINAL	([a-zA-Z_]+[a-zA-Z_0-9]*)
 PRODUCTION_RULE	([ \t]+[^\n\r]*)
 ESCAPE_CHARS	([\n\r\b\v\a\f\t ])
 
 %%
 
 {COMMENT}	{handleColumn(yyval);if (!local_store) ;}
-{START_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (START_ABSTRACTION);;}
-{GROUP_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (GROUP_ABSTRACTION);;}
-{INLINE_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (INLINE_ABSTRACTION);;}
-{INLINE_GROUP_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (INLINE_GROUP_ABSTRACTION);;}
-{UNKNOWN_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column);;handleColumn(yyval);if (!local_store) return (UNKNOWN_ABSTRACTION);;}
-{NONTERMINAL}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (NONTERMINAL);;}
-{PRODUCTION_RULE}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column);;handleColumn(yyval);if (!local_store) return (PRODUCTION_RULE);;}
+{START_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(2)));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(2));;handleColumn(yyval);if (!local_store) return (START_ABSTRACTION);;}
+{GROUP_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(3)));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(3));;handleColumn(yyval);if (!local_store) return (GROUP_ABSTRACTION);;}
+{INLINE_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(4)));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(4));;handleColumn(yyval);if (!local_store) return (INLINE_ABSTRACTION);;}
+{INLINE_GROUP_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(5)));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(5));;handleColumn(yyval);if (!local_store) return (INLINE_GROUP_ABSTRACTION);;}
+{UNKNOWN_ABSTRACTION}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(6)));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(6));;handleColumn(yyval);if (!local_store) return (UNKNOWN_ABSTRACTION);;}
+{NONTERMINAL}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(7)));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(7));;handleColumn(yyval);if (!local_store) return (NONTERMINAL);;}
+{PRODUCTION_RULE}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(8)));else DLDL_GRAMMARlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(8));;handleColumn(yyval);if (!local_store) return (PRODUCTION_RULE);;}
 {ESCAPE_CHARS}	{handleColumn(yyval);if (!local_store) ;}
 
 %%

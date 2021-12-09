@@ -7,3 +7,4 @@
 #
 # This file is part of the directory: sources
 
+add_subdirectory(DeamerDefaultApplication)

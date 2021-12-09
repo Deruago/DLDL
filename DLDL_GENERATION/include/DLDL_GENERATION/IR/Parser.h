@@ -1,10 +1,16 @@
 #ifndef DLDL_GENERATION_IR_PARSER_H
 #define DLDL_GENERATION_IR_PARSER_H
 
+#include "Deamer/Deamer.h"
 #include "DLDL/IR/Parser.h"
 #include "DLDL_GENERATION/Ast/Listener/User/Generation.h"
 #include "DLDL_GENERATION/Bison/Parser.h"
+#include <memory>
 #include <string>
+
+#ifndef DEAMER_CC_V2_RESERVED_MACRO_VALUE_VERSION_NUMBER
+#define DEAMER_CC_V2_RESERVED_MACRO_VALUE_VERSION_NUMBER 000'000'000UL
+#endif // DEAMER_CC_V2_RESERVED_MACRO_VALUE_VERSION_NUMBER
 
 namespace DLDL::ir::generation
 {
@@ -35,6 +41,12 @@ namespace DLDL::ir::generation
 			defaultGeneration->AddTool({"Bison", special::ToolType::Parser});
 			defaultGeneration->AddIntegration("Bison", "DeamerAST");
 			defaultGeneration->AddArgument("Bison", "Declare-deleted-terminals");
+			
+			if constexpr (DEAMER_CC_V2_RESERVED_MACRO_VALUE_VERSION_NUMBER >= 002'002'000)
+			{
+				defaultGeneration->AddTool({"DeamerDefaultApplication", special::ToolType::User});
+			}
+			
 
 			return defaultGeneration;
 		}
@@ -47,14 +59,16 @@ namespace DLDL::ir::generation
 			}
 
 			const auto parser = DLDL_GENERATION::parser::Parser();
-			auto* tree = parser.Parse(text);
+			auto tree = std::unique_ptr<deamer::external::cpp::ast::Tree>(parser.Parse(text));
+			if (tree == nullptr || tree->GetStartNode() == nullptr)
+			{
+				return GetDefaultIR();
+			}
 
 			auto generationListener = DLDL_GENERATION::ast::listener::user::Generation(os);
 			generationListener.Dispatch(tree->GetStartNode());
 
 			auto* generationIr = generationListener.GetGeneration();
-
-			delete tree;
 
 			return generationIr;
 		}
