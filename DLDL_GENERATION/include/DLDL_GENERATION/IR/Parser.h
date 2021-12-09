@@ -1,11 +1,16 @@
 #ifndef DLDL_GENERATION_IR_PARSER_H
 #define DLDL_GENERATION_IR_PARSER_H
 
+#include "Deamer/Deamer.h"
 #include "DLDL/IR/Parser.h"
 #include "DLDL_GENERATION/Ast/Listener/User/Generation.h"
 #include "DLDL_GENERATION/Bison/Parser.h"
 #include <memory>
 #include <string>
+
+#ifndef DEAMER_CC_V2_RESERVED_MACRO_VALUE_VERSION_NUMBER
+#define DEAMER_CC_V2_RESERVED_MACRO_VALUE_VERSION_NUMBER 000'000'000UL
+#endif // DEAMER_CC_V2_RESERVED_MACRO_VALUE_VERSION_NUMBER
 
 namespace DLDL::ir::generation
 {
@@ -36,8 +41,11 @@ namespace DLDL::ir::generation
 			defaultGeneration->AddTool({"Bison", special::ToolType::Parser});
 			defaultGeneration->AddIntegration("Bison", "DeamerAST");
 			defaultGeneration->AddArgument("Bison", "Declare-deleted-terminals");
-
-			defaultGeneration->AddTool({"DeamerDefaultApplication", special::ToolType::User});
+			
+			if constexpr (DEAMER_CC_V2_RESERVED_MACRO_VALUE_VERSION_NUMBER >= 002'002'000)
+			{
+				defaultGeneration->AddTool({"DeamerDefaultApplication", special::ToolType::User});
+			}
 			
 
 			return defaultGeneration;
