@@ -9,22 +9,13 @@ namespace DLDL::generate::sub
 	{
 	public:
 		AssociativityLPDWriter() = default;
+
 	public:
-		deamer::file::tool::File GetFileContentHeaderFile(ir::Language* language, const ir::LPD& lpd) override
-		{
-			deamer::file::tool::File file("Associativity", "h", "");
+		deamer::file::tool::File GetFileContentHeaderFile(ir::Language* language,
+														  const ir::LPD& lpd) override;
 
-			//auto* associativity = static_cast<ir::Associativity*>(lpd.GetIR());
-
-			return file;
-		}
-
-		deamer::file::tool::File GetFileContentSourceFile(ir::Language* language, const ir::LPD& lpd) override
-		{
-			deamer::file::tool::File file("Associativity", "cpp", "");
-
-			return file;
-		}
+		deamer::file::tool::File GetFileContentSourceFile(ir::Language* language,
+														  const ir::LPD& lpd) override;
 	};
 }
 

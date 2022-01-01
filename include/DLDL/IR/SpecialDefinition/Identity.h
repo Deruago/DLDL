@@ -10,18 +10,13 @@ namespace DLDL::ir::special
 	{
 	private:
 		std::string name;
-	public:
-		Identity(std::string name_) : IR(Type::Identity),
-		name(name_)
-		{
-		}
-		~Identity() override = default;
-	public:
-		std::string GetName() const
-		{
-			return name;
-		}
 
+	public:
+		Identity(std::string name_);
+		~Identity() override = default;
+
+	public:
+		std::string GetName() const;
 	};
 }
 

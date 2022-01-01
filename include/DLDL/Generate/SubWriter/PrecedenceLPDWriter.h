@@ -9,22 +9,13 @@ namespace DLDL::generate::sub
 	{
 	public:
 		PrecedenceLPDWriter() = default;
+
 	public:
-		deamer::file::tool::File GetFileContentHeaderFile(ir::Language* language, const ir::LPD& lpd) override
-		{
-			deamer::file::tool::File file("Precedence", "h", "");
+		deamer::file::tool::File GetFileContentHeaderFile(ir::Language* language,
+														  const ir::LPD& lpd) override;
 
-			//auto* precedence = static_cast<ir::Precedence*>(lpd.GetIR());
-			
-			return file;
-		}
-
-		deamer::file::tool::File GetFileContentSourceFile(ir::Language* language, const ir::LPD& lpd) override
-		{
-			deamer::file::tool::File file("Precedence", "cpp", "");
-
-			return file;
-		}
+		deamer::file::tool::File GetFileContentSourceFile(ir::Language* language,
+														  const ir::LPD& lpd) override;
 	};
 }
 

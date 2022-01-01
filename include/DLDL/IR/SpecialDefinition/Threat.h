@@ -12,9 +12,7 @@ namespace DLDL::ir::special
 		std::string name;
 
 	public:
-		Threat() : IR(Type::Threat)
-		{
-		}
+		Threat();
 		~Threat() override = default;
 
 	public:
