@@ -44,6 +44,10 @@ namespace DLDL::argument
 		deamer_map,
 		no_deamer,
 		include_dldls,
+		activate_lpd_generation,
+		activate_tool_generation,
+		generate_lpd,
+		generate_tool,
 	};
 }
 

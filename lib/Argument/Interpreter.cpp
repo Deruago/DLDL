@@ -123,8 +123,10 @@ void DLDL::argument::Interpreter::InitializeInterpreter(bool force)
 		parser.SetArguments({{Type::generate}, {Type::auto_compile}, {Type::auto_run}});
 
 		// LPD auto generate arguments
+		parser.SetArguments({{Type::generate_lpd}});
 
 		// Tool auto generate arguments
+		parser.SetArguments({{Type::generate_tool}});
 	}
 
 	if (parser.IsArgumentSet(Type::definition_map))
@@ -714,6 +716,15 @@ std::string DLDL::argument::Interpreter::RegenerationArgsLPD() const
 {
 	std::string args;
 	args += " -lpd-map=\"" + LpdMap + "\"";
+	args += " -activate-lpd-generation=";
+	if (parser.IsArgumentSet(Type::activate_lpd_generation))
+	{
+		args += parser.GetArgument(Type::activate_lpd_generation).value;
+	}
+	else
+	{
+		args += "false";
+	}
 	return args;
 }
 
@@ -721,6 +732,15 @@ std::string DLDL::argument::Interpreter::RegenerationArgsTool() const
 {
 	std::string args;
 	args += " -tool-map=\"" + ToolMap + "\"";
+	args += " -activate-tool-generation=";
+	if (parser.IsArgumentSet(Type::activate_tool_generation))
+	{
+		args += parser.GetArgument(Type::activate_tool_generation).value;
+	}
+	else
+	{
+		args += "false";
+	}
 	return args;
 }
 

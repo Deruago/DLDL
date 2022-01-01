@@ -77,6 +77,12 @@ static void initializeMaps()
 		{"tm", Type::tool_map},
 		{"deamer-map", Type::deamer_map},
 		{"no-deamer", Type::no_deamer},
+		{"activate-lpd-generation", Type::activate_lpd_generation},
+		{"activate-tool-generation", Type::activate_tool_generation},
+		{"generate-lpd", Type::generate_lpd},
+		{"generate-tool", Type::generate_tool},
+		{"glpd", Type::generate_lpd},
+		{"gtool", Type::generate_tool},
 	};
 
 	for (auto [str, type] : tuples)
