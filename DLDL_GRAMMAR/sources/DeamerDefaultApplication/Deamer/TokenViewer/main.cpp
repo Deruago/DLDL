@@ -37,7 +37,7 @@ int main(int argc, const char* argv[])
 
 		auto lexer = DLDL_GRAMMAR::lexer::Lexer();
 		auto tokens = lexer.Tokenize(text);
-		DLDL::parser::Parser();
+		DLDL_GRAMMAR::parser::Parser();
 
 		std::cout << "Tokens:\n";
 		for (auto token : tokens)

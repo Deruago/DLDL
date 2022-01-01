@@ -9,7 +9,7 @@ namespace DLDL_LEXER::ast::listener::user
 	class Lexicon : public ::DLDL_LEXER::ast::listener::Listener
 	{
 	private:
-		mutable DLDL::ir::Lexicon* lexicon;
+		DLDL::ir::Lexicon* lexicon;
 
 	public:
 		Lexicon()
@@ -30,7 +30,7 @@ namespace DLDL_LEXER::ast::listener::user
 				unfilteredRegex.erase(0, 1);
 				currentChar = unfilteredRegex[0];
 			}
-			
+
 			std::string newRegex;
 
 			for (auto character : unfilteredRegex)
@@ -66,41 +66,36 @@ namespace DLDL_LEXER::ast::listener::user
 			}
 			else
 			{
-				const auto abstraction_downcast = static_cast<Type>(abstraction[0]->GetNodes()[0]->GetType());
+				const auto abstraction_downcast =
+					static_cast<Type>(abstraction[0]->GetNodes()[0]->GetType());
 				switch (abstraction_downcast)
 				{
-				case Type::DELETE_ABSTRACTION:
-				{
+				case Type::DELETE_ABSTRACTION: {
 					abstractionType =
 						deamer::language::type::definition::object::main::SpecialType::Delete;
 					break;
 				}
-				case Type::CRASH_ABSTRACTION:
-				{
+				case Type::CRASH_ABSTRACTION: {
 					abstractionType =
 						deamer::language::type::definition::object::main::SpecialType::Crash;
 					break;
 				}
-				case Type::IGNORE_ABSTRACTION:
-				{
+				case Type::IGNORE_ABSTRACTION: {
 					abstractionType =
 						deamer::language::type::definition::object::main::SpecialType::Ignore;
 					break;
 				}
-				case Type::NOVALUE_ABSTRACTION:
-				{
+				case Type::NOVALUE_ABSTRACTION: {
 					abstractionType =
 						deamer::language::type::definition::object::main::SpecialType::NoValue;
 					break;
 				}
-				case Type::STANDARD_ABSTRACTION:
-				{
+				case Type::STANDARD_ABSTRACTION: {
 					abstractionType =
 						deamer::language::type::definition::object::main::SpecialType::Standard;
 					break;
 				}
-				case Type::UNKNOWN_ABSTRACTION:
-				{
+				case Type::UNKNOWN_ABSTRACTION: {
 					abstractionType =
 						deamer::language::type::definition::object::main::SpecialType::Standard;
 					break;

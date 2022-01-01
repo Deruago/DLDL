@@ -2,10 +2,12 @@
 #define DLDL_PRECEDENCE_AST_RELATION_NODETEXTTOENUM_H
 
 #include "DLDL_PRECEDENCE/Ast/Enum/Type.h"
+#include <string>
+#include <map>
 
 namespace DLDL_PRECEDENCE { namespace ast { namespace relation { 
 
-	static constexpr ::DLDL_PRECEDENCE::ast::Type ConvertEnumToText(const std::string& text)
+	static constexpr ::DLDL_PRECEDENCE::ast::Type ConvertTextToEnum(const std::string& text)
 	{
 		static const std::map<std::string, ::DLDL_PRECEDENCE::ast::Type> mapTextWithType = {
 			{"", ::DLDL_PRECEDENCE::ast::Type::deamerreserved_unknown },

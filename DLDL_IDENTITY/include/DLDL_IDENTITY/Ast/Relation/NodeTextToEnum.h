@@ -2,10 +2,12 @@
 #define DLDL_IDENTITY_AST_RELATION_NODETEXTTOENUM_H
 
 #include "DLDL_IDENTITY/Ast/Enum/Type.h"
+#include <string>
+#include <map>
 
 namespace DLDL_IDENTITY { namespace ast { namespace relation { 
 
-	static constexpr ::DLDL_IDENTITY::ast::Type ConvertEnumToText(const std::string& text)
+	static constexpr ::DLDL_IDENTITY::ast::Type ConvertTextToEnum(const std::string& text)
 	{
 		static const std::map<std::string, ::DLDL_IDENTITY::ast::Type> mapTextWithType = {
 			{"", ::DLDL_IDENTITY::ast::Type::deamerreserved_unknown },

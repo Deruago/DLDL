@@ -12,4 +12,4 @@
 # More information: https://github.com/Deruago/theDeamerProject
 
 add_executable(DLDL_LEXERdeamerAstViewer main.cpp)
-target_link_libraries(DLDL_LEXERdeamerAstViewer DLDL_static_library)
+target_link_libraries(DLDL_LEXERdeamerAstViewer DLDL_LEXER_static_library)

@@ -12,4 +12,4 @@
 # More information: https://github.com/Deruago/theDeamerProject
 
 add_executable(DLDL_LEXERdeamerTokenViewer main.cpp)
-target_link_libraries(DLDL_LEXERdeamerTokenViewer DLDL_static_library)
+target_link_libraries(DLDL_LEXERdeamerTokenViewer DLDL_LEXER_static_library)
