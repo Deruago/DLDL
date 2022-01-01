@@ -16,3 +16,4 @@ file(GLOB_RECURSE HEADER_LIST "${DLDL_SOURCE_DIR}/include/*.h")
 
 # Root library extension
 DLDL_root_library_extend("DLDL" "${DLDL_SOURCE_DIR}/extern" "${DLDL_SOURCE_DIR}/include" "${SOURCE_LIST}")
+

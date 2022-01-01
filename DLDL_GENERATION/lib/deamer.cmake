@@ -16,3 +16,5 @@ file(GLOB_RECURSE HEADER_LIST "${DLDL_GENERATION_SOURCE_DIR}/include/*.h")
 
 # Root library extension
 DLDL_root_library_extend("DLDL_GENERATION" "${DLDL_GENERATION_SOURCE_DIR}/extern" "${DLDL_GENERATION_SOURCE_DIR}/include" "${SOURCE_LIST}")
+
+add_library(DLDL_GENERATION_static_library ALIAS DLDL_static_library)
