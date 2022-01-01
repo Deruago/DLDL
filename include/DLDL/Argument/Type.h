@@ -36,6 +36,14 @@ namespace DLDL::argument
 		single_project,
 
 		git_initialize,
+
+		custom_project,
+		regenerate,
+		lpd_map,
+		tool_map,
+		deamer_map,
+		no_deamer,
+		include_dldls,
 	};
 }
 

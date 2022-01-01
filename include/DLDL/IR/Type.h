@@ -22,6 +22,13 @@ namespace DLDL::ir
 		Formatting,
 		Documentation,
 		Threat,
+
+		LpdDef,
+		LpdStruct,
+		LdoStruct,
+
+		ToolDef,
+		ToolStruct,
 	};
 }
 

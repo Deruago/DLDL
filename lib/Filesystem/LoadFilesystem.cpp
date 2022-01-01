@@ -1,0 +1,188 @@
+#include "DLDL/Filesystem/LoadFilesystem.h"
+#include <filesystem>
+#include <fstream>
+#include <sstream>
+#include <string>
+
+std::string ReadInFile(const std::string& file)
+{
+	const std::ifstream inputFile(file);
+
+	std::ostringstream sstr;
+	sstr << inputFile.rdbuf();
+
+	std::string input = sstr.str();
+
+	return input;
+}
+
+DLDL::filesystem::LoadFilesystem::LoadFilesystem(class deamer::file::tool::Directory& outputDir_,
+												 const std::string& startingDir_)
+	: outputDir(outputDir_),
+	  startingDir(startingDir_)
+{
+	LoadPath();
+}
+
+DLDL::filesystem::LoadFilesystem& DLDL::filesystem::LoadFilesystem::Upper()
+{
+	if (reachedRoot)
+	{
+		return *this;
+	}
+
+	startingDir += "../";
+
+	const auto currentDir = std::filesystem::canonical(startingDir).generic_string();
+	std::string parentPath;
+	try
+	{
+		parentPath = std::filesystem::canonical(startingDir + "../").generic_string();
+	} catch (const std::exception& ex)
+	{
+		reachedRoot = true;
+	}
+	if (parentPath == currentDir)
+	{
+		reachedRoot = true;
+	}
+
+	LoadPath();
+
+	return *this;
+}
+
+DLDL::filesystem::LoadFilesystem& DLDL::filesystem::LoadFilesystem::RecursiveExpand()
+{
+	return *this;
+}
+
+DLDL::filesystem::LoadFilesystem& DLDL::filesystem::LoadFilesystem::DirectLoad()
+{
+	LoadPath(true);
+	return *this;
+}
+
+DLDL::filesystem::LoadFilesystem& DLDL::filesystem::LoadFilesystem::Enter(const std::string& path)
+{
+	reachedRoot = false;
+
+	startingDir += path + "/";
+	LoadPath();
+	return *this;
+}
+
+std::vector<std::string> DLDL::filesystem::LoadFilesystem::GetDirectDirectories() const
+{
+	return directories;
+}
+
+std::vector<std::string> DLDL::filesystem::LoadFilesystem::GetDirectFiles() const
+{
+	return files;
+}
+
+bool DLDL::filesystem::LoadFilesystem::DirectContainsDirectory(
+	const std::string& directoryName) const
+{
+	for (const auto& dir : directories)
+	{
+		if (dir == directoryName)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool DLDL::filesystem::LoadFilesystem::ReachedRoot() const
+{
+	return reachedRoot;
+}
+
+std::string DLDL::filesystem::LoadFilesystem::GetPath() const
+{
+	return startingDir;
+}
+
+void DLDL::filesystem::LoadFilesystem::LoadPath(bool loadContent)
+{
+	directories.clear();
+	files.clear();
+
+	deamer::file::tool::Directory directory;
+
+	for (const auto& iter : std::filesystem::directory_iterator(startingDir))
+	{
+		if (iter.is_directory())
+		{
+			directory.AddDirectory(LoadDirectory(iter));
+		}
+		else
+		{
+			directory.AddFile(LoadFile(iter, loadContent));
+		}
+	}
+
+	outputDir = directory;
+}
+
+deamer::file::tool::Directory
+DLDL::filesystem::LoadFilesystem::LoadDirectory(const std::filesystem::directory_entry& iter)
+{
+	const std::string directoryName = iter.path().generic_string().erase(0, startingDir.size());
+	directories.push_back(directoryName);
+
+	return deamer::file::tool::Directory(directoryName);
+}
+
+deamer::file::tool::File
+DLDL::filesystem::LoadFilesystem::LoadFile(const std::filesystem::directory_entry& iter,
+										   bool loadContent)
+{
+	const std::string fileName = iter.path().generic_string().erase(0, startingDir.size());
+
+	std::string fileNameWithoutExtension;
+	files.push_back(fileNameWithoutExtension);
+	for (auto character : fileName)
+	{
+		if (character == '.')
+		{
+			break;
+		}
+		if (character == '/')
+		{
+			continue;
+		}
+
+		fileNameWithoutExtension += character;
+	}
+
+	std::string extension;
+	bool add = false;
+	for (auto character : fileName)
+	{
+		if (character == '.')
+		{
+			add = true;
+			continue;
+		}
+		if (character == '/')
+		{
+			continue;
+		}
+		if (add)
+		{
+			extension += character;
+		}
+	}
+
+	std::string content;
+	if (loadContent)
+	{
+		content = ReadInFile(iter.path().generic_string());
+	}
+
+	return deamer::file::tool::File(fileNameWithoutExtension, extension, content);
+}

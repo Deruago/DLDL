@@ -1,4 +1,5 @@
 #include "DLDL/Argument/Interpreter.h"
+#include "DLDL/Filesystem/LoadFilesystem.h"
 #include "DLDL/Generate/Project.h"
 #include "DLDL/IR/ConstructLanguage.h"
 #include "DLDL/Print/Language.h"
@@ -7,6 +8,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <thread>
 #include <vector>
 
 std::string GenerateRootCMakeLists(std::vector<DLDL::ir::Language*> languages)
@@ -44,9 +46,10 @@ deamer::file::tool::Directory InitialiseLanguageDirectory(DLDL::ir::Language* la
 	return directory;
 }
 
-deamer::file::tool::Directory GenerateRootDirectory(std::vector<DLDL::ir::Language*> languages)
+deamer::file::tool::Directory
+DLDL::argument::Interpreter::GenerateRootDirectory(std::vector<DLDL::ir::Language*> languages)
 {
-	auto rootDirectory = deamer::file::tool::Directory("./");
+	auto rootDirectory = deamer::file::tool::Directory(deamerDirRelocation);
 
 	auto rootCMakeProjectFile = deamer::file::tool::File("CMakeLists", "txt");
 	rootCMakeProjectFile.SetFileContent(GenerateRootCMakeLists(languages));
@@ -83,9 +86,36 @@ deamer::file::tool::Directory GenerateRootDirectory(std::vector<DLDL::ir::Langua
 	}
 }
 
-DLDL::argument::Interpreter::Interpreter(size_t count, const char* arguments[])
-	: parser(count, arguments)
+void DLDL::argument::Interpreter::InitializeInterpreter(bool force)
 {
+	// Load in and ensure if there is a .deamer directory to load in that directory.
+	// Unless it is in initialization stage.
+	if (!parser.IsArgumentSet(Type::initialize) && !force)
+	{
+		LoadInDeamerDir();
+		::deamer::file::tool::Directory deamerArgs;
+		filesystem::LoadFilesystem(deamerArgs, deamerDirRelocation)
+			.Enter(".deamer")
+			.Enter("arguments")
+			.DirectLoad();
+		auto files = deamerArgs.GetFiles();
+		std::optional<::deamer::file::tool::File> regenArgs;
+		for (auto file : files)
+		{
+			if (file.GetFilename() == "full")
+			{
+				regenArgs = file;
+			}
+		}
+
+		if (regenArgs.has_value())
+		{
+			parser.Overwrites(regenArgs.value().FileContent());
+		}
+
+		InitializeDeamerMap();
+	}
+
 	if (parser.IsArgumentSet(Type::definition_map))
 	{
 		DefinitionMap = parser.GetArgument(Type::definition_map).value;
@@ -94,6 +124,16 @@ DLDL::argument::Interpreter::Interpreter(size_t count, const char* arguments[])
 	if (parser.IsArgumentSet(Type::build_map))
 	{
 		BuildMap = parser.GetArgument(Type::build_map).value;
+	}
+
+	if (parser.IsArgumentSet(Type::lpd_map))
+	{
+		LpdMap = parser.GetArgument(Type::lpd_map).value;
+	}
+
+	if (parser.IsArgumentSet(Type::tool_map))
+	{
+		ToolMap = parser.GetArgument(Type::tool_map).value;
 	}
 
 	if (parser.IsArgumentSet(Type::language_name))
@@ -105,6 +145,12 @@ DLDL::argument::Interpreter::Interpreter(size_t count, const char* arguments[])
 	{
 		os = ConvertStringToOS(parser.GetArgument(Type::target_os).value);
 	}
+}
+
+DLDL::argument::Interpreter::Interpreter(size_t count, const char* arguments[])
+	: parser(count, arguments)
+{
+	InitializeInterpreter();
 }
 
 DLDL::argument::Interpreter::~Interpreter()
@@ -123,6 +169,7 @@ size_t DLDL::argument::Interpreter::Run()
 
 	if (ExitArguments())
 		return 0;
+	InitializeInterpreter(true); // If there is a .deamer dir, reinitialize the interpreter
 
 	if (parser.IsArgumentSet(Type::echo))
 	{
@@ -147,7 +194,7 @@ size_t DLDL::argument::Interpreter::Run()
 
 void DLDL::argument::Interpreter::Disclaimer()
 {
-	std::cout << "Copyright (C) 2020-2021  Thimo Bohmer\n"
+	std::cout << "Copyright (C) 2020-2022  Thimo Bohmer\n"
 				 "For more information about DLDL: https://github.com/Deruago/DLDL \n"
 				 "\n";
 	std::cout
@@ -252,11 +299,20 @@ void DLDL::argument::Interpreter::Help()
 		   "	-auto-compile, -ac                          ; Auto compiles the "
 		   "CompilerGenerator.\n"
 		   "	-auto-run, -ar                              ; Auto runs the compiled executable.\n"
+		   "	-regen, -regenerate                         ; Regenerates the Deamer project.\n"
+		   "	                                            ; Goes to nearest .deamer dir, and "
+		   "regenerates the project.\n"
+		   "	-cp, -custom-project                        ; Specifies a custom project, this "
+		   "may\n"
+		   "	                                            ; not be a language project.\n"
 		   "\n"
 		   "Single/Multi Project generation (Single Project is Default):\n"
 		   "	-single-project, -sp                        ; Generate a single project.\n"
-		   "	-multi-project, -mp                         ; Generate a multi project, each language\n"
+		   "	-multi-project, -mp                         ; Generate a multi project, each "
+		   "language\n"
 		   "	                                            ; is its own project.\n"
+		   "	-no-deamer                                  ; Removes the .deamer map, some "
+		   "features might become unavailable.\n"
 		   "\n"
 		   "Internal behavioural settings (modify how DLDL does stuff):\n"
 		   "	-language-name, -lang-name                  ; Modify the 'language' used to "
@@ -267,6 +323,12 @@ void DLDL::argument::Interpreter::Help()
 		   "'./build'\n"
 		   "	-definition-map, -dm                        ; Specify the definition map. Default: "
 		   "'./Definition'\n"
+		   "	-lpd-map, -lm                               ; Specify the LPD map. Default: "
+		   "there is no LPD map.\n"
+		   "	-tool-map, -tm                              ; Specify the Tool map. Default: "
+		   "there is no Tool map.\n"
+		   "	-deamer-map                                 ; Specify the .deamer map. Default: "
+		   "current map DLDL is called, or nearest .deamer map\n"
 		   "	-target-os                                  ; Specifies which OS should be "
 		   "targeted when generating the compiler.\n"
 		   "	                                            ; Default is the OS this executable is "
@@ -297,7 +359,7 @@ void DLDL::argument::Interpreter::Information()
 {
 	Version();
 	std::cout << "\n"
-				 "Copyright (C) 2020-2021  Thimo Bohmer\n"
+				 "Copyright (C) 2020-2022  Thimo Bohmer\n"
 				 "For more information about DLDL: https://github.com/Deruago/DLDL \n"
 				 "\n";
 	Help();
@@ -315,7 +377,7 @@ void DLDL::argument::Interpreter::Version()
 
 void DLDL::argument::Interpreter::License()
 {
-	std::cout << "Copyright (C) 2020-2021  Thimo Bohmer\n"
+	std::cout << "Copyright (C) 2020-2022  Thimo Bohmer\n"
 				 "For more information about DLDL: https://github.com/Deruago/DLDL \n"
 				 "\n"
 			  << "This program is free software; you can redistribute it and/or\n"
@@ -357,38 +419,106 @@ void DLDL::argument::Interpreter::Compatible()
 
 void DLDL::argument::Interpreter::Initialize()
 {
-	if (parser.IsArgumentSet(Type::initialize))
+	if (!parser.IsArgumentSet(Type::initialize))
 	{
-		if (language_name.empty())
-		{
-			std::cout << "Please specify a language name using the argument: '-language-name'\n";
-			return;
-		}
-
-		deamer::file::tool::Directory rootDirectory("./");
-		deamer::file::tool::Directory definition(DefinitionMap);
-		deamer::file::tool::Directory languageDefinition(language_name);
-		deamer::file::tool::Directory languageOutput(language_name);
-
-		languageDefinition.AddFile({"Lexicon", "dldl"});
-		languageDefinition.AddFile({"Lexicon", "dldls"});
-
-		languageDefinition.AddFile({"Grammar", "dldl"});
-		languageDefinition.AddFile({"Grammar", "dldls"});
-
-		languageDefinition.AddFile({"Generation", "dldl"});
-		languageDefinition.AddFile({"Generation", "dldls"});
-
-		languageDefinition.AddFile({"Identity", "dldl"});
-		languageDefinition.AddFile({"Identity", "dldls"});
-
-		definition.AddDirectory(languageDefinition);
-		rootDirectory.AddDirectory(definition);
-		rootDirectory.AddDirectory(languageOutput);
-
-		generate::Project(languages, parser.IsArgumentSet(Type::multi_project))
-			.WriteToDisk(rootDirectory);
+		return;
 	}
+
+	InitializeDeamerMap();
+
+	if (parser.IsArgumentSet(Type::custom_project))
+	{
+		return;
+	}
+
+	if (language_name.empty())
+	{
+		std::cout << "Please specify a language name using the argument: '-language-name'\n";
+		return;
+	}
+
+	deamer::file::tool::Directory rootDirectory(deamerDirRelocation);
+	deamer::file::tool::Directory definition(DefinitionMap);
+	deamer::file::tool::Directory languageDefinition(language_name);
+	deamer::file::tool::Directory languageOutput(language_name);
+
+	languageDefinition.AddFile({"Lexicon", "dldl"});
+	languageDefinition.AddFile({"Grammar", "dldl"});
+	languageDefinition.AddFile({"Generation", "dldl"});
+	languageDefinition.AddFile({"Identity", "dldl"});
+
+	if (parser.IsArgumentSet(Type::include_dldls))
+	{
+		languageDefinition.AddFile({"Lexicon", "dldls"});
+		languageDefinition.AddFile({"Grammar", "dldls"});
+		languageDefinition.AddFile({"Generation", "dldls"});
+		languageDefinition.AddFile({"Identity", "dldls"});
+	}
+
+	definition.AddDirectory(languageDefinition);
+	rootDirectory.AddDirectory(definition);
+	rootDirectory.AddDirectory(languageOutput);
+
+	generate::Project(languages, parser.IsArgumentSet(Type::multi_project))
+		.WriteToDisk(rootDirectory);
+}
+
+void DLDL::argument::Interpreter::InitializeDeamerMap()
+{
+	if (parser.IsArgumentSet(Type::no_deamer))
+	{
+		return;
+	}
+
+	// On initialization always "./", unless pre-discovered
+	// when pre-discovered, it maps to the path
+	deamer::file::tool::Directory rootDirectory(deamerDirRelocation);
+	deamer::file::tool::Directory deamerDirectory(".deamer");
+	deamer::file::tool::Directory deamerDLDLDirectory("dldl");
+	deamer::file::tool::Directory deamerDLDLDefinitionDirectory("definition");
+	deamer::file::tool::Directory deamerDLDLargumentsDirectory("arguments");
+
+	auto regeneration_arguments = RegenerationArgsDefinition() + " " + RegenerationArgsLPD() + " " +
+								  RegenerationArgsTool() + " " + RegenerationArgsMiccel();
+
+	deamer::file::tool::File dldl_regen_args("full", "deamer", regeneration_arguments);
+	deamer::file::tool::File dldl_regen_args_lpd("lpd", "deamer", RegenerationArgsLPD());
+	deamer::file::tool::File dldl_regen_args_definition("definition", "deamer",
+														RegenerationArgsDefinition());
+	deamer::file::tool::File dldl_regen_args_tool("tool", "deamer", RegenerationArgsTool());
+	deamer::file::tool::File dldl_regen_args_miccel("miccel", "deamer", RegenerationArgsMiccel());
+
+	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args);
+	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args_lpd);
+	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args_definition);
+	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args_tool);
+	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args_miccel);
+
+	deamerDLDLDirectory.AddDirectory(deamerDLDLDefinitionDirectory);
+	deamerDLDLDirectory.AddDirectory(deamerDLDLargumentsDirectory);
+	deamerDirectory.AddDirectory(deamerDLDLDirectory);
+	rootDirectory.AddDirectory(deamerDirectory);
+
+	// Write to disk
+	WriteToDisk(rootDirectory);
+}
+
+void DLDL::argument::Interpreter::LoadInDeamerDir()
+{
+	deamer::file::tool::Directory dir;
+	auto loader = filesystem::LoadFilesystem(dir);
+	while (!loader.DirectContainsDirectory(".deamer") && !loader.ReachedRoot())
+	{
+		loader.Upper();
+	}
+
+	if (loader.ReachedRoot())
+	{
+		return;
+	}
+
+	deamerDirRelocation = loader.GetPath();
+	deamerDirExists = true;
 }
 
 void DLDL::argument::Interpreter::SupportedGrammars()
@@ -431,7 +561,7 @@ bool DLDL::argument::Interpreter::InitializeLanguages()
 {
 	try
 	{
-		DLDL::ir::ConstructLanguage constructLanguage("./", DefinitionMap);
+		DLDL::ir::ConstructLanguage constructLanguage(deamerDirRelocation, DefinitionMap);
 		constructLanguage.Construct(os);
 		languages = constructLanguage.GetLanguages();
 	} catch (const std::logic_error&)
@@ -461,19 +591,19 @@ void DLDL::argument::Interpreter::AutoCompile()
 {
 	if (parser.IsArgumentSet(Type::auto_compile))
 	{
-		const std::string autoCompile = "rm -f -r ./" + BuildMap +
+		const std::string autoCompile = "rm -f -r ./" + deamerDirRelocation + BuildMap +
 										" &&"
 										"mkdir ./" +
-										BuildMap +
+										deamerDirRelocation + BuildMap +
 										" &&"
 										"cd ./" +
-										BuildMap +
+										deamerDirRelocation + BuildMap +
 										" &&"
 										" cmake .. &&"
 										"cmake --build . --target " +
 										projectGeneration->GetLanguageTarget() +
 										"&&"
-										"cd ../";
+										"cd ../"; // should calculate difference
 
 		const deamer::file::tool::Action autoCompileAction = {autoCompile};
 		std::system(autoCompileAction.GetSubShellAction(deamer::file::tool::os_used).c_str());
@@ -487,13 +617,13 @@ void DLDL::argument::Interpreter::AutoRun()
 		const std::string autoRun = "$(find . -name \"" + projectGeneration->GetLanguageTarget() +
 									"\") &&"
 									"rm -f -r ./" +
-									BuildMap +
+									deamerDirRelocation + BuildMap +
 									" &&"
 									"mkdir ./" +
-									BuildMap +
+									deamerDirRelocation + BuildMap +
 									" &&"
 									"cd ./" +
-									BuildMap +
+									deamerDirRelocation + BuildMap +
 									" &&"
 									"cmake ..";
 		const deamer::file::tool::Action autoRunAction = {autoRun};
@@ -505,7 +635,8 @@ void DLDL::argument::Interpreter::GitOptions()
 {
 	if (parser.IsArgumentSet(Type::git_initialize))
 	{
-		const bool gitDirectoryExists = std::filesystem::exists("./.git");
+		const bool gitDirectoryExists =
+			std::filesystem::exists("./" + deamerDirRelocation + ".git");
 		if (!gitDirectoryExists)
 		{
 			const std::string gitInit = "git init";
@@ -528,7 +659,7 @@ void DLDL::argument::Interpreter::GitOptions()
 
 void DLDL::argument::Interpreter::CreateGitignore()
 {
-	deamer::file::tool::Directory rootDirectory("./");
+	deamer::file::tool::Directory rootDirectory(deamerDirRelocation);
 
 	deamer::file::tool::File gitignore("", "gitignore", "**/build/*");
 
@@ -536,4 +667,82 @@ void DLDL::argument::Interpreter::CreateGitignore()
 
 	generate::Project(languages, parser.IsArgumentSet(Type::multi_project))
 		.WriteToDisk(rootDirectory);
+}
+
+std::string DLDL::argument::Interpreter::RegenerationArgsDefinition() const
+{
+	std::string args;
+	args += " -definition-map=\"" + DefinitionMap + "\"";
+	args += " -build-map=\"" + BuildMap + "\"";
+	return args;
+}
+
+std::string DLDL::argument::Interpreter::RegenerationArgsLPD() const
+{
+	std::string args;
+	args += " -lpd-map=\"" + LpdMap + "\"";
+	return args;
+}
+
+std::string DLDL::argument::Interpreter::RegenerationArgsTool() const
+{
+	std::string args;
+	args += " -tool-map=\"" + ToolMap + "\"";
+	return args;
+}
+
+std::string DLDL::argument::Interpreter::RegenerationArgsMiccel() const
+{
+	std::string args;
+
+	args += " -target-os=";
+	switch (os)
+	{
+	case deamer::file::tool::OSType::os_linux: {
+		args += "linux";
+		break;
+	}
+	case deamer::file::tool::OSType::os_windows: {
+		args += "windows";
+		break;
+	}
+	case deamer::file::tool::OSType::os_mac: {
+		args += "mac";
+		break;
+	}
+	}
+
+	return args;
+}
+
+void DLDL::argument::Interpreter::WriteToDisk(const deamer::file::tool::Directory& directory,
+											  std::string path)
+{
+	path += directory.GetThisDirectory() + "/";
+
+	std::filesystem::create_directories(path);
+
+	for (const auto& file : directory.GetFiles())
+	{
+		const auto filePath = path + file.GetCompleteFileName();
+
+		if (file.GetGenerationLevel() ==
+				::deamer::file::tool::GenerationLevel::Dont_generate_if_file_already_exists &&
+			std::filesystem::exists(filePath) && !std::filesystem::is_empty(filePath))
+		{
+			return;
+		}
+
+		std::ofstream outputFile;
+		outputFile.open(filePath);
+
+		outputFile << file.FileContent();
+
+		outputFile.close();
+	}
+
+	for (const auto& childDirectory : directory.GetDirectories())
+	{
+		WriteToDisk(childDirectory, path);
+	}
 }
