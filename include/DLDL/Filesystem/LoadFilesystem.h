@@ -17,6 +17,7 @@ namespace DLDL::filesystem
 		std::vector<std::string> directories;
 		std::vector<std::string> files;
 		bool reachedRoot = false;
+		bool error_state = false;
 
 	public:
 		LoadFilesystem(deamer::file::tool::Directory& outputDir_,
@@ -45,6 +46,7 @@ namespace DLDL::filesystem
 		std::vector<std::string> GetDirectDirectories() const;
 		std::vector<std::string> GetDirectFiles() const;
 		bool DirectContainsDirectory(const std::string& directoryName) const;
+		bool DirectContainsFile(const std::string& fileName) const;
 		bool ReachedRoot() const;
 		std::string GetPath() const;
 

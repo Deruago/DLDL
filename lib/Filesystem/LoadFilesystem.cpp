@@ -26,6 +26,11 @@ DLDL::filesystem::LoadFilesystem::LoadFilesystem(class deamer::file::tool::Direc
 
 DLDL::filesystem::LoadFilesystem& DLDL::filesystem::LoadFilesystem::Upper()
 {
+	if (error_state)
+	{
+		return *this;
+	}
+
 	if (reachedRoot)
 	{
 		return *this;
@@ -54,19 +59,42 @@ DLDL::filesystem::LoadFilesystem& DLDL::filesystem::LoadFilesystem::Upper()
 
 DLDL::filesystem::LoadFilesystem& DLDL::filesystem::LoadFilesystem::RecursiveExpand()
 {
+	if (error_state)
+	{
+		return *this;
+	}
+
 	return *this;
 }
 
 DLDL::filesystem::LoadFilesystem& DLDL::filesystem::LoadFilesystem::DirectLoad()
 {
+	if (error_state)
+	{
+		return *this;
+	}
+
 	LoadPath(true);
 	return *this;
 }
 
 DLDL::filesystem::LoadFilesystem& DLDL::filesystem::LoadFilesystem::Enter(const std::string& path)
 {
+	if (error_state)
+	{
+		return *this;
+	}
+
 	reachedRoot = false;
 
+	if (!DirectContainsDirectory(path))
+	{
+		files.clear();
+		directories.clear();
+		outputDir = ::deamer::file::tool::Directory("./");
+		error_state = true;
+		return *this;
+	}
 	startingDir += path + "/";
 	LoadPath();
 	return *this;
@@ -88,6 +116,19 @@ bool DLDL::filesystem::LoadFilesystem::DirectContainsDirectory(
 	for (const auto& dir : directories)
 	{
 		if (dir == directoryName)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool DLDL::filesystem::LoadFilesystem::DirectContainsFile(const std::string& fileName) const
+{
+	for (const auto& dir : files)
+	{
+		if (dir == fileName)
 		{
 			return true;
 		}
