@@ -176,7 +176,45 @@ DLDL::argument::Interpreter::~Interpreter()
 	delete projectGeneration;
 }
 
-size_t DLDL::argument::Interpreter::Run()
+std::size_t DLDL::argument::Interpreter::GenerateLanguage()
+{
+	if (!InitializeLanguages())
+	{
+		return -1;
+	}
+
+	PrintLanguages();
+
+	CompilerGenerator_Generation();
+
+	AutoCompile();
+
+	AutoRun();
+
+	return 0;
+}
+
+std::size_t DLDL::argument::Interpreter::GenerateLpd()
+{
+	if (!(parser.IsArgumentSet(Type::activate_lpd_generation) &&
+		  parser.GetArgument(Type::activate_lpd_generation).value == "true" &&
+		  parser.IsArgumentSet(Type::generate_lpd)))
+	{
+		return 0;
+	}
+}
+
+std::size_t DLDL::argument::Interpreter::GenerateTool()
+{
+	if (!(parser.IsArgumentSet(Type::activate_tool_generation) &&
+		  parser.GetArgument(Type::activate_tool_generation).value == "true" &&
+		  parser.IsArgumentSet(Type::generate_tool)))
+	{
+		return 0;
+	}
+}
+
+std::size_t DLDL::argument::Interpreter::Run()
 {
 	Disclaimer();
 
@@ -189,16 +227,15 @@ size_t DLDL::argument::Interpreter::Run()
 		std::cout << "Echo: " << parser.GetArgument(Type::echo).value << "\n";
 	}
 
-	if (!InitializeLanguages())
-		return -1;
+	const std::size_t languageSuccess = GenerateLanguage();
+	const std::size_t lpdSuccess = GenerateLpd();
+	const std::size_t toolSuccess = GenerateTool();
 
-	PrintLanguages();
-
-	CompilerGenerator_Generation();
-
-	AutoCompile();
-
-	AutoRun();
+	const std::size_t success = languageSuccess | lpdSuccess | toolSuccess;
+	if (success == -1)
+	{
+		return success;
+	}
 
 	GitOptions();
 

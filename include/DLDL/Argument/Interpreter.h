@@ -43,6 +43,7 @@ namespace DLDL::argument
 	public:
 		Interpreter(size_t count, const char* arguments[]);
 		~Interpreter();
+		std::size_t GenerateLanguage();
 		void InitializeInterpreter(bool force = false);
 		void AutoRun();
 		void AutoCompile();
@@ -56,7 +57,7 @@ namespace DLDL::argument
 		 *
 		 *	\details Runs the interpreter, the user can interact by giving different arguments.
 		 */
-		size_t Run();
+		std::size_t Run();
 
 	private:
 		/*!	\fn Disclaimer
