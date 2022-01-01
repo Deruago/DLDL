@@ -1,4 +1,5 @@
 #include "DLDL/Argument/Parser.h"
+#include <iostream>
 #include <map>
 
 using namespace DLDL::argument;
@@ -116,7 +117,7 @@ Parser::Parser(std::vector<std::string> input)
 	}
 }
 
-bool DLDL::argument::Parser::IsArgumentSet(Type type)
+bool DLDL::argument::Parser::IsArgumentSet(Type type) const
 {
 	for (const auto& argument : arguments)
 	{
@@ -129,7 +130,7 @@ bool DLDL::argument::Parser::IsArgumentSet(Type type)
 	return false;
 }
 
-DLDL::argument::Argument DLDL::argument::Parser::GetArgument(Type type)
+DLDL::argument::Argument DLDL::argument::Parser::GetArgument(Type type) const
 {
 	for (const auto& argument : arguments)
 	{
@@ -262,8 +263,11 @@ void Parser::Overwrites(const std::string& originalArgs)
 			}
 			else
 			{
-				args.push_back(current_arg);
-				current_arg.clear();
+				if (!current_arg.empty())
+				{
+					args.push_back(current_arg);
+					current_arg.clear();
+				}
 			}
 			break;
 		}
@@ -287,6 +291,28 @@ void Parser::Overwrites(const std::string& originalArgs)
 	for (const auto& originalArg : regenParser.arguments)
 	{
 		AddArgumentIfNotPresent(originalArg);
+	}
+}
+
+void Parser::SetArgument(const Argument& arg)
+{
+	for (auto iter = std::begin(arguments); iter != std::end(arguments); ++iter)
+	{
+		if (iter->type == arg.type)
+		{
+			iter->value = arg.value;
+			return;
+		}
+	}
+
+	arguments.push_back(arg);
+}
+
+void Parser::SetArguments(std::vector<Argument> args)
+{
+	for (const auto& arg : args)
+	{
+		SetArgument(arg);
 	}
 }
 

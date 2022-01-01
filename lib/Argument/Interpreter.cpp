@@ -96,11 +96,12 @@ void DLDL::argument::Interpreter::InitializeInterpreter(bool force)
 		::deamer::file::tool::Directory deamerArgs;
 		filesystem::LoadFilesystem(deamerArgs, deamerDirRelocation)
 			.Enter(".deamer")
+			.Enter("dldl")
 			.Enter("arguments")
 			.DirectLoad();
 		auto files = deamerArgs.GetFiles();
 		std::optional<::deamer::file::tool::File> regenArgs;
-		for (auto file : files)
+		for (const auto& file : files)
 		{
 			if (file.GetFilename() == "full")
 			{
@@ -114,6 +115,16 @@ void DLDL::argument::Interpreter::InitializeInterpreter(bool force)
 		}
 
 		InitializeDeamerMap();
+	}
+
+	if (parser.IsArgumentSet(Type::regenerate))
+	{
+		// Definition auto generate arguments
+		parser.SetArguments({{Type::generate}, {Type::auto_compile}, {Type::auto_run}});
+
+		// LPD auto generate arguments
+
+		// Tool auto generate arguments
 	}
 
 	if (parser.IsArgumentSet(Type::definition_map))
@@ -271,7 +282,8 @@ bool DLDL::argument::Interpreter::ExitArguments()
 void DLDL::argument::Interpreter::Help()
 {
 	std::cout
-		<< "This is the help page, this shows all the documented arguments that you can use with "
+		<< "This is the help page, this shows all the documented arguments that you can use "
+		   "with "
 		   "DLDL.\n"
 		   "Some arguments might not work, because they may not be implemented yet.\n"
 		   "\n"
@@ -280,11 +292,14 @@ void DLDL::argument::Interpreter::Help()
 		   "	-license, -copyright                        ; Shows the license.\n"
 		   "	-information                                ; Shows version, compatibility, "
 		   "copyright, and this page.\n"
-		   "	-version                                    ; Shows the current version of DLDL.\n"
-		   "	-compatible                                 ; Shows the compatibility with Deamer "
+		   "	-version                                    ; Shows the current version of "
+		   "DLDL.\n"
+		   "	-compatible                                 ; Shows the compatibility with "
+		   "Deamer "
 		   "CC.\n"
 		   "	-exit                                       ; Exits DLDL.\n"
-		   "	-echo                                       ; Repeats the text that was given.\n"
+		   "	-echo                                       ; Repeats the text that was "
+		   "given.\n"
 		   "	-supported-grammars                         ; Shows list of supported grammars "
 		   "available in this version of DLDL.\n"
 		   "	-about                                      ; Shows information about DLDL and "
@@ -298,7 +313,8 @@ void DLDL::argument::Interpreter::Help()
 		   "	                                            ; given a 'Definition Map'.\n"
 		   "	-auto-compile, -ac                          ; Auto compiles the "
 		   "CompilerGenerator.\n"
-		   "	-auto-run, -ar                              ; Auto runs the compiled executable.\n"
+		   "	-auto-run, -ar                              ; Auto runs the compiled "
+		   "executable.\n"
 		   "	-regen, -regenerate                         ; Regenerates the Deamer project.\n"
 		   "	                                            ; Goes to nearest .deamer dir, and "
 		   "regenerates the project.\n"
@@ -321,32 +337,38 @@ void DLDL::argument::Interpreter::Help()
 		   "default this is C++.\n"
 		   "	-build-map, -bm                             ; Specify the build map. Default: "
 		   "'./build'\n"
-		   "	-definition-map, -dm                        ; Specify the definition map. Default: "
+		   "	-definition-map, -dm                        ; Specify the definition map. "
+		   "Default: "
 		   "'./Definition'\n"
 		   "	-lpd-map, -lm                               ; Specify the LPD map. Default: "
 		   "there is no LPD map.\n"
 		   "	-tool-map, -tm                              ; Specify the Tool map. Default: "
 		   "there is no Tool map.\n"
-		   "	-deamer-map                                 ; Specify the .deamer map. Default: "
+		   "	-deamer-map                                 ; Specify the .deamer map. "
+		   "Default: "
 		   "current map DLDL is called, or nearest .deamer map\n"
 		   "	-target-os                                  ; Specifies which OS should be "
 		   "targeted when generating the compiler.\n"
-		   "	                                            ; Default is the OS this executable is "
+		   "	                                            ; Default is the OS this "
+		   "executable is "
 		   "installed in.\n"
 		   "\n"
 		   "Debug options:\n"
-		   "	-debug-dldl                                 ; Allow DLDL to output debug messages "
+		   "	-debug-dldl                                 ; Allow DLDL to output debug "
+		   "messages "
 		   "from DLDL.\n"
 		   "	-debug-build                                ; Creates a debug build for Deamer "
 		   "CC.\n"
 		   "	-log                                        ; Logs DLDL output to a txt.\n"
-		   "	-print-parser-output                        ; Prints the DLDL parser result after "
+		   "	-print-parser-output                        ; Prints the DLDL parser result "
+		   "after "
 		   "reading the definitions.\n"
 		   "\n"
 		   "The next set of arguments are arguments allowing automated calls to executables.\n"
 		   "E.g. DLDL can automatically initialize git repo's if Git is installed.\n"
 		   "Git maintaince arguments:\n"
-		   "	-git-init, -git-initialize                  ; Automatically initializes git repo.\n"
+		   "	-git-init, -git-initialize                  ; Automatically initializes git "
+		   "repo.\n"
 		   "	-git-maintain-definition                    ; Automatically commits when the "
 		   "Definition is updated.\n"
 		   "\n"
@@ -538,8 +560,10 @@ void DLDL::argument::Interpreter::About()
 		   "when given a set of definitions.\n"
 		   "\n"
 		   "When DLDL is done generating the definitions for Deamer CC.\n"
-		   "Deamer CC will take its role as infrastructure for compiler and ecosystem generation.\n"
-		   "Using Deamer CC you can compile the definitions and generate your defined compiler and "
+		   "Deamer CC will take its role as infrastructure for compiler and ecosystem "
+		   "generation.\n"
+		   "Using Deamer CC you can compile the definitions and generate your defined compiler "
+		   "and "
 		   "ecosystem.\n"
 		   "\n"
 		   "For more information about DLDL go to: https://github.com/Deruago/DLDL \n"
@@ -591,13 +615,13 @@ void DLDL::argument::Interpreter::AutoCompile()
 {
 	if (parser.IsArgumentSet(Type::auto_compile))
 	{
-		const std::string autoCompile = "rm -f -r ./" + deamerDirRelocation + BuildMap +
+		const std::string autoCompile = "rm -f -r ./" + BuildMap +
 										" &&"
 										"mkdir ./" +
-										deamerDirRelocation + BuildMap +
+										BuildMap +
 										" &&"
 										"cd ./" +
-										deamerDirRelocation + BuildMap +
+										BuildMap +
 										" &&"
 										" cmake .. &&"
 										"cmake --build . --target " +
@@ -606,7 +630,9 @@ void DLDL::argument::Interpreter::AutoCompile()
 										"cd ../"; // should calculate difference
 
 		const deamer::file::tool::Action autoCompileAction = {autoCompile};
-		std::system(autoCompileAction.GetSubShellAction(deamer::file::tool::os_used).c_str());
+		std::system(
+			autoCompileAction.GetSubShellAction(deamer::file::tool::os_used, deamerDirRelocation)
+				.c_str());
 	}
 }
 
@@ -617,17 +643,19 @@ void DLDL::argument::Interpreter::AutoRun()
 		const std::string autoRun = "$(find . -name \"" + projectGeneration->GetLanguageTarget() +
 									"\") &&"
 									"rm -f -r ./" +
-									deamerDirRelocation + BuildMap +
+									BuildMap +
 									" &&"
 									"mkdir ./" +
-									deamerDirRelocation + BuildMap +
+									BuildMap +
 									" &&"
 									"cd ./" +
-									deamerDirRelocation + BuildMap +
+									BuildMap +
 									" &&"
 									"cmake ..";
 		const deamer::file::tool::Action autoRunAction = {autoRun};
-		std::system(autoRunAction.GetSubShellAction(deamer::file::tool::os_used).c_str());
+		std::system(
+			autoRunAction.GetSubShellAction(deamer::file::tool::os_used, deamerDirRelocation)
+				.c_str());
 	}
 }
 
@@ -641,18 +669,23 @@ void DLDL::argument::Interpreter::GitOptions()
 		{
 			const std::string gitInit = "git init";
 			const deamer::file::tool::Action gitInitAction = {gitInit};
-			std::system(gitInitAction.GetSubShellAction(deamer::file::tool::os_used).c_str());
+			std::system(
+				gitInitAction.GetSubShellAction(deamer::file::tool::os_used, deamerDirRelocation)
+					.c_str());
 
 			CreateGitignore();
 
 			const std::string gitAddDot = "git add .";
 			const deamer::file::tool::Action gitAddDotAction = {gitAddDot};
-			std::system(gitAddDotAction.GetSubShellAction(deamer::file::tool::os_used).c_str());
+			std::system(
+				gitAddDotAction.GetSubShellAction(deamer::file::tool::os_used, deamerDirRelocation)
+					.c_str());
 
 			const std::string gitInitialCommit = "git commit -m \"Initial Commit!\"";
 			const deamer::file::tool::Action gitInitialCommitAction = {gitInitialCommit};
-			std::system(
-				gitInitialCommitAction.GetSubShellAction(deamer::file::tool::os_used).c_str());
+			std::system(gitInitialCommitAction
+							.GetSubShellAction(deamer::file::tool::os_used, deamerDirRelocation)
+							.c_str());
 		}
 	}
 }
@@ -696,20 +729,27 @@ std::string DLDL::argument::Interpreter::RegenerationArgsMiccel() const
 	std::string args;
 
 	args += " -target-os=";
-	switch (os)
+	if (!parser.IsArgumentSet(Type::target_os))
 	{
-	case deamer::file::tool::OSType::os_linux: {
-		args += "linux";
-		break;
+		switch (os)
+		{
+		case deamer::file::tool::OSType::os_linux: {
+			args += "linux";
+			break;
+		}
+		case deamer::file::tool::OSType::os_windows: {
+			args += "windows";
+			break;
+		}
+		case deamer::file::tool::OSType::os_mac: {
+			args += "mac";
+			break;
+		}
+		}
 	}
-	case deamer::file::tool::OSType::os_windows: {
-		args += "windows";
-		break;
-	}
-	case deamer::file::tool::OSType::os_mac: {
-		args += "mac";
-		break;
-	}
+	else
+	{
+		args += parser.GetArgument(Type::target_os).value;
 	}
 
 	return args;

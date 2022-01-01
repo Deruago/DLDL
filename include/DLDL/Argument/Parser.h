@@ -12,7 +12,7 @@ namespace DLDL::argument
 		Type type;
 		std::string value;
 
-		Argument(Type type_, const std::string& value_) : type(type_), value(value_)
+		Argument(Type type_, const std::string& value_ = "") : type(type_), value(value_)
 		{
 		}
 	};
@@ -29,14 +29,16 @@ namespace DLDL::argument
 		~Parser() = default;
 
 	public:
-		bool IsArgumentSet(Type type);
-		Argument GetArgument(Type type);
+		bool IsArgumentSet(Type type) const;
+		Argument GetArgument(Type type) const;
 
 		std::string GetValueFromString(const std::string& str);
 
 		Type GetTypeFromString(const std::string& argument);
 		std::string GetStringFromType(const Type& argument);
 		void Overwrites(const std::string& originalArgs);
+		void SetArgument(const Argument& arg);
+		void SetArguments(std::vector<Argument> args);
 
 	private:
 		void AddArgumentIfNotPresent(const Argument& value);
