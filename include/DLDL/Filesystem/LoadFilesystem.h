@@ -49,6 +49,7 @@ namespace DLDL::filesystem
 		bool DirectContainsFile(const std::string& fileName) const;
 		bool ReachedRoot() const;
 		std::string GetPath() const;
+		bool Error() const;
 
 	private:
 		void LoadPath(bool loadContent = false);

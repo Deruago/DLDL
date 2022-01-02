@@ -43,7 +43,6 @@ namespace DLDL::argument
 	public:
 		Interpreter(size_t count, const char* arguments[]);
 		~Interpreter();
-		std::size_t GenerateLanguage();
 		void InitializeInterpreter(bool force = false);
 		void AutoRun();
 		void AutoCompile();
@@ -85,6 +84,8 @@ namespace DLDL::argument
 		void About();
 
 		void InitializeDeamerMap();
+		void InitializeLpd();
+		void InitializeTool();
 
 		void PrintLanguages();
 		bool InitializeLanguages();
@@ -97,6 +98,10 @@ namespace DLDL::argument
 		std::string RegenerationArgsLPD() const;
 		std::string RegenerationArgsTool() const;
 		std::string RegenerationArgsMiccel() const;
+
+		std::size_t GenerateLanguage();
+		std::size_t GenerateLpd();
+		std::size_t GenerateTool();
 
 	private:
 		// Licensed libraries DLDL uses

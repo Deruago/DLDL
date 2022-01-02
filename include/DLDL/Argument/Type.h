@@ -48,6 +48,10 @@ namespace DLDL::argument
 		activate_tool_generation,
 		generate_lpd,
 		generate_tool,
+		init_lpd,
+		init_tool,
+		lpd_name,
+		tool_name,
 	};
 }
 

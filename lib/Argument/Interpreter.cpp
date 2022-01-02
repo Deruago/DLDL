@@ -90,7 +90,7 @@ void DLDL::argument::Interpreter::InitializeInterpreter(bool force)
 {
 	// Load in and ensure if there is a .deamer directory to load in that directory.
 	// Unless it is in initialization stage.
-	if (!parser.IsArgumentSet(Type::initialize) && !force)
+	if (!parser.IsArgumentSet(Type::initialize) || !force)
 	{
 		LoadInDeamerDir();
 		::deamer::file::tool::Directory deamerArgs;
@@ -113,8 +113,6 @@ void DLDL::argument::Interpreter::InitializeInterpreter(bool force)
 		{
 			parser.Overwrites(regenArgs.value().FileContent());
 		}
-
-		InitializeDeamerMap();
 	}
 
 	if (parser.IsArgumentSet(Type::regenerate))
@@ -157,6 +155,11 @@ void DLDL::argument::Interpreter::InitializeInterpreter(bool force)
 	if (parser.IsArgumentSet(Type::target_os))
 	{
 		os = ConvertStringToOS(parser.GetArgument(Type::target_os).value);
+	}
+
+	if (!parser.IsArgumentSet(Type::initialize) || !force)
+	{
+		InitializeDeamerMap();
 	}
 }
 
@@ -202,6 +205,8 @@ std::size_t DLDL::argument::Interpreter::GenerateLpd()
 	{
 		return 0;
 	}
+
+	return 0;
 }
 
 std::size_t DLDL::argument::Interpreter::GenerateTool()
@@ -212,6 +217,8 @@ std::size_t DLDL::argument::Interpreter::GenerateTool()
 	{
 		return 0;
 	}
+
+	return 0;
 }
 
 std::size_t DLDL::argument::Interpreter::Run()
@@ -232,7 +239,7 @@ std::size_t DLDL::argument::Interpreter::Run()
 	const std::size_t toolSuccess = GenerateTool();
 
 	const std::size_t success = languageSuccess | lpdSuccess | toolSuccess;
-	if (success == -1)
+	if (success != 0)
 	{
 		return success;
 	}
@@ -303,6 +310,18 @@ bool DLDL::argument::Interpreter::ExitArguments()
 		return true;
 	}
 
+	if (parser.IsArgumentSet(Type::init_lpd))
+	{
+		InitializeLpd();
+		return true;
+	}
+
+	if (parser.IsArgumentSet(Type::init_tool))
+	{
+		InitializeTool();
+		return true;
+	}
+
 	if (parser.IsArgumentSet(Type::supported_grammars))
 	{
 		SupportedGrammars();
@@ -360,6 +379,8 @@ void DLDL::argument::Interpreter::Help()
 		   "	-cp, -custom-project                        ; Specifies a custom project, this "
 		   "may\n"
 		   "	                                            ; not be a language project.\n"
+		   "	-init-lpd                                   ; Initializes a new LPD definition.\n"
+		   "	-init-tool                                  ; Initializes a new Tool definition.\n"
 		   "\n"
 		   "Single/Multi Project generation (Single Project is Default):\n"
 		   "	-single-project, -sp                        ; Generate a single project.\n"
@@ -372,6 +393,8 @@ void DLDL::argument::Interpreter::Help()
 		   "Internal behavioural settings (modify how DLDL does stuff):\n"
 		   "	-language-name, -lang-name                  ; Modify the 'language' used to "
 		   "initialize.\n"
+		   "	-lpd-name                                   ; Specifies the target lpd name.\n"
+		   "	-tool-name                                  ; Specifies the target tool name.\n"
 		   "	-target-language, tl                        ; Sets the 'target language', by "
 		   "default this is C++.\n"
 		   "	-build-map, -bm                             ; Specify the build map. Default: "
@@ -562,6 +585,78 @@ void DLDL::argument::Interpreter::InitializeDeamerMap()
 
 	// Write to disk
 	WriteToDisk(rootDirectory);
+}
+
+void DLDL::argument::Interpreter::InitializeLpd()
+{
+	if (!parser.IsArgumentSet(Type::init_lpd) || parser.GetArgument(Type::lpd_name).value.empty())
+	{
+		std::cout << "Please specify a lpd name using the argument: '-lpd-name'\n";
+		return;
+	}
+	if (!parser.IsArgumentSet(Type::lpd_map) || parser.GetArgument(Type::lpd_map).value.empty())
+	{
+		std::cout << "Please specify the map where all LPD definitions are located, using the "
+					 "argument: '-lpd-map'\n";
+		return;
+	}
+
+	::deamer::file::tool::Directory lpdDir_;
+	const auto lpdName = parser.GetArgument(Type::lpd_name).value;
+	const auto exists = filesystem::LoadFilesystem(lpdDir_, deamerDirRelocation + LpdMap)
+							.DirectContainsDirectory(lpdName);
+	if (exists)
+	{
+		std::cout << "Given LPD is already defined, please specify a different name\n";
+		return;
+	}
+
+	auto projectDir = ::deamer::file::tool::Directory(deamerDirRelocation);
+	auto lpdDir = ::deamer::file::tool::Directory(LpdMap);
+	auto lpdMap = ::deamer::file::tool::Directory(lpdName);
+	auto lpdInitFile = ::deamer::file::tool::File("LpdDef", "dldl", "lpd: " + lpdName + "\n");
+
+	lpdMap.AddFile(lpdInitFile);
+	lpdDir.AddDirectory(lpdMap);
+	projectDir.AddDirectory(lpdDir);
+
+	WriteToDisk(projectDir);
+}
+
+void DLDL::argument::Interpreter::InitializeTool()
+{
+	if (!parser.IsArgumentSet(Type::init_tool) || parser.GetArgument(Type::tool_name).value.empty())
+	{
+		std::cout << "Please specify a tool name using the argument: '-tool-name'\n";
+		return;
+	}
+	if (!parser.IsArgumentSet(Type::tool_map) || parser.GetArgument(Type::tool_map).value.empty())
+	{
+		std::cout << "Please specify the map where all tool definitions are located, using the "
+					 "argument: '-tool-map'\n";
+		return;
+	}
+
+	::deamer::file::tool::Directory toolDir_;
+	const auto toolName = parser.GetArgument(Type::tool_name).value;
+	const auto exists = filesystem::LoadFilesystem(toolDir_, deamerDirRelocation + ToolMap)
+							.DirectContainsDirectory(toolName);
+	if (exists)
+	{
+		std::cout << "Given tool is already defined, please specify a different name\n";
+		return;
+	}
+
+	auto projectDir = ::deamer::file::tool::Directory(deamerDirRelocation);
+	auto toolDir = ::deamer::file::tool::Directory(ToolMap);
+	auto toolMap = ::deamer::file::tool::Directory(toolName);
+	auto toolInitFile = ::deamer::file::tool::File("ToolDef", "dldl", "Tool: " + toolName + "\n");
+
+	toolMap.AddFile(toolInitFile);
+	toolDir.AddDirectory(toolMap);
+	projectDir.AddDirectory(toolDir);
+
+	WriteToDisk(projectDir);
 }
 
 void DLDL::argument::Interpreter::LoadInDeamerDir()

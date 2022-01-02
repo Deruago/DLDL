@@ -21,7 +21,14 @@ DLDL::filesystem::LoadFilesystem::LoadFilesystem(class deamer::file::tool::Direc
 	: outputDir(outputDir_),
 	  startingDir(startingDir_)
 {
-	LoadPath();
+	if (std::filesystem::exists(startingDir))
+	{
+		LoadPath();
+	}
+	else
+	{
+		error_state = true;
+	}
 }
 
 DLDL::filesystem::LoadFilesystem& DLDL::filesystem::LoadFilesystem::Upper()
@@ -115,7 +122,13 @@ bool DLDL::filesystem::LoadFilesystem::DirectContainsDirectory(
 {
 	for (const auto& dir : directories)
 	{
-		if (dir == directoryName)
+		auto formattedDir = dir;
+		if (!dir.empty() && dir[0] == '/')
+			formattedDir.erase(0, 1);
+		if (!dir.empty() && dir[dir.size() - 1] == '/')
+			formattedDir.pop_back();
+
+		if (formattedDir == directoryName)
 		{
 			return true;
 		}
@@ -128,7 +141,13 @@ bool DLDL::filesystem::LoadFilesystem::DirectContainsFile(const std::string& fil
 {
 	for (const auto& dir : files)
 	{
-		if (dir == fileName)
+		auto formattedDir = dir;
+		if (!dir.empty() && dir[0] == '/')
+			formattedDir.erase(0, 1);
+		if (!dir.empty() && dir[dir.size() - 1] == '/')
+			formattedDir.pop_back();
+
+		if (formattedDir == fileName)
 		{
 			return true;
 		}
@@ -145,6 +164,11 @@ bool DLDL::filesystem::LoadFilesystem::ReachedRoot() const
 std::string DLDL::filesystem::LoadFilesystem::GetPath() const
 {
 	return startingDir;
+}
+
+bool DLDL::filesystem::LoadFilesystem::Error() const
+{
+	return error_state;
 }
 
 void DLDL::filesystem::LoadFilesystem::LoadPath(bool loadContent)
