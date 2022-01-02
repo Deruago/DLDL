@@ -24,6 +24,7 @@ static void initializeMaps()
 		{"init", Type::initialize},
 		{"initial", Type::initialize},
 		{"initialize", Type::initialize},
+		{"init-language", Type::initialize},
 		{"ln", Type::language_name},
 		{"lang-name", Type::language_name},
 		{"language-name", Type::language_name},
@@ -83,6 +84,10 @@ static void initializeMaps()
 		{"generate-tool", Type::generate_tool},
 		{"glpd", Type::generate_lpd},
 		{"gtool", Type::generate_tool},
+		{"init-lpd", Type::init_lpd},
+		{"init-tool", Type::init_tool},
+		{"lpd-name", Type::lpd_name},
+		{"tool-name", Type::tool_name},
 	};
 
 	for (auto [str, type] : tuples)
@@ -114,7 +119,7 @@ Parser::Parser(std::vector<std::string> input)
 {
 	initializeMaps();
 
-	for (int i = 1; i < input.size(); i++)
+	for (int i = 0; i < input.size(); i++)
 	{
 		const Type type = GetTypeFromString(input[i]);
 		const std::string value = GetValueFromString(input[i]);
