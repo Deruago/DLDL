@@ -11,6 +11,8 @@
 #include <thread>
 #include <vector>
 
+#include "DLDL/Generate/DirectoryToDisk.h"
+
 std::string GenerateRootCMakeLists(std::vector<DLDL::ir::Language*> languages)
 {
 	std::string language_string;
@@ -543,8 +545,7 @@ void DLDL::argument::Interpreter::Initialize()
 	rootDirectory.AddDirectory(definition);
 	rootDirectory.AddDirectory(languageOutput);
 
-	generate::Project(languages, parser.IsArgumentSet(Type::multi_project))
-		.WriteToDisk(rootDirectory);
+	generate::DirectoryToDisk::WriteToDisk(rootDirectory);
 }
 
 void DLDL::argument::Interpreter::InitializeDeamerMap()
@@ -741,7 +742,7 @@ void DLDL::argument::Interpreter::CompilerGenerator_Generation()
 		auto currentDirectory = GenerateRootDirectory(languages);
 		currentDirectory.AddDirectory(directory);
 
-		projectGeneration->WriteToDisk(currentDirectory);
+		generate::DirectoryToDisk::WriteToDisk(currentDirectory);
 	}
 }
 
@@ -832,8 +833,7 @@ void DLDL::argument::Interpreter::CreateGitignore()
 
 	rootDirectory.AddFile(gitignore);
 
-	generate::Project(languages, parser.IsArgumentSet(Type::multi_project))
-		.WriteToDisk(rootDirectory);
+	generate::DirectoryToDisk::WriteToDisk(rootDirectory);
 }
 
 std::string DLDL::argument::Interpreter::RegenerationArgsDefinition() const

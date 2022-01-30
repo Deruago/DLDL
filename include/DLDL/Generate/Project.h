@@ -22,8 +22,9 @@ namespace DLDL::generate
 				const std::string& compilerGeneratorDirName = "CompilerGenerator");
 
 	public:
-		void WriteToDisk(deamer::file::tool::Directory directoryToWrite, std::string path = "./");
-
+		/*!	\fn Generate
+		 *	\brief Generate compiler generator directory
+		 */
 		deamer::file::tool::Directory Generate();
 
 		std::string GetLanguageTarget();
