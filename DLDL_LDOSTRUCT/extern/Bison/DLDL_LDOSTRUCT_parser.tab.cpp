@@ -101,7 +101,8 @@
 #include "DLDL_LDOSTRUCT/Ast/Node/argument.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_name.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_block.h"
-#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__argument_stmt__.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/argument_stmt.h"
 
 #ifndef YY_parse_NERRS
 #define YY_parse_NERRS DLDL_LDOSTRUCTnerrs
@@ -115,7 +116,7 @@ void DLDL_LDOSTRUCTerror(const char* s);
 int DLDL_LDOSTRUCTlex();
 static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 
-#line 119 "DLDL_LDOSTRUCT_parser.tab.c"
+#line 120 "DLDL_LDOSTRUCT_parser.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -159,7 +160,8 @@ enum yysymbol_kind_t
   YYSYMBOL_argument = 13,                  /* argument  */
   YYSYMBOL_argument_name = 14,             /* argument_name  */
   YYSYMBOL_argument_block = 15,            /* argument_block  */
-  YYSYMBOL_deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______ = 16 /* deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______  */
+  YYSYMBOL_deamerreserved_star__argument_stmt__ = 16, /* deamerreserved_star__argument_stmt__  */
+  YYSYMBOL_argument_stmt = 17              /* argument_stmt  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -487,16 +489,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  7
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   12
+#define YYLAST   10
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  9
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  8
+#define YYNNTS  9
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  13
+#define YYNRULES  14
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  21
+#define YYNSTATES  20
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   263
@@ -546,8 +548,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    80,    80,    88,    92,    99,   106,   110,   117,   124,
-     131,   135,   139,   143
+       0,    83,    83,    91,    95,   102,   109,   113,   120,   127,
+     134,   138,   145,   149,   153
 };
 #endif
 
@@ -567,7 +569,7 @@ static const char *const yytname[] =
   "LEFT_ANGLE_BRACKET", "RIGHT_ANGLE_BRACKET", "VARNAME", "VARNAME_EXT",
   "INDENTED_VALUE", "$accept", "program", "deamerreserved_star__stmt__",
   "stmt", "argument", "argument_name", "argument_block",
-  "deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______", YY_NULLPTR
+  "deamerreserved_star__argument_stmt__", "argument_stmt", YY_NULLPTR
 };
 
 static const char *
@@ -577,7 +579,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-7)
+#define YYPACT_NINF (-8)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -591,9 +593,8 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -5,    -7,     2,    -7,    -5,    -7,     7,    -7,    -7,    -4,
-      -2,    -7,    -7,    -2,    -2,    -2,     6,    -7,    -7,    -7,
-      -7
+      -5,    -8,     2,    -8,    -5,    -8,     4,    -8,    -8,    -4,
+      -2,    -8,    -8,    -8,    -8,    -8,     3,    -2,    -8,    -8
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -602,20 +603,19 @@ static const yytype_int8 yypact[] =
 static const yytype_int8 yydefact[] =
 {
        4,     8,     0,     2,     4,     5,     0,     1,     3,     0,
-      13,     6,     7,    13,    13,    13,     0,    12,    11,    10,
-       9
+      11,     6,     7,    14,    13,    12,     0,    11,     9,    10
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -7,    -7,     8,    -7,    -7,    -7,    -7,    -6
+      -8,    -8,     5,    -8,    -8,    -8,    -8,    -7,    -8
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2,     3,     4,     5,     6,    12,    16
+       0,     2,     3,     4,     5,     6,    12,    16,    17
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -623,14 +623,14 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      10,     1,     7,    11,    13,    14,    15,    17,    18,    19,
-       9,    20,     8
+      10,     1,     7,    11,    13,    14,    15,     9,    18,     8,
+      19
 };
 
 static const yytype_int8 yycheck[] =
 {
-       4,     6,     0,     7,     6,     7,     8,    13,    14,    15,
-       3,     5,     4
+       4,     6,     0,     7,     6,     7,     8,     3,     5,     4,
+      17
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -638,22 +638,21 @@ static const yytype_int8 yycheck[] =
 static const yytype_int8 yystos[] =
 {
        0,     6,    10,    11,    12,    13,    14,     0,    11,     3,
-       4,     7,    15,     6,     7,     8,    16,    16,    16,    16,
-       5
+       4,     7,    15,     6,     7,     8,    16,    17,     5,    16
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
        0,     9,    10,    11,    11,    12,    13,    13,    14,    15,
-      16,    16,    16,    16
+      16,    16,    17,    17,    17
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     2,     0,     1,     3,     3,     1,     3,
-       2,     2,     2,     0
+       2,     0,     1,     1,     1
 };
 
 
@@ -1117,116 +1116,125 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: deamerreserved_star__stmt__  */
-#line 80 "./DLDL_LDOSTRUCT_parser.y"
+#line 83 "./DLDL_LDOSTRUCT_parser.y"
                                     {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::program({::DLDL_LDOSTRUCT::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DLDL_LDOSTRUCT_deamerreserved_star__stmt__) });
 		(yyval.DLDL_LDOSTRUCT_program) = newNode;
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
-#line 1127 "DLDL_LDOSTRUCT_parser.tab.c"
+#line 1126 "DLDL_LDOSTRUCT_parser.tab.c"
     break;
 
   case 3: /* deamerreserved_star__stmt__: stmt deamerreserved_star__stmt__  */
-#line 88 "./DLDL_LDOSTRUCT_parser.y"
+#line 91 "./DLDL_LDOSTRUCT_parser.y"
                                          {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DLDL_LDOSTRUCT_stmt), (yyvsp[0].DLDL_LDOSTRUCT_deamerreserved_star__stmt__) });
 		(yyval.DLDL_LDOSTRUCT_deamerreserved_star__stmt__) = newNode;
 	}
-#line 1136 "DLDL_LDOSTRUCT_parser.tab.c"
+#line 1135 "DLDL_LDOSTRUCT_parser.tab.c"
     break;
 
   case 4: /* deamerreserved_star__stmt__: %empty  */
-#line 92 "./DLDL_LDOSTRUCT_parser.y"
+#line 95 "./DLDL_LDOSTRUCT_parser.y"
           {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
 		(yyval.DLDL_LDOSTRUCT_deamerreserved_star__stmt__) = newNode;
 	}
-#line 1145 "DLDL_LDOSTRUCT_parser.tab.c"
+#line 1144 "DLDL_LDOSTRUCT_parser.tab.c"
     break;
 
   case 5: /* stmt: argument  */
-#line 99 "./DLDL_LDOSTRUCT_parser.y"
+#line 102 "./DLDL_LDOSTRUCT_parser.y"
                  {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::stmt({::DLDL_LDOSTRUCT::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[0].DLDL_LDOSTRUCT_argument) });
 		(yyval.DLDL_LDOSTRUCT_stmt) = newNode;
 	}
-#line 1154 "DLDL_LDOSTRUCT_parser.tab.c"
+#line 1153 "DLDL_LDOSTRUCT_parser.tab.c"
     break;
 
   case 6: /* argument: argument_name COLON VARNAME_EXT  */
-#line 106 "./DLDL_LDOSTRUCT_parser.y"
+#line 109 "./DLDL_LDOSTRUCT_parser.y"
                                         {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument({::DLDL_LDOSTRUCT::ast::Type::argument, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-2].DLDL_LDOSTRUCT_argument_name), new DLDL_LDOSTRUCT::ast::node::VARNAME_EXT({::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DLDL_LDOSTRUCT_argument) = newNode;
 	}
-#line 1163 "DLDL_LDOSTRUCT_parser.tab.c"
+#line 1162 "DLDL_LDOSTRUCT_parser.tab.c"
     break;
 
   case 7: /* argument: argument_name COLON argument_block  */
-#line 110 "./DLDL_LDOSTRUCT_parser.y"
+#line 113 "./DLDL_LDOSTRUCT_parser.y"
                                              {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument({::DLDL_LDOSTRUCT::ast::Type::argument, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-2].DLDL_LDOSTRUCT_argument_name), (yyvsp[0].DLDL_LDOSTRUCT_argument_block) });
 		(yyval.DLDL_LDOSTRUCT_argument) = newNode;
 	}
-#line 1172 "DLDL_LDOSTRUCT_parser.tab.c"
+#line 1171 "DLDL_LDOSTRUCT_parser.tab.c"
     break;
 
   case 8: /* argument_name: VARNAME  */
-#line 117 "./DLDL_LDOSTRUCT_parser.y"
+#line 120 "./DLDL_LDOSTRUCT_parser.y"
                 {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_name({::DLDL_LDOSTRUCT::ast::Type::argument_name, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
 		(yyval.DLDL_LDOSTRUCT_argument_name) = newNode;
 	}
-#line 1181 "DLDL_LDOSTRUCT_parser.tab.c"
+#line 1180 "DLDL_LDOSTRUCT_parser.tab.c"
     break;
 
-  case 9: /* argument_block: LEFT_ANGLE_BRACKET deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______ RIGHT_ANGLE_BRACKET  */
-#line 124 "./DLDL_LDOSTRUCT_parser.y"
-                                                                                                                                                     {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_block({::DLDL_LDOSTRUCT::ast::Type::argument_block, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DLDL_LDOSTRUCT_deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______) });
+  case 9: /* argument_block: LEFT_ANGLE_BRACKET deamerreserved_star__argument_stmt__ RIGHT_ANGLE_BRACKET  */
+#line 127 "./DLDL_LDOSTRUCT_parser.y"
+                                                                                    {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_block({::DLDL_LDOSTRUCT::ast::Type::argument_block, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DLDL_LDOSTRUCT_deamerreserved_star__argument_stmt__) });
 		(yyval.DLDL_LDOSTRUCT_argument_block) = newNode;
 	}
-#line 1190 "DLDL_LDOSTRUCT_parser.tab.c"
+#line 1189 "DLDL_LDOSTRUCT_parser.tab.c"
     break;
 
-  case 10: /* deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______: INDENTED_VALUE deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______  */
-#line 131 "./DLDL_LDOSTRUCT_parser.y"
-                                                                                                                             {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE({::DLDL_LDOSTRUCT::ast::Type::INDENTED_VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), (yyvsp[0].DLDL_LDOSTRUCT_deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______) });
-		(yyval.DLDL_LDOSTRUCT_deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______) = newNode;
+  case 10: /* deamerreserved_star__argument_stmt__: argument_stmt deamerreserved_star__argument_stmt__  */
+#line 134 "./DLDL_LDOSTRUCT_parser.y"
+                                                           {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { (yyvsp[-1].DLDL_LDOSTRUCT_argument_stmt), (yyvsp[0].DLDL_LDOSTRUCT_deamerreserved_star__argument_stmt__) });
+		(yyval.DLDL_LDOSTRUCT_deamerreserved_star__argument_stmt__) = newNode;
 	}
-#line 1199 "DLDL_LDOSTRUCT_parser.tab.c"
+#line 1198 "DLDL_LDOSTRUCT_parser.tab.c"
     break;
 
-  case 11: /* deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______: VARNAME_EXT deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______  */
-#line 135 "./DLDL_LDOSTRUCT_parser.y"
-                                                                                                                            {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::VARNAME_EXT({::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), (yyvsp[0].DLDL_LDOSTRUCT_deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______) });
-		(yyval.DLDL_LDOSTRUCT_deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______) = newNode;
-	}
-#line 1208 "DLDL_LDOSTRUCT_parser.tab.c"
-    break;
-
-  case 12: /* deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______: VARNAME deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______  */
-#line 139 "./DLDL_LDOSTRUCT_parser.y"
-                                                                                                                        {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal)}), (yyvsp[0].DLDL_LDOSTRUCT_deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______) });
-		(yyval.DLDL_LDOSTRUCT_deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______) = newNode;
-	}
-#line 1217 "DLDL_LDOSTRUCT_parser.tab.c"
-    break;
-
-  case 13: /* deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______: %empty  */
-#line 143 "./DLDL_LDOSTRUCT_parser.y"
+  case 11: /* deamerreserved_star__argument_stmt__: %empty  */
+#line 138 "./DLDL_LDOSTRUCT_parser.y"
           {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______, ::deamer::external::cpp::ast::NodeValue::nonterminal, {3, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
-		(yyval.DLDL_LDOSTRUCT_deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______) = newNode;
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+		(yyval.DLDL_LDOSTRUCT_deamerreserved_star__argument_stmt__) = newNode;
 	}
-#line 1226 "DLDL_LDOSTRUCT_parser.tab.c"
+#line 1207 "DLDL_LDOSTRUCT_parser.tab.c"
+    break;
+
+  case 12: /* argument_stmt: INDENTED_VALUE  */
+#line 145 "./DLDL_LDOSTRUCT_parser.y"
+                       {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE({::DLDL_LDOSTRUCT::ast::Type::INDENTED_VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DLDL_LDOSTRUCT_argument_stmt) = newNode;
+	}
+#line 1216 "DLDL_LDOSTRUCT_parser.tab.c"
+    break;
+
+  case 13: /* argument_stmt: VARNAME_EXT  */
+#line 149 "./DLDL_LDOSTRUCT_parser.y"
+                      {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::VARNAME_EXT({::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DLDL_LDOSTRUCT_argument_stmt) = newNode;
+	}
+#line 1225 "DLDL_LDOSTRUCT_parser.tab.c"
+    break;
+
+  case 14: /* argument_stmt: VARNAME  */
+#line 153 "./DLDL_LDOSTRUCT_parser.y"
+                  {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal)}) });
+		(yyval.DLDL_LDOSTRUCT_argument_stmt) = newNode;
+	}
+#line 1234 "DLDL_LDOSTRUCT_parser.tab.c"
     break;
 
 
-#line 1230 "DLDL_LDOSTRUCT_parser.tab.c"
+#line 1238 "DLDL_LDOSTRUCT_parser.tab.c"
 
       default: break;
     }
@@ -1419,7 +1427,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 149 "./DLDL_LDOSTRUCT_parser.y"
+#line 159 "./DLDL_LDOSTRUCT_parser.y"
 
 
 void DLDL_LDOSTRUCTerror(const char* s)

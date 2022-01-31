@@ -18,7 +18,8 @@
 #include "DLDL_LDOSTRUCT/Ast/Node/argument.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_name.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_block.h"
-#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__argument_stmt__.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/argument_stmt.h"
 
 namespace DLDL_LDOSTRUCT { namespace ast { namespace Visitor { 
 
@@ -100,9 +101,14 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace Visitor {
 				Visit(static_cast<const DLDL_LDOSTRUCT::ast::node::argument_block*>(node));
 				break;
 			}
-			case DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______:
+			case DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__:
 			{
-				Visit(static_cast<const DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______*>(node));
+				Visit(static_cast<const DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__*>(node));
+				break;
+			}
+			case DLDL_LDOSTRUCT::ast::Type::argument_stmt:
+			{
+				Visit(static_cast<const DLDL_LDOSTRUCT::ast::node::argument_stmt*>(node));
 				break;
 			}
 			}
@@ -147,7 +153,10 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace Visitor {
 		virtual void Visit(const DLDL_LDOSTRUCT::ast::node::argument_block* node)
 		{
 		}
-		virtual void Visit(const DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______* node)
+		virtual void Visit(const DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__* node)
+		{
+		}
+		virtual void Visit(const DLDL_LDOSTRUCT::ast::node::argument_stmt* node)
 		{
 		}
 	};

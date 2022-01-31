@@ -68,7 +68,7 @@ extern int DLDL_LDOSTRUCTdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 59 "./DLDL_LDOSTRUCT_parser.y"
+#line 61 "./DLDL_LDOSTRUCT_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_LDOSTRUCT::ast::node::COLON* DLDL_LDOSTRUCT_COLON;
@@ -84,9 +84,10 @@ union YYSTYPE
 	::DLDL_LDOSTRUCT::ast::node::argument* DLDL_LDOSTRUCT_argument;
 	::DLDL_LDOSTRUCT::ast::node::argument_name* DLDL_LDOSTRUCT_argument_name;
 	::DLDL_LDOSTRUCT::ast::node::argument_block* DLDL_LDOSTRUCT_argument_block;
-	::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______* DLDL_LDOSTRUCT_deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______;
+	::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__* DLDL_LDOSTRUCT_deamerreserved_star__argument_stmt__;
+	::DLDL_LDOSTRUCT::ast::node::argument_stmt* DLDL_LDOSTRUCT_argument_stmt;
 
-#line 90 "DLDL_LDOSTRUCT_parser.tab.h"
+#line 91 "DLDL_LDOSTRUCT_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

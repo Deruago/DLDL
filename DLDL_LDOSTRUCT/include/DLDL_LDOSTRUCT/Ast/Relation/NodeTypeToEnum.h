@@ -11,7 +11,8 @@ class stmt;
 class argument;
 class argument_name;
 class argument_block;
-class deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______;
+class deamerreserved_star__argument_stmt__;
+class argument_stmt;
 class COLON;
 class LEFT_ANGLE_BRACKET;
 class RIGHT_ANGLE_BRACKET;
@@ -75,10 +76,17 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace relation {
 	};
 
 	template<>
-	struct NodeTypeToEnum<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>
+	struct NodeTypeToEnum<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__>
 	{
-		constexpr static auto value = ::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______;
-		using type = ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______;
+		constexpr static auto value = ::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__;
+		using type = ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__;
+	};
+
+	template<>
+	struct NodeTypeToEnum<::DLDL_LDOSTRUCT::ast::node::argument_stmt>
+	{
+		constexpr static auto value = ::DLDL_LDOSTRUCT::ast::Type::argument_stmt;
+		using type = ::DLDL_LDOSTRUCT::ast::node::argument_stmt;
 	};
 
 	template<>

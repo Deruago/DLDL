@@ -26,7 +26,8 @@
 #include "DLDL_LDOSTRUCT/Ast/Node/argument.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_name.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_block.h"
-#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__argument_stmt__.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/argument_stmt.h"
 #include "Bison/DLDL_LDOSTRUCT_parser.tab.h"
 void showError();
 extern int DLDL_LDOSTRUCTlex();

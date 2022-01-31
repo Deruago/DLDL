@@ -30,7 +30,10 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace relation {
 		{ "argument_block", ::DLDL_LDOSTRUCT::ast::Type::argument_block },
 	
 
-		{ "deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______", ::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______ },
+		{ "deamerreserved_star__argument_stmt__", ::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__ },
+	
+
+		{ "argument_stmt", ::DLDL_LDOSTRUCT::ast::Type::argument_stmt },
 	
 
 		{ "COLON", ::DLDL_LDOSTRUCT::ast::Type::COLON },

@@ -19,7 +19,8 @@
 #include "DLDL_LDOSTRUCT/Ast/Node/argument.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_name.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_block.h"
-#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__argument_stmt__.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/argument_stmt.h"
 
 #include <Deamer/External/Cpp/Ast/Listener.h>
 #include <Deamer/Algorithm/Tree/DFS.h>
@@ -171,12 +172,21 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace listener {
 				break;
 			}
 
-			case DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______:
+			case DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__:
 			{
 				// Enter nonterminal
 				EnterAnything(node);
 				EnterNonTerminal(node);
-				ListenEntry(static_cast<const DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______*>(node));
+				ListenEntry(static_cast<const DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__*>(node));
+				break;
+			}
+
+			case DLDL_LDOSTRUCT::ast::Type::argument_stmt:
+			{
+				// Enter nonterminal
+				EnterAnything(node);
+				EnterNonTerminal(node);
+				ListenEntry(static_cast<const DLDL_LDOSTRUCT::ast::node::argument_stmt*>(node));
 				break;
 			}
 
@@ -310,10 +320,19 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace listener {
 				break;
 			}
 
-			case DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______:
+			case DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__:
 			{
 				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______*>(node));
+				ListenExit(static_cast<const DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LDOSTRUCT::ast::Type::argument_stmt:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_LDOSTRUCT::ast::node::argument_stmt*>(node));
 				ExitNonTerminal(node);
 				ExitAnything(node);
 				break;
@@ -406,7 +425,11 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace listener {
 		{
 		}
 
-		virtual void ListenEntry(const DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______* node) 
+		virtual void ListenEntry(const DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__* node) 
+		{
+		}
+
+		virtual void ListenEntry(const DLDL_LDOSTRUCT::ast::node::argument_stmt* node) 
 		{
 		}
 
@@ -435,7 +458,11 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace listener {
 		{
 		}
 
-		virtual void ListenExit(const DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______* node) 
+		virtual void ListenExit(const DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_LDOSTRUCT::ast::node::argument_stmt* node) 
 		{
 		}
 

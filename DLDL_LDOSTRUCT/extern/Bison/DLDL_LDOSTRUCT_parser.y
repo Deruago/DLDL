@@ -24,7 +24,8 @@
 #include "DLDL_LDOSTRUCT/Ast/Node/argument.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_name.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_block.h"
-#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__argument_stmt__.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/argument_stmt.h"
 
 #ifndef YY_parse_NERRS
 #define YY_parse_NERRS DLDL_LDOSTRUCTnerrs
@@ -52,7 +53,8 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %nterm<DLDL_LDOSTRUCT_argument> argument
 %nterm<DLDL_LDOSTRUCT_argument_name> argument_name
 %nterm<DLDL_LDOSTRUCT_argument_block> argument_block
-%nterm<DLDL_LDOSTRUCT_deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______> deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______
+%nterm<DLDL_LDOSTRUCT_deamerreserved_star__argument_stmt__> deamerreserved_star__argument_stmt__
+%nterm<DLDL_LDOSTRUCT_argument_stmt> argument_stmt
 
 
 
@@ -71,7 +73,8 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_LDOSTRUCT::ast::node::argument* DLDL_LDOSTRUCT_argument;
 	::DLDL_LDOSTRUCT::ast::node::argument_name* DLDL_LDOSTRUCT_argument_name;
 	::DLDL_LDOSTRUCT::ast::node::argument_block* DLDL_LDOSTRUCT_argument_block;
-	::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______* DLDL_LDOSTRUCT_deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______;
+	::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__* DLDL_LDOSTRUCT_deamerreserved_star__argument_stmt__;
+	::DLDL_LDOSTRUCT::ast::node::argument_stmt* DLDL_LDOSTRUCT_argument_stmt;
 }
 
 %%
@@ -121,27 +124,34 @@ argument_name:
 ;
 
 argument_block:
-	LEFT_ANGLE_BRACKET deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______ RIGHT_ANGLE_BRACKET {
+	LEFT_ANGLE_BRACKET deamerreserved_star__argument_stmt__ RIGHT_ANGLE_BRACKET {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_block({::DLDL_LDOSTRUCT::ast::Type::argument_block, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $2 });
 		$$ = newNode;
 	}
 ;
 
-deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______:
-	INDENTED_VALUE deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______ {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE({::DLDL_LDOSTRUCT::ast::Type::INDENTED_VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), $2 });
-		$$ = newNode;
-	}
-	| VARNAME_EXT deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______ {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::VARNAME_EXT({::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), $2 });
-		$$ = newNode;
-	}
-	| VARNAME deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______ {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), $2 });
+deamerreserved_star__argument_stmt__:
+	argument_stmt deamerreserved_star__argument_stmt__ {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, $2 });
 		$$ = newNode;
 	}
 	| {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______, ::deamer::external::cpp::ast::NodeValue::nonterminal, {3, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+		$$ = newNode;
+	}
+;
+
+argument_stmt:
+	INDENTED_VALUE {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE({::DLDL_LDOSTRUCT::ast::Type::INDENTED_VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+		$$ = newNode;
+	}
+	| VARNAME_EXT {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::VARNAME_EXT({::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+		$$ = newNode;
+	}
+	| VARNAME {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
 		$$ = newNode;
 	}
 ;

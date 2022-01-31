@@ -86,14 +86,24 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace listener { namespace deamer
 			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"argument_block\"];\n";
 		}
 
-		void ListenEntry(const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______* node) override
+		void ListenEntry(const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__* node) override
 		{
 			for (const auto* child : node->GetNodes())
 			{
 				AddConnection(node, child);
 			}
 
-			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______\"];\n";
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_star__argument_stmt__\"];\n";
+		}
+
+		void ListenEntry(const ::DLDL_LDOSTRUCT::ast::node::argument_stmt* node) override
+		{
+			for (const auto* child : node->GetNodes())
+			{
+				AddConnection(node, child);
+			}
+
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"argument_stmt\"];\n";
 		}
 
 		void ListenEntry(const ::DLDL_LDOSTRUCT::ast::node::COLON* node) override
@@ -191,7 +201,11 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace listener { namespace deamer
 		{
 		}
 
-		void ListenExit(const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______* node) override
+		void ListenExit(const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__* node) override
+		{
+		}
+
+		void ListenExit(const ::DLDL_LDOSTRUCT::ast::node::argument_stmt* node) override
 		{
 		}
 

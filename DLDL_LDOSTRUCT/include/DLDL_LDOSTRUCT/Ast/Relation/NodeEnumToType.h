@@ -9,7 +9,8 @@
 #include "DLDL_LDOSTRUCT/Ast/Node/argument.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_name.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_block.h"
-#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__argument_stmt__.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/argument_stmt.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/COLON.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/LEFT_ANGLE_BRACKET.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/RIGHT_ANGLE_BRACKET.h"
@@ -72,10 +73,17 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace relation {
 	};
 
 	template<>
-	struct NodeEnumToType<::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>
+	struct NodeEnumToType<::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__>
 	{
-		constexpr static auto value = ::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______;
-		using type = ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______;
+		constexpr static auto value = ::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__;
+		using type = ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__;
+	};
+
+	template<>
+	struct NodeEnumToType<::DLDL_LDOSTRUCT::ast::Type::argument_stmt>
+	{
+		constexpr static auto value = ::DLDL_LDOSTRUCT::ast::Type::argument_stmt;
+		using type = ::DLDL_LDOSTRUCT::ast::node::argument_stmt;
 	};
 
 	template<>

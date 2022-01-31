@@ -27,7 +27,8 @@ namespace DLDL_LDOSTRUCT { namespace ast {
 		argument,
 		argument_name,
 		argument_block,
-		deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______,
+		deamerreserved_star__argument_stmt__,
+		argument_stmt,
 
 	};
 

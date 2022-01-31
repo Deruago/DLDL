@@ -759,7 +759,8 @@ char *yytext;
 #include "DLDL_LDOSTRUCT/Ast/Node/argument.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_name.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_block.h"
-#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__argument_stmt__.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/argument_stmt.h"
 #include "Bison/DLDL_LDOSTRUCT_parser.tab.h"
 void showError();
 extern int DLDL_LDOSTRUCTlex();
@@ -772,8 +773,8 @@ static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_ob
 #ifndef yyval
 #define yyval yytext
 #endif //yyval
-#line 776 "lex.DLDL_LDOSTRUCT.c"
 #line 777 "lex.DLDL_LDOSTRUCT.c"
+#line 778 "lex.DLDL_LDOSTRUCT.c"
 
 #define INITIAL 0
 
@@ -990,10 +991,10 @@ YY_DECL
 		}
 
 	{
-#line 52 "./DLDL_LDOSTRUCT_lexer.l"
+#line 53 "./DLDL_LDOSTRUCT_lexer.l"
 
 
-#line 997 "lex.DLDL_LDOSTRUCT.c"
+#line 998 "lex.DLDL_LDOSTRUCT.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1058,47 +1059,47 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 54 "./DLDL_LDOSTRUCT_lexer.l"
+#line 55 "./DLDL_LDOSTRUCT_lexer.l"
 {if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(1)));else DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(1));;handleColumn(yyval);if (!local_store) return (COLON);;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 55 "./DLDL_LDOSTRUCT_lexer.l"
+#line 56 "./DLDL_LDOSTRUCT_lexer.l"
 {if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(2)));else DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(2));;handleColumn(yyval);if (!local_store) return (LEFT_ANGLE_BRACKET);;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 56 "./DLDL_LDOSTRUCT_lexer.l"
+#line 57 "./DLDL_LDOSTRUCT_lexer.l"
 {if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(3)));else DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(3));;handleColumn(yyval);if (!local_store) return (RIGHT_ANGLE_BRACKET);;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 57 "./DLDL_LDOSTRUCT_lexer.l"
+#line 58 "./DLDL_LDOSTRUCT_lexer.l"
 {if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(4)));else DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(4));;handleColumn(yyval);if (!local_store) return (VARNAME);;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 58 "./DLDL_LDOSTRUCT_lexer.l"
+#line 59 "./DLDL_LDOSTRUCT_lexer.l"
 {if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(5)));else DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(5));;handleColumn(yyval);if (!local_store) return (VARNAME_EXT);;}
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 59 "./DLDL_LDOSTRUCT_lexer.l"
+#line 60 "./DLDL_LDOSTRUCT_lexer.l"
 {if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(6)));else DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(6));;handleColumn(yyval);if (!local_store) return (INDENTED_VALUE);;}
 	YY_BREAK
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 60 "./DLDL_LDOSTRUCT_lexer.l"
+#line 61 "./DLDL_LDOSTRUCT_lexer.l"
 {handleColumn(yyval);if (!local_store) ;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 62 "./DLDL_LDOSTRUCT_lexer.l"
+#line 63 "./DLDL_LDOSTRUCT_lexer.l"
 ECHO;
 	YY_BREAK
-#line 1102 "lex.DLDL_LDOSTRUCT.c"
+#line 1103 "lex.DLDL_LDOSTRUCT.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2116,7 +2117,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 62 "./DLDL_LDOSTRUCT_lexer.l"
+#line 63 "./DLDL_LDOSTRUCT_lexer.l"
 
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject)
 {

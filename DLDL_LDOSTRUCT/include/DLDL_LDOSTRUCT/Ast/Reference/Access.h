@@ -12,7 +12,8 @@
 #include "DLDL_LDOSTRUCT/Ast/Node/argument.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_name.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_block.h"
-#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__argument_stmt__.h"
+#include "DLDL_LDOSTRUCT/Ast/Node/argument_stmt.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/COLON.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/LEFT_ANGLE_BRACKET.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/RIGHT_ANGLE_BRACKET.h"
@@ -124,7 +125,9 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace reference {
 	template<>
 	struct AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_block>;
 	template<>
-	struct AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>;
+	struct AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__>;
+	template<>
+	struct AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_stmt>;
 	template<>
 	struct AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::COLON>;
 	template<>
@@ -754,12 +757,10 @@ AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME_EXT> VARNAME_EXT();
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______> deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______();
+		AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__> deamerreserved_star__argument_stmt__();
+AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_stmt> argument_stmt();
 AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::LEFT_ANGLE_BRACKET> LEFT_ANGLE_BRACKET();
 AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::RIGHT_ANGLE_BRACKET> RIGHT_ANGLE_BRACKET();
-AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME> VARNAME();
-AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME_EXT> VARNAME_EXT();
-AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE> INDENTED_VALUE();
 
 
 		template<typename FunctionType>
@@ -795,28 +796,28 @@ AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE> INDENTED_VALUE()
 	};
 
 	template<>
-	struct AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______> : public AccessBase
+	struct AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__> : public AccessBase
 	{
 	protected:
-		std::vector<const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______*> ts;
+		std::vector<const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__*> ts;
 
 	public:
-		AccessTemplateBase(std::vector<const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		AccessTemplateBase(const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__& t) : ts({&t})
 		{
 		}
 
-		AccessTemplateBase(const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__* t) : ts({t})
 		{
 		}
 
 		AccessTemplateBase() = default;
 
 	public:
-		AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -832,7 +833,7 @@ AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE> INDENTED_VALUE()
 			return *this;
 		}
 
-		AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -848,7 +849,7 @@ AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE> INDENTED_VALUE()
 			}
 			else
 			{
-				std::vector<const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______*> temporaries;
+				std::vector<const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__*> temporaries;
 				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
 				{
 					temporaries.push_back(ts[i]);
@@ -860,20 +861,127 @@ AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE> INDENTED_VALUE()
 			return *this;
 		}
 
-		std::vector<const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______*> GetContent()
+		std::vector<const ::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__*> GetContent()
 		{
 			return ts;
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______> deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______();
-AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME> VARNAME();
+		AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__> deamerreserved_star__argument_stmt__();
+AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_stmt> argument_stmt();
+
+
+		template<typename FunctionType>
+		AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__>& for_all(FunctionType function)
+		{
+			for (const auto* const t : ts)
+			{
+				function(t);
+			}
+
+			return *this;
+		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
+	};
+
+	template<>
+	struct AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_stmt> : public AccessBase
+	{
+	protected:
+		std::vector<const ::DLDL_LDOSTRUCT::ast::node::argument_stmt*> ts;
+
+	public:
+		AccessTemplateBase(std::vector<const ::DLDL_LDOSTRUCT::ast::node::argument_stmt*> ts_) : ts(std::move(ts_))
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_LDOSTRUCT::ast::node::argument_stmt& t) : ts({&t})
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_LDOSTRUCT::ast::node::argument_stmt* t) : ts({t})
+		{
+		}
+
+		AccessTemplateBase() = default;
+
+	public:
+		AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_stmt>& operator[](::std::size_t index)
+		{
+			if (index >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				const auto* const copy = ts[index];
+				ts.clear();
+				ts.push_back(copy);
+			}
+
+			return *this;
+		}
+
+		AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_stmt>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		{
+			// swap if the other is larger
+			if (indexBegin > indexEnd)
+			{
+				const auto tmp = indexBegin;
+				indexBegin = indexEnd;
+				indexEnd = tmp;
+			}
+
+			if (indexBegin >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				std::vector<const ::DLDL_LDOSTRUCT::ast::node::argument_stmt*> temporaries;
+				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
+				{
+					temporaries.push_back(ts[i]);
+				}
+				ts.clear();
+				ts = temporaries;
+			}
+
+			return *this;
+		}
+
+		std::vector<const ::DLDL_LDOSTRUCT::ast::node::argument_stmt*> GetContent()
+		{
+			return ts;
+		}
+
+	public:
+		AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME> VARNAME();
 AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME_EXT> VARNAME_EXT();
 AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE> INDENTED_VALUE();
 
 
 		template<typename FunctionType>
-		AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_stmt>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1728,12 +1836,20 @@ AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE> INDENTED_VALUE()
 			return AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME>(Get<::DLDL_LDOSTRUCT::ast::Type::VARNAME>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_block>::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______()
+		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_block>::deamerreserved_star__argument_stmt__()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>(Get<::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>(ts));
+			return AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__>(Get<::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_stmt> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_block>::argument_stmt()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_stmt>(Get<::DLDL_LDOSTRUCT::ast::Type::argument_stmt>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::LEFT_ANGLE_BRACKET> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_block>::LEFT_ANGLE_BRACKET()
@@ -1752,7 +1868,23 @@ AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE> INDENTED_VALUE()
 			return AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::RIGHT_ANGLE_BRACKET>(Get<::DLDL_LDOSTRUCT::ast::Type::RIGHT_ANGLE_BRACKET>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_block>::VARNAME()
+		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__>::deamerreserved_star__argument_stmt__()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__>(Get<::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_stmt> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__>::argument_stmt()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_stmt>(Get<::DLDL_LDOSTRUCT::ast::Type::argument_stmt>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_stmt>::VARNAME()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
@@ -1760,7 +1892,7 @@ AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE> INDENTED_VALUE()
 			return AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME>(Get<::DLDL_LDOSTRUCT::ast::Type::VARNAME>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME_EXT> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_block>::VARNAME_EXT()
+		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME_EXT> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_stmt>::VARNAME_EXT()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
@@ -1768,39 +1900,7 @@ AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE> INDENTED_VALUE()
 			return AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME_EXT>(Get<::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_block>::INDENTED_VALUE()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE>(Get<::DLDL_LDOSTRUCT::ast::Type::INDENTED_VALUE>(ts));
-		}
-
-		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>(Get<::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>(ts));
-		}
-
-		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>::VARNAME()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME>(Get<::DLDL_LDOSTRUCT::ast::Type::VARNAME>(ts));
-		}
-
-		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME_EXT> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>::VARNAME_EXT()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::VARNAME_EXT>(Get<::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT>(ts));
-		}
-
-		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>::INDENTED_VALUE()
+		inline AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE> AccessTemplateBase<::DLDL_LDOSTRUCT::ast::node::argument_stmt>::INDENTED_VALUE()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 

@@ -40,8 +40,13 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace relation {
 	}
 	
 
-	case ::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______: {
-		return "deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______";
+	case ::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__: {
+		return "deamerreserved_star__argument_stmt__";
+	}
+	
+
+	case ::DLDL_LDOSTRUCT::ast::Type::argument_stmt: {
+		return "argument_stmt";
 	}
 	
 
