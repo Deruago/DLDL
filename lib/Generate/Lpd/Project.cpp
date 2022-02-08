@@ -67,7 +67,6 @@ DLDL::generate::lpd::Project::LPDDirectory DLDL::generate::lpd::Project::Generat
 
 	return directory;
 }
-#include <iostream>
 void DLDL::generate::lpd::Project::GenerateMainLpd(LPDDirectory& directory) const
 {
 	::deamer::file::tool::Directory mainIncludeLpd;
@@ -87,7 +86,6 @@ void DLDL::generate::lpd::Project::GenerateMainLpd(LPDDirectory& directory) cons
 			continue;
 		}
 
-		std::cout << "lpd: " << lpd->GetName() << "\n";
 		// Reset mainTemplate
 		mainTemplate->brief_description_line_->variable_field_->Clear();
 		mainTemplate->detailed_description_line_->variable_field_->Clear();
@@ -889,10 +887,8 @@ DLDL::ir::LDO*
 DLDL::generate::lpd::Project::GetLDOfromString(const ir::DataMember& value,
 											   const std::unique_ptr<ir::LpdDef>& lpd) const
 {
-	std::cout << "LPD : " << lpd->GetName() << "\n";
 	for (auto& ldo : lpd->GetLDOs())
 	{
-		std::cout << "ldo: " << ldo->GetName() << " Request: " << value.type << "\n";
 		if (ldo->GetName() == value.type)
 		{
 			return ldo.get();
@@ -907,7 +903,6 @@ DLDL::generate::lpd::Project::GetLDOfromString(const ir::DataMember& value,
 			{
 				for (auto& ldo : lpd_->GetLDOs())
 				{
-					std::cout << "ldo: " << ldo->GetName() << " Request: " << value.type << "\n";
 					if (ldo->GetName() == value.type)
 					{
 						return ldo.get();
@@ -928,7 +923,6 @@ std::string DLDL::generate::lpd::Project::GetLPDFromLDO(const std::unique_ptr<ir
 	ldo = lpd->GetLDOFromString(lpdMember.type);
 	if (!lpdMember.explicitLPD.empty())
 	{
-		std::cout << "Explicit lpd: " << target_lpd << "\n";
 		target_lpd = lpdMember.explicitLPD;
 	}
 
@@ -942,7 +936,6 @@ std::string DLDL::generate::lpd::Project::GetLPDFromLDO(const std::unique_ptr<ir
 				{
 					auto ldo = dependencyLpd->GetLDOFromString(lpdMember.type);
 					target_lpd = dependencyLpd->GetName();
-					std::cout << "Dependent lpd: " << target_lpd << "\n";
 					if (ldo != nullptr)
 					{
 						break;
@@ -958,7 +951,6 @@ std::string DLDL::generate::lpd::Project::GetLPDFromLDO(const std::unique_ptr<ir
 	}
 	else
 	{
-		std::cout << "This lpd: " << target_lpd << "\n";
 		target_lpd = lpd->GetName();
 	}
 

@@ -33,7 +33,6 @@ void DLDL::ir::ConstructLPD::Construct(::deamer::file::tool::OSType os)
 
 	for (auto lpd : loader.GetDirectDirectories())
 	{
-		std::cout << "Lpd map: " << lpd << "\n";
 		auto lpdDef = ParseLpdDirectory(relativeDirectoryToLpdDefinitions + lpd + "/");
 		if (lpdDef == nullptr)
 		{
@@ -109,7 +108,6 @@ DLDL::ir::ConstructLPD::ParseLdoDirectory(const std::string& ldoDirectory)
 
 	for (auto file : files)
 	{
-		std::cout << "File: " << file.GetFilename() << "\n";
 		if (file.GetExtension() != "dldl")
 		{
 			continue;
@@ -135,6 +133,5 @@ DLDL::ir::ConstructLPD::ParseLdo(const deamer::file::tool::File& file)
 	auto listener = DLDL_LDOSTRUCT::ast::listener::user::LdoStruct();
 	listener.Dispatch(ast->GetStartNode());
 	std::unique_ptr<DLDL::ir::LDO> Ldo(listener.GetLdoStruct());
-	std::cout << "Ldo: " << Ldo->GetName() << "\n";
 	return Ldo;
 }

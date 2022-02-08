@@ -6,7 +6,6 @@
 #include "DLDL_LPDDEF/IR/LPDDEF.h"
 #include "DLDL_LPDDEF_DF/Ast/Listener/User/DF.h"
 #include "DLDL_LPDDEF_DF/Bison/Parser.h"
-#include <iostream>
 #include <limits>
 
 namespace DLDL_LPDDEF::ast::listener::user
@@ -199,7 +198,6 @@ namespace DLDL_LPDDEF::ast::listener::user
 					}
 				}
 
-				std::cout << "Lpd: " << lpdDef->GetName() << "Dependency:" << line << "A\n";
 				lpdDef->AddDependency({line});
 			}
 		}

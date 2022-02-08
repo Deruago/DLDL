@@ -8,7 +8,6 @@
 #include "DLDL_LPDDEF_DF/Bison/Parser.h"
 #include "DLDL_LPDDEF_EF/Ast/Listener/User/EF.h"
 #include "DLDL_LPDDEF_EF/Bison/Parser.h"
-#include <iostream>
 #include <limits>
 
 namespace DLDL_LDOSTRUCT::ast::listener::user
