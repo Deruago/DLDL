@@ -52,6 +52,22 @@ namespace DLDL::argument
 		init_tool,
 		lpd_name,
 		tool_name,
+
+		// lpd generation output directories
+		lpd_generation_map_main_lpd_include,
+		lpd_generation_map_tool_lpd_include,
+		lpd_generation_map_main_ldo_include,
+		lpd_generation_map_tool_ldo_include,
+		lpd_generation_map_main_lpd_source,
+		lpd_generation_map_tool_lpd_source,
+		lpd_generation_map_main_ldo_source,
+		lpd_generation_map_tool_ldo_source,
+		lpd_generation_map_main_generator,
+		lpd_generation_map_tool_generator,
+		lpd_generation_map_lpd_enumerations,
+		lpd_generation_map_ldo_enumerations,
+		lpd_generation_map_convertor,
+		lpd_generation_map_validator,
 	};
 }
 

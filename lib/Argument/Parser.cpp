@@ -88,6 +88,20 @@ static void initializeMaps()
 		{"init-tool", Type::init_tool},
 		{"lpd-name", Type::lpd_name},
 		{"tool-name", Type::tool_name},
+		{"lpd-generation-map-main-lpd-include", Type::lpd_generation_map_main_lpd_include},
+		{"lpd-generation-map-tool-lpd-include", Type::lpd_generation_map_tool_lpd_include},
+		{"lpd-generation-map-main-ldo-include", Type::lpd_generation_map_main_ldo_include},
+		{"lpd-generation-map-tool-ldo-include", Type::lpd_generation_map_tool_ldo_include},
+		{"lpd-generation-map-main-lpd-source", Type::lpd_generation_map_main_lpd_source},
+		{"lpd-generation-map-tool-lpd-source", Type::lpd_generation_map_tool_lpd_source},
+		{"lpd-generation-map-main-ldo-source", Type::lpd_generation_map_main_ldo_source},
+		{"lpd-generation-map-tool-ldo-source", Type::lpd_generation_map_tool_ldo_source},
+		{"lpd-generation-map-main-generator", Type::lpd_generation_map_main_generator},
+		{"lpd-generation-map-tool-generator", Type::lpd_generation_map_tool_generator},
+		{"lpd-generation-map-lpd-enumerations", Type::lpd_generation_map_lpd_enumerations},
+		{"lpd-generation-map-ldo-enumerations", Type::lpd_generation_map_ldo_enumerations},
+		{"lpd-generation-map-convertor", Type::lpd_generation_map_convertor},
+		{"lpd-generation-map-validator", Type::lpd_generation_map_validator},
 	};
 
 	for (auto [str, type] : tuples)
@@ -154,7 +168,17 @@ DLDL::argument::Argument DLDL::argument::Parser::GetArgument(Type type) const
 	return Argument(Type::unknown, "");
 }
 
-std::string DLDL::argument::Parser::GetValueFromString(const std::string& str)
+std::string Parser::CompileToArgument(Type type) const
+{
+	if (!IsArgumentSet(type))
+	{
+		return "";
+	}
+
+	return GetStringFromType(type) + "=\"" + GetArgument(type).value + "\"";
+}
+
+std::string DLDL::argument::Parser::GetValueFromString(const std::string& str) const
 {
 	std::string value;
 	bool addToValue = false;
@@ -189,7 +213,7 @@ std::string DLDL::argument::Parser::GetValueFromString(const std::string& str)
 	return value;
 }
 
-DLDL::argument::Type DLDL::argument::Parser::GetTypeFromString(const std::string& argument)
+DLDL::argument::Type DLDL::argument::Parser::GetTypeFromString(const std::string& argument) const
 {
 	std::string argumentReworked;
 	size_t index = 0;
@@ -224,7 +248,7 @@ DLDL::argument::Type DLDL::argument::Parser::GetTypeFromString(const std::string
 	}
 }
 
-std::string DLDL::argument::Parser::GetStringFromType(const Type& argument)
+std::string DLDL::argument::Parser::GetStringFromType(const Type& argument) const
 {
 	const auto result = typeToString.find(argument);
 	if (result == typeToString.end())

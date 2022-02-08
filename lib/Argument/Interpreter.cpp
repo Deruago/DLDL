@@ -217,51 +217,210 @@ std::size_t DLDL::argument::Interpreter::GenerateLpd()
 	auto projectGen = DLDL::generate::lpd::Project(lpdProject);
 	const auto projectDirectory = projectGen.Generate();
 
-	::deamer::file::tool::Directory mainLpdInclude("MainLpdInclude");
-	::deamer::file::tool::Directory mainLpdSource("MainLpdSource");
-	mainLpdInclude.AddDirectory(projectDirectory.mainLPD);
-	mainLpdSource.AddDirectory(projectDirectory.mainSourceLPD);
-	generate::DirectoryToDisk::WriteToDisk(mainLpdInclude, "./");
-	generate::DirectoryToDisk::WriteToDisk(mainLpdSource, "./");
-	std::cout << "Generated Main LPDs!\n";
+	GenerateLpdMainLpdSource(projectDirectory);
+	GenerateLpdMainLpdInclude(projectDirectory);
 
-	::deamer::file::tool::Directory mainLdoInclude("MainLdoInclude");
-	::deamer::file::tool::Directory mainLdoSource("MainLdoSource");
-	mainLdoInclude.AddDirectory(projectDirectory.mainLDO);
-	mainLdoSource.AddDirectory(projectDirectory.mainSourceLDO);
-	generate::DirectoryToDisk::WriteToDisk(mainLdoInclude, "./");
-	generate::DirectoryToDisk::WriteToDisk(mainLdoSource, "./");
-	std::cout << "Generated Main LDOs!\n";
+	GenerateLpdToolLpdSource(projectDirectory);
+	GenerateLpdToolLpdInclude(projectDirectory);
 
-	::deamer::file::tool::Directory toolLpdInclude("ToolLpdInclude");
-	::deamer::file::tool::Directory toolLpdSource("ToolLpdSource");
-	toolLpdInclude.AddDirectory(projectDirectory.toolLPD);
-	toolLpdSource.AddDirectory(projectDirectory.toolSourceLPD);
-	generate::DirectoryToDisk::WriteToDisk(toolLpdInclude, "./");
-	generate::DirectoryToDisk::WriteToDisk(toolLpdSource, "./");
-	std::cout << "Generated Tool LPDs!\n";
+	GenerateLpdMainLdoSource(projectDirectory);
+	GenerateLpdMainLdoInclude(projectDirectory);
 
-	::deamer::file::tool::Directory toolLdoInclude("ToolLdoInclude");
-	::deamer::file::tool::Directory toolLdoSource("ToolLdoSource");
-	toolLdoInclude.AddDirectory(projectDirectory.toolLDO);
-	toolLdoSource.AddDirectory(projectDirectory.toolSourceLDO);
-	generate::DirectoryToDisk::WriteToDisk(toolLdoInclude, "./");
-	generate::DirectoryToDisk::WriteToDisk(toolLdoSource, "./");
-	std::cout << "Generated Tool LDOs!\n";
+	GenerateLpdToolLdoSource(projectDirectory);
+	GenerateLpdToolLdoInclude(projectDirectory);
 
-	generate::DirectoryToDisk::WriteToDisk(projectDirectory.converter, "./");
-	std::cout << "Generated Converters!\n";
-	generate::DirectoryToDisk::WriteToDisk(projectDirectory.validater, "./");
-	std::cout << "Generated Validaters!\n";
-	::deamer::file::tool::Directory generator("Generator");
-	generator.AddDirectory(projectDirectory.generater);
-	generate::DirectoryToDisk::WriteToDisk(generator, "./");
-	std::cout << "Generated Generaters!\n";
-	generate::DirectoryToDisk::WriteToDisk(projectDirectory.ldoEnumeration, "./LDOEnum");
-	std::cout << "Generated LDO enumerations!\n";
-	generate::DirectoryToDisk::WriteToDisk(projectDirectory.lpdEnumeration, "./LPDEnum");
-	std::cout << "Generated LPD enumerations!\n";
+	GenerateLpdConvertor(projectDirectory);
+	GenerateLpdValidator(projectDirectory);
+
+	GenerateLpdMainGenerator(projectDirectory);
+	GenerateLpdToolGenerator(projectDirectory);
+
+	GenerateLpdEnumerationsLpd(projectDirectory);
+	GenerateLpdEnumerationsLdo(projectDirectory);
+
 	return 0;
+}
+
+void DLDL::argument::Interpreter::GenerateLpdMainLpdSource(
+	const DLDL::generate::lpd::Project::LPDDirectory lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_main_lpd_source))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_main_lpd_source).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.mainSourceLPD);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
+}
+
+void DLDL::argument::Interpreter::GenerateLpdMainLpdInclude(
+	const generate::lpd::Project::LPDDirectory& lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_main_lpd_include))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_main_lpd_include).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.mainLPD);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
+}
+
+void DLDL::argument::Interpreter::GenerateLpdToolLpdSource(
+	const generate::lpd::Project::LPDDirectory& lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_tool_lpd_source))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_tool_lpd_source).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.toolSourceLPD);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
+}
+
+void DLDL::argument::Interpreter::GenerateLpdToolLpdInclude(
+	const generate::lpd::Project::LPDDirectory& lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_tool_lpd_include))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_tool_lpd_include).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.toolLPD);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
+}
+
+void DLDL::argument::Interpreter::GenerateLpdMainLdoSource(
+	const generate::lpd::Project::LPDDirectory& lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_main_ldo_source))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_main_ldo_source).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.mainSourceLDO);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
+}
+
+void DLDL::argument::Interpreter::GenerateLpdMainLdoInclude(
+	const generate::lpd::Project::LPDDirectory& lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_main_ldo_include))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_main_ldo_include).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.mainLDO);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
+}
+
+void DLDL::argument::Interpreter::GenerateLpdToolLdoSource(
+	const generate::lpd::Project::LPDDirectory& lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_tool_ldo_source))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_tool_ldo_source).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.toolSourceLDO);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
+}
+
+void DLDL::argument::Interpreter::GenerateLpdToolLdoInclude(
+	const generate::lpd::Project::LPDDirectory& lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_tool_ldo_include))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_tool_ldo_include).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.toolLDO);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
+}
+
+void DLDL::argument::Interpreter::GenerateLpdConvertor(
+	const generate::lpd::Project::LPDDirectory& lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_convertor))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_convertor).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.converter);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
+}
+
+void DLDL::argument::Interpreter::GenerateLpdValidator(
+	const generate::lpd::Project::LPDDirectory& lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_validator))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_validator).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.validater);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
+}
+
+void DLDL::argument::Interpreter::GenerateLpdMainGenerator(
+	const generate::lpd::Project::LPDDirectory& lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_main_generator))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_main_generator).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.generater);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
+}
+
+void DLDL::argument::Interpreter::GenerateLpdToolGenerator(
+	const generate::lpd::Project::LPDDirectory& lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_tool_generator))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_tool_generator).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.generaterTool);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
+}
+
+void DLDL::argument::Interpreter::GenerateLpdEnumerationsLpd(
+	const generate::lpd::Project::LPDDirectory& lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_lpd_enumerations))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_lpd_enumerations).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.lpdEnumeration);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
+}
+
+void DLDL::argument::Interpreter::GenerateLpdEnumerationsLdo(
+	const generate::lpd::Project::LPDDirectory& lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_ldo_enumerations))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_ldo_enumerations).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.ldoEnumeration);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
 }
 
 std::size_t DLDL::argument::Interpreter::GenerateTool()
@@ -910,6 +1069,22 @@ std::string DLDL::argument::Interpreter::RegenerationArgsLPD() const
 	{
 		args += "false";
 	}
+
+	args += parser.CompileToArgument(Type::lpd_generation_map_main_lpd_include) + " ";
+	args += parser.CompileToArgument(Type::lpd_generation_map_tool_lpd_include) + " ";
+	args += parser.CompileToArgument(Type::lpd_generation_map_main_ldo_include) + " ";
+	args += parser.CompileToArgument(Type::lpd_generation_map_tool_ldo_include) + " ";
+	args += parser.CompileToArgument(Type::lpd_generation_map_main_lpd_source) + " ";
+	args += parser.CompileToArgument(Type::lpd_generation_map_tool_lpd_source) + " ";
+	args += parser.CompileToArgument(Type::lpd_generation_map_main_ldo_source) + " ";
+	args += parser.CompileToArgument(Type::lpd_generation_map_tool_ldo_source) + " ";
+	args += parser.CompileToArgument(Type::lpd_generation_map_convertor) + " ";
+	args += parser.CompileToArgument(Type::lpd_generation_map_validator) + " ";
+	args += parser.CompileToArgument(Type::lpd_generation_map_main_generator) + " ";
+	args += parser.CompileToArgument(Type::lpd_generation_map_tool_generator) + " ";
+	args += parser.CompileToArgument(Type::lpd_generation_map_ldo_enumerations) + " ";
+	args += parser.CompileToArgument(Type::lpd_generation_map_lpd_enumerations) + " ";
+
 	return args;
 }
 

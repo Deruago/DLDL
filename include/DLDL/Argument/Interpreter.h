@@ -3,6 +3,7 @@
 
 #include "DLDL/Argument/LicenseLibrary.h"
 #include "DLDL/Argument/Parser.h"
+#include "DLDL/Generate/Lpd/Project.h"
 #include "DLDL/Generate/Project.h"
 #include "DLDL/IR/Language.h"
 #include "DLDL_LPDDEF/IR/LPDDEF.h"
@@ -131,6 +132,22 @@ namespace DLDL::argument
 		void WriteToDisk(const deamer::file::tool::Directory& directory, std::string path = "./");
 		deamer::file::tool::Directory
 		GenerateRootDirectory(std::vector<DLDL::ir::Language*> languages);
+
+	private:
+		void GenerateLpdMainLpdSource(DLDL::generate::lpd::Project::LPDDirectory projectDirectory);
+		void GenerateLpdMainLpdInclude(const generate::lpd::Project::LPDDirectory& lpdDirectory);
+		void GenerateLpdToolLpdSource(const generate::lpd::Project::LPDDirectory& lpdDirectory);
+		void GenerateLpdToolLpdInclude(const generate::lpd::Project::LPDDirectory& lpdDirectory);
+		void GenerateLpdMainLdoSource(const generate::lpd::Project::LPDDirectory& lpdDirectory);
+		void GenerateLpdMainLdoInclude(const generate::lpd::Project::LPDDirectory& lpdDirectory);
+		void GenerateLpdToolLdoSource(const generate::lpd::Project::LPDDirectory& lpdDirectory);
+		void GenerateLpdToolLdoInclude(const generate::lpd::Project::LPDDirectory& lpdDirectory);
+		void GenerateLpdConvertor(const generate::lpd::Project::LPDDirectory& lpdDirectory);
+		void GenerateLpdValidator(const generate::lpd::Project::LPDDirectory& lpdDirectory);
+		void GenerateLpdMainGenerator(const generate::lpd::Project::LPDDirectory& lpdDirectory);
+		void GenerateLpdToolGenerator(const generate::lpd::Project::LPDDirectory& lpdDirectory);
+		void GenerateLpdEnumerationsLpd(const generate::lpd::Project::LPDDirectory& lpdDirectory);
+		void GenerateLpdEnumerationsLdo(const generate::lpd::Project::LPDDirectory& lpdDirectory);
 	};
 }
 
