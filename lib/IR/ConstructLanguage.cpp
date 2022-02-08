@@ -21,7 +21,7 @@ DLDL::ir::ConstructLanguage::ConstructLanguage(const std::string& relativeDirect
 		relativeDirectory.pop_back();
 	}
 
-	for (auto& item : std::filesystem::directory_iterator(relativeDirectory))
+	for (const auto& item : std::filesystem::directory_iterator(relativeDirectory))
 	{
 		if (!item.is_directory())
 		{

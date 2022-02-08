@@ -1,0 +1,51 @@
+/*
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+/*
+ * Part of the DeamerProject.
+ * For more information go to: https://github.com/Deruago/theDeamerProject
+ */
+
+#ifndef {{header_guard}}
+#define {{header_guard}}
+
+#include "Deamer/Language/Type/Definition/Property/Type.h"
+
+{{lpd_forward_declaration.Variable_Field}}
+
+namespace deamer::language::convertor::definition
+{
+	/*! \class PropertyTypeToEnum
+	 *
+	 *	\brief This class is used to convert property types into their enum counterparts.
+	 *
+	 *	\note This class functions on compile time using constexpr.
+	 *
+	 *	\tparam T The type that needs to be converted to an enum value.
+	 *
+	 *	\see deamer::language::convertor::definition::PropertyEnumToType
+	 */
+	template<typename T>
+	class PropertyTypeToEnum
+	{
+	public:
+		constexpr static auto value = type::definition::property::Type::Unknown;
+		using type = T;
+	};
+
+{{lpd_implementation.Variable_Field}}
+}
+
+#endif // {{header_guard}}

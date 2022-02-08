@@ -16,7 +16,6 @@
 #include "DLDL_LPDDEF/Ast/Node/LEFT_ANGLE_BRACKET.h"
 #include "DLDL_LPDDEF/Ast/Node/RIGHT_ANGLE_BRACKET.h"
 #include "DLDL_LPDDEF/Ast/Node/VARNAME.h"
-#include "DLDL_LPDDEF/Ast/Node/VARNAME_EXT.h"
 #include "DLDL_LPDDEF/Ast/Node/INDENTED_VALUE.h"
 #include "DLDL_LPDDEF/Ast/Node/ESCAPE_CHARS.h"
 
@@ -42,13 +41,12 @@ static std::vector<const deamer::external::cpp::lexer::TerminalObject*> local_ob
 #endif //yyval
 %}
 
-COLON	([:])
+COLON	([:][ \t]*)
 LEFT_ANGLE_BRACKET	([<])
 RIGHT_ANGLE_BRACKET	([>])
 VARNAME	([a-zA-Z_]+[a-zA-Z_0-9]*)
-VARNAME_EXT	(([a-zA-Z_]+[a-zA-Z_0-9]*)|(([a-zA-Z_]+[a-zA-Z_0-9]*)([:]([a-zA-Z_]+[a-zA-Z_0-9]*))+))
 INDENTED_VALUE	([\t ]+[^\n\r]*[\r\n]+)
-ESCAPE_CHARS	([\n\t\r\b\v\a ]+)
+ESCAPE_CHARS	([\n\t\r\b\v\a ])
 
 %%
 
@@ -56,8 +54,7 @@ ESCAPE_CHARS	([\n\t\r\b\v\a ]+)
 {LEFT_ANGLE_BRACKET}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(2)));else DLDL_LPDDEFlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(2));;handleColumn(yyval);if (!local_store) return (LEFT_ANGLE_BRACKET);;}
 {RIGHT_ANGLE_BRACKET}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(3)));else DLDL_LPDDEFlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(3));;handleColumn(yyval);if (!local_store) return (RIGHT_ANGLE_BRACKET);;}
 {VARNAME}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(4)));else DLDL_LPDDEFlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(4));;handleColumn(yyval);if (!local_store) return (VARNAME);;}
-{VARNAME_EXT}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(5)));else DLDL_LPDDEFlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(5));;handleColumn(yyval);if (!local_store) return (VARNAME_EXT);;}
-{INDENTED_VALUE}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(6)));else DLDL_LPDDEFlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(6));;handleColumn(yyval);if (!local_store) return (INDENTED_VALUE);;}
+{INDENTED_VALUE}	{if (local_store) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(5)));else DLDL_LPDDEFlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(5));;handleColumn(yyval);if (!local_store) return (INDENTED_VALUE);;}
 {ESCAPE_CHARS}	{handleColumn(yyval);if (!local_store) ;}
 
 %%

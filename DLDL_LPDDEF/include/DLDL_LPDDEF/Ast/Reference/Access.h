@@ -18,7 +18,6 @@
 #include "DLDL_LPDDEF/Ast/Node/LEFT_ANGLE_BRACKET.h"
 #include "DLDL_LPDDEF/Ast/Node/RIGHT_ANGLE_BRACKET.h"
 #include "DLDL_LPDDEF/Ast/Node/VARNAME.h"
-#include "DLDL_LPDDEF/Ast/Node/VARNAME_EXT.h"
 #include "DLDL_LPDDEF/Ast/Node/INDENTED_VALUE.h"
 #include "DLDL_LPDDEF/Ast/Node/ESCAPE_CHARS.h"
 
@@ -136,8 +135,6 @@ namespace DLDL_LPDDEF { namespace ast { namespace reference {
 	struct AccessTemplateBase<::DLDL_LPDDEF::ast::node::RIGHT_ANGLE_BRACKET>;
 	template<>
 	struct AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME>;
-	template<>
-	struct AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME_EXT>;
 	template<>
 	struct AccessTemplateBase<::DLDL_LPDDEF::ast::node::INDENTED_VALUE>;
 	template<>
@@ -543,7 +540,7 @@ AccessTemplateBase<::DLDL_LPDDEF::ast::node::stmt> stmt();
 		AccessTemplateBase<::DLDL_LPDDEF::ast::node::COLON> COLON();
 AccessTemplateBase<::DLDL_LPDDEF::ast::node::argument_name> argument_name();
 AccessTemplateBase<::DLDL_LPDDEF::ast::node::argument_block> argument_block();
-AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME_EXT> VARNAME_EXT();
+AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME> VARNAME();
 
 
 		template<typename FunctionType>
@@ -976,7 +973,6 @@ AccessTemplateBase<::DLDL_LPDDEF::ast::node::argument_stmt> argument_stmt();
 
 	public:
 		AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME> VARNAME();
-AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME_EXT> VARNAME_EXT();
 AccessTemplateBase<::DLDL_LPDDEF::ast::node::INDENTED_VALUE> INDENTED_VALUE();
 
 
@@ -1437,112 +1433,6 @@ AccessTemplateBase<::DLDL_LPDDEF::ast::node::INDENTED_VALUE> INDENTED_VALUE();
 	};
 
 	template<>
-	struct AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME_EXT> : public AccessBase
-	{
-	protected:
-		std::vector<const ::DLDL_LPDDEF::ast::node::VARNAME_EXT*> ts;
-
-	public:
-		AccessTemplateBase(std::vector<const ::DLDL_LPDDEF::ast::node::VARNAME_EXT*> ts_) : ts(std::move(ts_))
-		{
-		}
-
-		AccessTemplateBase(const ::DLDL_LPDDEF::ast::node::VARNAME_EXT& t) : ts({&t})
-		{
-		}
-
-		AccessTemplateBase(const ::DLDL_LPDDEF::ast::node::VARNAME_EXT* t) : ts({t})
-		{
-		}
-
-		AccessTemplateBase() = default;
-
-	public:
-		AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME_EXT>& operator[](::std::size_t index)
-		{
-			if (index >= ts.size())
-			{
-				ts.clear();
-			}
-			else
-			{
-				const auto* const copy = ts[index];
-				ts.clear();
-				ts.push_back(copy);
-			}
-
-			return *this;
-		}
-
-		AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME_EXT>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
-		{
-			// swap if the other is larger
-			if (indexBegin > indexEnd)
-			{
-				const auto tmp = indexBegin;
-				indexBegin = indexEnd;
-				indexEnd = tmp;
-			}
-
-			if (indexBegin >= ts.size())
-			{
-				ts.clear();
-			}
-			else
-			{
-				std::vector<const ::DLDL_LPDDEF::ast::node::VARNAME_EXT*> temporaries;
-				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
-				{
-					temporaries.push_back(ts[i]);
-				}
-				ts.clear();
-				ts = temporaries;
-			}
-
-			return *this;
-		}
-
-		std::vector<const ::DLDL_LPDDEF::ast::node::VARNAME_EXT*> GetContent()
-		{
-			return ts;
-		}
-
-	public:
-		
-
-		template<typename FunctionType>
-		AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME_EXT>& for_all(FunctionType function)
-		{
-			for (const auto* const t : ts)
-			{
-				function(t);
-			}
-
-			return *this;
-		}
-
-	public:
-		auto begin()
-		{
-			return ts.begin();
-		}
-		auto cbegin()
-		{
-			return ts.cbegin();
-		}
-		
-		auto end()
-		{
-			return ts.end();
-		}
-		
-		auto cend()
-		{
-			return ts.cend();
-		}
-	};
-
-	template<>
 	struct AccessTemplateBase<::DLDL_LPDDEF::ast::node::INDENTED_VALUE> : public AccessBase
 	{
 	protected:
@@ -1820,12 +1710,12 @@ AccessTemplateBase<::DLDL_LPDDEF::ast::node::INDENTED_VALUE> INDENTED_VALUE();
 			return AccessTemplateBase<::DLDL_LPDDEF::ast::node::argument_block>(Get<::DLDL_LPDDEF::ast::Type::argument_block>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME_EXT> AccessTemplateBase<::DLDL_LPDDEF::ast::node::argument>::VARNAME_EXT()
+		inline AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME> AccessTemplateBase<::DLDL_LPDDEF::ast::node::argument>::VARNAME()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME_EXT>(Get<::DLDL_LPDDEF::ast::Type::VARNAME_EXT>(ts));
+			return AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME>(Get<::DLDL_LPDDEF::ast::Type::VARNAME>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME> AccessTemplateBase<::DLDL_LPDDEF::ast::node::argument_name>::VARNAME()
@@ -1890,14 +1780,6 @@ AccessTemplateBase<::DLDL_LPDDEF::ast::node::INDENTED_VALUE> INDENTED_VALUE();
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME>(Get<::DLDL_LPDDEF::ast::Type::VARNAME>(ts));
-		}
-
-		inline AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME_EXT> AccessTemplateBase<::DLDL_LPDDEF::ast::node::argument_stmt>::VARNAME_EXT()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_LPDDEF::ast::node::VARNAME_EXT>(Get<::DLDL_LPDDEF::ast::Type::VARNAME_EXT>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_LPDDEF::ast::node::INDENTED_VALUE> AccessTemplateBase<::DLDL_LPDDEF::ast::node::argument_stmt>::INDENTED_VALUE()

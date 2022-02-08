@@ -146,16 +146,6 @@ namespace DLDL_LPDDEF { namespace ast { namespace listener { namespace deamer { 
 			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"VARNAME\"];\n";
 		}
 
-		void ListenEntry(const ::DLDL_LPDDEF::ast::node::VARNAME_EXT* node) override
-		{
-			for (const auto* child : node->GetNodes())
-			{
-				AddConnection(node, child);
-			}
-
-			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"VARNAME_EXT\"];\n";
-		}
-
 		void ListenEntry(const ::DLDL_LPDDEF::ast::node::INDENTED_VALUE* node) override
 		{
 			for (const auto* child : node->GetNodes())

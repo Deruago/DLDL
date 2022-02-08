@@ -28,11 +28,6 @@ namespace DLDL_LPDDEF { namespace ast { namespace relation {
 			return true;
 		}
 
-		if (t == ::DLDL_LPDDEF::ast::Type::VARNAME_EXT)
-		{
-			return true;
-		}
-
 		if (t == ::DLDL_LPDDEF::ast::Type::INDENTED_VALUE)
 		{
 			return true;

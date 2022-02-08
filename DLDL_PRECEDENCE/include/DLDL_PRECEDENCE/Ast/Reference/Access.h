@@ -420,8 +420,8 @@ AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt> stmt();
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence> specific_precedence();
-AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence> localized_precedence();
+		AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence> localized_precedence();
+AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence> specific_precedence();
 
 
 		template<typename FunctionType>
@@ -1337,20 +1337,20 @@ AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::TERMINAL> TERMINAL();
 			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt>(Get<::DLDL_PRECEDENCE::ast::Type::stmt>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt>::specific_precedence()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence>(Get<::DLDL_PRECEDENCE::ast::Type::specific_precedence>(ts));
-		}
-
 		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt>::localized_precedence()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence>(Get<::DLDL_PRECEDENCE::ast::Type::localized_precedence>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::stmt>::specific_precedence()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::specific_precedence>(Get<::DLDL_PRECEDENCE::ast::Type::specific_precedence>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::PRECEDENCE> AccessTemplateBase<::DLDL_PRECEDENCE::ast::node::localized_precedence>::PRECEDENCE()

@@ -24,3 +24,5 @@ function(DLDL_LPDDEF_add_external_library external_library_name source_files)
 	target_link_libraries(DLDL_external_libraries PUBLIC ${external_library_full_name})
 endfunction()
 
+add_subdirectory(DLDL_LPDDEF_DF)
+add_subdirectory(DLDL_LPDDEF_EF)

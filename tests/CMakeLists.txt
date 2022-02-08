@@ -17,7 +17,7 @@ add_custom_target(build_and_test ${CMAKE_CTEST_COMMAND} -V)
 
 macro(package_add_test TESTNAME)
     # create an exectuable in which the tests will be stored
-    add_executable(${TESTNAME} ${ARGN})
+    add_executable(${TESTNAME} ${ARGN} "Language/Parser/DF/TestDF.cpp")
 
     # link the Google test infrastructure, mocking library
     target_link_libraries(${TESTNAME} gtest gmock gtest_main)

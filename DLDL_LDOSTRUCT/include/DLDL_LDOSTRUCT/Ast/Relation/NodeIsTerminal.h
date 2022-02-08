@@ -28,11 +28,6 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace relation {
 			return true;
 		}
 
-		if (t == ::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT)
-		{
-			return true;
-		}
-
 		if (t == ::DLDL_LDOSTRUCT::ast::Type::INDENTED_VALUE)
 		{
 			return true;

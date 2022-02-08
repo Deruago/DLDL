@@ -8,7 +8,6 @@
 #include "DLDL_LDOSTRUCT/Ast/Node/LEFT_ANGLE_BRACKET.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/RIGHT_ANGLE_BRACKET.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/VARNAME.h"
-#include "DLDL_LDOSTRUCT/Ast/Node/VARNAME_EXT.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/INDENTED_VALUE.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/ESCAPE_CHARS.h"
 
@@ -85,15 +84,6 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterTerminal(node);
 				ListenEntry(static_cast<const DLDL_LDOSTRUCT::ast::node::VARNAME*>(node));
-				break;
-			}
-
-			case DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT:
-			{
-				// Entry terminal
-				EnterAnything(node);
-				EnterTerminal(node);
-				ListenEntry(static_cast<const DLDL_LDOSTRUCT::ast::node::VARNAME_EXT*>(node));
 				break;
 			}
 
@@ -236,15 +226,6 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace listener {
 				break;
 			}
 
-			case DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT:
-			{
-				// Exit terminal
-				ListenExit(static_cast<const DLDL_LDOSTRUCT::ast::node::VARNAME_EXT*>(node));
-				ExitTerminal(node);
-				ExitAnything(node);
-				break;
-			}
-
 			case DLDL_LDOSTRUCT::ast::Type::INDENTED_VALUE:
 			{
 				// Exit terminal
@@ -358,10 +339,6 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace listener {
 		{
 		}
 
-		virtual void ListenEntry(const DLDL_LDOSTRUCT::ast::node::VARNAME_EXT* node) 
-		{
-		}
-
 		virtual void ListenEntry(const DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE* node) 
 		{
 		}
@@ -384,10 +361,6 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace listener {
 		}
 
 		virtual void ListenExit(const DLDL_LDOSTRUCT::ast::node::VARNAME* node) 
-		{
-		}
-
-		virtual void ListenExit(const DLDL_LDOSTRUCT::ast::node::VARNAME_EXT* node) 
 		{
 		}
 

@@ -1,0 +1,13 @@
+{{file.target_language}} = <C++>
+{{file.file_name}} = <LDO>
+{{file.namespace}} = <DLDL::filetemplate::lpd::enumeration>
+{{file.extension}} = <h>
+
+{{header_guard}} = @<DEAMER_LANGUAGE_DATASTRUCTURE_DEFINITION_OBJECT_TYPE_H>@
+
+{{ldo_group}} = @<
+	// {{lpd_name}}
+{{lpd_ldo_member.Variable_Field}}
+>@
+
+{{lpd_ldo_member}} = @<	{{ldo_name}},>@

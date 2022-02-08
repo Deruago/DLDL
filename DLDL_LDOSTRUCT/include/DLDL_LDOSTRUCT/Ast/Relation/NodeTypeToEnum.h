@@ -17,7 +17,6 @@ class COLON;
 class LEFT_ANGLE_BRACKET;
 class RIGHT_ANGLE_BRACKET;
 class VARNAME;
-class VARNAME_EXT;
 class INDENTED_VALUE;
 class ESCAPE_CHARS;
 
@@ -115,13 +114,6 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace relation {
 	{
 		constexpr static auto value = ::DLDL_LDOSTRUCT::ast::Type::VARNAME;
 		using type = ::DLDL_LDOSTRUCT::ast::node::VARNAME;
-	};
-
-	template<>
-	struct NodeTypeToEnum<::DLDL_LDOSTRUCT::ast::node::VARNAME_EXT>
-	{
-		constexpr static auto value = ::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT;
-		using type = ::DLDL_LDOSTRUCT::ast::node::VARNAME_EXT;
 	};
 
 	template<>

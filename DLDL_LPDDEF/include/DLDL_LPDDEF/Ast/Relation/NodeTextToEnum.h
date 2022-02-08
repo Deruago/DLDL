@@ -48,9 +48,6 @@ namespace DLDL_LPDDEF { namespace ast { namespace relation {
 		{ "VARNAME", ::DLDL_LPDDEF::ast::Type::VARNAME },
 	
 
-		{ "VARNAME_EXT", ::DLDL_LPDDEF::ast::Type::VARNAME_EXT },
-	
-
 		{ "INDENTED_VALUE", ::DLDL_LPDDEF::ast::Type::INDENTED_VALUE },
 	
 

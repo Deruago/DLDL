@@ -1,7 +1,10 @@
 #include "DLDL/Argument/Interpreter.h"
 #include "DLDL/Filesystem/LoadFilesystem.h"
+#include "DLDL/Generate/DirectoryToDisk.h"
+#include "DLDL/Generate/Lpd/Project.h"
 #include "DLDL/Generate/Project.h"
 #include "DLDL/IR/ConstructLanguage.h"
+#include "DLDL/IR/Lpd/ConstructLPD.h"
 #include "DLDL/Print/Language.h"
 #include "DLDL/Template/CMakeLists/RootCMakeListstTemplate.h"
 #include <fstream>
@@ -10,8 +13,6 @@
 #include <string>
 #include <thread>
 #include <vector>
-
-#include "DLDL/Generate/DirectoryToDisk.h"
 
 std::string GenerateRootCMakeLists(std::vector<DLDL::ir::Language*> languages)
 {
@@ -208,6 +209,58 @@ std::size_t DLDL::argument::Interpreter::GenerateLpd()
 		return 0;
 	}
 
+	const std::string lpdDirectoryLocation =
+		deamerDirRelocation + parser.GetArgument(Type::lpd_map).value;
+	auto constructLpd = ir::ConstructLPD(lpdDirectoryLocation);
+	constructLpd.Construct(os);
+	lpdProject = constructLpd.GetLPDProject();
+	auto projectGen = DLDL::generate::lpd::Project(lpdProject);
+	const auto projectDirectory = projectGen.Generate();
+
+	::deamer::file::tool::Directory mainLpdInclude("MainLpdInclude");
+	::deamer::file::tool::Directory mainLpdSource("MainLpdSource");
+	mainLpdInclude.AddDirectory(projectDirectory.mainLPD);
+	mainLpdSource.AddDirectory(projectDirectory.mainSourceLPD);
+	generate::DirectoryToDisk::WriteToDisk(mainLpdInclude, "./");
+	generate::DirectoryToDisk::WriteToDisk(mainLpdSource, "./");
+	std::cout << "Generated Main LPDs!\n";
+
+	::deamer::file::tool::Directory mainLdoInclude("MainLdoInclude");
+	::deamer::file::tool::Directory mainLdoSource("MainLdoSource");
+	mainLdoInclude.AddDirectory(projectDirectory.mainLDO);
+	mainLdoSource.AddDirectory(projectDirectory.mainSourceLDO);
+	generate::DirectoryToDisk::WriteToDisk(mainLdoInclude, "./");
+	generate::DirectoryToDisk::WriteToDisk(mainLdoSource, "./");
+	std::cout << "Generated Main LDOs!\n";
+
+	::deamer::file::tool::Directory toolLpdInclude("ToolLpdInclude");
+	::deamer::file::tool::Directory toolLpdSource("ToolLpdSource");
+	toolLpdInclude.AddDirectory(projectDirectory.toolLPD);
+	toolLpdSource.AddDirectory(projectDirectory.toolSourceLPD);
+	generate::DirectoryToDisk::WriteToDisk(toolLpdInclude, "./");
+	generate::DirectoryToDisk::WriteToDisk(toolLpdSource, "./");
+	std::cout << "Generated Tool LPDs!\n";
+
+	::deamer::file::tool::Directory toolLdoInclude("ToolLdoInclude");
+	::deamer::file::tool::Directory toolLdoSource("ToolLdoSource");
+	toolLdoInclude.AddDirectory(projectDirectory.toolLDO);
+	toolLdoSource.AddDirectory(projectDirectory.toolSourceLDO);
+	generate::DirectoryToDisk::WriteToDisk(toolLdoInclude, "./");
+	generate::DirectoryToDisk::WriteToDisk(toolLdoSource, "./");
+	std::cout << "Generated Tool LDOs!\n";
+
+	generate::DirectoryToDisk::WriteToDisk(projectDirectory.converter, "./");
+	std::cout << "Generated Converters!\n";
+	generate::DirectoryToDisk::WriteToDisk(projectDirectory.validater, "./");
+	std::cout << "Generated Validaters!\n";
+	::deamer::file::tool::Directory generator("Generator");
+	generator.AddDirectory(projectDirectory.generater);
+	generate::DirectoryToDisk::WriteToDisk(generator, "./");
+	std::cout << "Generated Generaters!\n";
+	generate::DirectoryToDisk::WriteToDisk(projectDirectory.ldoEnumeration, "./LDOEnum");
+	std::cout << "Generated LDO enumerations!\n";
+	generate::DirectoryToDisk::WriteToDisk(projectDirectory.lpdEnumeration, "./LPDEnum");
+	std::cout << "Generated LPD enumerations!\n";
 	return 0;
 }
 

@@ -8,7 +8,6 @@
 #include "DLDL_LPDDEF/Ast/Node/LEFT_ANGLE_BRACKET.h"
 #include "DLDL_LPDDEF/Ast/Node/RIGHT_ANGLE_BRACKET.h"
 #include "DLDL_LPDDEF/Ast/Node/VARNAME.h"
-#include "DLDL_LPDDEF/Ast/Node/VARNAME_EXT.h"
 #include "DLDL_LPDDEF/Ast/Node/INDENTED_VALUE.h"
 #include "DLDL_LPDDEF/Ast/Node/ESCAPE_CHARS.h"
 
@@ -53,11 +52,6 @@ namespace DLDL_LPDDEF { namespace ast { namespace listener {
 			case DLDL_LPDDEF::ast::Type::VARNAME:
 			{
 				Listen(static_cast<const DLDL_LPDDEF::ast::node::VARNAME*>(node));
-				break;
-			}
-			case DLDL_LPDDEF::ast::Type::VARNAME_EXT:
-			{
-				Listen(static_cast<const DLDL_LPDDEF::ast::node::VARNAME_EXT*>(node));
 				break;
 			}
 			case DLDL_LPDDEF::ast::Type::INDENTED_VALUE:
@@ -131,9 +125,6 @@ namespace DLDL_LPDDEF { namespace ast { namespace listener {
 		{
 		}
 		virtual void Listen(const DLDL_LPDDEF::ast::node::VARNAME* node)
-		{
-		}
-		virtual void Listen(const DLDL_LPDDEF::ast::node::VARNAME_EXT* node)
 		{
 		}
 		virtual void Listen(const DLDL_LPDDEF::ast::node::INDENTED_VALUE* node)

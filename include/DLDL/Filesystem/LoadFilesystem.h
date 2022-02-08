@@ -20,6 +20,10 @@ namespace DLDL::filesystem
 		bool error_state = false;
 
 	public:
+		/*!	\fn LoadFilesystem
+		 *	\param outputDir_ Directory used to store found structures
+		 *	\param startingDir_ Starting directory
+		 */
 		LoadFilesystem(deamer::file::tool::Directory& outputDir_,
 					   const std::string& startingDir_ = "./");
 
@@ -49,6 +53,10 @@ namespace DLDL::filesystem
 		bool DirectContainsFile(const std::string& fileName) const;
 		bool ReachedRoot() const;
 		std::string GetPath() const;
+
+		/*!	\fn Error
+		 *	\brief If true an error has occured
+		 */
 		bool Error() const;
 
 	private:

@@ -15,7 +15,6 @@
 #include "DLDL_LDOSTRUCT/Ast/Node/LEFT_ANGLE_BRACKET.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/RIGHT_ANGLE_BRACKET.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/VARNAME.h"
-#include "DLDL_LDOSTRUCT/Ast/Node/VARNAME_EXT.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/INDENTED_VALUE.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/ESCAPE_CHARS.h"
 
@@ -112,13 +111,6 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace relation {
 	{
 		constexpr static auto value = ::DLDL_LDOSTRUCT::ast::Type::VARNAME;
 		using type = ::DLDL_LDOSTRUCT::ast::node::VARNAME;
-	};
-
-	template<>
-	struct NodeEnumToType<::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT>
-	{
-		constexpr static auto value = ::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT;
-		using type = ::DLDL_LDOSTRUCT::ast::node::VARNAME_EXT;
 	};
 
 	template<>

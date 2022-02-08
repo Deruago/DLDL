@@ -48,9 +48,6 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace relation {
 		{ "VARNAME", ::DLDL_LDOSTRUCT::ast::Type::VARNAME },
 	
 
-		{ "VARNAME_EXT", ::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT },
-	
-
 		{ "INDENTED_VALUE", ::DLDL_LDOSTRUCT::ast::Type::INDENTED_VALUE },
 	
 

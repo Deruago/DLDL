@@ -14,7 +14,6 @@
 #include "DLDL_LDOSTRUCT/Ast/Node/LEFT_ANGLE_BRACKET.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/RIGHT_ANGLE_BRACKET.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/VARNAME.h"
-#include "DLDL_LDOSTRUCT/Ast/Node/VARNAME_EXT.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/INDENTED_VALUE.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/ESCAPE_CHARS.h"
 
@@ -44,7 +43,6 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %token<Terminal> LEFT_ANGLE_BRACKET
 %token<Terminal> RIGHT_ANGLE_BRACKET
 %token<Terminal> VARNAME
-%token<Terminal> VARNAME_EXT
 %token<Terminal> INDENTED_VALUE
 
 %nterm<DLDL_LDOSTRUCT_program> program
@@ -64,7 +62,6 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_LDOSTRUCT::ast::node::LEFT_ANGLE_BRACKET* DLDL_LDOSTRUCT_LEFT_ANGLE_BRACKET;
 	::DLDL_LDOSTRUCT::ast::node::RIGHT_ANGLE_BRACKET* DLDL_LDOSTRUCT_RIGHT_ANGLE_BRACKET;
 	::DLDL_LDOSTRUCT::ast::node::VARNAME* DLDL_LDOSTRUCT_VARNAME;
-	::DLDL_LDOSTRUCT::ast::node::VARNAME_EXT* DLDL_LDOSTRUCT_VARNAME_EXT;
 	::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE* DLDL_LDOSTRUCT_INDENTED_VALUE;
 	::DLDL_LDOSTRUCT::ast::node::ESCAPE_CHARS* DLDL_LDOSTRUCT_ESCAPE_CHARS;
 	::DLDL_LDOSTRUCT::ast::node::program* DLDL_LDOSTRUCT_program;
@@ -106,8 +103,8 @@ stmt:
 ;
 
 argument:
-	argument_name COLON VARNAME_EXT {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument({::DLDL_LDOSTRUCT::ast::Type::argument, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, new DLDL_LDOSTRUCT::ast::node::VARNAME_EXT({::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT, ::deamer::external::cpp::ast::NodeValue::terminal, $3}) });
+	argument_name COLON VARNAME {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument({::DLDL_LDOSTRUCT::ast::Type::argument, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $3}) });
 		$$ = newNode;
 	}
 	| argument_name COLON argument_block {
@@ -146,12 +143,8 @@ argument_stmt:
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE({::DLDL_LDOSTRUCT::ast::Type::INDENTED_VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
 		$$ = newNode;
 	}
-	| VARNAME_EXT {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::VARNAME_EXT({::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
-		$$ = newNode;
-	}
 	| VARNAME {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
 		$$ = newNode;
 	}
 ;

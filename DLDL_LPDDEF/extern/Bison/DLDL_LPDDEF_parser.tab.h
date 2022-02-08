@@ -58,8 +58,7 @@ extern int DLDL_LPDDEFdebug;
     LEFT_ANGLE_BRACKET = 259,      /* LEFT_ANGLE_BRACKET  */
     RIGHT_ANGLE_BRACKET = 260,     /* RIGHT_ANGLE_BRACKET  */
     VARNAME = 261,                 /* VARNAME  */
-    VARNAME_EXT = 262,             /* VARNAME_EXT  */
-    INDENTED_VALUE = 263           /* INDENTED_VALUE  */
+    INDENTED_VALUE = 262           /* INDENTED_VALUE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -68,14 +67,13 @@ extern int DLDL_LPDDEFdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 61 "./DLDL_LPDDEF_parser.y"
+#line 59 "./DLDL_LPDDEF_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_LPDDEF::ast::node::COLON* DLDL_LPDDEF_COLON;
 	::DLDL_LPDDEF::ast::node::LEFT_ANGLE_BRACKET* DLDL_LPDDEF_LEFT_ANGLE_BRACKET;
 	::DLDL_LPDDEF::ast::node::RIGHT_ANGLE_BRACKET* DLDL_LPDDEF_RIGHT_ANGLE_BRACKET;
 	::DLDL_LPDDEF::ast::node::VARNAME* DLDL_LPDDEF_VARNAME;
-	::DLDL_LPDDEF::ast::node::VARNAME_EXT* DLDL_LPDDEF_VARNAME_EXT;
 	::DLDL_LPDDEF::ast::node::INDENTED_VALUE* DLDL_LPDDEF_INDENTED_VALUE;
 	::DLDL_LPDDEF::ast::node::ESCAPE_CHARS* DLDL_LPDDEF_ESCAPE_CHARS;
 	::DLDL_LPDDEF::ast::node::program* DLDL_LPDDEF_program;
@@ -87,7 +85,7 @@ union YYSTYPE
 	::DLDL_LPDDEF::ast::node::deamerreserved_star__argument_stmt__* DLDL_LPDDEF_deamerreserved_star__argument_stmt__;
 	::DLDL_LPDDEF::ast::node::argument_stmt* DLDL_LPDDEF_argument_stmt;
 
-#line 91 "DLDL_LPDDEF_parser.tab.h"
+#line 89 "DLDL_LPDDEF_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -70,11 +70,6 @@ namespace DLDL_LDOSTRUCT { namespace ast { namespace relation {
 	}
 	
 
-	case ::DLDL_LDOSTRUCT::ast::Type::VARNAME_EXT: {
-		return "VARNAME_EXT";
-	}
-	
-
 	case ::DLDL_LDOSTRUCT::ast::Type::INDENTED_VALUE: {
 		return "INDENTED_VALUE";
 	}

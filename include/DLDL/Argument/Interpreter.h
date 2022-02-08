@@ -5,6 +5,7 @@
 #include "DLDL/Argument/Parser.h"
 #include "DLDL/Generate/Project.h"
 #include "DLDL/IR/Language.h"
+#include "DLDL_LPDDEF/IR/LPDDEF.h"
 
 namespace DLDL::argument
 {
@@ -37,6 +38,7 @@ namespace DLDL::argument
 		static constexpr const char* version = "v2.2.0";
 
 	private:
+		std::unique_ptr<ir::LPDProject> lpdProject;
 		std::vector<DLDL::ir::Language*> languages;
 		DLDL::generate::Project* projectGeneration = nullptr;
 

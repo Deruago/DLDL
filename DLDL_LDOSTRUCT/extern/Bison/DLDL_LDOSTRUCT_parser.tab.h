@@ -58,8 +58,7 @@ extern int DLDL_LDOSTRUCTdebug;
     LEFT_ANGLE_BRACKET = 259,      /* LEFT_ANGLE_BRACKET  */
     RIGHT_ANGLE_BRACKET = 260,     /* RIGHT_ANGLE_BRACKET  */
     VARNAME = 261,                 /* VARNAME  */
-    VARNAME_EXT = 262,             /* VARNAME_EXT  */
-    INDENTED_VALUE = 263           /* INDENTED_VALUE  */
+    INDENTED_VALUE = 262           /* INDENTED_VALUE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -68,14 +67,13 @@ extern int DLDL_LDOSTRUCTdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 61 "./DLDL_LDOSTRUCT_parser.y"
+#line 59 "./DLDL_LDOSTRUCT_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_LDOSTRUCT::ast::node::COLON* DLDL_LDOSTRUCT_COLON;
 	::DLDL_LDOSTRUCT::ast::node::LEFT_ANGLE_BRACKET* DLDL_LDOSTRUCT_LEFT_ANGLE_BRACKET;
 	::DLDL_LDOSTRUCT::ast::node::RIGHT_ANGLE_BRACKET* DLDL_LDOSTRUCT_RIGHT_ANGLE_BRACKET;
 	::DLDL_LDOSTRUCT::ast::node::VARNAME* DLDL_LDOSTRUCT_VARNAME;
-	::DLDL_LDOSTRUCT::ast::node::VARNAME_EXT* DLDL_LDOSTRUCT_VARNAME_EXT;
 	::DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE* DLDL_LDOSTRUCT_INDENTED_VALUE;
 	::DLDL_LDOSTRUCT::ast::node::ESCAPE_CHARS* DLDL_LDOSTRUCT_ESCAPE_CHARS;
 	::DLDL_LDOSTRUCT::ast::node::program* DLDL_LDOSTRUCT_program;
@@ -87,7 +85,7 @@ union YYSTYPE
 	::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__* DLDL_LDOSTRUCT_deamerreserved_star__argument_stmt__;
 	::DLDL_LDOSTRUCT::ast::node::argument_stmt* DLDL_LDOSTRUCT_argument_stmt;
 
-#line 91 "DLDL_LDOSTRUCT_parser.tab.h"
+#line 89 "DLDL_LDOSTRUCT_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

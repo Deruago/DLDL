@@ -7,7 +7,6 @@
 #include <string>
 #include <vector>
 
-
 namespace DLDL::ir
 {
 	class Lexicon : public DLDL::ir::IR
@@ -26,7 +25,25 @@ namespace DLDL::ir
 			const deamer::language::type::definition::object::main::SpecialType& abstraction =
 				deamer::language::type::definition::object::main::SpecialType::Standard)
 		{
-			terminals.emplace_back(name, regex, abstraction);
+			terminals.emplace_back(name, FormatRegex(regex), abstraction);
+		}
+
+		// Any tabs or spaces at the end are removed.
+		std::string FormatRegex(std::string regex)
+		{
+			for (auto i = regex.size() - 1; i > 0; i--)
+			{
+				if (regex[i] == ' ' || regex[i] == '\t')
+				{
+					regex.pop_back();
+				}
+				else
+				{
+					return regex;
+				}
+			}
+
+			return regex;
 		}
 
 		std::vector<deamer::language::type::definition::object::main::Terminal> GetTerminals() const

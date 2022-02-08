@@ -70,11 +70,6 @@ namespace DLDL_LPDDEF { namespace ast { namespace relation {
 	}
 	
 
-	case ::DLDL_LPDDEF::ast::Type::VARNAME_EXT: {
-		return "VARNAME_EXT";
-	}
-	
-
 	case ::DLDL_LPDDEF::ast::Type::INDENTED_VALUE: {
 		return "INDENTED_VALUE";
 	}
