@@ -102,6 +102,7 @@ static void initializeMaps()
 		{"lpd-generation-map-ldo-enumerations", Type::lpd_generation_map_ldo_enumerations},
 		{"lpd-generation-map-convertor", Type::lpd_generation_map_convertor},
 		{"lpd-generation-map-validator", Type::lpd_generation_map_validator},
+		{"activate-language-generation", Type::activate_language_generation},
 	};
 
 	for (auto [str, type] : tuples)

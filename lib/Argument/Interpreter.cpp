@@ -184,6 +184,12 @@ DLDL::argument::Interpreter::~Interpreter()
 
 std::size_t DLDL::argument::Interpreter::GenerateLanguage()
 {
+	if (parser.IsArgumentSet(Type::activate_language_generation) &&
+		parser.GetArgument(Type::activate_language_generation).value == "false")
+	{
+		return 0;
+	}
+
 	if (!InitializeLanguages())
 	{
 		return -1;
@@ -603,6 +609,8 @@ void DLDL::argument::Interpreter::Help()
 		   "	                                            ; is its own project.\n"
 		   "	-no-deamer                                  ; Removes the .deamer map, some "
 		   "features might become unavailable.\n"
+		   "	-generate-language                          ; If false no language project is "
+		   "generated.\n"
 		   "\n"
 		   "Internal behavioural settings (modify how DLDL does stuff):\n"
 		   "	-language-name, -lang-name                  ; Modify the 'language' used to "
@@ -1053,6 +1061,7 @@ std::string DLDL::argument::Interpreter::RegenerationArgsDefinition() const
 	std::string args;
 	args += " -definition-map=\"" + DefinitionMap + "\"";
 	args += " -build-map=\"" + BuildMap + "\"";
+	args += " " + parser.CompileToArgument(Type::activate_language_generation);
 	return args;
 }
 

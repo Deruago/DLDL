@@ -68,6 +68,8 @@ namespace DLDL::argument
 		lpd_generation_map_ldo_enumerations,
 		lpd_generation_map_convertor,
 		lpd_generation_map_validator,
+
+		activate_language_generation,
 	};
 }
 
