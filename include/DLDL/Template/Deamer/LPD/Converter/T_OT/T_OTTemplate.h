@@ -24,6 +24,7 @@ Unknown,
 Scope,
 
 // User defined types
+enumeration_front_,
 explicit_lpd_namespace_,
 explicit_lpd_namespace_dispatch_,
 file_,
@@ -38,6 +39,7 @@ loc_main_,
 loc_tool_,
 location_,
 lpd_name_,
+optional_enumeration_front_,
 right_angle_bracket_,
 right_bracket_,
 right_curly_bracket_,
@@ -74,7 +76,12 @@ Function_Field_Separator_,
 {
 	switch(enumerationValue)
 	{
-	case ::DLDL::filetemplate::lpd::converter::T_OTTemplate::Type::explicit_lpd_namespace_:
+	case ::DLDL::filetemplate::lpd::converter::T_OTTemplate::Type::enumeration_front_:
+{
+	return "enumeration_front";
+}
+
+case ::DLDL::filetemplate::lpd::converter::T_OTTemplate::Type::explicit_lpd_namespace_:
 {
 	return "explicit_lpd_namespace";
 }
@@ -142,6 +149,11 @@ case ::DLDL::filetemplate::lpd::converter::T_OTTemplate::Type::location_:
 case ::DLDL::filetemplate::lpd::converter::T_OTTemplate::Type::lpd_name_:
 {
 	return "lpd_name";
+}
+
+case ::DLDL::filetemplate::lpd::converter::T_OTTemplate::Type::optional_enumeration_front_:
+{
+	return "optional_enumeration_front";
 }
 
 case ::DLDL::filetemplate::lpd::converter::T_OTTemplate::Type::right_angle_bracket_:
@@ -631,6 +643,45 @@ case ::DLDL::filetemplate::lpd::converter::T_OTTemplate::Type::right_curly_brack
 
 	public:
 		
+struct Variable_enumeration_front_ : public VariableScopes
+{
+
+static constexpr auto name = "enumeration_front_";
+
+
+
+Variable_enumeration_front_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::lpd::converter::T_OTTemplate::Type::enumeration_front_;
+}
+
+virtual ~Variable_enumeration_front_() override = default;
+
+Variable_enumeration_front_(T_OTTemplate* t_ottemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::lpd::converter::T_OTTemplate::Type::enumeration_front_;
+
+}
+
+
+
+Variable_enumeration_front_& operator=(const Variable_enumeration_front_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
 struct Variable_explicit_lpd_namespace_ : public VariableScopes
 {
 
@@ -732,7 +783,7 @@ virtual ~Variable_file_() override = default;
 Variable_file_(T_OTTemplate* t_ottemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
 {
 type = ::DLDL::filetemplate::lpd::converter::T_OTTemplate::Type::file_;
-*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("/*\n * This program is free software; you can redistribute it and/or\n * modify it under the terms of the GNU General Public License\n * as published by the Free Software Foundation; either version 3\n * of the License, or (at your option) any later version"), GenerateVariable("."), GenerateVariable("\n *\n * This program is distributed in the hope that it will be useful,\n * but WITHOUT ANY WARRANTY; without even the implied warranty of\n * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE"), GenerateVariable("."), GenerateVariable("  See the\n * GNU General Public License for more details"), GenerateVariable("."), GenerateVariable("\n *\n * You should have received a copy of the GNU General Public License\n * along with this program; if not, write to the Free Software Foundation,\n * Inc"), GenerateVariable("."), GenerateVariable(", 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA"), GenerateVariable("."), GenerateVariable("\n */\n/*\n * Part of the DeamerProject"), GenerateVariable("."), GenerateVariable("\n * For more information go to: https://github"), GenerateVariable("."), GenerateVariable("com/Deruago/theDeamerProject\n */\n\n#ifndef DEAMER_LANGUAGE_CONVERTOR_DEFINITION_OBJECTTYPETOENUM_H\n#define DEAMER_LANGUAGE_CONVERTOR_DEFINITION_OBJECTTYPETOENUM_H\n\n#include \"Deamer/Language/Type/Definition/Object/Type"), GenerateVariable("."), GenerateVariable("h\"\n\nnamespace deamer::language::type::definition::object\n"), GenerateVariable("{"), GenerateVariable("\n\tclass Base;\n"), GenerateVariable("}"), GenerateVariable("\n\n"), GenerateVariable(t_ottemplate_->ldo_forward_declaration_->Variable_Field()), GenerateVariable("\n\nnamespace deamer::language::convertor::definition\n"), GenerateVariable("{"), GenerateVariable("\n\t/*! "), GenerateVariable("\\"), GenerateVariable("class ObjectTypeToEnum\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("brief This class is used to convert object types into enumerated values"), GenerateVariable("."), GenerateVariable("\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("tparam T The type that needs to be converted to a enumerated value"), GenerateVariable("."), GenerateVariable("\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("see deamer::language::convertor::definition::ObjectEnumToType\n\t */\n\ttemplate<typename T>\n\tclass ObjectTypeToEnum\n\t"), GenerateVariable("{"), GenerateVariable("\n\tpublic:\n\t\tconstexpr static type::definition::object::Type value =\n\t\t\ttype::definition::object::Type::Unknown;\n\t\tusing type = void;\n\t"), GenerateVariable("}"), GenerateVariable(";\n\n\ttemplate<typename T>\n\tclass ObjectTypeToEnum<const T> : public ObjectTypeToEnum<T>\n\t"), GenerateVariable("{"), GenerateVariable("\n\t"), GenerateVariable("}"), GenerateVariable(";\n\n\ttemplate<typename T>\n\tclass ObjectTypeToEnum<volatile T> : public ObjectTypeToEnum<T>\n\t"), GenerateVariable("{"), GenerateVariable("\n\t"), GenerateVariable("}"), GenerateVariable(";\n\n\ttemplate<typename T>\n\tclass ObjectTypeToEnum<const volatile T> : public ObjectTypeToEnum<T>\n\t"), GenerateVariable("{"), GenerateVariable("\n\t"), GenerateVariable("}"), GenerateVariable(";\n\n"), GenerateVariable(t_ottemplate_->ldo_implementation_->Variable_Field()), GenerateVariable("\n\n\t/*!\n\t *\t"), GenerateVariable("\\"), GenerateVariable("see deamer::language::convertor::definition::ObjectTypeToEnum\n\t */\n\ttemplate<>\n\tclass ObjectTypeToEnum<type::definition::object::Base>\n\t"), GenerateVariable("{"), GenerateVariable("\n\tpublic:\n\t\tconstexpr static type::definition::object::Type value =\n\t\t\ttype::definition::object::Type::Base;\n\t\tusing type = type::definition::object::Base;\n\t"), GenerateVariable("}"), GenerateVariable(";\n"), GenerateVariable("}"), GenerateVariable("\n\n#endif // DEAMER_LANGUAGE_CONVERTOR_DEFINITION_OBJECTTYPETOENUM_H\n") }));
+*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("/*\n * This program is free software; you can redistribute it and/or\n * modify it under the terms of the GNU General Public License\n * as published by the Free Software Foundation; either version 3\n * of the License, or (at your option) any later version"), GenerateVariable("."), GenerateVariable("\n *\n * This program is distributed in the hope that it will be useful,\n * but WITHOUT ANY WARRANTY; without even the implied warranty of\n * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE"), GenerateVariable("."), GenerateVariable("  See the\n * GNU General Public License for more details"), GenerateVariable("."), GenerateVariable("\n *\n * You should have received a copy of the GNU General Public License\n * along with this program; if not, write to the Free Software Foundation,\n * Inc"), GenerateVariable("."), GenerateVariable(", 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA"), GenerateVariable("."), GenerateVariable("\n */\n/*\n * Part of the DeamerProject"), GenerateVariable("."), GenerateVariable("\n * For more information go to: https://github"), GenerateVariable("."), GenerateVariable("com/Deruago/theDeamerProject\n */\n\n#ifndef DEAMER_LANGUAGE_CONVERTOR_DEFINITION_OBJECTTYPETOENUM_H\n#define DEAMER_LANGUAGE_CONVERTOR_DEFINITION_OBJECTTYPETOENUM_H\n\n#include \"Deamer/Language/Type/Definition/Object/Type"), GenerateVariable("."), GenerateVariable("h\"\n\nnamespace deamer::language::type::definition::object\n"), GenerateVariable("{"), GenerateVariable("\n\tclass Base;\n"), GenerateVariable("}"), GenerateVariable("\n\n"), GenerateVariable(t_ottemplate_->ldo_forward_declaration_->Variable_Field()), GenerateVariable("\n\nnamespace deamer::language::convertor::definition\n"), GenerateVariable("{"), GenerateVariable("\n\t/*! "), GenerateVariable("\\"), GenerateVariable("class ObjectTypeToEnum\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("brief This class is used to convert object types into enumerated values"), GenerateVariable("."), GenerateVariable("\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("tparam T The type that needs to be converted to a enumerated value"), GenerateVariable("."), GenerateVariable("\n\t *\n\t *\t"), GenerateVariable("\\"), GenerateVariable("see deamer::language::convertor::definition::ObjectEnumToType\n\t */\n\ttemplate<typename T>\n\tclass ObjectTypeToEnum\n\t"), GenerateVariable("{"), GenerateVariable("\n\tpublic:\n\t\tconstexpr static type::definition::object::Type value =\n\t\t\ttype::definition::object::Type::Unknown;\n\t\tusing type = void;\n\t"), GenerateVariable("}"), GenerateVariable(";\n\n\ttemplate<typename T>\n\tclass ObjectTypeToEnum<const T> : public ObjectTypeToEnum<T>\n\t"), GenerateVariable("{"), GenerateVariable("\n\t"), GenerateVariable("}"), GenerateVariable(";\n\n\ttemplate<typename T>\n\tclass ObjectTypeToEnum<volatile T> : public ObjectTypeToEnum<T>\n\t"), GenerateVariable("{"), GenerateVariable("\n\t"), GenerateVariable("}"), GenerateVariable(";\n\n\ttemplate<typename T>\n\tclass ObjectTypeToEnum<const volatile T> : public ObjectTypeToEnum<T>\n\t"), GenerateVariable("{"), GenerateVariable("\n\t"), GenerateVariable("}"), GenerateVariable(";\n\n"), GenerateVariable(t_ottemplate_->ldo_implementation_->Variable_Field()), GenerateVariable("\n\n\t/*!\n\t *\t"), GenerateVariable("\\"), GenerateVariable("see deamer::language::convertor::definition::ObjectTypeToEnum\n\t */\n\ttemplate<>\n\tclass ObjectTypeToEnum<type::definition::object::Base>\n\t"), GenerateVariable("{"), GenerateVariable("\n\tpublic:\n\t\tconstexpr static type::definition::object::Type value =\n\t\t\ttype::definition::object::Type::Base;\n\t\tusing type = type::definition::object::Base;\n\t"), GenerateVariable("}"), GenerateVariable(";\n\n\ttemplate<typename T>\n\tusing ObjectTypeToEnum_t = typename ObjectTypeToEnum<T>::type;\n"), GenerateVariable("}"), GenerateVariable("\n\n#endif // DEAMER_LANGUAGE_CONVERTOR_DEFINITION_OBJECTTYPETOENUM_H\n") }));
 Content_->type = ::DLDL::filetemplate::lpd::converter::T_OTTemplate::Type::Scope;
 
 *static_cast<VariableBase*>(Class_postfix_) = VariableBase(std::vector<VariableBase*>({  }));
@@ -1237,6 +1288,45 @@ Variable_lpd_name_& operator=(const Variable_lpd_name_& variable)
 
 };
 
+struct Variable_optional_enumeration_front_ : public VariableScopes
+{
+
+static constexpr auto name = "optional_enumeration_front_";
+
+
+
+Variable_optional_enumeration_front_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::lpd::converter::T_OTTemplate::Type::optional_enumeration_front_;
+}
+
+virtual ~Variable_optional_enumeration_front_() override = default;
+
+Variable_optional_enumeration_front_(T_OTTemplate* t_ottemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::lpd::converter::T_OTTemplate::Type::optional_enumeration_front_;
+
+}
+
+
+
+Variable_optional_enumeration_front_& operator=(const Variable_optional_enumeration_front_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
 struct Variable_right_angle_bracket_ : public VariableScopes
 {
 
@@ -1364,7 +1454,8 @@ Variable_right_curly_bracket_& operator=(const Variable_right_curly_bracket_& va
 	public:
 		// Members that one can directly access.
 		// e.g. T_OTTemplate.member = "auto-generated";
-		Variable_explicit_lpd_namespace_* explicit_lpd_namespace_ = new Variable_explicit_lpd_namespace_();
+		Variable_enumeration_front_* enumeration_front_ = new Variable_enumeration_front_();
+Variable_explicit_lpd_namespace_* explicit_lpd_namespace_ = new Variable_explicit_lpd_namespace_();
 Variable_explicit_lpd_namespace_dispatch_* explicit_lpd_namespace_dispatch_ = new Variable_explicit_lpd_namespace_dispatch_();
 Variable_file_* file_ = new Variable_file_();
 Variable_ldo_forward_declaration_* ldo_forward_declaration_ = new Variable_ldo_forward_declaration_();
@@ -1378,6 +1469,7 @@ Variable_loc_main_* loc_main_ = new Variable_loc_main_();
 Variable_loc_tool_* loc_tool_ = new Variable_loc_tool_();
 Variable_location_* location_ = new Variable_location_();
 Variable_lpd_name_* lpd_name_ = new Variable_lpd_name_();
+Variable_optional_enumeration_front_* optional_enumeration_front_ = new Variable_optional_enumeration_front_();
 Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
 Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
 Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_bracket_();
@@ -1386,10 +1478,11 @@ Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_b
 	public:
 		T_OTTemplate()
 		{
-			*explicit_lpd_namespace_ = Variable_explicit_lpd_namespace_(this, std::vector<VariableBase*>({ GenerateVariable(explicit_lpd_namespace_dispatch_->This()) }));
+			*enumeration_front_ = Variable_enumeration_front_(this, std::vector<VariableBase*>({ GenerateVariable("enum ") }));
+*explicit_lpd_namespace_ = Variable_explicit_lpd_namespace_(this, std::vector<VariableBase*>({ GenerateVariable(explicit_lpd_namespace_dispatch_->This()) }));
 *explicit_lpd_namespace_dispatch_ = Variable_explicit_lpd_namespace_dispatch_(this, std::vector<VariableBase*>({ GenerateVariable("::"), GenerateVariable(lpd_name_->Lower()) }));
 *file_ = Variable_file_(this, std::vector<VariableBase*>({  }));
-*ldo_forward_declaration_ = Variable_ldo_forward_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("\nnamespace deamer::language::type::definition::object::"), GenerateVariable(location_->This()), GenerateVariable(explicit_lpd_namespace_->This()), GenerateVariable("\n"), GenerateVariable("{"), GenerateVariable("\n\tclass "), GenerateVariable(ldo_name_->This()), GenerateVariable(";\n"), GenerateVariable("}") }));
+*ldo_forward_declaration_ = Variable_ldo_forward_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("\nnamespace deamer::language::type::definition::object::"), GenerateVariable(location_->This()), GenerateVariable(explicit_lpd_namespace_->This()), GenerateVariable("\n"), GenerateVariable("{"), GenerateVariable("\n\t"), GenerateVariable(optional_enumeration_front_->This()), GenerateVariable("class "), GenerateVariable(ldo_name_->This()), GenerateVariable(";\n"), GenerateVariable("}") }));
 *ldo_implementation_ = Variable_ldo_implementation_(this, std::vector<VariableBase*>({ GenerateVariable("\n\t/*!\n\t *\t"), GenerateVariable("\\"), GenerateVariable("see deamer::language::convertor::definition::ObjectTypeToEnum\n\t */\n\ttemplate<>\n\tclass ObjectTypeToEnum<type::definition::object::"), GenerateVariable(location_->This()), GenerateVariable(explicit_lpd_namespace_->This()), GenerateVariable("::"), GenerateVariable(ldo_name_->This()), GenerateVariable(">\n\t"), GenerateVariable("{"), GenerateVariable("\n\tpublic:\n\t\tconstexpr static type::definition::object::Type value =\n\t\t\ttype::definition::object::Type::"), GenerateVariable(ldo_name_->This()), GenerateVariable(";\n\t\tusing type = type::definition::object::"), GenerateVariable(location_->This()), GenerateVariable(explicit_lpd_namespace_->This()), GenerateVariable("::"), GenerateVariable(ldo_name_->This()), GenerateVariable(";\n\t"), GenerateVariable("}"), GenerateVariable(";\n") }));
 *ldo_name_ = Variable_ldo_name_(this, std::vector<VariableBase*>({  }));
 *left_angle_bracket_ = Variable_left_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("<") }));
@@ -1400,12 +1493,14 @@ Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_b
 *loc_tool_ = Variable_loc_tool_(this, std::vector<VariableBase*>({ GenerateVariable("Tool") }));
 *location_ = Variable_location_(this, std::vector<VariableBase*>({ GenerateVariable(loc_impl_->Lower()) }));
 *lpd_name_ = Variable_lpd_name_(this, std::vector<VariableBase*>({  }));
+*optional_enumeration_front_ = Variable_optional_enumeration_front_(this, std::vector<VariableBase*>({  }));
 *right_angle_bracket_ = Variable_right_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(">") }));
 *right_bracket_ = Variable_right_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("}") }));
 *right_curly_bracket_ = Variable_right_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(")") }));
 
 
-			variables_.emplace_back(explicit_lpd_namespace_);
+			variables_.emplace_back(enumeration_front_);
+variables_.emplace_back(explicit_lpd_namespace_);
 variables_.emplace_back(explicit_lpd_namespace_dispatch_);
 variables_.emplace_back(file_);
 variables_.emplace_back(ldo_forward_declaration_);
@@ -1419,6 +1514,7 @@ variables_.emplace_back(loc_main_);
 variables_.emplace_back(loc_tool_);
 variables_.emplace_back(location_);
 variables_.emplace_back(lpd_name_);
+variables_.emplace_back(optional_enumeration_front_);
 variables_.emplace_back(right_angle_bracket_);
 variables_.emplace_back(right_bracket_);
 variables_.emplace_back(right_curly_bracket_);

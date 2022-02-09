@@ -24,6 +24,7 @@ Unknown,
 Scope,
 
 // User defined types
+enumeration_front_,
 explicit_lpd_namespace_,
 explicit_lpd_namespace_dispatch_,
 file_,
@@ -41,6 +42,7 @@ location_,
 lpd_forward_declaration_,
 lpd_name_,
 lpd_type_,
+optional_enumeration_front_,
 right_angle_bracket_,
 right_bracket_,
 right_curly_bracket_,
@@ -77,7 +79,12 @@ Function_Field_Separator_,
 {
 	switch(enumerationValue)
 	{
-	case ::DLDL::filetemplate::lpd::validater::PT_OETemplate::Type::explicit_lpd_namespace_:
+	case ::DLDL::filetemplate::lpd::validater::PT_OETemplate::Type::enumeration_front_:
+{
+	return "enumeration_front";
+}
+
+case ::DLDL::filetemplate::lpd::validater::PT_OETemplate::Type::explicit_lpd_namespace_:
 {
 	return "explicit_lpd_namespace";
 }
@@ -160,6 +167,11 @@ case ::DLDL::filetemplate::lpd::validater::PT_OETemplate::Type::lpd_name_:
 case ::DLDL::filetemplate::lpd::validater::PT_OETemplate::Type::lpd_type_:
 {
 	return "lpd_type";
+}
+
+case ::DLDL::filetemplate::lpd::validater::PT_OETemplate::Type::optional_enumeration_front_:
+{
+	return "optional_enumeration_front";
 }
 
 case ::DLDL::filetemplate::lpd::validater::PT_OETemplate::Type::right_angle_bracket_:
@@ -649,6 +661,45 @@ case ::DLDL::filetemplate::lpd::validater::PT_OETemplate::Type::right_curly_brac
 
 	public:
 		
+struct Variable_enumeration_front_ : public VariableScopes
+{
+
+static constexpr auto name = "enumeration_front_";
+
+
+
+Variable_enumeration_front_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::lpd::validater::PT_OETemplate::Type::enumeration_front_;
+}
+
+virtual ~Variable_enumeration_front_() override = default;
+
+Variable_enumeration_front_(PT_OETemplate* pt_oetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::lpd::validater::PT_OETemplate::Type::enumeration_front_;
+
+}
+
+
+
+Variable_enumeration_front_& operator=(const Variable_enumeration_front_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
 struct Variable_explicit_lpd_namespace_ : public VariableScopes
 {
 
@@ -1372,6 +1423,45 @@ Variable_lpd_type_& operator=(const Variable_lpd_type_& variable)
 
 };
 
+struct Variable_optional_enumeration_front_ : public VariableScopes
+{
+
+static constexpr auto name = "optional_enumeration_front_";
+
+
+
+Variable_optional_enumeration_front_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::lpd::validater::PT_OETemplate::Type::optional_enumeration_front_;
+}
+
+virtual ~Variable_optional_enumeration_front_() override = default;
+
+Variable_optional_enumeration_front_(PT_OETemplate* pt_oetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::lpd::validater::PT_OETemplate::Type::optional_enumeration_front_;
+
+}
+
+
+
+Variable_optional_enumeration_front_& operator=(const Variable_optional_enumeration_front_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
 struct Variable_right_angle_bracket_ : public VariableScopes
 {
 
@@ -1499,7 +1589,8 @@ Variable_right_curly_bracket_& operator=(const Variable_right_curly_bracket_& va
 	public:
 		// Members that one can directly access.
 		// e.g. PT_OETemplate.member = "auto-generated";
-		Variable_explicit_lpd_namespace_* explicit_lpd_namespace_ = new Variable_explicit_lpd_namespace_();
+		Variable_enumeration_front_* enumeration_front_ = new Variable_enumeration_front_();
+Variable_explicit_lpd_namespace_* explicit_lpd_namespace_ = new Variable_explicit_lpd_namespace_();
 Variable_explicit_lpd_namespace_dispatch_* explicit_lpd_namespace_dispatch_ = new Variable_explicit_lpd_namespace_dispatch_();
 Variable_file_* file_ = new Variable_file_();
 Variable_ldo_forward_declaration_* ldo_forward_declaration_ = new Variable_ldo_forward_declaration_();
@@ -1516,6 +1607,7 @@ Variable_location_* location_ = new Variable_location_();
 Variable_lpd_forward_declaration_* lpd_forward_declaration_ = new Variable_lpd_forward_declaration_();
 Variable_lpd_name_* lpd_name_ = new Variable_lpd_name_();
 Variable_lpd_type_* lpd_type_ = new Variable_lpd_type_();
+Variable_optional_enumeration_front_* optional_enumeration_front_ = new Variable_optional_enumeration_front_();
 Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
 Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
 Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_bracket_();
@@ -1524,10 +1616,11 @@ Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_b
 	public:
 		PT_OETemplate()
 		{
-			*explicit_lpd_namespace_ = Variable_explicit_lpd_namespace_(this, std::vector<VariableBase*>({ GenerateVariable(explicit_lpd_namespace_dispatch_->This()) }));
+			*enumeration_front_ = Variable_enumeration_front_(this, std::vector<VariableBase*>({ GenerateVariable("enum ") }));
+*explicit_lpd_namespace_ = Variable_explicit_lpd_namespace_(this, std::vector<VariableBase*>({ GenerateVariable(explicit_lpd_namespace_dispatch_->This()) }));
 *explicit_lpd_namespace_dispatch_ = Variable_explicit_lpd_namespace_dispatch_(this, std::vector<VariableBase*>({ GenerateVariable("::"), GenerateVariable(lpd_name_->Lower()) }));
 *file_ = Variable_file_(this, std::vector<VariableBase*>({  }));
-*ldo_forward_declaration_ = Variable_ldo_forward_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("\nnamespace deamer::language::type::definition::object::"), GenerateVariable(location_->This()), GenerateVariable(explicit_lpd_namespace_->This()), GenerateVariable("\n"), GenerateVariable("{"), GenerateVariable("\n\tclass "), GenerateVariable(ldo_type_->This()), GenerateVariable(";\n"), GenerateVariable("}") }));
+*ldo_forward_declaration_ = Variable_ldo_forward_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("\nnamespace deamer::language::type::definition::object::"), GenerateVariable(location_->This()), GenerateVariable(explicit_lpd_namespace_->This()), GenerateVariable("\n"), GenerateVariable("{"), GenerateVariable("\n\t"), GenerateVariable(optional_enumeration_front_->This()), GenerateVariable("class "), GenerateVariable(ldo_type_->This()), GenerateVariable(";\n"), GenerateVariable("}") }));
 *ldo_implementation_ = Variable_ldo_implementation_(this, std::vector<VariableBase*>({ GenerateVariable("\n\t/*!\n\t *\t"), GenerateVariable("\\"), GenerateVariable("see GetPropertyTypeFromObjectType\n\t */\n\ttemplate<>\n\tclass GetPropertyTypeFromObjectType<type::definition::object::"), GenerateVariable(location_->This()), GenerateVariable(explicit_lpd_namespace_->This()), GenerateVariable("::"), GenerateVariable(ldo_name_->This()), GenerateVariable(">\n\t"), GenerateVariable("{"), GenerateVariable("\n\tpublic:\n\t\tconstexpr static auto value = type::definition::property::Type::"), GenerateVariable(lpd_name_->This()), GenerateVariable(";\n\t\tusing type = type::definition::property::"), GenerateVariable(location_->This()), GenerateVariable("::"), GenerateVariable(lpd_name_->This()), GenerateVariable(";\n\t"), GenerateVariable("}"), GenerateVariable(";\n") }));
 *ldo_name_ = Variable_ldo_name_(this, std::vector<VariableBase*>({  }));
 *ldo_type_ = Variable_ldo_type_(this, std::vector<VariableBase*>({ GenerateVariable(ldo_name_->This()) }));
@@ -1541,12 +1634,14 @@ Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_b
 *lpd_forward_declaration_ = Variable_lpd_forward_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("\nnamespace deamer::language::type::definition::property::"), GenerateVariable(location_->This()), GenerateVariable(explicit_lpd_namespace_->This()), GenerateVariable("\n"), GenerateVariable("{"), GenerateVariable("\n\tclass "), GenerateVariable(lpd_type_->This()), GenerateVariable(";\n"), GenerateVariable("}") }));
 *lpd_name_ = Variable_lpd_name_(this, std::vector<VariableBase*>({  }));
 *lpd_type_ = Variable_lpd_type_(this, std::vector<VariableBase*>({ GenerateVariable(lpd_name_->This()) }));
+*optional_enumeration_front_ = Variable_optional_enumeration_front_(this, std::vector<VariableBase*>({  }));
 *right_angle_bracket_ = Variable_right_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(">") }));
 *right_bracket_ = Variable_right_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("}") }));
 *right_curly_bracket_ = Variable_right_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(")") }));
 
 
-			variables_.emplace_back(explicit_lpd_namespace_);
+			variables_.emplace_back(enumeration_front_);
+variables_.emplace_back(explicit_lpd_namespace_);
 variables_.emplace_back(explicit_lpd_namespace_dispatch_);
 variables_.emplace_back(file_);
 variables_.emplace_back(ldo_forward_declaration_);
@@ -1563,6 +1658,7 @@ variables_.emplace_back(location_);
 variables_.emplace_back(lpd_forward_declaration_);
 variables_.emplace_back(lpd_name_);
 variables_.emplace_back(lpd_type_);
+variables_.emplace_back(optional_enumeration_front_);
 variables_.emplace_back(right_angle_bracket_);
 variables_.emplace_back(right_bracket_);
 variables_.emplace_back(right_curly_bracket_);

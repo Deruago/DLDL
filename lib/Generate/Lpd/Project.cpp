@@ -460,6 +460,14 @@ void DLDL::generate::lpd::Project::GenerateMainLdo(LPDDirectory& directory) cons
 					ldoSourceTemplate.member_type_->Set("Base");
 					ldoSourceTemplate.ldo_namespace_->Set(ldoSourceTemplate.default_ldo_namespace_);
 				}
+				else if (Lower(ldoMember.type).find("deamer::") != std::string::npos)
+				{
+					ldoTemplate.member_type_->Set(ldoMember.type);
+					ldoTemplate.ldo_namespace_->Set(ldoTemplate.default_none_namespace_);
+					ldoSourceTemplate.member_type_->Set(ldoMember.type);
+					ldoSourceTemplate.ldo_namespace_->Set(
+						ldoSourceTemplate.default_none_namespace_);
+				}
 				else
 				{
 					ldoTemplate.target_lpd_name_->Set(ldoMemberPtr->GetLPD()->GetName());
@@ -671,6 +679,15 @@ void DLDL::generate::lpd::Project::GenerateConverter(LPDDirectory& directory) co
 
 		for (const auto& ldo : lpd->GetLDOs())
 		{
+			if (ldo->GetLDOType() == ir::LDOType::Enumeration)
+			{
+				T_OT->optional_enumeration_front_->Set(T_OT->enumeration_front_);
+			}
+			else
+			{
+				T_OT->optional_enumeration_front_->Set("");
+			}
+
 			OT_T->ldo_name_->Set(ldo->GetName());
 			T_OT->ldo_name_->Set(ldo->GetName());
 
@@ -722,6 +739,14 @@ void DLDL::generate::lpd::Project::GenerateValidater(LPDDirectory& directory) co
 		PT_OEs->lpd_name_->Set(lpd->GetName());
 		for (auto& ldo : lpd->GetLDOs())
 		{
+			if (ldo->GetLDOType() == ir::LDOType::Enumeration)
+			{
+				PT_OEs->optional_enumeration_front_->Set(PT_OEs->enumeration_front_);
+			}
+			else
+			{
+				PT_OEs->optional_enumeration_front_->Set("");
+			}
 			PT_OEs->ldo_name_->Set(ldo->GetName());
 
 			PT_OEs->ldo_forward_declaration_->ExpandVariableField();
@@ -765,6 +790,14 @@ void DLDL::generate::lpd::Project::GenerateValidater(LPDDirectory& directory) co
 				OEs_PT->optional_comma_extension_->Set(OEs_PT->comma_extension_);
 			}
 			OEs_PT->ldo_name_->Set(ldo->GetName());
+			OEs_PT->ldo_implementation_->ExpandVariableField();
+		}
+
+		if (lpd->GetLDOs().empty())
+		{
+			OEs_PT->optional_comma_extension_->Set("");
+
+			OEs_PT->ldo_name_->Set("Unknown");
 			OEs_PT->ldo_implementation_->ExpandVariableField();
 		}
 		OEs_PT->lpd_include_->ExpandVariableField();

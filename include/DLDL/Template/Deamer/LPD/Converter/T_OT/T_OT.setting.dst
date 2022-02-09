@@ -6,8 +6,10 @@
 {{ldo_forward_declaration}} = @<
 namespace deamer::language::type::definition::object::{{location}}{{explicit_lpd_namespace}}
 {
-	class {{ldo_name}};
+	{{optional_enumeration_front}}class {{ldo_name}};
 }>@
+{{optional_enumeration_front}} = @<>@
+{{enumeration_front}} = @<enum >@
 
 {{ldo_implementation}} = @<
 	/*!

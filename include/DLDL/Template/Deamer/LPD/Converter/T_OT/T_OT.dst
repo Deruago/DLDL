@@ -77,6 +77,9 @@ namespace deamer::language::convertor::definition
 			type::definition::object::Type::Base;
 		using type = type::definition::object::Base;
 	};
+
+	template<typename T>
+	using ObjectTypeToEnum_t = typename ObjectTypeToEnum<T>::type;
 }
 
 #endif // DEAMER_LANGUAGE_CONVERTOR_DEFINITION_OBJECTTYPETOENUM_H
