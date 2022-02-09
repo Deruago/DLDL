@@ -36,8 +36,18 @@ namespace DLDL_LPDDEF_DF::ast::listener::user
 			}
 			else
 			{
-				std::cout << "Error!\n";
-				// unsupported
+				if (reference::Access(node).var_type().GetContent().empty())
+				{
+					std::cout << "DF parser encountered an Error in standard variant!\n"
+								 "Line: "
+							  << node->GetText() << "\n";
+					return;
+					// unsupported
+				}
+				else
+				{
+					newMember.type = reference::Access(node).var_type().GetContent()[0]->GetText();
+				}
 			}
 			newMember.name = reference::Access(node).var_name().GetContent()[0]->GetText();
 			if (!reference::Access(node).value_part().value().GetContent().empty())
@@ -65,8 +75,18 @@ namespace DLDL_LPDDEF_DF::ast::listener::user
 			}
 			else
 			{
-				std::cout << "Error!\n";
-				// unsupported
+				if (reference::Access(node).var_type().GetContent().empty())
+				{
+					std::cout << "DF parser encountered an Error in vector variant!\n"
+								 "Line: "
+							  << node->GetText() << "\n";
+					return;
+					// unsupported
+				}
+				else
+				{
+					newMember.type = reference::Access(node).var_type().GetContent()[0]->GetText();
+				}
 			}
 			newMember.name = reference::Access(node).var_name().GetContent()[0]->GetText();
 			if (!reference::Access(node).value_part().value().GetContent().empty())
@@ -95,8 +115,18 @@ namespace DLDL_LPDDEF_DF::ast::listener::user
 			}
 			else
 			{
-				std::cout << "Error!\n";
-				// unsupported
+				if (reference::Access(node).var_type().GetContent().empty())
+				{
+					std::cout << "DF parser encountered an Error in optional variant!\n"
+								 "Line: "
+							  << node->GetText() << "\n";
+					return;
+					// unsupported
+				}
+				else
+				{
+					newMember.type = reference::Access(node).var_type().GetContent()[0]->GetText();
+				}
 			}
 			newMember.name = reference::Access(node).var_name().GetContent()[0]->GetText();
 			if (!reference::Access(node).value_part().value().GetContent().empty())

@@ -164,3 +164,19 @@ TEST_F(TestLPDDEF_DF, ParseDefinition_2BoolWithDefaultValue_ShouldCorrectlyParse
 	std::unique_ptr<::deamer::external::cpp::ast::Tree> ast(parser.Parse(text));
 	EXPECT_FALSE(ast == nullptr);
 }
+
+TEST_F(TestLPDDEF_DF, ParseDefinition_1ParseDeamer_ShouldCorrectlyParse)
+{
+	std::string text = "deamer::tool::type::Tool Generator\n";
+	std::unique_ptr<::deamer::external::cpp::ast::Tree> ast(parser.Parse(text));
+	EXPECT_FALSE(ast == nullptr);
+}
+
+TEST_F(TestLPDDEF_DF, ParseDefinition_2ParseDeamer_ShouldCorrectlyParse)
+{
+	std::string text =
+		"deamer::tool::type::Tool Generator\n"
+		"deamer::file::tool::OSType os\n";
+	std::unique_ptr<::deamer::external::cpp::ast::Tree> ast(parser.Parse(text));
+	EXPECT_FALSE(ast == nullptr);
+}
