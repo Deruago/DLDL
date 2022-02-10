@@ -290,7 +290,7 @@ namespace DLDL_LPDDEF::ast::listener::user
 				{"special", DLDL::ir::LPDType::special},
 				{"tool", DLDL::ir::LPDType::tool},
 			};
-
+			
 			auto iter = mapStrToType.find(ToLower(name));
 			if (iter == mapStrToType.end())
 			{

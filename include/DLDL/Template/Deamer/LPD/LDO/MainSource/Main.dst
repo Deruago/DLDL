@@ -18,7 +18,8 @@
  * For more information go to: https://github.com/Deruago/theDeamerProject
  */
 
-#include "Deamer/Language/Type/Definition/Object/{{loc_impl}}/{{ldo_name}}.h"
+#include "Deamer/Language/Type/Definition/Object/{{loc_impl}}/{{lpd_name}}/{{ldo_name}}.h"
+{{ldo_specific_include}}
 #include <utility>
 
 deamer::language::type::definition::object::{{location}}{{explicit_lpd_namespace}}::{{ldo_name}}::{{ldo_name}}({{ldo_ctor_member.Variable_Field}})
@@ -27,13 +28,11 @@ deamer::language::type::definition::object::{{location}}{{explicit_lpd_namespace
 {{ldo_member_reference.Variable_Field}}
 }
 
-deamer::language::type::definition::object::{{location}}{{explicit_lpd_namespace}}::{{ldo_name}}::operator==(const {{ldo_name}}& rhs) const noexcept
+bool deamer::language::type::definition::object::{{location}}{{explicit_lpd_namespace}}::{{ldo_name}}::operator==(const {{ldo_name}}& rhs) const noexcept
 {
 	return this == &rhs || ({{ldo_compare.Variable_Field}}true);
 }
 
-deamer::language::type::definition::object::{{location}}{{explicit_lpd_namespace}}::{{ldo_name}}::{{ldo_name}}() : {{ldo_name}}({{ldo_default_ctor_member.Variable_Field}})
-{
-}
+{{optional_default_ctor}}
 
 {{ldo_specific_function.Variable_Field}}

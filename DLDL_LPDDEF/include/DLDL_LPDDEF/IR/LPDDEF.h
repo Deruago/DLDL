@@ -8,6 +8,7 @@
 
 namespace DLDL::ir
 {
+	struct LDO;
 	class LpdDef;
 
 	enum class LDOType
@@ -37,6 +38,10 @@ namespace DLDL::ir
 		std::string function;
 
 		std::string GetFunctionPrototype() const;
+
+		std::string GetFunctionSource(LDO* ldo) const;
+
+		std::string GetFunctionSource(LpdDef* lpdDef) const;
 	};
 
 	struct LDO
@@ -54,6 +59,8 @@ namespace DLDL::ir
 		LDOType type;
 		LpdDef* lpdDef;
 		bool Generate = true;
+		std::string include;
+		std::string source_include;
 
 		~LDO();
 
@@ -64,6 +71,8 @@ namespace DLDL::ir
 		void SetDataMembers(std::vector<DataMember> dataMembers_);
 		void SetLPD(::DLDL::ir::LpdDef* lpdDef_);
 		void AddFunction(Function function);
+		void SetInclude(const std::string& include_);
+		void SetSourceInclude(const std::string& include_);
 
 	public:
 		std::string GetDescription() const;
@@ -72,6 +81,10 @@ namespace DLDL::ir
 		std::vector<DataMember> GetDataMembers() const;
 		LpdDef* GetLPD() const;
 		std::vector<Function> GetFunction() const;
+		std::string GetInclude() const;
+		std::string GetSourceInclude() const;
+		bool IsDefaultConstructible() const;
+		std::string GetObjectTypeName() const;
 	};
 
 	enum class LPDType
@@ -135,6 +148,7 @@ namespace DLDL::ir
 		LDO* GetLDOFromString(const std::string& LdoName_);
 		std::vector<Function> GetFunctions() const;
 		bool IsTool() const;
+		std::string GetObjectTypeName() const;
 	};
 
 	struct LPDProject

@@ -239,6 +239,7 @@ std::size_t DLDL::argument::Interpreter::GenerateLpd()
 	GenerateLpdValidator(projectDirectory);
 
 	GenerateLpdMainGenerator(projectDirectory);
+	GenerateLpdSpecialGenerator(projectDirectory);
 	GenerateLpdToolGenerator(projectDirectory);
 
 	GenerateLpdEnumerationsLpd(projectDirectory);
@@ -387,6 +388,19 @@ void DLDL::argument::Interpreter::GenerateLpdMainGenerator(
 	const auto path = parser.GetArgument(Type::lpd_generation_map_main_generator).value;
 	::deamer::file::tool::Directory outputDirectory(path);
 	outputDirectory.AddDirectory(lpdDirectory.generater);
+	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
+}
+
+void DLDL::argument::Interpreter::GenerateLpdSpecialGenerator(
+	const generate::lpd::Project::LPDDirectory& lpdDirectory)
+{
+	if (!parser.IsArgumentSet(Type::lpd_generation_map_special_generator))
+	{
+		return;
+	}
+	const auto path = parser.GetArgument(Type::lpd_generation_map_special_generator).value;
+	::deamer::file::tool::Directory outputDirectory(path);
+	outputDirectory.AddDirectory(lpdDirectory.generaterSpecial);
 	generate::DirectoryToDisk::WriteToDisk(outputDirectory, "./");
 }
 
@@ -1079,6 +1093,7 @@ std::string DLDL::argument::Interpreter::RegenerationArgsLPD() const
 		args += "false";
 	}
 
+	args += " ";
 	args += parser.CompileToArgument(Type::lpd_generation_map_main_lpd_include) + " ";
 	args += parser.CompileToArgument(Type::lpd_generation_map_tool_lpd_include) + " ";
 	args += parser.CompileToArgument(Type::lpd_generation_map_main_ldo_include) + " ";
@@ -1090,6 +1105,7 @@ std::string DLDL::argument::Interpreter::RegenerationArgsLPD() const
 	args += parser.CompileToArgument(Type::lpd_generation_map_convertor) + " ";
 	args += parser.CompileToArgument(Type::lpd_generation_map_validator) + " ";
 	args += parser.CompileToArgument(Type::lpd_generation_map_main_generator) + " ";
+	args += parser.CompileToArgument(Type::lpd_generation_map_special_generator) + " ";
 	args += parser.CompileToArgument(Type::lpd_generation_map_tool_generator) + " ";
 	args += parser.CompileToArgument(Type::lpd_generation_map_ldo_enumerations) + " ";
 	args += parser.CompileToArgument(Type::lpd_generation_map_lpd_enumerations) + " ";

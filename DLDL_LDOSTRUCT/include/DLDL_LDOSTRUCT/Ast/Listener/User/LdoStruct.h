@@ -73,6 +73,14 @@ namespace DLDL_LDOSTRUCT::ast::listener::user
 			{
 				ParseGenerate(node);
 			}
+			else if (argument_name == "include")
+			{
+				ParseInclude(node);
+			}
+			else if (argument_name == "source_include")
+			{
+				ParseSourceInclude(node);
+			}
 			else if (argument_name == "data" || argument_name == "members")
 			{
 				ParseData(node);
@@ -228,6 +236,16 @@ namespace DLDL_LDOSTRUCT::ast::listener::user
 			Ldo->AddFunction({ConstructFormattedLines(node)});
 		}
 
+		void ParseInclude(const node::argument* node)
+		{
+			Ldo->SetInclude(ConstructFormattedLines(node));
+		}
+
+		void ParseSourceInclude(const node::argument* node)
+		{
+			Ldo->SetSourceInclude(ConstructFormattedLines(node));
+		}
+
 	public:
 		DLDL::ir::LDO* GetLdoStruct() const
 		{
@@ -288,6 +306,11 @@ namespace DLDL_LDOSTRUCT::ast::listener::user
 				return DLDL::ir::LDOType::Ldo;
 			}
 
+			// For now Structs are unsupported, they default to LDOs from 2.3.0 and later.
+			if (iter->second == DLDL::ir::LDOType::Struct)
+			{
+				return DLDL::ir::LDOType::Ldo;
+			}
 			return iter->second;
 		}
 	};

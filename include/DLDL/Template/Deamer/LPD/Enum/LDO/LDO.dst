@@ -33,6 +33,7 @@ namespace deamer::language::type::definition::object
 	enum class Type
 	{
 		Unknown = 0,
+		Base,
 {{ldo_group.Variable_Field}}
 	};
 }

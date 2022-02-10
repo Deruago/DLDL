@@ -125,6 +125,7 @@ void DLDL::generate::lpd::Project::GenerateMainLpd(LPDDirectory& directory) cons
 				mainSourceTemplate->comma_extension_->Set("");
 				first = false;
 			}
+
 			mainTemplate->comment_->variable_field_->Clear();
 
 			ir::LDO* ldo = nullptr;
@@ -241,14 +242,14 @@ void DLDL::generate::lpd::Project::GenerateMainLpd(LPDDirectory& directory) cons
 			}
 
 			// Temporary fix, function prototype needs to be further analyzed
-			mainTemplate->lpd_specific_function_prototype_->Set(function.function);
-			mainTemplate->lpd_specific_function_->ExpandVariableField();
-
-			// mainTemplate->lpd_specific_function_prototype_->Set(function.GetFunctionPrototype());
+			// mainTemplate->lpd_specific_function_prototype_->Set(function.function);
 			// mainTemplate->lpd_specific_function_->ExpandVariableField();
 
-			// mainSourceTemplate->lpd_specific_function_->Set(function.function);
-			// mainSourceTemplate->lpd_specific_function_->ExpandVariableField();
+			mainTemplate->lpd_specific_function_prototype_->Set(function.GetFunctionPrototype());
+			mainTemplate->lpd_specific_function_->ExpandVariableField();
+
+			mainSourceTemplate->lpd_specific_function_->Set(function.GetFunctionSource(lpd.get()));
+			mainSourceTemplate->lpd_specific_function_->ExpandVariableField();
 		}
 
 		if (lpd->IsTool())
@@ -289,6 +290,7 @@ void DLDL::generate::lpd::Project::GenerateMainLdo(LPDDirectory& directory) cons
 	ldoSourceTemplate.ldo_ctor_member_->variable_field_separator_->Set("");
 	ldoSourceTemplate.ldo_ctor_member_assignment_->variable_field_separator_->Set("");
 	ldoSourceTemplate.ldo_compare_->variable_field_separator_->Set(" && ");
+	ldoSourceTemplate.ldo_default_ctor_member_->variable_field_separator_->Set("");
 
 	for (const auto& lpd : lpdProject->GetLPDs())
 	{
@@ -323,14 +325,38 @@ void DLDL::generate::lpd::Project::GenerateMainLdo(LPDDirectory& directory) cons
 			ldoSourceTemplate.ldo_ctor_member_->variable_field_->Clear();
 			ldoSourceTemplate.ldo_compare_->variable_field_->Clear();
 			ldoSourceTemplate.ldo_specific_function_->variable_field_->Clear();
+			ldoSourceTemplate.ldo_default_ctor_member_->variable_field_->Clear();
+
+			if (ldo != nullptr)
+			{
+				ldoTemplate.ldo_special_include_->Set(ldo->GetInclude());
+				ldoSourceTemplate.ldo_specific_include_->Set(ldo->GetSourceInclude());
+			}
+			else
+			{
+				ldoTemplate.ldo_special_include_->Set("");
+				ldoSourceTemplate.ldo_specific_include_->Set("");
+			}
 
 			if (ldo->GetLDOType() != ir::LDOType::Ldo && ldo->GetLDOType() != ir::LDOType::Struct)
 			{
 				continue;
 			}
 
+			if (!ldo->IsDefaultConstructible())
+			{
+				ldoTemplate.optional_default_ctor_->Set(ldoTemplate.default_ctor_);
+				ldoSourceTemplate.optional_default_ctor_->Set(ldoSourceTemplate.default_ctor_);
+			}
+			else
+			{
+				ldoTemplate.optional_default_ctor_->Set("");
+				ldoSourceTemplate.optional_default_ctor_->Set("");
+			}
+
 			ldoTemplate.ldo_name_->Set(ldo->GetName());
 			ldoSourceTemplate.ldo_name_->Set(ldo->GetName());
+			ldoSourceTemplate.lpd_name_->Set(ldo->GetLPD()->GetName());
 			bool first = true;
 			for (auto& ldoMember : ldo->GetDataMembers())
 			{
@@ -385,6 +411,8 @@ void DLDL::generate::lpd::Project::GenerateMainLdo(LPDDirectory& directory) cons
 					ldoSourceTemplate.ldo_member_->Set(ldoSourceTemplate.ldo_member_vector_);
 					ldoSourceTemplate.lpd_ctor_member_impl_->Set(
 						ldoSourceTemplate.ldo_ctor_vector_);
+					ldoSourceTemplate.lpd_default_ctor_member_impl_->Set(
+						ldoSourceTemplate.ldo_default_ctor_vector_);
 				}
 				else if (ldoMember.optional)
 				{
@@ -393,6 +421,8 @@ void DLDL::generate::lpd::Project::GenerateMainLdo(LPDDirectory& directory) cons
 					ldoSourceTemplate.ldo_member_->Set(ldoSourceTemplate.ldo_member_optional_);
 					ldoSourceTemplate.lpd_ctor_member_impl_->Set(
 						ldoSourceTemplate.ldo_ctor_optional_);
+					ldoSourceTemplate.lpd_default_ctor_member_impl_->Set(
+						ldoSourceTemplate.ldo_default_ctor_optional_);
 				}
 				else
 				{
@@ -401,6 +431,49 @@ void DLDL::generate::lpd::Project::GenerateMainLdo(LPDDirectory& directory) cons
 					ldoSourceTemplate.ldo_member_->Set(ldoSourceTemplate.ldo_member_standard_);
 					ldoSourceTemplate.lpd_ctor_member_impl_->Set(
 						ldoSourceTemplate.ldo_ctor_standard_);
+
+					if (Lower(ldoMember.type) == "string")
+					{
+						ldoSourceTemplate.lpd_default_ctor_member_impl_->Set(
+							ldoSourceTemplate.ldo_default_ctor_string_);
+					}
+					else if (Lower(ldoMember.type) == "size_t")
+					{
+						ldoSourceTemplate.lpd_default_ctor_member_impl_->Set("0");
+					}
+					else if (Lower(ldoMember.type) == "unsigned")
+					{
+						ldoSourceTemplate.lpd_default_ctor_member_impl_->Set("0");
+					}
+					else if (Lower(ldoMember.type) == "int")
+					{
+						ldoSourceTemplate.lpd_default_ctor_member_impl_->Set("0");
+					}
+					else if (Lower(ldoMember.type) == "bool")
+					{
+						ldoSourceTemplate.lpd_default_ctor_member_impl_->Set("false");
+					}
+					else if (Lower(ldoMember.type) == "base")
+					{
+						ldoSourceTemplate.lpd_default_ctor_member_impl_->Set(
+							ldoSourceTemplate.ldo_default_ctor_ldo_);
+					}
+					else if (Lower(ldoMember.type).find("deamer::") != std::string::npos)
+					{
+						ldoSourceTemplate.lpd_default_ctor_member_impl_->Set(
+							ldoSourceTemplate.lpd_default_ctor_member_impl_default_);
+					}
+					else if (ldoMemberPtr != nullptr &&
+							 ldoMemberPtr->GetLDOType() == ir::LDOType::Enumeration)
+					{
+						ldoSourceTemplate.lpd_default_ctor_member_impl_->Set(
+							ldoSourceTemplate.ldo_default_ctor_enum_);
+					}
+					else
+					{
+						ldoSourceTemplate.lpd_default_ctor_member_impl_->Set(
+							ldoSourceTemplate.ldo_default_ctor_ldo_);
+					}
 				}
 
 				if ((ldoMemberPtr != nullptr && ldoMemberPtr->GetLDOType() == ir::LDOType::Ldo) ||
@@ -456,9 +529,9 @@ void DLDL::generate::lpd::Project::GenerateMainLdo(LPDDirectory& directory) cons
 				else if (Lower(ldoMember.type) == "base")
 				{
 					ldoTemplate.member_type_->Set("Base");
-					ldoTemplate.ldo_namespace_->Set(ldoTemplate.default_ldo_namespace_);
+					ldoTemplate.ldo_namespace_->Set("object::");
 					ldoSourceTemplate.member_type_->Set("Base");
-					ldoSourceTemplate.ldo_namespace_->Set(ldoSourceTemplate.default_ldo_namespace_);
+					ldoSourceTemplate.ldo_namespace_->Set("object::");
 				}
 				else if (Lower(ldoMember.type).find("deamer::") != std::string::npos)
 				{
@@ -491,7 +564,12 @@ void DLDL::generate::lpd::Project::GenerateMainLdo(LPDDirectory& directory) cons
 					ldoTemplate.optional_default_value_->Set(ldoTemplate.default_value_);
 					ldoTemplate.default_implementation_->Set(ldoMember.defaultValue);
 				}
-				if (ldoMemberPtr != nullptr || Lower(ldoMember.type) == "base")
+				if (ldoMemberPtr != nullptr &&
+					ldoMemberPtr->GetLDOType() == ir::LDOType::Enumeration)
+				{
+					// Nothing
+				}
+				else if (ldoMemberPtr != nullptr || Lower(ldoMember.type) == "base")
 				{
 					ldoSourceTemplate.ldo_member_reference_->ExpandVariableField();
 				}
@@ -502,6 +580,7 @@ void DLDL::generate::lpd::Project::GenerateMainLdo(LPDDirectory& directory) cons
 				ldoSourceTemplate.ldo_ctor_member_assignment_->ExpandVariableField();
 				ldoSourceTemplate.ldo_ctor_member_->ExpandVariableField();
 				ldoSourceTemplate.ldo_compare_->ExpandVariableField();
+				ldoSourceTemplate.ldo_default_ctor_member_->ExpandVariableField();
 			}
 
 			if (lpd->IsTool())
@@ -536,14 +615,15 @@ void DLDL::generate::lpd::Project::GenerateMainLdo(LPDDirectory& directory) cons
 				}
 
 				// Temporary fix, function prototype needs to be further analyzed
-				ldoTemplate.ldo_specific_function_prototype_->Set(function.function);
-				ldoTemplate.ldo_specific_function_->ExpandVariableField();
-
-				// ldoTemplate.ldo_specific_function_prototype_->Set(function.GetFunctionPrototype());
+				// ldoTemplate.ldo_specific_function_prototype_->Set(function.function);
 				// ldoTemplate.ldo_specific_function_->ExpandVariableField();
 
-				// ldoSourceTemplate.ldo_specific_function_->Set(function.function);
-				// ldoSourceTemplate.ldo_specific_function_->ExpandVariableField();
+				ldoTemplate.ldo_specific_function_prototype_->Set(function.GetFunctionPrototype());
+				ldoTemplate.ldo_specific_function_->ExpandVariableField();
+
+				ldoSourceTemplate.ldo_specific_function_->Set(
+					function.GetFunctionSource(ldo.get()));
+				ldoSourceTemplate.ldo_specific_function_->ExpandVariableField();
 			}
 
 			lpdIncludeDir.AddFile(
@@ -816,11 +896,17 @@ void DLDL::generate::lpd::Project::GenerateGenerater(LPDDirectory& directory) co
 {
 	auto Default = std::make_unique<filetemplate::lpd::generater::DefaultTemplate>();
 	::deamer::file::tool::Directory generaterMainDirectory;
+	::deamer::file::tool::Directory generaterSpecialDirectory;
 	::deamer::file::tool::Directory generaterToolDirectory;
 	Default->lpd_ctor_member_->variable_field_separator_->Set("");
 
 	for (auto& lpd : lpdProject->GetLPDs())
 	{
+		if (!lpd->Generate)
+		{
+			continue;
+		}
+
 		Default->lpd_ctor_member_->variable_field_->Clear();
 		Default->lpd_retrieve_ctor_member_->variable_field_->Clear();
 		Default->lpd_name_->Set(lpd->GetName());
@@ -865,9 +951,14 @@ void DLDL::generate::lpd::Project::GenerateGenerater(LPDDirectory& directory) co
 			Default->lpd_retrieve_ctor_member_->ExpandVariableField();
 		}
 
-		if (lpd->IsTool())
+		if (lpd->GetLPDType() == ir::LPDType::tool)
 		{
 			generaterToolDirectory.AddFile(
+				::deamer::file::tool::File(lpd->GetName(), "h", Default->GetOutput()));
+		}
+		else if (lpd->GetLPDType() == ir::LPDType::special)
+		{
+			generaterSpecialDirectory.AddFile(
 				::deamer::file::tool::File(lpd->GetName(), "h", Default->GetOutput()));
 		}
 		else
@@ -878,6 +969,7 @@ void DLDL::generate::lpd::Project::GenerateGenerater(LPDDirectory& directory) co
 	}
 
 	directory.generater = generaterMainDirectory;
+	directory.generaterSpecial = generaterSpecialDirectory;
 	directory.generaterTool = generaterToolDirectory;
 }
 

@@ -50,3 +50,6 @@
 
 {{explicit_lpd_namespace}} = @<{{explicit_lpd_namespace_dispatch}}>@
 {{explicit_lpd_namespace_dispatch}} = @<::{{lpd_name.Lower}}>@
+
+{{optional_default_ctor}} = @<{{default_ctor}}>@
+{{default_ctor}} = @<{{ldo_name}}();>@

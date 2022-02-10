@@ -30,3 +30,4 @@
 
 {{explicit_lpd_namespace}} = @<{{explicit_lpd_namespace_dispatch}}>@
 {{explicit_lpd_namespace_dispatch}} = @<::{{lpd_name.Lower}}>@
+

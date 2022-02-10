@@ -145,6 +145,7 @@ namespace DLDL::argument
 		void GenerateLpdConvertor(const generate::lpd::Project::LPDDirectory& lpdDirectory);
 		void GenerateLpdValidator(const generate::lpd::Project::LPDDirectory& lpdDirectory);
 		void GenerateLpdMainGenerator(const generate::lpd::Project::LPDDirectory& lpdDirectory);
+		void GenerateLpdSpecialGenerator(const generate::lpd::Project::LPDDirectory& lpdDirectory);
 		void GenerateLpdToolGenerator(const generate::lpd::Project::LPDDirectory& lpdDirectory);
 		void GenerateLpdEnumerationsLpd(const generate::lpd::Project::LPDDirectory& lpdDirectory);
 		void GenerateLpdEnumerationsLdo(const generate::lpd::Project::LPDDirectory& lpdDirectory);

@@ -23,6 +23,7 @@
 
 #include "Deamer/Language/Type/Definition/Object/Base.h"
 {{ldo_include.Variable_Field}}
+{{ldo_special_include}}
 #include "Deamer/Type/Memory/SafeReserve.h"
 #include <string>
 #include <vector>
@@ -57,7 +58,7 @@ namespace deamer::language::type::definition::object::{{location}}{{explicit_lpd
 {{ldo_specific_function.Variable_Field}}
 
 	protected:
-		{{ldo_name}}();
+		{{optional_default_ctor}}
 	};
 }
 

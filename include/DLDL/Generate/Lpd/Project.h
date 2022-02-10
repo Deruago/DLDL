@@ -41,6 +41,7 @@ namespace DLDL::generate::lpd
 			::deamer::file::tool::Directory converter;
 			::deamer::file::tool::Directory validater;
 			::deamer::file::tool::Directory generater;
+			::deamer::file::tool::Directory generaterSpecial;
 			::deamer::file::tool::Directory generaterTool;
 			::deamer::file::tool::Directory ldoEnumeration;
 			::deamer::file::tool::Directory lpdEnumeration;

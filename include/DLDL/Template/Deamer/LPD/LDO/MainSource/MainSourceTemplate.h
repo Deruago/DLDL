@@ -26,6 +26,7 @@ Scope,
 // User defined types
 comma_extension_,
 comment_,
+default_ctor_,
 default_ldo_namespace_,
 default_none_namespace_,
 default_std_namespace_,
@@ -39,13 +40,13 @@ ldo_ctor_member_assignment_,
 ldo_ctor_optional_,
 ldo_ctor_standard_,
 ldo_ctor_vector_,
-ldo_defaukt_ctor_enum_,
-ldo_defaukt_ctor_ldo_,
-ldo_defaukt_ctor_optional_,
-ldo_defaukt_ctor_string_,
-ldo_defaukt_ctor_struct_,
-ldo_defaukt_ctor_vector_,
+ldo_default_ctor_enum_,
+ldo_default_ctor_ldo_,
 ldo_default_ctor_member_,
+ldo_default_ctor_optional_,
+ldo_default_ctor_string_,
+ldo_default_ctor_struct_,
+ldo_default_ctor_vector_,
 ldo_member_,
 ldo_member_optional_,
 ldo_member_reference_,
@@ -54,6 +55,7 @@ ldo_member_vector_,
 ldo_name_,
 ldo_namespace_,
 ldo_specific_function_,
+ldo_specific_include_,
 left_angle_bracket_,
 left_bracket_,
 left_curly_bracket_,
@@ -63,10 +65,12 @@ loc_tool_,
 location_,
 lpd_ctor_member_impl_,
 lpd_default_ctor_member_impl_,
+lpd_default_ctor_member_impl_default_,
 lpd_name_,
 member_full_type_,
 member_name_,
 member_type_,
+optional_default_ctor_,
 optional_pointer_,
 right_angle_bracket_,
 right_bracket_,
@@ -112,6 +116,11 @@ Function_Field_Separator_,
 case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::comment_:
 {
 	return "comment";
+}
+
+case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::default_ctor_:
+{
+	return "default_ctor";
 }
 
 case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::default_ldo_namespace_:
@@ -179,39 +188,39 @@ case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_ctor_vector_:
 	return "ldo_ctor_vector";
 }
 
-case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_enum_:
+case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_enum_:
 {
-	return "ldo_defaukt_ctor_enum";
+	return "ldo_default_ctor_enum";
 }
 
-case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_ldo_:
+case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_ldo_:
 {
-	return "ldo_defaukt_ctor_ldo";
-}
-
-case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_optional_:
-{
-	return "ldo_defaukt_ctor_optional";
-}
-
-case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_string_:
-{
-	return "ldo_defaukt_ctor_string";
-}
-
-case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_struct_:
-{
-	return "ldo_defaukt_ctor_struct";
-}
-
-case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_vector_:
-{
-	return "ldo_defaukt_ctor_vector";
+	return "ldo_default_ctor_ldo";
 }
 
 case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_member_:
 {
 	return "ldo_default_ctor_member";
+}
+
+case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_optional_:
+{
+	return "ldo_default_ctor_optional";
+}
+
+case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_string_:
+{
+	return "ldo_default_ctor_string";
+}
+
+case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_struct_:
+{
+	return "ldo_default_ctor_struct";
+}
+
+case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_vector_:
+{
+	return "ldo_default_ctor_vector";
 }
 
 case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_member_:
@@ -252,6 +261,11 @@ case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_namespace_:
 case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_specific_function_:
 {
 	return "ldo_specific_function";
+}
+
+case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_specific_include_:
+{
+	return "ldo_specific_include";
 }
 
 case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::left_angle_bracket_:
@@ -299,6 +313,11 @@ case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::lpd_default_ctor_
 	return "lpd_default_ctor_member_impl";
 }
 
+case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::lpd_default_ctor_member_impl_default_:
+{
+	return "lpd_default_ctor_member_impl_default";
+}
+
 case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::lpd_name_:
 {
 	return "lpd_name";
@@ -317,6 +336,11 @@ case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::member_name_:
 case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::member_type_:
 {
 	return "member_type";
+}
+
+case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::optional_default_ctor_:
+{
+	return "optional_default_ctor";
 }
 
 case ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::optional_pointer_:
@@ -889,6 +913,45 @@ Variable_comment_& operator=(const Variable_comment_& variable)
 
 };
 
+struct Variable_default_ctor_ : public VariableScopes
+{
+
+static constexpr auto name = "default_ctor_";
+
+
+
+Variable_default_ctor_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::default_ctor_;
+}
+
+virtual ~Variable_default_ctor_() override = default;
+
+Variable_default_ctor_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::default_ctor_;
+
+}
+
+
+
+Variable_default_ctor_& operator=(const Variable_default_ctor_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
 struct Variable_default_ldo_namespace_ : public VariableScopes
 {
 
@@ -1107,7 +1170,7 @@ virtual ~Variable_file_() override = default;
 Variable_file_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
 {
 type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::file_;
-*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("/*\n * This program is free software; you can redistribute it and/or\n * modify it under the terms of the GNU General Public License\n * as published by the Free Software Foundation; either version 3\n * of the License, or (at your option) any later version"), GenerateVariable("."), GenerateVariable("\n *\n * This program is distributed in the hope that it will be useful,\n * but WITHOUT ANY WARRANTY; without even the implied warranty of\n * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE"), GenerateVariable("."), GenerateVariable("  See the\n * GNU General Public License for more details"), GenerateVariable("."), GenerateVariable("\n *\n * You should have received a copy of the GNU General Public License\n * along with this program; if not, write to the Free Software Foundation,\n * Inc"), GenerateVariable("."), GenerateVariable(", 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA"), GenerateVariable("."), GenerateVariable("\n */\n/*\n * Part of the DeamerProject"), GenerateVariable("."), GenerateVariable("\n * For more information go to: https://github"), GenerateVariable("."), GenerateVariable("com/Deruago/theDeamerProject\n */\n\n#include \"Deamer/Language/Type/Definition/Object/"), GenerateVariable(mainsourcetemplate_->loc_impl_->This()), GenerateVariable("/"), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable("."), GenerateVariable("h\"\n#include <utility>\n\ndeamer::language::type::definition::object::"), GenerateVariable(mainsourcetemplate_->location_->This()), GenerateVariable(mainsourcetemplate_->explicit_lpd_namespace_->This()), GenerateVariable("::"), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable("::"), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable("("), GenerateVariable(mainsourcetemplate_->ldo_ctor_member_->Variable_Field()), GenerateVariable(")\n\t: Base(Type::"), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable(")"), GenerateVariable(mainsourcetemplate_->ldo_ctor_member_assignment_->Variable_Field()), GenerateVariable("\n"), GenerateVariable("{"), GenerateVariable("\n"), GenerateVariable(mainsourcetemplate_->ldo_member_reference_->Variable_Field()), GenerateVariable("\n"), GenerateVariable("}"), GenerateVariable("\n\ndeamer::language::type::definition::object::"), GenerateVariable(mainsourcetemplate_->location_->This()), GenerateVariable(mainsourcetemplate_->explicit_lpd_namespace_->This()), GenerateVariable("::"), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable("::operator==(const "), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable("& rhs) const noexcept\n"), GenerateVariable("{"), GenerateVariable("\n\treturn this == &rhs || ("), GenerateVariable(mainsourcetemplate_->ldo_compare_->Variable_Field()), GenerateVariable("true);\n"), GenerateVariable("}"), GenerateVariable("\n\ndeamer::language::type::definition::object::"), GenerateVariable(mainsourcetemplate_->location_->This()), GenerateVariable(mainsourcetemplate_->explicit_lpd_namespace_->This()), GenerateVariable("::"), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable("::"), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable("() : "), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable("("), GenerateVariable(mainsourcetemplate_->ldo_default_ctor_member_->Variable_Field()), GenerateVariable(")\n"), GenerateVariable("{"), GenerateVariable("\n"), GenerateVariable("}"), GenerateVariable("\n\n"), GenerateVariable(mainsourcetemplate_->ldo_specific_function_->Variable_Field()) }));
+*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("/*\n * This program is free software; you can redistribute it and/or\n * modify it under the terms of the GNU General Public License\n * as published by the Free Software Foundation; either version 3\n * of the License, or (at your option) any later version"), GenerateVariable("."), GenerateVariable("\n *\n * This program is distributed in the hope that it will be useful,\n * but WITHOUT ANY WARRANTY; without even the implied warranty of\n * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE"), GenerateVariable("."), GenerateVariable("  See the\n * GNU General Public License for more details"), GenerateVariable("."), GenerateVariable("\n *\n * You should have received a copy of the GNU General Public License\n * along with this program; if not, write to the Free Software Foundation,\n * Inc"), GenerateVariable("."), GenerateVariable(", 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA"), GenerateVariable("."), GenerateVariable("\n */\n/*\n * Part of the DeamerProject"), GenerateVariable("."), GenerateVariable("\n * For more information go to: https://github"), GenerateVariable("."), GenerateVariable("com/Deruago/theDeamerProject\n */\n\n#include \"Deamer/Language/Type/Definition/Object/"), GenerateVariable(mainsourcetemplate_->loc_impl_->This()), GenerateVariable("/"), GenerateVariable(mainsourcetemplate_->lpd_name_->This()), GenerateVariable("/"), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable("."), GenerateVariable("h\"\n"), GenerateVariable(mainsourcetemplate_->ldo_specific_include_->This()), GenerateVariable("\n#include <utility>\n\ndeamer::language::type::definition::object::"), GenerateVariable(mainsourcetemplate_->location_->This()), GenerateVariable(mainsourcetemplate_->explicit_lpd_namespace_->This()), GenerateVariable("::"), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable("::"), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable("("), GenerateVariable(mainsourcetemplate_->ldo_ctor_member_->Variable_Field()), GenerateVariable(")\n\t: Base(Type::"), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable(")"), GenerateVariable(mainsourcetemplate_->ldo_ctor_member_assignment_->Variable_Field()), GenerateVariable("\n"), GenerateVariable("{"), GenerateVariable("\n"), GenerateVariable(mainsourcetemplate_->ldo_member_reference_->Variable_Field()), GenerateVariable("\n"), GenerateVariable("}"), GenerateVariable("\n\nbool deamer::language::type::definition::object::"), GenerateVariable(mainsourcetemplate_->location_->This()), GenerateVariable(mainsourcetemplate_->explicit_lpd_namespace_->This()), GenerateVariable("::"), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable("::operator==(const "), GenerateVariable(mainsourcetemplate_->ldo_name_->This()), GenerateVariable("& rhs) const noexcept\n"), GenerateVariable("{"), GenerateVariable("\n\treturn this == &rhs || ("), GenerateVariable(mainsourcetemplate_->ldo_compare_->Variable_Field()), GenerateVariable("true);\n"), GenerateVariable("}"), GenerateVariable("\n\n"), GenerateVariable(mainsourcetemplate_->optional_default_ctor_->This()), GenerateVariable("\n\n"), GenerateVariable(mainsourcetemplate_->ldo_specific_function_->Variable_Field()) }));
 Content_->type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::Scope;
 
 *static_cast<VariableBase*>(Class_postfix_) = VariableBase(std::vector<VariableBase*>({  }));
@@ -1456,29 +1519,29 @@ Variable_ldo_ctor_vector_& operator=(const Variable_ldo_ctor_vector_& variable)
 
 };
 
-struct Variable_ldo_defaukt_ctor_enum_ : public VariableScopes
+struct Variable_ldo_default_ctor_enum_ : public VariableScopes
 {
 
-static constexpr auto name = "ldo_defaukt_ctor_enum_";
+static constexpr auto name = "ldo_default_ctor_enum_";
 
 
 
-Variable_ldo_defaukt_ctor_enum_() : VariableScopes()
+Variable_ldo_default_ctor_enum_() : VariableScopes()
 {
-	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_enum_;
+	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_enum_;
 }
 
-virtual ~Variable_ldo_defaukt_ctor_enum_() override = default;
+virtual ~Variable_ldo_default_ctor_enum_() override = default;
 
-Variable_ldo_defaukt_ctor_enum_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+Variable_ldo_default_ctor_enum_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
 {
-type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_enum_;
+type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_enum_;
 
 }
 
 
 
-Variable_ldo_defaukt_ctor_enum_& operator=(const Variable_ldo_defaukt_ctor_enum_& variable)
+Variable_ldo_default_ctor_enum_& operator=(const Variable_ldo_default_ctor_enum_& variable)
 {
 	if (&variable == this)
 	{
@@ -1495,185 +1558,29 @@ Variable_ldo_defaukt_ctor_enum_& operator=(const Variable_ldo_defaukt_ctor_enum_
 
 };
 
-struct Variable_ldo_defaukt_ctor_ldo_ : public VariableScopes
+struct Variable_ldo_default_ctor_ldo_ : public VariableScopes
 {
 
-static constexpr auto name = "ldo_defaukt_ctor_ldo_";
+static constexpr auto name = "ldo_default_ctor_ldo_";
 
 
 
-Variable_ldo_defaukt_ctor_ldo_() : VariableScopes()
+Variable_ldo_default_ctor_ldo_() : VariableScopes()
 {
-	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_ldo_;
+	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_ldo_;
 }
 
-virtual ~Variable_ldo_defaukt_ctor_ldo_() override = default;
+virtual ~Variable_ldo_default_ctor_ldo_() override = default;
 
-Variable_ldo_defaukt_ctor_ldo_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+Variable_ldo_default_ctor_ldo_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
 {
-type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_ldo_;
-
-}
-
-
-
-Variable_ldo_defaukt_ctor_ldo_& operator=(const Variable_ldo_defaukt_ctor_ldo_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
-
-	value = variable.value;
-	isString = variable.isString;
-
-	
-
-	return *this;
-}
-
-};
-
-struct Variable_ldo_defaukt_ctor_optional_ : public VariableScopes
-{
-
-static constexpr auto name = "ldo_defaukt_ctor_optional_";
-
-
-
-Variable_ldo_defaukt_ctor_optional_() : VariableScopes()
-{
-	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_optional_;
-}
-
-virtual ~Variable_ldo_defaukt_ctor_optional_() override = default;
-
-Variable_ldo_defaukt_ctor_optional_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_optional_;
+type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_ldo_;
 
 }
 
 
 
-Variable_ldo_defaukt_ctor_optional_& operator=(const Variable_ldo_defaukt_ctor_optional_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
-
-	value = variable.value;
-	isString = variable.isString;
-
-	
-
-	return *this;
-}
-
-};
-
-struct Variable_ldo_defaukt_ctor_string_ : public VariableScopes
-{
-
-static constexpr auto name = "ldo_defaukt_ctor_string_";
-
-
-
-Variable_ldo_defaukt_ctor_string_() : VariableScopes()
-{
-	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_string_;
-}
-
-virtual ~Variable_ldo_defaukt_ctor_string_() override = default;
-
-Variable_ldo_defaukt_ctor_string_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_string_;
-
-}
-
-
-
-Variable_ldo_defaukt_ctor_string_& operator=(const Variable_ldo_defaukt_ctor_string_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
-
-	value = variable.value;
-	isString = variable.isString;
-
-	
-
-	return *this;
-}
-
-};
-
-struct Variable_ldo_defaukt_ctor_struct_ : public VariableScopes
-{
-
-static constexpr auto name = "ldo_defaukt_ctor_struct_";
-
-
-
-Variable_ldo_defaukt_ctor_struct_() : VariableScopes()
-{
-	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_struct_;
-}
-
-virtual ~Variable_ldo_defaukt_ctor_struct_() override = default;
-
-Variable_ldo_defaukt_ctor_struct_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_struct_;
-
-}
-
-
-
-Variable_ldo_defaukt_ctor_struct_& operator=(const Variable_ldo_defaukt_ctor_struct_& variable)
-{
-	if (&variable == this)
-	{
-		return *this;
-	}
-
-	value = variable.value;
-	isString = variable.isString;
-
-	
-
-	return *this;
-}
-
-};
-
-struct Variable_ldo_defaukt_ctor_vector_ : public VariableScopes
-{
-
-static constexpr auto name = "ldo_defaukt_ctor_vector_";
-
-
-
-Variable_ldo_defaukt_ctor_vector_() : VariableScopes()
-{
-	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_vector_;
-}
-
-virtual ~Variable_ldo_defaukt_ctor_vector_() override = default;
-
-Variable_ldo_defaukt_ctor_vector_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
-{
-type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_defaukt_ctor_vector_;
-
-}
-
-
-
-Variable_ldo_defaukt_ctor_vector_& operator=(const Variable_ldo_defaukt_ctor_vector_& variable)
+Variable_ldo_default_ctor_ldo_& operator=(const Variable_ldo_default_ctor_ldo_& variable)
 {
 	if (&variable == this)
 	{
@@ -1713,6 +1620,162 @@ type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_cto
 
 
 Variable_ldo_default_ctor_member_& operator=(const Variable_ldo_default_ctor_member_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_ldo_default_ctor_optional_ : public VariableScopes
+{
+
+static constexpr auto name = "ldo_default_ctor_optional_";
+
+
+
+Variable_ldo_default_ctor_optional_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_optional_;
+}
+
+virtual ~Variable_ldo_default_ctor_optional_() override = default;
+
+Variable_ldo_default_ctor_optional_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_optional_;
+
+}
+
+
+
+Variable_ldo_default_ctor_optional_& operator=(const Variable_ldo_default_ctor_optional_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_ldo_default_ctor_string_ : public VariableScopes
+{
+
+static constexpr auto name = "ldo_default_ctor_string_";
+
+
+
+Variable_ldo_default_ctor_string_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_string_;
+}
+
+virtual ~Variable_ldo_default_ctor_string_() override = default;
+
+Variable_ldo_default_ctor_string_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_string_;
+
+}
+
+
+
+Variable_ldo_default_ctor_string_& operator=(const Variable_ldo_default_ctor_string_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_ldo_default_ctor_struct_ : public VariableScopes
+{
+
+static constexpr auto name = "ldo_default_ctor_struct_";
+
+
+
+Variable_ldo_default_ctor_struct_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_struct_;
+}
+
+virtual ~Variable_ldo_default_ctor_struct_() override = default;
+
+Variable_ldo_default_ctor_struct_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_struct_;
+
+}
+
+
+
+Variable_ldo_default_ctor_struct_& operator=(const Variable_ldo_default_ctor_struct_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_ldo_default_ctor_vector_ : public VariableScopes
+{
+
+static constexpr auto name = "ldo_default_ctor_vector_";
+
+
+
+Variable_ldo_default_ctor_vector_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_vector_;
+}
+
+virtual ~Variable_ldo_default_ctor_vector_() override = default;
+
+Variable_ldo_default_ctor_vector_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_default_ctor_vector_;
+
+}
+
+
+
+Variable_ldo_default_ctor_vector_& operator=(const Variable_ldo_default_ctor_vector_& variable)
 {
 	if (&variable == this)
 	{
@@ -2025,6 +2088,45 @@ type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_specific_fu
 
 
 Variable_ldo_specific_function_& operator=(const Variable_ldo_specific_function_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_ldo_specific_include_ : public VariableScopes
+{
+
+static constexpr auto name = "ldo_specific_include_";
+
+
+
+Variable_ldo_specific_include_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_specific_include_;
+}
+
+virtual ~Variable_ldo_specific_include_() override = default;
+
+Variable_ldo_specific_include_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::ldo_specific_include_;
+
+}
+
+
+
+Variable_ldo_specific_include_& operator=(const Variable_ldo_specific_include_& variable)
 {
 	if (&variable == this)
 	{
@@ -2392,6 +2494,45 @@ Variable_lpd_default_ctor_member_impl_& operator=(const Variable_lpd_default_cto
 
 };
 
+struct Variable_lpd_default_ctor_member_impl_default_ : public VariableScopes
+{
+
+static constexpr auto name = "lpd_default_ctor_member_impl_default_";
+
+
+
+Variable_lpd_default_ctor_member_impl_default_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::lpd_default_ctor_member_impl_default_;
+}
+
+virtual ~Variable_lpd_default_ctor_member_impl_default_() override = default;
+
+Variable_lpd_default_ctor_member_impl_default_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::lpd_default_ctor_member_impl_default_;
+
+}
+
+
+
+Variable_lpd_default_ctor_member_impl_default_& operator=(const Variable_lpd_default_ctor_member_impl_default_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
 struct Variable_lpd_name_ : public VariableScopes
 {
 
@@ -2532,6 +2673,45 @@ type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::member_type_;
 
 
 Variable_member_type_& operator=(const Variable_member_type_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_optional_default_ctor_ : public VariableScopes
+{
+
+static constexpr auto name = "optional_default_ctor_";
+
+
+
+Variable_optional_default_ctor_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::optional_default_ctor_;
+}
+
+virtual ~Variable_optional_default_ctor_() override = default;
+
+Variable_optional_default_ctor_(MainSourceTemplate* mainsourcetemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::ldo::ldo::MainSourceTemplate::Type::optional_default_ctor_;
+
+}
+
+
+
+Variable_optional_default_ctor_& operator=(const Variable_optional_default_ctor_& variable)
 {
 	if (&variable == this)
 	{
@@ -2716,6 +2896,7 @@ Variable_right_curly_bracket_& operator=(const Variable_right_curly_bracket_& va
 		// e.g. MainSourceTemplate.member = "auto-generated";
 		Variable_comma_extension_* comma_extension_ = new Variable_comma_extension_();
 Variable_comment_* comment_ = new Variable_comment_();
+Variable_default_ctor_* default_ctor_ = new Variable_default_ctor_();
 Variable_default_ldo_namespace_* default_ldo_namespace_ = new Variable_default_ldo_namespace_();
 Variable_default_none_namespace_* default_none_namespace_ = new Variable_default_none_namespace_();
 Variable_default_std_namespace_* default_std_namespace_ = new Variable_default_std_namespace_();
@@ -2729,13 +2910,13 @@ Variable_ldo_ctor_member_assignment_* ldo_ctor_member_assignment_ = new Variable
 Variable_ldo_ctor_optional_* ldo_ctor_optional_ = new Variable_ldo_ctor_optional_();
 Variable_ldo_ctor_standard_* ldo_ctor_standard_ = new Variable_ldo_ctor_standard_();
 Variable_ldo_ctor_vector_* ldo_ctor_vector_ = new Variable_ldo_ctor_vector_();
-Variable_ldo_defaukt_ctor_enum_* ldo_defaukt_ctor_enum_ = new Variable_ldo_defaukt_ctor_enum_();
-Variable_ldo_defaukt_ctor_ldo_* ldo_defaukt_ctor_ldo_ = new Variable_ldo_defaukt_ctor_ldo_();
-Variable_ldo_defaukt_ctor_optional_* ldo_defaukt_ctor_optional_ = new Variable_ldo_defaukt_ctor_optional_();
-Variable_ldo_defaukt_ctor_string_* ldo_defaukt_ctor_string_ = new Variable_ldo_defaukt_ctor_string_();
-Variable_ldo_defaukt_ctor_struct_* ldo_defaukt_ctor_struct_ = new Variable_ldo_defaukt_ctor_struct_();
-Variable_ldo_defaukt_ctor_vector_* ldo_defaukt_ctor_vector_ = new Variable_ldo_defaukt_ctor_vector_();
+Variable_ldo_default_ctor_enum_* ldo_default_ctor_enum_ = new Variable_ldo_default_ctor_enum_();
+Variable_ldo_default_ctor_ldo_* ldo_default_ctor_ldo_ = new Variable_ldo_default_ctor_ldo_();
 Variable_ldo_default_ctor_member_* ldo_default_ctor_member_ = new Variable_ldo_default_ctor_member_();
+Variable_ldo_default_ctor_optional_* ldo_default_ctor_optional_ = new Variable_ldo_default_ctor_optional_();
+Variable_ldo_default_ctor_string_* ldo_default_ctor_string_ = new Variable_ldo_default_ctor_string_();
+Variable_ldo_default_ctor_struct_* ldo_default_ctor_struct_ = new Variable_ldo_default_ctor_struct_();
+Variable_ldo_default_ctor_vector_* ldo_default_ctor_vector_ = new Variable_ldo_default_ctor_vector_();
 Variable_ldo_member_* ldo_member_ = new Variable_ldo_member_();
 Variable_ldo_member_optional_* ldo_member_optional_ = new Variable_ldo_member_optional_();
 Variable_ldo_member_reference_* ldo_member_reference_ = new Variable_ldo_member_reference_();
@@ -2744,6 +2925,7 @@ Variable_ldo_member_vector_* ldo_member_vector_ = new Variable_ldo_member_vector
 Variable_ldo_name_* ldo_name_ = new Variable_ldo_name_();
 Variable_ldo_namespace_* ldo_namespace_ = new Variable_ldo_namespace_();
 Variable_ldo_specific_function_* ldo_specific_function_ = new Variable_ldo_specific_function_();
+Variable_ldo_specific_include_* ldo_specific_include_ = new Variable_ldo_specific_include_();
 Variable_left_angle_bracket_* left_angle_bracket_ = new Variable_left_angle_bracket_();
 Variable_left_bracket_* left_bracket_ = new Variable_left_bracket_();
 Variable_left_curly_bracket_* left_curly_bracket_ = new Variable_left_curly_bracket_();
@@ -2753,10 +2935,12 @@ Variable_loc_tool_* loc_tool_ = new Variable_loc_tool_();
 Variable_location_* location_ = new Variable_location_();
 Variable_lpd_ctor_member_impl_* lpd_ctor_member_impl_ = new Variable_lpd_ctor_member_impl_();
 Variable_lpd_default_ctor_member_impl_* lpd_default_ctor_member_impl_ = new Variable_lpd_default_ctor_member_impl_();
+Variable_lpd_default_ctor_member_impl_default_* lpd_default_ctor_member_impl_default_ = new Variable_lpd_default_ctor_member_impl_default_();
 Variable_lpd_name_* lpd_name_ = new Variable_lpd_name_();
 Variable_member_full_type_* member_full_type_ = new Variable_member_full_type_();
 Variable_member_name_* member_name_ = new Variable_member_name_();
 Variable_member_type_* member_type_ = new Variable_member_type_();
+Variable_optional_default_ctor_* optional_default_ctor_ = new Variable_optional_default_ctor_();
 Variable_optional_pointer_* optional_pointer_ = new Variable_optional_pointer_();
 Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
 Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
@@ -2768,6 +2952,7 @@ Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_b
 		{
 			*comma_extension_ = Variable_comma_extension_(this, std::vector<VariableBase*>({  }));
 *comment_ = Variable_comment_(this, std::vector<VariableBase*>({  }));
+*default_ctor_ = Variable_default_ctor_(this, std::vector<VariableBase*>({ GenerateVariable("\ndeamer::language::type::definition::object::"), GenerateVariable(location_->This()), GenerateVariable(explicit_lpd_namespace_->This()), GenerateVariable("::"), GenerateVariable(ldo_name_->This()), GenerateVariable("::"), GenerateVariable(ldo_name_->This()), GenerateVariable("() : "), GenerateVariable(ldo_name_->This()), GenerateVariable("("), GenerateVariable(ldo_default_ctor_member_->Variable_Field()), GenerateVariable(")\n"), GenerateVariable("{"), GenerateVariable("\n"), GenerateVariable("}"), GenerateVariable("\n") }));
 *default_ldo_namespace_ = Variable_default_ldo_namespace_(this, std::vector<VariableBase*>({ GenerateVariable("object::"), GenerateVariable(location_->This()), GenerateVariable(explicit_lpd_namespace_->This()), GenerateVariable("::") }));
 *default_none_namespace_ = Variable_default_none_namespace_(this, std::vector<VariableBase*>({  }));
 *default_std_namespace_ = Variable_default_std_namespace_(this, std::vector<VariableBase*>({ GenerateVariable("std::") }));
@@ -2776,18 +2961,18 @@ Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_b
 *file_ = Variable_file_(this, std::vector<VariableBase*>({  }));
 *ldo_compare_ = Variable_ldo_compare_(this, std::vector<VariableBase*>({ GenerateVariable("this->"), GenerateVariable(member_name_->This()), GenerateVariable(" == rhs"), GenerateVariable("."), GenerateVariable(member_name_->This()) }));
 *ldo_ctor_ = Variable_ldo_ctor_(this, std::vector<VariableBase*>({ GenerateVariable(ldo_ctor_member_->Variable_Field()) }));
-*ldo_ctor_member_ = Variable_ldo_ctor_member_(this, std::vector<VariableBase*>({ GenerateVariable(comma_extension_->This()), GenerateVariable(lpd_ctor_member_impl_->This()) }));
+*ldo_ctor_member_ = Variable_ldo_ctor_member_(this, std::vector<VariableBase*>({ GenerateVariable(comma_extension_->This()), GenerateVariable(lpd_ctor_member_impl_->This()), GenerateVariable(" "), GenerateVariable(member_name_->This()), GenerateVariable("_") }));
 *ldo_ctor_member_assignment_ = Variable_ldo_ctor_member_assignment_(this, std::vector<VariableBase*>({ GenerateVariable(",\n\t"), GenerateVariable(member_name_->This()), GenerateVariable("("), GenerateVariable(member_name_->This()), GenerateVariable("_)") }));
-*ldo_ctor_optional_ = Variable_ldo_ctor_optional_(this, std::vector<VariableBase*>({ GenerateVariable("std::optional<"), GenerateVariable(member_full_type_->This()), GenerateVariable("> "), GenerateVariable(member_name_->This()), GenerateVariable("_") }));
-*ldo_ctor_standard_ = Variable_ldo_ctor_standard_(this, std::vector<VariableBase*>({ GenerateVariable(member_full_type_->This()), GenerateVariable(" "), GenerateVariable(member_name_->This()), GenerateVariable("_") }));
-*ldo_ctor_vector_ = Variable_ldo_ctor_vector_(this, std::vector<VariableBase*>({ GenerateVariable("std::vector<"), GenerateVariable(member_full_type_->This()), GenerateVariable("> "), GenerateVariable(member_name_->This()), GenerateVariable("_") }));
-*ldo_defaukt_ctor_enum_ = Variable_ldo_defaukt_ctor_enum_(this, std::vector<VariableBase*>({ GenerateVariable(member_name_->This()), GenerateVariable("::reserved_default_enum_option") }));
-*ldo_defaukt_ctor_ldo_ = Variable_ldo_defaukt_ctor_ldo_(this, std::vector<VariableBase*>({ GenerateVariable("nullptr") }));
-*ldo_defaukt_ctor_optional_ = Variable_ldo_defaukt_ctor_optional_(this, std::vector<VariableBase*>({ GenerateVariable("{"), GenerateVariable("}") }));
-*ldo_defaukt_ctor_string_ = Variable_ldo_defaukt_ctor_string_(this, std::vector<VariableBase*>({ GenerateVariable("\"\"") }));
-*ldo_defaukt_ctor_struct_ = Variable_ldo_defaukt_ctor_struct_(this, std::vector<VariableBase*>({ GenerateVariable("{"), GenerateVariable("}") }));
-*ldo_defaukt_ctor_vector_ = Variable_ldo_defaukt_ctor_vector_(this, std::vector<VariableBase*>({ GenerateVariable("{"), GenerateVariable("}") }));
+*ldo_ctor_optional_ = Variable_ldo_ctor_optional_(this, std::vector<VariableBase*>({ GenerateVariable("std::optional<"), GenerateVariable(member_full_type_->This()), GenerateVariable(">") }));
+*ldo_ctor_standard_ = Variable_ldo_ctor_standard_(this, std::vector<VariableBase*>({ GenerateVariable(member_full_type_->This()) }));
+*ldo_ctor_vector_ = Variable_ldo_ctor_vector_(this, std::vector<VariableBase*>({ GenerateVariable("std::vector<"), GenerateVariable(member_full_type_->This()), GenerateVariable(">") }));
+*ldo_default_ctor_enum_ = Variable_ldo_default_ctor_enum_(this, std::vector<VariableBase*>({ GenerateVariable(lpd_ctor_member_impl_->This()), GenerateVariable("::reserved_default_enum_option") }));
+*ldo_default_ctor_ldo_ = Variable_ldo_default_ctor_ldo_(this, std::vector<VariableBase*>({ GenerateVariable("nullptr") }));
 *ldo_default_ctor_member_ = Variable_ldo_default_ctor_member_(this, std::vector<VariableBase*>({ GenerateVariable(comma_extension_->This()), GenerateVariable(lpd_default_ctor_member_impl_->This()) }));
+*ldo_default_ctor_optional_ = Variable_ldo_default_ctor_optional_(this, std::vector<VariableBase*>({ GenerateVariable(lpd_ctor_member_impl_->This()), GenerateVariable("{"), GenerateVariable("}") }));
+*ldo_default_ctor_string_ = Variable_ldo_default_ctor_string_(this, std::vector<VariableBase*>({ GenerateVariable("\"\"") }));
+*ldo_default_ctor_struct_ = Variable_ldo_default_ctor_struct_(this, std::vector<VariableBase*>({ GenerateVariable(lpd_ctor_member_impl_->This()), GenerateVariable("{"), GenerateVariable("}") }));
+*ldo_default_ctor_vector_ = Variable_ldo_default_ctor_vector_(this, std::vector<VariableBase*>({ GenerateVariable(lpd_ctor_member_impl_->This()), GenerateVariable("{"), GenerateVariable("}") }));
 *ldo_member_ = Variable_ldo_member_(this, std::vector<VariableBase*>({  }));
 *ldo_member_optional_ = Variable_ldo_member_optional_(this, std::vector<VariableBase*>({ GenerateVariable("\t\t"), GenerateVariable(comment_->Variable_Field()), GenerateVariable("std::optional<"), GenerateVariable(member_full_type_->This()), GenerateVariable("> "), GenerateVariable(member_name_->This()), GenerateVariable(";") }));
 *ldo_member_reference_ = Variable_ldo_member_reference_(this, std::vector<VariableBase*>({ GenerateVariable("\treferences"), GenerateVariable("."), GenerateVariable("Add("), GenerateVariable(member_name_->This()), GenerateVariable(");") }));
@@ -2796,6 +2981,7 @@ Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_b
 *ldo_name_ = Variable_ldo_name_(this, std::vector<VariableBase*>({  }));
 *ldo_namespace_ = Variable_ldo_namespace_(this, std::vector<VariableBase*>({ GenerateVariable(default_ldo_namespace_->This()) }));
 *ldo_specific_function_ = Variable_ldo_specific_function_(this, std::vector<VariableBase*>({  }));
+*ldo_specific_include_ = Variable_ldo_specific_include_(this, std::vector<VariableBase*>({  }));
 *left_angle_bracket_ = Variable_left_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("<") }));
 *left_bracket_ = Variable_left_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("{") }));
 *left_curly_bracket_ = Variable_left_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("(") }));
@@ -2804,11 +2990,13 @@ Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_b
 *loc_tool_ = Variable_loc_tool_(this, std::vector<VariableBase*>({ GenerateVariable("Tool") }));
 *location_ = Variable_location_(this, std::vector<VariableBase*>({ GenerateVariable(loc_impl_->Lower()) }));
 *lpd_ctor_member_impl_ = Variable_lpd_ctor_member_impl_(this, std::vector<VariableBase*>({  }));
-*lpd_default_ctor_member_impl_ = Variable_lpd_default_ctor_member_impl_(this, std::vector<VariableBase*>({  }));
+*lpd_default_ctor_member_impl_ = Variable_lpd_default_ctor_member_impl_(this, std::vector<VariableBase*>({ GenerateVariable(lpd_default_ctor_member_impl_default_->This()) }));
+*lpd_default_ctor_member_impl_default_ = Variable_lpd_default_ctor_member_impl_default_(this, std::vector<VariableBase*>({ GenerateVariable(lpd_ctor_member_impl_->This()), GenerateVariable("{"), GenerateVariable("}") }));
 *lpd_name_ = Variable_lpd_name_(this, std::vector<VariableBase*>({  }));
 *member_full_type_ = Variable_member_full_type_(this, std::vector<VariableBase*>({ GenerateVariable(ldo_namespace_->This()), GenerateVariable(member_type_->This()), GenerateVariable(optional_pointer_->This()) }));
 *member_name_ = Variable_member_name_(this, std::vector<VariableBase*>({  }));
 *member_type_ = Variable_member_type_(this, std::vector<VariableBase*>({  }));
+*optional_default_ctor_ = Variable_optional_default_ctor_(this, std::vector<VariableBase*>({ GenerateVariable(default_ctor_->This()) }));
 *optional_pointer_ = Variable_optional_pointer_(this, std::vector<VariableBase*>({  }));
 *right_angle_bracket_ = Variable_right_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(">") }));
 *right_bracket_ = Variable_right_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("}") }));
@@ -2817,6 +3005,7 @@ Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_b
 
 			variables_.emplace_back(comma_extension_);
 variables_.emplace_back(comment_);
+variables_.emplace_back(default_ctor_);
 variables_.emplace_back(default_ldo_namespace_);
 variables_.emplace_back(default_none_namespace_);
 variables_.emplace_back(default_std_namespace_);
@@ -2830,13 +3019,13 @@ variables_.emplace_back(ldo_ctor_member_assignment_);
 variables_.emplace_back(ldo_ctor_optional_);
 variables_.emplace_back(ldo_ctor_standard_);
 variables_.emplace_back(ldo_ctor_vector_);
-variables_.emplace_back(ldo_defaukt_ctor_enum_);
-variables_.emplace_back(ldo_defaukt_ctor_ldo_);
-variables_.emplace_back(ldo_defaukt_ctor_optional_);
-variables_.emplace_back(ldo_defaukt_ctor_string_);
-variables_.emplace_back(ldo_defaukt_ctor_struct_);
-variables_.emplace_back(ldo_defaukt_ctor_vector_);
+variables_.emplace_back(ldo_default_ctor_enum_);
+variables_.emplace_back(ldo_default_ctor_ldo_);
 variables_.emplace_back(ldo_default_ctor_member_);
+variables_.emplace_back(ldo_default_ctor_optional_);
+variables_.emplace_back(ldo_default_ctor_string_);
+variables_.emplace_back(ldo_default_ctor_struct_);
+variables_.emplace_back(ldo_default_ctor_vector_);
 variables_.emplace_back(ldo_member_);
 variables_.emplace_back(ldo_member_optional_);
 variables_.emplace_back(ldo_member_reference_);
@@ -2845,6 +3034,7 @@ variables_.emplace_back(ldo_member_vector_);
 variables_.emplace_back(ldo_name_);
 variables_.emplace_back(ldo_namespace_);
 variables_.emplace_back(ldo_specific_function_);
+variables_.emplace_back(ldo_specific_include_);
 variables_.emplace_back(left_angle_bracket_);
 variables_.emplace_back(left_bracket_);
 variables_.emplace_back(left_curly_bracket_);
@@ -2854,10 +3044,12 @@ variables_.emplace_back(loc_tool_);
 variables_.emplace_back(location_);
 variables_.emplace_back(lpd_ctor_member_impl_);
 variables_.emplace_back(lpd_default_ctor_member_impl_);
+variables_.emplace_back(lpd_default_ctor_member_impl_default_);
 variables_.emplace_back(lpd_name_);
 variables_.emplace_back(member_full_type_);
 variables_.emplace_back(member_name_);
 variables_.emplace_back(member_type_);
+variables_.emplace_back(optional_default_ctor_);
 variables_.emplace_back(optional_pointer_);
 variables_.emplace_back(right_angle_bracket_);
 variables_.emplace_back(right_bracket_);

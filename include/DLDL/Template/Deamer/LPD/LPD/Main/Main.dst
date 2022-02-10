@@ -23,9 +23,10 @@
 
 {{ldo_include.Variable_Field}}
 #include "Deamer/Language/Type/Definition/Property/{{loc_impl}}/Definition.h"
-#include <vector>
 #include <optional>
+#include <stdexcept>
 #include <string>
+#include <vector>
 
 namespace deamer::language::type::definition::property::{{location}}
 {
@@ -48,6 +49,7 @@ namespace deamer::language::type::definition::property::{{location}}
 
 	public:
 		{{lpd_member_getter_unique.Variable_Field}}
+
 	};
 }
 

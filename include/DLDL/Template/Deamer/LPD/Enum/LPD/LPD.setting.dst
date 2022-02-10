@@ -5,4 +5,4 @@
 
 {{header_guard}} = @<DEAMER_LANGUAGE_DATASTRUCTURE_DEFINITION_PROPERTY_TYPE_H>@
 
-{{lpd_implementation}} = @<	{{lpd_name}},>@
+{{lpd_implementation}} = @<		{{lpd_name}},>@

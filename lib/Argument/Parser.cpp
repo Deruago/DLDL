@@ -97,6 +97,7 @@ static void initializeMaps()
 		{"lpd-generation-map-main-ldo-source", Type::lpd_generation_map_main_ldo_source},
 		{"lpd-generation-map-tool-ldo-source", Type::lpd_generation_map_tool_ldo_source},
 		{"lpd-generation-map-main-generator", Type::lpd_generation_map_main_generator},
+		{"lpd-generation-map-special-generator", Type::lpd_generation_map_special_generator},
 		{"lpd-generation-map-tool-generator", Type::lpd_generation_map_tool_generator},
 		{"lpd-generation-map-lpd-enumerations", Type::lpd_generation_map_lpd_enumerations},
 		{"lpd-generation-map-ldo-enumerations", Type::lpd_generation_map_ldo_enumerations},

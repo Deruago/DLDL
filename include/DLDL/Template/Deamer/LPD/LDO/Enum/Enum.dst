@@ -32,6 +32,8 @@ namespace deamer::language::type::definition::object::{{location}}{{explicit_lpd
 	 */
 	 enum class {{ldo_name}}
 	 {
+		reserved_default_enum_option,
+
 {{enumeration.Variable_Field}}
 	 };
 }

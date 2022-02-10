@@ -15,20 +15,21 @@
 {{ldo_member_optional}} = @<		{{comment.Variable_Field}}std::optional<{{member_full_type}}> {{member_name}};>@
 
 {{ldo_ctor}} = @<{{ldo_ctor_member.Variable_Field}}>@
-{{ldo_ctor_member}} = @<{{comma_extension}}{{lpd_ctor_member_impl}}>@
+{{ldo_ctor_member}} = @<{{comma_extension}}{{lpd_ctor_member_impl}} {{member_name}}_>@
 {{lpd_ctor_member_impl}} = @<>@
-{{ldo_ctor_standard}}    = @<{{member_full_type}} {{member_name}}_>@
-{{ldo_ctor_vector}}      = @<std::vector<{{member_full_type}}> {{member_name}}_>@
-{{ldo_ctor_optional}}    = @<std::optional<{{member_full_type}}> {{member_name}}_>@
+{{ldo_ctor_standard}}    = @<{{member_full_type}}>@
+{{ldo_ctor_vector}}      = @<std::vector<{{member_full_type}}>>@
+{{ldo_ctor_optional}}    = @<std::optional<{{member_full_type}}>>@
 
 {{ldo_default_ctor_member}}      = @<{{comma_extension}}{{lpd_default_ctor_member_impl}}>@
-{{lpd_default_ctor_member_impl}} = @<>@
-{{ldo_defaukt_ctor_ldo}}         = @<nullptr>@
-{{ldo_defaukt_ctor_string}}      = @<"">@
-{{ldo_defaukt_ctor_struct}}      = @<{}>@
-{{ldo_defaukt_ctor_enum}}        = @<{{member_name}}::reserved_default_enum_option>@
-{{ldo_defaukt_ctor_vector}}      = @<{}>@
-{{ldo_defaukt_ctor_optional}}    = @<{}>@
+{{lpd_default_ctor_member_impl}} = @<{{lpd_default_ctor_member_impl_default}}>@
+{{lpd_default_ctor_member_impl_default}} = @<{{lpd_ctor_member_impl}}{}>@
+{{ldo_default_ctor_ldo}}         = @<nullptr>@
+{{ldo_default_ctor_string}}      = @<"">@
+{{ldo_default_ctor_struct}}      = @<{{lpd_ctor_member_impl}}{}>@
+{{ldo_default_ctor_enum}}        = @<{{lpd_ctor_member_impl}}::reserved_default_enum_option>@
+{{ldo_default_ctor_vector}}      = @<{{lpd_ctor_member_impl}}{}>@
+{{ldo_default_ctor_optional}}    = @<{{lpd_ctor_member_impl}}{}>@
 
 {{ldo_ctor_member_assignment}} = @<,
 	{{member_name}}({{member_name}}_)>@
@@ -44,3 +45,10 @@
 
 {{explicit_lpd_namespace}} = @<{{explicit_lpd_namespace_dispatch}}>@
 {{explicit_lpd_namespace_dispatch}} = @<::{{lpd_name.Lower}}>@
+
+{{optional_default_ctor}} = @<{{default_ctor}}>@
+{{default_ctor}} = @<
+deamer::language::type::definition::object::{{location}}{{explicit_lpd_namespace}}::{{ldo_name}}::{{ldo_name}}() : {{ldo_name}}({{ldo_default_ctor_member.Variable_Field}})
+{
+}
+>@
