@@ -63,7 +63,7 @@ extern int DLDLdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 40 "./DLDL_parser.y"
+#line 45 "./DLDL_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL::ast::node::ANY* DLDL_ANY;
@@ -71,7 +71,8 @@ union YYSTYPE
 	::DLDL::ast::node::stmts* DLDL_stmts;
 	::DLDL::ast::node::stmt* DLDL_stmt;
 
-#line 75 "DLDL_parser.tab.h"
+
+#line 76 "DLDL_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

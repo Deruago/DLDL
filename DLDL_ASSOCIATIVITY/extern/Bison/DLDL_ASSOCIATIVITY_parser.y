@@ -1,3 +1,6 @@
+%define parse.error verbose
+%define parse.lac full
+
 %{
 #include <iostream>
 #include <vector>
@@ -12,9 +15,11 @@
 #include "DLDL_ASSOCIATIVITY/Ast/Enum/Type.h"
 #include "DLDL_ASSOCIATIVITY/Ast/Node/ASSOCIATIVITY.h"
 
+
 #include "DLDL_ASSOCIATIVITY/Ast/Node/program.h"
 #include "DLDL_ASSOCIATIVITY/Ast/Node/stmts.h"
 #include "DLDL_ASSOCIATIVITY/Ast/Node/stmt.h"
+
 
 #ifndef YY_parse_NERRS
 #define YY_parse_NERRS DLDL_ASSOCIATIVITYnerrs
@@ -31,10 +36,10 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 
 %token<Terminal> ASSOCIATIVITY
 
+
 %nterm<DLDL_ASSOCIATIVITY_program> program
 %nterm<DLDL_ASSOCIATIVITY_stmts> stmts
 %nterm<DLDL_ASSOCIATIVITY_stmt> stmt
-
 
 
 %union{
@@ -43,35 +48,49 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_ASSOCIATIVITY::ast::node::program* DLDL_ASSOCIATIVITY_program;
 	::DLDL_ASSOCIATIVITY::ast::node::stmts* DLDL_ASSOCIATIVITY_stmts;
 	::DLDL_ASSOCIATIVITY::ast::node::stmt* DLDL_ASSOCIATIVITY_stmt;
+
 }
 
 %%
 
+
 program:
-	stmts {
-		auto* const newNode = new DLDL_ASSOCIATIVITY::ast::node::program({::DLDL_ASSOCIATIVITY::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	stmts  {
+		auto* const newNode = new DLDL_ASSOCIATIVITY::ast::node::program({::DLDL_ASSOCIATIVITY::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
 ;
 
+
 stmts:
-	stmt stmts {
-		auto* const newNode = new DLDL_ASSOCIATIVITY::ast::node::stmts({::DLDL_ASSOCIATIVITY::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, $2 });
+	stmt stmts  {
+		auto* const newNode = new DLDL_ASSOCIATIVITY::ast::node::stmts({::DLDL_ASSOCIATIVITY::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| {
-		auto* const newNode = new DLDL_ASSOCIATIVITY::ast::node::stmts({::DLDL_ASSOCIATIVITY::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+	|  {
+		auto* const newNode = new DLDL_ASSOCIATIVITY::ast::node::stmts({::DLDL_ASSOCIATIVITY::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
 
+
 stmt:
-	ASSOCIATIVITY {
-		auto* const newNode = new DLDL_ASSOCIATIVITY::ast::node::stmt({::DLDL_ASSOCIATIVITY::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY({::DLDL_ASSOCIATIVITY::ast::Type::ASSOCIATIVITY, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	ASSOCIATIVITY  {
+		auto* const newNode = new DLDL_ASSOCIATIVITY::ast::node::stmt({::DLDL_ASSOCIATIVITY::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY({::DLDL_ASSOCIATIVITY::ast::Type::ASSOCIATIVITY, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
+
 
 %%
 
@@ -91,4 +110,3 @@ deamer::external::cpp::ast::Tree* DLDL_ASSOCIATIVITY::parser::Parser::Parse(cons
 
 	return outputTree;
 }
-

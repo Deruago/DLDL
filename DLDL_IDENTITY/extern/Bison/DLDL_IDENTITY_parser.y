@@ -1,3 +1,6 @@
+%define parse.error verbose
+%define parse.lac full
+
 %{
 #include <iostream>
 #include <vector>
@@ -15,10 +18,12 @@
 #include "DLDL_IDENTITY/Ast/Node/SYMBOLS.h"
 #include "DLDL_IDENTITY/Ast/Node/ESCAPE_CHARS.h"
 
+
 #include "DLDL_IDENTITY/Ast/Node/program.h"
 #include "DLDL_IDENTITY/Ast/Node/stmts.h"
 #include "DLDL_IDENTITY/Ast/Node/stmt.h"
 #include "DLDL_IDENTITY/Ast/Node/name_declaration.h"
+
 
 #ifndef YY_parse_NERRS
 #define YY_parse_NERRS DLDL_IDENTITYnerrs
@@ -35,12 +40,14 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 
 %token<Terminal> NAME
 %token<Terminal> VALUE
+%token<Terminal> SYMBOLS
+%token<Terminal> ESCAPE_CHARS
+
 
 %nterm<DLDL_IDENTITY_program> program
 %nterm<DLDL_IDENTITY_stmts> stmts
 %nterm<DLDL_IDENTITY_stmt> stmt
 %nterm<DLDL_IDENTITY_name_declaration> name_declaration
-
 
 
 %union{
@@ -53,42 +60,59 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_IDENTITY::ast::node::stmts* DLDL_IDENTITY_stmts;
 	::DLDL_IDENTITY::ast::node::stmt* DLDL_IDENTITY_stmt;
 	::DLDL_IDENTITY::ast::node::name_declaration* DLDL_IDENTITY_name_declaration;
+
 }
 
 %%
 
+
 program:
-	stmts {
-		auto* const newNode = new DLDL_IDENTITY::ast::node::program({::DLDL_IDENTITY::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	stmts  {
+		auto* const newNode = new DLDL_IDENTITY::ast::node::program({::DLDL_IDENTITY::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
 ;
 
+
 stmts:
-	stmt stmts {
-		auto* const newNode = new DLDL_IDENTITY::ast::node::stmts({::DLDL_IDENTITY::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, $2 });
+	stmt stmts  {
+		auto* const newNode = new DLDL_IDENTITY::ast::node::stmts({::DLDL_IDENTITY::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| {
-		auto* const newNode = new DLDL_IDENTITY::ast::node::stmts({::DLDL_IDENTITY::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+	|  {
+		auto* const newNode = new DLDL_IDENTITY::ast::node::stmts({::DLDL_IDENTITY::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 stmt:
-	name_declaration {
-		auto* const newNode = new DLDL_IDENTITY::ast::node::stmt({::DLDL_IDENTITY::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	name_declaration  {
+		auto* const newNode = new DLDL_IDENTITY::ast::node::stmt({::DLDL_IDENTITY::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
 
+
 name_declaration:
-	NAME VALUE {
-		auto* const newNode = new DLDL_IDENTITY::ast::node::name_declaration({::DLDL_IDENTITY::ast::Type::name_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_IDENTITY::ast::node::NAME({::DLDL_IDENTITY::ast::Type::NAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), new DLDL_IDENTITY::ast::node::VALUE({::DLDL_IDENTITY::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $2}) });
+	NAME VALUE  {
+		auto* const newNode = new DLDL_IDENTITY::ast::node::name_declaration({::DLDL_IDENTITY::ast::Type::name_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_IDENTITY::ast::node::NAME({::DLDL_IDENTITY::ast::Type::NAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), new DLDL_IDENTITY::ast::node::VALUE({::DLDL_IDENTITY::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $2 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
+
 
 %%
 
@@ -108,4 +132,3 @@ deamer::external::cpp::ast::Tree* DLDL_IDENTITY::parser::Parser::Parse(const std
 
 	return outputTree;
 }
-

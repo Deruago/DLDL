@@ -1,3 +1,6 @@
+%define parse.error verbose
+%define parse.lac full
+
 %{
 #include <iostream>
 #include <vector>
@@ -20,6 +23,7 @@
 #include "DLDL_GRAMMAR/Ast/Node/PRODUCTION_RULE.h"
 #include "DLDL_GRAMMAR/Ast/Node/ESCAPE_CHARS.h"
 
+
 #include "DLDL_GRAMMAR/Ast/Node/program.h"
 #include "DLDL_GRAMMAR/Ast/Node/stmts.h"
 #include "DLDL_GRAMMAR/Ast/Node/stmt.h"
@@ -27,6 +31,7 @@
 #include "DLDL_GRAMMAR/Ast/Node/abstraction.h"
 #include "DLDL_GRAMMAR/Ast/Node/definition.h"
 #include "DLDL_GRAMMAR/Ast/Node/production_rules.h"
+
 
 #ifndef YY_parse_NERRS
 #define YY_parse_NERRS DLDL_GRAMMARnerrs
@@ -41,6 +46,7 @@ int DLDL_GRAMMARlex();
 static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %}
 
+%token<Terminal> COMMENT
 %token<Terminal> START_ABSTRACTION
 %token<Terminal> GROUP_ABSTRACTION
 %token<Terminal> INLINE_ABSTRACTION
@@ -48,6 +54,8 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %token<Terminal> UNKNOWN_ABSTRACTION
 %token<Terminal> NONTERMINAL
 %token<Terminal> PRODUCTION_RULE
+%token<Terminal> ESCAPE_CHARS
+
 
 %nterm<DLDL_GRAMMAR_program> program
 %nterm<DLDL_GRAMMAR_stmts> stmts
@@ -56,7 +64,6 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %nterm<DLDL_GRAMMAR_abstraction> abstraction
 %nterm<DLDL_GRAMMAR_definition> definition
 %nterm<DLDL_GRAMMAR_production_rules> production_rules
-
 
 
 %union{
@@ -77,91 +84,131 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_GRAMMAR::ast::node::abstraction* DLDL_GRAMMAR_abstraction;
 	::DLDL_GRAMMAR::ast::node::definition* DLDL_GRAMMAR_definition;
 	::DLDL_GRAMMAR::ast::node::production_rules* DLDL_GRAMMAR_production_rules;
+
 }
 
 %%
 
+
 program:
-	stmts {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::program({::DLDL_GRAMMAR::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	stmts  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::program({::DLDL_GRAMMAR::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
 ;
 
+
 stmts:
-	stmt stmts {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::stmts({::DLDL_GRAMMAR::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, $2 });
+	stmt stmts  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::stmts({::DLDL_GRAMMAR::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::stmts({::DLDL_GRAMMAR::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+	|  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::stmts({::DLDL_GRAMMAR::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 stmt:
-	abstraction_declaration {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::stmt({::DLDL_GRAMMAR::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	abstraction_declaration  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::stmt({::DLDL_GRAMMAR::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| definition {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::stmt({::DLDL_GRAMMAR::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	| definition  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::stmt({::DLDL_GRAMMAR::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 abstraction_declaration:
-	abstraction NONTERMINAL {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::abstraction_declaration({::DLDL_GRAMMAR::ast::Type::abstraction_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, new DLDL_GRAMMAR::ast::node::NONTERMINAL({::DLDL_GRAMMAR::ast::Type::NONTERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $2}) });
+	abstraction NONTERMINAL  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::abstraction_declaration({::DLDL_GRAMMAR::ast::Type::abstraction_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, new DLDL_GRAMMAR::ast::node::NONTERMINAL({::DLDL_GRAMMAR::ast::Type::NONTERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $2 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 abstraction:
-	GROUP_ABSTRACTION {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::abstraction({::DLDL_GRAMMAR::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION({::DLDL_GRAMMAR::ast::Type::GROUP_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	GROUP_ABSTRACTION  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::abstraction({::DLDL_GRAMMAR::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GRAMMAR::ast::node::GROUP_ABSTRACTION({::DLDL_GRAMMAR::ast::Type::GROUP_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| INLINE_ABSTRACTION {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::abstraction({::DLDL_GRAMMAR::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION({::DLDL_GRAMMAR::ast::Type::INLINE_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| INLINE_ABSTRACTION  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::abstraction({::DLDL_GRAMMAR::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GRAMMAR::ast::node::INLINE_ABSTRACTION({::DLDL_GRAMMAR::ast::Type::INLINE_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| INLINE_GROUP_ABSTRACTION {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::abstraction({::DLDL_GRAMMAR::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION({::DLDL_GRAMMAR::ast::Type::INLINE_GROUP_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| INLINE_GROUP_ABSTRACTION  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::abstraction({::DLDL_GRAMMAR::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 2, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GRAMMAR::ast::node::INLINE_GROUP_ABSTRACTION({::DLDL_GRAMMAR::ast::Type::INLINE_GROUP_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| START_ABSTRACTION {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::abstraction({::DLDL_GRAMMAR::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {3, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GRAMMAR::ast::node::START_ABSTRACTION({::DLDL_GRAMMAR::ast::Type::START_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| START_ABSTRACTION  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::abstraction({::DLDL_GRAMMAR::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 3, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GRAMMAR::ast::node::START_ABSTRACTION({::DLDL_GRAMMAR::ast::Type::START_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| UNKNOWN_ABSTRACTION {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::abstraction({::DLDL_GRAMMAR::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {4, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION({::DLDL_GRAMMAR::ast::Type::UNKNOWN_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| UNKNOWN_ABSTRACTION  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::abstraction({::DLDL_GRAMMAR::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 4, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GRAMMAR::ast::node::UNKNOWN_ABSTRACTION({::DLDL_GRAMMAR::ast::Type::UNKNOWN_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 definition:
-	abstraction NONTERMINAL production_rules {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::definition({::DLDL_GRAMMAR::ast::Type::definition, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, new DLDL_GRAMMAR::ast::node::NONTERMINAL({::DLDL_GRAMMAR::ast::Type::NONTERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $2}), $3 });
+	abstraction NONTERMINAL production_rules  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::definition({::DLDL_GRAMMAR::ast::Type::definition, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, new DLDL_GRAMMAR::ast::node::NONTERMINAL({::DLDL_GRAMMAR::ast::Type::NONTERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $2 }), $3 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| NONTERMINAL production_rules {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::definition({::DLDL_GRAMMAR::ast::Type::definition, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GRAMMAR::ast::node::NONTERMINAL({::DLDL_GRAMMAR::ast::Type::NONTERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), $2 });
+	| NONTERMINAL production_rules  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::definition({::DLDL_GRAMMAR::ast::Type::definition, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GRAMMAR::ast::node::NONTERMINAL({::DLDL_GRAMMAR::ast::Type::NONTERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
 
+
 production_rules:
-	PRODUCTION_RULE production_rules {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::production_rules({::DLDL_GRAMMAR::ast::Type::production_rules, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GRAMMAR::ast::node::PRODUCTION_RULE({::DLDL_GRAMMAR::ast::Type::PRODUCTION_RULE, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), $2 });
+	PRODUCTION_RULE production_rules  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::production_rules({::DLDL_GRAMMAR::ast::Type::production_rules, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GRAMMAR::ast::node::PRODUCTION_RULE({::DLDL_GRAMMAR::ast::Type::PRODUCTION_RULE, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| PRODUCTION_RULE {
-		auto* const newNode = new DLDL_GRAMMAR::ast::node::production_rules({::DLDL_GRAMMAR::ast::Type::production_rules, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GRAMMAR::ast::node::PRODUCTION_RULE({::DLDL_GRAMMAR::ast::Type::PRODUCTION_RULE, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| PRODUCTION_RULE  {
+		auto* const newNode = new DLDL_GRAMMAR::ast::node::production_rules({::DLDL_GRAMMAR::ast::Type::production_rules, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GRAMMAR::ast::node::PRODUCTION_RULE({::DLDL_GRAMMAR::ast::Type::PRODUCTION_RULE, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
+
 
 %%
 
@@ -181,4 +228,3 @@ deamer::external::cpp::ast::Tree* DLDL_GRAMMAR::parser::Parser::Parse(const std:
 
 	return outputTree;
 }
-

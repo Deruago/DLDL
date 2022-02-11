@@ -1,3 +1,6 @@
+%define parse.error verbose
+%define parse.lac full
+
 %{
 #include <iostream>
 #include <vector>
@@ -16,12 +19,14 @@
 #include "DLDL_PRECEDENCE/Ast/Node/SYMBOLS.h"
 #include "DLDL_PRECEDENCE/Ast/Node/ESCAPE_CHARS.h"
 
+
 #include "DLDL_PRECEDENCE/Ast/Node/program.h"
 #include "DLDL_PRECEDENCE/Ast/Node/stmts.h"
 #include "DLDL_PRECEDENCE/Ast/Node/stmt.h"
 #include "DLDL_PRECEDENCE/Ast/Node/localized_precedence.h"
 #include "DLDL_PRECEDENCE/Ast/Node/specific_precedence.h"
 #include "DLDL_PRECEDENCE/Ast/Node/terminal_one_or_more.h"
+
 
 #ifndef YY_parse_NERRS
 #define YY_parse_NERRS DLDL_PRECEDENCEnerrs
@@ -39,6 +44,9 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %token<Terminal> PRECEDENCE
 %token<Terminal> NUMBER
 %token<Terminal> TERMINAL
+%token<Terminal> SYMBOLS
+%token<Terminal> ESCAPE_CHARS
+
 
 %nterm<DLDL_PRECEDENCE_program> program
 %nterm<DLDL_PRECEDENCE_stmts> stmts
@@ -46,7 +54,6 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %nterm<DLDL_PRECEDENCE_localized_precedence> localized_precedence
 %nterm<DLDL_PRECEDENCE_specific_precedence> specific_precedence
 %nterm<DLDL_PRECEDENCE_terminal_one_or_more> terminal_one_or_more
-
 
 
 %union{
@@ -62,64 +69,91 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_PRECEDENCE::ast::node::localized_precedence* DLDL_PRECEDENCE_localized_precedence;
 	::DLDL_PRECEDENCE::ast::node::specific_precedence* DLDL_PRECEDENCE_specific_precedence;
 	::DLDL_PRECEDENCE::ast::node::terminal_one_or_more* DLDL_PRECEDENCE_terminal_one_or_more;
+
 }
 
 %%
 
+
 program:
-	stmts {
-		auto* const newNode = new DLDL_PRECEDENCE::ast::node::program({::DLDL_PRECEDENCE::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	stmts  {
+		auto* const newNode = new DLDL_PRECEDENCE::ast::node::program({::DLDL_PRECEDENCE::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
 ;
 
+
 stmts:
-	stmt stmts {
-		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmts({::DLDL_PRECEDENCE::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, $2 });
+	stmt stmts  {
+		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmts({::DLDL_PRECEDENCE::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| {
-		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmts({::DLDL_PRECEDENCE::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+	|  {
+		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmts({::DLDL_PRECEDENCE::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 stmt:
-	localized_precedence {
-		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmt({::DLDL_PRECEDENCE::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	localized_precedence  {
+		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmt({::DLDL_PRECEDENCE::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| specific_precedence {
-		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmt({::DLDL_PRECEDENCE::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	| specific_precedence  {
+		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmt({::DLDL_PRECEDENCE::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 localized_precedence:
-	PRECEDENCE terminal_one_or_more {
-		auto* const newNode = new DLDL_PRECEDENCE::ast::node::localized_precedence({::DLDL_PRECEDENCE::ast::Type::localized_precedence, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_PRECEDENCE::ast::node::PRECEDENCE({::DLDL_PRECEDENCE::ast::Type::PRECEDENCE, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), $2 });
+	PRECEDENCE terminal_one_or_more  {
+		auto* const newNode = new DLDL_PRECEDENCE::ast::node::localized_precedence({::DLDL_PRECEDENCE::ast::Type::localized_precedence, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_PRECEDENCE::ast::node::PRECEDENCE({::DLDL_PRECEDENCE::ast::Type::PRECEDENCE, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 specific_precedence:
-	PRECEDENCE NUMBER terminal_one_or_more {
-		auto* const newNode = new DLDL_PRECEDENCE::ast::node::specific_precedence({::DLDL_PRECEDENCE::ast::Type::specific_precedence, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_PRECEDENCE::ast::node::PRECEDENCE({::DLDL_PRECEDENCE::ast::Type::PRECEDENCE, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), new DLDL_PRECEDENCE::ast::node::NUMBER({::DLDL_PRECEDENCE::ast::Type::NUMBER, ::deamer::external::cpp::ast::NodeValue::terminal, $2}), $3 });
+	PRECEDENCE NUMBER terminal_one_or_more  {
+		auto* const newNode = new DLDL_PRECEDENCE::ast::node::specific_precedence({::DLDL_PRECEDENCE::ast::Type::specific_precedence, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_PRECEDENCE::ast::node::PRECEDENCE({::DLDL_PRECEDENCE::ast::Type::PRECEDENCE, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), new DLDL_PRECEDENCE::ast::node::NUMBER({::DLDL_PRECEDENCE::ast::Type::NUMBER, ::deamer::external::cpp::ast::NodeValue::terminal, $2 }), $3 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
 
+
 terminal_one_or_more:
-	TERMINAL terminal_one_or_more {
-		auto* const newNode = new DLDL_PRECEDENCE::ast::node::terminal_one_or_more({::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_PRECEDENCE::ast::node::TERMINAL({::DLDL_PRECEDENCE::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), $2 });
+	TERMINAL terminal_one_or_more  {
+		auto* const newNode = new DLDL_PRECEDENCE::ast::node::terminal_one_or_more({::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_PRECEDENCE::ast::node::TERMINAL({::DLDL_PRECEDENCE::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| TERMINAL {
-		auto* const newNode = new DLDL_PRECEDENCE::ast::node::terminal_one_or_more({::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_PRECEDENCE::ast::node::TERMINAL({::DLDL_PRECEDENCE::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| TERMINAL  {
+		auto* const newNode = new DLDL_PRECEDENCE::ast::node::terminal_one_or_more({::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_PRECEDENCE::ast::node::TERMINAL({::DLDL_PRECEDENCE::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
+
 
 %%
 
@@ -139,4 +173,3 @@ deamer::external::cpp::ast::Tree* DLDL_PRECEDENCE::parser::Parser::Parse(const s
 
 	return outputTree;
 }
-

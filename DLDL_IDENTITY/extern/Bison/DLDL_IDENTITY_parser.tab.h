@@ -55,7 +55,9 @@ extern int DLDL_IDENTITYdebug;
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
     NAME = 258,                    /* NAME  */
-    VALUE = 259                    /* VALUE  */
+    VALUE = 259,                   /* VALUE  */
+    SYMBOLS = 260,                 /* SYMBOLS  */
+    ESCAPE_CHARS = 261             /* ESCAPE_CHARS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -64,7 +66,7 @@ extern int DLDL_IDENTITYdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 46 "./DLDL_IDENTITY_parser.y"
+#line 53 "./DLDL_IDENTITY_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_IDENTITY::ast::node::NAME* DLDL_IDENTITY_NAME;
@@ -76,7 +78,8 @@ union YYSTYPE
 	::DLDL_IDENTITY::ast::node::stmt* DLDL_IDENTITY_stmt;
 	::DLDL_IDENTITY::ast::node::name_declaration* DLDL_IDENTITY_name_declaration;
 
-#line 80 "DLDL_IDENTITY_parser.tab.h"
+
+#line 83 "DLDL_IDENTITY_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

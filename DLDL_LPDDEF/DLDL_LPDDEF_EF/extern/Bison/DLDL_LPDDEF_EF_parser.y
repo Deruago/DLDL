@@ -1,3 +1,6 @@
+%define parse.error verbose
+%define parse.lac full
+
 %{
 #include <iostream>
 #include <vector>
@@ -17,6 +20,7 @@
 #include "DLDL_LPDDEF_EF/Ast/Node/SEMICOLON.h"
 #include "DLDL_LPDDEF_EF/Ast/Node/ESCAPE_CHARS.h"
 
+
 #include "DLDL_LPDDEF_EF/Ast/Node/program.h"
 #include "DLDL_LPDDEF_EF/Ast/Node/deamerreserved_star__stmt__.h"
 #include "DLDL_LPDDEF_EF/Ast/Node/stmt.h"
@@ -25,6 +29,7 @@
 #include "DLDL_LPDDEF_EF/Ast/Node/standard_variant_specific_number.h"
 #include "DLDL_LPDDEF_EF/Ast/Node/value.h"
 #include "DLDL_LPDDEF_EF/Ast/Node/enum_name.h"
+
 
 #ifndef YY_parse_NERRS
 #define YY_parse_NERRS DLDL_LPDDEF_EFnerrs
@@ -42,6 +47,10 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %token<Terminal> COMMENT
 %token<Terminal> VARNAME
 %token<Terminal> NUMBER
+%token<Terminal> COLON
+%token<Terminal> SEMICOLON
+%token<Terminal> ESCAPE_CHARS
+
 
 %nterm<DLDL_LPDDEF_EF_program> program
 %nterm<DLDL_LPDDEF_EF_deamerreserved_star__stmt__> deamerreserved_star__stmt__
@@ -51,7 +60,6 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %nterm<DLDL_LPDDEF_EF_standard_variant_specific_number> standard_variant_specific_number
 %nterm<DLDL_LPDDEF_EF_value> value
 %nterm<DLDL_LPDDEF_EF_enum_name> enum_name
-
 
 
 %union{
@@ -70,78 +78,111 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_LPDDEF_EF::ast::node::standard_variant_specific_number* DLDL_LPDDEF_EF_standard_variant_specific_number;
 	::DLDL_LPDDEF_EF::ast::node::value* DLDL_LPDDEF_EF_value;
 	::DLDL_LPDDEF_EF::ast::node::enum_name* DLDL_LPDDEF_EF_enum_name;
+
 }
 
 %%
 
+
 program:
-	deamerreserved_star__stmt__ {
-		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::program({::DLDL_LPDDEF_EF::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	deamerreserved_star__stmt__  {
+		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::program({::DLDL_LPDDEF_EF::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
 ;
 
+
 deamerreserved_star__stmt__:
-	stmt deamerreserved_star__stmt__ {
-		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::deamerreserved_star__stmt__({::DLDL_LPDDEF_EF::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, $2 });
+	stmt deamerreserved_star__stmt__  {
+		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::deamerreserved_star__stmt__({::DLDL_LPDDEF_EF::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, { $1, $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| {
-		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::deamerreserved_star__stmt__({::DLDL_LPDDEF_EF::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+	|  {
+		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::deamerreserved_star__stmt__({::DLDL_LPDDEF_EF::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, {  });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 stmt:
-	comment_line {
-		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::stmt({::DLDL_LPDDEF_EF::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	comment_line  {
+		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::stmt({::DLDL_LPDDEF_EF::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| standard_variant_specific_number {
-		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::stmt({::DLDL_LPDDEF_EF::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	| standard_variant_specific_number  {
+		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::stmt({::DLDL_LPDDEF_EF::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| standard_variant {
-		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::stmt({::DLDL_LPDDEF_EF::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	| standard_variant  {
+		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::stmt({::DLDL_LPDDEF_EF::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 2, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 comment_line:
-	COMMENT {
-		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::comment_line({::DLDL_LPDDEF_EF::ast::Type::comment_line, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LPDDEF_EF::ast::node::COMMENT({::DLDL_LPDDEF_EF::ast::Type::COMMENT, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	COMMENT  {
+		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::comment_line({::DLDL_LPDDEF_EF::ast::Type::comment_line, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_EF::ast::node::COMMENT({::DLDL_LPDDEF_EF::ast::Type::COMMENT, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 standard_variant:
-	enum_name {
-		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::standard_variant({::DLDL_LPDDEF_EF::ast::Type::standard_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	enum_name  {
+		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::standard_variant({::DLDL_LPDDEF_EF::ast::Type::standard_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 standard_variant_specific_number:
-	enum_name value {
-		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::standard_variant_specific_number({::DLDL_LPDDEF_EF::ast::Type::standard_variant_specific_number, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, $2 });
+	enum_name value  {
+		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::standard_variant_specific_number({::DLDL_LPDDEF_EF::ast::Type::standard_variant_specific_number, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 value:
-	NUMBER {
-		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::value({::DLDL_LPDDEF_EF::ast::Type::value, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LPDDEF_EF::ast::node::NUMBER({::DLDL_LPDDEF_EF::ast::Type::NUMBER, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	NUMBER  {
+		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::value({::DLDL_LPDDEF_EF::ast::Type::value, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_EF::ast::node::NUMBER({::DLDL_LPDDEF_EF::ast::Type::NUMBER, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
 
+
 enum_name:
-	VARNAME {
-		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::enum_name({::DLDL_LPDDEF_EF::ast::Type::enum_name, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LPDDEF_EF::ast::node::VARNAME({::DLDL_LPDDEF_EF::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	VARNAME  {
+		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::enum_name({::DLDL_LPDDEF_EF::ast::Type::enum_name, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_EF::ast::node::VARNAME({::DLDL_LPDDEF_EF::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
+
 
 %%
 
@@ -161,4 +202,3 @@ deamer::external::cpp::ast::Tree* DLDL_LPDDEF_EF::parser::Parser::Parse(const st
 
 	return outputTree;
 }
-

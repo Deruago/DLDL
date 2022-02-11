@@ -1,3 +1,6 @@
+%define parse.error verbose
+%define parse.lac full
+
 %{
 #include <iostream>
 #include <vector>
@@ -21,11 +24,13 @@
 #include "DLDL_LEXER/Ast/Node/ESCAPE_CHARS.h"
 #include "DLDL_LEXER/Ast/Node/COMMENT.h"
 
+
 #include "DLDL_LEXER/Ast/Node/program.h"
 #include "DLDL_LEXER/Ast/Node/stmts.h"
 #include "DLDL_LEXER/Ast/Node/stmt.h"
 #include "DLDL_LEXER/Ast/Node/tokendeclaration.h"
 #include "DLDL_LEXER/Ast/Node/abstraction.h"
+
 
 #ifndef YY_parse_NERRS
 #define YY_parse_NERRS DLDL_LEXERnerrs
@@ -48,13 +53,15 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %token<Terminal> UNKNOWN_ABSTRACTION
 %token<Terminal> TERMINAL
 %token<Terminal> REGEX
+%token<Terminal> ESCAPE_CHARS
+%token<Terminal> COMMENT
+
 
 %nterm<DLDL_LEXER_program> program
 %nterm<DLDL_LEXER_stmts> stmts
 %nterm<DLDL_LEXER_stmt> stmt
 %nterm<DLDL_LEXER_tokendeclaration> tokendeclaration
 %nterm<DLDL_LEXER_abstraction> abstraction
-
 
 
 %union{
@@ -74,73 +81,105 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_LEXER::ast::node::stmt* DLDL_LEXER_stmt;
 	::DLDL_LEXER::ast::node::tokendeclaration* DLDL_LEXER_tokendeclaration;
 	::DLDL_LEXER::ast::node::abstraction* DLDL_LEXER_abstraction;
+
 }
 
 %%
 
+
 program:
-	stmts {
-		auto* const newNode = new DLDL_LEXER::ast::node::program({::DLDL_LEXER::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	stmts  {
+		auto* const newNode = new DLDL_LEXER::ast::node::program({::DLDL_LEXER::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
 ;
 
+
 stmts:
-	stmt stmts {
-		auto* const newNode = new DLDL_LEXER::ast::node::stmts({::DLDL_LEXER::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, $2 });
+	stmt stmts  {
+		auto* const newNode = new DLDL_LEXER::ast::node::stmts({::DLDL_LEXER::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| {
-		auto* const newNode = new DLDL_LEXER::ast::node::stmts({::DLDL_LEXER::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+	|  {
+		auto* const newNode = new DLDL_LEXER::ast::node::stmts({::DLDL_LEXER::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 stmt:
-	tokendeclaration {
-		auto* const newNode = new DLDL_LEXER::ast::node::stmt({::DLDL_LEXER::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	tokendeclaration  {
+		auto* const newNode = new DLDL_LEXER::ast::node::stmt({::DLDL_LEXER::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 tokendeclaration:
-	abstraction TERMINAL REGEX {
-		auto* const newNode = new DLDL_LEXER::ast::node::tokendeclaration({::DLDL_LEXER::ast::Type::tokendeclaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, new DLDL_LEXER::ast::node::TERMINAL({::DLDL_LEXER::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $2}), new DLDL_LEXER::ast::node::REGEX({::DLDL_LEXER::ast::Type::REGEX, ::deamer::external::cpp::ast::NodeValue::terminal, $3}) });
+	abstraction TERMINAL REGEX  {
+		auto* const newNode = new DLDL_LEXER::ast::node::tokendeclaration({::DLDL_LEXER::ast::Type::tokendeclaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, new DLDL_LEXER::ast::node::TERMINAL({::DLDL_LEXER::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $2 }), new DLDL_LEXER::ast::node::REGEX({::DLDL_LEXER::ast::Type::REGEX, ::deamer::external::cpp::ast::NodeValue::terminal, $3 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| TERMINAL REGEX {
-		auto* const newNode = new DLDL_LEXER::ast::node::tokendeclaration({::DLDL_LEXER::ast::Type::tokendeclaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::TERMINAL({::DLDL_LEXER::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), new DLDL_LEXER::ast::node::REGEX({::DLDL_LEXER::ast::Type::REGEX, ::deamer::external::cpp::ast::NodeValue::terminal, $2}) });
+	| TERMINAL REGEX  {
+		auto* const newNode = new DLDL_LEXER::ast::node::tokendeclaration({::DLDL_LEXER::ast::Type::tokendeclaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LEXER::ast::node::TERMINAL({::DLDL_LEXER::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), new DLDL_LEXER::ast::node::REGEX({::DLDL_LEXER::ast::Type::REGEX, ::deamer::external::cpp::ast::NodeValue::terminal, $2 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
 
+
 abstraction:
-	DELETE_ABSTRACTION {
-		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::DELETE_ABSTRACTION({::DLDL_LEXER::ast::Type::DELETE_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	DELETE_ABSTRACTION  {
+		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LEXER::ast::node::DELETE_ABSTRACTION({::DLDL_LEXER::ast::Type::DELETE_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| IGNORE_ABSTRACTION {
-		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::IGNORE_ABSTRACTION({::DLDL_LEXER::ast::Type::IGNORE_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| IGNORE_ABSTRACTION  {
+		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LEXER::ast::node::IGNORE_ABSTRACTION({::DLDL_LEXER::ast::Type::IGNORE_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| CRASH_ABSTRACTION {
-		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::CRASH_ABSTRACTION({::DLDL_LEXER::ast::Type::CRASH_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| CRASH_ABSTRACTION  {
+		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 2, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LEXER::ast::node::CRASH_ABSTRACTION({::DLDL_LEXER::ast::Type::CRASH_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| NOVALUE_ABSTRACTION {
-		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {3, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION({::DLDL_LEXER::ast::Type::NOVALUE_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| NOVALUE_ABSTRACTION  {
+		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 3, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION({::DLDL_LEXER::ast::Type::NOVALUE_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| STANDARD_ABSTRACTION {
-		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {4, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::STANDARD_ABSTRACTION({::DLDL_LEXER::ast::Type::STANDARD_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| STANDARD_ABSTRACTION  {
+		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 4, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LEXER::ast::node::STANDARD_ABSTRACTION({::DLDL_LEXER::ast::Type::STANDARD_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| UNKNOWN_ABSTRACTION {
-		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, {5, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION({::DLDL_LEXER::ast::Type::UNKNOWN_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| UNKNOWN_ABSTRACTION  {
+		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 5, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION({::DLDL_LEXER::ast::Type::UNKNOWN_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
+
 
 %%
 
@@ -160,4 +199,3 @@ deamer::external::cpp::ast::Tree* DLDL_LEXER::parser::Parser::Parse(const std::s
 
 	return outputTree;
 }
-

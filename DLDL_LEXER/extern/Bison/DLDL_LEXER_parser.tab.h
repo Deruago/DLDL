@@ -61,7 +61,9 @@ extern int DLDL_LEXERdebug;
     STANDARD_ABSTRACTION = 262,    /* STANDARD_ABSTRACTION  */
     UNKNOWN_ABSTRACTION = 263,     /* UNKNOWN_ABSTRACTION  */
     TERMINAL = 264,                /* TERMINAL  */
-    REGEX = 265                    /* REGEX  */
+    REGEX = 265,                   /* REGEX  */
+    ESCAPE_CHARS = 266,            /* ESCAPE_CHARS  */
+    COMMENT = 267                  /* COMMENT  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -70,7 +72,7 @@ extern int DLDL_LEXERdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 60 "./DLDL_LEXER_parser.y"
+#line 67 "./DLDL_LEXER_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_LEXER::ast::node::DELETE_ABSTRACTION* DLDL_LEXER_DELETE_ABSTRACTION;
@@ -89,7 +91,8 @@ union YYSTYPE
 	::DLDL_LEXER::ast::node::tokendeclaration* DLDL_LEXER_tokendeclaration;
 	::DLDL_LEXER::ast::node::abstraction* DLDL_LEXER_abstraction;
 
-#line 93 "DLDL_LEXER_parser.tab.h"
+
+#line 96 "DLDL_LEXER_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

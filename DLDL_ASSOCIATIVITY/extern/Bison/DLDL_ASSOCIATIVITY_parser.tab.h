@@ -63,7 +63,7 @@ extern int DLDL_ASSOCIATIVITYdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 40 "./DLDL_ASSOCIATIVITY_parser.y"
+#line 45 "./DLDL_ASSOCIATIVITY_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_ASSOCIATIVITY::ast::node::ASSOCIATIVITY* DLDL_ASSOCIATIVITY_ASSOCIATIVITY;
@@ -71,7 +71,8 @@ union YYSTYPE
 	::DLDL_ASSOCIATIVITY::ast::node::stmts* DLDL_ASSOCIATIVITY_stmts;
 	::DLDL_ASSOCIATIVITY::ast::node::stmt* DLDL_ASSOCIATIVITY_stmt;
 
-#line 75 "DLDL_ASSOCIATIVITY_parser.tab.h"
+
+#line 76 "DLDL_ASSOCIATIVITY_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

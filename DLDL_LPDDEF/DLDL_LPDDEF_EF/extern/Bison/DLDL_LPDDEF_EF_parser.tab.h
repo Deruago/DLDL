@@ -56,7 +56,10 @@ extern int DLDL_LPDDEF_EFdebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     COMMENT = 258,                 /* COMMENT  */
     VARNAME = 259,                 /* VARNAME  */
-    NUMBER = 260                   /* NUMBER  */
+    NUMBER = 260,                  /* NUMBER  */
+    COLON = 261,                   /* COLON  */
+    SEMICOLON = 262,               /* SEMICOLON  */
+    ESCAPE_CHARS = 263             /* ESCAPE_CHARS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -65,7 +68,7 @@ extern int DLDL_LPDDEF_EFdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 57 "./DLDL_LPDDEF_EF_parser.y"
+#line 65 "./DLDL_LPDDEF_EF_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_LPDDEF_EF::ast::node::COMMENT* DLDL_LPDDEF_EF_COMMENT;
@@ -83,7 +86,8 @@ union YYSTYPE
 	::DLDL_LPDDEF_EF::ast::node::value* DLDL_LPDDEF_EF_value;
 	::DLDL_LPDDEF_EF::ast::node::enum_name* DLDL_LPDDEF_EF_enum_name;
 
-#line 87 "DLDL_LPDDEF_EF_parser.tab.h"
+
+#line 91 "DLDL_LPDDEF_EF_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

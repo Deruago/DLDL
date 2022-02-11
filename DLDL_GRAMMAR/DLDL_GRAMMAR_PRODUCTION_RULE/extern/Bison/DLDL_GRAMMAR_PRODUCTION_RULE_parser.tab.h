@@ -54,21 +54,26 @@ extern int DLDL_GRAMMAR_PRODUCTION_RULEdebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    VERTICAL_SLASH = 258,          /* VERTICAL_SLASH  */
-    LEFT_PARANTHESIS = 259,        /* LEFT_PARANTHESIS  */
-    RIGHT_PARANTHESIS = 260,       /* RIGHT_PARANTHESIS  */
-    LEFT_BRACKET = 261,            /* LEFT_BRACKET  */
-    RIGHT_BRACKET = 262,           /* RIGHT_BRACKET  */
-    LEFT_SQUARE_BRACKET = 263,     /* LEFT_SQUARE_BRACKET  */
-    RIGHT_SQUARE_BRACKET = 264,    /* RIGHT_SQUARE_BRACKET  */
-    QUESTION_MARK = 265,           /* QUESTION_MARK  */
-    EXCLAMATION_MARK = 266,        /* EXCLAMATION_MARK  */
-    ARROW = 267,                   /* ARROW  */
-    STAR = 268,                    /* STAR  */
-    PLUS = 269,                    /* PLUS  */
-    MINUS = 270,                   /* MINUS  */
-    VALUE = 271,                   /* VALUE  */
-    NUMBER = 272                   /* NUMBER  */
+    ENDING_USELESS_SYMBOLS = 258,  /* ENDING_USELESS_SYMBOLS  */
+    VERTICAL_SLASH = 259,          /* VERTICAL_SLASH  */
+    LEFT_PARANTHESIS = 260,        /* LEFT_PARANTHESIS  */
+    RIGHT_PARANTHESIS = 261,       /* RIGHT_PARANTHESIS  */
+    LEFT_BRACKET = 262,            /* LEFT_BRACKET  */
+    RIGHT_BRACKET = 263,           /* RIGHT_BRACKET  */
+    LEFT_SQUARE_BRACKET = 264,     /* LEFT_SQUARE_BRACKET  */
+    RIGHT_SQUARE_BRACKET = 265,    /* RIGHT_SQUARE_BRACKET  */
+    QUESTION_MARK = 266,           /* QUESTION_MARK  */
+    EXCLAMATION_MARK = 267,        /* EXCLAMATION_MARK  */
+    ARROW = 268,                   /* ARROW  */
+    STAR = 269,                    /* STAR  */
+    PLUS = 270,                    /* PLUS  */
+    MINUS = 271,                   /* MINUS  */
+    VALUE = 272,                   /* VALUE  */
+    NUMBER = 273,                  /* NUMBER  */
+    SINGLE_LINE_COMMENT = 274,     /* SINGLE_LINE_COMMENT  */
+    MULTI_LINE_COMMENT = 275,      /* MULTI_LINE_COMMENT  */
+    SYMBOLS = 276,                 /* SYMBOLS  */
+    ESCAPE_CHARS = 277             /* ESCAPE_CHARS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -77,7 +82,7 @@ extern int DLDL_GRAMMAR_PRODUCTION_RULEdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 89 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+#line 99 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ENDING_USELESS_SYMBOLS* DLDL_GRAMMAR_PRODUCTION_RULE_ENDING_USELESS_SYMBOLS;
@@ -112,7 +117,8 @@ union YYSTYPE
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::min_max_group* DLDL_GRAMMAR_PRODUCTION_RULE_min_max_group;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::extension_group* DLDL_GRAMMAR_PRODUCTION_RULE_extension_group;
 
-#line 116 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.h"
+
+#line 122 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

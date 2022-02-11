@@ -69,7 +69,9 @@ extern int DLDL_LPDDEF_DFdebug;
     COMMENT = 270,                 /* COMMENT  */
     VARNAME = 271,                 /* VARNAME  */
     NUMBER = 272,                  /* NUMBER  */
-    STRING = 273                   /* STRING  */
+    STRING = 273,                  /* STRING  */
+    SEMICOLON = 274,               /* SEMICOLON  */
+    ESCAPE_CHARS = 275             /* ESCAPE_CHARS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -78,7 +80,7 @@ extern int DLDL_LPDDEF_DFdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 98 "./DLDL_LPDDEF_DF_parser.y"
+#line 105 "./DLDL_LPDDEF_DF_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_LPDDEF_DF::ast::node::LAB* DLDL_LPDDEF_DF_LAB;
@@ -116,7 +118,8 @@ union YYSTYPE
 	::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COLON__VARNAME__* DLDL_LPDDEF_DF_deamerreserved_star__COLON__VARNAME__;
 	::DLDL_LPDDEF_DF::ast::node::var_name* DLDL_LPDDEF_DF_var_name;
 
-#line 120 "DLDL_LPDDEF_DF_parser.tab.h"
+
+#line 123 "DLDL_LPDDEF_DF_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -1,3 +1,6 @@
+%define parse.error verbose
+%define parse.lac full
+
 %{
 #include <iostream>
 #include <vector>
@@ -17,6 +20,7 @@
 #include "DLDL_LDOSTRUCT/Ast/Node/INDENTED_VALUE.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/ESCAPE_CHARS.h"
 
+
 #include "DLDL_LDOSTRUCT/Ast/Node/program.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__stmt__.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/stmt.h"
@@ -25,6 +29,7 @@
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_block.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/deamerreserved_star__argument_stmt__.h"
 #include "DLDL_LDOSTRUCT/Ast/Node/argument_stmt.h"
+
 
 #ifndef YY_parse_NERRS
 #define YY_parse_NERRS DLDL_LDOSTRUCTnerrs
@@ -44,6 +49,8 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %token<Terminal> RIGHT_ANGLE_BRACKET
 %token<Terminal> VARNAME
 %token<Terminal> INDENTED_VALUE
+%token<Terminal> ESCAPE_CHARS
+
 
 %nterm<DLDL_LDOSTRUCT_program> program
 %nterm<DLDL_LDOSTRUCT_deamerreserved_star__stmt__> deamerreserved_star__stmt__
@@ -53,7 +60,6 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %nterm<DLDL_LDOSTRUCT_argument_block> argument_block
 %nterm<DLDL_LDOSTRUCT_deamerreserved_star__argument_stmt__> deamerreserved_star__argument_stmt__
 %nterm<DLDL_LDOSTRUCT_argument_stmt> argument_stmt
-
 
 
 %union{
@@ -72,82 +78,121 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_LDOSTRUCT::ast::node::argument_block* DLDL_LDOSTRUCT_argument_block;
 	::DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__* DLDL_LDOSTRUCT_deamerreserved_star__argument_stmt__;
 	::DLDL_LDOSTRUCT::ast::node::argument_stmt* DLDL_LDOSTRUCT_argument_stmt;
+
 }
 
 %%
 
+
 program:
-	deamerreserved_star__stmt__ {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::program({::DLDL_LDOSTRUCT::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	deamerreserved_star__stmt__  {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::program({::DLDL_LDOSTRUCT::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
 ;
 
+
 deamerreserved_star__stmt__:
-	stmt deamerreserved_star__stmt__ {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, $2 });
+	stmt deamerreserved_star__stmt__  {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, { $1, $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+	|  {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, {  });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 stmt:
-	argument {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::stmt({::DLDL_LDOSTRUCT::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	argument  {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::stmt({::DLDL_LDOSTRUCT::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 argument:
-	argument_name COLON VARNAME {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument({::DLDL_LDOSTRUCT::ast::Type::argument, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $3}) });
+	argument_name COLON VARNAME  {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument({::DLDL_LDOSTRUCT::ast::Type::argument, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $3 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
+		delete $2;
 	}
-	| argument_name COLON argument_block {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument({::DLDL_LDOSTRUCT::ast::Type::argument, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, $3 });
+	| argument_name COLON argument_block  {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument({::DLDL_LDOSTRUCT::ast::Type::argument, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, $3 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
+		delete $2;
 	}
 ;
+
 
 argument_name:
-	VARNAME {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_name({::DLDL_LDOSTRUCT::ast::Type::argument_name, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	VARNAME  {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_name({::DLDL_LDOSTRUCT::ast::Type::argument_name, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 argument_block:
-	LEFT_ANGLE_BRACKET deamerreserved_star__argument_stmt__ RIGHT_ANGLE_BRACKET {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_block({::DLDL_LDOSTRUCT::ast::Type::argument_block, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $2 });
+	LEFT_ANGLE_BRACKET deamerreserved_star__argument_stmt__ RIGHT_ANGLE_BRACKET  {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_block({::DLDL_LDOSTRUCT::ast::Type::argument_block, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
+		delete $1;
+		delete $3;
 	}
 ;
+
 
 deamerreserved_star__argument_stmt__:
-	argument_stmt deamerreserved_star__argument_stmt__ {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, $2 });
+	argument_stmt deamerreserved_star__argument_stmt__  {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, { $1, $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+	|  {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, {  });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
 
+
 argument_stmt:
-	INDENTED_VALUE {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE({::DLDL_LDOSTRUCT::ast::Type::INDENTED_VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	INDENTED_VALUE  {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE({::DLDL_LDOSTRUCT::ast::Type::INDENTED_VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| VARNAME {
-		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	| VARNAME  {
+		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
+
 
 %%
 
@@ -167,4 +212,3 @@ deamer::external::cpp::ast::Tree* DLDL_LDOSTRUCT::parser::Parser::Parse(const st
 
 	return outputTree;
 }
-

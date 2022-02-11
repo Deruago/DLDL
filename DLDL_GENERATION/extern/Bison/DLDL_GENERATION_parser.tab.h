@@ -57,7 +57,9 @@ extern int DLDL_GENERATIONdebug;
     GENERATE = 258,                /* GENERATE  */
     INTEGRATE = 259,               /* INTEGRATE  */
     ARGUMENT = 260,                /* ARGUMENT  */
-    VALUE = 261                    /* VALUE  */
+    VALUE = 261,                   /* VALUE  */
+    SYMBOLS = 262,                 /* SYMBOLS  */
+    ESCAPE_CHARS = 263             /* ESCAPE_CHARS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -66,7 +68,7 @@ extern int DLDL_GENERATIONdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 60 "./DLDL_GENERATION_parser.y"
+#line 67 "./DLDL_GENERATION_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_GENERATION::ast::node::GENERATE* DLDL_GENERATION_GENERATE;
@@ -85,7 +87,8 @@ union YYSTYPE
 	::DLDL_GENERATION::ast::node::tool* DLDL_GENERATION_tool;
 	::DLDL_GENERATION::ast::node::argument_data* DLDL_GENERATION_argument_data;
 
-#line 89 "DLDL_GENERATION_parser.tab.h"
+
+#line 92 "DLDL_GENERATION_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

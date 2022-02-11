@@ -56,7 +56,9 @@ extern int DLDL_PRECEDENCEdebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     PRECEDENCE = 258,              /* PRECEDENCE  */
     NUMBER = 259,                  /* NUMBER  */
-    TERMINAL = 260                 /* TERMINAL  */
+    TERMINAL = 260,                /* TERMINAL  */
+    SYMBOLS = 261,                 /* SYMBOLS  */
+    ESCAPE_CHARS = 262             /* ESCAPE_CHARS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -65,7 +67,7 @@ extern int DLDL_PRECEDENCEdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 52 "./DLDL_PRECEDENCE_parser.y"
+#line 59 "./DLDL_PRECEDENCE_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_PRECEDENCE::ast::node::PRECEDENCE* DLDL_PRECEDENCE_PRECEDENCE;
@@ -80,7 +82,8 @@ union YYSTYPE
 	::DLDL_PRECEDENCE::ast::node::specific_precedence* DLDL_PRECEDENCE_specific_precedence;
 	::DLDL_PRECEDENCE::ast::node::terminal_one_or_more* DLDL_PRECEDENCE_terminal_one_or_more;
 
-#line 84 "DLDL_PRECEDENCE_parser.tab.h"
+
+#line 87 "DLDL_PRECEDENCE_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

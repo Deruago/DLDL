@@ -1,3 +1,6 @@
+%define parse.error verbose
+%define parse.lac full
+
 %{
 #include <iostream>
 #include <vector>
@@ -17,6 +20,7 @@
 #include "DLDL_GENERATION/Ast/Node/SYMBOLS.h"
 #include "DLDL_GENERATION/Ast/Node/ESCAPE_CHARS.h"
 
+
 #include "DLDL_GENERATION/Ast/Node/program.h"
 #include "DLDL_GENERATION/Ast/Node/stmts.h"
 #include "DLDL_GENERATION/Ast/Node/stmt.h"
@@ -26,6 +30,7 @@
 #include "DLDL_GENERATION/Ast/Node/type.h"
 #include "DLDL_GENERATION/Ast/Node/tool.h"
 #include "DLDL_GENERATION/Ast/Node/argument_data.h"
+
 
 #ifndef YY_parse_NERRS
 #define YY_parse_NERRS DLDL_GENERATIONnerrs
@@ -44,6 +49,9 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %token<Terminal> INTEGRATE
 %token<Terminal> ARGUMENT
 %token<Terminal> VALUE
+%token<Terminal> SYMBOLS
+%token<Terminal> ESCAPE_CHARS
+
 
 %nterm<DLDL_GENERATION_program> program
 %nterm<DLDL_GENERATION_stmts> stmts
@@ -54,7 +62,6 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %nterm<DLDL_GENERATION_type> type
 %nterm<DLDL_GENERATION_tool> tool
 %nterm<DLDL_GENERATION_argument_data> argument_data
-
 
 
 %union{
@@ -74,89 +81,127 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_GENERATION::ast::node::type* DLDL_GENERATION_type;
 	::DLDL_GENERATION::ast::node::tool* DLDL_GENERATION_tool;
 	::DLDL_GENERATION::ast::node::argument_data* DLDL_GENERATION_argument_data;
+
 }
 
 %%
 
+
 program:
-	stmts {
-		auto* const newNode = new DLDL_GENERATION::ast::node::program({::DLDL_GENERATION::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	stmts  {
+		auto* const newNode = new DLDL_GENERATION::ast::node::program({::DLDL_GENERATION::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
 ;
 
+
 stmts:
-	stmt stmts {
-		auto* const newNode = new DLDL_GENERATION::ast::node::stmts({::DLDL_GENERATION::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1, $2 });
+	stmt stmts  {
+		auto* const newNode = new DLDL_GENERATION::ast::node::stmts({::DLDL_GENERATION::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| {
-		auto* const newNode = new DLDL_GENERATION::ast::node::stmts({::DLDL_GENERATION::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+	|  {
+		auto* const newNode = new DLDL_GENERATION::ast::node::stmts({::DLDL_GENERATION::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 stmt:
-	generate_declaration {
-		auto* const newNode = new DLDL_GENERATION::ast::node::stmt({::DLDL_GENERATION::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	generate_declaration  {
+		auto* const newNode = new DLDL_GENERATION::ast::node::stmt({::DLDL_GENERATION::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| integrate_declaration {
-		auto* const newNode = new DLDL_GENERATION::ast::node::stmt({::DLDL_GENERATION::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	| integrate_declaration  {
+		auto* const newNode = new DLDL_GENERATION::ast::node::stmt({::DLDL_GENERATION::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| argument_declaration {
-		auto* const newNode = new DLDL_GENERATION::ast::node::stmt({::DLDL_GENERATION::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, {2, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { $1 });
+	| argument_declaration  {
+		auto* const newNode = new DLDL_GENERATION::ast::node::stmt({::DLDL_GENERATION::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 2, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 generate_declaration:
-	GENERATE type tool {
-		auto* const newNode = new DLDL_GENERATION::ast::node::generate_declaration({::DLDL_GENERATION::ast::Type::generate_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GENERATION::ast::node::GENERATE({::DLDL_GENERATION::ast::Type::GENERATE, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), $2, $3 });
+	GENERATE type tool  {
+		auto* const newNode = new DLDL_GENERATION::ast::node::generate_declaration({::DLDL_GENERATION::ast::Type::generate_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GENERATION::ast::node::GENERATE({::DLDL_GENERATION::ast::Type::GENERATE, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $2, $3 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 integrate_declaration:
-	INTEGRATE tool tool {
-		auto* const newNode = new DLDL_GENERATION::ast::node::integrate_declaration({::DLDL_GENERATION::ast::Type::integrate_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GENERATION::ast::node::INTEGRATE({::DLDL_GENERATION::ast::Type::INTEGRATE, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), $2, $3 });
+	INTEGRATE tool tool  {
+		auto* const newNode = new DLDL_GENERATION::ast::node::integrate_declaration({::DLDL_GENERATION::ast::Type::integrate_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GENERATION::ast::node::INTEGRATE({::DLDL_GENERATION::ast::Type::INTEGRATE, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $2, $3 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 argument_declaration:
-	ARGUMENT tool argument_data {
-		auto* const newNode = new DLDL_GENERATION::ast::node::argument_declaration({::DLDL_GENERATION::ast::Type::argument_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GENERATION::ast::node::ARGUMENT({::DLDL_GENERATION::ast::Type::ARGUMENT, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), $2, $3 });
+	ARGUMENT tool argument_data  {
+		auto* const newNode = new DLDL_GENERATION::ast::node::argument_declaration({::DLDL_GENERATION::ast::Type::argument_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GENERATION::ast::node::ARGUMENT({::DLDL_GENERATION::ast::Type::ARGUMENT, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $2, $3 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 type:
-	VALUE {
-		auto* const newNode = new DLDL_GENERATION::ast::node::type({::DLDL_GENERATION::ast::Type::type, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GENERATION::ast::node::VALUE({::DLDL_GENERATION::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	VALUE  {
+		auto* const newNode = new DLDL_GENERATION::ast::node::type({::DLDL_GENERATION::ast::Type::type, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GENERATION::ast::node::VALUE({::DLDL_GENERATION::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
 
 tool:
-	VALUE {
-		auto* const newNode = new DLDL_GENERATION::ast::node::tool({::DLDL_GENERATION::ast::Type::tool, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GENERATION::ast::node::VALUE({::DLDL_GENERATION::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $1}) });
+	VALUE  {
+		auto* const newNode = new DLDL_GENERATION::ast::node::tool({::DLDL_GENERATION::ast::Type::tool, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GENERATION::ast::node::VALUE({::DLDL_GENERATION::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
 
+
 argument_data:
-	VALUE argument_data {
-		auto* const newNode = new DLDL_GENERATION::ast::node::argument_data({::DLDL_GENERATION::ast::Type::argument_data, ::deamer::external::cpp::ast::NodeValue::nonterminal, {0, ::deamer::external::cpp::ast::ProductionRuleType::user}}, { new DLDL_GENERATION::ast::node::VALUE({::DLDL_GENERATION::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $1}), $2 });
+	VALUE argument_data  {
+		auto* const newNode = new DLDL_GENERATION::ast::node::argument_data({::DLDL_GENERATION::ast::Type::argument_data, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GENERATION::ast::node::VALUE({::DLDL_GENERATION::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $2 });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
-	| {
-		auto* const newNode = new DLDL_GENERATION::ast::node::argument_data({::DLDL_GENERATION::ast::Type::argument_data, ::deamer::external::cpp::ast::NodeValue::nonterminal, {1, ::deamer::external::cpp::ast::ProductionRuleType::user}}, {  });
+	|  {
+		auto* const newNode = new DLDL_GENERATION::ast::node::argument_data({::DLDL_GENERATION::ast::Type::argument_data, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
 	}
 ;
+
+
 
 %%
 
@@ -176,4 +221,3 @@ deamer::external::cpp::ast::Tree* DLDL_GENERATION::parser::Parser::Parse(const s
 
 	return outputTree;
 }
-

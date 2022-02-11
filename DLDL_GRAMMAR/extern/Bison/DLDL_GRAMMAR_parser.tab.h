@@ -54,13 +54,15 @@ extern int DLDL_GRAMMARdebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    START_ABSTRACTION = 258,       /* START_ABSTRACTION  */
-    GROUP_ABSTRACTION = 259,       /* GROUP_ABSTRACTION  */
-    INLINE_ABSTRACTION = 260,      /* INLINE_ABSTRACTION  */
-    INLINE_GROUP_ABSTRACTION = 261, /* INLINE_GROUP_ABSTRACTION  */
-    UNKNOWN_ABSTRACTION = 262,     /* UNKNOWN_ABSTRACTION  */
-    NONTERMINAL = 263,             /* NONTERMINAL  */
-    PRODUCTION_RULE = 264          /* PRODUCTION_RULE  */
+    COMMENT = 258,                 /* COMMENT  */
+    START_ABSTRACTION = 259,       /* START_ABSTRACTION  */
+    GROUP_ABSTRACTION = 260,       /* GROUP_ABSTRACTION  */
+    INLINE_ABSTRACTION = 261,      /* INLINE_ABSTRACTION  */
+    INLINE_GROUP_ABSTRACTION = 262, /* INLINE_GROUP_ABSTRACTION  */
+    UNKNOWN_ABSTRACTION = 263,     /* UNKNOWN_ABSTRACTION  */
+    NONTERMINAL = 264,             /* NONTERMINAL  */
+    PRODUCTION_RULE = 265,         /* PRODUCTION_RULE  */
+    ESCAPE_CHARS = 266             /* ESCAPE_CHARS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -69,7 +71,7 @@ extern int DLDL_GRAMMARdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 62 "./DLDL_GRAMMAR_parser.y"
+#line 69 "./DLDL_GRAMMAR_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_GRAMMAR::ast::node::COMMENT* DLDL_GRAMMAR_COMMENT;
@@ -89,7 +91,8 @@ union YYSTYPE
 	::DLDL_GRAMMAR::ast::node::definition* DLDL_GRAMMAR_definition;
 	::DLDL_GRAMMAR::ast::node::production_rules* DLDL_GRAMMAR_production_rules;
 
-#line 93 "DLDL_GRAMMAR_parser.tab.h"
+
+#line 96 "DLDL_GRAMMAR_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
