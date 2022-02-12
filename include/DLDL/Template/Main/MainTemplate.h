@@ -635,14 +635,25 @@ namespace DLDL::filetemplate
 			{
 				type = ::DLDL::filetemplate::mainTemplate::Type::file_;
 				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>(
-					{GenerateVariable(maintemplate_->root_language_includes_->Variable_Field()),
-					 GenerateVariable("\n#include \"Deamer/File/Generate/Compiler"),
+					{GenerateVariable(
+						 "/* \r\n * This file is auto-generated and auto-maintained by DLDL\r\n * "
+						 "Do not change code in this as it can be overwritten"),
 					 GenerateVariable("."),
-					 GenerateVariable("h\"\n\nint main(int argc, char* argv[])\n"),
-					 GenerateVariable("{"), GenerateVariable("\n\t"),
+					 GenerateVariable(
+						 "\r\n *\r\n * For more information see the DLDL repo: https://github"),
+					 GenerateVariable("."),
+					 GenerateVariable("com/Deruago/DLDL\r\n * For more information about Deamer: "
+									  "https://github"),
+					 GenerateVariable("."),
+					 GenerateVariable("com/Deruago/theDeamerProject\r\n */\r\n\r\n"),
+					 GenerateVariable(maintemplate_->root_language_includes_->Variable_Field()),
+					 GenerateVariable("\r\n#include \"Deamer/File/Generate/Compiler"),
+					 GenerateVariable("."),
+					 GenerateVariable("h\"\r\n\r\nint main(int argc, char* argv[])\r\n"),
+					 GenerateVariable("{"), GenerateVariable("\r\n\t"),
 					 GenerateVariable(maintemplate_->generate_root_language_->Variable_Field()),
-					 GenerateVariable("\n\n\treturn 0;\n"), GenerateVariable("}"),
-					 GenerateVariable("\n")}));
+					 GenerateVariable("\r\n\r\n\treturn 0;\r\n"), GenerateVariable("}"),
+					 GenerateVariable("\r\n")}));
 				Content_->type = ::DLDL::filetemplate::mainTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Class_postfix_) =
@@ -1138,14 +1149,14 @@ namespace DLDL::filetemplate
 				this,
 				std::vector<VariableBase*>(
 					{GenerateVariable("\t// Generate: "), GenerateVariable(root_language_->This()),
-					 GenerateVariable("\n\t::"), GenerateVariable(root_language_->This()),
+					 GenerateVariable("\r\n\t::"), GenerateVariable(root_language_->This()),
 					 GenerateVariable("::CompilerGenerator "),
 					 GenerateVariable(root_language_->This()),
-					 GenerateVariable("_compiler;\n\t::deamer::file::generate::Compiler "),
+					 GenerateVariable("_compiler;\r\n\t::deamer::file::generate::Compiler "),
 					 GenerateVariable(root_language_->This()), GenerateVariable("_WriteToDisk("),
 					 GenerateVariable(root_language_->This()), GenerateVariable("_compiler"),
-					 GenerateVariable("."), GenerateVariable("Generate());\n\t"),
-					 GenerateVariable(optional_project_type_->This()), GenerateVariable("\n\t"),
+					 GenerateVariable("."), GenerateVariable("Generate());\r\n\t"),
+					 GenerateVariable(optional_project_type_->This()), GenerateVariable("\r\n\t"),
 					 GenerateVariable(root_language_->This()), GenerateVariable("_WriteToDisk"),
 					 GenerateVariable("."), GenerateVariable("Generate();")}));
 			*left_angle_bracket_ = Variable_left_angle_bracket_(

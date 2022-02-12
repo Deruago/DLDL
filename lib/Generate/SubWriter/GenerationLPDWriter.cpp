@@ -9,7 +9,7 @@ DLDL::generate::sub::GenerationLPDWriter::GetFileContentHeaderFile(ir::Language*
 
 	auto* generation = static_cast<ir::special::Generation*>(lpd.GetIR());
 
-	auto generator = DLDL::filetemplate::GenerationTemplate();
+	auto generator = DLDL::filetemplate::GenerationHTemplate();
 
 	FillInDefaultVariablesInConstruction(generator, language);
 

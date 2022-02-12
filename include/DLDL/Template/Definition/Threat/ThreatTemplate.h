@@ -632,60 +632,71 @@ namespace DLDL::filetemplate
 			{
 				type = ::DLDL::filetemplate::ThreatTemplate::Type::file_;
 				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>(
-					{GenerateVariable("#ifndef "),
+					{GenerateVariable(
+						 "/* \r\n * This file is auto-generated and auto-maintained by DLDL\r\n * "
+						 "Do not change code in this as it can be overwritten"),
+					 GenerateVariable("."),
+					 GenerateVariable(
+						 "\r\n *\r\n * For more information see the DLDL repo: https://github"),
+					 GenerateVariable("."),
+					 GenerateVariable("com/Deruago/DLDL\r\n * For more information about Deamer: "
+									  "https://github"),
+					 GenerateVariable("."),
+					 GenerateVariable("com/Deruago/theDeamerProject\r\n */\r\n\r\n#ifndef "),
 					 GenerateVariable(threattemplate_->header_guard_->This()),
-					 GenerateVariable("\n#define "),
+					 GenerateVariable("\r\n#define "),
 					 GenerateVariable(threattemplate_->header_guard_->This()),
 					 GenerateVariable(
-						 "\n\n#include "
+						 "\r\n\r\n#include "
 						 "\"Deamer/Language/Generator/Definition/Property/Standard/Main/Threat"),
 					 GenerateVariable("."),
-					 GenerateVariable("h\"\n#include "
+					 GenerateVariable("h\"\r\n#include "
 									  "\"Deamer/Language/Type/Definition/Object/Main/Threat/"
 									  "Analyzer/Combined/Deamer/DeamerCore"),
 					 GenerateVariable("."),
-					 GenerateVariable("h\"\n\nnamespace "),
+					 GenerateVariable("h\"\r\n\r\nnamespace "),
 					 GenerateVariable(threattemplate_->language_full_name_->This()),
-					 GenerateVariable("\n"),
+					 GenerateVariable("\r\n"),
 					 GenerateVariable("{"),
-					 GenerateVariable("\n\tclass Language;\n\n\t/*!\t"),
+					 GenerateVariable("\r\n\tclass Language;\r\n\r\n\t/*!\t"),
 					 GenerateVariable("\\"),
-					 GenerateVariable("class Threat\n\t *\n\t *\t"),
+					 GenerateVariable("class Threat\r\n\t *\r\n\t *\t"),
 					 GenerateVariable("\\"),
 					 GenerateVariable("brief This contains the threat LPD of the language "),
 					 GenerateVariable(threattemplate_->language_full_name_->This()),
-					 GenerateVariable("\n\t *\n\t *\t"),
+					 GenerateVariable("\r\n\t *\r\n\t *\t"),
 					 GenerateVariable("\\"),
 					 GenerateVariable("note This is auto-generated via the DLDL definition"),
 					 GenerateVariable("."),
-					 GenerateVariable("\n\t */\n\tclass Threat : public "
+					 GenerateVariable("\r\n\t */\r\n\tclass Threat : public "
 									  "::deamer::language::generator::definition::property::"
-									  "standard::Threat<\n\t\t\t  ::"),
+									  "standard::Threat<\r\n\t\t\t  ::"),
 					 GenerateVariable(threattemplate_->language_full_name_->This()),
-					 GenerateVariable("::Language, "
-									  "::deamer::language::type::definition::object::main::threat::"
-									  "\n\t\t\t\t\t\t\t\t\t\t\tanalyzer::deamer::DeamerCore>\n\t"),
+					 GenerateVariable(
+						 "::Language, "
+						 "::deamer::language::type::definition::object::main::threat::"
+						 "\r\n\t\t\t\t\t\t\t\t\t\t\tanalyzer::deamer::DeamerCore>\r\n\t"),
 					 GenerateVariable("{"),
-					 GenerateVariable("\n\tpublic:\n\t\tThreat(::"),
+					 GenerateVariable("\r\n\tpublic:\r\n\t\tThreat(::"),
 					 GenerateVariable(threattemplate_->language_full_name_->This()),
-					 GenerateVariable("::Language* language)\n\t\t\t: "
+					 GenerateVariable("::Language* language)\r\n\t\t\t: "
 									  "::deamer::language::generator::definition::property::"
-									  "standard::Threat<\n\t\t\t\t  ::"),
+									  "standard::Threat<\r\n\t\t\t\t  ::"),
 					 GenerateVariable(threattemplate_->language_full_name_->This()),
 					 GenerateVariable("::Language, "
 									  "::deamer::language::type::definition::object::main::"
-									  "\n\t\t\t\t\t\t\t\t\t\t\t\tthreat::analyzer::deamer::"
-									  "DeamerCore>(language)\n\t\t"),
+									  "\r\n\t\t\t\t\t\t\t\t\t\t\t\tthreat::analyzer::deamer::"
+									  "DeamerCore>(language)\r\n\t\t"),
 					 GenerateVariable("{"),
-					 GenerateVariable("\n\t\t"),
+					 GenerateVariable("\r\n\t\t"),
 					 GenerateVariable("}"),
-					 GenerateVariable("\n\t\t~Threat() override = default;\n\t"),
+					 GenerateVariable("\r\n\t\t~Threat() override = default;\r\n\t"),
 					 GenerateVariable("}"),
-					 GenerateVariable(";\n"),
+					 GenerateVariable(";\r\n"),
 					 GenerateVariable("}"),
-					 GenerateVariable("\n\n#endif // "),
+					 GenerateVariable("\r\n\r\n#endif // "),
 					 GenerateVariable(threattemplate_->header_guard_->This()),
-					 GenerateVariable("\n")}));
+					 GenerateVariable("\r\n")}));
 				Content_->type = ::DLDL::filetemplate::ThreatTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Class_postfix_) =
@@ -693,11 +704,11 @@ namespace DLDL::filetemplate
 				Class_postfix_->type = ::DLDL::filetemplate::ThreatTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Extension_) =
-					VariableBase(std::vector<VariableBase*>({}));
+					VariableBase(std::vector<VariableBase*>({GenerateVariable("h")}));
 				Extension_->type = ::DLDL::filetemplate::ThreatTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(File_name_) =
-					VariableBase(std::vector<VariableBase*>({}));
+					VariableBase(std::vector<VariableBase*>({GenerateVariable("Threat")}));
 				File_name_->type = ::DLDL::filetemplate::ThreatTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Namespace_) = VariableBase(
@@ -705,7 +716,7 @@ namespace DLDL::filetemplate
 				Namespace_->type = ::DLDL::filetemplate::ThreatTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Target_language_) =
-					VariableBase(std::vector<VariableBase*>({}));
+					VariableBase(std::vector<VariableBase*>({GenerateVariable("C++")}));
 				Target_language_->type = ::DLDL::filetemplate::ThreatTemplate::Type::Scope;
 			}
 

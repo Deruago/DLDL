@@ -662,56 +662,66 @@ namespace DLDL::filetemplate
 			{
 				type = ::DLDL::filetemplate::GrammarHTemplate::Type::file_;
 				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>(
-					{GenerateVariable("#ifndef "),
+					{GenerateVariable(
+						 "/* \r\n * This file is auto-generated and auto-maintained by DLDL\r\n * "
+						 "Do not change code in this as it can be overwritten"),
+					 GenerateVariable("."),
+					 GenerateVariable(
+						 "\r\n *\r\n * For more information see the DLDL repo: https://github"),
+					 GenerateVariable("."),
+					 GenerateVariable("com/Deruago/DLDL\r\n * For more information about Deamer: "
+									  "https://github"),
+					 GenerateVariable("."),
+					 GenerateVariable("com/Deruago/theDeamerProject\r\n */\r\n\r\n#ifndef "),
 					 GenerateVariable(grammarhtemplate_->header_guard_->This()),
-					 GenerateVariable("\n#define "),
+					 GenerateVariable("\r\n#define "),
 					 GenerateVariable(grammarhtemplate_->header_guard_->This()),
 					 GenerateVariable(
-						 "\n\n#include "
+						 "\r\n\r\n#include "
 						 "\"Deamer/Language/Generator/Definition/Property/User/Main/Grammar"),
 					 GenerateVariable("."),
-					 GenerateVariable("h\"\n"),
+					 GenerateVariable("h\"\r\n"),
 					 GenerateVariable(grammarhtemplate_->uninitialized_include_->This()),
-					 GenerateVariable("\n\nnamespace "),
+					 GenerateVariable("\r\n\r\nnamespace "),
 					 GenerateVariable(grammarhtemplate_->language_full_name_->This()),
-					 GenerateVariable("\n"),
+					 GenerateVariable("\r\n"),
 					 GenerateVariable("{"),
-					 GenerateVariable("\n\tclass Language;\n\n\t/*!\t"),
+					 GenerateVariable("\r\n\tclass Language;\r\n\r\n\t/*!\t"),
 					 GenerateVariable("\\"),
-					 GenerateVariable("class Grammar\n\t *\n\t *\t"),
+					 GenerateVariable("class Grammar\r\n\t *\r\n\t *\t"),
 					 GenerateVariable("\\"),
 					 GenerateVariable("brief This contains the grammar LPD of the language "),
 					 GenerateVariable(grammarhtemplate_->language_full_name_->This()),
-					 GenerateVariable("\n\t *\n\t *\t"),
+					 GenerateVariable("\r\n\t *\r\n\t *\t"),
 					 GenerateVariable("\\"),
 					 GenerateVariable("note This is auto-generated via the DLDL definition"),
 					 GenerateVariable("."),
-					 GenerateVariable("\n\t */\n\tclass Grammar : public "
+					 GenerateVariable("\r\n\t */\r\n\tclass Grammar : public "
 									  "::deamer::language::generator::definition::property::user::"
-									  "Grammar<\n\t\t\t\t\t\t\t\t::"),
+									  "Grammar<\r\n\t\t\t\t\t\t\t\t::"),
 					 GenerateVariable(grammarhtemplate_->language_full_name_->This()),
-					 GenerateVariable("::Language>\n\t"),
+					 GenerateVariable("::Language>\r\n\t"),
 					 GenerateVariable("{"),
-					 GenerateVariable("\n\tpublic:\n\t\t// Non-Terminal declarations\n\t\t"),
+					 GenerateVariable("\r\n\tpublic:\r\n\t\t// Non-Terminal declarations\r\n\t\t"),
 					 GenerateVariable(
 						 grammarhtemplate_->nonterminal_declaration_->Variable_Field()),
-					 GenerateVariable("\n\t\n\t\t// Production-Rule declarations\n\t\t"),
+					 GenerateVariable("\r\n\t\r\n\t\t// Production-Rule declarations\r\n\t\t"),
 					 GenerateVariable(
 						 grammarhtemplate_->productionrule_declaration_->Variable_Field()),
 					 GenerateVariable(
-						 "\n\t\n\tprivate:\n\t\t// Unknown reference declarations\n\t\t"),
+						 "\r\n\t\r\n\tprivate:\r\n\t\t// Unknown reference declarations\r\n\t\t"),
 					 GenerateVariable(
 						 grammarhtemplate_->unknown_reference_declaration_->Variable_Field()),
-					 GenerateVariable("\n\t\n\tpublic:\n\t\tGrammar("),
+					 GenerateVariable("\r\n\t\r\n\tpublic:\r\n\t\tGrammar("),
 					 GenerateVariable(grammarhtemplate_->language_full_name_->This()),
-					 GenerateVariable(
-						 "::Language* language);\n\n\t\tvoid GenerateObjects() override;\n\t"),
+					 GenerateVariable("::Language* language);\r\n\r\n\t\tvoid GenerateObjects() "
+									  "override;\r\n\t"),
 					 GenerateVariable("}"),
-					 GenerateVariable(";\n"),
+					 GenerateVariable(";\r\n"),
 					 GenerateVariable("}"),
-					 GenerateVariable("\n\n#endif // "),
+					 GenerateVariable("\r\n\r\n#endif // "),
 					 GenerateVariable(grammarhtemplate_->header_guard_->This()),
-					 GenerateVariable("\n")}));
+					 GenerateVariable("\r\n")}));
 				Content_->type = ::DLDL::filetemplate::GrammarHTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Class_postfix_) =
@@ -1393,22 +1403,15 @@ namespace DLDL::filetemplate
 			*nonterminal_ = Variable_nonterminal_(this, std::vector<VariableBase*>({}));
 			*nonterminal_declaration_ = Variable_nonterminal_declaration_(
 				this, std::vector<VariableBase*>(
-						  {GenerateVariable("::deamer::type::SafeReserve"),
-						   GenerateVariable(left_angle_bracket_->This()),
-						   GenerateVariable(
-							   "::deamer::language::type::definition::object::main::NonTerminal"),
-						   GenerateVariable(right_angle_bracket_->This()), GenerateVariable(" "),
+						  {GenerateVariable("::deamer::type::SafeReserve<::deamer::language::type::"
+											"definition::object::main::NonTerminal> "),
 						   GenerateVariable(nonterminal_->This()), GenerateVariable(";")}));
 			*productionrule_ = Variable_productionrule_(this, std::vector<VariableBase*>({}));
 			*productionrule_declaration_ = Variable_productionrule_declaration_(
-				this,
-				std::vector<VariableBase*>(
-					{GenerateVariable("::deamer::type::SafeReserve"),
-					 GenerateVariable(left_angle_bracket_->This()),
-					 GenerateVariable(
-						 "::deamer::language::type::definition::object::main::ProductionRule"),
-					 GenerateVariable(right_angle_bracket_->This()), GenerateVariable(" "),
-					 GenerateVariable(productionrule_->This()), GenerateVariable(";")}));
+				this, std::vector<VariableBase*>(
+						  {GenerateVariable("::deamer::type::SafeReserve<::deamer::language::type::"
+											"definition::object::main::ProductionRule> "),
+						   GenerateVariable(productionrule_->This()), GenerateVariable(";")}));
 			*right_angle_bracket_ = Variable_right_angle_bracket_(
 				this, std::vector<VariableBase*>({GenerateVariable(">")}));
 			*right_bracket_ =
@@ -1425,15 +1428,9 @@ namespace DLDL::filetemplate
 			*unknown_reference_declaration_ = Variable_unknown_reference_declaration_(
 				this,
 				std::vector<VariableBase*>(
-					{GenerateVariable("::deamer::type::SafeReserve"),
-					 GenerateVariable(left_angle_bracket_->This()),
-					 GenerateVariable(
-						 "::deamer::language::type::definition::object::special::Uninitialized"),
-					 GenerateVariable(left_angle_bracket_->This()),
-					 GenerateVariable(
-						 "::deamer::language::type::definition::object::main::NonTerminal"),
-					 GenerateVariable(right_angle_bracket_->This()),
-					 GenerateVariable(right_angle_bracket_->This()), GenerateVariable(" "),
+					{GenerateVariable("::deamer::type::SafeReserve<::deamer::language::type::"
+									  "definition::object::special::Uninitialized<::deamer::"
+									  "language::type::definition::object::main::NonTerminal>> "),
 					 GenerateVariable(unknown_reference_->This()), GenerateVariable(";")}));
 
 			variables_.emplace_back(file_);

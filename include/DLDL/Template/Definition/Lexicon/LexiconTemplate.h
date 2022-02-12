@@ -1,12 +1,13 @@
-#ifndef DST_LEXICONTEMPLATE_h
-#define DST_LEXICONTEMPLATE_h
+#ifndef DLDL_FILETEMPLATE_LEXICONTEMPLATE_h
+#define DLDL_FILETEMPLATE_LEXICONTEMPLATE_h
 
-#include <string>
 #include <variant>
 #include <vector>
+#include <string>
 
 namespace DLDL::filetemplate
 {
+
 	/*!	\class LexiconTemplate
 	 *
 	 *	\brief Generates code for "LexiconTemplate"
@@ -18,123 +19,160 @@ namespace DLDL::filetemplate
 	{
 	public:
 		enum class Type
-		{
-			Unknown,
-			Scope,
+{
+Unknown,
+Scope,
 
-			// User defined types
-			add_object_,
-			file_,
-			header_guard_,
-			high_level_operation_,
-			language_full_name_,
-			language_full_name_underscore_,
-			left_angle_bracket_,
-			left_bracket_,
-			left_curly_bracket_,
-			right_angle_bracket_,
-			right_bracket_,
-			right_curly_bracket_,
-			variable_abstraction_,
-			variable_declaration_,
-			variable_initialization_,
-			variable_name_,
-			variable_regex_,
+// User defined types
+add_object_,
+file_,
+header_guard_,
+high_level_operation_,
+language_full_name_,
+language_full_name_slash_,
+language_full_name_underscore_,
+left_angle_bracket_,
+left_bracket_,
+left_curly_bracket_,
+right_angle_bracket_,
+right_bracket_,
+right_curly_bracket_,
+variable_abstraction_,
+variable_declaration_,
+variable_initialization_,
+variable_name_,
+variable_regex_,
 
-		};
+
+};
+
 
 		enum class ScopeType
-		{
-			Unknown,
+{
+Unknown,
 
-			// Default
-			Default_,
-			Upper_,
-			Lower_,
-			Variable_Field_,
-			Variable_Field_Separator_,
-			Function_Field_,
-			Function_Field_Separator_,
+// Default
+Default_,
+Upper_,
+Lower_,
 
-		};
+Snake_,
+Slash_,
+BackSlash_,
+Colon_,
+DoubleColon_,
 
-		static constexpr const char*
-		ConvertEnumToName(::DLDL::filetemplate::LexiconTemplate::Type enumerationValue)
-		{
-			switch (enumerationValue)
-			{
-			case ::DLDL::filetemplate::LexiconTemplate::Type::add_object_: {
-				return "add_object";
-			}
+Variable_Field_,
+Variable_Field_Separator_,
+Function_Field_,
+Function_Field_Separator_,
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::file_: {
-				return "file";
-			}
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::header_guard_: {
-				return "header_guard";
-			}
+};
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::high_level_operation_: {
-				return "high_level_operation";
-			}
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_: {
-				return "language_full_name";
-			}
+		static constexpr const char* ConvertEnumToName(::DLDL::filetemplate::LexiconTemplate::Type enumerationValue)
+{
+	switch(enumerationValue)
+	{
+	case ::DLDL::filetemplate::LexiconTemplate::Type::add_object_:
+{
+	return "add_object";
+}
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_underscore_: {
-				return "language_full_name_underscore";
-			}
+case ::DLDL::filetemplate::LexiconTemplate::Type::file_:
+{
+	return "file";
+}
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::left_angle_bracket_: {
-				return "left_angle_bracket";
-			}
+case ::DLDL::filetemplate::LexiconTemplate::Type::header_guard_:
+{
+	return "header_guard";
+}
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::left_bracket_: {
-				return "left_bracket";
-			}
+case ::DLDL::filetemplate::LexiconTemplate::Type::high_level_operation_:
+{
+	return "high_level_operation";
+}
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::left_curly_bracket_: {
-				return "left_curly_bracket";
-			}
+case ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_:
+{
+	return "language_full_name";
+}
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::right_angle_bracket_: {
-				return "right_angle_bracket";
-			}
+case ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_slash_:
+{
+	return "language_full_name_slash";
+}
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::right_bracket_: {
-				return "right_bracket";
-			}
+case ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_underscore_:
+{
+	return "language_full_name_underscore";
+}
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::right_curly_bracket_: {
-				return "right_curly_bracket";
-			}
+case ::DLDL::filetemplate::LexiconTemplate::Type::left_angle_bracket_:
+{
+	return "left_angle_bracket";
+}
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::variable_abstraction_: {
-				return "variable_abstraction";
-			}
+case ::DLDL::filetemplate::LexiconTemplate::Type::left_bracket_:
+{
+	return "left_bracket";
+}
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::variable_declaration_: {
-				return "variable_declaration";
-			}
+case ::DLDL::filetemplate::LexiconTemplate::Type::left_curly_bracket_:
+{
+	return "left_curly_bracket";
+}
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::variable_initialization_: {
-				return "variable_initialization";
-			}
+case ::DLDL::filetemplate::LexiconTemplate::Type::right_angle_bracket_:
+{
+	return "right_angle_bracket";
+}
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::variable_name_: {
-				return "variable_name";
-			}
+case ::DLDL::filetemplate::LexiconTemplate::Type::right_bracket_:
+{
+	return "right_bracket";
+}
 
-			case ::DLDL::filetemplate::LexiconTemplate::Type::variable_regex_: {
-				return "variable_regex";
-			}
-			}
+case ::DLDL::filetemplate::LexiconTemplate::Type::right_curly_bracket_:
+{
+	return "right_curly_bracket";
+}
 
-			return "";
-		}
+case ::DLDL::filetemplate::LexiconTemplate::Type::variable_abstraction_:
+{
+	return "variable_abstraction";
+}
 
+case ::DLDL::filetemplate::LexiconTemplate::Type::variable_declaration_:
+{
+	return "variable_declaration";
+}
+
+case ::DLDL::filetemplate::LexiconTemplate::Type::variable_initialization_:
+{
+	return "variable_initialization";
+}
+
+case ::DLDL::filetemplate::LexiconTemplate::Type::variable_name_:
+{
+	return "variable_name";
+}
+
+case ::DLDL::filetemplate::LexiconTemplate::Type::variable_regex_:
+{
+	return "variable_regex";
+}
+
+
+	}
+
+	return "";
+}
+
+
+		
 	public:
 		struct VariableBase
 		{
@@ -143,8 +181,7 @@ namespace DLDL::filetemplate
 			std::variant<std::string, std::vector<VariableBase*>> value;
 			bool isString = true;
 
-			::DLDL::filetemplate::LexiconTemplate::Type type =
-				::DLDL::filetemplate::LexiconTemplate::Type::Unknown;
+			::DLDL::filetemplate::LexiconTemplate::Type type = ::DLDL::filetemplate::LexiconTemplate::Type::Unknown;
 
 			VariableBase() : VariableBase(std::vector<VariableBase*>())
 			{
@@ -175,7 +212,7 @@ namespace DLDL::filetemplate
 				return this;
 			}
 
-			std::string GetValue()
+			virtual std::string GetValue()
 			{
 				if (isString)
 				{
@@ -270,7 +307,7 @@ namespace DLDL::filetemplate
 					// then create a vector.
 					auto& currentValue = std::get<std::string>(value);
 					auto* currentValueAsVariableBase = new VariableBase(currentValue);
-					value = std::vector<VariableBase*>({currentValueAsVariableBase, variable});
+					value = std::vector<VariableBase*>({ currentValueAsVariableBase, variable });
 
 					isString = false;
 				}
@@ -310,6 +347,7 @@ namespace DLDL::filetemplate
 			return variable;
 		}
 
+		
 		static VariableBase* GenerateVariable(const std::string& variable)
 		{
 			return new VariableBase(variable);
@@ -317,71 +355,229 @@ namespace DLDL::filetemplate
 
 		struct VariableScope : public VariableBase
 		{
-			::DLDL::filetemplate::LexiconTemplate::ScopeType scope_type =
-				::DLDL::filetemplate::LexiconTemplate::ScopeType::Unknown;
+			::DLDL::filetemplate::LexiconTemplate::ScopeType scope_type = ::DLDL::filetemplate::LexiconTemplate::ScopeType::Unknown;
 			bool isReserved = false;
 
-			VariableScope(::DLDL::filetemplate::LexiconTemplate::ScopeType scope_type_,
-						  bool isReserved_ = false)
-				: VariableBase(),
-				  scope_type(scope_type_),
-				  isReserved(isReserved_)
+			VariableScope(::DLDL::filetemplate::LexiconTemplate::ScopeType scope_type_, bool isReserved_ = false) : VariableBase(), scope_type(scope_type_), isReserved(isReserved_)
 			{
 				type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
 			}
 
-			VariableScope(const char* text,
-						  ::DLDL::filetemplate::LexiconTemplate::ScopeType scope_type_,
-						  bool isReserved_ = false)
-				: VariableBase(text),
-				  scope_type(scope_type_),
-				  isReserved(isReserved_)
+			VariableScope(const char* text, ::DLDL::filetemplate::LexiconTemplate::ScopeType scope_type_, bool isReserved_ = false) : VariableBase(text), scope_type(scope_type_), isReserved(isReserved_)
 			{
 				type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
 			}
 
-			VariableScope(std::vector<VariableBase*> variable,
-						  ::DLDL::filetemplate::LexiconTemplate::ScopeType scope_type_,
-						  bool isReserved_ = false)
-				: VariableBase(variable),
-				  scope_type(scope_type_),
-				  isReserved(isReserved_)
+			VariableScope(std::vector<VariableBase*> variable, ::DLDL::filetemplate::LexiconTemplate::ScopeType scope_type_, bool isReserved_ = false) : VariableBase(variable), scope_type(scope_type_), isReserved(isReserved_)
 			{
 				type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
+			}
+		};
+		
+		struct Variable_ReservedScope_Upper : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Upper(VariableBase* base_)
+			: VariableScope(::DLDL::filetemplate::LexiconTemplate::ScopeType::Upper_, true),
+			  base(base_)
+			{
+			}
+			
+			virtual std::string GetValue() override
+			{
+				std::string upperVariant;
+				std::string currentValue = base->GetValue();
+
+				for (const auto character : currentValue)
+				{
+					upperVariant += std::toupper(character);
+				}
+
+				return upperVariant;
+			}
+		};
+		
+		struct Variable_ReservedScope_Lower : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Lower(VariableBase* base_)
+			: VariableScope(::DLDL::filetemplate::LexiconTemplate::ScopeType::Lower_, true),
+			  base(base_)
+			{
+			}
+			
+			virtual std::string GetValue() override
+			{
+				std::string lowerVariant;
+				std::string currentValue = base->GetValue();
+
+				for (const auto character : currentValue)
+				{
+					lowerVariant += std::tolower(character);
+				}
+
+				return lowerVariant;
+			}
+		};
+		
+		struct Variable_ReservedScope_Snake : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Snake(VariableBase* base_)
+			: VariableScope(::DLDL::filetemplate::LexiconTemplate::ScopeType::Snake_, true),
+			  base(base_)
+			{
+			}
+			
+			virtual std::string GetValue() override
+			{
+				std::string snakeVariant;
+				std::string currentValue = base->GetValue();
+				
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						snakeVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+						
+						snakeVariant += '_';
+						lastWasNonAlpha = true;
+					}
+				}
+				
+				// If it contains text
+				// remove the tail
+				if (!snakeVariant.empty() && lastWasNonAlpha)
+				{
+					snakeVariant.pop_back();
+				}
+
+				return snakeVariant;
+			}
+		};
+		
+		struct Variable_ReservedScope_Slash : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Slash(VariableBase* base_)
+			: VariableScope(::DLDL::filetemplate::LexiconTemplate::ScopeType::Slash_, true),
+			  base(base_)
+			{
+			}
+			
+			virtual std::string GetValue() override
+			{
+				std::string slashVariant;
+				std::string currentValue = base->GetValue();
+				
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						slashVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+						
+						slashVariant += '/';
+						lastWasNonAlpha = true;
+					}
+				}
+				
+				// If it contains text
+				// remove the tail
+				if (!slashVariant.empty() && lastWasNonAlpha)
+				{
+					slashVariant.pop_back();
+				}
+
+				return slashVariant;
+			}
+		};
+		
+		struct Variable_ReservedScope_DoubleColon : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_DoubleColon(VariableBase* base_)
+			: VariableScope(::DLDL::filetemplate::LexiconTemplate::ScopeType::DoubleColon_, true),
+			  base(base_)
+			{
+			}
+			
+			virtual std::string GetValue() override
+			{
+				std::string doubleColonVariant;
+				std::string currentValue = base->GetValue();
+				
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						doubleColonVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+						
+						doubleColonVariant += "::";
+						lastWasNonAlpha = true;
+					}
+				}
+				
+				// If it contains text
+				// remove the tail
+				if (!doubleColonVariant.empty() && lastWasNonAlpha)
+				{
+					doubleColonVariant.pop_back();
+					doubleColonVariant.pop_back();
+				}
+
+				return doubleColonVariant;
 			}
 		};
 
 		struct VariableScopes : public VariableBase
 		{
 			// Default scopes
-			VariableBase* default_ =
-				new VariableScope(::DLDL::filetemplate::LexiconTemplate::ScopeType::Default_, true);
-			VariableBase* upper_ =
-				new VariableScope(::DLDL::filetemplate::LexiconTemplate::ScopeType::Upper_, true);
-			VariableBase* lower_ =
-				new VariableScope(::DLDL::filetemplate::LexiconTemplate::ScopeType::Lower_, true);
-			VariableBase* variable_field_ = new VariableScope(
-				::DLDL::filetemplate::LexiconTemplate::ScopeType::Variable_Field_, true);
-			VariableBase* variable_field_separator_ = new VariableScope(
-				"\n", ::DLDL::filetemplate::LexiconTemplate::ScopeType::Variable_Field_Separator_,
-				true);
+			VariableBase* default_ = new VariableScope(::DLDL::filetemplate::LexiconTemplate::ScopeType::Default_, true);
+			VariableBase* upper_ = new Variable_ReservedScope_Upper(this);
+			VariableBase* lower_ = new Variable_ReservedScope_Lower(this);
+			
+			VariableBase* snake_ = new Variable_ReservedScope_Snake(this);
+			VariableBase* slash_ = new Variable_ReservedScope_Slash(this);
+			VariableBase* double_colon_ = new Variable_ReservedScope_DoubleColon(this);
+			
+			VariableBase* variable_field_ = new VariableScope(::DLDL::filetemplate::LexiconTemplate::ScopeType::Variable_Field_, true);
+			VariableBase* variable_field_separator_ = new VariableScope("\n", ::DLDL::filetemplate::LexiconTemplate::ScopeType::Variable_Field_Separator_, true);
 
 			// Ctor
-			VariableScopes() : VariableBase()
-			{
-			}
+			VariableScopes() : VariableBase() {}
 
-			VariableScopes(const char* text) : VariableBase(text)
-			{
-			}
+			VariableScopes(const char* text) : VariableBase(text) {}
 
-			VariableScopes(const std::string& text) : VariableBase(text)
-			{
-			}
+			VariableScopes(const std::string& text) : VariableBase(text) {}
 
-			VariableScopes(std::vector<VariableBase*> variables) : VariableBase(variables)
-			{
-			}
+			VariableScopes(std::vector<VariableBase*> variables) : VariableBase(variables) {}
 
 			// Dtor
 			virtual ~VariableScopes() override = default;
@@ -393,32 +589,32 @@ namespace DLDL::filetemplate
 			}
 			VariableBase* Upper()
 			{
-				std::string upperVariant;
-				std::string currentValue = GetValue();
-
-				for (const auto character : currentValue)
-				{
-					upperVariant += std::toupper(character);
-				}
-
-				*upper_ = upperVariant;
-
 				return upper_;
 			}
 
 			VariableBase* Lower()
 			{
-				std::string lowerVariant;
-				std::string currentValue = GetValue();
-
-				for (const auto character : currentValue)
-				{
-					lowerVariant += std::tolower(character);
-				}
-
-				*lower_ = lowerVariant;
-
 				return lower_;
+			}
+
+			VariableBase* Underscore()
+			{
+				return snake_;
+			}
+
+			VariableBase* Snake()
+			{
+				return snake_;
+			}
+
+			VariableBase* Slash()
+			{
+				return slash_;
+			}
+
+			VariableBase* DoubleColon()
+			{
+				return double_colon_;
 			}
 
 			VariableBase* Variable_Field()
@@ -440,689 +636,769 @@ namespace DLDL::filetemplate
 		};
 
 	public:
-		struct Variable_add_object_ : public VariableScopes
-		{
-			static constexpr auto name = "add_object_";
-
-			Variable_add_object_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::add_object_;
-			}
-
-			virtual ~Variable_add_object_() override = default;
-
-			Variable_add_object_(LexiconTemplate* lexicontemplate_,
-								 const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::add_object_;
-			}
-
-			Variable_add_object_& operator=(const Variable_add_object_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_file_ : public VariableScopes
-		{
-			static constexpr auto name = "file_";
-
-			VariableBase* Content_ = GenerateVariable("");
-			VariableBase* Class_postfix_ = GenerateVariable("");
-			VariableBase* Extension_ = GenerateVariable("");
-			VariableBase* File_name_ = GenerateVariable("");
-			VariableBase* Namespace_ = GenerateVariable("");
-			VariableBase* Target_language_ = GenerateVariable("");
-
-			Variable_file_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::file_;
-			}
-
-			virtual ~Variable_file_() override = default;
-
-			Variable_file_(LexiconTemplate* lexicontemplate_,
-						   const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::file_;
-				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>(
-					{GenerateVariable("#ifndef "),
-					 GenerateVariable(lexicontemplate_->header_guard_->This()),
-					 GenerateVariable("\n#define "),
-					 GenerateVariable(lexicontemplate_->header_guard_->This()),
-					 GenerateVariable(
-						 "\n#include "
-						 "\"Deamer/Language/Generator/Definition/Property/User/Main/Lexicon"),
-					 GenerateVariable("."),
-					 GenerateVariable("h\"\nnamespace "),
-					 GenerateVariable(lexicontemplate_->language_full_name_->This()),
-					 GenerateVariable("\n"),
-					 GenerateVariable("{"),
-					 GenerateVariable("\n\tclass Language;\n\tclass Lexicon : public "
-									  "::deamer::language::generator::definition::property::user::"
-									  "Lexicon<\n\t\t\t\t\t\t\t\t::"),
-					 GenerateVariable(lexicontemplate_->language_full_name_->This()),
-					 GenerateVariable("::Language>\n\t"),
-					 GenerateVariable("{"),
-					 GenerateVariable("\n\tpublic:\n\t\t// Terminal declarations\n\t\t"),
-					 GenerateVariable(lexicontemplate_->variable_declaration_->Variable_Field()),
-					 GenerateVariable("\n\t\n\tpublic:\n\t\tLexicon("),
-					 GenerateVariable(lexicontemplate_->language_full_name_->This()),
-					 GenerateVariable("::Language* "
-									  "language)\n\t\t\t:\t::deamer::language::generator::"
-									  "definition::property::user::Lexicon<\n\t\t\t\t\t::"),
-					 GenerateVariable(lexicontemplate_->language_full_name_->This()),
-					 GenerateVariable("::Language>(language)\n\t\t"),
-					 GenerateVariable("{"),
-					 GenerateVariable("\n\t\t"),
-					 GenerateVariable("}"),
-					 GenerateVariable("\n\t\tvoid GenerateObjects() override\n\t\t"),
-					 GenerateVariable("{"),
-					 GenerateVariable("\n\t\t\t// Terminals\n\t\t\t"),
-					 GenerateVariable(lexicontemplate_->variable_initialization_->Variable_Field()),
-					 GenerateVariable("\n\t\t\t// Add object calls\n\t\t\t// AddObject("),
-					 GenerateVariable("."),
-					 GenerateVariable("."),
-					 GenerateVariable("."),
-					 GenerateVariable(")\n\t\t\t"),
-					 GenerateVariable(lexicontemplate_->add_object_->Variable_Field()),
-					 GenerateVariable("\n\t\t\t// Place higher level operations here"),
-					 GenerateVariable("."),
-					 GenerateVariable("\n\t\t\t// ReplaceObject("),
-					 GenerateVariable("."),
-					 GenerateVariable("."),
-					 GenerateVariable("."),
-					 GenerateVariable(", "),
-					 GenerateVariable("."),
-					 GenerateVariable("."),
-					 GenerateVariable("."),
-					 GenerateVariable(")\n\t\t\t// DeleteObject("),
-					 GenerateVariable("."),
-					 GenerateVariable("."),
-					 GenerateVariable("."),
-					 GenerateVariable(", "),
-					 GenerateVariable("."),
-					 GenerateVariable("."),
-					 GenerateVariable("."),
-					 GenerateVariable(")\n\t\t\t"),
-					 GenerateVariable(lexicontemplate_->high_level_operation_->Variable_Field()),
-					 GenerateVariable("\n\t\t"),
-					 GenerateVariable("}"),
-					 GenerateVariable("\n\t"),
-					 GenerateVariable("}"),
-					 GenerateVariable(";\n"),
-					 GenerateVariable("}"),
-					 GenerateVariable("\n#endif // "),
-					 GenerateVariable(lexicontemplate_->header_guard_->This()),
-					 GenerateVariable("\n")}));
-				Content_->type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
-
-				*static_cast<VariableBase*>(Class_postfix_) =
-					VariableBase(std::vector<VariableBase*>({}));
-				Class_postfix_->type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
-
-				*static_cast<VariableBase*>(Extension_) =
-					VariableBase(std::vector<VariableBase*>({}));
-				Extension_->type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
-
-				*static_cast<VariableBase*>(File_name_) =
-					VariableBase(std::vector<VariableBase*>({}));
-				File_name_->type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
-
-				*static_cast<VariableBase*>(Namespace_) =
-					VariableBase(std::vector<VariableBase*>({}));
-				Namespace_->type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
-
-				*static_cast<VariableBase*>(Target_language_) =
-					VariableBase(std::vector<VariableBase*>({}));
-				Target_language_->type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
-			}
-
-			VariableBase* Content() const
-			{
-				return Content_;
-			}
-
-			VariableBase* Class_postfix() const
-			{
-				return Class_postfix_;
-			}
-
-			VariableBase* Extension() const
-			{
-				return Extension_;
-			}
-
-			VariableBase* File_name() const
-			{
-				return File_name_;
-			}
-
-			VariableBase* Namespace() const
-			{
-				return Namespace_;
-			}
-
-			VariableBase* Target_language() const
-			{
-				return Target_language_;
-			}
-
-			Variable_file_& operator=(const Variable_file_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				*Content_ = *variable.Content_;
-				*Class_postfix_ = *variable.Class_postfix_;
-				*Extension_ = *variable.Extension_;
-				*File_name_ = *variable.File_name_;
-				*Namespace_ = *variable.Namespace_;
-				*Target_language_ = *variable.Target_language_;
-
-				return *this;
-			}
-		};
-
-		struct Variable_header_guard_ : public VariableScopes
-		{
-			static constexpr auto name = "header_guard_";
-
-			Variable_header_guard_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::header_guard_;
-			}
-
-			virtual ~Variable_header_guard_() override = default;
-
-			Variable_header_guard_(LexiconTemplate* lexicontemplate_,
-								   const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::header_guard_;
-			}
-
-			Variable_header_guard_& operator=(const Variable_header_guard_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_high_level_operation_ : public VariableScopes
-		{
-			static constexpr auto name = "high_level_operation_";
-
-			Variable_high_level_operation_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::high_level_operation_;
-			}
-
-			virtual ~Variable_high_level_operation_() override = default;
-
-			Variable_high_level_operation_(LexiconTemplate* lexicontemplate_,
-										   const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::high_level_operation_;
-			}
-
-			Variable_high_level_operation_&
-			operator=(const Variable_high_level_operation_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_language_full_name_ : public VariableScopes
-		{
-			static constexpr auto name = "language_full_name_";
-
-			Variable_language_full_name_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_;
-			}
-
-			virtual ~Variable_language_full_name_() override = default;
-
-			Variable_language_full_name_(LexiconTemplate* lexicontemplate_,
-										 const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_;
-			}
-
-			Variable_language_full_name_& operator=(const Variable_language_full_name_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_language_full_name_underscore_ : public VariableScopes
-		{
-			static constexpr auto name = "language_full_name_underscore_";
-
-			Variable_language_full_name_underscore_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_underscore_;
-			}
-
-			virtual ~Variable_language_full_name_underscore_() override = default;
-
-			Variable_language_full_name_underscore_(LexiconTemplate* lexicontemplate_,
-													const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_underscore_;
-			}
-
-			Variable_language_full_name_underscore_&
-			operator=(const Variable_language_full_name_underscore_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_left_angle_bracket_ : public VariableScopes
-		{
-			static constexpr auto name = "left_angle_bracket_";
-
-			Variable_left_angle_bracket_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::left_angle_bracket_;
-			}
-
-			virtual ~Variable_left_angle_bracket_() override = default;
-
-			Variable_left_angle_bracket_(LexiconTemplate* lexicontemplate_,
-										 const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::left_angle_bracket_;
-			}
-
-			Variable_left_angle_bracket_& operator=(const Variable_left_angle_bracket_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_left_bracket_ : public VariableScopes
-		{
-			static constexpr auto name = "left_bracket_";
-
-			Variable_left_bracket_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::left_bracket_;
-			}
-
-			virtual ~Variable_left_bracket_() override = default;
-
-			Variable_left_bracket_(LexiconTemplate* lexicontemplate_,
-								   const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::left_bracket_;
-			}
-
-			Variable_left_bracket_& operator=(const Variable_left_bracket_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_left_curly_bracket_ : public VariableScopes
-		{
-			static constexpr auto name = "left_curly_bracket_";
-
-			Variable_left_curly_bracket_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::left_curly_bracket_;
-			}
-
-			virtual ~Variable_left_curly_bracket_() override = default;
-
-			Variable_left_curly_bracket_(LexiconTemplate* lexicontemplate_,
-										 const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::left_curly_bracket_;
-			}
-
-			Variable_left_curly_bracket_& operator=(const Variable_left_curly_bracket_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_right_angle_bracket_ : public VariableScopes
-		{
-			static constexpr auto name = "right_angle_bracket_";
-
-			Variable_right_angle_bracket_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::right_angle_bracket_;
-			}
-
-			virtual ~Variable_right_angle_bracket_() override = default;
-
-			Variable_right_angle_bracket_(LexiconTemplate* lexicontemplate_,
-										  const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::right_angle_bracket_;
-			}
-
-			Variable_right_angle_bracket_& operator=(const Variable_right_angle_bracket_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_right_bracket_ : public VariableScopes
-		{
-			static constexpr auto name = "right_bracket_";
-
-			Variable_right_bracket_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::right_bracket_;
-			}
-
-			virtual ~Variable_right_bracket_() override = default;
-
-			Variable_right_bracket_(LexiconTemplate* lexicontemplate_,
-									const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::right_bracket_;
-			}
-
-			Variable_right_bracket_& operator=(const Variable_right_bracket_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_right_curly_bracket_ : public VariableScopes
-		{
-			static constexpr auto name = "right_curly_bracket_";
-
-			Variable_right_curly_bracket_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::right_curly_bracket_;
-			}
-
-			virtual ~Variable_right_curly_bracket_() override = default;
-
-			Variable_right_curly_bracket_(LexiconTemplate* lexicontemplate_,
-										  const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::right_curly_bracket_;
-			}
-
-			Variable_right_curly_bracket_& operator=(const Variable_right_curly_bracket_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_variable_abstraction_ : public VariableScopes
-		{
-			static constexpr auto name = "variable_abstraction_";
-
-			Variable_variable_abstraction_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_abstraction_;
-			}
-
-			virtual ~Variable_variable_abstraction_() override = default;
-
-			Variable_variable_abstraction_(LexiconTemplate* lexicontemplate_,
-										   const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_abstraction_;
-			}
-
-			Variable_variable_abstraction_&
-			operator=(const Variable_variable_abstraction_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_variable_declaration_ : public VariableScopes
-		{
-			static constexpr auto name = "variable_declaration_";
-
-			Variable_variable_declaration_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_declaration_;
-			}
-
-			virtual ~Variable_variable_declaration_() override = default;
-
-			Variable_variable_declaration_(LexiconTemplate* lexicontemplate_,
-										   const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_declaration_;
-			}
-
-			Variable_variable_declaration_&
-			operator=(const Variable_variable_declaration_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_variable_initialization_ : public VariableScopes
-		{
-			static constexpr auto name = "variable_initialization_";
-
-			Variable_variable_initialization_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_initialization_;
-			}
-
-			virtual ~Variable_variable_initialization_() override = default;
-
-			Variable_variable_initialization_(LexiconTemplate* lexicontemplate_,
-											  const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_initialization_;
-			}
-
-			Variable_variable_initialization_&
-			operator=(const Variable_variable_initialization_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_variable_name_ : public VariableScopes
-		{
-			static constexpr auto name = "variable_name_";
-
-			Variable_variable_name_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_name_;
-			}
-
-			virtual ~Variable_variable_name_() override = default;
-
-			Variable_variable_name_(LexiconTemplate* lexicontemplate_,
-									const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_name_;
-			}
-
-			Variable_variable_name_& operator=(const Variable_variable_name_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
-
-		struct Variable_variable_regex_ : public VariableScopes
-		{
-			static constexpr auto name = "variable_regex_";
-
-			Variable_variable_regex_() : VariableScopes()
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_regex_;
-			}
-
-			virtual ~Variable_variable_regex_() override = default;
-
-			Variable_variable_regex_(LexiconTemplate* lexicontemplate_,
-									 const std::vector<VariableBase*>& variables)
-				: VariableScopes(variables)
-			{
-				type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_regex_;
-			}
-
-			Variable_variable_regex_& operator=(const Variable_variable_regex_& variable)
-			{
-				if (&variable == this)
-				{
-					return *this;
-				}
-
-				value = variable.value;
-				isString = variable.isString;
-
-				return *this;
-			}
-		};
+		
+struct Variable_add_object_ : public VariableScopes
+{
+
+static constexpr auto name = "add_object_";
+
+
+
+Variable_add_object_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::add_object_;
+}
+
+virtual ~Variable_add_object_() override = default;
+
+Variable_add_object_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::add_object_;
+
+}
+
+
+
+Variable_add_object_& operator=(const Variable_add_object_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_file_ : public VariableScopes
+{
+
+static constexpr auto name = "file_";
+
+VariableBase* Content_ = GenerateVariable("");
+VariableBase* Class_postfix_ = GenerateVariable("");
+VariableBase* Extension_ = GenerateVariable("");
+VariableBase* File_name_ = GenerateVariable("");
+VariableBase* Namespace_ = GenerateVariable("");
+VariableBase* Target_language_ = GenerateVariable("");
+
+
+Variable_file_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::file_;
+}
+
+virtual ~Variable_file_() override = default;
+
+Variable_file_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::file_;
+*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("/* \r\n * This file is auto-generated and auto-maintained by DLDL\r\n * Do not change code in this as it can be overwritten"), GenerateVariable("."), GenerateVariable("\r\n *\r\n * For more information see the DLDL repo: https://github"), GenerateVariable("."), GenerateVariable("com/Deruago/DLDL\r\n * For more information about Deamer: https://github"), GenerateVariable("."), GenerateVariable("com/Deruago/theDeamerProject\r\n */\r\n\r\n#ifndef "), GenerateVariable(lexicontemplate_->header_guard_->This()), GenerateVariable("\r\n#define "), GenerateVariable(lexicontemplate_->header_guard_->This()), GenerateVariable("\r\n\r\n#include \"Deamer/Language/Generator/Definition/Property/User/Main/Lexicon"), GenerateVariable("."), GenerateVariable("h\"\r\n\r\nnamespace "), GenerateVariable(lexicontemplate_->language_full_name_->This()), GenerateVariable("\r\n"), GenerateVariable("{"), GenerateVariable("\r\n\tclass Language;\r\n\r\n\tclass Lexicon : public ::deamer::language::generator::definition::property::user::Lexicon<\r\n\t\t\t\t\t\t\t\t::"), GenerateVariable(lexicontemplate_->language_full_name_->This()), GenerateVariable("::Language>\r\n\t"), GenerateVariable("{"), GenerateVariable("\r\n\tpublic:\r\n\t\t// Terminal declarations\r\n\t\t"), GenerateVariable(lexicontemplate_->variable_declaration_->Variable_Field()), GenerateVariable("\r\n\t\r\n\tpublic:\r\n\t\tLexicon("), GenerateVariable(lexicontemplate_->language_full_name_->This()), GenerateVariable("::Language* language)\r\n\t\t\t:\t::deamer::language::generator::definition::property::user::Lexicon<\r\n\t\t\t\t\t::"), GenerateVariable(lexicontemplate_->language_full_name_->This()), GenerateVariable("::Language>(language)\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\r\n\t\tvoid GenerateObjects() override\r\n\t\t"), GenerateVariable("{"), GenerateVariable("\r\n\t\t\t// Terminals\r\n\t\t\t"), GenerateVariable(lexicontemplate_->variable_initialization_->Variable_Field()), GenerateVariable("\r\n\r\n\t\t\t// Add object calls\r\n\t\t\t// AddObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\r\n\t\t\t"), GenerateVariable(lexicontemplate_->add_object_->Variable_Field()), GenerateVariable("\r\n\r\n\t\t\t// Place higher level operations here"), GenerateVariable("."), GenerateVariable("\r\n\t\t\t// ReplaceObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(", "), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\r\n\t\t\t// DeleteObject("), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(", "), GenerateVariable("."), GenerateVariable("."), GenerateVariable("."), GenerateVariable(")\r\n\t\t\t"), GenerateVariable(lexicontemplate_->high_level_operation_->Variable_Field()), GenerateVariable("\r\n\t\t"), GenerateVariable("}"), GenerateVariable("\r\n\t"), GenerateVariable("}"), GenerateVariable(";\r\n"), GenerateVariable("}"), GenerateVariable("\r\n\r\n#endif // "), GenerateVariable(lexicontemplate_->header_guard_->This()), GenerateVariable("\r\n") }));
+Content_->type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
+
+*static_cast<VariableBase*>(Class_postfix_) = VariableBase(std::vector<VariableBase*>({  }));
+Class_postfix_->type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
+
+*static_cast<VariableBase*>(Extension_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("h") }));
+Extension_->type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
+
+*static_cast<VariableBase*>(File_name_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("Lexicon") }));
+File_name_->type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
+
+*static_cast<VariableBase*>(Namespace_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("DLDL::filetemplate") }));
+Namespace_->type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
+
+*static_cast<VariableBase*>(Target_language_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("C++") }));
+Target_language_->type = ::DLDL::filetemplate::LexiconTemplate::Type::Scope;
+
+
+}
+
+
+VariableBase* Content() const
+{
+	return Content_;
+}
+
+VariableBase* Class_postfix() const
+{
+	return Class_postfix_;
+}
+
+VariableBase* Extension() const
+{
+	return Extension_;
+}
+
+VariableBase* File_name() const
+{
+	return File_name_;
+}
+
+VariableBase* Namespace() const
+{
+	return Namespace_;
+}
+
+VariableBase* Target_language() const
+{
+	return Target_language_;
+}
+
+
+Variable_file_& operator=(const Variable_file_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	*Content_ = *variable.Content_;
+*Class_postfix_ = *variable.Class_postfix_;
+*Extension_ = *variable.Extension_;
+*File_name_ = *variable.File_name_;
+*Namespace_ = *variable.Namespace_;
+*Target_language_ = *variable.Target_language_;
+
+
+	return *this;
+}
+
+};
+
+struct Variable_header_guard_ : public VariableScopes
+{
+
+static constexpr auto name = "header_guard_";
+
+
+
+Variable_header_guard_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::header_guard_;
+}
+
+virtual ~Variable_header_guard_() override = default;
+
+Variable_header_guard_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::header_guard_;
+
+}
+
+
+
+Variable_header_guard_& operator=(const Variable_header_guard_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_high_level_operation_ : public VariableScopes
+{
+
+static constexpr auto name = "high_level_operation_";
+
+
+
+Variable_high_level_operation_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::high_level_operation_;
+}
+
+virtual ~Variable_high_level_operation_() override = default;
+
+Variable_high_level_operation_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::high_level_operation_;
+
+}
+
+
+
+Variable_high_level_operation_& operator=(const Variable_high_level_operation_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_language_full_name_ : public VariableScopes
+{
+
+static constexpr auto name = "language_full_name_";
+
+
+
+Variable_language_full_name_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_;
+}
+
+virtual ~Variable_language_full_name_() override = default;
+
+Variable_language_full_name_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_;
+
+}
+
+
+
+Variable_language_full_name_& operator=(const Variable_language_full_name_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_language_full_name_slash_ : public VariableScopes
+{
+
+static constexpr auto name = "language_full_name_slash_";
+
+
+
+Variable_language_full_name_slash_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_slash_;
+}
+
+virtual ~Variable_language_full_name_slash_() override = default;
+
+Variable_language_full_name_slash_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_slash_;
+
+}
+
+
+
+Variable_language_full_name_slash_& operator=(const Variable_language_full_name_slash_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_language_full_name_underscore_ : public VariableScopes
+{
+
+static constexpr auto name = "language_full_name_underscore_";
+
+
+
+Variable_language_full_name_underscore_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_underscore_;
+}
+
+virtual ~Variable_language_full_name_underscore_() override = default;
+
+Variable_language_full_name_underscore_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::language_full_name_underscore_;
+
+}
+
+
+
+Variable_language_full_name_underscore_& operator=(const Variable_language_full_name_underscore_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_left_angle_bracket_ : public VariableScopes
+{
+
+static constexpr auto name = "left_angle_bracket_";
+
+
+
+Variable_left_angle_bracket_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::left_angle_bracket_;
+}
+
+virtual ~Variable_left_angle_bracket_() override = default;
+
+Variable_left_angle_bracket_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::left_angle_bracket_;
+
+}
+
+
+
+Variable_left_angle_bracket_& operator=(const Variable_left_angle_bracket_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_left_bracket_ : public VariableScopes
+{
+
+static constexpr auto name = "left_bracket_";
+
+
+
+Variable_left_bracket_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::left_bracket_;
+}
+
+virtual ~Variable_left_bracket_() override = default;
+
+Variable_left_bracket_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::left_bracket_;
+
+}
+
+
+
+Variable_left_bracket_& operator=(const Variable_left_bracket_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_left_curly_bracket_ : public VariableScopes
+{
+
+static constexpr auto name = "left_curly_bracket_";
+
+
+
+Variable_left_curly_bracket_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::left_curly_bracket_;
+}
+
+virtual ~Variable_left_curly_bracket_() override = default;
+
+Variable_left_curly_bracket_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::left_curly_bracket_;
+
+}
+
+
+
+Variable_left_curly_bracket_& operator=(const Variable_left_curly_bracket_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_right_angle_bracket_ : public VariableScopes
+{
+
+static constexpr auto name = "right_angle_bracket_";
+
+
+
+Variable_right_angle_bracket_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::right_angle_bracket_;
+}
+
+virtual ~Variable_right_angle_bracket_() override = default;
+
+Variable_right_angle_bracket_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::right_angle_bracket_;
+
+}
+
+
+
+Variable_right_angle_bracket_& operator=(const Variable_right_angle_bracket_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_right_bracket_ : public VariableScopes
+{
+
+static constexpr auto name = "right_bracket_";
+
+
+
+Variable_right_bracket_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::right_bracket_;
+}
+
+virtual ~Variable_right_bracket_() override = default;
+
+Variable_right_bracket_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::right_bracket_;
+
+}
+
+
+
+Variable_right_bracket_& operator=(const Variable_right_bracket_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_right_curly_bracket_ : public VariableScopes
+{
+
+static constexpr auto name = "right_curly_bracket_";
+
+
+
+Variable_right_curly_bracket_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::right_curly_bracket_;
+}
+
+virtual ~Variable_right_curly_bracket_() override = default;
+
+Variable_right_curly_bracket_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::right_curly_bracket_;
+
+}
+
+
+
+Variable_right_curly_bracket_& operator=(const Variable_right_curly_bracket_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_variable_abstraction_ : public VariableScopes
+{
+
+static constexpr auto name = "variable_abstraction_";
+
+
+
+Variable_variable_abstraction_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_abstraction_;
+}
+
+virtual ~Variable_variable_abstraction_() override = default;
+
+Variable_variable_abstraction_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_abstraction_;
+
+}
+
+
+
+Variable_variable_abstraction_& operator=(const Variable_variable_abstraction_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_variable_declaration_ : public VariableScopes
+{
+
+static constexpr auto name = "variable_declaration_";
+
+
+
+Variable_variable_declaration_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_declaration_;
+}
+
+virtual ~Variable_variable_declaration_() override = default;
+
+Variable_variable_declaration_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_declaration_;
+
+}
+
+
+
+Variable_variable_declaration_& operator=(const Variable_variable_declaration_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_variable_initialization_ : public VariableScopes
+{
+
+static constexpr auto name = "variable_initialization_";
+
+
+
+Variable_variable_initialization_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_initialization_;
+}
+
+virtual ~Variable_variable_initialization_() override = default;
+
+Variable_variable_initialization_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_initialization_;
+
+}
+
+
+
+Variable_variable_initialization_& operator=(const Variable_variable_initialization_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_variable_name_ : public VariableScopes
+{
+
+static constexpr auto name = "variable_name_";
+
+
+
+Variable_variable_name_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_name_;
+}
+
+virtual ~Variable_variable_name_() override = default;
+
+Variable_variable_name_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_name_;
+
+}
+
+
+
+Variable_variable_name_& operator=(const Variable_variable_name_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
+struct Variable_variable_regex_ : public VariableScopes
+{
+
+static constexpr auto name = "variable_regex_";
+
+
+
+Variable_variable_regex_() : VariableScopes()
+{
+	type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_regex_;
+}
+
+virtual ~Variable_variable_regex_() override = default;
+
+Variable_variable_regex_(LexiconTemplate* lexicontemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+{
+type = ::DLDL::filetemplate::LexiconTemplate::Type::variable_regex_;
+
+}
+
+
+
+Variable_variable_regex_& operator=(const Variable_variable_regex_& variable)
+{
+	if (&variable == this)
+	{
+		return *this;
+	}
+
+	value = variable.value;
+	isString = variable.isString;
+
+	
+
+	return *this;
+}
+
+};
+
 
 	public:
 		inline static std::vector<VariableBase*> variables_to_delete = std::vector<VariableBase*>();
@@ -1134,106 +1410,76 @@ namespace DLDL::filetemplate
 		// Members that one can directly access.
 		// e.g. LexiconTemplate.member = "auto-generated";
 		Variable_add_object_* add_object_ = new Variable_add_object_();
-		Variable_file_* file_ = new Variable_file_();
-		Variable_header_guard_* header_guard_ = new Variable_header_guard_();
-		Variable_high_level_operation_* high_level_operation_ =
-			new Variable_high_level_operation_();
-		Variable_language_full_name_* language_full_name_ = new Variable_language_full_name_();
-		Variable_language_full_name_underscore_* language_full_name_underscore_ =
-			new Variable_language_full_name_underscore_();
-		VariableScopes* language_full_name_slash_ = new VariableScopes();
-		Variable_left_angle_bracket_* left_angle_bracket_ = new Variable_left_angle_bracket_();
-		Variable_left_bracket_* left_bracket_ = new Variable_left_bracket_();
-		Variable_left_curly_bracket_* left_curly_bracket_ = new Variable_left_curly_bracket_();
-		Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
-		Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
-		Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_bracket_();
-		Variable_variable_abstraction_* variable_abstraction_ =
-			new Variable_variable_abstraction_();
-		Variable_variable_declaration_* variable_declaration_ =
-			new Variable_variable_declaration_();
-		Variable_variable_initialization_* variable_initialization_ =
-			new Variable_variable_initialization_();
-		Variable_variable_name_* variable_name_ = new Variable_variable_name_();
-		Variable_variable_regex_* variable_regex_ = new Variable_variable_regex_();
+Variable_file_* file_ = new Variable_file_();
+Variable_header_guard_* header_guard_ = new Variable_header_guard_();
+Variable_high_level_operation_* high_level_operation_ = new Variable_high_level_operation_();
+Variable_language_full_name_* language_full_name_ = new Variable_language_full_name_();
+Variable_language_full_name_slash_* language_full_name_slash_ = new Variable_language_full_name_slash_();
+Variable_language_full_name_underscore_* language_full_name_underscore_ = new Variable_language_full_name_underscore_();
+Variable_left_angle_bracket_* left_angle_bracket_ = new Variable_left_angle_bracket_();
+Variable_left_bracket_* left_bracket_ = new Variable_left_bracket_();
+Variable_left_curly_bracket_* left_curly_bracket_ = new Variable_left_curly_bracket_();
+Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
+Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
+Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_bracket_();
+Variable_variable_abstraction_* variable_abstraction_ = new Variable_variable_abstraction_();
+Variable_variable_declaration_* variable_declaration_ = new Variable_variable_declaration_();
+Variable_variable_initialization_* variable_initialization_ = new Variable_variable_initialization_();
+Variable_variable_name_* variable_name_ = new Variable_variable_name_();
+Variable_variable_regex_* variable_regex_ = new Variable_variable_regex_();
+
 
 	public:
 		LexiconTemplate()
 		{
-			*add_object_ = Variable_add_object_(
-				this, std::vector<VariableBase*>({GenerateVariable("AddObject("),
-												  GenerateVariable(variable_name_->This()),
-												  GenerateVariable(");")}));
-			*file_ = Variable_file_(this, std::vector<VariableBase*>({}));
-			*header_guard_ = Variable_header_guard_(
-				this, std::vector<VariableBase*>(
-						  {GenerateVariable(language_full_name_underscore_->Upper()),
-						   GenerateVariable("_LEXICON_H")}));
-			*high_level_operation_ =
-				Variable_high_level_operation_(this, std::vector<VariableBase*>({}));
-			*language_full_name_ =
-				Variable_language_full_name_(this, std::vector<VariableBase*>({}));
-			*language_full_name_underscore_ =
-				Variable_language_full_name_underscore_(this, std::vector<VariableBase*>({}));
-			*left_angle_bracket_ = Variable_left_angle_bracket_(
-				this, std::vector<VariableBase*>({GenerateVariable("<")}));
-			*left_bracket_ =
-				Variable_left_bracket_(this, std::vector<VariableBase*>({GenerateVariable("{")}));
-			*left_curly_bracket_ = Variable_left_curly_bracket_(
-				this, std::vector<VariableBase*>({GenerateVariable("(")}));
-			*right_angle_bracket_ = Variable_right_angle_bracket_(
-				this, std::vector<VariableBase*>({GenerateVariable(">")}));
-			*right_bracket_ =
-				Variable_right_bracket_(this, std::vector<VariableBase*>({GenerateVariable("}")}));
-			*right_curly_bracket_ = Variable_right_curly_bracket_(
-				this, std::vector<VariableBase*>({GenerateVariable(")")}));
-			*variable_abstraction_ =
-				Variable_variable_abstraction_(this, std::vector<VariableBase*>({}));
-			*variable_declaration_ = Variable_variable_declaration_(
-				this, std::vector<VariableBase*>(
-						  {GenerateVariable("::deamer::type::SafeReserve"),
-						   GenerateVariable(left_angle_bracket_->This()),
-						   GenerateVariable(
-							   "::deamer::language::type::definition::object::main::Terminal"),
-						   GenerateVariable(right_angle_bracket_->This()), GenerateVariable(" "),
-						   GenerateVariable(variable_name_->This()), GenerateVariable(";")}));
-			*variable_initialization_ = Variable_variable_initialization_(
-				this,
-				std::vector<VariableBase*>(
-					{GenerateVariable(variable_name_->This()), GenerateVariable("."),
-					 GenerateVariable(
-						 "Set(deamer::language::type::definition::object::main::Terminal(\""),
-					 GenerateVariable(variable_name_->This()), GenerateVariable("\", \""),
-					 GenerateVariable(variable_regex_->This()), GenerateVariable("\", "),
-					 GenerateVariable(variable_abstraction_->This()), GenerateVariable("));")}));
-			*variable_name_ = Variable_variable_name_(this, std::vector<VariableBase*>({}));
-			*variable_regex_ = Variable_variable_regex_(this, std::vector<VariableBase*>({}));
+			*add_object_ = Variable_add_object_(this, std::vector<VariableBase*>({ GenerateVariable("AddObject("), GenerateVariable(variable_name_->This()), GenerateVariable(");") }));
+*file_ = Variable_file_(this, std::vector<VariableBase*>({  }));
+*header_guard_ = Variable_header_guard_(this, std::vector<VariableBase*>({ GenerateVariable(language_full_name_underscore_->Upper()), GenerateVariable("_LEXICON_H") }));
+*high_level_operation_ = Variable_high_level_operation_(this, std::vector<VariableBase*>({  }));
+*language_full_name_ = Variable_language_full_name_(this, std::vector<VariableBase*>({  }));
+*language_full_name_slash_ = Variable_language_full_name_slash_(this, std::vector<VariableBase*>({  }));
+*language_full_name_underscore_ = Variable_language_full_name_underscore_(this, std::vector<VariableBase*>({  }));
+*left_angle_bracket_ = Variable_left_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("<") }));
+*left_bracket_ = Variable_left_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("{") }));
+*left_curly_bracket_ = Variable_left_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("(") }));
+*right_angle_bracket_ = Variable_right_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(">") }));
+*right_bracket_ = Variable_right_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("}") }));
+*right_curly_bracket_ = Variable_right_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(")") }));
+*variable_abstraction_ = Variable_variable_abstraction_(this, std::vector<VariableBase*>({  }));
+*variable_declaration_ = Variable_variable_declaration_(this, std::vector<VariableBase*>({ GenerateVariable("::deamer::type::SafeReserve<::deamer::language::type::definition::object::main::Terminal> "), GenerateVariable(variable_name_->This()), GenerateVariable(";") }));
+*variable_initialization_ = Variable_variable_initialization_(this, std::vector<VariableBase*>({ GenerateVariable(variable_name_->This()), GenerateVariable("."), GenerateVariable("Set(deamer::language::type::definition::object::main::Terminal(\""), GenerateVariable(variable_name_->This()), GenerateVariable("\", \""), GenerateVariable(variable_regex_->This()), GenerateVariable("\", "), GenerateVariable(variable_abstraction_->This()), GenerateVariable("));") }));
+*variable_name_ = Variable_variable_name_(this, std::vector<VariableBase*>({  }));
+*variable_regex_ = Variable_variable_regex_(this, std::vector<VariableBase*>({  }));
+
 
 			variables_.emplace_back(add_object_);
-			variables_.emplace_back(file_);
-			variables_.emplace_back(header_guard_);
-			variables_.emplace_back(high_level_operation_);
-			variables_.emplace_back(language_full_name_);
-			variables_.emplace_back(language_full_name_underscore_);
-			variables_.emplace_back(left_angle_bracket_);
-			variables_.emplace_back(left_bracket_);
-			variables_.emplace_back(left_curly_bracket_);
-			variables_.emplace_back(right_angle_bracket_);
-			variables_.emplace_back(right_bracket_);
-			variables_.emplace_back(right_curly_bracket_);
-			variables_.emplace_back(variable_abstraction_);
-			variables_.emplace_back(variable_declaration_);
-			variables_.emplace_back(variable_initialization_);
-			variables_.emplace_back(variable_name_);
-			variables_.emplace_back(variable_regex_);
+variables_.emplace_back(file_);
+variables_.emplace_back(header_guard_);
+variables_.emplace_back(high_level_operation_);
+variables_.emplace_back(language_full_name_);
+variables_.emplace_back(language_full_name_slash_);
+variables_.emplace_back(language_full_name_underscore_);
+variables_.emplace_back(left_angle_bracket_);
+variables_.emplace_back(left_bracket_);
+variables_.emplace_back(left_curly_bracket_);
+variables_.emplace_back(right_angle_bracket_);
+variables_.emplace_back(right_bracket_);
+variables_.emplace_back(right_curly_bracket_);
+variables_.emplace_back(variable_abstraction_);
+variables_.emplace_back(variable_declaration_);
+variables_.emplace_back(variable_initialization_);
+variables_.emplace_back(variable_name_);
+variables_.emplace_back(variable_regex_);
+
 		}
 
 		virtual ~LexiconTemplate()
 		{
-			for (auto* variable : variables_to_delete)
+			for(auto* variable : variables_to_delete)
 			{
 				delete variable;
 			}
+
 			variables_to_delete.clear();
 		}
 
@@ -1262,4 +1508,4 @@ namespace DLDL::filetemplate
 	};
 }
 
-#endif // DST_LEXICONTEMPLATE_h
+#endif // DLDL_FILETEMPLATE_LEXICONTEMPLATE_h

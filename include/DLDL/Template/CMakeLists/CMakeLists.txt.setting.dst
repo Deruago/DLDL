@@ -1,4 +1,7 @@
+{{file.target_language}} = <C++>
+{{file.file_name}} = <CMakeLists>
 {{file.namespace}} = <DLDL::filetemplate>
+{{file.extension}} = <h>
 
 {{project_name}} = <{{languages}}_CompilerGenerator>
 

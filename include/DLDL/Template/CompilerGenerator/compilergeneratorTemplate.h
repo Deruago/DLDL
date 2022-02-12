@@ -946,90 +946,100 @@ namespace DLDL::filetemplate
 			{
 				type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::file_;
 				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>(
-					{GenerateVariable("#ifndef "),
-					 GenerateVariable(compilergeneratortemplate_->header_guard_->This()),
-					 GenerateVariable("\n#define "),
-					 GenerateVariable(compilergeneratortemplate_->header_guard_->This()),
-					 GenerateVariable("\n\n#include \"Deamer/Compiler/Generator/Compiler"),
+					{GenerateVariable(
+						 "/* \r\n * This file is auto-generated and auto-maintained by DLDL\r\n * "
+						 "Do not change code in this as it can be overwritten"),
 					 GenerateVariable("."),
 					 GenerateVariable(
-						 "h\"\n#include \"Deamer/Language/Reference/PropertyDefinition"),
+						 "\r\n *\r\n * For more information see the DLDL repo: https://github"),
 					 GenerateVariable("."),
-					 GenerateVariable("h\"\n#include \""),
+					 GenerateVariable("com/Deruago/DLDL\r\n * For more information about Deamer: "
+									  "https://github"),
+					 GenerateVariable("."),
+					 GenerateVariable("com/Deruago/theDeamerProject\r\n */\r\n\r\n#ifndef "),
+					 GenerateVariable(compilergeneratortemplate_->header_guard_->This()),
+					 GenerateVariable("\r\n#define "),
+					 GenerateVariable(compilergeneratortemplate_->header_guard_->This()),
+					 GenerateVariable("\r\n\r\n#include \"Deamer/Compiler/Generator/Compiler"),
+					 GenerateVariable("."),
+					 GenerateVariable(
+						 "h\"\r\n#include \"Deamer/Language/Reference/PropertyDefinition"),
+					 GenerateVariable("."),
+					 GenerateVariable("h\"\r\n#include \""),
 					 GenerateVariable(
 						 compilergeneratortemplate_->language_full_name_slash_->This()),
 					 GenerateVariable("/Language"),
 					 GenerateVariable("."),
-					 GenerateVariable("h\"\n\n"),
+					 GenerateVariable("h\"\r\n\r\n"),
 					 GenerateVariable(compilergeneratortemplate_
 										  ->children_compilergenerator_include_->Variable_Field()),
-					 GenerateVariable("\n"),
+					 GenerateVariable("\r\n"),
 					 GenerateVariable(compilergeneratortemplate_->tool_includes_->Variable_Field()),
-					 GenerateVariable("\n\nnamespace "),
+					 GenerateVariable("\r\n\r\nnamespace "),
 					 GenerateVariable(compilergeneratortemplate_->language_full_name_->This()),
-					 GenerateVariable("\n"),
+					 GenerateVariable("\r\n"),
 					 GenerateVariable("{"),
-					 GenerateVariable("\n\t/*!\t"),
+					 GenerateVariable("\r\n\t/*!\t"),
 					 GenerateVariable("\\"),
-					 GenerateVariable("class CompilerGenerator\n\t *\n\t *\t"),
+					 GenerateVariable("class CompilerGenerator\r\n\t *\r\n\t *\t"),
 					 GenerateVariable("\\"),
 					 GenerateVariable("brief This contains the CompilerGenerator of the language "),
 					 GenerateVariable(compilergeneratortemplate_->language_full_name_->This()),
-					 GenerateVariable("\n\t *\n\t *\t"),
+					 GenerateVariable("\r\n\t *\r\n\t *\t"),
 					 GenerateVariable("\\"),
 					 GenerateVariable("details The CompilerGenerator class generates the compiler "
 									  "and various ecosystems"),
 					 GenerateVariable("."),
-					 GenerateVariable("\n\t *\n\t *\t"),
+					 GenerateVariable("\r\n\t *\r\n\t *\t"),
 					 GenerateVariable("\\"),
 					 GenerateVariable("note This is auto-generated via the DLDL definitions"),
 					 GenerateVariable("."),
-					 GenerateVariable("\n\t */\n\tclass CompilerGenerator : public "
+					 GenerateVariable("\r\n\t */\r\n\tclass CompilerGenerator : public "
 									  "::deamer::compiler::generator::Compiler<::"),
 					 GenerateVariable(compilergeneratortemplate_->language_full_name_->This()),
-					 GenerateVariable("::Language>\n\t"),
+					 GenerateVariable("::Language>\r\n\t"),
 					 GenerateVariable(compilergeneratortemplate_->children_compilergenerator_bases_
 										  ->Variable_Field()),
-					 GenerateVariable("\n\t"),
+					 GenerateVariable("\r\n\t"),
 					 GenerateVariable("{"),
-					 GenerateVariable("\n\tpublic:\n\t\tCompilerGenerator()\n\t\t\t: "
+					 GenerateVariable("\r\n\tpublic:\r\n\t\tCompilerGenerator()\r\n\t\t\t: "
 									  "deamer::compiler::generator::Compiler<::"),
 					 GenerateVariable(compilergeneratortemplate_->language_full_name_->This()),
-					 GenerateVariable("::Language>()\n\t\t\t"),
+					 GenerateVariable("::Language>()\r\n\t\t\t"),
 					 GenerateVariable(
 						 compilergeneratortemplate_->children_compilergenerator_bases_ctor_
 							 ->Variable_Field()),
-					 GenerateVariable("\n\t\t"),
+					 GenerateVariable("\r\n\t\t"),
 					 GenerateVariable("{"),
-					 GenerateVariable("\n\t\t"),
+					 GenerateVariable("\r\n\t\t"),
 					 GenerateVariable("}"),
 					 GenerateVariable(
-						 "\n\n\t\tdeamer::file::compiler::Output Generate() override\n\t\t"),
+						 "\r\n\r\n\t\tdeamer::file::compiler::Output Generate() override\r\n\t\t"),
 					 GenerateVariable("{"),
-					 GenerateVariable("\n\t\t\t// Retrieve the Language Definition "
-									  "(LD)\n\t\t\t::deamer::file::compiler::Output "
+					 GenerateVariable("\r\n\t\t\t// Retrieve the Language Definition "
+									  "(LD)\r\n\t\t\t::deamer::file::compiler::Output "
 									  "output(::deamer::compiler::generator::Compiler<::"),
 					 GenerateVariable(compilergeneratortemplate_->language_full_name_->This()),
-					 GenerateVariable("::Language>::GetLanguageDefinition());\n\t\t\t"),
+					 GenerateVariable("::Language>::GetLanguageDefinition());\r\n\t\t\t"),
 					 GenerateVariable(compilergeneratortemplate_->print_threats_->This()),
-					 GenerateVariable("\n\n\t\t\t"),
+					 GenerateVariable("\r\n\r\n\t\t\t"),
 					 GenerateVariable(compilergeneratortemplate_->add_children_compilergenerators_
 										  ->Variable_Field()),
-					 GenerateVariable("\n\n\t\t\t// Initialize language outputs\n\t\t\t"),
+					 GenerateVariable("\r\n\r\n\t\t\t// Initialize language outputs\r\n\t\t\t"),
 					 GenerateVariable(compilergeneratortemplate_->language_output_initialization_
 										  ->Variable_Field()),
-					 GenerateVariable("\n\n\t\t\t// The language generation targets\n\t\t\t"),
+					 GenerateVariable("\r\n\r\n\t\t\t// The language generation targets\r\n\t\t\t"),
 					 GenerateVariable(
 						 compilergeneratortemplate_->add_language_outputs_->Variable_Field()),
-					 GenerateVariable("\n\n\t\t\treturn output;\n\t\t"),
+					 GenerateVariable("\r\n\r\n\t\t\treturn output;\r\n\t\t"),
 					 GenerateVariable("}"),
-					 GenerateVariable("\n\n\t\t~CompilerGenerator() override = default;\n\t"),
+					 GenerateVariable("\r\n\r\n\t\t~CompilerGenerator() override = default;\r\n\t"),
 					 GenerateVariable("}"),
-					 GenerateVariable(";\n"),
+					 GenerateVariable(";\r\n"),
 					 GenerateVariable("}"),
-					 GenerateVariable("\n\n#endif // "),
+					 GenerateVariable("\r\n\r\n#endif // "),
 					 GenerateVariable(compilergeneratortemplate_->header_guard_->This()),
-					 GenerateVariable("\n")}));
+					 GenerateVariable("\r\n")}));
 				Content_->type = ::DLDL::filetemplate::compilergeneratorTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Class_postfix_) =
@@ -1719,17 +1729,14 @@ namespace DLDL::filetemplate
 			*language_full_name_underscore_ =
 				Variable_language_full_name_underscore_(this, std::vector<VariableBase*>({}));
 			*language_output_initialization_ = Variable_language_output_initialization_(
-				this,
-				std::vector<VariableBase*>(
-					{GenerateVariable(tool_namespace_->This()), GenerateVariable("::"),
-					 GenerateVariable(tool_->Lower()), GenerateVariable("::"),
-					 GenerateVariable(tool_->This()), GenerateVariable(" "),
-					 GenerateVariable(tool_->This()),
-					 GenerateVariable("(::deamer::compiler::generator::Compiler"),
-					 GenerateVariable(left_angle_bracket_->This()), GenerateVariable("::"),
-					 GenerateVariable(language_full_name_->This()), GenerateVariable("::Language"),
-					 GenerateVariable(right_angle_bracket_->This()),
-					 GenerateVariable("::GetLanguageDefinition());")}));
+				this, std::vector<VariableBase*>(
+						  {GenerateVariable(tool_namespace_->This()), GenerateVariable("::"),
+						   GenerateVariable(tool_->Lower()), GenerateVariable("::"),
+						   GenerateVariable(tool_->This()), GenerateVariable(" "),
+						   GenerateVariable(tool_->This()),
+						   GenerateVariable("(::deamer::compiler::generator::Compiler<::"),
+						   GenerateVariable(language_full_name_->This()),
+						   GenerateVariable("::Language>::GetLanguageDefinition());")}));
 			*left_angle_bracket_ = Variable_left_angle_bracket_(
 				this, std::vector<VariableBase*>({GenerateVariable("<")}));
 			*left_bracket_ =
@@ -1740,18 +1747,13 @@ namespace DLDL::filetemplate
 				this,
 				std::vector<VariableBase*>(
 					{GenerateVariable("::deamer::language::reference::PropertyDefinition("
-									  "\n\t\t\t\t::deamer::compiler::generator::Compiler"),
-					 GenerateVariable(left_angle_bracket_->This()), GenerateVariable("::"),
-					 GenerateVariable(language_full_name_->This()), GenerateVariable("::Language"),
-					 GenerateVariable(right_angle_bracket_->This()),
-					 GenerateVariable("::GetLanguageDefinition())\n\t\t\t\t"),
-					 GenerateVariable("."), GenerateVariable("GetDefinition"),
-					 GenerateVariable(left_angle_bracket_->This()),
-					 GenerateVariable(
-						 "::deamer::language::type::definition::property::Type::Threat"),
-					 GenerateVariable(right_angle_bracket_->This()),
-					 GenerateVariable("()\n\t\t\t\t"), GenerateVariable("."),
-					 GenerateVariable("PrintThreats();")}));
+									  "\r\n\t\t\t\t::deamer::compiler::generator::Compiler<::"),
+					 GenerateVariable(language_full_name_->This()),
+					 GenerateVariable("::Language>::GetLanguageDefinition())\r\n\t\t\t\t"),
+					 GenerateVariable("."),
+					 GenerateVariable("GetDefinition<::deamer::language::type::definition::"
+									  "property::Type::Threat>()\r\n\t\t\t\t"),
+					 GenerateVariable("."), GenerateVariable("PrintThreats();")}));
 			*right_angle_bracket_ = Variable_right_angle_bracket_(
 				this, std::vector<VariableBase*>({GenerateVariable(">")}));
 			*right_bracket_ =

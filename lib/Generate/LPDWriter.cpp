@@ -9,7 +9,7 @@ deamer::file::tool::File DLDL::generate::LPDWriter::GetLanguage(ir::Language* la
 {
 	deamer::file::tool::File file("Language", "h", "");
 
-	auto generator = DLDL::filetemplate::languageTemplate();
+	auto generator = DLDL::filetemplate::LanguageTemplate();
 
 	FillInDefaultVariablesInConstruction(generator, language);
 

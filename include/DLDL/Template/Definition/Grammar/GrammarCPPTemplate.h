@@ -771,7 +771,17 @@ namespace DLDL::filetemplate
 			{
 				type = ::DLDL::filetemplate::GrammarCPPTemplate::Type::file_;
 				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>(
-					{GenerateVariable("#include \""),
+					{GenerateVariable(
+						 "/* \n * This file is auto-generated and auto-maintained by DLDL\n * Do "
+						 "not change code in this as it can be overwritten"),
+					 GenerateVariable("."),
+					 GenerateVariable(
+						 "\n *\n * For more information see the DLDL repo: https://github"),
+					 GenerateVariable("."),
+					 GenerateVariable(
+						 "com/Deruago/DLDL\n * For more information about Deamer: https://github"),
+					 GenerateVariable("."),
+					 GenerateVariable("com/Deruago/theDeamerProject\n */\n\n#include \""),
 					 GenerateVariable(grammarcpptemplate_->language_full_name_slash_->This()),
 					 GenerateVariable("/Grammar"),
 					 GenerateVariable("."),
@@ -1784,18 +1794,15 @@ namespace DLDL::filetemplate
 				this, std::vector<VariableBase*>({GenerateVariable(")")}));
 			*token_references_ = Variable_token_references_(this, std::vector<VariableBase*>({}));
 			*unknown_reference_ = Variable_unknown_reference_(
-				this, std::vector<VariableBase*>(
-						  {GenerateVariable(unknown_type_->This()), GenerateVariable("."),
-						   GenerateVariable("Set(::deamer::language::type::definition::object::"
-											"special::Uninitialized"),
-						   GenerateVariable(left_angle_bracket_->This()),
-						   GenerateVariable(
-							   "::deamer::language::type::definition::object::main::NonTerminal"),
-						   GenerateVariable(right_angle_bracket_->This()),
-						   GenerateVariable("(\"NonTerminal\", \""),
-						   GenerateVariable(unknown_type_->This()),
-						   GenerateVariable(
-							   "\", \"Unknown reference to (most likely) a NonTerminal!\"));")}));
+				this,
+				std::vector<VariableBase*>(
+					{GenerateVariable(unknown_type_->This()), GenerateVariable("."),
+					 GenerateVariable("Set(::deamer::language::type::definition::object::special::"
+									  "Uninitialized<::deamer::language::type::definition::object::"
+									  "main::NonTerminal>(\"NonTerminal\", \""),
+					 GenerateVariable(unknown_type_->This()),
+					 GenerateVariable(
+						 "\", \"Unknown reference to (most likely) a NonTerminal!\"));")}));
 			*unknown_reference_add_object_ = Variable_unknown_reference_add_object_(
 				this, std::vector<VariableBase*>({GenerateVariable("AddObject("),
 												  GenerateVariable(unknown_type_->This()),

@@ -1,13 +1,12 @@
-#ifndef DST_CMAKELISTSTEMPLATE_txt
-#define DST_CMAKELISTSTEMPLATE_txt
+#ifndef DLDL_FILETEMPLATE_CMAKELISTSTEMPLATE_h
+#define DLDL_FILETEMPLATE_CMAKELISTSTEMPLATE_h
 
+#include <string>
 #include <variant>
 #include <vector>
-#include <string>
 
 namespace DLDL::filetemplate
 {
-
 	/*!	\class CMakeListsTemplate
 	 *
 	 *	\brief Generates code for "CMakeListsTemplate"
@@ -37,9 +36,7 @@ namespace DLDL::filetemplate
 			right_bracket_,
 			right_curly_bracket_,
 
-
 		};
-
 
 		enum class ScopeType
 		{
@@ -49,86 +46,76 @@ namespace DLDL::filetemplate
 			Default_,
 			Upper_,
 			Lower_,
+
+			Snake_,
+			Slash_,
+			BackSlash_,
+			Colon_,
+			DoubleColon_,
+
 			Variable_Field_,
 			Variable_Field_Separator_,
 			Function_Field_,
 			Function_Field_Separator_,
 
-
 		};
 
-
-		static constexpr const char* ConvertEnumToName(::DLDL::filetemplate::CMakeListsTemplate::Type enumerationValue)
+		static constexpr const char*
+		ConvertEnumToName(::DLDL::filetemplate::CMakeListsTemplate::Type enumerationValue)
 		{
 			switch (enumerationValue)
 			{
-			case ::DLDL::filetemplate::CMakeListsTemplate::Type::file_:
-			{
+			case ::DLDL::filetemplate::CMakeListsTemplate::Type::file_: {
 				return "file";
 			}
 
-			case ::DLDL::filetemplate::CMakeListsTemplate::Type::language_generation_target_:
-			{
+			case ::DLDL::filetemplate::CMakeListsTemplate::Type::language_generation_target_: {
 				return "language_generation_target";
 			}
 
-			case ::DLDL::filetemplate::CMakeListsTemplate::Type::language_static_library_target_:
-			{
+			case ::DLDL::filetemplate::CMakeListsTemplate::Type::language_static_library_target_: {
 				return "language_static_library_target";
 			}
 
-			case ::DLDL::filetemplate::CMakeListsTemplate::Type::languages_:
-			{
+			case ::DLDL::filetemplate::CMakeListsTemplate::Type::languages_: {
 				return "languages";
 			}
 
-			case ::DLDL::filetemplate::CMakeListsTemplate::Type::languages_comma_:
-			{
+			case ::DLDL::filetemplate::CMakeListsTemplate::Type::languages_comma_: {
 				return "languages_comma";
 			}
 
-			case ::DLDL::filetemplate::CMakeListsTemplate::Type::left_angle_bracket_:
-			{
+			case ::DLDL::filetemplate::CMakeListsTemplate::Type::left_angle_bracket_: {
 				return "left_angle_bracket";
 			}
 
-			case ::DLDL::filetemplate::CMakeListsTemplate::Type::left_bracket_:
-			{
+			case ::DLDL::filetemplate::CMakeListsTemplate::Type::left_bracket_: {
 				return "left_bracket";
 			}
 
-			case ::DLDL::filetemplate::CMakeListsTemplate::Type::left_curly_bracket_:
-			{
+			case ::DLDL::filetemplate::CMakeListsTemplate::Type::left_curly_bracket_: {
 				return "left_curly_bracket";
 			}
 
-			case ::DLDL::filetemplate::CMakeListsTemplate::Type::project_name_:
-			{
+			case ::DLDL::filetemplate::CMakeListsTemplate::Type::project_name_: {
 				return "project_name";
 			}
 
-			case ::DLDL::filetemplate::CMakeListsTemplate::Type::right_angle_bracket_:
-			{
+			case ::DLDL::filetemplate::CMakeListsTemplate::Type::right_angle_bracket_: {
 				return "right_angle_bracket";
 			}
 
-			case ::DLDL::filetemplate::CMakeListsTemplate::Type::right_bracket_:
-			{
+			case ::DLDL::filetemplate::CMakeListsTemplate::Type::right_bracket_: {
 				return "right_bracket";
 			}
 
-			case ::DLDL::filetemplate::CMakeListsTemplate::Type::right_curly_bracket_:
-			{
+			case ::DLDL::filetemplate::CMakeListsTemplate::Type::right_curly_bracket_: {
 				return "right_curly_bracket";
 			}
-
-
 			}
 
 			return "";
 		}
-
-
 
 	public:
 		struct VariableBase
@@ -138,7 +125,8 @@ namespace DLDL::filetemplate
 			std::variant<std::string, std::vector<VariableBase*>> value;
 			bool isString = true;
 
-			::DLDL::filetemplate::CMakeListsTemplate::Type type = ::DLDL::filetemplate::CMakeListsTemplate::Type::Unknown;
+			::DLDL::filetemplate::CMakeListsTemplate::Type type =
+				::DLDL::filetemplate::CMakeListsTemplate::Type::Unknown;
 
 			VariableBase() : VariableBase(std::vector<VariableBase*>())
 			{
@@ -169,7 +157,7 @@ namespace DLDL::filetemplate
 				return this;
 			}
 
-			std::string GetValue()
+			virtual std::string GetValue()
 			{
 				if (isString)
 				{
@@ -264,7 +252,7 @@ namespace DLDL::filetemplate
 					// then create a vector.
 					auto& currentValue = std::get<std::string>(value);
 					auto* currentValueAsVariableBase = new VariableBase(currentValue);
-					value = std::vector<VariableBase*>({ currentValueAsVariableBase, variable });
+					value = std::vector<VariableBase*>({currentValueAsVariableBase, variable});
 
 					isString = false;
 				}
@@ -304,7 +292,6 @@ namespace DLDL::filetemplate
 			return variable;
 		}
 
-
 		static VariableBase* GenerateVariable(const std::string& variable)
 		{
 			return new VariableBase(variable);
@@ -312,42 +299,258 @@ namespace DLDL::filetemplate
 
 		struct VariableScope : public VariableBase
 		{
-			::DLDL::filetemplate::CMakeListsTemplate::ScopeType scope_type = ::DLDL::filetemplate::CMakeListsTemplate::ScopeType::Unknown;
+			::DLDL::filetemplate::CMakeListsTemplate::ScopeType scope_type =
+				::DLDL::filetemplate::CMakeListsTemplate::ScopeType::Unknown;
 			bool isReserved = false;
 
-			VariableScope(::DLDL::filetemplate::CMakeListsTemplate::ScopeType scope_type_, bool isReserved_ = false) : VariableBase(), scope_type(scope_type_), isReserved(isReserved_)
+			VariableScope(::DLDL::filetemplate::CMakeListsTemplate::ScopeType scope_type_,
+						  bool isReserved_ = false)
+				: VariableBase(),
+				  scope_type(scope_type_),
+				  isReserved(isReserved_)
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::Scope;
 			}
 
-			VariableScope(const char* text, ::DLDL::filetemplate::CMakeListsTemplate::ScopeType scope_type_, bool isReserved_ = false) : VariableBase(text), scope_type(scope_type_), isReserved(isReserved_)
+			VariableScope(const char* text,
+						  ::DLDL::filetemplate::CMakeListsTemplate::ScopeType scope_type_,
+						  bool isReserved_ = false)
+				: VariableBase(text),
+				  scope_type(scope_type_),
+				  isReserved(isReserved_)
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::Scope;
 			}
 
-			VariableScope(std::vector<VariableBase*> variable, ::DLDL::filetemplate::CMakeListsTemplate::ScopeType scope_type_, bool isReserved_ = false) : VariableBase(variable), scope_type(scope_type_), isReserved(isReserved_)
+			VariableScope(std::vector<VariableBase*> variable,
+						  ::DLDL::filetemplate::CMakeListsTemplate::ScopeType scope_type_,
+						  bool isReserved_ = false)
+				: VariableBase(variable),
+				  scope_type(scope_type_),
+				  isReserved(isReserved_)
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::Scope;
+			}
+		};
+
+		struct Variable_ReservedScope_Upper : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Upper(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::CMakeListsTemplate::ScopeType::Upper_, true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string upperVariant;
+				std::string currentValue = base->GetValue();
+
+				for (const auto character : currentValue)
+				{
+					upperVariant += std::toupper(character);
+				}
+
+				return upperVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Lower : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Lower(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::CMakeListsTemplate::ScopeType::Lower_, true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string lowerVariant;
+				std::string currentValue = base->GetValue();
+
+				for (const auto character : currentValue)
+				{
+					lowerVariant += std::tolower(character);
+				}
+
+				return lowerVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Snake : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Snake(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::CMakeListsTemplate::ScopeType::Snake_, true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string snakeVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						snakeVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						snakeVariant += '_';
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!snakeVariant.empty() && lastWasNonAlpha)
+				{
+					snakeVariant.pop_back();
+				}
+
+				return snakeVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_Slash : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_Slash(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::CMakeListsTemplate::ScopeType::Slash_, true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string slashVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						slashVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						slashVariant += '/';
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!slashVariant.empty() && lastWasNonAlpha)
+				{
+					slashVariant.pop_back();
+				}
+
+				return slashVariant;
+			}
+		};
+
+		struct Variable_ReservedScope_DoubleColon : public VariableScope
+		{
+			VariableBase* base;
+			Variable_ReservedScope_DoubleColon(VariableBase* base_)
+				: VariableScope(::DLDL::filetemplate::CMakeListsTemplate::ScopeType::DoubleColon_,
+								true),
+				  base(base_)
+			{
+			}
+
+			virtual std::string GetValue() override
+			{
+				std::string doubleColonVariant;
+				std::string currentValue = base->GetValue();
+
+				bool lastWasNonAlpha = true;
+				for (const auto character : currentValue)
+				{
+					if (std::isalpha(character))
+					{
+						doubleColonVariant += character;
+						lastWasNonAlpha = false;
+					}
+					else
+					{
+						if (lastWasNonAlpha)
+						{
+							continue;
+						}
+
+						doubleColonVariant += "::";
+						lastWasNonAlpha = true;
+					}
+				}
+
+				// If it contains text
+				// remove the tail
+				if (!doubleColonVariant.empty() && lastWasNonAlpha)
+				{
+					doubleColonVariant.pop_back();
+					doubleColonVariant.pop_back();
+				}
+
+				return doubleColonVariant;
 			}
 		};
 
 		struct VariableScopes : public VariableBase
 		{
 			// Default scopes
-			VariableBase* default_ = new VariableScope(::DLDL::filetemplate::CMakeListsTemplate::ScopeType::Default_, true);
-			VariableBase* upper_ = new VariableScope(::DLDL::filetemplate::CMakeListsTemplate::ScopeType::Upper_, true);
-			VariableBase* lower_ = new VariableScope(::DLDL::filetemplate::CMakeListsTemplate::ScopeType::Lower_, true);
-			VariableBase* variable_field_ = new VariableScope(::DLDL::filetemplate::CMakeListsTemplate::ScopeType::Variable_Field_, true);
-			VariableBase* variable_field_separator_ = new VariableScope("\n", ::DLDL::filetemplate::CMakeListsTemplate::ScopeType::Variable_Field_Separator_, true);
+			VariableBase* default_ = new VariableScope(
+				::DLDL::filetemplate::CMakeListsTemplate::ScopeType::Default_, true);
+			VariableBase* upper_ = new Variable_ReservedScope_Upper(this);
+			VariableBase* lower_ = new Variable_ReservedScope_Lower(this);
+
+			VariableBase* snake_ = new Variable_ReservedScope_Snake(this);
+			VariableBase* slash_ = new Variable_ReservedScope_Slash(this);
+			VariableBase* double_colon_ = new Variable_ReservedScope_DoubleColon(this);
+
+			VariableBase* variable_field_ = new VariableScope(
+				::DLDL::filetemplate::CMakeListsTemplate::ScopeType::Variable_Field_, true);
+			VariableBase* variable_field_separator_ = new VariableScope(
+				"\n",
+				::DLDL::filetemplate::CMakeListsTemplate::ScopeType::Variable_Field_Separator_,
+				true);
 
 			// Ctor
-			VariableScopes() : VariableBase() {}
+			VariableScopes() : VariableBase()
+			{
+			}
 
-			VariableScopes(const char* text) : VariableBase(text) {}
+			VariableScopes(const char* text) : VariableBase(text)
+			{
+			}
 
-			VariableScopes(const std::string& text) : VariableBase(text) {}
+			VariableScopes(const std::string& text) : VariableBase(text)
+			{
+			}
 
-			VariableScopes(std::vector<VariableBase*> variables) : VariableBase(variables) {}
+			VariableScopes(std::vector<VariableBase*> variables) : VariableBase(variables)
+			{
+			}
 
 			// Dtor
 			virtual ~VariableScopes() override = default;
@@ -359,32 +562,32 @@ namespace DLDL::filetemplate
 			}
 			VariableBase* Upper()
 			{
-				std::string upperVariant;
-				std::string currentValue = GetValue();
-
-				for (const auto character : currentValue)
-				{
-					upperVariant += std::toupper(character);
-				}
-
-				*upper_ = upperVariant;
-
 				return upper_;
 			}
 
 			VariableBase* Lower()
 			{
-				std::string lowerVariant;
-				std::string currentValue = GetValue();
-
-				for (const auto character : currentValue)
-				{
-					lowerVariant += std::tolower(character);
-				}
-
-				*lower_ = lowerVariant;
-
 				return lower_;
+			}
+
+			VariableBase* Underscore()
+			{
+				return snake_;
+			}
+
+			VariableBase* Snake()
+			{
+				return snake_;
+			}
+
+			VariableBase* Slash()
+			{
+				return slash_;
+			}
+
+			VariableBase* DoubleColon()
+			{
+				return double_colon_;
 			}
 
 			VariableBase* Variable_Field()
@@ -406,10 +609,8 @@ namespace DLDL::filetemplate
 		};
 
 	public:
-
 		struct Variable_file_ : public VariableScopes
 		{
-
 			static constexpr auto name = "file_";
 
 			VariableBase* Content_ = GenerateVariable("");
@@ -419,7 +620,6 @@ namespace DLDL::filetemplate
 			VariableBase* Namespace_ = GenerateVariable("");
 			VariableBase* Target_language_ = GenerateVariable("");
 
-
 			Variable_file_() : VariableScopes()
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::file_;
@@ -427,30 +627,87 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_file_() override = default;
 
-			Variable_file_(CMakeListsTemplate* cmakeliststemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_file_(CMakeListsTemplate* cmakeliststemplate_,
+						   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::file_;
-				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>({ GenerateVariable("cmake_minimum_required(VERSION 3"), GenerateVariable("."), GenerateVariable("16)\nproject("), GenerateVariable(cmakeliststemplate_->project_name_->This()), GenerateVariable("\n                      DESCRIPTION \"Compiler/Ecosystem generator for language(s): "), GenerateVariable(cmakeliststemplate_->languages_comma_->This()), GenerateVariable("."), GenerateVariable(" This CompilerGenerator project uses Deamer CC for the generation, and DLDL to generate the definitions"), GenerateVariable("."), GenerateVariable("\"\n                      LANGUAGES CXX)\nfind_package(Deamer REQUIRED)\nfile(GLOB_RECURSE SOURCE_LIST \"$"), GenerateVariable(cmakeliststemplate_->left_bracket_->This()), GenerateVariable(cmakeliststemplate_->project_name_->This()), GenerateVariable("_SOURCE_DIR"), GenerateVariable("}"), GenerateVariable("/lib/*"), GenerateVariable("."), GenerateVariable("cpp\")\nadd_library("), GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()), GenerateVariable(" STATIC $"), GenerateVariable("{"), GenerateVariable("SOURCE_LIST"), GenerateVariable("}"), GenerateVariable(")\ntarget_include_directories("), GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()), GenerateVariable(" PUBLIC \"$"), GenerateVariable(cmakeliststemplate_->left_bracket_->This()), GenerateVariable(cmakeliststemplate_->project_name_->This()), GenerateVariable("_SOURCE_DIR"), GenerateVariable("}"), GenerateVariable("/include\")\ntarget_link_libraries("), GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()), GenerateVariable(" PUBLIC Deamer)\ntarget_compile_features("), GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()), GenerateVariable(" PUBLIC cxx_std_17)\nset_target_properties("), GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()), GenerateVariable(" PROPERTIES LINKER_LANGUAGE CXX)\nadd_executable("), GenerateVariable(cmakeliststemplate_->language_generation_target_->This()), GenerateVariable(" \"$"), GenerateVariable(cmakeliststemplate_->left_bracket_->This()), GenerateVariable(cmakeliststemplate_->project_name_->This()), GenerateVariable("_SOURCE_DIR"), GenerateVariable("}"), GenerateVariable("/main"), GenerateVariable("."), GenerateVariable("cpp\")\ntarget_link_libraries("), GenerateVariable(cmakeliststemplate_->language_generation_target_->This()), GenerateVariable(" PUBLIC "), GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()), GenerateVariable(")\n") }));
+				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>(
+					{GenerateVariable("cmake_minimum_required(VERSION 3"),
+					 GenerateVariable("."),
+					 GenerateVariable("16)\r\n\r\nproject("),
+					 GenerateVariable(cmakeliststemplate_->project_name_->This()),
+					 GenerateVariable("\r\n                      DESCRIPTION \"Compiler/Ecosystem "
+									  "generator for language(s): "),
+					 GenerateVariable(cmakeliststemplate_->languages_comma_->This()),
+					 GenerateVariable("."),
+					 GenerateVariable(" This CompilerGenerator project uses Deamer CC for the "
+									  "generation, and DLDL to generate the definitions"),
+					 GenerateVariable("."),
+					 GenerateVariable(
+						 "\"\r\n                      LANGUAGES CXX)\r\n\r\nfind_package(Deamer "
+						 "REQUIRED)\r\n\r\nfile(GLOB_RECURSE SOURCE_LIST \"$"),
+					 GenerateVariable(cmakeliststemplate_->left_bracket_->This()),
+					 GenerateVariable(cmakeliststemplate_->project_name_->This()),
+					 GenerateVariable("_SOURCE_DIR"),
+					 GenerateVariable("}"),
+					 GenerateVariable("/lib/*"),
+					 GenerateVariable("."),
+					 GenerateVariable("cpp\")\r\n\r\nadd_library("),
+					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
+					 GenerateVariable(" STATIC $"),
+					 GenerateVariable("{"),
+					 GenerateVariable("SOURCE_LIST"),
+					 GenerateVariable("}"),
+					 GenerateVariable(")\r\n\r\ntarget_include_directories("),
+					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
+					 GenerateVariable(" PUBLIC \"$"),
+					 GenerateVariable(cmakeliststemplate_->left_bracket_->This()),
+					 GenerateVariable(cmakeliststemplate_->project_name_->This()),
+					 GenerateVariable("_SOURCE_DIR"),
+					 GenerateVariable("}"),
+					 GenerateVariable("/include\")\r\ntarget_link_libraries("),
+					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
+					 GenerateVariable(" PUBLIC Deamer)\r\ntarget_compile_features("),
+					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
+					 GenerateVariable(" PUBLIC cxx_std_17)\r\nset_target_properties("),
+					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
+					 GenerateVariable(" PROPERTIES LINKER_LANGUAGE CXX)\r\n\r\nadd_executable("),
+					 GenerateVariable(cmakeliststemplate_->language_generation_target_->This()),
+					 GenerateVariable(" \"$"),
+					 GenerateVariable(cmakeliststemplate_->left_bracket_->This()),
+					 GenerateVariable(cmakeliststemplate_->project_name_->This()),
+					 GenerateVariable("_SOURCE_DIR"),
+					 GenerateVariable("}"),
+					 GenerateVariable("/main"),
+					 GenerateVariable("."),
+					 GenerateVariable("cpp\")\r\ntarget_link_libraries("),
+					 GenerateVariable(cmakeliststemplate_->language_generation_target_->This()),
+					 GenerateVariable(" PUBLIC "),
+					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
+					 GenerateVariable(")\r\n")}));
 				Content_->type = ::DLDL::filetemplate::CMakeListsTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(Class_postfix_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(Class_postfix_) =
+					VariableBase(std::vector<VariableBase*>({}));
 				Class_postfix_->type = ::DLDL::filetemplate::CMakeListsTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(Extension_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(Extension_) =
+					VariableBase(std::vector<VariableBase*>({GenerateVariable("h")}));
 				Extension_->type = ::DLDL::filetemplate::CMakeListsTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(File_name_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(File_name_) =
+					VariableBase(std::vector<VariableBase*>({GenerateVariable("CMakeLists")}));
 				File_name_->type = ::DLDL::filetemplate::CMakeListsTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(Namespace_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(Namespace_) = VariableBase(
+					std::vector<VariableBase*>({GenerateVariable("DLDL::filetemplate")}));
 				Namespace_->type = ::DLDL::filetemplate::CMakeListsTemplate::Type::Scope;
 
-				*static_cast<VariableBase*>(Target_language_) = VariableBase(std::vector<VariableBase*>({  }));
+				*static_cast<VariableBase*>(Target_language_) =
+					VariableBase(std::vector<VariableBase*>({GenerateVariable("C++")}));
 				Target_language_->type = ::DLDL::filetemplate::CMakeListsTemplate::Type::Scope;
-
-
 			}
-
 
 			VariableBase* Content() const
 			{
@@ -482,7 +739,6 @@ namespace DLDL::filetemplate
 				return Target_language_;
 			}
 
-
 			Variable_file_& operator=(const Variable_file_& variable)
 			{
 				if (&variable == this)
@@ -500,18 +756,13 @@ namespace DLDL::filetemplate
 				*Namespace_ = *variable.Namespace_;
 				*Target_language_ = *variable.Target_language_;
 
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_language_generation_target_ : public VariableScopes
 		{
-
 			static constexpr auto name = "language_generation_target_";
-
-
 
 			Variable_language_generation_target_() : VariableScopes()
 			{
@@ -520,15 +771,15 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_language_generation_target_() override = default;
 
-			Variable_language_generation_target_(CMakeListsTemplate* cmakeliststemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_language_generation_target_(CMakeListsTemplate* cmakeliststemplate_,
+												 const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::language_generation_target_;
-
 			}
 
-
-
-			Variable_language_generation_target_& operator=(const Variable_language_generation_target_& variable)
+			Variable_language_generation_target_&
+			operator=(const Variable_language_generation_target_& variable)
 			{
 				if (&variable == this)
 				{
@@ -538,36 +789,32 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_language_static_library_target_ : public VariableScopes
 		{
-
 			static constexpr auto name = "language_static_library_target_";
-
-
 
 			Variable_language_static_library_target_() : VariableScopes()
 			{
-				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::language_static_library_target_;
+				type =
+					::DLDL::filetemplate::CMakeListsTemplate::Type::language_static_library_target_;
 			}
 
 			virtual ~Variable_language_static_library_target_() override = default;
 
-			Variable_language_static_library_target_(CMakeListsTemplate* cmakeliststemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_language_static_library_target_(CMakeListsTemplate* cmakeliststemplate_,
+													 const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
-				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::language_static_library_target_;
-
+				type =
+					::DLDL::filetemplate::CMakeListsTemplate::Type::language_static_library_target_;
 			}
 
-
-
-			Variable_language_static_library_target_& operator=(const Variable_language_static_library_target_& variable)
+			Variable_language_static_library_target_&
+			operator=(const Variable_language_static_library_target_& variable)
 			{
 				if (&variable == this)
 				{
@@ -577,19 +824,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_languages_ : public VariableScopes
 		{
-
 			static constexpr auto name = "languages_";
-
-
 
 			Variable_languages_() : VariableScopes()
 			{
@@ -598,13 +839,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_languages_() override = default;
 
-			Variable_languages_(CMakeListsTemplate* cmakeliststemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_languages_(CMakeListsTemplate* cmakeliststemplate_,
+								const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::languages_;
-
 			}
-
-
 
 			Variable_languages_& operator=(const Variable_languages_& variable)
 			{
@@ -616,19 +856,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_languages_comma_ : public VariableScopes
 		{
-
 			static constexpr auto name = "languages_comma_";
-
-
 
 			Variable_languages_comma_() : VariableScopes()
 			{
@@ -637,13 +871,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_languages_comma_() override = default;
 
-			Variable_languages_comma_(CMakeListsTemplate* cmakeliststemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_languages_comma_(CMakeListsTemplate* cmakeliststemplate_,
+									  const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::languages_comma_;
-
 			}
-
-
 
 			Variable_languages_comma_& operator=(const Variable_languages_comma_& variable)
 			{
@@ -655,19 +888,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_left_angle_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "left_angle_bracket_";
-
-
 
 			Variable_left_angle_bracket_() : VariableScopes()
 			{
@@ -676,13 +903,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_left_angle_bracket_() override = default;
 
-			Variable_left_angle_bracket_(CMakeListsTemplate* cmakeliststemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_left_angle_bracket_(CMakeListsTemplate* cmakeliststemplate_,
+										 const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::left_angle_bracket_;
-
 			}
-
-
 
 			Variable_left_angle_bracket_& operator=(const Variable_left_angle_bracket_& variable)
 			{
@@ -694,19 +920,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_left_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "left_bracket_";
-
-
 
 			Variable_left_bracket_() : VariableScopes()
 			{
@@ -715,13 +935,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_left_bracket_() override = default;
 
-			Variable_left_bracket_(CMakeListsTemplate* cmakeliststemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_left_bracket_(CMakeListsTemplate* cmakeliststemplate_,
+								   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::left_bracket_;
-
 			}
-
-
 
 			Variable_left_bracket_& operator=(const Variable_left_bracket_& variable)
 			{
@@ -733,19 +952,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_left_curly_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "left_curly_bracket_";
-
-
 
 			Variable_left_curly_bracket_() : VariableScopes()
 			{
@@ -754,13 +967,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_left_curly_bracket_() override = default;
 
-			Variable_left_curly_bracket_(CMakeListsTemplate* cmakeliststemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_left_curly_bracket_(CMakeListsTemplate* cmakeliststemplate_,
+										 const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::left_curly_bracket_;
-
 			}
-
-
 
 			Variable_left_curly_bracket_& operator=(const Variable_left_curly_bracket_& variable)
 			{
@@ -772,19 +984,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_project_name_ : public VariableScopes
 		{
-
 			static constexpr auto name = "project_name_";
-
-
 
 			Variable_project_name_() : VariableScopes()
 			{
@@ -793,13 +999,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_project_name_() override = default;
 
-			Variable_project_name_(CMakeListsTemplate* cmakeliststemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_project_name_(CMakeListsTemplate* cmakeliststemplate_,
+								   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::project_name_;
-
 			}
-
-
 
 			Variable_project_name_& operator=(const Variable_project_name_& variable)
 			{
@@ -811,19 +1016,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_right_angle_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "right_angle_bracket_";
-
-
 
 			Variable_right_angle_bracket_() : VariableScopes()
 			{
@@ -832,13 +1031,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_right_angle_bracket_() override = default;
 
-			Variable_right_angle_bracket_(CMakeListsTemplate* cmakeliststemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_right_angle_bracket_(CMakeListsTemplate* cmakeliststemplate_,
+										  const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::right_angle_bracket_;
-
 			}
-
-
 
 			Variable_right_angle_bracket_& operator=(const Variable_right_angle_bracket_& variable)
 			{
@@ -850,19 +1048,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_right_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "right_bracket_";
-
-
 
 			Variable_right_bracket_() : VariableScopes()
 			{
@@ -871,13 +1063,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_right_bracket_() override = default;
 
-			Variable_right_bracket_(CMakeListsTemplate* cmakeliststemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_right_bracket_(CMakeListsTemplate* cmakeliststemplate_,
+									const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::right_bracket_;
-
 			}
-
-
 
 			Variable_right_bracket_& operator=(const Variable_right_bracket_& variable)
 			{
@@ -889,19 +1080,13 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
 
 		struct Variable_right_curly_bracket_ : public VariableScopes
 		{
-
 			static constexpr auto name = "right_curly_bracket_";
-
-
 
 			Variable_right_curly_bracket_() : VariableScopes()
 			{
@@ -910,13 +1095,12 @@ namespace DLDL::filetemplate
 
 			virtual ~Variable_right_curly_bracket_() override = default;
 
-			Variable_right_curly_bracket_(CMakeListsTemplate* cmakeliststemplate_, const std::vector<VariableBase*>& variables) : VariableScopes(variables)
+			Variable_right_curly_bracket_(CMakeListsTemplate* cmakeliststemplate_,
+										  const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
 			{
 				type = ::DLDL::filetemplate::CMakeListsTemplate::Type::right_curly_bracket_;
-
 			}
-
-
 
 			Variable_right_curly_bracket_& operator=(const Variable_right_curly_bracket_& variable)
 			{
@@ -928,13 +1112,9 @@ namespace DLDL::filetemplate
 				value = variable.value;
 				isString = variable.isString;
 
-
-
 				return *this;
 			}
-
 		};
-
 
 	public:
 		inline static std::vector<VariableBase*> variables_to_delete = std::vector<VariableBase*>();
@@ -946,8 +1126,10 @@ namespace DLDL::filetemplate
 		// Members that one can directly access.
 		// e.g. CMakeListsTemplate.member = "auto-generated";
 		Variable_file_* file_ = new Variable_file_();
-		Variable_language_generation_target_* language_generation_target_ = new Variable_language_generation_target_();
-		Variable_language_static_library_target_* language_static_library_target_ = new Variable_language_static_library_target_();
+		Variable_language_generation_target_* language_generation_target_ =
+			new Variable_language_generation_target_();
+		Variable_language_static_library_target_* language_static_library_target_ =
+			new Variable_language_static_library_target_();
 		Variable_languages_* languages_ = new Variable_languages_();
 		Variable_languages_comma_* languages_comma_ = new Variable_languages_comma_();
 		Variable_left_angle_bracket_* left_angle_bracket_ = new Variable_left_angle_bracket_();
@@ -958,23 +1140,34 @@ namespace DLDL::filetemplate
 		Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
 		Variable_right_curly_bracket_* right_curly_bracket_ = new Variable_right_curly_bracket_();
 
-
 	public:
 		CMakeListsTemplate()
 		{
-			*file_ = Variable_file_(this, std::vector<VariableBase*>({  }));
-			*language_generation_target_ = Variable_language_generation_target_(this, std::vector<VariableBase*>({ GenerateVariable(languages_->This()), GenerateVariable("_CompilerGenerator_Main") }));
-			*language_static_library_target_ = Variable_language_static_library_target_(this, std::vector<VariableBase*>({ GenerateVariable(languages_->This()), GenerateVariable("_CompilerGenerator_static_library") }));
-			*languages_ = Variable_languages_(this, std::vector<VariableBase*>({  }));
-			*languages_comma_ = Variable_languages_comma_(this, std::vector<VariableBase*>({  }));
-			*left_angle_bracket_ = Variable_left_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("<") }));
-			*left_bracket_ = Variable_left_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("{") }));
-			*left_curly_bracket_ = Variable_left_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("(") }));
-			*project_name_ = Variable_project_name_(this, std::vector<VariableBase*>({ GenerateVariable(languages_->This()), GenerateVariable("_CompilerGenerator") }));
-			*right_angle_bracket_ = Variable_right_angle_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(">") }));
-			*right_bracket_ = Variable_right_bracket_(this, std::vector<VariableBase*>({ GenerateVariable("}") }));
-			*right_curly_bracket_ = Variable_right_curly_bracket_(this, std::vector<VariableBase*>({ GenerateVariable(")") }));
-
+			*file_ = Variable_file_(this, std::vector<VariableBase*>({}));
+			*language_generation_target_ = Variable_language_generation_target_(
+				this, std::vector<VariableBase*>({GenerateVariable(languages_->This()),
+												  GenerateVariable("_CompilerGenerator_Main")}));
+			*language_static_library_target_ = Variable_language_static_library_target_(
+				this, std::vector<VariableBase*>(
+						  {GenerateVariable(languages_->This()),
+						   GenerateVariable("_CompilerGenerator_static_library")}));
+			*languages_ = Variable_languages_(this, std::vector<VariableBase*>({}));
+			*languages_comma_ = Variable_languages_comma_(this, std::vector<VariableBase*>({}));
+			*left_angle_bracket_ = Variable_left_angle_bracket_(
+				this, std::vector<VariableBase*>({GenerateVariable("<")}));
+			*left_bracket_ =
+				Variable_left_bracket_(this, std::vector<VariableBase*>({GenerateVariable("{")}));
+			*left_curly_bracket_ = Variable_left_curly_bracket_(
+				this, std::vector<VariableBase*>({GenerateVariable("(")}));
+			*project_name_ = Variable_project_name_(
+				this, std::vector<VariableBase*>({GenerateVariable(languages_->This()),
+												  GenerateVariable("_CompilerGenerator")}));
+			*right_angle_bracket_ = Variable_right_angle_bracket_(
+				this, std::vector<VariableBase*>({GenerateVariable(">")}));
+			*right_bracket_ =
+				Variable_right_bracket_(this, std::vector<VariableBase*>({GenerateVariable("}")}));
+			*right_curly_bracket_ = Variable_right_curly_bracket_(
+				this, std::vector<VariableBase*>({GenerateVariable(")")}));
 
 			variables_.emplace_back(file_);
 			variables_.emplace_back(language_generation_target_);
@@ -988,7 +1181,6 @@ namespace DLDL::filetemplate
 			variables_.emplace_back(right_angle_bracket_);
 			variables_.emplace_back(right_bracket_);
 			variables_.emplace_back(right_curly_bracket_);
-
 		}
 
 		virtual ~CMakeListsTemplate()
@@ -997,6 +1189,8 @@ namespace DLDL::filetemplate
 			{
 				delete variable;
 			}
+
+			variables_to_delete.clear();
 		}
 
 	public:
@@ -1024,4 +1218,4 @@ namespace DLDL::filetemplate
 	};
 }
 
-#endif // DST_CMAKELISTSTEMPLATE_txt
+#endif // DLDL_FILETEMPLATE_CMAKELISTSTEMPLATE_h

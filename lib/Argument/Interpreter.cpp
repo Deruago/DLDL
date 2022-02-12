@@ -6,7 +6,7 @@
 #include "DLDL/IR/ConstructLanguage.h"
 #include "DLDL/IR/Lpd/ConstructLPD.h"
 #include "DLDL/Print/Language.h"
-#include "DLDL/Template/CMakeLists/RootCMakeListstTemplate.h"
+#include "DLDL/Template/CMakeLists/RootCMakeListsTemplate.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -28,7 +28,7 @@ std::string GenerateRootCMakeLists(std::vector<DLDL::ir::Language*> languages)
 		language_string.pop_back();
 	}
 
-	auto generator = DLDL::filetemplate::RootCMakeListstTemplate();
+	auto generator = DLDL::filetemplate::RootCMakeListsTemplate();
 	generator.languages_->Set(language_string);
 
 	for (auto* language : languages)

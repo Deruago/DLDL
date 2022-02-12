@@ -1,4 +1,7 @@
+{{file.target_language}} = <C++>
+{{file.file_name}} = <RootCMakeLists>
 {{file.namespace}} = <DLDL::filetemplate>
+{{file.extension}} = <h>
 
 {{project_name}} = <{{languages}}_LanguageProject>
 

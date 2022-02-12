@@ -1,0 +1,4 @@
+{{file.target_language}} = @<C++>@
+{{file.file_name}} = @<LexiconCPP>@
+{{file.namespace}} = @<DLDL::filetemplate>@
+{{file.extension}} = @<h>@
