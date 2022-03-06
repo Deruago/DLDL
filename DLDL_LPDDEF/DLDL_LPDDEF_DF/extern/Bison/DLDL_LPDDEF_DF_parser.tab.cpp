@@ -74,7 +74,7 @@
 #define yychar          DLDL_LPDDEF_DFchar
 
 /* First part of user prologue.  */
-#line 4 "./DLDL_LPDDEF_DF_parser.y"
+#line 5 "./DLDL_LPDDEF_DF_parser.y"
 
 #include <iostream>
 #include <vector>
@@ -567,10 +567,10 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   148,   148,   159,   165,   175,   181,   187,   193,   203,
-     213,   221,   229,   237,   249,   257,   265,   273,   285,   296,
-     302,   312,   322,   328,   334,   340,   346,   352,   358,   368,
-     378,   384,   394,   400,   410,   420,   426,   436
+       0,   149,   149,   160,   166,   176,   182,   188,   194,   204,
+     214,   222,   230,   238,   250,   258,   266,   274,   286,   297,
+     303,   313,   323,   329,   335,   341,   347,   353,   359,   369,
+     379,   385,   395,   401,   411,   421,   427,   437
 };
 #endif
 
@@ -1701,7 +1701,7 @@ yyreduce:
     switch (yyn)
       {
   case 2: /* program: deamerreserved_star__stmt__  */
-#line 148 "./DLDL_LPDDEF_DF_parser.y"
+#line 149 "./DLDL_LPDDEF_DF_parser.y"
                                      {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::program({::DLDL_LPDDEF_DF::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LPDDEF_DF_deamerreserved_star__stmt__) });
 		(yyval.DLDL_LPDDEF_DF_program) = newNode;
@@ -1713,7 +1713,7 @@ yyreduce:
     break;
 
   case 3: /* deamerreserved_star__stmt__: stmt deamerreserved_star__stmt__  */
-#line 159 "./DLDL_LPDDEF_DF_parser.y"
+#line 160 "./DLDL_LPDDEF_DF_parser.y"
                                           {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::deamerreserved_star__stmt__({::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, { (yyvsp[-1].DLDL_LPDDEF_DF_stmt), (yyvsp[0].DLDL_LPDDEF_DF_deamerreserved_star__stmt__) });
 		(yyval.DLDL_LPDDEF_DF_deamerreserved_star__stmt__) = newNode;
@@ -1724,7 +1724,7 @@ yyreduce:
     break;
 
   case 4: /* deamerreserved_star__stmt__: %empty  */
-#line 165 "./DLDL_LPDDEF_DF_parser.y"
+#line 166 "./DLDL_LPDDEF_DF_parser.y"
            {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::deamerreserved_star__stmt__({::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, {  });
 		(yyval.DLDL_LPDDEF_DF_deamerreserved_star__stmt__) = newNode;
@@ -1735,7 +1735,7 @@ yyreduce:
     break;
 
   case 5: /* stmt: comment_line  */
-#line 175 "./DLDL_LPDDEF_DF_parser.y"
+#line 176 "./DLDL_LPDDEF_DF_parser.y"
                       {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::stmt({::DLDL_LPDDEF_DF::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LPDDEF_DF_comment_line) });
 		(yyval.DLDL_LPDDEF_DF_stmt) = newNode;
@@ -1746,7 +1746,7 @@ yyreduce:
     break;
 
   case 6: /* stmt: vector_variant  */
-#line 181 "./DLDL_LPDDEF_DF_parser.y"
+#line 182 "./DLDL_LPDDEF_DF_parser.y"
                           {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::stmt({::DLDL_LPDDEF_DF::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LPDDEF_DF_vector_variant) });
 		(yyval.DLDL_LPDDEF_DF_stmt) = newNode;
@@ -1757,7 +1757,7 @@ yyreduce:
     break;
 
   case 7: /* stmt: optional_variant  */
-#line 187 "./DLDL_LPDDEF_DF_parser.y"
+#line 188 "./DLDL_LPDDEF_DF_parser.y"
                             {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::stmt({::DLDL_LPDDEF_DF::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 2, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LPDDEF_DF_optional_variant) });
 		(yyval.DLDL_LPDDEF_DF_stmt) = newNode;
@@ -1768,7 +1768,7 @@ yyreduce:
     break;
 
   case 8: /* stmt: standard_variant  */
-#line 193 "./DLDL_LPDDEF_DF_parser.y"
+#line 194 "./DLDL_LPDDEF_DF_parser.y"
                             {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::stmt({::DLDL_LPDDEF_DF::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 3, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LPDDEF_DF_standard_variant) });
 		(yyval.DLDL_LPDDEF_DF_stmt) = newNode;
@@ -1779,7 +1779,7 @@ yyreduce:
     break;
 
   case 9: /* comment_line: COMMENT  */
-#line 203 "./DLDL_LPDDEF_DF_parser.y"
+#line 204 "./DLDL_LPDDEF_DF_parser.y"
                  {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::comment_line({::DLDL_LPDDEF_DF::ast::Type::comment_line, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::COMMENT({::DLDL_LPDDEF_DF::ast::Type::COMMENT, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LPDDEF_DF_comment_line) = newNode;
@@ -1790,7 +1790,7 @@ yyreduce:
     break;
 
   case 10: /* vector_variant: VECTOR LAB var_type RAB var_name value_part  */
-#line 213 "./DLDL_LPDDEF_DF_parser.y"
+#line 214 "./DLDL_LPDDEF_DF_parser.y"
                                                      {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::vector_variant({::DLDL_LPDDEF_DF::ast::Type::vector_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::VECTOR({::DLDL_LPDDEF_DF::ast::Type::VECTOR, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-5].Terminal) }), (yyvsp[-3].DLDL_LPDDEF_DF_var_type), (yyvsp[-1].DLDL_LPDDEF_DF_var_name), (yyvsp[0].DLDL_LPDDEF_DF_value_part) });
 		(yyval.DLDL_LPDDEF_DF_vector_variant) = newNode;
@@ -1803,7 +1803,7 @@ yyreduce:
     break;
 
   case 11: /* vector_variant: VECTOR LAB var_type RAB var_name  */
-#line 221 "./DLDL_LPDDEF_DF_parser.y"
+#line 222 "./DLDL_LPDDEF_DF_parser.y"
                                             {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::vector_variant({::DLDL_LPDDEF_DF::ast::Type::vector_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::VECTOR({::DLDL_LPDDEF_DF::ast::Type::VECTOR, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-4].Terminal) }), (yyvsp[-2].DLDL_LPDDEF_DF_var_type), (yyvsp[0].DLDL_LPDDEF_DF_var_name) });
 		(yyval.DLDL_LPDDEF_DF_vector_variant) = newNode;
@@ -1816,7 +1816,7 @@ yyreduce:
     break;
 
   case 12: /* vector_variant: VECTOR LSB var_type RSB var_name value_part  */
-#line 229 "./DLDL_LPDDEF_DF_parser.y"
+#line 230 "./DLDL_LPDDEF_DF_parser.y"
                                                        {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::vector_variant({::DLDL_LPDDEF_DF::ast::Type::vector_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 2, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::VECTOR({::DLDL_LPDDEF_DF::ast::Type::VECTOR, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-5].Terminal) }), (yyvsp[-3].DLDL_LPDDEF_DF_var_type), (yyvsp[-1].DLDL_LPDDEF_DF_var_name), (yyvsp[0].DLDL_LPDDEF_DF_value_part) });
 		(yyval.DLDL_LPDDEF_DF_vector_variant) = newNode;
@@ -1829,7 +1829,7 @@ yyreduce:
     break;
 
   case 13: /* vector_variant: VECTOR LSB var_type RSB var_name  */
-#line 237 "./DLDL_LPDDEF_DF_parser.y"
+#line 238 "./DLDL_LPDDEF_DF_parser.y"
                                             {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::vector_variant({::DLDL_LPDDEF_DF::ast::Type::vector_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 3, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::VECTOR({::DLDL_LPDDEF_DF::ast::Type::VECTOR, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-4].Terminal) }), (yyvsp[-2].DLDL_LPDDEF_DF_var_type), (yyvsp[0].DLDL_LPDDEF_DF_var_name) });
 		(yyval.DLDL_LPDDEF_DF_vector_variant) = newNode;
@@ -1842,7 +1842,7 @@ yyreduce:
     break;
 
   case 14: /* optional_variant: OPTIONAL LAB var_type RAB var_name value_part  */
-#line 249 "./DLDL_LPDDEF_DF_parser.y"
+#line 250 "./DLDL_LPDDEF_DF_parser.y"
                                                        {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::optional_variant({::DLDL_LPDDEF_DF::ast::Type::optional_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::OPTIONAL({::DLDL_LPDDEF_DF::ast::Type::OPTIONAL, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-5].Terminal) }), (yyvsp[-3].DLDL_LPDDEF_DF_var_type), (yyvsp[-1].DLDL_LPDDEF_DF_var_name), (yyvsp[0].DLDL_LPDDEF_DF_value_part) });
 		(yyval.DLDL_LPDDEF_DF_optional_variant) = newNode;
@@ -1855,7 +1855,7 @@ yyreduce:
     break;
 
   case 15: /* optional_variant: OPTIONAL LAB var_type RAB var_name  */
-#line 257 "./DLDL_LPDDEF_DF_parser.y"
+#line 258 "./DLDL_LPDDEF_DF_parser.y"
                                               {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::optional_variant({::DLDL_LPDDEF_DF::ast::Type::optional_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::OPTIONAL({::DLDL_LPDDEF_DF::ast::Type::OPTIONAL, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-4].Terminal) }), (yyvsp[-2].DLDL_LPDDEF_DF_var_type), (yyvsp[0].DLDL_LPDDEF_DF_var_name) });
 		(yyval.DLDL_LPDDEF_DF_optional_variant) = newNode;
@@ -1868,7 +1868,7 @@ yyreduce:
     break;
 
   case 16: /* optional_variant: OPTIONAL LSB var_type RSB var_name value_part  */
-#line 265 "./DLDL_LPDDEF_DF_parser.y"
+#line 266 "./DLDL_LPDDEF_DF_parser.y"
                                                          {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::optional_variant({::DLDL_LPDDEF_DF::ast::Type::optional_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 2, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::OPTIONAL({::DLDL_LPDDEF_DF::ast::Type::OPTIONAL, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-5].Terminal) }), (yyvsp[-3].DLDL_LPDDEF_DF_var_type), (yyvsp[-1].DLDL_LPDDEF_DF_var_name), (yyvsp[0].DLDL_LPDDEF_DF_value_part) });
 		(yyval.DLDL_LPDDEF_DF_optional_variant) = newNode;
@@ -1881,7 +1881,7 @@ yyreduce:
     break;
 
   case 17: /* optional_variant: OPTIONAL LSB var_type RSB var_name  */
-#line 273 "./DLDL_LPDDEF_DF_parser.y"
+#line 274 "./DLDL_LPDDEF_DF_parser.y"
                                               {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::optional_variant({::DLDL_LPDDEF_DF::ast::Type::optional_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 3, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::OPTIONAL({::DLDL_LPDDEF_DF::ast::Type::OPTIONAL, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-4].Terminal) }), (yyvsp[-2].DLDL_LPDDEF_DF_var_type), (yyvsp[0].DLDL_LPDDEF_DF_var_name) });
 		(yyval.DLDL_LPDDEF_DF_optional_variant) = newNode;
@@ -1894,7 +1894,7 @@ yyreduce:
     break;
 
   case 18: /* value_part: EQ value  */
-#line 285 "./DLDL_LPDDEF_DF_parser.y"
+#line 286 "./DLDL_LPDDEF_DF_parser.y"
                   {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::value_part({::DLDL_LPDDEF_DF::ast::Type::value_part, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LPDDEF_DF_value) });
 		(yyval.DLDL_LPDDEF_DF_value_part) = newNode;
@@ -1906,7 +1906,7 @@ yyreduce:
     break;
 
   case 19: /* standard_variant: var_type var_name value_part  */
-#line 296 "./DLDL_LPDDEF_DF_parser.y"
+#line 297 "./DLDL_LPDDEF_DF_parser.y"
                                       {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::standard_variant({::DLDL_LPDDEF_DF::ast::Type::standard_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[-2].DLDL_LPDDEF_DF_var_type), (yyvsp[-1].DLDL_LPDDEF_DF_var_name), (yyvsp[0].DLDL_LPDDEF_DF_value_part) });
 		(yyval.DLDL_LPDDEF_DF_standard_variant) = newNode;
@@ -1917,7 +1917,7 @@ yyreduce:
     break;
 
   case 20: /* standard_variant: var_type var_name  */
-#line 302 "./DLDL_LPDDEF_DF_parser.y"
+#line 303 "./DLDL_LPDDEF_DF_parser.y"
                              {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::standard_variant({::DLDL_LPDDEF_DF::ast::Type::standard_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[-1].DLDL_LPDDEF_DF_var_type), (yyvsp[0].DLDL_LPDDEF_DF_var_name) });
 		(yyval.DLDL_LPDDEF_DF_standard_variant) = newNode;
@@ -1928,7 +1928,7 @@ yyreduce:
     break;
 
   case 21: /* value: value_type  */
-#line 312 "./DLDL_LPDDEF_DF_parser.y"
+#line 313 "./DLDL_LPDDEF_DF_parser.y"
                     {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::value({::DLDL_LPDDEF_DF::ast::Type::value, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LPDDEF_DF_value_type) });
 		(yyval.DLDL_LPDDEF_DF_value) = newNode;
@@ -1939,7 +1939,7 @@ yyreduce:
     break;
 
   case 22: /* value_type: VARNAME  */
-#line 322 "./DLDL_LPDDEF_DF_parser.y"
+#line 323 "./DLDL_LPDDEF_DF_parser.y"
                  {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::value_type({::DLDL_LPDDEF_DF::ast::Type::value_type, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::VARNAME({::DLDL_LPDDEF_DF::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LPDDEF_DF_value_type) = newNode;
@@ -1950,7 +1950,7 @@ yyreduce:
     break;
 
   case 23: /* value_type: VARNAME COLON COLON VARNAME  */
-#line 328 "./DLDL_LPDDEF_DF_parser.y"
+#line 329 "./DLDL_LPDDEF_DF_parser.y"
                                        {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::value_type({::DLDL_LPDDEF_DF::ast::Type::value_type, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::VARNAME({::DLDL_LPDDEF_DF::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-3].Terminal) }), new DLDL_LPDDEF_DF::ast::node::COLON({::DLDL_LPDDEF_DF::ast::Type::COLON, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal) }), new DLDL_LPDDEF_DF::ast::node::COLON({::DLDL_LPDDEF_DF::ast::Type::COLON, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal) }), new DLDL_LPDDEF_DF::ast::node::VARNAME({::DLDL_LPDDEF_DF::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LPDDEF_DF_value_type) = newNode;
@@ -1961,7 +1961,7 @@ yyreduce:
     break;
 
   case 24: /* value_type: DEAMER_VARNAME  */
-#line 334 "./DLDL_LPDDEF_DF_parser.y"
+#line 335 "./DLDL_LPDDEF_DF_parser.y"
                           {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::value_type({::DLDL_LPDDEF_DF::ast::Type::value_type, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 2, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::DEAMER_VARNAME({::DLDL_LPDDEF_DF::ast::Type::DEAMER_VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LPDDEF_DF_value_type) = newNode;
@@ -1972,7 +1972,7 @@ yyreduce:
     break;
 
   case 25: /* value_type: NUMBER  */
-#line 340 "./DLDL_LPDDEF_DF_parser.y"
+#line 341 "./DLDL_LPDDEF_DF_parser.y"
                   {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::value_type({::DLDL_LPDDEF_DF::ast::Type::value_type, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 3, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::NUMBER({::DLDL_LPDDEF_DF::ast::Type::NUMBER, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LPDDEF_DF_value_type) = newNode;
@@ -1983,7 +1983,7 @@ yyreduce:
     break;
 
   case 26: /* value_type: STRING  */
-#line 346 "./DLDL_LPDDEF_DF_parser.y"
+#line 347 "./DLDL_LPDDEF_DF_parser.y"
                   {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::value_type({::DLDL_LPDDEF_DF::ast::Type::value_type, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 4, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::STRING({::DLDL_LPDDEF_DF::ast::Type::STRING, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LPDDEF_DF_value_type) = newNode;
@@ -1994,7 +1994,7 @@ yyreduce:
     break;
 
   case 27: /* value_type: LB deamerreserved_arrow__value_type__ RB  */
-#line 352 "./DLDL_LPDDEF_DF_parser.y"
+#line 353 "./DLDL_LPDDEF_DF_parser.y"
                                                     {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::value_type({::DLDL_LPDDEF_DF::ast::Type::value_type, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 5, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::LB({::DLDL_LPDDEF_DF::ast::Type::LB, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal) }), (yyvsp[-1].DLDL_LPDDEF_DF_deamerreserved_arrow__value_type__), new DLDL_LPDDEF_DF::ast::node::RB({::DLDL_LPDDEF_DF::ast::Type::RB, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LPDDEF_DF_value_type) = newNode;
@@ -2005,7 +2005,7 @@ yyreduce:
     break;
 
   case 28: /* value_type: LB RB  */
-#line 358 "./DLDL_LPDDEF_DF_parser.y"
+#line 359 "./DLDL_LPDDEF_DF_parser.y"
                  {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::value_type({::DLDL_LPDDEF_DF::ast::Type::value_type, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 6, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::LB({::DLDL_LPDDEF_DF::ast::Type::LB, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal) }), new DLDL_LPDDEF_DF::ast::node::RB({::DLDL_LPDDEF_DF::ast::Type::RB, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LPDDEF_DF_value_type) = newNode;
@@ -2016,7 +2016,7 @@ yyreduce:
     break;
 
   case 29: /* deamerreserved_arrow__value_type__: value_type deamerreserved_star__COMMA__value_type__  */
-#line 368 "./DLDL_LPDDEF_DF_parser.y"
+#line 369 "./DLDL_LPDDEF_DF_parser.y"
                                                              {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::deamerreserved_arrow__value_type__({::DLDL_LPDDEF_DF::ast::Type::deamerreserved_arrow__value_type__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, { (yyvsp[-1].DLDL_LPDDEF_DF_value_type), (yyvsp[0].DLDL_LPDDEF_DF_deamerreserved_star__COMMA__value_type__) });
 		(yyval.DLDL_LPDDEF_DF_deamerreserved_arrow__value_type__) = newNode;
@@ -2027,7 +2027,7 @@ yyreduce:
     break;
 
   case 30: /* deamerreserved_star__COMMA__value_type__: COMMA value_type deamerreserved_star__COMMA__value_type__  */
-#line 378 "./DLDL_LPDDEF_DF_parser.y"
+#line 379 "./DLDL_LPDDEF_DF_parser.y"
                                                                    {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__({::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__COMMA__value_type__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, { new DLDL_LPDDEF_DF::ast::node::COMMA({::DLDL_LPDDEF_DF::ast::Type::COMMA, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal) }), (yyvsp[-1].DLDL_LPDDEF_DF_value_type), (yyvsp[0].DLDL_LPDDEF_DF_deamerreserved_star__COMMA__value_type__) });
 		(yyval.DLDL_LPDDEF_DF_deamerreserved_star__COMMA__value_type__) = newNode;
@@ -2038,7 +2038,7 @@ yyreduce:
     break;
 
   case 31: /* deamerreserved_star__COMMA__value_type__: %empty  */
-#line 384 "./DLDL_LPDDEF_DF_parser.y"
+#line 385 "./DLDL_LPDDEF_DF_parser.y"
            {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__({::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__COMMA__value_type__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, {  });
 		(yyval.DLDL_LPDDEF_DF_deamerreserved_star__COMMA__value_type__) = newNode;
@@ -2049,7 +2049,7 @@ yyreduce:
     break;
 
   case 32: /* var_type: DEAMER_VARNAME  */
-#line 394 "./DLDL_LPDDEF_DF_parser.y"
+#line 395 "./DLDL_LPDDEF_DF_parser.y"
                         {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::var_type({::DLDL_LPDDEF_DF::ast::Type::var_type, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::DEAMER_VARNAME({::DLDL_LPDDEF_DF::ast::Type::DEAMER_VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LPDDEF_DF_var_type) = newNode;
@@ -2060,7 +2060,7 @@ yyreduce:
     break;
 
   case 33: /* var_type: deamerreserved_arrow__VARNAME__  */
-#line 400 "./DLDL_LPDDEF_DF_parser.y"
+#line 401 "./DLDL_LPDDEF_DF_parser.y"
                                            {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::var_type({::DLDL_LPDDEF_DF::ast::Type::var_type, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LPDDEF_DF_deamerreserved_arrow__VARNAME__) });
 		(yyval.DLDL_LPDDEF_DF_var_type) = newNode;
@@ -2071,7 +2071,7 @@ yyreduce:
     break;
 
   case 34: /* deamerreserved_arrow__VARNAME__: VARNAME deamerreserved_star__COLON__VARNAME__  */
-#line 410 "./DLDL_LPDDEF_DF_parser.y"
+#line 411 "./DLDL_LPDDEF_DF_parser.y"
                                                        {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::deamerreserved_arrow__VARNAME__({::DLDL_LPDDEF_DF::ast::Type::deamerreserved_arrow__VARNAME__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, { new DLDL_LPDDEF_DF::ast::node::VARNAME({::DLDL_LPDDEF_DF::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal) }), (yyvsp[0].DLDL_LPDDEF_DF_deamerreserved_star__COLON__VARNAME__) });
 		(yyval.DLDL_LPDDEF_DF_deamerreserved_arrow__VARNAME__) = newNode;
@@ -2082,7 +2082,7 @@ yyreduce:
     break;
 
   case 35: /* deamerreserved_star__COLON__VARNAME__: COLON VARNAME deamerreserved_star__COLON__VARNAME__  */
-#line 420 "./DLDL_LPDDEF_DF_parser.y"
+#line 421 "./DLDL_LPDDEF_DF_parser.y"
                                                              {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COLON__VARNAME__({::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__COLON__VARNAME__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, { new DLDL_LPDDEF_DF::ast::node::COLON({::DLDL_LPDDEF_DF::ast::Type::COLON, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal) }), new DLDL_LPDDEF_DF::ast::node::VARNAME({::DLDL_LPDDEF_DF::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal) }), (yyvsp[0].DLDL_LPDDEF_DF_deamerreserved_star__COLON__VARNAME__) });
 		(yyval.DLDL_LPDDEF_DF_deamerreserved_star__COLON__VARNAME__) = newNode;
@@ -2093,7 +2093,7 @@ yyreduce:
     break;
 
   case 36: /* deamerreserved_star__COLON__VARNAME__: %empty  */
-#line 426 "./DLDL_LPDDEF_DF_parser.y"
+#line 427 "./DLDL_LPDDEF_DF_parser.y"
            {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COLON__VARNAME__({::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__COLON__VARNAME__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, {  });
 		(yyval.DLDL_LPDDEF_DF_deamerreserved_star__COLON__VARNAME__) = newNode;
@@ -2104,7 +2104,7 @@ yyreduce:
     break;
 
   case 37: /* var_name: VARNAME  */
-#line 436 "./DLDL_LPDDEF_DF_parser.y"
+#line 437 "./DLDL_LPDDEF_DF_parser.y"
                  {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::var_name({::DLDL_LPDDEF_DF::ast::Type::var_name, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::VARNAME({::DLDL_LPDDEF_DF::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LPDDEF_DF_var_name) = newNode;
@@ -2350,7 +2350,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 446 "./DLDL_LPDDEF_DF_parser.y"
+#line 447 "./DLDL_LPDDEF_DF_parser.y"
 
 
 void DLDL_LPDDEF_DFerror(const char* s)

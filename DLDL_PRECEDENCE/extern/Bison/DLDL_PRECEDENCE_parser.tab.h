@@ -67,7 +67,7 @@ extern int DLDL_PRECEDENCEdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 59 "./DLDL_PRECEDENCE_parser.y"
+#line 60 "./DLDL_PRECEDENCE_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_PRECEDENCE::ast::node::PRECEDENCE* DLDL_PRECEDENCE_PRECEDENCE;

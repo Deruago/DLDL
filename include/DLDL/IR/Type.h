@@ -29,6 +29,8 @@ namespace DLDL::ir
 
 		ToolDef,
 		ToolStruct,
+
+		OopSyntax,
 	};
 }
 

@@ -56,6 +56,19 @@ namespace DLDL::ir
 		{
 			return {};
 		}
+
+		bool DoesTerminalExist(const std::string& terminalName)
+		{
+			for (auto terminal : terminals)
+			{
+				if (terminal.Name == terminalName)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
 	};
 }
 

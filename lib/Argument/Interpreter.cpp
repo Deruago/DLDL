@@ -7,6 +7,8 @@
 #include "DLDL/IR/Lpd/ConstructLPD.h"
 #include "DLDL/Print/Language.h"
 #include "DLDL/Template/CMakeLists/RootCMakeListsTemplate.h"
+#include "DLDL/Template/Python/CrossPlatform/ConsolePyTemplate.h"
+#include <Deamer/File/Tool/Action/Builder.h>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -794,6 +796,7 @@ void DLDL::argument::Interpreter::InitializeDeamerMap()
 	deamer::file::tool::Directory rootDirectory(deamerDirRelocation);
 	deamer::file::tool::Directory deamerDirectory(".deamer");
 	deamer::file::tool::Directory deamerDLDLDirectory("dldl");
+	deamer::file::tool::Directory deamerDLDLScriptsDirectory("scripts");
 	deamer::file::tool::Directory deamerDLDLDefinitionDirectory("definition");
 	deamer::file::tool::Directory deamerDLDLargumentsDirectory("arguments");
 
@@ -807,12 +810,19 @@ void DLDL::argument::Interpreter::InitializeDeamerMap()
 	deamer::file::tool::File dldl_regen_args_tool("tool", "deamer", RegenerationArgsTool());
 	deamer::file::tool::File dldl_regen_args_miccel("miccel", "deamer", RegenerationArgsMiccel());
 
+	auto consolePyTemplate = std::make_unique<filetemplate::ConsolePyTemplate>();
+	deamer::file::tool::File dldl_script_console_py("Console", "py",
+													consolePyTemplate->GetOutput());
+
 	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args);
 	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args_lpd);
 	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args_definition);
 	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args_tool);
 	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args_miccel);
 
+	deamerDLDLScriptsDirectory.AddFile(dldl_script_console_py);
+
+	deamerDLDLDirectory.AddDirectory(deamerDLDLScriptsDirectory);
 	deamerDLDLDirectory.AddDirectory(deamerDLDLDefinitionDirectory);
 	deamerDLDLDirectory.AddDirectory(deamerDLDLargumentsDirectory);
 	deamerDirectory.AddDirectory(deamerDLDLDirectory);
@@ -984,24 +994,19 @@ void DLDL::argument::Interpreter::AutoCompile()
 {
 	if (parser.IsArgumentSet(Type::auto_compile))
 	{
-		const std::string autoCompile = "rm -f -r ./" + BuildMap +
-										" &&"
-										"mkdir ./" +
-										BuildMap +
-										" &&"
-										"cd ./" +
-										BuildMap +
-										" &&"
-										" cmake .. &&"
-										"cmake --build . --target " +
-										projectGeneration->GetLanguageTarget() +
-										"&&"
-										"cd ../"; // should calculate difference
+		auto builder = ::deamer::file::tool::action::Builder();
+		builder.RemoveDirectory("./" + BuildMap)
+			.CreateDirectory("./" + BuildMap)
+			.ChangeDirectory("./" + BuildMap)
+			.CrossPlatformCommand("cmake ..")
+			.CrossPlatformCommand("cmake --build . --target " +
+								  projectGeneration->GetLanguageTarget())
+			.ChangeDirectory("../"); // should calculate difference
 
-		const deamer::file::tool::Action autoCompileAction = {autoCompile};
-		std::system(
-			autoCompileAction.GetSubShellAction(deamer::file::tool::os_used, deamerDirRelocation)
-				.c_str());
+		const auto action = builder.GetAction();
+		const auto command = action->ConstructArgument(
+			deamer::file::tool::action::CommandTarget::python, deamerDirRelocation);
+		std::system(command.c_str());
 	}
 }
 
@@ -1009,22 +1014,17 @@ void DLDL::argument::Interpreter::AutoRun()
 {
 	if (parser.IsArgumentSet(Type::auto_run))
 	{
-		const std::string autoRun = "$(find . -name \"" + projectGeneration->GetLanguageTarget() +
-									"\") &&"
-									"rm -f -r ./" +
-									BuildMap +
-									" &&"
-									"mkdir ./" +
-									BuildMap +
-									" &&"
-									"cd ./" +
-									BuildMap +
-									" &&"
-									"cmake ..";
-		const deamer::file::tool::Action autoRunAction = {autoRun};
-		std::system(
-			autoRunAction.GetSubShellAction(deamer::file::tool::os_used, deamerDirRelocation)
-				.c_str());
+		auto builder = ::deamer::file::tool::action::Builder();
+		builder.FindAndExecute(projectGeneration->GetLanguageTarget())
+			.RemoveDirectory("./" + BuildMap)
+			.CreateDirectory("./" + BuildMap)
+			.ChangeDirectory("./" + BuildMap)
+			.CrossPlatformCommand("cmake ..");
+
+		const auto action = builder.GetAction();
+		const auto command = action->ConstructArgument(
+			deamer::file::tool::action::CommandTarget::python, deamerDirRelocation);
+		std::system(command.c_str());
 	}
 }
 
@@ -1036,25 +1036,28 @@ void DLDL::argument::Interpreter::GitOptions()
 			std::filesystem::exists("./" + deamerDirRelocation + ".git");
 		if (!gitDirectoryExists)
 		{
-			const std::string gitInit = "git init";
-			const deamer::file::tool::Action gitInitAction = {gitInit};
-			std::system(
-				gitInitAction.GetSubShellAction(deamer::file::tool::os_used, deamerDirRelocation)
-					.c_str());
+			auto gitInitBuilder = deamer::file::tool::action::Builder();
+			gitInitBuilder.CrossPlatformCommand("git init");
+			const auto gitInitAction = gitInitBuilder.GetAction();
+			const auto gitInitCommand = gitInitAction->ConstructArgument(
+				deamer::file::tool::action::CommandTarget::python, deamerDirRelocation);
+			std::system(gitInitCommand.c_str());
 
 			CreateGitignore();
 
-			const std::string gitAddDot = "git add .";
-			const deamer::file::tool::Action gitAddDotAction = {gitAddDot};
-			std::system(
-				gitAddDotAction.GetSubShellAction(deamer::file::tool::os_used, deamerDirRelocation)
-					.c_str());
+			auto gitAddDotBuilder = deamer::file::tool::action::Builder();
+			gitAddDotBuilder.CrossPlatformCommand("git add .");
+			const auto gitAddDotAction = gitAddDotBuilder.GetAction();
+			const auto gitAddDotCommand = gitAddDotAction->ConstructArgument(
+				deamer::file::tool::action::CommandTarget::python, deamerDirRelocation);
+			std::system(gitAddDotCommand.c_str());
 
-			const std::string gitInitialCommit = "git commit -m \"Initial Commit!\"";
-			const deamer::file::tool::Action gitInitialCommitAction = {gitInitialCommit};
-			std::system(gitInitialCommitAction
-							.GetSubShellAction(deamer::file::tool::os_used, deamerDirRelocation)
-							.c_str());
+			auto gitInitialBuilder = deamer::file::tool::action::Builder();
+			gitInitialBuilder.CrossPlatformCommand("git commit -m \"Initial Commit!\"");
+			const auto gitInitialAction = gitInitialBuilder.GetAction();
+			const auto gitInitialCommand = gitInitialAction->ConstructArgument(
+				deamer::file::tool::action::CommandTarget::python, deamerDirRelocation);
+			std::system(gitInitialCommand.c_str());
 		}
 	}
 }

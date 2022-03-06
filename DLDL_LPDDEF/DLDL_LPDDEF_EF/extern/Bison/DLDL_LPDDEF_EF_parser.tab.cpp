@@ -74,7 +74,7 @@
 #define yychar          DLDL_LPDDEF_EFchar
 
 /* First part of user prologue.  */
-#line 4 "./DLDL_LPDDEF_EF_parser.y"
+#line 5 "./DLDL_LPDDEF_EF_parser.y"
 
 #include <iostream>
 #include <vector>
@@ -526,8 +526,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    88,    88,    99,   105,   115,   121,   127,   137,   147,
-     157,   167,   177
+       0,    89,    89,   100,   106,   116,   122,   128,   138,   148,
+     158,   168,   178
 };
 #endif
 
@@ -1622,7 +1622,7 @@ yyreduce:
     switch (yyn)
       {
   case 2: /* program: deamerreserved_star__stmt__  */
-#line 88 "./DLDL_LPDDEF_EF_parser.y"
+#line 89 "./DLDL_LPDDEF_EF_parser.y"
                                      {
 		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::program({::DLDL_LPDDEF_EF::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LPDDEF_EF_deamerreserved_star__stmt__) });
 		(yyval.DLDL_LPDDEF_EF_program) = newNode;
@@ -1634,7 +1634,7 @@ yyreduce:
     break;
 
   case 3: /* deamerreserved_star__stmt__: stmt deamerreserved_star__stmt__  */
-#line 99 "./DLDL_LPDDEF_EF_parser.y"
+#line 100 "./DLDL_LPDDEF_EF_parser.y"
                                           {
 		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::deamerreserved_star__stmt__({::DLDL_LPDDEF_EF::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, { (yyvsp[-1].DLDL_LPDDEF_EF_stmt), (yyvsp[0].DLDL_LPDDEF_EF_deamerreserved_star__stmt__) });
 		(yyval.DLDL_LPDDEF_EF_deamerreserved_star__stmt__) = newNode;
@@ -1645,7 +1645,7 @@ yyreduce:
     break;
 
   case 4: /* deamerreserved_star__stmt__: %empty  */
-#line 105 "./DLDL_LPDDEF_EF_parser.y"
+#line 106 "./DLDL_LPDDEF_EF_parser.y"
            {
 		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::deamerreserved_star__stmt__({::DLDL_LPDDEF_EF::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, {  });
 		(yyval.DLDL_LPDDEF_EF_deamerreserved_star__stmt__) = newNode;
@@ -1656,7 +1656,7 @@ yyreduce:
     break;
 
   case 5: /* stmt: comment_line  */
-#line 115 "./DLDL_LPDDEF_EF_parser.y"
+#line 116 "./DLDL_LPDDEF_EF_parser.y"
                       {
 		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::stmt({::DLDL_LPDDEF_EF::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LPDDEF_EF_comment_line) });
 		(yyval.DLDL_LPDDEF_EF_stmt) = newNode;
@@ -1667,7 +1667,7 @@ yyreduce:
     break;
 
   case 6: /* stmt: standard_variant_specific_number  */
-#line 121 "./DLDL_LPDDEF_EF_parser.y"
+#line 122 "./DLDL_LPDDEF_EF_parser.y"
                                             {
 		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::stmt({::DLDL_LPDDEF_EF::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LPDDEF_EF_standard_variant_specific_number) });
 		(yyval.DLDL_LPDDEF_EF_stmt) = newNode;
@@ -1678,7 +1678,7 @@ yyreduce:
     break;
 
   case 7: /* stmt: standard_variant  */
-#line 127 "./DLDL_LPDDEF_EF_parser.y"
+#line 128 "./DLDL_LPDDEF_EF_parser.y"
                             {
 		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::stmt({::DLDL_LPDDEF_EF::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 2, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LPDDEF_EF_standard_variant) });
 		(yyval.DLDL_LPDDEF_EF_stmt) = newNode;
@@ -1689,7 +1689,7 @@ yyreduce:
     break;
 
   case 8: /* comment_line: COMMENT  */
-#line 137 "./DLDL_LPDDEF_EF_parser.y"
+#line 138 "./DLDL_LPDDEF_EF_parser.y"
                  {
 		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::comment_line({::DLDL_LPDDEF_EF::ast::Type::comment_line, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_EF::ast::node::COMMENT({::DLDL_LPDDEF_EF::ast::Type::COMMENT, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LPDDEF_EF_comment_line) = newNode;
@@ -1700,7 +1700,7 @@ yyreduce:
     break;
 
   case 9: /* standard_variant: enum_name  */
-#line 147 "./DLDL_LPDDEF_EF_parser.y"
+#line 148 "./DLDL_LPDDEF_EF_parser.y"
                    {
 		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::standard_variant({::DLDL_LPDDEF_EF::ast::Type::standard_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LPDDEF_EF_enum_name) });
 		(yyval.DLDL_LPDDEF_EF_standard_variant) = newNode;
@@ -1711,7 +1711,7 @@ yyreduce:
     break;
 
   case 10: /* standard_variant_specific_number: enum_name value  */
-#line 157 "./DLDL_LPDDEF_EF_parser.y"
+#line 158 "./DLDL_LPDDEF_EF_parser.y"
                          {
 		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::standard_variant_specific_number({::DLDL_LPDDEF_EF::ast::Type::standard_variant_specific_number, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[-1].DLDL_LPDDEF_EF_enum_name), (yyvsp[0].DLDL_LPDDEF_EF_value) });
 		(yyval.DLDL_LPDDEF_EF_standard_variant_specific_number) = newNode;
@@ -1722,7 +1722,7 @@ yyreduce:
     break;
 
   case 11: /* value: NUMBER  */
-#line 167 "./DLDL_LPDDEF_EF_parser.y"
+#line 168 "./DLDL_LPDDEF_EF_parser.y"
                 {
 		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::value({::DLDL_LPDDEF_EF::ast::Type::value, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_EF::ast::node::NUMBER({::DLDL_LPDDEF_EF::ast::Type::NUMBER, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LPDDEF_EF_value) = newNode;
@@ -1733,7 +1733,7 @@ yyreduce:
     break;
 
   case 12: /* enum_name: VARNAME  */
-#line 177 "./DLDL_LPDDEF_EF_parser.y"
+#line 178 "./DLDL_LPDDEF_EF_parser.y"
                  {
 		auto* const newNode = new DLDL_LPDDEF_EF::ast::node::enum_name({::DLDL_LPDDEF_EF::ast::Type::enum_name, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_EF::ast::node::VARNAME({::DLDL_LPDDEF_EF::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LPDDEF_EF_enum_name) = newNode;
@@ -1979,7 +1979,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 187 "./DLDL_LPDDEF_EF_parser.y"
+#line 188 "./DLDL_LPDDEF_EF_parser.y"
 
 
 void DLDL_LPDDEF_EFerror(const char* s)

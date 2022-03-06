@@ -66,7 +66,7 @@ extern int DLDL_IDENTITYdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 53 "./DLDL_IDENTITY_parser.y"
+#line 54 "./DLDL_IDENTITY_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_IDENTITY::ast::node::NAME* DLDL_IDENTITY_NAME;

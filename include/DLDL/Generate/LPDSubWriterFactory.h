@@ -7,6 +7,7 @@
 #include "DLDL/Generate/SubWriter/GrammarLPDWriter.h"
 #include "DLDL/Generate/SubWriter/IdentityLPDWriter.h"
 #include "DLDL/Generate/SubWriter/LexiconLPDWriter.h"
+#include "DLDL/Generate/SubWriter/OopSyntaxLPDWriter.h"
 #include "DLDL/Generate/SubWriter/PrecedenceLPDWriter.h"
 #include "DLDL/Generate/SubWriter/ThreatLPDWriter.h"
 #include "DLDL/IR/Type.h"

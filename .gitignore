@@ -6,3 +6,4 @@ CppProperties.json
 *build/*
 *out/*
 *build*/*
+/CMakeSettings.json

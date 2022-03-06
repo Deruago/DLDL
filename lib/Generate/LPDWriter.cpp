@@ -163,6 +163,8 @@ std::string DLDL::generate::LPDWriter::GetTextFromIREnum(ir::Type type)
 		return "Formatting";
 	case ir::Type::Documentation:
 		return "Documentation";
+	case ir::Type::OopSyntax:
+		return "OopSyntax";
 	case ir::Type::Threat:
 		return "Threat";
 	default:

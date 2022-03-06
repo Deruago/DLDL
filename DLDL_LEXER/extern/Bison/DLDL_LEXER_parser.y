@@ -1,5 +1,6 @@
 %define parse.error verbose
-%define parse.lac full
+
+%glr-parser
 
 %{
 #include <iostream>

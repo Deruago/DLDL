@@ -74,7 +74,7 @@
 #define yychar          DLDLchar
 
 /* First part of user prologue.  */
-#line 4 "./DLDL_parser.y"
+#line 5 "./DLDL_parser.y"
 
 #include <iostream>
 #include <vector>
@@ -505,7 +505,7 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    58,    58,    69,    75,    85
+       0,    59,    59,    70,    76,    86
 };
 #endif
 
@@ -1592,7 +1592,7 @@ yyreduce:
     switch (yyn)
       {
   case 2: /* program: stmts  */
-#line 58 "./DLDL_parser.y"
+#line 59 "./DLDL_parser.y"
                {
 		auto* const newNode = new DLDL::ast::node::program({::DLDL::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_stmts) });
 		(yyval.DLDL_program) = newNode;
@@ -1604,7 +1604,7 @@ yyreduce:
     break;
 
   case 3: /* stmts: stmt stmts  */
-#line 69 "./DLDL_parser.y"
+#line 70 "./DLDL_parser.y"
                     {
 		auto* const newNode = new DLDL::ast::node::stmts({::DLDL::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[-1].DLDL_stmt), (yyvsp[0].DLDL_stmts) });
 		(yyval.DLDL_stmts) = newNode;
@@ -1615,7 +1615,7 @@ yyreduce:
     break;
 
   case 4: /* stmts: %empty  */
-#line 75 "./DLDL_parser.y"
+#line 76 "./DLDL_parser.y"
            {
 		auto* const newNode = new DLDL::ast::node::stmts({::DLDL::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		(yyval.DLDL_stmts) = newNode;
@@ -1626,7 +1626,7 @@ yyreduce:
     break;
 
   case 5: /* stmt: ANY  */
-#line 85 "./DLDL_parser.y"
+#line 86 "./DLDL_parser.y"
              {
 		auto* const newNode = new DLDL::ast::node::stmt({::DLDL::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL::ast::node::ANY({::DLDL::ast::Type::ANY, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_stmt) = newNode;
@@ -1872,7 +1872,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 95 "./DLDL_parser.y"
+#line 96 "./DLDL_parser.y"
 
 
 void DLDLerror(const char* s)

@@ -67,6 +67,8 @@ namespace DLDL::ir::special
 		std::vector<Tool> GetTools() const;
 
 		deamer::file::tool::OSType GetOs() const;
+
+		void FillInUnknownReferences(DLDL::ir::Language* language) override;
 	};
 }
 

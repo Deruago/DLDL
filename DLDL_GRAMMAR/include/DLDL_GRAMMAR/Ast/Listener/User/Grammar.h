@@ -9,8 +9,8 @@ namespace DLDL_GRAMMAR::ast::listener::user
 	class Grammar : public ::DLDL_GRAMMAR::ast::listener::Listener
 	{
 	private:
-		mutable DLDL::ir::Grammar* grammar;
-		mutable std::string currentNonTerminal;
+		DLDL::ir::Grammar* grammar;
+		std::string currentNonTerminal;
 
 	public:
 		Grammar()

@@ -1,0 +1,100 @@
+#include "{{language_full_name_slash}}/OopSyntax.h"
+#include "{{language_full_name_slash}}/Language.h"
+
+{{language_full_name}}::OopSyntax::OopSyntax({{language_full_name}}::Language* language)
+			:	::deamer::language::generator::definition::property::user::OOPSyntax<
+					{{language_full_name}}::Language>(language)
+{
+}
+
+void {{language_full_name}}::OopSyntax::GenerateObjects()
+{
+	{{oop_encapsulation_implementation.Variable_Field}}
+
+	{{oop_link_implementation.Variable_Field}}
+
+	{{oop_concept_link_implementation.Variable_Field}}
+
+	{{oop_concept_member}}Class_Name.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::Class,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Name));
+	{{oop_concept_member}}Struct_Name.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::Struct,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Name));
+	{{oop_concept_member}}Interface_Name.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::Interface,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Name));
+	{{oop_concept_member}}Enum_Name.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::Enum,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Name));
+	{{oop_concept_member}}Enum_Member.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::Enum,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Member));
+
+	{{oop_concept_member}}BaseTypes_Type.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::BaseTypes,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Type));
+
+	{{oop_concept_member}}Function_Name.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::Function,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Name));
+	{{oop_concept_member}}Function_Type.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::Function,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Type));
+
+	{{oop_concept_member}}FunctionArguments_Name.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::FunctionArguments,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Name));
+	{{oop_concept_member}}FunctionArguments_Type.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::FunctionArguments,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Type));
+
+	{{oop_concept_member}}Property_Name.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::Property,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Name));
+	{{oop_concept_member}}Property_Type.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::Property,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Type));
+
+	{{oop_concept_member}}Any_Name.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::Property,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Name));
+	{{oop_concept_member}}Any_Type.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::Property,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Type));
+	{{oop_concept_member}}Any_Member.Set(::deamer::language::type::definition::object::main::OopConceptMember(
+		deamer::language::type::definition::object::main::OopSyntaxScope::Property,
+		::deamer::language::type::definition::object::main::OopConceptMemberType::Member));
+	
+	// Unknown References
+	{{unknown_reference_implementation.Variable_Field}}
+
+	// Add Oop Concept Members
+	AddObject({{oop_concept_member}}Class_Name);
+	AddObject({{oop_concept_member}}Struct_Name);
+	AddObject({{oop_concept_member}}Interface_Name);
+	AddObject({{oop_concept_member}}Enum_Name);
+	AddObject({{oop_concept_member}}Enum_Member);
+	AddObject({{oop_concept_member}}BaseTypes_Type);
+	AddObject({{oop_concept_member}}Function_Name);
+	AddObject({{oop_concept_member}}Function_Type);
+	AddObject({{oop_concept_member}}FunctionArguments_Name);
+	AddObject({{oop_concept_member}}FunctionArguments_Type);
+	AddObject({{oop_concept_member}}Property_Name);
+	AddObject({{oop_concept_member}}Property_Type);
+	AddObject({{oop_concept_member}}Any_Name);
+	AddObject({{oop_concept_member}}Any_Type);
+	AddObject({{oop_concept_member}}Any_Member);
+
+	// Add Oop Concept Links
+	{{add_concept_link.Variable_Field}}
+	
+	// Add Oop Links
+	{{add_link.Variable_Field}}
+
+	// Add Oop Encapsulations
+	{{add_encapsulation.Variable_Field}}
+
+	// Unknown References
+	{{add_unknown_reference.Variable_Field}}
+}

@@ -82,7 +82,7 @@ extern int DLDL_GRAMMAR_PRODUCTION_RULEdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 99 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+#line 100 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ENDING_USELESS_SYMBOLS* DLDL_GRAMMAR_PRODUCTION_RULE_ENDING_USELESS_SYMBOLS;

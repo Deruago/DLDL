@@ -74,7 +74,7 @@
 #define yychar          DLDL_IDENTITYchar
 
 /* First part of user prologue.  */
-#line 4 "./DLDL_IDENTITY_parser.y"
+#line 5 "./DLDL_IDENTITY_parser.y"
 
 #include <iostream>
 #include <vector>
@@ -514,7 +514,7 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    70,    70,    81,    87,    97,   107
+       0,    71,    71,    82,    88,    98,   108
 };
 #endif
 
@@ -1602,7 +1602,7 @@ yyreduce:
     switch (yyn)
       {
   case 2: /* program: stmts  */
-#line 70 "./DLDL_IDENTITY_parser.y"
+#line 71 "./DLDL_IDENTITY_parser.y"
                {
 		auto* const newNode = new DLDL_IDENTITY::ast::node::program({::DLDL_IDENTITY::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_IDENTITY_stmts) });
 		(yyval.DLDL_IDENTITY_program) = newNode;
@@ -1614,7 +1614,7 @@ yyreduce:
     break;
 
   case 3: /* stmts: stmt stmts  */
-#line 81 "./DLDL_IDENTITY_parser.y"
+#line 82 "./DLDL_IDENTITY_parser.y"
                     {
 		auto* const newNode = new DLDL_IDENTITY::ast::node::stmts({::DLDL_IDENTITY::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[-1].DLDL_IDENTITY_stmt), (yyvsp[0].DLDL_IDENTITY_stmts) });
 		(yyval.DLDL_IDENTITY_stmts) = newNode;
@@ -1625,7 +1625,7 @@ yyreduce:
     break;
 
   case 4: /* stmts: %empty  */
-#line 87 "./DLDL_IDENTITY_parser.y"
+#line 88 "./DLDL_IDENTITY_parser.y"
            {
 		auto* const newNode = new DLDL_IDENTITY::ast::node::stmts({::DLDL_IDENTITY::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		(yyval.DLDL_IDENTITY_stmts) = newNode;
@@ -1636,7 +1636,7 @@ yyreduce:
     break;
 
   case 5: /* stmt: name_declaration  */
-#line 97 "./DLDL_IDENTITY_parser.y"
+#line 98 "./DLDL_IDENTITY_parser.y"
                           {
 		auto* const newNode = new DLDL_IDENTITY::ast::node::stmt({::DLDL_IDENTITY::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_IDENTITY_name_declaration) });
 		(yyval.DLDL_IDENTITY_stmt) = newNode;
@@ -1647,7 +1647,7 @@ yyreduce:
     break;
 
   case 6: /* name_declaration: NAME VALUE  */
-#line 107 "./DLDL_IDENTITY_parser.y"
+#line 108 "./DLDL_IDENTITY_parser.y"
                     {
 		auto* const newNode = new DLDL_IDENTITY::ast::node::name_declaration({::DLDL_IDENTITY::ast::Type::name_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_IDENTITY::ast::node::NAME({::DLDL_IDENTITY::ast::Type::NAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal) }), new DLDL_IDENTITY::ast::node::VALUE({::DLDL_IDENTITY::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_IDENTITY_name_declaration) = newNode;
@@ -1893,7 +1893,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 117 "./DLDL_IDENTITY_parser.y"
+#line 118 "./DLDL_IDENTITY_parser.y"
 
 
 void DLDL_IDENTITYerror(const char* s)

@@ -68,7 +68,7 @@ extern int DLDL_LPDDEF_EFdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 65 "./DLDL_LPDDEF_EF_parser.y"
+#line 66 "./DLDL_LPDDEF_EF_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_LPDDEF_EF::ast::node::COMMENT* DLDL_LPDDEF_EF_COMMENT;

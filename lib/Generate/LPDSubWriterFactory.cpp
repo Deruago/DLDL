@@ -29,6 +29,8 @@ DLDL::generate::LPDSubWriterFactory::GetLPDSubWriter(ir::Type type)
 		break;
 	case ir::Type::Documentation:
 		break;
+	case ir::Type::OopSyntax:
+		return std::make_shared<sub::OopSyntaxLPDWriter>();
 	default:
 		break;
 	}

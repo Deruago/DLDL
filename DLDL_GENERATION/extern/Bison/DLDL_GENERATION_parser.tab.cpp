@@ -74,7 +74,7 @@
 #define yychar          DLDL_GENERATIONchar
 
 /* First part of user prologue.  */
-#line 4 "./DLDL_GENERATION_parser.y"
+#line 5 "./DLDL_GENERATION_parser.y"
 
 #include <iostream>
 #include <vector>
@@ -528,8 +528,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    91,    91,   102,   108,   118,   124,   130,   140,   150,
-     160,   170,   180,   190,   196
+       0,    92,    92,   103,   109,   119,   125,   131,   141,   151,
+     161,   171,   181,   191,   197
 };
 #endif
 
@@ -1629,7 +1629,7 @@ yyreduce:
     switch (yyn)
       {
   case 2: /* program: stmts  */
-#line 91 "./DLDL_GENERATION_parser.y"
+#line 92 "./DLDL_GENERATION_parser.y"
                {
 		auto* const newNode = new DLDL_GENERATION::ast::node::program({::DLDL_GENERATION::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_GENERATION_stmts) });
 		(yyval.DLDL_GENERATION_program) = newNode;
@@ -1641,7 +1641,7 @@ yyreduce:
     break;
 
   case 3: /* stmts: stmt stmts  */
-#line 102 "./DLDL_GENERATION_parser.y"
+#line 103 "./DLDL_GENERATION_parser.y"
                     {
 		auto* const newNode = new DLDL_GENERATION::ast::node::stmts({::DLDL_GENERATION::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[-1].DLDL_GENERATION_stmt), (yyvsp[0].DLDL_GENERATION_stmts) });
 		(yyval.DLDL_GENERATION_stmts) = newNode;
@@ -1652,7 +1652,7 @@ yyreduce:
     break;
 
   case 4: /* stmts: %empty  */
-#line 108 "./DLDL_GENERATION_parser.y"
+#line 109 "./DLDL_GENERATION_parser.y"
            {
 		auto* const newNode = new DLDL_GENERATION::ast::node::stmts({::DLDL_GENERATION::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		(yyval.DLDL_GENERATION_stmts) = newNode;
@@ -1663,7 +1663,7 @@ yyreduce:
     break;
 
   case 5: /* stmt: generate_declaration  */
-#line 118 "./DLDL_GENERATION_parser.y"
+#line 119 "./DLDL_GENERATION_parser.y"
                               {
 		auto* const newNode = new DLDL_GENERATION::ast::node::stmt({::DLDL_GENERATION::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_GENERATION_generate_declaration) });
 		(yyval.DLDL_GENERATION_stmt) = newNode;
@@ -1674,7 +1674,7 @@ yyreduce:
     break;
 
   case 6: /* stmt: integrate_declaration  */
-#line 124 "./DLDL_GENERATION_parser.y"
+#line 125 "./DLDL_GENERATION_parser.y"
                                  {
 		auto* const newNode = new DLDL_GENERATION::ast::node::stmt({::DLDL_GENERATION::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_GENERATION_integrate_declaration) });
 		(yyval.DLDL_GENERATION_stmt) = newNode;
@@ -1685,7 +1685,7 @@ yyreduce:
     break;
 
   case 7: /* stmt: argument_declaration  */
-#line 130 "./DLDL_GENERATION_parser.y"
+#line 131 "./DLDL_GENERATION_parser.y"
                                 {
 		auto* const newNode = new DLDL_GENERATION::ast::node::stmt({::DLDL_GENERATION::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 2, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_GENERATION_argument_declaration) });
 		(yyval.DLDL_GENERATION_stmt) = newNode;
@@ -1696,7 +1696,7 @@ yyreduce:
     break;
 
   case 8: /* generate_declaration: GENERATE type tool  */
-#line 140 "./DLDL_GENERATION_parser.y"
+#line 141 "./DLDL_GENERATION_parser.y"
                             {
 		auto* const newNode = new DLDL_GENERATION::ast::node::generate_declaration({::DLDL_GENERATION::ast::Type::generate_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GENERATION::ast::node::GENERATE({::DLDL_GENERATION::ast::Type::GENERATE, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal) }), (yyvsp[-1].DLDL_GENERATION_type), (yyvsp[0].DLDL_GENERATION_tool) });
 		(yyval.DLDL_GENERATION_generate_declaration) = newNode;
@@ -1707,7 +1707,7 @@ yyreduce:
     break;
 
   case 9: /* integrate_declaration: INTEGRATE tool tool  */
-#line 150 "./DLDL_GENERATION_parser.y"
+#line 151 "./DLDL_GENERATION_parser.y"
                              {
 		auto* const newNode = new DLDL_GENERATION::ast::node::integrate_declaration({::DLDL_GENERATION::ast::Type::integrate_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GENERATION::ast::node::INTEGRATE({::DLDL_GENERATION::ast::Type::INTEGRATE, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal) }), (yyvsp[-1].DLDL_GENERATION_tool), (yyvsp[0].DLDL_GENERATION_tool) });
 		(yyval.DLDL_GENERATION_integrate_declaration) = newNode;
@@ -1718,7 +1718,7 @@ yyreduce:
     break;
 
   case 10: /* argument_declaration: ARGUMENT tool argument_data  */
-#line 160 "./DLDL_GENERATION_parser.y"
+#line 161 "./DLDL_GENERATION_parser.y"
                                      {
 		auto* const newNode = new DLDL_GENERATION::ast::node::argument_declaration({::DLDL_GENERATION::ast::Type::argument_declaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GENERATION::ast::node::ARGUMENT({::DLDL_GENERATION::ast::Type::ARGUMENT, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal) }), (yyvsp[-1].DLDL_GENERATION_tool), (yyvsp[0].DLDL_GENERATION_argument_data) });
 		(yyval.DLDL_GENERATION_argument_declaration) = newNode;
@@ -1729,7 +1729,7 @@ yyreduce:
     break;
 
   case 11: /* type: VALUE  */
-#line 170 "./DLDL_GENERATION_parser.y"
+#line 171 "./DLDL_GENERATION_parser.y"
                {
 		auto* const newNode = new DLDL_GENERATION::ast::node::type({::DLDL_GENERATION::ast::Type::type, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GENERATION::ast::node::VALUE({::DLDL_GENERATION::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_GENERATION_type) = newNode;
@@ -1740,7 +1740,7 @@ yyreduce:
     break;
 
   case 12: /* tool: VALUE  */
-#line 180 "./DLDL_GENERATION_parser.y"
+#line 181 "./DLDL_GENERATION_parser.y"
                {
 		auto* const newNode = new DLDL_GENERATION::ast::node::tool({::DLDL_GENERATION::ast::Type::tool, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GENERATION::ast::node::VALUE({::DLDL_GENERATION::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_GENERATION_tool) = newNode;
@@ -1751,7 +1751,7 @@ yyreduce:
     break;
 
   case 13: /* argument_data: VALUE argument_data  */
-#line 190 "./DLDL_GENERATION_parser.y"
+#line 191 "./DLDL_GENERATION_parser.y"
                              {
 		auto* const newNode = new DLDL_GENERATION::ast::node::argument_data({::DLDL_GENERATION::ast::Type::argument_data, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GENERATION::ast::node::VALUE({::DLDL_GENERATION::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal) }), (yyvsp[0].DLDL_GENERATION_argument_data) });
 		(yyval.DLDL_GENERATION_argument_data) = newNode;
@@ -1762,7 +1762,7 @@ yyreduce:
     break;
 
   case 14: /* argument_data: %empty  */
-#line 196 "./DLDL_GENERATION_parser.y"
+#line 197 "./DLDL_GENERATION_parser.y"
            {
 		auto* const newNode = new DLDL_GENERATION::ast::node::argument_data({::DLDL_GENERATION::ast::Type::argument_data, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		(yyval.DLDL_GENERATION_argument_data) = newNode;
@@ -2008,7 +2008,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 206 "./DLDL_GENERATION_parser.y"
+#line 207 "./DLDL_GENERATION_parser.y"
 
 
 void DLDL_GENERATIONerror(const char* s)

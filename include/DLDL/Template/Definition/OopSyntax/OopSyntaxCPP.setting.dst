@@ -1,0 +1,36 @@
+{{file.target_language}} = @<C++>@
+{{file.file_name}} = @<OopSyntaxCPP>@
+{{file.namespace}} = @<DLDL::filetemplate>@
+{{file.extension}} = @<h>@
+
+{{language_full_name_underscore}} = @<>@
+
+{{unknown_reference_implementation}} = @<{{unknown_reference}}.Set(::deamer::language::type::definition::object::special::Uninitialized<::deamer::language::type::definition::object::main::NonTerminal>("NonTerminal", "{{unknown_reference}}", "Unknown reference to (most likely) a NonTerminal!"));>@
+
+{{oop_concept_member}} = @<oop_concept_member__>@
+
+{{oop_encapsulation_name}} = @<oop_encapsulation_{{oop_syntax_scope}}__{{object_name}}>@
+{{oop_encapsulation_implementation}} = @<{{oop_encapsulation_name}}.Set(
+		::deamer::language::type::definition::object::main::OopEncapsulation(
+			Language->{{object_name}}.Pointer(),
+			deamer::language::type::definition::object::main::OopSyntaxScope::{{oop_syntax_scope}}));>@
+
+{{oop_link_name}} = @<oop_link_{{productionrule_index}}__{{object_name}}>@
+{{oop_link_implementation}} = @<{{oop_link_name}}.Set(
+		::deamer::language::type::definition::object::main::OopLink(
+			Language->{{oop_link_productionrule_name}}.Pointer(),
+			{ {{oop_link_member.Variable_Field}} }));>@
+
+{{optional_comma_extension}} = @<>@
+{{comma_extension}} = @<, >@
+{{oop_link_member}} = @<{{optional_comma_extension}}{{oop_concept_link_name}}.Pointer()>@
+
+{{oop_concept_link_name}} = @<oop_concept_link_{{object_name}}_{{productionrule_index}}__{{object_name}}__{{oop_concept_member_type}}__{{oop_concept_member_object_name}}>@
+{{oop_concept_link_implementation}} = @<{{oop_concept_link_name}}.Set(
+		::deamer::language::type::definition::object::main::OopConceptLink(
+			Language->{{oop_concept_member_object_name}}.Pointer(), {{oop_concept_member}}{{oop_concept_member_type}}.Pointer()));>@
+
+{{add_concept_link}} = @<AddObject({{oop_concept_link_name}});>@
+{{add_link}} = @<AddObject({{oop_link_name}});>@
+{{add_encapsulation}} = @<AddObject({{oop_encapsulation_name}});>@
+{{add_unknown_reference}} = @<AddObject({{unknown_reference}});>@

@@ -74,7 +74,7 @@
 #define yychar          DLDL_PRECEDENCEchar
 
 /* First part of user prologue.  */
-#line 4 "./DLDL_PRECEDENCE_parser.y"
+#line 5 "./DLDL_PRECEDENCE_parser.y"
 
 #include <iostream>
 #include <vector>
@@ -520,8 +520,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    79,    79,    90,    96,   106,   112,   122,   132,   142,
-     148
+       0,    80,    80,    91,    97,   107,   113,   123,   133,   143,
+     149
 };
 #endif
 
@@ -1615,7 +1615,7 @@ yyreduce:
     switch (yyn)
       {
   case 2: /* program: stmts  */
-#line 79 "./DLDL_PRECEDENCE_parser.y"
+#line 80 "./DLDL_PRECEDENCE_parser.y"
                {
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::program({::DLDL_PRECEDENCE::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_PRECEDENCE_stmts) });
 		(yyval.DLDL_PRECEDENCE_program) = newNode;
@@ -1627,7 +1627,7 @@ yyreduce:
     break;
 
   case 3: /* stmts: stmt stmts  */
-#line 90 "./DLDL_PRECEDENCE_parser.y"
+#line 91 "./DLDL_PRECEDENCE_parser.y"
                     {
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmts({::DLDL_PRECEDENCE::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[-1].DLDL_PRECEDENCE_stmt), (yyvsp[0].DLDL_PRECEDENCE_stmts) });
 		(yyval.DLDL_PRECEDENCE_stmts) = newNode;
@@ -1638,7 +1638,7 @@ yyreduce:
     break;
 
   case 4: /* stmts: %empty  */
-#line 96 "./DLDL_PRECEDENCE_parser.y"
+#line 97 "./DLDL_PRECEDENCE_parser.y"
            {
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmts({::DLDL_PRECEDENCE::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		(yyval.DLDL_PRECEDENCE_stmts) = newNode;
@@ -1649,7 +1649,7 @@ yyreduce:
     break;
 
   case 5: /* stmt: localized_precedence  */
-#line 106 "./DLDL_PRECEDENCE_parser.y"
+#line 107 "./DLDL_PRECEDENCE_parser.y"
                               {
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmt({::DLDL_PRECEDENCE::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_PRECEDENCE_localized_precedence) });
 		(yyval.DLDL_PRECEDENCE_stmt) = newNode;
@@ -1660,7 +1660,7 @@ yyreduce:
     break;
 
   case 6: /* stmt: specific_precedence  */
-#line 112 "./DLDL_PRECEDENCE_parser.y"
+#line 113 "./DLDL_PRECEDENCE_parser.y"
                                {
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::stmt({::DLDL_PRECEDENCE::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_PRECEDENCE_specific_precedence) });
 		(yyval.DLDL_PRECEDENCE_stmt) = newNode;
@@ -1671,7 +1671,7 @@ yyreduce:
     break;
 
   case 7: /* localized_precedence: PRECEDENCE terminal_one_or_more  */
-#line 122 "./DLDL_PRECEDENCE_parser.y"
+#line 123 "./DLDL_PRECEDENCE_parser.y"
                                          {
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::localized_precedence({::DLDL_PRECEDENCE::ast::Type::localized_precedence, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_PRECEDENCE::ast::node::PRECEDENCE({::DLDL_PRECEDENCE::ast::Type::PRECEDENCE, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal) }), (yyvsp[0].DLDL_PRECEDENCE_terminal_one_or_more) });
 		(yyval.DLDL_PRECEDENCE_localized_precedence) = newNode;
@@ -1682,7 +1682,7 @@ yyreduce:
     break;
 
   case 8: /* specific_precedence: PRECEDENCE NUMBER terminal_one_or_more  */
-#line 132 "./DLDL_PRECEDENCE_parser.y"
+#line 133 "./DLDL_PRECEDENCE_parser.y"
                                                 {
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::specific_precedence({::DLDL_PRECEDENCE::ast::Type::specific_precedence, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_PRECEDENCE::ast::node::PRECEDENCE({::DLDL_PRECEDENCE::ast::Type::PRECEDENCE, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-2].Terminal) }), new DLDL_PRECEDENCE::ast::node::NUMBER({::DLDL_PRECEDENCE::ast::Type::NUMBER, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal) }), (yyvsp[0].DLDL_PRECEDENCE_terminal_one_or_more) });
 		(yyval.DLDL_PRECEDENCE_specific_precedence) = newNode;
@@ -1693,7 +1693,7 @@ yyreduce:
     break;
 
   case 9: /* terminal_one_or_more: TERMINAL terminal_one_or_more  */
-#line 142 "./DLDL_PRECEDENCE_parser.y"
+#line 143 "./DLDL_PRECEDENCE_parser.y"
                                        {
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::terminal_one_or_more({::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_PRECEDENCE::ast::node::TERMINAL({::DLDL_PRECEDENCE::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[-1].Terminal) }), (yyvsp[0].DLDL_PRECEDENCE_terminal_one_or_more) });
 		(yyval.DLDL_PRECEDENCE_terminal_one_or_more) = newNode;
@@ -1704,7 +1704,7 @@ yyreduce:
     break;
 
   case 10: /* terminal_one_or_more: TERMINAL  */
-#line 148 "./DLDL_PRECEDENCE_parser.y"
+#line 149 "./DLDL_PRECEDENCE_parser.y"
                     {
 		auto* const newNode = new DLDL_PRECEDENCE::ast::node::terminal_one_or_more({::DLDL_PRECEDENCE::ast::Type::terminal_one_or_more, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_PRECEDENCE::ast::node::TERMINAL({::DLDL_PRECEDENCE::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_PRECEDENCE_terminal_one_or_more) = newNode;
@@ -1950,7 +1950,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 158 "./DLDL_PRECEDENCE_parser.y"
+#line 159 "./DLDL_PRECEDENCE_parser.y"
 
 
 void DLDL_PRECEDENCEerror(const char* s)

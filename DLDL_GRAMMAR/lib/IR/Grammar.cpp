@@ -67,6 +67,19 @@ bool DLDL::ir::Grammar::DoesProductionRuleExist(const ProductionRule& ourProduct
 	return false;
 }
 
+bool DLDL::ir::Grammar::DoesNonTerminalExist(const std::string& name_) const
+{
+	for (const auto& nonterminal : nonterminals)
+	{
+		if (nonterminal.name == name_)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool DLDL::ir::Grammar::DoesNonTerminalExist(const NonTerminal& ourNonTerminal) const
 {
 	for (const auto& nonterminal : nonterminals)

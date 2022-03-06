@@ -68,7 +68,7 @@ extern int DLDL_GENERATIONdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 67 "./DLDL_GENERATION_parser.y"
+#line 68 "./DLDL_GENERATION_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_GENERATION::ast::node::GENERATE* DLDL_GENERATION_GENERATE;

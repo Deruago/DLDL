@@ -63,6 +63,16 @@ namespace DLDL::ir
 
 			return true;
 		}
+
+		std::string GetName() const
+		{
+			std::string name = nonterminal;
+			for (const auto& token : tokens)
+			{
+				name += "_" + token;
+			}
+			return name;
+		}
 	};
 
 	struct NonTerminal
@@ -146,6 +156,8 @@ namespace DLDL::ir
 		void SetStartType(const std::string& name);
 
 		bool DoesProductionRuleExist(const ProductionRule& ourProductionRule) const;
+
+		bool DoesNonTerminalExist(const std::string& name_) const;
 
 		bool DoesNonTerminalExist(const NonTerminal& ourNonTerminal) const;
 

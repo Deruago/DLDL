@@ -74,7 +74,7 @@
 #define yychar          DLDL_LDOSTRUCTchar
 
 /* First part of user prologue.  */
-#line 4 "./DLDL_LDOSTRUCT_parser.y"
+#line 5 "./DLDL_LDOSTRUCT_parser.y"
 
 #include <iostream>
 #include <vector>
@@ -526,8 +526,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    88,    88,    99,   105,   115,   125,   132,   143,   153,
-     165,   171,   181,   187
+       0,    89,    89,   100,   106,   116,   126,   133,   144,   154,
+     166,   172,   182,   188
 };
 #endif
 
@@ -1622,7 +1622,7 @@ yyreduce:
     switch (yyn)
       {
   case 2: /* program: deamerreserved_star__stmt__  */
-#line 88 "./DLDL_LDOSTRUCT_parser.y"
+#line 89 "./DLDL_LDOSTRUCT_parser.y"
                                      {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::program({::DLDL_LDOSTRUCT::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LDOSTRUCT_deamerreserved_star__stmt__) });
 		(yyval.DLDL_LDOSTRUCT_program) = newNode;
@@ -1634,7 +1634,7 @@ yyreduce:
     break;
 
   case 3: /* deamerreserved_star__stmt__: stmt deamerreserved_star__stmt__  */
-#line 99 "./DLDL_LDOSTRUCT_parser.y"
+#line 100 "./DLDL_LDOSTRUCT_parser.y"
                                           {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, { (yyvsp[-1].DLDL_LDOSTRUCT_stmt), (yyvsp[0].DLDL_LDOSTRUCT_deamerreserved_star__stmt__) });
 		(yyval.DLDL_LDOSTRUCT_deamerreserved_star__stmt__) = newNode;
@@ -1645,7 +1645,7 @@ yyreduce:
     break;
 
   case 4: /* deamerreserved_star__stmt__: %empty  */
-#line 105 "./DLDL_LDOSTRUCT_parser.y"
+#line 106 "./DLDL_LDOSTRUCT_parser.y"
            {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, {  });
 		(yyval.DLDL_LDOSTRUCT_deamerreserved_star__stmt__) = newNode;
@@ -1656,7 +1656,7 @@ yyreduce:
     break;
 
   case 5: /* stmt: argument  */
-#line 115 "./DLDL_LDOSTRUCT_parser.y"
+#line 116 "./DLDL_LDOSTRUCT_parser.y"
                   {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::stmt({::DLDL_LDOSTRUCT::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_LDOSTRUCT_argument) });
 		(yyval.DLDL_LDOSTRUCT_stmt) = newNode;
@@ -1667,7 +1667,7 @@ yyreduce:
     break;
 
   case 6: /* argument: argument_name COLON VARNAME  */
-#line 125 "./DLDL_LDOSTRUCT_parser.y"
+#line 126 "./DLDL_LDOSTRUCT_parser.y"
                                      {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument({::DLDL_LDOSTRUCT::ast::Type::argument, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[-2].DLDL_LDOSTRUCT_argument_name), new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LDOSTRUCT_argument) = newNode;
@@ -1679,7 +1679,7 @@ yyreduce:
     break;
 
   case 7: /* argument: argument_name COLON argument_block  */
-#line 132 "./DLDL_LDOSTRUCT_parser.y"
+#line 133 "./DLDL_LDOSTRUCT_parser.y"
                                               {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument({::DLDL_LDOSTRUCT::ast::Type::argument, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[-2].DLDL_LDOSTRUCT_argument_name), (yyvsp[0].DLDL_LDOSTRUCT_argument_block) });
 		(yyval.DLDL_LDOSTRUCT_argument) = newNode;
@@ -1691,7 +1691,7 @@ yyreduce:
     break;
 
   case 8: /* argument_name: VARNAME  */
-#line 143 "./DLDL_LDOSTRUCT_parser.y"
+#line 144 "./DLDL_LDOSTRUCT_parser.y"
                  {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_name({::DLDL_LDOSTRUCT::ast::Type::argument_name, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LDOSTRUCT_argument_name) = newNode;
@@ -1702,7 +1702,7 @@ yyreduce:
     break;
 
   case 9: /* argument_block: LEFT_ANGLE_BRACKET deamerreserved_star__argument_stmt__ RIGHT_ANGLE_BRACKET  */
-#line 153 "./DLDL_LDOSTRUCT_parser.y"
+#line 154 "./DLDL_LDOSTRUCT_parser.y"
                                                                                      {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_block({::DLDL_LDOSTRUCT::ast::Type::argument_block, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[-1].DLDL_LDOSTRUCT_deamerreserved_star__argument_stmt__) });
 		(yyval.DLDL_LDOSTRUCT_argument_block) = newNode;
@@ -1715,7 +1715,7 @@ yyreduce:
     break;
 
   case 10: /* deamerreserved_star__argument_stmt__: argument_stmt deamerreserved_star__argument_stmt__  */
-#line 165 "./DLDL_LDOSTRUCT_parser.y"
+#line 166 "./DLDL_LDOSTRUCT_parser.y"
                                                             {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, { (yyvsp[-1].DLDL_LDOSTRUCT_argument_stmt), (yyvsp[0].DLDL_LDOSTRUCT_deamerreserved_star__argument_stmt__) });
 		(yyval.DLDL_LDOSTRUCT_deamerreserved_star__argument_stmt__) = newNode;
@@ -1726,7 +1726,7 @@ yyreduce:
     break;
 
   case 11: /* deamerreserved_star__argument_stmt__: %empty  */
-#line 171 "./DLDL_LDOSTRUCT_parser.y"
+#line 172 "./DLDL_LDOSTRUCT_parser.y"
            {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::deamerreserved_star__argument_stmt__({::DLDL_LDOSTRUCT::ast::Type::deamerreserved_star__argument_stmt__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, {  });
 		(yyval.DLDL_LDOSTRUCT_deamerreserved_star__argument_stmt__) = newNode;
@@ -1737,7 +1737,7 @@ yyreduce:
     break;
 
   case 12: /* argument_stmt: INDENTED_VALUE  */
-#line 181 "./DLDL_LDOSTRUCT_parser.y"
+#line 182 "./DLDL_LDOSTRUCT_parser.y"
                         {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LDOSTRUCT::ast::node::INDENTED_VALUE({::DLDL_LDOSTRUCT::ast::Type::INDENTED_VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LDOSTRUCT_argument_stmt) = newNode;
@@ -1748,7 +1748,7 @@ yyreduce:
     break;
 
   case 13: /* argument_stmt: VARNAME  */
-#line 187 "./DLDL_LDOSTRUCT_parser.y"
+#line 188 "./DLDL_LDOSTRUCT_parser.y"
                    {
 		auto* const newNode = new DLDL_LDOSTRUCT::ast::node::argument_stmt({::DLDL_LDOSTRUCT::ast::Type::argument_stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LDOSTRUCT::ast::node::VARNAME({::DLDL_LDOSTRUCT::ast::Type::VARNAME, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_LDOSTRUCT_argument_stmt) = newNode;
@@ -1994,7 +1994,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 197 "./DLDL_LDOSTRUCT_parser.y"
+#line 198 "./DLDL_LDOSTRUCT_parser.y"
 
 
 void DLDL_LDOSTRUCTerror(const char* s)

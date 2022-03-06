@@ -2,7 +2,6 @@
 #define DLDL_GENERATE_SUBWRITER_LEXICONLPDWRITER_H
 
 #include "DLDL/Generate/SubWriter.h"
-#include "DLDL/IR/LPD.h"
 #include "DLDL_LEXER/IR/Lexicon.h"
 #include <Deamer/File/Tool/File.h>
 

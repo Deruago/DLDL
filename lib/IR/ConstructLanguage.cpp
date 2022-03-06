@@ -1,6 +1,7 @@
 #include "DLDL/IR/ConstructLanguage.h"
 #include "DLDL_GRAMMAR/IR/Parser.h"
 #include "DLDL_LEXER/IR/Parser.h"
+#include "DLDL_OOPSYNTAX/IR/Parser.h"
 #include <Deamer/File/Tool/Directory.h>
 #include <fstream>
 #include <sstream>
@@ -182,7 +183,14 @@ DLDL::ir::Type DLDL::ir::ConstructLanguage::ConvertTextToEnum(const std::string&
 	std::string textLowered;
 	for (auto character : text)
 	{
-		textLowered += ::tolower(character);
+		if (::isalpha(character))
+		{
+			textLowered += ::tolower(character);
+		}
+		else
+		{
+			textLowered += character;
+		}
 	}
 
 	if (textLowered == "lexicon")
@@ -208,6 +216,10 @@ DLDL::ir::Type DLDL::ir::ConstructLanguage::ConvertTextToEnum(const std::string&
 	if (textLowered == "identity")
 	{
 		return Type::Identity;
+	}
+	if (textLowered == "oopsyntax")
+	{
+		return Type::OopSyntax;
 	}
 
 	return Type::Unknown;
@@ -249,6 +261,9 @@ DLDL::ir::IR* DLDL::ir::ConstructLanguage::GetIR(const Type type, const std::str
 		break;
 	case Type::Generation:
 		newIR = ::DLDL::ir::generation::Parser(os).GetIR(fileContent);
+		break;
+	case Type::OopSyntax:
+		newIR = ::DLDL::ir::oopsyntax::Parser(os).GetIR(fileContent);
 		break;
 	case Type::Identity:
 		break;

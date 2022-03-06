@@ -1,4 +1,5 @@
 #include "DLDL/IR/SpecialDefinition/Generation.h"
+#include "DLDL/IR/Language.h"
 #include <stdexcept>
 
 DLDL::ir::special::Argument::Argument(std::string argumentName_) : argumentName(argumentName_)
@@ -130,4 +131,17 @@ std::vector<DLDL::ir::special::Tool> DLDL::ir::special::Generation::GetTools() c
 deamer::file::tool::OSType DLDL::ir::special::Generation::GetOs() const
 {
 	return os;
+}
+
+void DLDL::ir::special::Generation::FillInUnknownReferences(DLDL::ir::Language* language)
+{
+	if (!IsDefaultImplementedByDLDL())
+	{
+		return;
+	}
+
+	if (language->DoesIRExist(Type::OopSyntax))
+	{
+		AddTool("OopSyntaxRecognizer");
+	}
 }

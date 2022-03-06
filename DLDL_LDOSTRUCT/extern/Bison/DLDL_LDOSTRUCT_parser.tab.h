@@ -68,7 +68,7 @@ extern int DLDL_LDOSTRUCTdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 65 "./DLDL_LDOSTRUCT_parser.y"
+#line 66 "./DLDL_LDOSTRUCT_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_LDOSTRUCT::ast::node::COLON* DLDL_LDOSTRUCT_COLON;
