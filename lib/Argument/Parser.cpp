@@ -104,6 +104,8 @@ static void initializeMaps()
 		{"lpd-generation-map-convertor", Type::lpd_generation_map_convertor},
 		{"lpd-generation-map-validator", Type::lpd_generation_map_validator},
 		{"activate-language-generation", Type::activate_language_generation},
+		{"no-console", Type::no_console},
+		{"console-debug-mode", Type::console_debug_mode},
 	};
 
 	for (auto [str, type] : tuples)

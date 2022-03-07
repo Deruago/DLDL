@@ -71,6 +71,9 @@ namespace DLDL::argument
 		lpd_generation_map_validator,
 
 		activate_language_generation,
+
+		no_console,
+		console_debug_mode,
 	};
 }
 

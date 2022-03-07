@@ -34,7 +34,7 @@ our_os = ""
 target_os = ""
 python_console_version = "1.0.0"
 user_name = ""
-debug_mode = False
+debug_mode = {{debug_mode}}
 
 def execute_setting(arg_os: str, arg_header: str, arg_content: str):
 	global dangerous_script
@@ -101,7 +101,7 @@ def execute_linux_argument(arg_os: str, arg_header: str, arg_content: str):
 		pass
 	if our_os == "windows":
 		# Try to use WSL
-		os.system(f'bash -c "({arg_content})')
+		os.system(f"bash -c '({arg_content})'")
 		pass
 	if our_os == "mac":
 		# No conversion possible
@@ -237,6 +237,10 @@ def execute_argument(arg: str):
 		return
 
 def main():
+	global debug_mode
+	if debug_mode:
+		print('Entered Python Console!')
+
 	first = True
 	for argument in sys.argv:
 		if first:

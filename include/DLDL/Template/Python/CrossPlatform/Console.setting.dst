@@ -2,3 +2,5 @@
 {{file.file_name}} = @<ConsolePy>@
 {{file.namespace}} = @<DLDL::filetemplate>@
 {{file.extension}} = @<h>@
+
+{{debug_mode}} = @<True>@

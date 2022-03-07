@@ -9,6 +9,7 @@
 #include "DLDL/Template/CMakeLists/RootCMakeListsTemplate.h"
 #include "DLDL/Template/Python/CrossPlatform/ConsolePyTemplate.h"
 #include <Deamer/File/Tool/Action/Builder.h>
+#include <Deamer/File/Tool/Action/PythonConsole.h>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -810,17 +811,29 @@ void DLDL::argument::Interpreter::InitializeDeamerMap()
 	deamer::file::tool::File dldl_regen_args_tool("tool", "deamer", RegenerationArgsTool());
 	deamer::file::tool::File dldl_regen_args_miccel("miccel", "deamer", RegenerationArgsMiccel());
 
-	auto consolePyTemplate = std::make_unique<filetemplate::ConsolePyTemplate>();
-	deamer::file::tool::File dldl_script_console_py("Console", "py",
-													consolePyTemplate->GetOutput());
+	if (!(parser.IsArgumentSet(Type::no_console) &&
+		  parser.GetArgument(Type::no_console).value == "true"))
+	{
+		auto consolePyTemplate = std::make_unique<filetemplate::ConsolePyTemplate>();
 
+		if (parser.IsArgumentSet(Type::console_debug_mode) &&
+			parser.GetArgument(Type::console_debug_mode).value == "true")
+		{
+			consolePyTemplate->debug_mode_->Set("True");
+		}
+		else
+		{
+			consolePyTemplate->debug_mode_->Set("False");
+		}
+		deamer::file::tool::File dldl_script_console_py("Console", "py",
+														consolePyTemplate->GetOutput());
+		deamerDLDLScriptsDirectory.AddFile(dldl_script_console_py);
+	}
 	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args);
 	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args_lpd);
 	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args_definition);
 	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args_tool);
 	deamerDLDLargumentsDirectory.AddFile(dldl_regen_args_miccel);
-
-	deamerDLDLScriptsDirectory.AddFile(dldl_script_console_py);
 
 	deamerDLDLDirectory.AddDirectory(deamerDLDLScriptsDirectory);
 	deamerDLDLDirectory.AddDirectory(deamerDLDLDefinitionDirectory);
@@ -1015,7 +1028,17 @@ void DLDL::argument::Interpreter::AutoRun()
 	if (parser.IsArgumentSet(Type::auto_run))
 	{
 		auto builder = ::deamer::file::tool::action::Builder();
-		builder.FindAndExecute(projectGeneration->GetLanguageTarget())
+		std::string extension; // empty if on linux, .exe if on windows
+		if (deamer::file::tool::os_used == deamer::file::tool::OSType::os_windows &&
+			deamer::file::tool::action::PythonConsole::IsAvailable())
+		{
+			extension = ".exe";
+		}
+		else
+		{
+			extension = "";
+		}
+		builder.FindAndExecute(projectGeneration->GetLanguageTarget() + extension)
 			.RemoveDirectory("./" + BuildMap)
 			.CreateDirectory("./" + BuildMap)
 			.ChangeDirectory("./" + BuildMap)
@@ -1159,6 +1182,10 @@ std::string DLDL::argument::Interpreter::RegenerationArgsMiccel() const
 	{
 		args += parser.GetArgument(Type::target_os).value;
 	}
+
+	args += " ";
+	args += parser.CompileToArgument(Type::no_console) + " ";
+	args += parser.CompileToArgument(Type::console_debug_mode) + " ";
 
 	return args;
 }
