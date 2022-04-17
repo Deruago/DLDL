@@ -9,4 +9,3 @@
 
 set(source_files ./DLDL_IDENTITY_parser.tab.cpp)
 DLDL_IDENTITY_add_external_library(Bison ${source_files})
-target_link_libraries(DLDL_IDENTITY_Bison_static_library PUBLIC DLDL_IDENTITY_Flex_static_library)

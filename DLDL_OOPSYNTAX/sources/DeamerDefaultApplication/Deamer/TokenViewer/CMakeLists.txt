@@ -7,9 +7,6 @@
 #
 # This file is part of the directory: TokenViewer
 
-# Auto-generated, do not changed this code
-# Part of: DeamerDefaultApplication tool
-# More information: https://github.com/Deruago/theDeamerProject
-
 add_executable(DLDL_OOPSYNTAXdeamerTokenViewer main.cpp)
-target_link_libraries(DLDL_OOPSYNTAXdeamerTokenViewer DLDL_OOPSYNTAX_static_library)
+target_link_libraries(DLDL_OOPSYNTAXdeamerTokenViewer  PRIVATE Deamer::External Deamer::Algorithm deamer_reserved_DLDL_OOPSYNTAX_core_library)
+ 

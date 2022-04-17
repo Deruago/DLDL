@@ -7,9 +7,5 @@
 #
 # This file is part of the directory: AstViewer
 
-# Auto-generated, do not changed this code
-# Part of: DeamerDefaultApplication tool
-# More information: https://github.com/Deruago/theDeamerProject
-
 add_executable(DLDL_GRAMMAR_PRODUCTION_RULEdeamerAstViewer main.cpp)
-target_link_libraries(DLDL_GRAMMAR_PRODUCTION_RULEdeamerAstViewer DLDL_GRAMMAR_PRODUCTION_RULE_static_library)
+target_link_libraries(DLDL_GRAMMAR_PRODUCTION_RULEdeamerAstViewer PRIVATE Deamer::External Deamer::Algorithm deamer_reserved_DLDL_GRAMMAR_PRODUCTION_RULE_core_library)

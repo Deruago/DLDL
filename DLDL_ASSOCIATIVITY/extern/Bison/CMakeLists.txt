@@ -9,4 +9,3 @@
 
 set(source_files ./DLDL_ASSOCIATIVITY_parser.tab.cpp)
 DLDL_ASSOCIATIVITY_add_external_library(Bison ${source_files})
-target_link_libraries(DLDL_ASSOCIATIVITY_Bison_static_library PUBLIC DLDL_ASSOCIATIVITY_Flex_static_library)

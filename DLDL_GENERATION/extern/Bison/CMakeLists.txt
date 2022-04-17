@@ -9,4 +9,3 @@
 
 set(source_files ./DLDL_GENERATION_parser.tab.cpp)
 DLDL_GENERATION_add_external_library(Bison ${source_files})
-target_link_libraries(DLDL_GENERATION_Bison_static_library PUBLIC DLDL_GENERATION_Flex_static_library)

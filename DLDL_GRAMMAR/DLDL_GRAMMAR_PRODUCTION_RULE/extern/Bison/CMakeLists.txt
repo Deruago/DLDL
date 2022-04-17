@@ -9,4 +9,3 @@
 
 set(source_files ./DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.cpp)
 DLDL_GRAMMAR_PRODUCTION_RULE_add_external_library(Bison ${source_files})
-target_link_libraries(DLDL_GRAMMAR_PRODUCTION_RULE_Bison_static_library PUBLIC DLDL_GRAMMAR_PRODUCTION_RULE_Flex_static_library)

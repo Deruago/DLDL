@@ -9,4 +9,3 @@
 
 set(source_files ./DLDL_LEXER_parser.tab.cpp)
 DLDL_LEXER_add_external_library(Bison ${source_files})
-target_link_libraries(DLDL_LEXER_Bison_static_library PUBLIC DLDL_LEXER_Flex_static_library)

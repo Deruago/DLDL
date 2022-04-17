@@ -7,9 +7,5 @@
 #
 # This file is part of the directory: AstViewer
 
-# Auto-generated, do not changed this code
-# Part of: DeamerDefaultApplication tool
-# More information: https://github.com/Deruago/theDeamerProject
-
 add_executable(DLDLdeamerAstViewer main.cpp)
-target_link_libraries(DLDLdeamerAstViewer DLDL_static_library)
+target_link_libraries(DLDLdeamerAstViewer PRIVATE Deamer::External Deamer::Algorithm deamer_reserved_DLDL_core_library)

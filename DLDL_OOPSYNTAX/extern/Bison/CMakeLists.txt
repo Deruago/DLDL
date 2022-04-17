@@ -9,4 +9,3 @@
 
 set(source_files ./DLDL_OOPSYNTAX_parser.tab.cpp)
 DLDL_OOPSYNTAX_add_external_library(Bison ${source_files})
-target_link_libraries(DLDL_OOPSYNTAX_Bison_static_library PUBLIC DLDL_OOPSYNTAX_Flex_static_library)

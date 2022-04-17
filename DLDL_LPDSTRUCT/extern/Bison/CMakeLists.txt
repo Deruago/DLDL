@@ -9,4 +9,3 @@
 
 set(source_files ./DLDL_LPDSTRUCT_parser.tab.cpp)
 DLDL_LPDSTRUCT_add_external_library(Bison ${source_files})
-target_link_libraries(DLDL_LPDSTRUCT_Bison_static_library PUBLIC DLDL_LPDSTRUCT_Flex_static_library)

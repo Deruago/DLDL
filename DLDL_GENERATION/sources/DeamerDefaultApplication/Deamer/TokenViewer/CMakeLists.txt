@@ -7,9 +7,6 @@
 #
 # This file is part of the directory: TokenViewer
 
-# Auto-generated, do not changed this code
-# Part of: DeamerDefaultApplication tool
-# More information: https://github.com/Deruago/theDeamerProject
-
 add_executable(DLDL_GENERATIONdeamerTokenViewer main.cpp)
-target_link_libraries(DLDL_GENERATIONdeamerTokenViewer DLDL_GENERATION_static_library)
+target_link_libraries(DLDL_GENERATIONdeamerTokenViewer  PRIVATE Deamer::External Deamer::Algorithm deamer_reserved_DLDL_GENERATION_core_library)
+ 
