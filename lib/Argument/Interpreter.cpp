@@ -17,7 +17,8 @@
 #include <thread>
 #include <vector>
 
-std::string GenerateRootCMakeLists(std::vector<DLDL::ir::Language*> languages)
+std::string
+DLDL::argument::Interpreter::GenerateRootCMakeLists(std::vector<DLDL::ir::Language*> languages)
 {
 	std::string language_string;
 
@@ -39,7 +40,19 @@ std::string GenerateRootCMakeLists(std::vector<DLDL::ir::Language*> languages)
 		generator.language_->Set(language->GetName());
 		generator.language_directory_->ExpandVariableField();
 	}
-
+	if (parser.IsArgumentSet(Type::default_value_compiler_generator) &&
+		parser.GetArgument(Type::default_value_compiler_generator).value == "OFF")
+	{
+		generator.option_compiler_generator_value_->Set(generator.option_value_off_);
+	}
+	else
+	{
+		generator.option_compiler_generator_value_->Set(generator.option_value_on_);
+	}
+	if (!languages.empty())
+	{
+		generator.language_name_->Set(languages[0]->GetName());
+	}
 	return generator.GetOutput();
 }
 
@@ -990,8 +1003,10 @@ bool DLDL::argument::Interpreter::InitializeLanguages()
 
 void DLDL::argument::Interpreter::CompilerGenerator_Generation()
 {
-	projectGeneration =
-		new DLDL::generate::Project(languages, parser.IsArgumentSet(Type::multi_project));
+	projectGeneration = new DLDL::generate::Project(
+		languages, parser.IsArgumentSet(Type::multi_project),
+		parser.IsArgumentSet(Type::cmake_output_use_legacy_names) &&
+			parser.GetArgument(Type::cmake_output_use_legacy_names).value == "true");
 	if (parser.IsArgumentSet(Type::generate))
 	{
 		auto directory = projectGeneration->Generate();
@@ -1007,11 +1022,17 @@ void DLDL::argument::Interpreter::AutoCompile()
 {
 	if (parser.IsArgumentSet(Type::auto_compile))
 	{
+		std::string language_name;
+		if (!languages.empty())
+		{
+			language_name = languages[0]->GetName();
+		}
+
 		auto builder = ::deamer::file::tool::action::Builder();
 		builder.RemoveDirectory("./" + BuildMap)
 			.CreateDirectory("./" + BuildMap)
 			.ChangeDirectory("./" + BuildMap)
-			.CrossPlatformCommand("cmake ..")
+			.CrossPlatformCommand("cmake .. -D" + language_name + "_ENABLE_COMPILER_GENERATOR=ON")
 			.CrossPlatformCommand("cmake --build . --target " +
 								  projectGeneration->GetLanguageTarget())
 			.ChangeDirectory("../"); // should calculate difference
@@ -1186,6 +1207,8 @@ std::string DLDL::argument::Interpreter::RegenerationArgsMiccel() const
 	args += " ";
 	args += parser.CompileToArgument(Type::no_console) + " ";
 	args += parser.CompileToArgument(Type::console_debug_mode) + " ";
+	args += parser.CompileToArgument(Type::default_value_compiler_generator) + " ";
+	args += parser.CompileToArgument(Type::cmake_output_use_legacy_names) + " ";
 
 	return args;
 }

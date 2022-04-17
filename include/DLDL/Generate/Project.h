@@ -16,9 +16,11 @@ namespace DLDL::generate
 		std::vector<ir::Language*> languages;
 		deamer::file::tool::Directory CompilerGenerator;
 		bool multiProject;
+		bool useLegacyNames;
 
 	public:
 		Project(std::vector<ir::Language*> languages_, bool multiProject_ = false,
+				bool useLegacyNames_ = false,
 				const std::string& compilerGeneratorDirName = "CompilerGenerator");
 
 	public:

@@ -1,10 +1,11 @@
 #include "DLDL/Generate/Project.h"
 
 DLDL::generate::Project::Project(std::vector<ir::Language*> languages_, bool multiProject_,
-								 const std::string& compilerGeneratorDirName)
+								 bool useLegacyNames_, const std::string& compilerGeneratorDirName)
 	: languages(languages_),
 	  CompilerGenerator(compilerGeneratorDirName),
-	  multiProject(multiProject_)
+	  multiProject(multiProject_),
+	  useLegacyNames(useLegacyNames_)
 {
 }
 
@@ -13,7 +14,7 @@ deamer::file::tool::Directory DLDL::generate::Project::Generate()
 	deamer::file::tool::Directory includeDir("include");
 	deamer::file::tool::Directory libDir("lib");
 
-	CompilerGenerator.AddFile(LPDWriter::GetMain(languages, multiProject));
+	CompilerGenerator.AddFile(LPDWriter::GetMain(languages, multiProject, useLegacyNames));
 	CompilerGenerator.AddFile(LPDWriter::GetCMakeLists(languages));
 
 	for (auto* language : languages)

@@ -24,7 +24,7 @@ namespace DLDL::generate
 		static deamer::file::tool::File GetCompilerGenerator(ir::Language* language);
 
 		static deamer::file::tool::File GetMain(const std::vector<ir::Language*>& languages,
-												bool multiProject);
+												bool multiProject, bool useLegacyNames);
 
 		deamer::file::tool::File GetFileContentSourceFile(ir::Language* language,
 														  const ir::LPD& lpd) override;

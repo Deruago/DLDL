@@ -130,6 +130,7 @@ namespace DLDL::argument
 		 */
 		void LoadInDeamerDir();
 		void WriteToDisk(const deamer::file::tool::Directory& directory, std::string path = "./");
+		std::string GenerateRootCMakeLists(std::vector<DLDL::ir::Language*> languages);
 		deamer::file::tool::Directory
 		GenerateRootDirectory(std::vector<DLDL::ir::Language*> languages);
 

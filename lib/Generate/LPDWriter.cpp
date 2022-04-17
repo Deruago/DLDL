@@ -82,11 +82,17 @@ deamer::file::tool::File DLDL::generate::LPDWriter::GetCompilerGenerator(ir::Lan
 }
 
 deamer::file::tool::File
-DLDL::generate::LPDWriter::GetMain(const std::vector<ir::Language*>& languages, bool multiProject)
+DLDL::generate::LPDWriter::GetMain(const std::vector<ir::Language*>& languages, bool multiProject,
+								   bool useLegacyNames)
 {
 	deamer::file::tool::File file("main", "cpp", "");
 
 	auto generator = DLDL::filetemplate::mainTemplate();
+
+	if (useLegacyNames)
+	{
+		generator.optional_use_legacy_names_->Set(generator.use_legacy_names_);
+	}
 
 	if constexpr (DEAMER_CC_V2_RESERVED_MACRO_VALUE_VERSION_NUMBER >= 002'001'001UL)
 	{
