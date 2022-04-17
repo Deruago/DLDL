@@ -74,6 +74,10 @@ namespace DLDL::argument
 
 		no_console,
 		console_debug_mode,
+
+		default_value_compiler_generator,
+
+		cmake_output_use_legacy_names,
 	};
 }
 

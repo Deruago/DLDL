@@ -106,6 +106,8 @@ static void initializeMaps()
 		{"activate-language-generation", Type::activate_language_generation},
 		{"no-console", Type::no_console},
 		{"console-debug-mode", Type::console_debug_mode},
+		{"default-compiler-generator-value", Type::default_value_compiler_generator},
+		{"cmake-output-use-legacy-names", Type::cmake_output_use_legacy_names},
 	};
 
 	for (auto [str, type] : tuples)
