@@ -29,6 +29,7 @@ namespace DLDL::filetemplate
 			left_bracket_,
 			left_curly_bracket_,
 			optional_project_type_,
+			optional_use_legacy_names_,
 			project_type_,
 			project_type_value_,
 			right_angle_bracket_,
@@ -36,6 +37,7 @@ namespace DLDL::filetemplate
 			right_curly_bracket_,
 			root_language_,
 			root_language_includes_,
+			use_legacy_names_,
 
 		};
 
@@ -90,6 +92,10 @@ namespace DLDL::filetemplate
 				return "optional_project_type";
 			}
 
+			case ::DLDL::filetemplate::mainTemplate::Type::optional_use_legacy_names_: {
+				return "optional_use_legacy_names";
+			}
+
 			case ::DLDL::filetemplate::mainTemplate::Type::project_type_: {
 				return "project_type";
 			}
@@ -116,6 +122,10 @@ namespace DLDL::filetemplate
 
 			case ::DLDL::filetemplate::mainTemplate::Type::root_language_includes_: {
 				return "root_language_includes";
+			}
+
+			case ::DLDL::filetemplate::mainTemplate::Type::use_legacy_names_: {
+				return "use_legacy_names";
 			}
 			}
 
@@ -636,24 +646,24 @@ namespace DLDL::filetemplate
 				type = ::DLDL::filetemplate::mainTemplate::Type::file_;
 				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>(
 					{GenerateVariable(
-						 "/* \r\n * This file is auto-generated and auto-maintained by DLDL\r\n * "
-						 "Do not change code in this as it can be overwritten"),
+						 "/* \n * This file is auto-generated and auto-maintained by DLDL\n * Do "
+						 "not change code in this as it can be overwritten"),
 					 GenerateVariable("."),
 					 GenerateVariable(
-						 "\r\n *\r\n * For more information see the DLDL repo: https://github"),
+						 "\n *\n * For more information see the DLDL repo: https://github"),
 					 GenerateVariable("."),
-					 GenerateVariable("com/Deruago/DLDL\r\n * For more information about Deamer: "
-									  "https://github"),
+					 GenerateVariable(
+						 "com/Deruago/DLDL\n * For more information about Deamer: https://github"),
 					 GenerateVariable("."),
-					 GenerateVariable("com/Deruago/theDeamerProject\r\n */\r\n\r\n"),
+					 GenerateVariable("com/Deruago/theDeamerProject\n */\n\n"),
 					 GenerateVariable(maintemplate_->root_language_includes_->Variable_Field()),
-					 GenerateVariable("\r\n#include \"Deamer/File/Generate/Compiler"),
+					 GenerateVariable("\n#include \"Deamer/File/Generate/Compiler"),
 					 GenerateVariable("."),
-					 GenerateVariable("h\"\r\n\r\nint main(int argc, char* argv[])\r\n"),
-					 GenerateVariable("{"), GenerateVariable("\r\n\t"),
+					 GenerateVariable("h\"\n\nint main(int argc, char* argv[])\n"),
+					 GenerateVariable("{"), GenerateVariable("\n\t"),
 					 GenerateVariable(maintemplate_->generate_root_language_->Variable_Field()),
-					 GenerateVariable("\r\n\r\n\treturn 0;\r\n"), GenerateVariable("}"),
-					 GenerateVariable("\r\n")}));
+					 GenerateVariable("\n\n\treturn 0;\n"), GenerateVariable("}"),
+					 GenerateVariable("\n")}));
 				Content_->type = ::DLDL::filetemplate::mainTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Class_postfix_) =
@@ -877,6 +887,39 @@ namespace DLDL::filetemplate
 
 			Variable_optional_project_type_&
 			operator=(const Variable_optional_project_type_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
+		struct Variable_optional_use_legacy_names_ : public VariableScopes
+		{
+			static constexpr auto name = "optional_use_legacy_names_";
+
+			Variable_optional_use_legacy_names_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::mainTemplate::Type::optional_use_legacy_names_;
+			}
+
+			virtual ~Variable_optional_use_legacy_names_() override = default;
+
+			Variable_optional_use_legacy_names_(mainTemplate* maintemplate_,
+												const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::mainTemplate::Type::optional_use_legacy_names_;
+			}
+
+			Variable_optional_use_legacy_names_&
+			operator=(const Variable_optional_use_legacy_names_& variable)
 			{
 				if (&variable == this)
 				{
@@ -1115,6 +1158,38 @@ namespace DLDL::filetemplate
 			}
 		};
 
+		struct Variable_use_legacy_names_ : public VariableScopes
+		{
+			static constexpr auto name = "use_legacy_names_";
+
+			Variable_use_legacy_names_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::mainTemplate::Type::use_legacy_names_;
+			}
+
+			virtual ~Variable_use_legacy_names_() override = default;
+
+			Variable_use_legacy_names_(mainTemplate* maintemplate_,
+									   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::mainTemplate::Type::use_legacy_names_;
+			}
+
+			Variable_use_legacy_names_& operator=(const Variable_use_legacy_names_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
 	public:
 		inline static std::vector<VariableBase*> variables_to_delete = std::vector<VariableBase*>();
 
@@ -1132,6 +1207,8 @@ namespace DLDL::filetemplate
 		Variable_left_curly_bracket_* left_curly_bracket_ = new Variable_left_curly_bracket_();
 		Variable_optional_project_type_* optional_project_type_ =
 			new Variable_optional_project_type_();
+		Variable_optional_use_legacy_names_* optional_use_legacy_names_ =
+			new Variable_optional_use_legacy_names_();
 		Variable_project_type_* project_type_ = new Variable_project_type_();
 		Variable_project_type_value_* project_type_value_ = new Variable_project_type_value_();
 		Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
@@ -1140,25 +1217,35 @@ namespace DLDL::filetemplate
 		Variable_root_language_* root_language_ = new Variable_root_language_();
 		Variable_root_language_includes_* root_language_includes_ =
 			new Variable_root_language_includes_();
+		Variable_use_legacy_names_* use_legacy_names_ = new Variable_use_legacy_names_();
 
 	public:
 		mainTemplate()
 		{
 			*file_ = Variable_file_(this, std::vector<VariableBase*>({}));
 			*generate_root_language_ = Variable_generate_root_language_(
-				this,
-				std::vector<VariableBase*>(
-					{GenerateVariable("\t// Generate: "), GenerateVariable(root_language_->This()),
-					 GenerateVariable("\r\n\t::"), GenerateVariable(root_language_->This()),
-					 GenerateVariable("::CompilerGenerator "),
-					 GenerateVariable(root_language_->This()),
-					 GenerateVariable("_compiler;\r\n\t::deamer::file::generate::Compiler "),
-					 GenerateVariable(root_language_->This()), GenerateVariable("_WriteToDisk("),
-					 GenerateVariable(root_language_->This()), GenerateVariable("_compiler"),
-					 GenerateVariable("."), GenerateVariable("Generate());\r\n\t"),
-					 GenerateVariable(optional_project_type_->This()), GenerateVariable("\r\n\t"),
-					 GenerateVariable(root_language_->This()), GenerateVariable("_WriteToDisk"),
-					 GenerateVariable("."), GenerateVariable("Generate();")}));
+				this, std::vector<VariableBase*>(
+						  {GenerateVariable("\t// Generate: "),
+						   GenerateVariable(root_language_->This()),
+						   GenerateVariable("\n\t::"),
+						   GenerateVariable(root_language_->This()),
+						   GenerateVariable("::CompilerGenerator "),
+						   GenerateVariable(root_language_->This()),
+						   GenerateVariable("_compiler;\n\t::deamer::file::generate::Compiler "),
+						   GenerateVariable(root_language_->This()),
+						   GenerateVariable("_WriteToDisk("),
+						   GenerateVariable(root_language_->This()),
+						   GenerateVariable("_compiler"),
+						   GenerateVariable("."),
+						   GenerateVariable("Generate());\n\t"),
+						   GenerateVariable(optional_project_type_->This()),
+						   GenerateVariable("\n\t"),
+						   GenerateVariable(optional_use_legacy_names_->This()),
+						   GenerateVariable("\n\t"),
+						   GenerateVariable(root_language_->This()),
+						   GenerateVariable("_WriteToDisk"),
+						   GenerateVariable("."),
+						   GenerateVariable("Generate();")}));
 			*left_angle_bracket_ = Variable_left_angle_bracket_(
 				this, std::vector<VariableBase*>({GenerateVariable("<")}));
 			*left_bracket_ =
@@ -1167,6 +1254,8 @@ namespace DLDL::filetemplate
 				this, std::vector<VariableBase*>({GenerateVariable("(")}));
 			*optional_project_type_ = Variable_optional_project_type_(
 				this, std::vector<VariableBase*>({GenerateVariable(project_type_->This())}));
+			*optional_use_legacy_names_ =
+				Variable_optional_use_legacy_names_(this, std::vector<VariableBase*>({}));
 			*project_type_ = Variable_project_type_(
 				this, std::vector<VariableBase*>(
 						  {GenerateVariable(root_language_->This()),
@@ -1188,6 +1277,11 @@ namespace DLDL::filetemplate
 												  GenerateVariable(root_language_->This()),
 												  GenerateVariable("/CompilerGenerator"),
 												  GenerateVariable("."), GenerateVariable("h\"")}));
+			*use_legacy_names_ = Variable_use_legacy_names_(
+				this,
+				std::vector<VariableBase*>({GenerateVariable(root_language_->This()),
+											GenerateVariable("_WriteToDisk"), GenerateVariable("."),
+											GenerateVariable("SetLegacyNaming();")}));
 
 			variables_.emplace_back(file_);
 			variables_.emplace_back(generate_root_language_);
@@ -1195,6 +1289,7 @@ namespace DLDL::filetemplate
 			variables_.emplace_back(left_bracket_);
 			variables_.emplace_back(left_curly_bracket_);
 			variables_.emplace_back(optional_project_type_);
+			variables_.emplace_back(optional_use_legacy_names_);
 			variables_.emplace_back(project_type_);
 			variables_.emplace_back(project_type_value_);
 			variables_.emplace_back(right_angle_bracket_);
@@ -1202,6 +1297,7 @@ namespace DLDL::filetemplate
 			variables_.emplace_back(right_curly_bracket_);
 			variables_.emplace_back(root_language_);
 			variables_.emplace_back(root_language_includes_);
+			variables_.emplace_back(use_legacy_names_);
 		}
 
 		virtual ~mainTemplate()
