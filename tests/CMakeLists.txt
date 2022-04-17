@@ -20,8 +20,10 @@ macro(package_add_test TESTNAME)
     add_executable(${TESTNAME} ${ARGN} "Language/Parser/DF/TestDF.cpp")
 
     # link the Google test infrastructure, mocking library
-    target_link_libraries(${TESTNAME} gtest gmock gtest_main)
-    target_link_libraries(${TESTNAME} DLDL_static_library)
+    target_link_libraries(${TESTNAME} PRIVATE gtest gmock gtest_main)
+    target_link_libraries(${TESTNAME} PRIVATE DLDL_static_library)
+    target_link_libraries(${TESTNAME} PRIVATE Deamer::External)
+    target_link_libraries(${TESTNAME} PRIVATE Deamer::Algorithm)
 	target_include_directories(${TESTNAME} PUBLIC ${DLDL_SOURCE_DIR}/include/ ${DLDL_SOURCE_DIR}/extern/googletest)
 
     gtest_discover_tests(${TESTNAME}
