@@ -5,4 +5,8 @@
 
 {{project_name}} = <{{languages}}_LanguageProject>
 
+{{option_compiler_generator_value}} = @<{{option_value_on}}>@
+{{option_value_on}} = @<ON>@
+{{option_value_off}} = @<OFF>@
+
 {{language_directory}} = <add_subdirectory({{language}})>

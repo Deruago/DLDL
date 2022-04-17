@@ -26,10 +26,14 @@ namespace DLDL::filetemplate
 			file_,
 			language_,
 			language_directory_,
+			language_name_,
 			languages_,
 			left_angle_bracket_,
 			left_bracket_,
 			left_curly_bracket_,
+			option_compiler_generator_value_,
+			option_value_off_,
+			option_value_on_,
 			project_name_,
 			right_angle_bracket_,
 			right_bracket_,
@@ -76,6 +80,10 @@ namespace DLDL::filetemplate
 				return "language_directory";
 			}
 
+			case ::DLDL::filetemplate::RootCMakeListsTemplate::Type::language_name_: {
+				return "language_name";
+			}
+
 			case ::DLDL::filetemplate::RootCMakeListsTemplate::Type::languages_: {
 				return "languages";
 			}
@@ -90,6 +98,19 @@ namespace DLDL::filetemplate
 
 			case ::DLDL::filetemplate::RootCMakeListsTemplate::Type::left_curly_bracket_: {
 				return "left_curly_bracket";
+			}
+
+			case ::DLDL::filetemplate::RootCMakeListsTemplate::Type::
+				option_compiler_generator_value_: {
+				return "option_compiler_generator_value";
+			}
+
+			case ::DLDL::filetemplate::RootCMakeListsTemplate::Type::option_value_off_: {
+				return "option_value_off";
+			}
+
+			case ::DLDL::filetemplate::RootCMakeListsTemplate::Type::option_value_on_: {
+				return "option_value_on";
 			}
 
 			case ::DLDL::filetemplate::RootCMakeListsTemplate::Type::project_name_: {
@@ -633,14 +654,21 @@ namespace DLDL::filetemplate
 				type = ::DLDL::filetemplate::RootCMakeListsTemplate::Type::file_;
 				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>(
 					{GenerateVariable("cmake_minimum_required(VERSION 3"), GenerateVariable("."),
-					 GenerateVariable("16)\r\n\r\nproject("),
+					 GenerateVariable("16)\n\nproject("),
 					 GenerateVariable(rootcmakeliststemplate_->project_name_->This()),
 					 GenerateVariable(
-						 "\r\n                      DESCRIPTION \"Project for the language(s): "),
+						 "\n                      DESCRIPTION \"Project for the language(s): "),
 					 GenerateVariable(rootcmakeliststemplate_->languages_->This()),
+					 GenerateVariable("\"\n                      LANGUAGES CXX)\n\noption("),
+					 GenerateVariable(rootcmakeliststemplate_->language_name_->This()),
+					 GenerateVariable("_ENABLE_COMPILER_GENERATOR \"Enable Compiler Generation\" "),
 					 GenerateVariable(
-						 "\"\r\n                      LANGUAGES CXX)\r\n\r\nfind_package(Deamer "
-						 "REQUIRED)\r\n\r\nadd_subdirectory(CompilerGenerator)\r\n"),
+						 rootcmakeliststemplate_->option_compiler_generator_value_->This()),
+					 GenerateVariable(")\nif ("),
+					 GenerateVariable(rootcmakeliststemplate_->language_name_->This()),
+					 GenerateVariable(
+						 "_ENABLE_COMPILER_GENERATOR)\n\tfind_package(Deamer "
+						 "REQUIRED)\n\tadd_subdirectory(CompilerGenerator)\nendif()\n\n"),
 					 GenerateVariable(
 						 rootcmakeliststemplate_->language_directory_->Variable_Field())}));
 				Content_->type = ::DLDL::filetemplate::RootCMakeListsTemplate::Type::Scope;
@@ -781,6 +809,38 @@ namespace DLDL::filetemplate
 			}
 		};
 
+		struct Variable_language_name_ : public VariableScopes
+		{
+			static constexpr auto name = "language_name_";
+
+			Variable_language_name_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::RootCMakeListsTemplate::Type::language_name_;
+			}
+
+			virtual ~Variable_language_name_() override = default;
+
+			Variable_language_name_(RootCMakeListsTemplate* rootcmakeliststemplate_,
+									const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::RootCMakeListsTemplate::Type::language_name_;
+			}
+
+			Variable_language_name_& operator=(const Variable_language_name_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
 		struct Variable_languages_ : public VariableScopes
 		{
 			static constexpr auto name = "languages_";
@@ -896,6 +956,106 @@ namespace DLDL::filetemplate
 			}
 
 			Variable_left_curly_bracket_& operator=(const Variable_left_curly_bracket_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
+		struct Variable_option_compiler_generator_value_ : public VariableScopes
+		{
+			static constexpr auto name = "option_compiler_generator_value_";
+
+			Variable_option_compiler_generator_value_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::RootCMakeListsTemplate::Type::
+					option_compiler_generator_value_;
+			}
+
+			virtual ~Variable_option_compiler_generator_value_() override = default;
+
+			Variable_option_compiler_generator_value_(
+				RootCMakeListsTemplate* rootcmakeliststemplate_,
+				const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::RootCMakeListsTemplate::Type::
+					option_compiler_generator_value_;
+			}
+
+			Variable_option_compiler_generator_value_&
+			operator=(const Variable_option_compiler_generator_value_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
+		struct Variable_option_value_off_ : public VariableScopes
+		{
+			static constexpr auto name = "option_value_off_";
+
+			Variable_option_value_off_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::RootCMakeListsTemplate::Type::option_value_off_;
+			}
+
+			virtual ~Variable_option_value_off_() override = default;
+
+			Variable_option_value_off_(RootCMakeListsTemplate* rootcmakeliststemplate_,
+									   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::RootCMakeListsTemplate::Type::option_value_off_;
+			}
+
+			Variable_option_value_off_& operator=(const Variable_option_value_off_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
+		struct Variable_option_value_on_ : public VariableScopes
+		{
+			static constexpr auto name = "option_value_on_";
+
+			Variable_option_value_on_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::RootCMakeListsTemplate::Type::option_value_on_;
+			}
+
+			virtual ~Variable_option_value_on_() override = default;
+
+			Variable_option_value_on_(RootCMakeListsTemplate* rootcmakeliststemplate_,
+									  const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::RootCMakeListsTemplate::Type::option_value_on_;
+			}
+
+			Variable_option_value_on_& operator=(const Variable_option_value_on_& variable)
 			{
 				if (&variable == this)
 				{
@@ -1049,10 +1209,15 @@ namespace DLDL::filetemplate
 		Variable_file_* file_ = new Variable_file_();
 		Variable_language_* language_ = new Variable_language_();
 		Variable_language_directory_* language_directory_ = new Variable_language_directory_();
+		Variable_language_name_* language_name_ = new Variable_language_name_();
 		Variable_languages_* languages_ = new Variable_languages_();
 		Variable_left_angle_bracket_* left_angle_bracket_ = new Variable_left_angle_bracket_();
 		Variable_left_bracket_* left_bracket_ = new Variable_left_bracket_();
 		Variable_left_curly_bracket_* left_curly_bracket_ = new Variable_left_curly_bracket_();
+		Variable_option_compiler_generator_value_* option_compiler_generator_value_ =
+			new Variable_option_compiler_generator_value_();
+		Variable_option_value_off_* option_value_off_ = new Variable_option_value_off_();
+		Variable_option_value_on_* option_value_on_ = new Variable_option_value_on_();
 		Variable_project_name_* project_name_ = new Variable_project_name_();
 		Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
 		Variable_right_bracket_* right_bracket_ = new Variable_right_bracket_();
@@ -1067,6 +1232,7 @@ namespace DLDL::filetemplate
 				this, std::vector<VariableBase*>({GenerateVariable("add_subdirectory("),
 												  GenerateVariable(language_->This()),
 												  GenerateVariable(")")}));
+			*language_name_ = Variable_language_name_(this, std::vector<VariableBase*>({}));
 			*languages_ = Variable_languages_(this, std::vector<VariableBase*>({}));
 			*left_angle_bracket_ = Variable_left_angle_bracket_(
 				this, std::vector<VariableBase*>({GenerateVariable("<")}));
@@ -1074,6 +1240,12 @@ namespace DLDL::filetemplate
 				Variable_left_bracket_(this, std::vector<VariableBase*>({GenerateVariable("{")}));
 			*left_curly_bracket_ = Variable_left_curly_bracket_(
 				this, std::vector<VariableBase*>({GenerateVariable("(")}));
+			*option_compiler_generator_value_ = Variable_option_compiler_generator_value_(
+				this, std::vector<VariableBase*>({GenerateVariable(option_value_on_->This())}));
+			*option_value_off_ = Variable_option_value_off_(
+				this, std::vector<VariableBase*>({GenerateVariable("OFF")}));
+			*option_value_on_ = Variable_option_value_on_(
+				this, std::vector<VariableBase*>({GenerateVariable("ON")}));
 			*project_name_ = Variable_project_name_(
 				this, std::vector<VariableBase*>({GenerateVariable(languages_->This()),
 												  GenerateVariable("_LanguageProject")}));
@@ -1087,10 +1259,14 @@ namespace DLDL::filetemplate
 			variables_.emplace_back(file_);
 			variables_.emplace_back(language_);
 			variables_.emplace_back(language_directory_);
+			variables_.emplace_back(language_name_);
 			variables_.emplace_back(languages_);
 			variables_.emplace_back(left_angle_bracket_);
 			variables_.emplace_back(left_bracket_);
 			variables_.emplace_back(left_curly_bracket_);
+			variables_.emplace_back(option_compiler_generator_value_);
+			variables_.emplace_back(option_value_off_);
+			variables_.emplace_back(option_value_on_);
 			variables_.emplace_back(project_name_);
 			variables_.emplace_back(right_angle_bracket_);
 			variables_.emplace_back(right_bracket_);

@@ -635,9 +635,9 @@ namespace DLDL::filetemplate
 				*static_cast<VariableBase*>(Content_) = VariableBase(std::vector<VariableBase*>(
 					{GenerateVariable("cmake_minimum_required(VERSION 3"),
 					 GenerateVariable("."),
-					 GenerateVariable("16)\r\n\r\nproject("),
+					 GenerateVariable("16)\n\nproject("),
 					 GenerateVariable(cmakeliststemplate_->project_name_->This()),
-					 GenerateVariable("\r\n                      DESCRIPTION \"Compiler/Ecosystem "
+					 GenerateVariable("\n                      DESCRIPTION \"Compiler/Ecosystem "
 									  "generator for language(s): "),
 					 GenerateVariable(cmakeliststemplate_->languages_comma_->This()),
 					 GenerateVariable("."),
@@ -645,47 +645,51 @@ namespace DLDL::filetemplate
 									  "generation, and DLDL to generate the definitions"),
 					 GenerateVariable("."),
 					 GenerateVariable(
-						 "\"\r\n                      LANGUAGES CXX)\r\n\r\nfind_package(Deamer "
-						 "REQUIRED)\r\n\r\nfile(GLOB_RECURSE SOURCE_LIST \"$"),
+						 "\"\n                      LANGUAGES CXX)\n\nfind_package(Deamer "
+						 "REQUIRED)\n\nfile(GLOB_RECURSE SOURCE_LIST \"$"),
 					 GenerateVariable(cmakeliststemplate_->left_bracket_->This()),
 					 GenerateVariable(cmakeliststemplate_->project_name_->This()),
 					 GenerateVariable("_SOURCE_DIR"),
 					 GenerateVariable("}"),
 					 GenerateVariable("/lib/*"),
 					 GenerateVariable("."),
-					 GenerateVariable("cpp\")\r\n\r\nadd_library("),
+					 GenerateVariable("cpp\")\n\nadd_library("),
 					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
-					 GenerateVariable(" STATIC $"),
+					 GenerateVariable(" STATIC)\ntarget_sources("),
+					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
+					 GenerateVariable(" PRIVATE $"),
 					 GenerateVariable("{"),
 					 GenerateVariable("SOURCE_LIST"),
 					 GenerateVariable("}"),
-					 GenerateVariable(")\r\n\r\ntarget_include_directories("),
+					 GenerateVariable(")\n\ntarget_include_directories("),
 					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
 					 GenerateVariable(" PUBLIC \"$"),
 					 GenerateVariable(cmakeliststemplate_->left_bracket_->This()),
 					 GenerateVariable(cmakeliststemplate_->project_name_->This()),
 					 GenerateVariable("_SOURCE_DIR"),
 					 GenerateVariable("}"),
-					 GenerateVariable("/include\")\r\ntarget_link_libraries("),
+					 GenerateVariable("/include\")\ntarget_link_libraries("),
 					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
-					 GenerateVariable(" PUBLIC Deamer)\r\ntarget_compile_features("),
+					 GenerateVariable(" PRIVATE Deamer::Deamer)\ntarget_compile_features("),
 					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
-					 GenerateVariable(" PUBLIC cxx_std_17)\r\nset_target_properties("),
+					 GenerateVariable(" PUBLIC cxx_std_17)\nset_target_properties("),
 					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
-					 GenerateVariable(" PROPERTIES LINKER_LANGUAGE CXX)\r\n\r\nadd_executable("),
+					 GenerateVariable(" PROPERTIES LINKER_LANGUAGE CXX)\n\nadd_executable("),
 					 GenerateVariable(cmakeliststemplate_->language_generation_target_->This()),
-					 GenerateVariable(" \"$"),
+					 GenerateVariable(")\ntarget_sources("),
+					 GenerateVariable(cmakeliststemplate_->language_generation_target_->This()),
+					 GenerateVariable(" PRIVATE \"$"),
 					 GenerateVariable(cmakeliststemplate_->left_bracket_->This()),
 					 GenerateVariable(cmakeliststemplate_->project_name_->This()),
 					 GenerateVariable("_SOURCE_DIR"),
 					 GenerateVariable("}"),
 					 GenerateVariable("/main"),
 					 GenerateVariable("."),
-					 GenerateVariable("cpp\")\r\ntarget_link_libraries("),
+					 GenerateVariable("cpp\")\ntarget_link_libraries("),
 					 GenerateVariable(cmakeliststemplate_->language_generation_target_->This()),
-					 GenerateVariable(" PUBLIC "),
+					 GenerateVariable(" PRIVATE "),
 					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
-					 GenerateVariable(")\r\n")}));
+					 GenerateVariable(")\n")}));
 				Content_->type = ::DLDL::filetemplate::CMakeListsTemplate::Type::Scope;
 
 				*static_cast<VariableBase*>(Class_postfix_) =
@@ -1150,7 +1154,7 @@ namespace DLDL::filetemplate
 			*language_static_library_target_ = Variable_language_static_library_target_(
 				this, std::vector<VariableBase*>(
 						  {GenerateVariable(languages_->This()),
-						   GenerateVariable("_CompilerGenerator_static_library")}));
+						   GenerateVariable("_CompilerGenerator_implementation_detail")}));
 			*languages_ = Variable_languages_(this, std::vector<VariableBase*>({}));
 			*languages_comma_ = Variable_languages_comma_(this, std::vector<VariableBase*>({}));
 			*left_angle_bracket_ = Variable_left_angle_bracket_(

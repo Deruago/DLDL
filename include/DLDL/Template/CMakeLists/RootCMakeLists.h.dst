@@ -4,7 +4,10 @@ project({{project_name}}
                       DESCRIPTION "Project for the language(s): {{languages}}"
                       LANGUAGES CXX)
 
-find_package(Deamer REQUIRED)
+option({{language_name}}_ENABLE_COMPILER_GENERATOR "Enable Compiler Generation" {{option_compiler_generator_value}})
+if ({{language_name}}_ENABLE_COMPILER_GENERATOR)
+	find_package(Deamer REQUIRED)
+	add_subdirectory(CompilerGenerator)
+endif()
 
-add_subdirectory(CompilerGenerator)
 {{language_directory.Variable_Field}}
