@@ -19,7 +19,7 @@ public:
 
 TEST_F(TestGroup, Bnf_CorrectlyGeneratesProductionRules)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "function_type VARNAME LEFT_PARAN arguments RIGHT_PARAN";
 	auto* const result = parser.Parse(text);
 
@@ -49,7 +49,7 @@ TEST_F(TestGroup, Bnf_CorrectlyGeneratesProductionRules)
 
 TEST_F(TestGroup, BnfEmpty_CorrectlyGeneratesEmptyProductionRule)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "EMPTY EMPTY EPSILON";
 	auto* const result = parser.Parse(text);
 
@@ -73,7 +73,7 @@ TEST_F(TestGroup, BnfEmpty_CorrectlyGeneratesEmptyProductionRule)
 
 TEST_F(TestGroup, EbnfSingleOptional_CorrectlyGeneratesProductionRules)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "[VARNAME]";
 	auto* const result = parser.Parse(text);
 
@@ -100,7 +100,7 @@ TEST_F(TestGroup, EbnfSingleOptional_CorrectlyGeneratesProductionRules)
 
 TEST_F(TestGroup, EbnfSingleOptional_RedundantOptionalNotation_CorrectlyGeneratesProductionRules)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "[VARNAME]?";
 	auto* const result = parser.Parse(text);
 
@@ -127,7 +127,7 @@ TEST_F(TestGroup, EbnfSingleOptional_RedundantOptionalNotation_CorrectlyGenerate
 
 TEST_F(TestGroup, EbnfDoubleOptional_CorrectlyGeneratesProductionRules)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "[VARNAME] [LEFT_PARAN]";
 	auto* const result = parser.Parse(text);
 
@@ -161,7 +161,7 @@ TEST_F(TestGroup, EbnfDoubleOptional_CorrectlyGeneratesProductionRules)
 
 TEST_F(TestGroup, EbnfDoubleOptionalWithStandardTerminal_CorrectlyGeneratesProductionRules)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "[VARNAME] ALWAYS [LEFT_PARAN]";
 	auto* const result = parser.Parse(text);
 
@@ -200,7 +200,7 @@ TEST_F(TestGroup, EbnfDoubleOptionalWithStandardTerminal_CorrectlyGeneratesProdu
 
 TEST_F(TestGroup, EbnfSingleOr_CorrectlyGeneratesProductionRules)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "(VARNAME|TYPENAME)";
 	auto* const result = parser.Parse(text);
 
@@ -228,7 +228,7 @@ TEST_F(TestGroup, EbnfSingleOr_CorrectlyGeneratesProductionRules)
 
 TEST_F(TestGroup, EbnfDoubleOr_CorrectlyGeneratesProductionRules)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "(VARNAME|TYPENAME|CLASSNAME)";
 	auto* const result = parser.Parse(text);
 
@@ -258,7 +258,7 @@ TEST_F(TestGroup, EbnfDoubleOr_CorrectlyGeneratesProductionRules)
 
 TEST_F(TestGroup, EbnfOptionalDoubleOr_CorrectlyGeneratesProductionRules)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "(VARNAME|TYPENAME|CLASSNAME)?";
 	auto* const result = parser.Parse(text);
 
@@ -289,7 +289,7 @@ TEST_F(TestGroup, EbnfOptionalDoubleOr_CorrectlyGeneratesProductionRules)
 
 TEST_F(TestGroup, EbnfOptionalDoubleOrWithNestedGroups_CorrectlyGeneratesProductionRules)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text =
 		"(VARNAME|(TYPENAME LEFT_ANGLE_BRACKET RIGHT_ANGLE_BRACKET)|(CLASSNAME LEFT_PARAN "
 		"RIGHT_PARAN))?";
@@ -330,7 +330,7 @@ TEST_F(TestGroup, EbnfOptionalDoubleOrWithNestedGroups_CorrectlyGeneratesProduct
 TEST_F(TestGroup,
 	   EbnfOptionalDoubleOrWithNestedGroupsWithNestedOrs_CorrectlyGeneratesProductionRules)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text =
 		"(VARNAME|(TYPENAME ((LEFT_ANGLE_BRACKET RIGHT_ANGLE_BRACKET)|(LEFT_PARAN "
 		"RIGHT_PARAN)))|(CLASSNAME LEFT_PARAN "
@@ -376,7 +376,7 @@ TEST_F(TestGroup,
 
 TEST_F(TestGroup, EbnfSingleStar_CorrectlyGeneratesProductionRules)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "VARNAME*";
 	auto* const result = parser.Parse(text);
 
@@ -411,7 +411,7 @@ TEST_F(TestGroup, EbnfSingleStar_CorrectlyGeneratesProductionRules)
 
 TEST_F(TestGroup, EbnfSinglePlus_CorrectlyGeneratesProductionRules)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "VARNAME+";
 	auto* const result = parser.Parse(text);
 

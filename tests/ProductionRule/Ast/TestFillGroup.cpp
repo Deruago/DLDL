@@ -19,7 +19,7 @@ public:
 
 TEST_F(TestFillGroup, GetGroupOfNothingPr_ShouldReturnEmptyGroup)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "";
 	auto* const result = parser.Parse(text);
 
@@ -39,7 +39,7 @@ TEST_F(TestFillGroup, GetGroupOfNothingPr_ShouldReturnEmptyGroup)
 
 TEST_F(TestFillGroup, GetGroupOfEMPTYPr_ShouldReturnEmptyGroup)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "EMPTY";
 	auto* const result = parser.Parse(text);
 
@@ -59,7 +59,7 @@ TEST_F(TestFillGroup, GetGroupOfEMPTYPr_ShouldReturnEmptyGroup)
 
 TEST_F(TestFillGroup, GetGroupOfEPSILONPr_ShouldReturnEmptyGroup)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "EPSILON";
 	auto* const result = parser.Parse(text);
 
@@ -79,7 +79,7 @@ TEST_F(TestFillGroup, GetGroupOfEPSILONPr_ShouldReturnEmptyGroup)
 
 TEST_F(TestFillGroup, GetGroupOfBnfPr_ShouldCorrectlyGiveA_SingleGroupWith5SubGroups)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "function_type VARNAME LEFT_PARAN arguments RIGHT_PARAN";
 	auto* const result = parser.Parse(text);
 
@@ -101,7 +101,7 @@ TEST_F(
 	TestFillGroup,
 	GetGroupOfEbnfPrWithOptionalPart_ShouldCorrectlyGiveA_SingleGroupWith4SubGroups_OptionalPartHas2SubGroups)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "[function_type VARNAME] LEFT_PARAN arguments RIGHT_PARAN";
 	auto* const result = parser.Parse(text);
 
@@ -124,7 +124,7 @@ TEST_F(
 	TestFillGroup,
 	GetGroupOfEbnfPrWithOptionalPart_ShouldCorrectlyGiveA_SingleGroupWith5SubGroups_OptionalPartHas1SubGroups)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "[function_type] [VARNAME] LEFT_PARAN arguments RIGHT_PARAN";
 	auto* const result = parser.Parse(text);
 
@@ -146,7 +146,7 @@ TEST_F(
 
 TEST_F(TestFillGroup, EbnfOrGroup_ShouldCorrectlyGiveSubGroups)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "(function_type|VARNAME) LEFT_PARAN arguments RIGHT_PARAN";
 	auto* const result = parser.Parse(text);
 
@@ -168,7 +168,7 @@ TEST_F(TestFillGroup, EbnfOrGroup_ShouldCorrectlyGiveSubGroups)
 
 TEST_F(TestFillGroup, EbnfOrGroupMultiple_ShouldCorrectlyGiveSubGroups)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "(function_type|VARNAME|LEFT_PARAN) arguments RIGHT_PARAN";
 	auto* const result = parser.Parse(text);
 
@@ -193,7 +193,7 @@ TEST_F(TestFillGroup, EbnfOrGroupMultiple_ShouldCorrectlyGiveSubGroups)
 
 TEST_F(TestFillGroup, EbnfOrGroupWithNestedGroups_ShouldCorrectlyGiveSubGroups)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "((function_type VARNAME)|(LEFT_PARAN arguments)) RIGHT_PARAN";
 	auto* const result = parser.Parse(text);
 
@@ -227,7 +227,7 @@ TEST_F(TestFillGroup, EbnfOrGroupWithNestedGroups_ShouldCorrectlyGiveSubGroups)
 
 TEST_F(TestFillGroup, EbnfNestedGroups_ShouldCorrectlyGiveSubGroups)
 {
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "(function_type VARNAME) (LEFT_PARAN arguments) RIGHT_PARAN";
 	auto* const result = parser.Parse(text);
 

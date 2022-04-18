@@ -202,7 +202,7 @@ namespace DLDL_LDOSTRUCT::ast::listener::user
 				Ldo->GetLDOType() == DLDL::ir::LDOType::Struct)
 			{
 				auto df = DLDL_LPDDEF_DF::ast::listener::user::LpdDefDf();
-				const auto dfParser = DLDL_LPDDEF_DF::parser::Parser();
+				const auto dfParser = DLDL_LPDDEF_DF::bison::parser::Parser();
 				const std::unique_ptr<::deamer::external::cpp::ast::Tree> ast(
 					dfParser.Parse(ConstructFormattedLines(node)));
 				if (ast == nullptr)
@@ -217,7 +217,7 @@ namespace DLDL_LDOSTRUCT::ast::listener::user
 			else if (Ldo->GetLDOType() == DLDL::ir::LDOType::Enumeration)
 			{
 				auto ef = DLDL_LPDDEF_EF::ast::listener::user::LpdDefEf();
-				const auto efParser = DLDL_LPDDEF_EF::parser::Parser();
+				const auto efParser = DLDL_LPDDEF_EF::bison::parser::Parser();
 				const std::unique_ptr<::deamer::external::cpp::ast::Tree> ast(
 					efParser.Parse(ConstructFormattedLines(node)));
 				if (ast == nullptr)

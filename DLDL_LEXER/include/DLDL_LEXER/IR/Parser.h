@@ -19,7 +19,7 @@ namespace DLDL::ir::lexer
 	public:
 		DLDL::ir::IR* GetIR(std::string text) override
 		{
-			const auto parser = DLDL_LEXER::parser::Parser();
+			const auto parser = DLDL_LEXER::bison::parser::Parser();
 			auto tree = std::unique_ptr<deamer::external::cpp::ast::Tree>(parser.Parse(text));
 			if (tree == nullptr || tree->GetStartNode() == nullptr)
 			{

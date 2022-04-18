@@ -178,7 +178,7 @@ DLDL::ir::Grammar::ConvertToProductionRule(std::string text, std::string nonterm
 
 	std::vector<std::string> tokens;
 
-	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	const auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	const auto* const ast = parser.Parse(text);
 	if (ast == nullptr || ast->GetStartNode() == nullptr)
 	{

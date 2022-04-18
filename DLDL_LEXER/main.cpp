@@ -20,7 +20,7 @@ std::string ReadInFile(const std::string& file)
 
 int main()
 {
-	const auto parser = DLDL_LEXER::parser::Parser();
+	const auto parser = DLDL_LEXER::bison::parser::Parser();
 	auto* tree = parser.Parse(ReadInFile("Lexicon.dldl"));
 
 	auto lexiconListener = DLDL_LEXER::ast::listener::user::Lexicon();

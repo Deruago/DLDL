@@ -20,7 +20,7 @@ std::string ReadInFile(const std::string& file)
 
 int main()
 {
-	const auto parser = DLDL_GRAMMAR::parser::Parser();
+	const auto parser = DLDL_GRAMMAR::bison::parser::Parser();
 	auto* tree = parser.Parse(ReadInFile("Grammar.dldl"));
 
 	auto grammarListener = DLDL_GRAMMAR::ast::listener::user::Grammar();

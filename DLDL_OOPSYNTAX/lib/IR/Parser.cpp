@@ -8,7 +8,7 @@ DLDL::ir::oopsyntax::Parser::Parser(::deamer::file::tool::OSType os_)
 
 DLDL::ir::IR* DLDL::ir::oopsyntax::Parser::GetIR(std::string text)
 {
-	const auto parser = DLDL_OOPSYNTAX::parser::Parser();
+	const auto parser = DLDL_OOPSYNTAX::bison::parser::Parser();
 	auto tree = std::unique_ptr<deamer::external::cpp::ast::Tree>(parser.Parse(text));
 	if (tree == nullptr || tree->GetStartNode() == nullptr)
 	{

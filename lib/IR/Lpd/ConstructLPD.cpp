@@ -81,7 +81,7 @@ std::unique_ptr<DLDL::ir::LpdDef> DLDL::ir::ConstructLPD::ParseLpdDirectory(cons
 
 	std::string lpdDefinition = file->FileContent();
 
-	auto parser = DLDL_LPDDEF::parser::Parser();
+	auto parser = DLDL_LPDDEF::bison::parser::Parser();
 	std::unique_ptr<::deamer::external::cpp::ast::Tree> ast(parser.Parse(lpdDefinition));
 	if (ast == nullptr)
 	{
@@ -123,7 +123,7 @@ std::unique_ptr<DLDL::ir::LDO>
 DLDL::ir::ConstructLPD::ParseLdo(const deamer::file::tool::File& file)
 {
 	const auto content = file.FileContent();
-	const auto parser = DLDL_LDOSTRUCT::parser::Parser();
+	const auto parser = DLDL_LDOSTRUCT::bison::parser::Parser();
 	const std::unique_ptr<::deamer::external::cpp::ast::Tree> ast(parser.Parse(content));
 	if (ast == nullptr)
 	{

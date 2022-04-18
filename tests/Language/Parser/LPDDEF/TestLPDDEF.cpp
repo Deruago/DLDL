@@ -11,7 +11,7 @@ protected:
 	virtual ~TestLPDDEF() = default;
 
 public:
-	DLDL_LPDDEF::parser::Parser parser = DLDL_LPDDEF::parser::Parser();
+	DLDL_LPDDEF::bison::parser::Parser parser = DLDL_LPDDEF::bison::parser::Parser();
 };
 
 TEST_F(TestLPDDEF, EmptyDefinition_ShouldCorrectlyParseEmptyDefinition)

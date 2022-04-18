@@ -205,7 +205,7 @@ namespace DLDL_LPDDEF::ast::listener::user
 		void ParseData(const node::argument* node)
 		{
 			auto df = DLDL_LPDDEF_DF::ast::listener::user::LpdDefDf();
-			const auto dfParser = DLDL_LPDDEF_DF::parser::Parser();
+			const auto dfParser = DLDL_LPDDEF_DF::bison::parser::Parser();
 			const std::unique_ptr<::deamer::external::cpp::ast::Tree> ast(
 				dfParser.Parse(ConstructFormattedLines(node)));
 			if (ast == nullptr)

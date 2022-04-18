@@ -57,7 +57,7 @@ namespace DLDL::ir::generation
 				return GetDefaultIR();
 			}
 
-			const auto parser = DLDL_GENERATION::parser::Parser();
+			const auto parser = DLDL_GENERATION::bison::parser::Parser();
 			auto tree = std::unique_ptr<deamer::external::cpp::ast::Tree>(parser.Parse(text));
 			if (tree == nullptr || tree->GetStartNode() == nullptr)
 			{

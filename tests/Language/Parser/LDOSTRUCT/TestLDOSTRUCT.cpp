@@ -11,7 +11,7 @@ protected:
 	virtual ~TestLDOSTRUCT() = default;
 
 public:
-	DLDL_LDOSTRUCT::parser::Parser parser = DLDL_LDOSTRUCT::parser::Parser();
+	DLDL_LDOSTRUCT::bison::parser::Parser parser = DLDL_LDOSTRUCT::bison::parser::Parser();
 };
 
 TEST_F(TestLDOSTRUCT, EmptyDefinition_ShouldCorrectlyParseEmptyDefinition)

@@ -84,7 +84,7 @@ public:
 TEST_F(TestProductionRuleParser,
 	   ParseBNF_ShouldCorrectlyGiveTheVariousTerminalsAndNonterminalsInProductionRule)
 {
-	auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "function_type VARNAME LEFT_PARAN arguments RIGHT_PARAN";
 	auto* const result = parser.Parse(text);
 
@@ -106,7 +106,7 @@ TEST_F(TestProductionRuleParser,
 
 TEST_F(TestProductionRuleParser, ParseEBNF_OptionalGroup_ShouldCorrectlyGiveTheOptionalGroup)
 {
-	auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "[function_type] VARNAME [LEFT_PARAN] arguments? [RIGHT_PARAN]?";
 	auto* const result = parser.Parse(text);
 
@@ -135,7 +135,7 @@ TEST_F(
 	TestProductionRuleParser,
 	ParseBNFWithSpacesInFront_ShouldCorrectlyGiveTheVariousTerminalsAndNonterminalsInProductionRule)
 {
-	auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text =
 		"                   function_type VARNAME LEFT_PARAN arguments RIGHT_PARAN";
 	auto* const result = parser.Parse(text);
@@ -160,7 +160,7 @@ TEST_F(
 	TestProductionRuleParser,
 	ParseBNFWithTabsInFront_ShouldCorrectlyGiveTheVariousTerminalsAndNonterminalsInProductionRule)
 {
-	auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text = "				function_type VARNAME LEFT_PARAN arguments RIGHT_PARAN";
 	auto* const result = parser.Parse(text);
 
@@ -184,7 +184,7 @@ TEST_F(
 	TestProductionRuleParser,
 	ParseBNFWithSpacesAndTabsInFront_ShouldCorrectlyGiveTheVariousTerminalsAndNonterminalsInProductionRule)
 {
-	auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text =
 		"						  function_type VARNAME LEFT_PARAN arguments RIGHT_PARAN";
 	auto* const result = parser.Parse(text);
@@ -209,7 +209,7 @@ TEST_F(
 	TestProductionRuleParser,
 	ParseBNFWithTabsAndSpacesInBetween_ShouldCorrectlyGiveTheVariousTerminalsAndNonterminalsInProductionRule)
 {
-	auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text =
 		"function_type VARNAME		LEFT_PARAN  arguments			"
 		"RIGHT_PARAN";
@@ -235,7 +235,7 @@ TEST_F(
 	TestProductionRuleParser,
 	ParseBNFWithSpacesAndTabsAfter_ShouldCorrectlyGiveTheVariousTerminalsAndNonterminalsInProductionRule)
 {
-	auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::parser::Parser();
+	auto parser = DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser();
 	constexpr auto text =
 		"function_type VARNAME LEFT_PARAN arguments RIGHT_PARAN								";
 	auto* const result = parser.Parse(text);
