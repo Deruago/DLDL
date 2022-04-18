@@ -2358,7 +2358,7 @@ void DLDL_LPDDEF_DFerror(const char* s)
 	std::cout << "Syntax error on line: " << s << '\n';
 }
 
-deamer::external::cpp::ast::Tree* DLDL_LPDDEF_DF::parser::Parser::Parse(const std::string& text) const
+deamer::external::cpp::ast::Tree* DLDL_LPDDEF_DF::bison::parser::Parser::Parse(const std::string& text) const
 {
 	outputTree = nullptr;
 	YY_BUFFER_STATE buf;

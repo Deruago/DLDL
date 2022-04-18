@@ -18,7 +18,7 @@ set_target_properties(DLDL_static_library PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(DLDL_static_library PUBLIC 
 		$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
-target_link_libraries(DLDL_static_library PRIVATE Deamer::External Deamer::Algorithm)
+target_link_libraries(DLDL_static_library PUBLIC Deamer::External Deamer::Algorithm)
 
 
 function(DLDL_root_library_extend projectname extern_directory include_directory source_files)

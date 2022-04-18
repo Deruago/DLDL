@@ -35,7 +35,7 @@ int main(int argc, const char* argv[])
 		std::cout << text << "\n";
 		std::cout << "\n";
 
-		auto parser = DLDL_GENERATION::parser::Parser();
+		auto parser = DLDL_GENERATION::bison::parser::Parser();
 		auto* ast = parser.Parse(text);
 		if (ast == nullptr)
 		{

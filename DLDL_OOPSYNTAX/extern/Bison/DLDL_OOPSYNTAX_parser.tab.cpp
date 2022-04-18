@@ -2163,7 +2163,7 @@ void DLDL_OOPSYNTAXerror(const char* s)
 	std::cout << "Syntax error on line: " << s << '\n';
 }
 
-deamer::external::cpp::ast::Tree* DLDL_OOPSYNTAX::parser::Parser::Parse(const std::string& text) const
+deamer::external::cpp::ast::Tree* DLDL_OOPSYNTAX::bison::parser::Parser::Parse(const std::string& text) const
 {
 	outputTree = nullptr;
 	YY_BUFFER_STATE buf;

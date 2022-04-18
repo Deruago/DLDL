@@ -35,9 +35,9 @@ int main(int argc, const char* argv[])
 		std::cout << text << "\n";
 		std::cout << "\n";
 
-		auto lexer = DLDL_LDOSTRUCT::lexer::Lexer();
+		auto lexer = DLDL_LDOSTRUCT::flex::lexer::Lexer();
 		auto tokens = lexer.Tokenize(text);
-		DLDL_LDOSTRUCT::parser::Parser();
+		DLDL_LDOSTRUCT::bison::parser::Parser();
 
 		std::cout << "Tokens:\n";
 		for (auto token : tokens)

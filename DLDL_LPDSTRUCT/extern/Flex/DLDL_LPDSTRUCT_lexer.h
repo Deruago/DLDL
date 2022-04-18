@@ -701,7 +701,7 @@ extern int yylex (void);
 #undef yyTABLES_NAME
 #endif
 
-#line 62 "./DLDL_LPDSTRUCT_lexer.l"
+#line 73 "./DLDL_LPDSTRUCT_lexer.l"
 
 
 #line 708 "./DLDL_LPDSTRUCT_lexer.h"

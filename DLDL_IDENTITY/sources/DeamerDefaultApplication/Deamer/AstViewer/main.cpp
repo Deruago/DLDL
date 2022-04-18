@@ -35,7 +35,7 @@ int main(int argc, const char* argv[])
 		std::cout << text << "\n";
 		std::cout << "\n";
 
-		auto parser = DLDL_IDENTITY::parser::Parser();
+		auto parser = DLDL_IDENTITY::bison::parser::Parser();
 		auto* ast = parser.Parse(text);
 		if (ast == nullptr)
 		{

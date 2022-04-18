@@ -701,7 +701,7 @@ extern int yylex (void);
 #undef yyTABLES_NAME
 #endif
 
-#line 40 "./DLDL_ASSOCIATIVITY_lexer.l"
+#line 51 "./DLDL_ASSOCIATIVITY_lexer.l"
 
 
 #line 708 "./DLDL_ASSOCIATIVITY_lexer.h"

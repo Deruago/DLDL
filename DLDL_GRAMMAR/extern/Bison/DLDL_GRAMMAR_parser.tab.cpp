@@ -2038,7 +2038,7 @@ void DLDL_GRAMMARerror(const char* s)
 	std::cout << "Syntax error on line: " << s << '\n';
 }
 
-deamer::external::cpp::ast::Tree* DLDL_GRAMMAR::parser::Parser::Parse(const std::string& text) const
+deamer::external::cpp::ast::Tree* DLDL_GRAMMAR::bison::parser::Parser::Parse(const std::string& text) const
 {
 	outputTree = nullptr;
 	YY_BUFFER_STATE buf;

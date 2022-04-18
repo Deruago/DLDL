@@ -122,7 +122,7 @@ void DLDL_IDENTITYerror(const char* s)
 	std::cout << "Syntax error on line: " << s << '\n';
 }
 
-deamer::external::cpp::ast::Tree* DLDL_IDENTITY::parser::Parser::Parse(const std::string& text) const
+deamer::external::cpp::ast::Tree* DLDL_IDENTITY::bison::parser::Parser::Parse(const std::string& text) const
 {
 	outputTree = nullptr;
 	YY_BUFFER_STATE buf;

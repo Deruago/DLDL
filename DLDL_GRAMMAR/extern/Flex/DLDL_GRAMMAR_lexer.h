@@ -701,7 +701,7 @@ extern int yylex (void);
 #undef yyTABLES_NAME
 #endif
 
-#line 68 "./DLDL_GRAMMAR_lexer.l"
+#line 79 "./DLDL_GRAMMAR_lexer.l"
 
 
 #line 708 "./DLDL_GRAMMAR_lexer.h"
