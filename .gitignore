@@ -7,3 +7,4 @@ CppProperties.json
 *out/*
 *build*/*
 /CMakeSettings.json
+/Folder.DotSettings.user
