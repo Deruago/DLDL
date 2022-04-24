@@ -670,7 +670,7 @@ namespace DLDL::filetemplate
 					 GenerateVariable("}"),
 					 GenerateVariable("/include\")\ntarget_link_libraries("),
 					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
-					 GenerateVariable(" PRIVATE Deamer::Deamer)\ntarget_compile_features("),
+					 GenerateVariable(" PUBLIC Deamer::Deamer)\ntarget_compile_features("),
 					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
 					 GenerateVariable(" PUBLIC cxx_std_17)\nset_target_properties("),
 					 GenerateVariable(cmakeliststemplate_->language_static_library_target_->This()),
