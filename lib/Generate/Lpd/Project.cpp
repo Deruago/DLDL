@@ -79,7 +79,7 @@ void DLDL::generate::lpd::Project::GenerateMainLpd(LPDDirectory& directory) cons
 	mainTemplate->lpd_ctor_member_->variable_field_separator_->Set("");
 	mainSourceTemplate->lpd_ctor_member_->variable_field_separator_->Set("");
 	mainSourceTemplate->lpd_ctor_member_assignment_->variable_field_separator_->Set("");
-	for (auto& lpd : lpdProject->GetLPDs())
+	for (const auto& lpd : lpdProject->GetLPDs())
 	{
 		if (!lpd->Generate)
 		{

@@ -31,7 +31,7 @@ void DLDL::ir::ConstructLPD::Construct(::deamer::file::tool::OSType os)
 		return;
 	}
 
-	for (auto lpd : loader.GetDirectDirectories())
+	for (const auto& lpd : loader.GetDirectDirectories())
 	{
 		auto lpdDef = ParseLpdDirectory(relativeDirectoryToLpdDefinitions + lpd + "/");
 		if (lpdDef == nullptr)
@@ -44,7 +44,7 @@ void DLDL::ir::ConstructLPD::Construct(::deamer::file::tool::OSType os)
 		auto lpdLoader =
 			filesystem::LoadFilesystem(lpdDir, relativeDirectoryToLpdDefinitions + lpd + "/");
 		lpdLoader.DirectLoad();
-		for (auto lpdSubDir : lpdLoader.GetDirectDirectories())
+		for (const auto& lpdSubDir : lpdLoader.GetDirectDirectories())
 		{
 			if (lpdSubDir == "LDO")
 			{
@@ -75,7 +75,7 @@ std::unique_ptr<DLDL::ir::LpdDef> DLDL::ir::ConstructLPD::ParseLpdDirectory(cons
 
 	if (file == files.end())
 	{
-		std::cout << "No such file\n";
+		std::cout << lpd << ": No lpddef.dldl found in LPD directory.\n";
 		return nullptr; // error no such file
 	}
 
@@ -85,7 +85,7 @@ std::unique_ptr<DLDL::ir::LpdDef> DLDL::ir::ConstructLPD::ParseLpdDirectory(cons
 	std::unique_ptr<::deamer::external::cpp::ast::Tree> ast(parser.Parse(lpdDefinition));
 	if (ast == nullptr)
 	{
-		std::cout << "Syntax error\n";
+		std::cout << lpd << ": Syntax error in lpddef.dldl\n";
 		return nullptr; // error the content was not following the grammar
 	}
 	auto startNode = ast->GetStartNode();
@@ -127,6 +127,8 @@ DLDL::ir::ConstructLPD::ParseLdo(const deamer::file::tool::File& file)
 	const std::unique_ptr<::deamer::external::cpp::ast::Tree> ast(parser.Parse(content));
 	if (ast == nullptr)
 	{
+		std::cout << file.GetFilename() << "." << file.GetExtension()
+				  << ": Syntax Error encountered!\n";
 		return nullptr; // some syntax error.
 	}
 

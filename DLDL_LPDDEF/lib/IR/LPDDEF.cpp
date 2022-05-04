@@ -443,6 +443,16 @@ std::string DLDL::ir::LpdDef::GetObjectTypeName() const
 	return "deamer::language::type::definition::property::main::" + GetName();
 }
 
+void DLDL::ir::LPDProject::AddLPD(std::unique_ptr<LpdDef> LPD)
+{
+	LPDs.push_back(std::move(LPD));
+}
+
+const std::vector<std::unique_ptr<DLDL::ir::LpdDef>>& DLDL::ir::LPDProject::GetLPDs() const
+{
+	return LPDs;
+}
+
 void DLDL::ir::LpdDef::SetLDOs(std::vector<std::unique_ptr<LDO>> ldos)
 {
 	LDOs = std::move(ldos);

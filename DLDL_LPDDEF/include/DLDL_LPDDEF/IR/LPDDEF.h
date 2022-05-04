@@ -155,15 +155,9 @@ namespace DLDL::ir
 	{
 		std::vector<std::unique_ptr<LpdDef>> LPDs;
 
-		void AddLPD(std::unique_ptr<LpdDef> LPD)
-		{
-			LPDs.push_back(std::move(LPD));
-		}
+		void AddLPD(std::unique_ptr<LpdDef> LPD);
 
-		const std::vector<std::unique_ptr<LpdDef>>& GetLPDs() const
-		{
-			return LPDs;
-		}
+		const std::vector<std::unique_ptr<LpdDef>>& GetLPDs() const;
 	};
 }
 
