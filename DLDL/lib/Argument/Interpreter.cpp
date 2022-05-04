@@ -41,13 +41,13 @@ DLDL::argument::Interpreter::GenerateRootCMakeLists(std::vector<DLDL::ir::Langua
 		generator.language_directory_->ExpandVariableField();
 	}
 	if (parser.IsArgumentSet(Type::default_value_compiler_generator) &&
-		parser.GetArgument(Type::default_value_compiler_generator).value == "OFF")
+		parser.GetArgument(Type::default_value_compiler_generator).value == "ON")
 	{
-		generator.option_compiler_generator_value_->Set(generator.option_value_off_);
+		generator.option_compiler_generator_value_->Set(generator.option_value_on_);
 	}
 	else
 	{
-		generator.option_compiler_generator_value_->Set(generator.option_value_on_);
+		generator.option_compiler_generator_value_->Set(generator.option_value_off_);
 	}
 	if (!languages.empty())
 	{
@@ -1032,7 +1032,9 @@ void DLDL::argument::Interpreter::AutoCompile()
 		builder.RemoveDirectory("./" + BuildMap)
 			.CreateDirectory("./" + BuildMap)
 			.ChangeDirectory("./" + BuildMap)
-			.CrossPlatformCommand("cmake .. -D" + language_name + "_ENABLE_COMPILER_GENERATOR=ON")
+			.CrossPlatformCommand("cmake .. -D" + language_name +
+								  "_ENABLE_COMPILER_GENERATOR=ON -D" + language_name +
+								  "_ENABLE_LANGUAGE_BUILD=OFF")
 			.CrossPlatformCommand("cmake --build . --target " +
 								  projectGeneration->GetLanguageTarget())
 			.ChangeDirectory("../"); // should calculate difference
