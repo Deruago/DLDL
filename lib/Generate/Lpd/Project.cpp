@@ -546,14 +546,16 @@ void DLDL::generate::lpd::Project::GenerateMainLdo(LPDDirectory& directory) cons
 				{
 					if (ldoMemberPtr == nullptr && lpd == nullptr)
 					{
-						std::cout << "Unresolved LdoMemberPtr: " + ldoMember.name +
+						std::cout << "Unresolved LdoMemberPtr: " + ldoMember.type + " " +
+										 ldoMember.name + " In LDO: " + ldo->GetName() +  
 											   " In LPD: Unknown\n";
 						continue;
 					}
 					if (ldoMemberPtr == nullptr)
 					{
-						std::cout << "Unresolved LdoMemberPtr: "
-											   + ldoMember.name + " In LPD: " + lpd->GetName()
+						std::cout << "Unresolved LdoMemberPtr: " + ldoMember.type + " " +
+										 ldoMember.name + " In LDO: " + ldo->GetName() +
+										 " In LPD: " + lpd->GetName()
 											   + "\n";
 						continue;
 					}
