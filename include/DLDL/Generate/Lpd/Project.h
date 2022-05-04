@@ -48,10 +48,10 @@ namespace DLDL::generate::lpd
 		};
 
 	private:
-		std::unique_ptr<ir::LPDProject>& lpdProject;
+		ir::LPDProject* lpdProject;
 
 	public:
-		Project(std::unique_ptr<ir::LPDProject>& lpdProject_);
+		Project(ir::LPDProject* lpdProject_);
 		~Project() = default;
 
 	public:

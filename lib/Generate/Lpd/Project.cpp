@@ -49,7 +49,7 @@ static std::string Lower(std::string str)
 	return str;
 }
 
-DLDL::generate::lpd::Project::Project(std::unique_ptr<ir::LPDProject>& lpdProject_)
+DLDL::generate::lpd::Project::Project(ir::LPDProject* lpdProject_)
 	: lpdProject(lpdProject_)
 {
 }

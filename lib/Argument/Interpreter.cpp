@@ -236,7 +236,7 @@ std::size_t DLDL::argument::Interpreter::GenerateLpd()
 	auto constructLpd = ir::ConstructLPD(lpdDirectoryLocation);
 	constructLpd.Construct(os);
 	lpdProject = constructLpd.GetLPDProject();
-	auto projectGen = DLDL::generate::lpd::Project(lpdProject);
+	auto projectGen = DLDL::generate::lpd::Project(lpdProject.get());
 	const auto projectDirectory = projectGen.Generate();
 
 	GenerateLpdMainLpdSource(projectDirectory);
