@@ -10,19 +10,6 @@ find_package(Deamer_Algorithm REQUIRED)
 
 include(deamer.cmake)
 
-add_subdirectory(extern)
-add_subdirectory(lib)
-
-target_link_libraries(DLDL_static_library PUBLIC Deamer::Deamer)
-
-add_executable(DLDL)
-target_sources(DLDL PRIVATE "main.cpp")
-target_link_libraries(DLDL PRIVATE DLDL_static_library)
-
-add_subdirectory(sources)
-
-add_executable(Deamer::DLDL ALIAS DLDL)
-
 macro(option_enable OPTION_NAME OPTION_TEXT OPTION_DEFAULT)
 	if(${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
 		option(${OPTION_NAME} ${OPTION_TEXT} ${OPTION_DEFAULT})
@@ -33,6 +20,22 @@ endmacro()
 
 option_enable(DLDL_BUILD_EXAMPLES "Build the examples" OFF)
 option_enable(DLDL_BUILD_TESTS "Build the tests" ON)
+option_enable(DLDL_BUILD_SOURCES "Build the sources" OFF)
+
+add_subdirectory(extern)
+add_subdirectory(lib)
+
+target_link_libraries(DLDL_static_library PUBLIC Deamer::Deamer)
+
+add_executable(DLDL)
+target_sources(DLDL PRIVATE "main.cpp")
+target_link_libraries(DLDL PRIVATE DLDL_static_library)
+
+if(DLDL_BUILD_SOURCES)
+	add_subdirectory(sources)
+endif()
+
+add_executable(Deamer::DLDL ALIAS DLDL)
 
 if(DLDL_BUILD_TESTS)
 	find_package(GTest)

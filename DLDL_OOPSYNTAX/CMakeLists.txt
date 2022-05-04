@@ -16,7 +16,7 @@ if(TESTS)
 	add_subdirectory(tests)
 endif()
 
-option(APPLICATIONS "Enables all the applications" ON)
+option(APPLICATIONS "Enables all the applications" OFF)
 if(APPLICATIONS)
 	message(STATUS "Applications are now available.")
 	add_subdirectory(sources)

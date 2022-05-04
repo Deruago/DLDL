@@ -8,3 +8,7 @@ include(deamer.cmake)
 
 add_subdirectory(extern)
 add_subdirectory(lib)
+
+if(DLDL_BUILD_SOURCES)
+	add_subdirectory(sources)
+endif()
