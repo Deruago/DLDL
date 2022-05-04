@@ -13,6 +13,7 @@
 #include "DLDL/Template/Deamer/LPD/LPD/MainSource/MainSourceTemplate.h"
 #include "DLDL/Template/Deamer/LPD/Validater/OEs_PT/OEs_PTTemplate.h"
 #include "DLDL/Template/Deamer/LPD/Validater/PT_OE/PT_OETemplate.h"
+#include <iostream>
 #include <set>
 
 static std::vector<std::string> Split(const std::string& str, char split)
@@ -543,6 +544,20 @@ void DLDL::generate::lpd::Project::GenerateMainLdo(LPDDirectory& directory) cons
 				}
 				else
 				{
+					if (ldoMemberPtr == nullptr && lpd == nullptr)
+					{
+						std::cout << "Unresolved LdoMemberPtr: " + ldoMember.name +
+											   " In LPD: Unknown\n";
+						continue;
+					}
+					if (ldoMemberPtr == nullptr)
+					{
+						std::cout << "Unresolved LdoMemberPtr: "
+											   + ldoMember.name + " In LPD: " + lpd->GetName()
+											   + "\n";
+						continue;
+					}
+					
 					ldoTemplate.target_lpd_name_->Set(ldoMemberPtr->GetLPD()->GetName());
 
 					ldoTemplate.ldo_namespace_->Set(ldoTemplate.default_ldo_namespace_);
