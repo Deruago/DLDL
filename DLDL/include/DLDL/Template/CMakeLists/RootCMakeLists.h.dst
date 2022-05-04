@@ -10,4 +10,7 @@ if ({{language_name}}_ENABLE_COMPILER_GENERATOR)
 	add_subdirectory(CompilerGenerator)
 endif()
 
-{{language_directory.Variable_Field}}
+option({{language_name}}_ENABLE_LANGUAGE_BUILD "Enable Language CMake Build." {{option_language_build_value}})
+if ({{language_name}}_ENABLE_LANGUAGE_BUILD)
+	{{language_directory.Variable_Field}}
+endif()

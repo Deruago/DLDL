@@ -5,7 +5,8 @@
 
 {{project_name}} = <{{languages}}_LanguageProject>
 
-{{option_compiler_generator_value}} = @<{{option_value_on}}>@
+{{option_compiler_generator_value}} = @<{{option_value_off}}>@
+{{option_language_build_value}} = @<{{option_value_on}}>@
 {{option_value_on}} = @<ON>@
 {{option_value_off}} = @<OFF>@
 
