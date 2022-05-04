@@ -1,0 +1,45 @@
+/
+/ DLDL Grammar->Production Rule lexicon
+/ This language is used to parse production rules
+/ Made by: Thimo Böhmer
+
+/ Deleted combinations
+/ When someone ends using |\n or ;\n this should be ignored
+/ As these are incomplete and useless
+Delete: ENDING_USELESS_SYMBOLS [|;\r\b\v\a\f\t ]+[\n]+
+
+/ Symbols
+Ignore: VERTICAL_SLASH         [|]
+
+Ignore: LEFT_PARANTHESIS       [(]
+Ignore: RIGHT_PARANTHESIS      [)]
+
+Ignore: LEFT_BRACKET           [{]
+Ignore: RIGHT_BRACKET          [}]
+
+Ignore: LEFT_SQUARE_BRACKET    [\[]
+Ignore: RIGHT_SQUARE_BRACKET   [\]]
+
+Ignore: QUESTION_MARK          [?]
+Ignore: EXCLAMATION_MARK       [!]
+
+Ignore: ARROW                  [\-][>]
+
+Ignore: STAR                   [*]
+Ignore: PLUS                   [+]
+Ignore: MINUS                  [\-]
+
+/ Values
+Terminal: VALUE       [a-zA-Z_]+[a-zA-Z_0-9]*
+Terminal: NUMBER      [0-9]+
+
+/ Single line comments are DLDL style,
+/ Multi line comments work, but the user may not use the character "*" in the block
+Delete: SINGLE_LINE_COMMENT   [/][^\n]*[\n]
+Delete: MULTI_LINE_COMMENT    [/][*][^*][*][/]
+
+/ These symbols aren't used.
+Delete: SYMBOLS               [:;="']
+Delete: ESCAPE_CHARS          [\n\r\b\v\a\f\t ]
+
+/

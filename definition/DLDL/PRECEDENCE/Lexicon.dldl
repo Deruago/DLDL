@@ -1,0 +1,11 @@
+/
+/ DLDL Precedence LPD lexicon
+/ Made by: Thimo Bohmer
+
+Terminal: PRECEDENCE Precedence
+
+Terminal: NUMBER     [0-9]+
+Terminal: TERMINAL   [a-zA-Z_]+
+
+Delete: SYMBOLS         [|&^%$#@!?(){}]
+Delete: ESCAPE_CHARS    [\n\r\b\v\a\f\t ]

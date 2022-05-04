@@ -1,0 +1,26 @@
+/
+/ DLDL Precedence LPD grammar
+/ Made by: Thimo Bohmer
+
+program
+	stmts
+
+stmts
+	stmt stmts
+	EMPTY
+
+stmt
+	localized_precedence
+	specific_precedence
+
+localized_precedence
+	PRECEDENCE terminal_one_or_more
+
+specific_precedence
+	PRECEDENCE NUMBER terminal_one_or_more
+
+terminal_one_or_more
+	TERMINAL terminal_one_or_more
+	TERMINAL
+
+/

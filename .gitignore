@@ -1,10 +1,4 @@
-*.o
-*.out
-CppProperties.json
-.vs/*
-
-*build/*
-*out/*
 *build*/*
-/CMakeSettings.json
-/Folder.DotSettings.user
+**/.vs/*
+**/out/*
+CompilerGenerator/*

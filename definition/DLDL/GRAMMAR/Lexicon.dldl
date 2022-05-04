@@ -1,0 +1,20 @@
+/ The lexicon of DLDL grammar lpd
+/ Made by: Thimo Bohmer
+
+/ Comments
+Delete: COMMENT	[/][^\n]*
+
+/ Abstractions
+NoValue: START_ABSTRACTION           [Ss]tart[:][ \t]*
+NoValue: GROUP_ABSTRACTION           [Gg]roup[:][ \t]*
+NoValue: INLINE_ABSTRACTION          [Ii]nline[:][ \t]*
+NoValue: INLINE_GROUP_ABSTRACTION    (([Ii]nline[ ][Gg]roup)|([Gg]roup[ ][Ii]nline))[:][ \t]*
+NoValue: UNKNOWN_ABSTRACTION         [a-zA-Z0-9_\\$?!-+=]*[:][ \t]*
+
+/ Values
+Terminal: NONTERMINAL            [a-zA-Z_]+[a-zA-Z_0-9]*
+Terminal: PRODUCTION_RULE        [ \t]+[^\n\r]*
+
+Delete: ESCAPE_CHARS         [\n\r\b\v\a\f\t ]
+
+/

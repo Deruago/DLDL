@@ -1,0 +1,13 @@
+/ DLDL:LPDDEF:EnumerationFormat Lexicon
+/ Used to parse enumeration format used to define LDO enumeration layout
+/ Designed by Thimo Böhmer
+
+/ Variadic vars
+Terminal: COMMENT   [/]+[^\n]*[\n]
+Terminal: VARNAME   [a-zA-Z_]+[a-zA-Z_0-9]*
+Terminal: NUMBER    [-]*[0-9]+
+
+/ Delete characters
+Delete: COLON [:]
+Delete: SEMICOLON [;]
+Delete: ESCAPE_CHARS [\n\t\r\b\v\a ]

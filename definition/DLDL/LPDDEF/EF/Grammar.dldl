@@ -1,0 +1,28 @@
+/ DLDL:LPDDEF:EnumerationFormat Grammar
+/ Used to parse enumeration format used to define LDO enumeration layout
+/ Designed by Thimo Böhmer
+
+program
+	stmt*
+
+stmt
+	comment_line
+	standard_variant_specific_number
+	standard_variant
+
+comment_line
+	COMMENT
+
+standard_variant
+	enum_name
+
+standard_variant_specific_number
+	enum_name value
+
+value
+	NUMBER
+
+enum_name
+	VARNAME
+
+/

@@ -1,0 +1,11 @@
+Generate: Lexer Flex
+Generate: Parser Bison
+Generate: Ast CPP
+Generate: Tool DeamerDefaultApplication
+
+Integrate: Flex Bison
+Integrate: Flex DeamerAST
+Integrate: Bison DeamerAST
+
+
+Argument: Bison activate-glr

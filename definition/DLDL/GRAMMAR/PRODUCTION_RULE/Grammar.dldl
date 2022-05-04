@@ -1,0 +1,55 @@
+/
+/ DLDL Grammar->Production Rule grammar
+/ This language is used to parse production rules
+/ Made by: Thimo Böhmer
+
+program
+	stmts
+	
+stmts
+	stmt stmts
+	EMPTY
+
+stmt
+	group
+
+/ A group is a combination of several high level concepts.
+/ E.g. a group can represent optional parts
+group
+	nested_group
+	optional_group
+	zero_or_more_group
+	one_or_more_group
+	group MINUS
+	or_group
+	min_max_group
+	extension_group
+	VALUE
+
+nested_group
+	LEFT_PARANTHESIS stmts RIGHT_PARANTHESIS
+	
+optional_group
+	LEFT_SQUARE_BRACKET stmts RIGHT_SQUARE_BRACKET
+	group QUESTION_MARK
+
+zero_or_more_group
+	group STAR
+	
+one_or_more_group
+	group PLUS
+
+or_group
+	group VERTICAL_SLASH group
+
+min_max_group
+	group LEFT_BRACKET NUMBER NUMBER RIGHT_BRACKET
+	group LEFT_BRACKET NUMBER RIGHT_BRACKET
+	group LEFT_BRACKET NUMBER PLUS RIGHT_BRACKET
+	group LEFT_BRACKET NUMBER STAR RIGHT_BRACKET
+
+/ If one wants to extend the left side, the right side can be applied {0, n} times
+extension_group
+	group ARROW group
+
+/
