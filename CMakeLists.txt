@@ -4,10 +4,14 @@ project(DLDL_LanguageProject
                       DESCRIPTION "Project for the language(s): DLDL"
                       LANGUAGES CXX)
 
-option(DLDL_ENABLE_COMPILER_GENERATOR "Enable Compiler Generation" ON)
+option(DLDL_ENABLE_COMPILER_GENERATOR "Enable Compiler Generation" OFF)
 if (DLDL_ENABLE_COMPILER_GENERATOR)
 	find_package(Deamer REQUIRED)
 	add_subdirectory(CompilerGenerator)
 endif()
 
-add_subdirectory(DLDL)
+option(DLDL_ENABLE_LANGUAGE_BUILD "Enable Language CMake Build." ON)
+if (DLDL_ENABLE_LANGUAGE_BUILD)
+	add_subdirectory(DLDL)
+
+endif()
