@@ -2,12 +2,14 @@
 #include "DLDL_GRAMMAR/IR/Parser.h"
 #include "DLDL_LEXER/IR/Parser.h"
 #include "DLDL_OOPSYNTAX/IR/Parser.h"
+#include "DLDL/IR/IRParser.h"
 #include <Deamer/File/Tool/Directory.h>
 #include <fstream>
 #include <sstream>
 
+
 DLDL::ir::ConstructLanguage::ConstructLanguage(const std::string& relativeDirectory_,
-											   const std::string& definitionMap_)
+                                               const std::string& definitionMap_)
 	: relativeDirectory(relativeDirectory_),
 	  definitionMap(definitionMap_)
 {
@@ -213,48 +215,8 @@ DLDL::ir::IR* DLDL::ir::ConstructLanguage::GetIR(const Type type, const std::str
 {
 	std::cout << path << '\n';
 
-	IR* newIR = nullptr;
 	const std::string fileContent = ReadInFile(path);
-
-	switch (type)
-	{
-	case Type::Unknown:
-		break;
-	case Type::Lexicon:
-		newIR = ::DLDL::ir::lexer::Parser().GetIR(fileContent);
-		break;
-	case Type::Grammar:
-		newIR = ::DLDL::ir::grammar::Parser().GetIR(fileContent);
-		break;
-	case Type::Precedence:
-		break;
-	case Type::Associativity:
-		break;
-	case Type::Generation:
-		newIR = ::DLDL::ir::generation::Parser(os).GetIR(fileContent);
-		break;
-	case Type::OopSyntax:
-		newIR = ::DLDL::ir::oopsyntax::Parser(os).GetIR(fileContent);
-		break;
-	case Type::Identity:
-		break;
-	case Type::AstOptimization:
-		break;
-	case Type::AstTranslation:
-		break;
-	case Type::Coloring:
-		break;
-	case Type::Formatting:
-		break;
-	case Type::Documentation:
-		break;
-	case Type::Threat:
-		break;
-	default:
-		break;
-	}
-
-	return newIR;
+	return IRParser::Parse(type, fileContent, os);
 }
 
 DLDL::ir::IR_Config* DLDL::ir::ConstructLanguage::GetConfig(const Type type,
