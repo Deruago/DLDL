@@ -35,7 +35,7 @@ namespace DLDL::ir
 		OopSyntax,
 	};
 	
-	static constexpr Type GetLpdType(const std::string& text)
+	static Type GetLpdType(const std::string& text)
 	{
 		if (text == "lexicon")
 		{
