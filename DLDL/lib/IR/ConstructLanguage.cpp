@@ -193,36 +193,7 @@ DLDL::ir::Type DLDL::ir::ConstructLanguage::ConvertTextToEnum(const std::string&
 		}
 	}
 
-	if (textLowered == "lexicon")
-	{
-		return Type::Lexicon;
-	}
-	if (textLowered == "grammar")
-	{
-		return Type::Grammar;
-	}
-	if (textLowered == "associativity")
-	{
-		return Type::Associativity;
-	}
-	if (textLowered == "precedence")
-	{
-		return Type::Precedence;
-	}
-	if (textLowered == "generation")
-	{
-		return Type::Generation;
-	}
-	if (textLowered == "identity")
-	{
-		return Type::Identity;
-	}
-	if (textLowered == "oopsyntax")
-	{
-		return Type::OopSyntax;
-	}
-
-	return Type::Unknown;
+	return GetLpdType(textLowered);
 }
 
 std::string DLDL::ir::ConstructLanguage::ReadInFile(const std::string& file)
