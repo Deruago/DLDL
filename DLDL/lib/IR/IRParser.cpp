@@ -44,4 +44,6 @@ DLDL::ir::IR* DLDL::ir::IRParser::Parse(const Type type, const std::string& file
 	default:
 		break;
 	}
+
+	return nullptr;
 }
