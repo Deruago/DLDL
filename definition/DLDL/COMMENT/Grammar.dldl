@@ -1,0 +1,32 @@
+/ Grammar of DLDL Comment LPD
+/ Made by: Thimo Bohmer
+
+program
+	stmt*
+	
+stmt
+	comment_value_declaration
+	
+comment_value_declaration
+	COMMENT_VALUE syntactic_reference [LEFT_SQUARE_BRACKET comment_abstraction* RIGHT_SQUARE_BRACKET]
+		
+comment_abstraction
+	start_abstraction
+	end_abstraction
+
+start_abstraction
+	START start_sequence
+
+end_abstraction
+	END end_sequence
+
+start_sequence
+	sequence
+	
+end_sequence
+	sequence
+	
+sequence
+	TEXT
+
+/

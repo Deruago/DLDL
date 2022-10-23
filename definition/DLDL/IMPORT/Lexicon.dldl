@@ -1,0 +1,27 @@
+/ Lexicon of DLDL Import LPD
+/ Made by: Thimo Bohmer
+
+/ Comments
+Delete: SINGLE_COMMENT [/][^\n\r]*[\n\r]{0,1}
+Delete: MULTI_COMMENT  [/][*][^*]*[*][/]{0,1}
+
+/ Structural Syntactic Symbols
+NoValue: LEFT_PARANTHESIS     [(]
+NoValue: RIGHT_PARANTHESIS    [)]
+NoValue: LEFT_SQUARE_BRACKET  [\[]
+NoValue: RIGHT_SQUARE_BRACKET [\]]
+NoValue: COLON [:]
+NoValue: DOT   [\.]
+
+/ Import
+NoValue: IMPORT_FILE   [Ii][Mm][Pp][Oo][Rr][Tt][ ]+[Ff][Ii][Ll][Ee]
+NoValue: IMPORT_MODULE [Ii][Mm][Pp][Oo][Rr][Tt][ ]+[Mm][Oo][Dd][Uu][Ll][Ee]
+NoValue: IMPORT        [Ii][Mm][Pp][Oo][Rr][Tt]
+
+/ Value
+Terminal: TEXT ["][^"]*["]
+Terminal: VARNAME [a-zA-Z_][a-zA-Z_0-9]*
+
+/ Escape Chars
+Delete: ESCAPE_CHARS [ \n\r\t]
+/

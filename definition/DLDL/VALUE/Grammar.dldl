@@ -1,0 +1,10 @@
+/ Grammar of DLDL Value LPD
+/ Made by: Thimo Bohmer
+
+program
+	stmt*
+	
+stmt
+	VARNAME
+
+/
