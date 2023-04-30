@@ -33,8 +33,16 @@ namespace DLDL::ir
 		ToolStruct,
 
 		OopSyntax,
+
+		Argument,
+		Comment,
+		Import,
+		Value,
+
+		// Lexer/Parser Generator definition import
+		Antlr,
 	};
-	
+
 	static Type GetLpdType(const std::string& text)
 	{
 		if (text == "lexicon")
@@ -64,6 +72,30 @@ namespace DLDL::ir
 		if (text == "oopsyntax")
 		{
 			return Type::OopSyntax;
+		}
+		if (text == "argument")
+		{
+			return Type::Argument;
+		}
+		if (text == "comment")
+		{
+			return Type::Comment;
+		}
+		if (text == "import")
+		{
+			return Type::Import;
+		}
+		if (text == "value")
+		{
+			return Type::Value;
+		}
+		if (text == "formatting")
+		{
+			return Type::Formatting;
+		}
+		if (text == "antlr")
+		{
+			return Type::Antlr;
 		}
 
 		return Type::Unknown;

@@ -55,7 +55,7 @@ namespace DLDL::ir
 		std::vector<std::string> GetParents(std::vector<std::string>& current) const;
 
 		void FixUnknownReferences();
-		
+
 	public:
 		bool DoesIRExist(Type getType) const;
 
@@ -65,6 +65,7 @@ namespace DLDL::ir
 
 		void ReplaceIR(IR* ir);
 
+		void AddIR(std::vector<IR*> newIRs);
 		void AddIR(IR* newIR);
 
 		void AddIR_Config(IR_Config* newConfig);

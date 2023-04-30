@@ -78,6 +78,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 #include <cstring>
 #include <stdio.h>
 #include <Deamer/External/Cpp/Lexer/TerminalObject.h>
@@ -101,13 +102,20 @@
 #ifndef YY_parse_LLOC
 #define YY_parse_LLOC DLDLlloc
 #endif //YY_parse_LLOC
-#define YYERROR_VERBOSE
+#define YYERROR_VERBOSE 1
+
+
 
 void DLDLerror(const char* s);
 int DLDLlex();
 static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 
-#line 111 "DLDL_parser.tab.c"
+extern int DLDLlineno;
+extern int DLDL_column;
+
+static const std::string* DLDL_input_text = nullptr;
+
+#line 119 "DLDL_parser.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -505,7 +513,7 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    59,    59,    70,    76,    86
+       0,    67,    67,    78,    84,    94
 };
 #endif
 
@@ -1592,7 +1600,7 @@ yyreduce:
     switch (yyn)
       {
   case 2: /* program: stmts  */
-#line 59 "./DLDL_parser.y"
+#line 67 "./DLDL_parser.y"
                {
 		auto* const newNode = new DLDL::ast::node::program({::DLDL::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[0].DLDL_stmts) });
 		(yyval.DLDL_program) = newNode;
@@ -1600,44 +1608,44 @@ yyreduce:
 		// Ignored, Deleted, tokens are deleted
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
-#line 1604 "DLDL_parser.tab.c"
+#line 1612 "DLDL_parser.tab.c"
     break;
 
   case 3: /* stmts: stmt stmts  */
-#line 70 "./DLDL_parser.y"
+#line 78 "./DLDL_parser.y"
                     {
 		auto* const newNode = new DLDL::ast::node::stmts({::DLDL::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (yyvsp[-1].DLDL_stmt), (yyvsp[0].DLDL_stmts) });
 		(yyval.DLDL_stmts) = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-#line 1615 "DLDL_parser.tab.c"
+#line 1623 "DLDL_parser.tab.c"
     break;
 
   case 4: /* stmts: %empty  */
-#line 76 "./DLDL_parser.y"
+#line 84 "./DLDL_parser.y"
            {
 		auto* const newNode = new DLDL::ast::node::stmts({::DLDL::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		(yyval.DLDL_stmts) = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-#line 1626 "DLDL_parser.tab.c"
+#line 1634 "DLDL_parser.tab.c"
     break;
 
   case 5: /* stmt: ANY  */
-#line 86 "./DLDL_parser.y"
+#line 94 "./DLDL_parser.y"
              {
 		auto* const newNode = new DLDL::ast::node::stmt({::DLDL::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL::ast::node::ANY({::DLDL::ast::Type::ANY, ::deamer::external::cpp::ast::NodeValue::terminal, (yyvsp[0].Terminal) }) });
 		(yyval.DLDL_stmt) = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-#line 1637 "DLDL_parser.tab.c"
+#line 1645 "DLDL_parser.tab.c"
     break;
 
 
-#line 1641 "DLDL_parser.tab.c"
+#line 1649 "DLDL_parser.tab.c"
 
         default: break;
       }
@@ -1872,16 +1880,95 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 96 "./DLDL_parser.y"
+#line 104 "./DLDL_parser.y"
 
 
 void DLDLerror(const char* s)
 {
-	std::cout << "Syntax error on line: " << s << '\n';
+	std::cout << "Error: " << s << "\n";
+	std::cout << "In line: " << DLDLlineno << ", Column: " << DLDL_column << '\n';
+
+	std::size_t currentLineCount = 1;
+	auto index = 0;
+	static constexpr auto offsetShow = 2;
+
+	while (index < DLDL_input_text->size())
+	{
+		if ((*DLDL_input_text)[index] == '\n')
+		{
+			currentLineCount += 1;
+		}
+		index++;
+
+		if (currentLineCount + offsetShow >= DLDLlineno)
+		{
+			break;
+		}
+
+	}
+
+	bool donePreShow = false;
+	while (!donePreShow && offsetShow > 0)
+	{
+		if ((*DLDL_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_input_text)[index];
+		}
+
+		if ((*DLDL_input_text)[index] == '\n')
+		{
+			if (currentLineCount + 1 == DLDLlineno)
+			{
+				donePreShow = true;
+			}
+			currentLineCount += 1;
+		}
+
+		index++;
+	}
+	
+	bool endLine = false;
+	while (!endLine && index < DLDL_input_text->size())
+	{
+		if ((*DLDL_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_input_text)[index];
+		}
+		
+		if ((*DLDL_input_text)[index] == '\n')
+		{
+			endLine = true;
+		}
+		
+		index++;
+	}
+
+    for(int i = 0; i < DLDL_column - 1; i++)
+	{
+		std::cout << "_";
+	}
+	std::cout << "^\n";
 }
 
 deamer::external::cpp::ast::Tree* DLDL::bison::parser::Parser::Parse(const std::string& text) const
 {
+	DLDL_input_text = &text;
 	outputTree = nullptr;
 	YY_BUFFER_STATE buf;
 	buf = DLDL_scan_string(text.c_str());

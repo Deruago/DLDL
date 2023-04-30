@@ -1,0 +1,34 @@
+/* 
+ * This file is auto-generated and auto-maintained by DLDL
+ * Do not change code in this as it can be overwritten.
+ *
+ * For more information see the DLDL repo: https://github.com/Deruago/DLDL
+ * For more information about Deamer: https://github.com/Deruago/theDeamerProject
+ */
+
+#ifndef {{header_guard}}
+#define {{header_guard}}
+
+#include "Deamer/Language/Generator/Definition/Property/User/Main/Formatting.h"
+#include "Deamer/Language/Type/Definition/Object/Special/Uninitialized.h"
+
+namespace {{language_full_name}}
+{
+	class Language;
+
+	class Formatting : public ::deamer::language::generator::definition::property::user::Formatting<
+								::{{language_full_name}}::Language>
+	{
+	public:
+
+	private:
+		{{unknown_reference_declaration.Variable_Field}}
+
+	public:
+		Formatting({{language_full_name}}::Language* language);
+		
+		void GenerateObjects() override;
+	};
+}
+
+#endif // {{header_guard}}

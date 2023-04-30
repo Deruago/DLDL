@@ -173,8 +173,24 @@ std::string DLDL::generate::LPDWriter::GetTextFromIREnum(ir::Type type)
 		return "OopSyntax";
 	case ir::Type::Threat:
 		return "Threat";
-	default:
-		break;
+	case ir::Type::LpdDef:
+		return "LpdDef";
+	case ir::Type::LpdStruct:
+		return "LpdStruct";
+	case ir::Type::LdoStruct:
+		return "LdoStruct";
+	case ir::Type::ToolDef:
+		return "ToolDef";
+	case ir::Type::ToolStruct:
+		return "ToolStruct";
+	case ir::Type::Argument:
+		return "Argument";
+	case ir::Type::Comment:
+		return "Comment";
+	case ir::Type::Import:
+		return "Import";
+	case ir::Type::Value:
+		return "Value";
 	}
 
 	throw std::logic_error("Unknown IR given!");

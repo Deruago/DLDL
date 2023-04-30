@@ -132,6 +132,14 @@ void DLDL::ir::Language::ReplaceIR(IR* ir)
 	AddIR(ir);
 }
 
+void DLDL::ir::Language::AddIR(std::vector<IR*> newIRs)
+{
+	for (auto newIr : newIRs)
+	{
+		AddIR(newIr);
+	}
+}
+
 void DLDL::ir::Language::AddIR(IR* newIR)
 {
 	if (newIR == nullptr)

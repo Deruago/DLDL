@@ -25,7 +25,16 @@ DLDL::generate::LPDSubWriterFactory::GetLPDSubWriter(ir::Type type)
 		break;
 	case ir::Type::Coloring:
 		break;
+	case ir::Type::Comment:
+		return std::make_shared<sub::CommentLPDWriter>();
+	case ir::Type::Value:
+		return std::make_shared<sub::ValueLPDWriter>();
+	case ir::Type::Import:
+		return std::make_shared<sub::ImportLPDWriter>();
+	case ir::Type::Argument:
+		return std::make_shared<sub::ArgumentLPDWriter>();
 	case ir::Type::Formatting:
+		//	return std::make_shared<sub::FormattingLPDWriter>();
 		break;
 	case ir::Type::Documentation:
 		break;

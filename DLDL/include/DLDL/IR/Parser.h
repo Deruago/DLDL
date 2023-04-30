@@ -4,6 +4,7 @@
 #include "DLDL/IR/IR.h"
 #include "DLDL/IR/Type.h"
 #include <string>
+#include <vector>
 
 namespace DLDL::ir
 {
@@ -11,19 +12,28 @@ namespace DLDL::ir
 	{
 	private:
 		Type type;
+
 	public:
-		Parser(Type type_)
-			: type(type_)
+		Parser(Type type_) : type(type_)
 		{
 		}
 		virtual ~Parser() = default;
+
 	public:
 		Type GetType() const
 		{
 			return type;
 		}
 
-		virtual DLDL::ir::IR* GetIR(std::string text) = 0;
+		virtual DLDL::ir::IR* GetIR(std::string text)
+		{
+			return nullptr;
+		}
+
+		virtual std::vector<DLDL::ir::IR*> GetIRs(std::string text)
+		{
+			return {GetIR(text)};
+		}
 	};
 }
 

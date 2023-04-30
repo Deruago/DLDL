@@ -1,15 +1,14 @@
 #include "DLDL/IR/ConstructLanguage.h"
+#include "DLDL/IR/IRParser.h"
 #include "DLDL_GRAMMAR/IR/Parser.h"
 #include "DLDL_LEXER/IR/Parser.h"
 #include "DLDL_OOPSYNTAX/IR/Parser.h"
-#include "DLDL/IR/IRParser.h"
 #include <Deamer/File/Tool/Directory.h>
 #include <fstream>
 #include <sstream>
 
-
 DLDL::ir::ConstructLanguage::ConstructLanguage(const std::string& relativeDirectory_,
-                                               const std::string& definitionMap_)
+											   const std::string& definitionMap_)
 	: relativeDirectory(relativeDirectory_),
 	  definitionMap(definitionMap_)
 {
@@ -210,8 +209,9 @@ std::string DLDL::ir::ConstructLanguage::ReadInFile(const std::string& file)
 	return input;
 }
 
-DLDL::ir::IR* DLDL::ir::ConstructLanguage::GetIR(const Type type, const std::string& path,
-												 deamer::file::tool::OSType os)
+std::vector<DLDL::ir::IR*> DLDL::ir::ConstructLanguage::GetIR(const Type type,
+															  const std::string& path,
+															  deamer::file::tool::OSType os)
 {
 	std::cout << path << '\n';
 

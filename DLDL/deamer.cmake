@@ -37,16 +37,20 @@ function(DLDL_add_external_library external_library_name source_files)
 	target_sources(DLDL_static_library PRIVATE ${source_files})
 endfunction()
 
+add_subdirectory(DLDL_ARGUMENT)
 add_subdirectory(DLDL_ASSOCIATIVITY)
+add_subdirectory(DLDL_COMMENT)
 add_subdirectory(DLDL_GENERATION)
 add_subdirectory(DLDL_GRAMMAR)
 add_subdirectory(DLDL_IDENTITY)
+add_subdirectory(DLDL_IMPORT)
 add_subdirectory(DLDL_LDOSTRUCT)
 add_subdirectory(DLDL_LEXER)
 add_subdirectory(DLDL_LPDDEF)
 add_subdirectory(DLDL_LPDSTRUCT)
 add_subdirectory(DLDL_OOPSYNTAX)
 add_subdirectory(DLDL_PRECEDENCE)
+add_subdirectory(DLDL_VALUE)
 
 
 

@@ -50,8 +50,8 @@ namespace DLDL::ir
 
 		std::string ReadInFile(const std::string& file);
 
-		IR* GetIR(const Type type, const std::string& path,
-				  deamer::file::tool::OSType os = deamer::file::tool::os_used);
+		std::vector<IR*> GetIR(const Type type, const std::string& path,
+							   deamer::file::tool::OSType os = deamer::file::tool::os_used);
 
 		IR_Config* GetConfig(const Type type, const std::string& path);
 	};

@@ -1,0 +1,10 @@
+{{file.target_language}} = @<C++>@
+{{file.file_name}} = @<FormattingH>@
+{{file.namespace}} = @<DLDL::filetemplate>@
+{{file.extension}} = @<h>@
+
+{{header_guard}} = @<{{language_full_name_underscore.Upper}}_FORMATTING_H>@
+
+{{language_full_name_slash}} = @<>@
+
+{{unknown_reference_declaration}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::special::Uninitialized<::deamer::language::type::definition::object::main::NonTerminal>> {{unknown_reference}};>@

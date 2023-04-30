@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(DLDL VERSION 2.2.0)
 
+set(CMAKE_CXX_STANDARD 17)
 include(GNUInstallDirs)
 
 find_package(Deamer REQUIRED)
@@ -28,7 +29,7 @@ add_subdirectory(lib)
 target_link_libraries(DLDL_static_library PUBLIC Deamer::Deamer)
 
 add_executable(DLDL)
-target_sources(DLDL PRIVATE "main.cpp")
+target_sources(DLDL PRIVATE "main.cpp" "DLDL_VALUE/lib/IR/ValueAbstraction.cpp" "DLDL_IMPORT/lib/IR/ImportRule.cpp")
 target_link_libraries(DLDL PRIVATE DLDL_static_library)
 
 if(DLDL_BUILD_SOURCES)
@@ -36,6 +37,20 @@ if(DLDL_BUILD_SOURCES)
 endif()
 
 add_executable(Deamer::DLDL ALIAS DLDL)
+
+option_enable(DLDL_DEBUG "Debug Build" OFF)
+
+if (DLDL_DEBUG)
+
+else()
+	if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+		set_target_properties(DLDL PROPERTIES COMPILE_FLAGS "-O3")
+	elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+		set_target_properties(DLDL PROPERTIES COMPILE_FLAGS "-O3")
+	elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+		set_target_properties(DLDL PROPERTIES COMPILE_FLAGS "/O3")
+	endif()
+endif()
 
 if(DLDL_BUILD_TESTS)
 	find_package(GTest)
