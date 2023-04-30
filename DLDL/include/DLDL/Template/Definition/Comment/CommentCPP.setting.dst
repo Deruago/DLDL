@@ -1,0 +1,20 @@
+{{file.target_language}} = @<C++>@
+{{file.file_name}} = @<CommentCPP>@
+{{file.namespace}} = @<DLDL::filetemplate>@
+{{file.extension}} = @<h>@
+
+{{language_full_name_underscore}} = @<>@
+
+{{unknown_reference_implementation}} = @<{{unknown_reference}}.Set(::deamer::language::type::definition::object::special::Uninitialized<::deamer::language::type::definition::object::main::NonTerminal>("NonTerminal", "{{unknown_reference}}", "Unknown reference to (most likely) a NonTerminal!"));>@
+{{add_unknown_reference}} = @<AddObject({{unknown_reference}});>@
+
+{{comment_reference}} = @<comment_{{terminal_name}}>@
+
+{{comment_implementation}} = @<{{comment_reference}}.Set(::deamer::language::type::definition::object::main::CommentValue(
+			Language->{{terminal_name}}.Pointer(),
+			"{{start_sequence}}",
+			"{{escape_sequence}}",
+			"{{end_sequence}}"
+		));>@
+
+{{add_comment}} = @<AddObject({{comment_reference}});>@

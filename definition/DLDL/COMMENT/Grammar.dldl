@@ -29,4 +29,7 @@ end_sequence
 sequence
 	TEXT
 
+syntactic_reference
+	VARNAME
+
 /
