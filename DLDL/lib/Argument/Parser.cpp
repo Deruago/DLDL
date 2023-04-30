@@ -108,6 +108,10 @@ static void initializeMaps()
 		{"console-debug-mode", Type::console_debug_mode},
 		{"default-compiler-generator-value", Type::default_value_compiler_generator},
 		{"cmake-output-use-legacy-names", Type::cmake_output_use_legacy_names},
+		{"force-fgrammar", Type::force_fgrammar},
+		{"import-antlr-language-file", Type::import_antlr_language_file},
+		{"import-antlr-language", Type::import_antlr_language_file},
+		{"extra-map", Type::extra_map},
 	};
 
 	for (auto [str, type] : tuples)

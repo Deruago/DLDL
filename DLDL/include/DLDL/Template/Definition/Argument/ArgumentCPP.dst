@@ -1,0 +1,17 @@
+#include "{{language_full_name_slash}}/Argument.h"
+#include "{{language_full_name_slash}}/Language.h"
+
+{{language_full_name}}::Argument::Argument({{language_full_name}}::Language* language)
+			:	::deamer::language::generator::definition::property::user::Argument<
+					{{language_full_name}}::Language>(language)
+{
+}
+
+void {{language_full_name}}::Argument::GenerateObjects()
+{
+	// Unknown References
+	{{unknown_reference_implementation.Variable_Field}}
+
+	// Unknown References
+	{{add_unknown_reference.Variable_Field}}
+}

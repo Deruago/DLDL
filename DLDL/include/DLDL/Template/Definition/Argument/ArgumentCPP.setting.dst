@@ -1,0 +1,9 @@
+{{file.target_language}} = @<C++>@
+{{file.file_name}} = @<ArgumentCPP>@
+{{file.namespace}} = @<DLDL::filetemplate>@
+{{file.extension}} = @<h>@
+
+{{language_full_name_underscore}} = @<>@
+
+{{unknown_reference_implementation}} = @<{{unknown_reference}}.Set(::deamer::language::type::definition::object::special::Uninitialized<::deamer::language::type::definition::object::main::NonTerminal>("NonTerminal", "{{unknown_reference}}", "Unknown reference to (most likely) a NonTerminal!"));>@
+{{add_unknown_reference}} = @<AddObject({{unknown_reference}});>@

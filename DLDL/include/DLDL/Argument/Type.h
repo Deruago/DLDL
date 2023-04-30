@@ -78,6 +78,12 @@ namespace DLDL::argument
 		default_value_compiler_generator,
 
 		cmake_output_use_legacy_names,
+
+		force_fgrammar,
+
+		import_antlr_language_file,
+
+		extra_map,
 	};
 }
 

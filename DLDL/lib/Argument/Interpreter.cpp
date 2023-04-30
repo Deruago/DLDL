@@ -180,6 +180,11 @@ void DLDL::argument::Interpreter::InitializeInterpreter(bool force)
 	{
 		InitializeDeamerMap();
 	}
+
+	if (!parser.IsArgumentSet(Type::extra_map))
+	{
+		InitializeExtraMap();
+	}
 }
 
 DLDL::argument::Interpreter::Interpreter(size_t count, const char* arguments[])
@@ -501,8 +506,8 @@ std::size_t DLDL::argument::Interpreter::Run()
 
 void DLDL::argument::Interpreter::Disclaimer()
 {
-	std::cout << "Copyright (C) 2020-2022  Thimo Bohmer\n"
-				 "For more information about DLDL: https://github.com/Deruago/DLDL \n"
+	std::cout << copyright_header
+			  << "For more information about DLDL: https://github.com/Deruago/DLDL \n"
 				 "\n";
 	std::cout
 		<< "This program comes with ABSOLUTELY NO WARRANTY; for details type `DLDL -license'.\n"
@@ -641,6 +646,8 @@ void DLDL::argument::Interpreter::Help()
 		   "features might become unavailable.\n"
 		   "	-generate-language                          ; If false no language project is "
 		   "generated.\n"
+		   "	-force-fgrammar                             ; Forces reading the Lexicon and "
+		   "Grammar as Fgrammars.\n"
 		   "\n"
 		   "Internal behavioural settings (modify how DLDL does stuff):\n"
 		   "	-language-name, -lang-name                  ; Modify the 'language' used to "
@@ -695,8 +702,8 @@ void DLDL::argument::Interpreter::Information()
 {
 	Version();
 	std::cout << "\n"
-				 "Copyright (C) 2020-2022  Thimo Bohmer\n"
-				 "For more information about DLDL: https://github.com/Deruago/DLDL \n"
+			  << copyright_header
+			  << "For more information about DLDL: https://github.com/Deruago/DLDL \n"
 				 "\n";
 	Help();
 }
@@ -713,8 +720,8 @@ void DLDL::argument::Interpreter::Version()
 
 void DLDL::argument::Interpreter::License()
 {
-	std::cout << "Copyright (C) 2020-2022  Thimo Bohmer\n"
-				 "For more information about DLDL: https://github.com/Deruago/DLDL \n"
+	std::cout << copyright_header
+			  << "For more information about DLDL: https://github.com/Deruago/DLDL \n"
 				 "\n"
 			  << "This program is free software; you can redistribute it and/or\n"
 				 "modify it under the terms of the GNU General Public License\n"
@@ -740,6 +747,7 @@ void DLDL::argument::Interpreter::PrintUsedLicenses() const
 	std::cout << DeamerCC.GetLicenseMessage(1) << "\t----------------------------\n";
 	std::cout << DeamerExternal.GetLicenseMessage(1) << "\n";
 	std::cout << DeamerAlgorithm.GetLicenseMessage(1) << "\n";
+	std::cout << Dregx.GetLicenseMessage(1) << "\n";
 }
 
 void DLDL::argument::Interpreter::Exit()
@@ -767,11 +775,18 @@ void DLDL::argument::Interpreter::Initialize()
 		return;
 	}
 
+	if (parser.IsArgumentSet(Type::import_antlr_language_file))
+	{
+		ImportAntlrLanguageFile();
+	}
+
 	if (language_name.empty())
 	{
 		std::cout << "Please specify a language name using the argument: '-language-name'\n";
 		return;
 	}
+
+	InitializeExtraMap();
 
 	deamer::file::tool::Directory rootDirectory(deamerDirRelocation);
 	deamer::file::tool::Directory definition(DefinitionMap);
@@ -930,6 +945,79 @@ void DLDL::argument::Interpreter::InitializeTool()
 	WriteToDisk(projectDir);
 }
 
+void DLDL::argument::Interpreter::ImportAntlrLanguageFile()
+{
+	deamer::file::tool::Directory rootDirectory(deamerDirRelocation);
+	deamer::file::tool::Directory deamerDirectory(".deamer");
+	auto fileName = parser.GetArgument(Type::import_antlr_language_file).value;
+	deamer::file::tool::Directory dir;
+	auto loader = filesystem::LoadFilesystem(dir, deamerDirRelocation);
+	auto exists = loader.DirectContainsFile(fileName);
+	if (!exists)
+	{
+		// Error as nothing will be extracted
+		return;
+	}
+
+	std::string fileNameLowered;
+
+	// It exists, lower the filename and extract the language-name
+	for (auto character : fileName)
+	{
+		if (std::isalpha(character))
+		{
+			fileNameLowered += std::tolower(character);
+		}
+		else
+		{
+			fileNameLowered += character;
+		}
+	}
+
+	if (fileName.find_last_of("/\\") != std::string::npos)
+	{
+		fileName = fileName.substr(fileName.find_last_of("/\\") + 1, fileName.size());
+	}
+
+	if (fileNameLowered.find("parser.g4") != std::string::npos)
+	{
+		language_name =
+			fileName.erase(fileName.size() - std::string("parser.g4").size(), fileName.size());
+	}
+	else if (fileNameLowered.find("lexer.g4") != std::string::npos)
+	{
+		language_name =
+			fileName.erase(fileName.size() - std::string("lexer.g4").size(), fileName.size());
+	}
+	else if (fileNameLowered.find("compiler.g4") != std::string::npos)
+	{
+		language_name =
+			fileName.erase(fileName.size() - std::string("compiler.g4").size(), fileName.size());
+	}
+	else if (fileNameLowered.find(".g4") != std::string::npos)
+	{
+		language_name =
+			fileName.erase(fileName.size() - std::string(".g4").size(), fileName.size());
+	}
+}
+
+void DLDL::argument::Interpreter::InitializeExtraMap()
+{
+	if (language_name == "extra")
+	{
+		ExtraMap = "extra_";
+	}
+	else
+	{
+		ExtraMap = "extra";
+	}
+
+	deamer::file::tool::Directory rootDirectory(deamerDirRelocation);
+	deamer::file::tool::Directory deamerDirectory(ExtraMap);
+	rootDirectory.AddDirectory(rootDirectory);
+	WriteToDisk(rootDirectory);
+}
+
 void DLDL::argument::Interpreter::LoadInDeamerDir()
 {
 	deamer::file::tool::Directory dir;
@@ -993,7 +1081,7 @@ bool DLDL::argument::Interpreter::InitializeLanguages()
 		DLDL::ir::ConstructLanguage constructLanguage(deamerDirRelocation, DefinitionMap);
 		constructLanguage.Construct(os);
 		languages = constructLanguage.GetLanguages();
-	} catch (const std::logic_error&)
+	} catch (const std::logic_error& ex)
 	{
 		std::cout << "Your directory doesn't have a definition directory.\n";
 		return false;
@@ -1044,6 +1132,11 @@ void DLDL::argument::Interpreter::AutoCompile()
 			deamer::file::tool::action::CommandTarget::python, deamerDirRelocation);
 		std::system(command.c_str());
 	}
+}
+
+std::string DLDL::argument::Interpreter::GetDeamerDirRelocation()
+{
+	return deamerDirRelocation;
 }
 
 void DLDL::argument::Interpreter::AutoRun()
@@ -1124,6 +1217,10 @@ std::string DLDL::argument::Interpreter::RegenerationArgsDefinition() const
 	std::string args;
 	args += " -definition-map=\"" + DefinitionMap + "\"";
 	args += " -build-map=\"" + BuildMap + "\"";
+	if (!ExtraMap.empty())
+	{
+		args += " -extra-map=\"" + ExtraMap + "\"";
+	}
 	args += " " + parser.CompileToArgument(Type::activate_language_generation);
 	return args;
 }
