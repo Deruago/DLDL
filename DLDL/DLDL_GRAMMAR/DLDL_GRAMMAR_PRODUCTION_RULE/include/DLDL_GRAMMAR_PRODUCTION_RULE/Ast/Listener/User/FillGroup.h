@@ -4,6 +4,7 @@
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Listener/EnterExitListener.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/IR/ArrowGroup.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/IR/Group.h"
+#include "DLDL_GRAMMAR_PRODUCTION_RULE/IR/NotGroup.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/IR/OptionalGroup.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/IR/OrGroup.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/IR/PlusGroup.h"
@@ -16,8 +17,11 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ast::listener::user
 	{
 	public:
 		std::vector<std::vector<ir::Group*>> Groups;
+		const std::vector<std::string>* terminals;
 
-		FillGroup() : EnterExitListener()
+		FillGroup(const std::vector<std::string>& terminals_ = {})
+			: EnterExitListener(),
+			  terminals(&terminals_)
 		{
 			NewScope();
 		}
@@ -116,6 +120,16 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ast::listener::user
 			NewScope();
 		}
 
+		void ListenEntry(const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group* node) override
+		{
+			// Not yet implemented,
+		}
+
+		void ListenExit(const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group* node) override
+		{
+			// Not yet implemented,
+		}
+
 		void
 		ListenExit(const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::extension_group* node) override
 		{
@@ -134,12 +148,12 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ast::listener::user
 		{
 			const std::string nodeName = node->GetValue();
 			std::string loweredName;
-			
+
 			for (const auto& character : nodeName)
 			{
 				loweredName += ::tolower(character);
 			}
-			
+
 			if (loweredName == "empty" || loweredName == "epsilon")
 			{
 				return;

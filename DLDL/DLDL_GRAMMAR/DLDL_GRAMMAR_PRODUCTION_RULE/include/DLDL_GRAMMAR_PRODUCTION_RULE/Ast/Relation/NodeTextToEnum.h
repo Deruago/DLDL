@@ -33,6 +33,9 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace relation {
 		{ "zero_or_more_group", ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::zero_or_more_group },
 	
 
+		{ "not_group", ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::not_group },
+	
+
 		{ "one_or_more_group", ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::one_or_more_group },
 	
 
@@ -73,6 +76,9 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace relation {
 	
 
 		{ "EXCLAMATION_MARK", ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::EXCLAMATION_MARK },
+	
+
+		{ "TILDE", ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::TILDE },
 	
 
 		{ "ARROW", ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::ARROW },

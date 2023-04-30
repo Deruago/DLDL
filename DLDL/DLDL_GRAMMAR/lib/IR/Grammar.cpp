@@ -155,7 +155,8 @@ bool DLDL::ir::Grammar::IsUnknownReference(const std::string& nonterminal)
 }
 
 std::optional<std::vector<DLDL::ir::ProductionRule>>
-DLDL::ir::Grammar::ConvertToProductionRule(std::string text, std::string nonterminal)
+DLDL::ir::Grammar::ConvertToProductionRule(std::string text, std::string nonterminal,
+										   const std::vector<std::string>& terminals)
 {
 	if (text.empty())
 	{
@@ -186,11 +187,11 @@ DLDL::ir::Grammar::ConvertToProductionRule(std::string text, std::string nonterm
 		return {};
 	}
 
-	auto fillGroup = DLDL_GRAMMAR_PRODUCTION_RULE::ast::listener::user::FillGroup();
+	auto fillGroup = DLDL_GRAMMAR_PRODUCTION_RULE::ast::listener::user::FillGroup(terminals);
 	fillGroup.Dispatch(ast->GetStartNode());
 
 	auto* const group = fillGroup.GetGroup();
-	const auto environment = group->GetEnvironment();
+	const auto environment = group->GetEnvironment(this);
 
 	for (const auto& generatedNonTerminal : environment.nonterminals)
 	{

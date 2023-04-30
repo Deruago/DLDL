@@ -71,7 +71,7 @@ extern int DLDL_GRAMMARdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 70 "./DLDL_GRAMMAR_parser.y"
+#line 78 "./DLDL_GRAMMAR_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_GRAMMAR::ast::node::COMMENT* DLDL_GRAMMAR_COMMENT;

@@ -22,6 +22,7 @@ Ignore: RIGHT_SQUARE_BRACKET   [\]]
 
 Ignore: QUESTION_MARK          [?]
 Ignore: EXCLAMATION_MARK       [!]
+Ignore: TILDE                  [~]
 
 Ignore: ARROW                  [\-][>]
 

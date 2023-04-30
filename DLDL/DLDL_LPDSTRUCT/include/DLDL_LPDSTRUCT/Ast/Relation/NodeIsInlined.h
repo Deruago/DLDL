@@ -38,7 +38,17 @@ namespace DLDL_LPDSTRUCT { namespace ast { namespace relation {
 			return false;
 		}
 
-		if (t == ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______)
+		if (t == ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_60)
+		{
+			return true;
+		}
+
+		if (t == ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_63)
+		{
+			return true;
+		}
+
+		if (t == ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_66)
 		{
 			return true;
 		}

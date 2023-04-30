@@ -9,7 +9,9 @@
 #include "DLDL_LPDSTRUCT/Ast/Node/argument.h"
 #include "DLDL_LPDSTRUCT/Ast/Node/argument_name.h"
 #include "DLDL_LPDSTRUCT/Ast/Node/argument_block.h"
-#include "DLDL_LPDSTRUCT/Ast/Node/deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______.h"
+#include "DLDL_LPDSTRUCT/Ast/Node/deamerreserved_long_60.h"
+#include "DLDL_LPDSTRUCT/Ast/Node/deamerreserved_long_63.h"
+#include "DLDL_LPDSTRUCT/Ast/Node/deamerreserved_long_66.h"
 #include "DLDL_LPDSTRUCT/Ast/Node/COLON.h"
 #include "DLDL_LPDSTRUCT/Ast/Node/LEFT_ANGLE_BRACKET.h"
 #include "DLDL_LPDSTRUCT/Ast/Node/RIGHT_ANGLE_BRACKET.h"
@@ -72,10 +74,24 @@ namespace DLDL_LPDSTRUCT { namespace ast { namespace relation {
 	};
 
 	template<>
-	struct NodeEnumToType<::DLDL_LPDSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______>
+	struct NodeEnumToType<::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_60>
 	{
-		constexpr static auto value = ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______;
-		using type = ::DLDL_LPDSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______;
+		constexpr static auto value = ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_60;
+		using type = ::DLDL_LPDSTRUCT::ast::node::deamerreserved_long_60;
+	};
+
+	template<>
+	struct NodeEnumToType<::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_63>
+	{
+		constexpr static auto value = ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_63;
+		using type = ::DLDL_LPDSTRUCT::ast::node::deamerreserved_long_63;
+	};
+
+	template<>
+	struct NodeEnumToType<::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_66>
+	{
+		constexpr static auto value = ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_66;
+		using type = ::DLDL_LPDSTRUCT::ast::node::deamerreserved_long_66;
 	};
 
 	template<>

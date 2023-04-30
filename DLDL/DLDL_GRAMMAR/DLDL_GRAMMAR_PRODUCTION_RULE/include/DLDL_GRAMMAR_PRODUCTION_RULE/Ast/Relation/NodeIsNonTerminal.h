@@ -43,6 +43,11 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace relation {
 			return true;
 		}
 
+		if (t == ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::not_group)
+		{
+			return true;
+		}
+
 		if (t == ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::one_or_more_group)
 		{
 			return true;

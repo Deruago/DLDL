@@ -735,10 +735,16 @@ char *yytext;
 #define YY_NO_UNISTD_H 1
 #line 7 "./DLDL_LDOSTRUCT_lexer.l"
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <vector>
+#include <cstdio>
+#include <cstdlib>
+#include <clocale>
+#include <cwchar>
 #include <Deamer/External/Cpp/Lexer/TerminalObject.h>
 #include "DLDL_LDOSTRUCT/Flex/Lexer.h"
 
@@ -764,10 +770,15 @@ char *yytext;
 void showError();
 extern int DLDL_LDOSTRUCTlex();
 
-static bool local_store = false;
+static bool local_store     = false;
 static bool include_deleted = false;
-static int column = 0;
-static void handleColumn(const std::string& text);
+
+int DLDL_LDOSTRUCT_column    = 1;
+static int next_column = 1;
+
+static std::size_t min(std::size_t a, std::size_t b);
+
+static void handleColumn();
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject);
 static std::vector<const deamer::external::cpp::lexer::TerminalObject*> 
 local_objects;
@@ -776,8 +787,8 @@ local_objects;
 #ifndef yyval
 #define yyval yytext
 #endif // yyval
-#line 780 "lex.DLDL_LDOSTRUCT.c"
-#line 781 "lex.DLDL_LDOSTRUCT.c"
+#line 791 "lex.DLDL_LDOSTRUCT.c"
+#line 792 "lex.DLDL_LDOSTRUCT.c"
 
 #define INITIAL 0
 
@@ -994,10 +1005,10 @@ YY_DECL
 		}
 
 	{
-#line 60 "./DLDL_LDOSTRUCT_lexer.l"
+#line 71 "./DLDL_LDOSTRUCT_lexer.l"
 
 
-#line 1001 "lex.DLDL_LDOSTRUCT.c"
+#line 1012 "lex.DLDL_LDOSTRUCT.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1062,47 +1073,47 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 62 "./DLDL_LDOSTRUCT_lexer.l"
-{  if (local_store && !true || local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(1))); else if (local_store && true) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(1))); else if (local_store && true); else if (!true || include_deleted) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(1)); else if (true) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(1)); handleColumn(yyval); if ((!local_store && true) || (!local_store && include_deleted)) return (COLON); }
+#line 73 "./DLDL_LDOSTRUCT_lexer.l"
+{ handleColumn();  if (local_store && !true || local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, DLDL_LDOSTRUCT_column, std::size_t(1))); else if (local_store && true) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, DLDL_LDOSTRUCT_column, std::size_t(1))); else if (local_store && true); else if (!true || include_deleted) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, DLDL_LDOSTRUCT_column, std::size_t(1)); else if (true) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, DLDL_LDOSTRUCT_column, std::size_t(1)); if ((!local_store && true) || (!local_store && include_deleted)) return (COLON); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 63 "./DLDL_LDOSTRUCT_lexer.l"
-{  if (local_store && !true || local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(2))); else if (local_store && true) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(2))); else if (local_store && true); else if (!true || include_deleted) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(2)); else if (true) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(2)); handleColumn(yyval); if ((!local_store && true) || (!local_store && include_deleted)) return (LEFT_ANGLE_BRACKET); }
+#line 74 "./DLDL_LDOSTRUCT_lexer.l"
+{ handleColumn();  if (local_store && !true || local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, DLDL_LDOSTRUCT_column, std::size_t(2))); else if (local_store && true) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, DLDL_LDOSTRUCT_column, std::size_t(2))); else if (local_store && true); else if (!true || include_deleted) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, DLDL_LDOSTRUCT_column, std::size_t(2)); else if (true) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, DLDL_LDOSTRUCT_column, std::size_t(2)); if ((!local_store && true) || (!local_store && include_deleted)) return (LEFT_ANGLE_BRACKET); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 64 "./DLDL_LDOSTRUCT_lexer.l"
-{  if (local_store && !true || local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(3))); else if (local_store && true) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(3))); else if (local_store && true); else if (!true || include_deleted) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(3)); else if (true) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(3)); handleColumn(yyval); if ((!local_store && true) || (!local_store && include_deleted)) return (RIGHT_ANGLE_BRACKET); }
+#line 75 "./DLDL_LDOSTRUCT_lexer.l"
+{ handleColumn();  if (local_store && !true || local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, DLDL_LDOSTRUCT_column, std::size_t(3))); else if (local_store && true) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, DLDL_LDOSTRUCT_column, std::size_t(3))); else if (local_store && true); else if (!true || include_deleted) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, DLDL_LDOSTRUCT_column, std::size_t(3)); else if (true) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, DLDL_LDOSTRUCT_column, std::size_t(3)); if ((!local_store && true) || (!local_store && include_deleted)) return (RIGHT_ANGLE_BRACKET); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 65 "./DLDL_LDOSTRUCT_lexer.l"
-{  if (local_store && !false || local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(4))); else if (local_store && true) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(4))); else if (local_store && false); else if (!false || include_deleted) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(4)); else if (true) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(4)); handleColumn(yyval); if ((!local_store && true) || (!local_store && include_deleted)) return (VARNAME); }
+#line 76 "./DLDL_LDOSTRUCT_lexer.l"
+{ handleColumn();  if (local_store && !false || local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, DLDL_LDOSTRUCT_column, std::size_t(4))); else if (local_store && true) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, DLDL_LDOSTRUCT_column, std::size_t(4))); else if (local_store && false); else if (!false || include_deleted) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, DLDL_LDOSTRUCT_column, std::size_t(4)); else if (true) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, DLDL_LDOSTRUCT_column, std::size_t(4)); if ((!local_store && true) || (!local_store && include_deleted)) return (VARNAME); }
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 66 "./DLDL_LDOSTRUCT_lexer.l"
-{  if (local_store && !false || local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(5))); else if (local_store && true) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(5))); else if (local_store && false); else if (!false || include_deleted) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(5)); else if (true) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(5)); handleColumn(yyval); if ((!local_store && true) || (!local_store && include_deleted)) return (INDENTED_VALUE); }
+#line 77 "./DLDL_LDOSTRUCT_lexer.l"
+{ handleColumn();  if (local_store && !false || local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, DLDL_LDOSTRUCT_column, std::size_t(5))); else if (local_store && true) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, DLDL_LDOSTRUCT_column, std::size_t(5))); else if (local_store && false); else if (!false || include_deleted) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, DLDL_LDOSTRUCT_column, std::size_t(5)); else if (true) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, DLDL_LDOSTRUCT_column, std::size_t(5)); if ((!local_store && true) || (!local_store && include_deleted)) return (INDENTED_VALUE); }
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 67 "./DLDL_LDOSTRUCT_lexer.l"
-{  if (local_store && !true || local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(6))); else if (local_store && false) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(6))); else if (local_store && true); else if (!true || include_deleted) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(6)); else if (false) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, column, std::size_t(6)); handleColumn(yyval); if ((!local_store && false) || (!local_store && include_deleted)) return (ESCAPE_CHARS); }
+#line 78 "./DLDL_LDOSTRUCT_lexer.l"
+{ handleColumn();  if (local_store && !true || local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, DLDL_LDOSTRUCT_column, std::size_t(6))); else if (local_store && false) store(new deamer::external::cpp::lexer::TerminalObject("", yylineno, DLDL_LDOSTRUCT_column, std::size_t(6))); else if (local_store && true); else if (!true || include_deleted) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, DLDL_LDOSTRUCT_column, std::size_t(6)); else if (false) DLDL_LDOSTRUCTlval.Terminal = new deamer::external::cpp::lexer::TerminalObject("", yylineno, DLDL_LDOSTRUCT_column, std::size_t(6)); if ((!local_store && false) || (!local_store && include_deleted)) return (ESCAPE_CHARS); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 69 "./DLDL_LDOSTRUCT_lexer.l"
-{ if (local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, column, std::size_t(0))); }
+#line 80 "./DLDL_LDOSTRUCT_lexer.l"
+{ if (local_store && include_deleted) store(new deamer::external::cpp::lexer::TerminalObject(yyval, yylineno, DLDL_LDOSTRUCT_column, std::size_t(0))); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 71 "./DLDL_LDOSTRUCT_lexer.l"
+#line 82 "./DLDL_LDOSTRUCT_lexer.l"
 ECHO;
 	YY_BREAK
-#line 1112 "lex.DLDL_LDOSTRUCT.c"
+#line 1123 "lex.DLDL_LDOSTRUCT.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2120,7 +2131,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 71 "./DLDL_LDOSTRUCT_lexer.l"
+#line 82 "./DLDL_LDOSTRUCT_lexer.l"
 
 
 static void store(const deamer::external::cpp::lexer::TerminalObject* const newObject)
@@ -2133,17 +2144,29 @@ static void clear()
 	local_objects.clear();
 }
 
-static void handleColumn(const std::string& text)
+static void handleColumn()
 {
-	int& currentColumn = column;
-	currentColumn += text.size();
+	const std::string text = yytext;
+	DLDL_LDOSTRUCT_column = next_column;
+
 	for (auto character : text)
 	{
+		next_column++;
 		if (character == '\n')
 		{
-			currentColumn = 0;
-			break;
+			next_column = 1;
 		}
+	}
+}
+
+static std::size_t min(std::size_t a, std::size_t b) {
+    if (b < a)
+	{
+		return b;
+	}
+	else
+	{
+		return a;
 	}
 }
 
@@ -2159,7 +2182,7 @@ std::vector<const ::deamer::external::cpp::lexer::TerminalObject*> DLDL_LDOSTRUC
 	}
 
 	local_store = true;
-	column = 0;
+	DLDL_LDOSTRUCT_column = 0;
 
 	YY_BUFFER_STATE buf;
 	buf = yy_scan_string(text.c_str());

@@ -541,9 +541,9 @@ AccessTemplateBase<::DLDL_GENERATION::ast::node::argument_declaration> argument_
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_GENERATION::ast::node::type> type();
+		AccessTemplateBase<::DLDL_GENERATION::ast::node::GENERATE> GENERATE();
+AccessTemplateBase<::DLDL_GENERATION::ast::node::type> type();
 AccessTemplateBase<::DLDL_GENERATION::ast::node::tool> tool();
-AccessTemplateBase<::DLDL_GENERATION::ast::node::GENERATE> GENERATE();
 
 
 		template<typename FunctionType>
@@ -1803,6 +1803,14 @@ AccessTemplateBase<::DLDL_GENERATION::ast::node::VALUE> VALUE();
 			return AccessTemplateBase<::DLDL_GENERATION::ast::node::argument_declaration>(Get<::DLDL_GENERATION::ast::Type::argument_declaration>(ts));
 		}
 
+		inline AccessTemplateBase<::DLDL_GENERATION::ast::node::GENERATE> AccessTemplateBase<::DLDL_GENERATION::ast::node::generate_declaration>::GENERATE()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_GENERATION::ast::node::GENERATE>(Get<::DLDL_GENERATION::ast::Type::GENERATE>(ts));
+		}
+
 		inline AccessTemplateBase<::DLDL_GENERATION::ast::node::type> AccessTemplateBase<::DLDL_GENERATION::ast::node::generate_declaration>::type()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
@@ -1817,14 +1825,6 @@ AccessTemplateBase<::DLDL_GENERATION::ast::node::VALUE> VALUE();
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_GENERATION::ast::node::tool>(Get<::DLDL_GENERATION::ast::Type::tool>(ts));
-		}
-
-		inline AccessTemplateBase<::DLDL_GENERATION::ast::node::GENERATE> AccessTemplateBase<::DLDL_GENERATION::ast::node::generate_declaration>::GENERATE()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_GENERATION::ast::node::GENERATE>(Get<::DLDL_GENERATION::ast::Type::GENERATE>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_GENERATION::ast::node::tool> AccessTemplateBase<::DLDL_GENERATION::ast::node::integrate_declaration>::tool()

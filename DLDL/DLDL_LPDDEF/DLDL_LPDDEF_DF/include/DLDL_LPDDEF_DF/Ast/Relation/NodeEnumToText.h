@@ -35,6 +35,11 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace relation {
 	}
 	
 
+	case ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_optional__value_part__: {
+		return "deamerreserved_optional__value_part__";
+	}
+	
+
 	case ::DLDL_LPDDEF_DF::ast::Type::optional_variant: {
 		return "optional_variant";
 	}
@@ -67,6 +72,11 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace relation {
 
 	case ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__COMMA__value_type__: {
 		return "deamerreserved_star__COMMA__value_type__";
+	}
+	
+
+	case ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_long_54: {
+		return "deamerreserved_long_54";
 	}
 	
 

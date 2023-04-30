@@ -86,14 +86,34 @@ namespace DLDL_LPDSTRUCT { namespace ast { namespace listener { namespace deamer
 			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"argument_block\"];\n";
 		}
 
-		void ListenEntry(const ::DLDL_LPDSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______* node) override
+		void ListenEntry(const ::DLDL_LPDSTRUCT::ast::node::deamerreserved_long_60* node) override
 		{
 			for (const auto* child : node->GetNodes())
 			{
 				AddConnection(node, child);
 			}
 
-			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______\"];\n";
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_long_60\"];\n";
+		}
+
+		void ListenEntry(const ::DLDL_LPDSTRUCT::ast::node::deamerreserved_long_63* node) override
+		{
+			for (const auto* child : node->GetNodes())
+			{
+				AddConnection(node, child);
+			}
+
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_long_63\"];\n";
+		}
+
+		void ListenEntry(const ::DLDL_LPDSTRUCT::ast::node::deamerreserved_long_66* node) override
+		{
+			for (const auto* child : node->GetNodes())
+			{
+				AddConnection(node, child);
+			}
+
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_long_66\"];\n";
 		}
 
 		void ListenEntry(const ::DLDL_LPDSTRUCT::ast::node::COLON* node) override
@@ -191,7 +211,15 @@ namespace DLDL_LPDSTRUCT { namespace ast { namespace listener { namespace deamer
 		{
 		}
 
-		void ListenExit(const ::DLDL_LPDSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______* node) override
+		void ListenExit(const ::DLDL_LPDSTRUCT::ast::node::deamerreserved_long_60* node) override
+		{
+		}
+
+		void ListenExit(const ::DLDL_LPDSTRUCT::ast::node::deamerreserved_long_63* node) override
+		{
+		}
+
+		void ListenExit(const ::DLDL_LPDSTRUCT::ast::node::deamerreserved_long_66* node) override
 		{
 		}
 

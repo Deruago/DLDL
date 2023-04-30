@@ -96,6 +96,16 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace listener { na
 			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"zero_or_more_group\"];\n";
 		}
 
+		void ListenEntry(const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group* node) override
+		{
+			for (const auto* child : node->GetNodes())
+			{
+				AddConnection(node, child);
+			}
+
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"not_group\"];\n";
+		}
+
 		void ListenEntry(const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::one_or_more_group* node) override
 		{
 			for (const auto* child : node->GetNodes())
@@ -236,6 +246,16 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace listener { na
 			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"EXCLAMATION_MARK\"];\n";
 		}
 
+		void ListenEntry(const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE* node) override
+		{
+			for (const auto* child : node->GetNodes())
+			{
+				AddConnection(node, child);
+			}
+
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"TILDE\"];\n";
+		}
+
 		void ListenEntry(const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ARROW* node) override
 		{
 			for (const auto* child : node->GetNodes())
@@ -362,6 +382,10 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace listener { na
 		}
 
 		void ListenExit(const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group* node) override
+		{
+		}
+
+		void ListenExit(const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group* node) override
 		{
 		}
 

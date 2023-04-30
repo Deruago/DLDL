@@ -8,6 +8,7 @@
 #include "DLDL_LPDDEF_DF/Ast/Node/stmt.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/comment_line.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/vector_variant.h"
+#include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_optional__value_part__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/optional_variant.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/value_part.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/standard_variant.h"
@@ -15,6 +16,7 @@
 #include "DLDL_LPDDEF_DF/Ast/Node/value_type.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_arrow__value_type__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_star__COMMA__value_type__.h"
+#include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_long_54.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/var_type.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_arrow__VARNAME__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_star__COLON__VARNAME__.h"
@@ -85,6 +87,13 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace relation {
 	};
 
 	template<>
+	struct NodeEnumToType<::DLDL_LPDDEF_DF::ast::Type::deamerreserved_optional__value_part__>
+	{
+		constexpr static auto value = ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_optional__value_part__;
+		using type = ::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__;
+	};
+
+	template<>
 	struct NodeEnumToType<::DLDL_LPDDEF_DF::ast::Type::optional_variant>
 	{
 		constexpr static auto value = ::DLDL_LPDDEF_DF::ast::Type::optional_variant;
@@ -131,6 +140,13 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace relation {
 	{
 		constexpr static auto value = ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__COMMA__value_type__;
 		using type = ::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__;
+	};
+
+	template<>
+	struct NodeEnumToType<::DLDL_LPDDEF_DF::ast::Type::deamerreserved_long_54>
+	{
+		constexpr static auto value = ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_long_54;
+		using type = ::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54;
 	};
 
 	template<>

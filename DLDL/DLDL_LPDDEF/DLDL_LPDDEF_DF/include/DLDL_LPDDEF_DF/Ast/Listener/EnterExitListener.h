@@ -29,6 +29,7 @@
 #include "DLDL_LPDDEF_DF/Ast/Node/stmt.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/comment_line.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/vector_variant.h"
+#include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_optional__value_part__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/optional_variant.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/value_part.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/standard_variant.h"
@@ -36,6 +37,7 @@
 #include "DLDL_LPDDEF_DF/Ast/Node/value_type.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_arrow__value_type__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_star__COMMA__value_type__.h"
+#include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_long_54.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/var_type.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_arrow__VARNAME__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_star__COLON__VARNAME__.h"
@@ -281,6 +283,15 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener {
 				break;
 			}
 
+			case DLDL_LPDDEF_DF::ast::Type::deamerreserved_optional__value_part__:
+			{
+				// Enter nonterminal
+				EnterAnything(node);
+				EnterNonTerminal(node);
+				ListenEntry(static_cast<const DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__*>(node));
+				break;
+			}
+
 			case DLDL_LPDDEF_DF::ast::Type::optional_variant:
 			{
 				// Enter nonterminal
@@ -341,6 +352,15 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener {
 				EnterAnything(node);
 				EnterNonTerminal(node);
 				ListenEntry(static_cast<const DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__*>(node));
+				break;
+			}
+
+			case DLDL_LPDDEF_DF::ast::Type::deamerreserved_long_54:
+			{
+				// Enter nonterminal
+				EnterAnything(node);
+				EnterNonTerminal(node);
+				ListenEntry(static_cast<const DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54*>(node));
 				break;
 			}
 
@@ -600,6 +620,15 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener {
 				break;
 			}
 
+			case DLDL_LPDDEF_DF::ast::Type::deamerreserved_optional__value_part__:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
 			case DLDL_LPDDEF_DF::ast::Type::optional_variant:
 			{
 				// Exit nonterminal
@@ -658,6 +687,15 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener {
 			{
 				// Exit nonterminal
 				ListenExit(static_cast<const DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LPDDEF_DF::ast::Type::deamerreserved_long_54:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54*>(node));
 				ExitNonTerminal(node);
 				ExitAnything(node);
 				break;
@@ -870,6 +908,10 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener {
 		{
 		}
 
+		virtual void ListenEntry(const DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__* node) 
+		{
+		}
+
 		virtual void ListenEntry(const DLDL_LPDDEF_DF::ast::node::optional_variant* node) 
 		{
 		}
@@ -895,6 +937,10 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener {
 		}
 
 		virtual void ListenEntry(const DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__* node) 
+		{
+		}
+
+		virtual void ListenEntry(const DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54* node) 
 		{
 		}
 
@@ -935,6 +981,10 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener {
 		{
 		}
 
+		virtual void ListenExit(const DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__* node) 
+		{
+		}
+
 		virtual void ListenExit(const DLDL_LPDDEF_DF::ast::node::optional_variant* node) 
 		{
 		}
@@ -960,6 +1010,10 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener {
 		}
 
 		virtual void ListenExit(const DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54* node) 
 		{
 		}
 

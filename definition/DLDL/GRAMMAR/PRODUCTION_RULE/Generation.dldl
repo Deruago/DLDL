@@ -1,0 +1,7 @@
+Generate: Lexer Flex
+Generate: Parser Bison
+Generate: Ast CPP
+
+Integrate: Flex Bison
+Integrate: Flex DeamerAST
+Integrate: Bison DeamerAST

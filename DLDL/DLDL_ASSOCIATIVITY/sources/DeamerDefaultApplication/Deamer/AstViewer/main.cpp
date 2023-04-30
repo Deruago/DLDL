@@ -1,12 +1,12 @@
+#include "DLDL_ASSOCIATIVITY/Ast/Relation/NodeEnumToText.h"
 #include "DLDL_ASSOCIATIVITY/Ast/Visualisation/Graph.h"
 #include "DLDL_ASSOCIATIVITY/Bison/Parser.h"
-#include "DLDL_ASSOCIATIVITY/Ast/Relation/NodeEnumToText.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <vector>
 
-std::string ReadInFile(const std::string& file)
+static std::string ReadInFile(const std::string& file)
 {
 	const std::ifstream inputFile(file);
 

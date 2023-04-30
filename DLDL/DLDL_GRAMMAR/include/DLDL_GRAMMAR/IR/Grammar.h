@@ -143,7 +143,8 @@ namespace DLDL::ir
 		void SetInline(const std::string& name, bool inlineNonTerminal);
 
 		std::optional<std::vector<DLDL::ir::ProductionRule>>
-		ConvertToProductionRule(std::string text, std::string nonterminal);
+		ConvertToProductionRule(std::string text, std::string nonterminal,
+								const std::vector<std::string>& terminals = {});
 
 		void AddProductionRules(const std::string& nonterminal, const std::string& productionrule);
 

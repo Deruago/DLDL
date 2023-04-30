@@ -58,6 +58,11 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace relation {
 			return false;
 		}
 
+		if (t == ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::TILDE)
+		{
+			return false;
+		}
+
 		if (t == ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::ARROW)
 		{
 			return false;

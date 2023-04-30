@@ -3,6 +3,8 @@
 
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/IR/NonTerminal.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/IR/ProductionRule.h"
+#include "DLDL_GRAMMAR_PRODUCTION_RULE/IR/Value.h"
+#include <memory>
 #include <set>
 #include <utility>
 #include <vector>
@@ -28,7 +30,7 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 		void AddNonTerminal(const std::string& text, std::vector<ProductionRule> productionRules)
 		{
 			NonTerminal newNonTerminal(text, ValueType::generated, std::move(productionRules));
-			
+
 			for (const auto& nonterminal : nonterminals)
 			{
 				if (nonterminal == newNonTerminal)
@@ -36,7 +38,7 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 					return;
 				}
 			}
-			
+
 			nonterminals.emplace_back(newNonTerminal);
 		}
 

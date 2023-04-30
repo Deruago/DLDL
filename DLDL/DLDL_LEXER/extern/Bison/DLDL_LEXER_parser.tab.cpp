@@ -65,6 +65,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 #include <cstring>
 #include <stdio.h>
 #include <Deamer/External/Cpp/Lexer/TerminalObject.h>
@@ -99,13 +100,20 @@
 #ifndef YY_parse_LLOC
 #define YY_parse_LLOC DLDL_LEXERlloc
 #endif //YY_parse_LLOC
-#define YYERROR_VERBOSE
+#define YYERROR_VERBOSE 1
+
+
 
 void DLDL_LEXERerror(const char* s);
 int DLDL_LEXERlex();
 static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 
-#line 109 "DLDL_LEXER_parser.tab.c"
+extern int DLDL_LEXERlineno;
+extern int DLDL_LEXER_column;
+
+static const std::string* DLDL_LEXER_input_text = nullptr;
+
+#line 117 "DLDL_LEXER_parser.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -478,8 +486,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    92,    92,   103,   109,   119,   129,   135,   145,   151,
-     157,   163,   169,   175
+       0,   100,   100,   111,   117,   127,   137,   143,   153,   159,
+     165,   171,   177,   183
 };
 #endif
 
@@ -1080,7 +1088,7 @@ yyuserAction (yyRuleNum yyrule, int yyrhslen, yyGLRStackItem* yyvsp,
   switch (yyrule)
     {
   case 2: /* program: stmts  */
-#line 92 "./DLDL_LEXER_parser.y"
+#line 100 "./DLDL_LEXER_parser.y"
                {
 		auto* const newNode = new DLDL_LEXER::ast::node::program({::DLDL_LEXER::ast::Type::program, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.DLDL_LEXER_stmts) });
 		((*yyvalp).DLDL_LEXER_program) = newNode;
@@ -1088,132 +1096,132 @@ yyuserAction (yyRuleNum yyrule, int yyrhslen, yyGLRStackItem* yyvsp,
 		// Ignored, Deleted, tokens are deleted
 		outputTree = new ::deamer::external::cpp::ast::Tree(newNode);
 	}
-#line 1092 "DLDL_LEXER_parser.tab.c"
+#line 1100 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 3: /* stmts: stmt stmts  */
-#line 103 "./DLDL_LEXER_parser.y"
+#line 111 "./DLDL_LEXER_parser.y"
                     {
 		auto* const newNode = new DLDL_LEXER::ast::node::stmts({::DLDL_LEXER::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.DLDL_LEXER_stmt), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.DLDL_LEXER_stmts) });
 		((*yyvalp).DLDL_LEXER_stmts) = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-#line 1103 "DLDL_LEXER_parser.tab.c"
+#line 1111 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 4: /* stmts: %empty  */
-#line 109 "./DLDL_LEXER_parser.y"
+#line 117 "./DLDL_LEXER_parser.y"
            {
 		auto* const newNode = new DLDL_LEXER::ast::node::stmts({::DLDL_LEXER::ast::Type::stmts, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, {  });
 		((*yyvalp).DLDL_LEXER_stmts) = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-#line 1114 "DLDL_LEXER_parser.tab.c"
+#line 1122 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 5: /* stmt: tokendeclaration  */
-#line 119 "./DLDL_LEXER_parser.y"
+#line 127 "./DLDL_LEXER_parser.y"
                           {
 		auto* const newNode = new DLDL_LEXER::ast::node::stmt({::DLDL_LEXER::ast::Type::stmt, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.DLDL_LEXER_tokendeclaration) });
 		((*yyvalp).DLDL_LEXER_stmt) = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-#line 1125 "DLDL_LEXER_parser.tab.c"
+#line 1133 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 6: /* tokendeclaration: abstraction TERMINAL REGEX  */
-#line 129 "./DLDL_LEXER_parser.y"
+#line 137 "./DLDL_LEXER_parser.y"
                                     {
 		auto* const newNode = new DLDL_LEXER::ast::node::tokendeclaration({::DLDL_LEXER::ast::Type::tokendeclaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.DLDL_LEXER_abstraction), new DLDL_LEXER::ast::node::TERMINAL({::DLDL_LEXER::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.Terminal) }), new DLDL_LEXER::ast::node::REGEX({::DLDL_LEXER::ast::Type::REGEX, ::deamer::external::cpp::ast::NodeValue::terminal, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.Terminal) }) });
 		((*yyvalp).DLDL_LEXER_tokendeclaration) = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-#line 1136 "DLDL_LEXER_parser.tab.c"
+#line 1144 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 7: /* tokendeclaration: TERMINAL REGEX  */
-#line 135 "./DLDL_LEXER_parser.y"
+#line 143 "./DLDL_LEXER_parser.y"
                           {
 		auto* const newNode = new DLDL_LEXER::ast::node::tokendeclaration({::DLDL_LEXER::ast::Type::tokendeclaration, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LEXER::ast::node::TERMINAL({::DLDL_LEXER::ast::Type::TERMINAL, ::deamer::external::cpp::ast::NodeValue::terminal, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.Terminal) }), new DLDL_LEXER::ast::node::REGEX({::DLDL_LEXER::ast::Type::REGEX, ::deamer::external::cpp::ast::NodeValue::terminal, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.Terminal) }) });
 		((*yyvalp).DLDL_LEXER_tokendeclaration) = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-#line 1147 "DLDL_LEXER_parser.tab.c"
+#line 1155 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 8: /* abstraction: DELETE_ABSTRACTION  */
-#line 145 "./DLDL_LEXER_parser.y"
+#line 153 "./DLDL_LEXER_parser.y"
                             {
 		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LEXER::ast::node::DELETE_ABSTRACTION({::DLDL_LEXER::ast::Type::DELETE_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.Terminal) }) });
 		((*yyvalp).DLDL_LEXER_abstraction) = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-#line 1158 "DLDL_LEXER_parser.tab.c"
+#line 1166 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 9: /* abstraction: IGNORE_ABSTRACTION  */
-#line 151 "./DLDL_LEXER_parser.y"
+#line 159 "./DLDL_LEXER_parser.y"
                               {
 		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LEXER::ast::node::IGNORE_ABSTRACTION({::DLDL_LEXER::ast::Type::IGNORE_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.Terminal) }) });
 		((*yyvalp).DLDL_LEXER_abstraction) = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-#line 1169 "DLDL_LEXER_parser.tab.c"
+#line 1177 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 10: /* abstraction: CRASH_ABSTRACTION  */
-#line 157 "./DLDL_LEXER_parser.y"
+#line 165 "./DLDL_LEXER_parser.y"
                              {
 		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 2, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LEXER::ast::node::CRASH_ABSTRACTION({::DLDL_LEXER::ast::Type::CRASH_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.Terminal) }) });
 		((*yyvalp).DLDL_LEXER_abstraction) = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-#line 1180 "DLDL_LEXER_parser.tab.c"
+#line 1188 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 11: /* abstraction: NOVALUE_ABSTRACTION  */
-#line 163 "./DLDL_LEXER_parser.y"
+#line 171 "./DLDL_LEXER_parser.y"
                                {
 		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 3, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LEXER::ast::node::NOVALUE_ABSTRACTION({::DLDL_LEXER::ast::Type::NOVALUE_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.Terminal) }) });
 		((*yyvalp).DLDL_LEXER_abstraction) = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-#line 1191 "DLDL_LEXER_parser.tab.c"
+#line 1199 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 12: /* abstraction: STANDARD_ABSTRACTION  */
-#line 169 "./DLDL_LEXER_parser.y"
+#line 177 "./DLDL_LEXER_parser.y"
                                 {
 		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 4, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LEXER::ast::node::STANDARD_ABSTRACTION({::DLDL_LEXER::ast::Type::STANDARD_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.Terminal) }) });
 		((*yyvalp).DLDL_LEXER_abstraction) = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-#line 1202 "DLDL_LEXER_parser.tab.c"
+#line 1210 "DLDL_LEXER_parser.tab.c"
     break;
 
   case 13: /* abstraction: UNKNOWN_ABSTRACTION  */
-#line 175 "./DLDL_LEXER_parser.y"
+#line 183 "./DLDL_LEXER_parser.y"
                                {
 		auto* const newNode = new DLDL_LEXER::ast::node::abstraction({::DLDL_LEXER::ast::Type::abstraction, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 5, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LEXER::ast::node::UNKNOWN_ABSTRACTION({::DLDL_LEXER::ast::Type::UNKNOWN_ABSTRACTION, ::deamer::external::cpp::ast::NodeValue::terminal, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.Terminal) }) });
 		((*yyvalp).DLDL_LEXER_abstraction) = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-#line 1213 "DLDL_LEXER_parser.tab.c"
+#line 1221 "DLDL_LEXER_parser.tab.c"
     break;
 
 
-#line 1217 "DLDL_LEXER_parser.tab.c"
+#line 1225 "DLDL_LEXER_parser.tab.c"
 
       default: break;
     }
@@ -2902,16 +2910,95 @@ yypdumpstack (yyGLRStack* yystackp)
 #define yynerrs DLDL_LEXERnerrs
 
 
-#line 185 "./DLDL_LEXER_parser.y"
+#line 193 "./DLDL_LEXER_parser.y"
 
 
 void DLDL_LEXERerror(const char* s)
 {
-	std::cout << "Syntax error on line: " << s << '\n';
+	std::cout << "Error: " << s << "\n";
+	std::cout << "In line: " << DLDL_LEXERlineno << ", Column: " << DLDL_LEXER_column << '\n';
+
+	std::size_t currentLineCount = 1;
+	auto index = 0;
+	static constexpr auto offsetShow = 2;
+
+	while (index < DLDL_LEXER_input_text->size())
+	{
+		if ((*DLDL_LEXER_input_text)[index] == '\n')
+		{
+			currentLineCount += 1;
+		}
+		index++;
+
+		if (currentLineCount + offsetShow >= DLDL_LEXERlineno)
+		{
+			break;
+		}
+
+	}
+
+	bool donePreShow = false;
+	while (!donePreShow && offsetShow > 0)
+	{
+		if ((*DLDL_LEXER_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_LEXER_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_LEXER_input_text)[index];
+		}
+
+		if ((*DLDL_LEXER_input_text)[index] == '\n')
+		{
+			if (currentLineCount + 1 == DLDL_LEXERlineno)
+			{
+				donePreShow = true;
+			}
+			currentLineCount += 1;
+		}
+
+		index++;
+	}
+	
+	bool endLine = false;
+	while (!endLine && index < DLDL_LEXER_input_text->size())
+	{
+		if ((*DLDL_LEXER_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_LEXER_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_LEXER_input_text)[index];
+		}
+		
+		if ((*DLDL_LEXER_input_text)[index] == '\n')
+		{
+			endLine = true;
+		}
+		
+		index++;
+	}
+
+    for(int i = 0; i < DLDL_LEXER_column - 1; i++)
+	{
+		std::cout << "_";
+	}
+	std::cout << "^\n";
 }
 
 deamer::external::cpp::ast::Tree* DLDL_LEXER::bison::parser::Parser::Parse(const std::string& text) const
 {
+	DLDL_LEXER_input_text = &text;
 	outputTree = nullptr;
 	YY_BUFFER_STATE buf;
 	buf = DLDL_LEXER_scan_string(text.c_str());

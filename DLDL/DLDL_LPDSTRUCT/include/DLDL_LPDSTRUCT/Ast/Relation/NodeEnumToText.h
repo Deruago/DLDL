@@ -40,8 +40,18 @@ namespace DLDL_LPDSTRUCT { namespace ast { namespace relation {
 	}
 	
 
-	case ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______: {
-		return "deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______";
+	case ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_60: {
+		return "deamerreserved_long_60";
+	}
+	
+
+	case ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_63: {
+		return "deamerreserved_long_63";
+	}
+	
+
+	case ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_66: {
+		return "deamerreserved_long_66";
 	}
 	
 

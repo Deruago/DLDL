@@ -10,7 +10,7 @@ include(deamer.cmake)
 add_subdirectory(extern)
 add_subdirectory(lib)
 
-option(TESTS "Enables all the tests" ON)
+option(TESTS "Enables all the tests" OFF)
 if(TESTS)
 	message(STATUS "Tests are now available.")
 	add_subdirectory(tests)

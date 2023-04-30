@@ -19,9 +19,9 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 		{
 		}
 
-		std::vector<ProductionRule>
-		RetrieveEnvironment(Environment& currentEnvironment,
-							const ProductionRule& productionRule) override
+		std::vector<ProductionRule> RetrieveEnvironment(Environment& currentEnvironment,
+														const ProductionRule& productionRule,
+														DLDL::ir::Grammar* grammar) override
 		{
 			std::vector<ProductionRule> currentStage = {ProductionRule()};
 			for (auto* const subgroup : subgroups)
@@ -29,8 +29,8 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 				std::vector<ProductionRule> nextStage;
 				for (const auto& currentProductionRule : currentStage)
 				{
-					const auto& newProductionRules =
-						subgroup->RetrieveEnvironment(currentEnvironment, currentProductionRule);
+					const auto& newProductionRules = subgroup->RetrieveEnvironment(
+						currentEnvironment, currentProductionRule, grammar);
 					for (const auto& newProductionRule : newProductionRules)
 					{
 						nextStage.push_back(newProductionRule);

@@ -20,7 +20,20 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 	{
 		std::string name;
 		ValueType vt;
-		Value(std::string name_, ValueType vt_) : name(std::move(name_)), vt(vt_)
+
+		Value(const std::string& name_ = "", ValueType vt_ = ValueType::generated)
+			: name(name_),
+			  vt(vt_)
+		{
+		}
+
+		~Value() = default;
+
+		Value(const Value& rhs) : name(rhs.name), vt(rhs.vt)
+		{
+		}
+
+		Value(Value&& rhs) noexcept : name(std::move(rhs.name)), vt(std::move(rhs.vt))
 		{
 		}
 

@@ -28,6 +28,7 @@
 #include "DLDL_LPDDEF_DF/Ast/Node/stmt.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/comment_line.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/vector_variant.h"
+#include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_optional__value_part__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/optional_variant.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/value_part.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/standard_variant.h"
@@ -35,6 +36,7 @@
 #include "DLDL_LPDDEF_DF/Ast/Node/value_type.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_arrow__value_type__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_star__COMMA__value_type__.h"
+#include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_long_54.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/var_type.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_arrow__VARNAME__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_star__COLON__VARNAME__.h"
@@ -175,6 +177,12 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener {
 				DefaultAction(node);
 				break;
 			}
+			case DLDL_LPDDEF_DF::ast::Type::deamerreserved_optional__value_part__:
+			{
+				Listen(static_cast<const DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__*>(node));
+				DefaultAction(node);
+				break;
+			}
 			case DLDL_LPDDEF_DF::ast::Type::optional_variant:
 			{
 				Listen(static_cast<const DLDL_LPDDEF_DF::ast::node::optional_variant*>(node));
@@ -214,6 +222,12 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener {
 			case DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__COMMA__value_type__:
 			{
 				Listen(static_cast<const DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__*>(node));
+				DefaultAction(node);
+				break;
+			}
+			case DLDL_LPDDEF_DF::ast::Type::deamerreserved_long_54:
+			{
+				Listen(static_cast<const DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54*>(node));
 				DefaultAction(node);
 				break;
 			}
@@ -313,6 +327,9 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener {
 		virtual void Listen(const DLDL_LPDDEF_DF::ast::node::vector_variant* node)
 		{
 		}
+		virtual void Listen(const DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__* node)
+		{
+		}
 		virtual void Listen(const DLDL_LPDDEF_DF::ast::node::optional_variant* node)
 		{
 		}
@@ -332,6 +349,9 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener {
 		{
 		}
 		virtual void Listen(const DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__* node)
+		{
+		}
+		virtual void Listen(const DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54* node)
 		{
 		}
 		virtual void Listen(const DLDL_LPDDEF_DF::ast::node::var_type* node)

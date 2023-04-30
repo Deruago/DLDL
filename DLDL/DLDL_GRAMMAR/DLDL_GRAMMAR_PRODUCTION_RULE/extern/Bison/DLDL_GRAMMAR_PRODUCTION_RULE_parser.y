@@ -5,6 +5,7 @@
 %{
 #include <iostream>
 #include <vector>
+#include <string>
 #include <cstring>
 #include <stdio.h>
 #include <Deamer/External/Cpp/Lexer/TerminalObject.h>
@@ -24,6 +25,7 @@
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/RIGHT_SQUARE_BRACKET.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/QUESTION_MARK.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/EXCLAMATION_MARK.h"
+#include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/TILDE.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/ARROW.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/STAR.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/PLUS.h"
@@ -43,6 +45,7 @@
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/nested_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/optional_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/zero_or_more_group.h"
+#include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/not_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/one_or_more_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/or_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/min_max_group.h"
@@ -55,11 +58,18 @@
 #ifndef YY_parse_LLOC
 #define YY_parse_LLOC DLDL_GRAMMAR_PRODUCTION_RULElloc
 #endif //YY_parse_LLOC
-#define YYERROR_VERBOSE
+#define YYERROR_VERBOSE 1
+
+
 
 void DLDL_GRAMMAR_PRODUCTION_RULEerror(const char* s);
 int DLDL_GRAMMAR_PRODUCTION_RULElex();
 static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
+
+extern int DLDL_GRAMMAR_PRODUCTION_RULElineno;
+extern int DLDL_GRAMMAR_PRODUCTION_RULE_column;
+
+static const std::string* DLDL_GRAMMAR_PRODUCTION_RULE_input_text = nullptr;
 %}
 
 %token<Terminal> ENDING_USELESS_SYMBOLS
@@ -72,6 +82,7 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %token<Terminal> RIGHT_SQUARE_BRACKET
 %token<Terminal> QUESTION_MARK
 %token<Terminal> EXCLAMATION_MARK
+%token<Terminal> TILDE
 %token<Terminal> ARROW
 %token<Terminal> STAR
 %token<Terminal> PLUS
@@ -91,6 +102,7 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %nterm<DLDL_GRAMMAR_PRODUCTION_RULE_nested_group> nested_group
 %nterm<DLDL_GRAMMAR_PRODUCTION_RULE_optional_group> optional_group
 %nterm<DLDL_GRAMMAR_PRODUCTION_RULE_zero_or_more_group> zero_or_more_group
+%nterm<DLDL_GRAMMAR_PRODUCTION_RULE_not_group> not_group
 %nterm<DLDL_GRAMMAR_PRODUCTION_RULE_one_or_more_group> one_or_more_group
 %nterm<DLDL_GRAMMAR_PRODUCTION_RULE_or_group> or_group
 %nterm<DLDL_GRAMMAR_PRODUCTION_RULE_min_max_group> min_max_group
@@ -109,6 +121,7 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::RIGHT_SQUARE_BRACKET* DLDL_GRAMMAR_PRODUCTION_RULE_RIGHT_SQUARE_BRACKET;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::QUESTION_MARK* DLDL_GRAMMAR_PRODUCTION_RULE_QUESTION_MARK;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::EXCLAMATION_MARK* DLDL_GRAMMAR_PRODUCTION_RULE_EXCLAMATION_MARK;
+	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE* DLDL_GRAMMAR_PRODUCTION_RULE_TILDE;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ARROW* DLDL_GRAMMAR_PRODUCTION_RULE_ARROW;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::STAR* DLDL_GRAMMAR_PRODUCTION_RULE_STAR;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::PLUS* DLDL_GRAMMAR_PRODUCTION_RULE_PLUS;
@@ -126,6 +139,7 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::nested_group* DLDL_GRAMMAR_PRODUCTION_RULE_nested_group;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::optional_group* DLDL_GRAMMAR_PRODUCTION_RULE_optional_group;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group* DLDL_GRAMMAR_PRODUCTION_RULE_zero_or_more_group;
+	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group* DLDL_GRAMMAR_PRODUCTION_RULE_not_group;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::one_or_more_group* DLDL_GRAMMAR_PRODUCTION_RULE_one_or_more_group;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::or_group* DLDL_GRAMMAR_PRODUCTION_RULE_or_group;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::min_max_group* DLDL_GRAMMAR_PRODUCTION_RULE_min_max_group;
@@ -211,20 +225,26 @@ group:
 
 		// Ignored, Deleted, tokens are deleted
 	}
-	| min_max_group  {
+	| not_group  {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 6, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
-	| extension_group  {
+	| min_max_group  {
 		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 7, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
 		$$ = newNode;
 
 		// Ignored, Deleted, tokens are deleted
 	}
+	| extension_group  {
+		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 8, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1 });
+		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
+	}
 	| VALUE  {
-		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 8, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::VALUE({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
+		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 9, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::VALUE({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::VALUE, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }) });
 		$$ = newNode;
 
 		// Ignored, Deleted, tokens are deleted
@@ -270,6 +290,17 @@ zero_or_more_group:
 
 		// Ignored, Deleted, tokens are deleted
 		delete $2;
+	}
+;
+
+
+not_group:
+	TILDE group  {
+		auto* const newNode = new DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group({::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::not_group, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $2 });
+		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
+		delete $1;
 	}
 ;
 
@@ -350,11 +381,90 @@ extension_group:
 
 void DLDL_GRAMMAR_PRODUCTION_RULEerror(const char* s)
 {
-	std::cout << "Syntax error on line: " << s << '\n';
+	std::cout << "Error: " << s << "\n";
+	std::cout << "In line: " << DLDL_GRAMMAR_PRODUCTION_RULElineno << ", Column: " << DLDL_GRAMMAR_PRODUCTION_RULE_column << '\n';
+
+	std::size_t currentLineCount = 1;
+	auto index = 0;
+	static constexpr auto offsetShow = 2;
+
+	while (index < DLDL_GRAMMAR_PRODUCTION_RULE_input_text->size())
+	{
+		if ((*DLDL_GRAMMAR_PRODUCTION_RULE_input_text)[index] == '\n')
+		{
+			currentLineCount += 1;
+		}
+		index++;
+
+		if (currentLineCount + offsetShow >= DLDL_GRAMMAR_PRODUCTION_RULElineno)
+		{
+			break;
+		}
+
+	}
+
+	bool donePreShow = false;
+	while (!donePreShow && offsetShow > 0)
+	{
+		if ((*DLDL_GRAMMAR_PRODUCTION_RULE_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_GRAMMAR_PRODUCTION_RULE_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_GRAMMAR_PRODUCTION_RULE_input_text)[index];
+		}
+
+		if ((*DLDL_GRAMMAR_PRODUCTION_RULE_input_text)[index] == '\n')
+		{
+			if (currentLineCount + 1 == DLDL_GRAMMAR_PRODUCTION_RULElineno)
+			{
+				donePreShow = true;
+			}
+			currentLineCount += 1;
+		}
+
+		index++;
+	}
+	
+	bool endLine = false;
+	while (!endLine && index < DLDL_GRAMMAR_PRODUCTION_RULE_input_text->size())
+	{
+		if ((*DLDL_GRAMMAR_PRODUCTION_RULE_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_GRAMMAR_PRODUCTION_RULE_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_GRAMMAR_PRODUCTION_RULE_input_text)[index];
+		}
+		
+		if ((*DLDL_GRAMMAR_PRODUCTION_RULE_input_text)[index] == '\n')
+		{
+			endLine = true;
+		}
+		
+		index++;
+	}
+
+    for(int i = 0; i < DLDL_GRAMMAR_PRODUCTION_RULE_column - 1; i++)
+	{
+		std::cout << "_";
+	}
+	std::cout << "^\n";
 }
 
 deamer::external::cpp::ast::Tree* DLDL_GRAMMAR_PRODUCTION_RULE::bison::parser::Parser::Parse(const std::string& text) const
 {
+	DLDL_GRAMMAR_PRODUCTION_RULE_input_text = &text;
 	outputTree = nullptr;
 	YY_BUFFER_STATE buf;
 	buf = DLDL_GRAMMAR_PRODUCTION_RULE_scan_string(text.c_str());

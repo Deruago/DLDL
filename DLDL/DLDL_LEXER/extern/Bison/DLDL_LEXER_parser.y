@@ -5,6 +5,7 @@
 %{
 #include <iostream>
 #include <vector>
+#include <string>
 #include <cstring>
 #include <stdio.h>
 #include <Deamer/External/Cpp/Lexer/TerminalObject.h>
@@ -39,11 +40,18 @@
 #ifndef YY_parse_LLOC
 #define YY_parse_LLOC DLDL_LEXERlloc
 #endif //YY_parse_LLOC
-#define YYERROR_VERBOSE
+#define YYERROR_VERBOSE 1
+
+
 
 void DLDL_LEXERerror(const char* s);
 int DLDL_LEXERlex();
 static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
+
+extern int DLDL_LEXERlineno;
+extern int DLDL_LEXER_column;
+
+static const std::string* DLDL_LEXER_input_text = nullptr;
 %}
 
 %token<Terminal> DELETE_ABSTRACTION
@@ -186,11 +194,90 @@ abstraction:
 
 void DLDL_LEXERerror(const char* s)
 {
-	std::cout << "Syntax error on line: " << s << '\n';
+	std::cout << "Error: " << s << "\n";
+	std::cout << "In line: " << DLDL_LEXERlineno << ", Column: " << DLDL_LEXER_column << '\n';
+
+	std::size_t currentLineCount = 1;
+	auto index = 0;
+	static constexpr auto offsetShow = 2;
+
+	while (index < DLDL_LEXER_input_text->size())
+	{
+		if ((*DLDL_LEXER_input_text)[index] == '\n')
+		{
+			currentLineCount += 1;
+		}
+		index++;
+
+		if (currentLineCount + offsetShow >= DLDL_LEXERlineno)
+		{
+			break;
+		}
+
+	}
+
+	bool donePreShow = false;
+	while (!donePreShow && offsetShow > 0)
+	{
+		if ((*DLDL_LEXER_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_LEXER_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_LEXER_input_text)[index];
+		}
+
+		if ((*DLDL_LEXER_input_text)[index] == '\n')
+		{
+			if (currentLineCount + 1 == DLDL_LEXERlineno)
+			{
+				donePreShow = true;
+			}
+			currentLineCount += 1;
+		}
+
+		index++;
+	}
+	
+	bool endLine = false;
+	while (!endLine && index < DLDL_LEXER_input_text->size())
+	{
+		if ((*DLDL_LEXER_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_LEXER_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_LEXER_input_text)[index];
+		}
+		
+		if ((*DLDL_LEXER_input_text)[index] == '\n')
+		{
+			endLine = true;
+		}
+		
+		index++;
+	}
+
+    for(int i = 0; i < DLDL_LEXER_column - 1; i++)
+	{
+		std::cout << "_";
+	}
+	std::cout << "^\n";
 }
 
 deamer::external::cpp::ast::Tree* DLDL_LEXER::bison::parser::Parser::Parse(const std::string& text) const
 {
+	DLDL_LEXER_input_text = &text;
 	outputTree = nullptr;
 	YY_BUFFER_STATE buf;
 	buf = DLDL_LEXER_scan_string(text.c_str());

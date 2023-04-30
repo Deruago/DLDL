@@ -64,16 +64,17 @@ extern int DLDL_GRAMMAR_PRODUCTION_RULEdebug;
     RIGHT_SQUARE_BRACKET = 265,    /* RIGHT_SQUARE_BRACKET  */
     QUESTION_MARK = 266,           /* QUESTION_MARK  */
     EXCLAMATION_MARK = 267,        /* EXCLAMATION_MARK  */
-    ARROW = 268,                   /* ARROW  */
-    STAR = 269,                    /* STAR  */
-    PLUS = 270,                    /* PLUS  */
-    MINUS = 271,                   /* MINUS  */
-    VALUE = 272,                   /* VALUE  */
-    NUMBER = 273,                  /* NUMBER  */
-    SINGLE_LINE_COMMENT = 274,     /* SINGLE_LINE_COMMENT  */
-    MULTI_LINE_COMMENT = 275,      /* MULTI_LINE_COMMENT  */
-    SYMBOLS = 276,                 /* SYMBOLS  */
-    ESCAPE_CHARS = 277             /* ESCAPE_CHARS  */
+    TILDE = 268,                   /* TILDE  */
+    ARROW = 269,                   /* ARROW  */
+    STAR = 270,                    /* STAR  */
+    PLUS = 271,                    /* PLUS  */
+    MINUS = 272,                   /* MINUS  */
+    VALUE = 273,                   /* VALUE  */
+    NUMBER = 274,                  /* NUMBER  */
+    SINGLE_LINE_COMMENT = 275,     /* SINGLE_LINE_COMMENT  */
+    MULTI_LINE_COMMENT = 276,      /* MULTI_LINE_COMMENT  */
+    SYMBOLS = 277,                 /* SYMBOLS  */
+    ESCAPE_CHARS = 278             /* ESCAPE_CHARS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -82,7 +83,7 @@ extern int DLDL_GRAMMAR_PRODUCTION_RULEdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 100 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
+#line 112 "./DLDL_GRAMMAR_PRODUCTION_RULE_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ENDING_USELESS_SYMBOLS* DLDL_GRAMMAR_PRODUCTION_RULE_ENDING_USELESS_SYMBOLS;
@@ -95,6 +96,7 @@ union YYSTYPE
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::RIGHT_SQUARE_BRACKET* DLDL_GRAMMAR_PRODUCTION_RULE_RIGHT_SQUARE_BRACKET;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::QUESTION_MARK* DLDL_GRAMMAR_PRODUCTION_RULE_QUESTION_MARK;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::EXCLAMATION_MARK* DLDL_GRAMMAR_PRODUCTION_RULE_EXCLAMATION_MARK;
+	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE* DLDL_GRAMMAR_PRODUCTION_RULE_TILDE;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ARROW* DLDL_GRAMMAR_PRODUCTION_RULE_ARROW;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::STAR* DLDL_GRAMMAR_PRODUCTION_RULE_STAR;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::PLUS* DLDL_GRAMMAR_PRODUCTION_RULE_PLUS;
@@ -112,13 +114,14 @@ union YYSTYPE
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::nested_group* DLDL_GRAMMAR_PRODUCTION_RULE_nested_group;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::optional_group* DLDL_GRAMMAR_PRODUCTION_RULE_optional_group;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group* DLDL_GRAMMAR_PRODUCTION_RULE_zero_or_more_group;
+	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group* DLDL_GRAMMAR_PRODUCTION_RULE_not_group;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::one_or_more_group* DLDL_GRAMMAR_PRODUCTION_RULE_one_or_more_group;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::or_group* DLDL_GRAMMAR_PRODUCTION_RULE_or_group;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::min_max_group* DLDL_GRAMMAR_PRODUCTION_RULE_min_max_group;
 	::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::extension_group* DLDL_GRAMMAR_PRODUCTION_RULE_extension_group;
 
 
-#line 122 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.h"
+#line 125 "DLDL_GRAMMAR_PRODUCTION_RULE_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

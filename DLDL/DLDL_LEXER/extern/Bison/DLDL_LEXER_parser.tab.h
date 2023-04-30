@@ -67,7 +67,7 @@ extern int DLDL_LEXERdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 68 "./DLDL_LEXER_parser.y"
+#line 76 "./DLDL_LEXER_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_LEXER::ast::node::DELETE_ABSTRACTION* DLDL_LEXER_DELETE_ABSTRACTION;

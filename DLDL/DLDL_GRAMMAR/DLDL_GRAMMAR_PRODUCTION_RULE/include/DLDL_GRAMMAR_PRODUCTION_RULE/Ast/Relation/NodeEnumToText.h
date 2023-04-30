@@ -45,6 +45,11 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace relation {
 	}
 	
 
+	case ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::not_group: {
+		return "not_group";
+	}
+	
+
 	case ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::one_or_more_group: {
 		return "one_or_more_group";
 	}
@@ -112,6 +117,11 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace relation {
 
 	case ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::EXCLAMATION_MARK: {
 		return "EXCLAMATION_MARK";
+	}
+	
+
+	case ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::TILDE: {
+		return "TILDE";
 	}
 	
 

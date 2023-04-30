@@ -76,6 +76,16 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener { namespace deamer
 			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"vector_variant\"];\n";
 		}
 
+		void ListenEntry(const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__* node) override
+		{
+			for (const auto* child : node->GetNodes())
+			{
+				AddConnection(node, child);
+			}
+
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_optional__value_part__\"];\n";
+		}
+
 		void ListenEntry(const ::DLDL_LPDDEF_DF::ast::node::optional_variant* node) override
 		{
 			for (const auto* child : node->GetNodes())
@@ -144,6 +154,16 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener { namespace deamer
 			}
 
 			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_star__COMMA__value_type__\"];\n";
+		}
+
+		void ListenEntry(const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54* node) override
+		{
+			for (const auto* child : node->GetNodes())
+			{
+				AddConnection(node, child);
+			}
+
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_long_54\"];\n";
 		}
 
 		void ListenEntry(const ::DLDL_LPDDEF_DF::ast::node::var_type* node) override
@@ -387,6 +407,10 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener { namespace deamer
 		{
 		}
 
+		void ListenExit(const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__* node) override
+		{
+		}
+
 		void ListenExit(const ::DLDL_LPDDEF_DF::ast::node::optional_variant* node) override
 		{
 		}
@@ -412,6 +436,10 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace listener { namespace deamer
 		}
 
 		void ListenExit(const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__* node) override
+		{
+		}
+
+		void ListenExit(const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54* node) override
 		{
 		}
 

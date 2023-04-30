@@ -1,10 +1,11 @@
 %define parse.error verbose
-%define parse.lac full
 
+%glr-parser
 
 %{
 #include <iostream>
 #include <vector>
+#include <string>
 #include <cstring>
 #include <stdio.h>
 #include <Deamer/External/Cpp/Lexer/TerminalObject.h>
@@ -38,11 +39,18 @@
 #ifndef YY_parse_LLOC
 #define YY_parse_LLOC DLDL_LDOSTRUCTlloc
 #endif //YY_parse_LLOC
-#define YYERROR_VERBOSE
+#define YYERROR_VERBOSE 1
+
+
 
 void DLDL_LDOSTRUCTerror(const char* s);
 int DLDL_LDOSTRUCTlex();
 static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
+
+extern int DLDL_LDOSTRUCTlineno;
+extern int DLDL_LDOSTRUCT_column;
+
+static const std::string* DLDL_LDOSTRUCT_input_text = nullptr;
 %}
 
 %token<Terminal> COLON
@@ -199,11 +207,90 @@ argument_stmt:
 
 void DLDL_LDOSTRUCTerror(const char* s)
 {
-	std::cout << "Syntax error on line: " << s << '\n';
+	std::cout << "Error: " << s << "\n";
+	std::cout << "In line: " << DLDL_LDOSTRUCTlineno << ", Column: " << DLDL_LDOSTRUCT_column << '\n';
+
+	std::size_t currentLineCount = 1;
+	auto index = 0;
+	static constexpr auto offsetShow = 2;
+
+	while (index < DLDL_LDOSTRUCT_input_text->size())
+	{
+		if ((*DLDL_LDOSTRUCT_input_text)[index] == '\n')
+		{
+			currentLineCount += 1;
+		}
+		index++;
+
+		if (currentLineCount + offsetShow >= DLDL_LDOSTRUCTlineno)
+		{
+			break;
+		}
+
+	}
+
+	bool donePreShow = false;
+	while (!donePreShow && offsetShow > 0)
+	{
+		if ((*DLDL_LDOSTRUCT_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_LDOSTRUCT_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_LDOSTRUCT_input_text)[index];
+		}
+
+		if ((*DLDL_LDOSTRUCT_input_text)[index] == '\n')
+		{
+			if (currentLineCount + 1 == DLDL_LDOSTRUCTlineno)
+			{
+				donePreShow = true;
+			}
+			currentLineCount += 1;
+		}
+
+		index++;
+	}
+	
+	bool endLine = false;
+	while (!endLine && index < DLDL_LDOSTRUCT_input_text->size())
+	{
+		if ((*DLDL_LDOSTRUCT_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_LDOSTRUCT_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_LDOSTRUCT_input_text)[index];
+		}
+		
+		if ((*DLDL_LDOSTRUCT_input_text)[index] == '\n')
+		{
+			endLine = true;
+		}
+		
+		index++;
+	}
+
+    for(int i = 0; i < DLDL_LDOSTRUCT_column - 1; i++)
+	{
+		std::cout << "_";
+	}
+	std::cout << "^\n";
 }
 
 deamer::external::cpp::ast::Tree* DLDL_LDOSTRUCT::bison::parser::Parser::Parse(const std::string& text) const
 {
+	DLDL_LDOSTRUCT_input_text = &text;
 	outputTree = nullptr;
 	YY_BUFFER_STATE buf;
 	buf = DLDL_LDOSTRUCT_scan_string(text.c_str());

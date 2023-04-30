@@ -30,7 +30,13 @@ namespace DLDL_LPDSTRUCT { namespace ast { namespace relation {
 		{ "argument_block", ::DLDL_LPDSTRUCT::ast::Type::argument_block },
 	
 
-		{ "deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______", ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______ },
+		{ "deamerreserved_long_60", ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_60 },
+	
+
+		{ "deamerreserved_long_63", ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_63 },
+	
+
+		{ "deamerreserved_long_66", ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_66 },
 	
 
 		{ "COLON", ::DLDL_LPDSTRUCT::ast::Type::COLON },

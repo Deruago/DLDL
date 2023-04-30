@@ -13,6 +13,7 @@
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/nested_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/optional_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/zero_or_more_group.h"
+#include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/not_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/one_or_more_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/or_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/min_max_group.h"
@@ -27,6 +28,7 @@
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/RIGHT_SQUARE_BRACKET.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/QUESTION_MARK.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/EXCLAMATION_MARK.h"
+#include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/TILDE.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/ARROW.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/STAR.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/PLUS.h"
@@ -143,6 +145,8 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace reference {
 	template<>
 	struct AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group>;
 	template<>
+	struct AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group>;
+	template<>
 	struct AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::one_or_more_group>;
 	template<>
 	struct AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::or_group>;
@@ -170,6 +174,8 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace reference {
 	struct AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::QUESTION_MARK>;
 	template<>
 	struct AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::EXCLAMATION_MARK>;
+	template<>
+	struct AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE>;
 	template<>
 	struct AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ARROW>;
 	template<>
@@ -372,8 +378,8 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace reference {
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmt> stmt();
-AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts> stmts();
+		AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts> stmts();
+AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmt> stmt();
 
 
 		template<typename FunctionType>
@@ -591,6 +597,7 @@ AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts> stmts();
 AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::nested_group> nested_group();
 AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::optional_group> optional_group();
 AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group> zero_or_more_group();
+AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group> not_group();
 AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::one_or_more_group> one_or_more_group();
 AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::or_group> or_group();
 AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::min_max_group> min_max_group();
@@ -812,8 +819,8 @@ AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::RIGHT_PARANTHESIS>
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group> group();
-AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts> stmts();
+		AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts> stmts();
+AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group> group();
 AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::LEFT_SQUARE_BRACKET> LEFT_SQUARE_BRACKET();
 AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::RIGHT_SQUARE_BRACKET> RIGHT_SQUARE_BRACKET();
 AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::QUESTION_MARK> QUESTION_MARK();
@@ -929,6 +936,114 @@ AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::STAR> STAR();
 
 		template<typename FunctionType>
 		AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group>& for_all(FunctionType function)
+		{
+			for (const auto* const t : ts)
+			{
+				function(t);
+			}
+
+			return *this;
+		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
+	};
+
+	template<>
+	struct AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group> : public AccessBase
+	{
+	protected:
+		std::vector<const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group*> ts;
+
+	public:
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group*> ts_) : ts(std::move(ts_))
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group& t) : ts({&t})
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group* t) : ts({t})
+		{
+		}
+
+		AccessTemplateBase() = default;
+
+	public:
+		AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group>& operator[](::std::size_t index)
+		{
+			if (index >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				const auto* const copy = ts[index];
+				ts.clear();
+				ts.push_back(copy);
+			}
+
+			return *this;
+		}
+
+		AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		{
+			// swap if the other is larger
+			if (indexBegin > indexEnd)
+			{
+				const auto tmp = indexBegin;
+				indexBegin = indexEnd;
+				indexEnd = tmp;
+			}
+
+			if (indexBegin >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				std::vector<const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group*> temporaries;
+				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
+				{
+					temporaries.push_back(ts[i]);
+				}
+				ts.clear();
+				ts = temporaries;
+			}
+
+			return *this;
+		}
+
+		std::vector<const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group*> GetContent()
+		{
+			return ts;
+		}
+
+	public:
+		AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group> group();
+AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE> TILDE();
+
+
+		template<typename FunctionType>
+		AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -2456,6 +2571,112 @@ AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ARROW> ARROW();
 	};
 
 	template<>
+	struct AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE> : public AccessBase
+	{
+	protected:
+		std::vector<const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE*> ts;
+
+	public:
+		AccessTemplateBase(std::vector<const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE*> ts_) : ts(std::move(ts_))
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE& t) : ts({&t})
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE* t) : ts({t})
+		{
+		}
+
+		AccessTemplateBase() = default;
+
+	public:
+		AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE>& operator[](::std::size_t index)
+		{
+			if (index >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				const auto* const copy = ts[index];
+				ts.clear();
+				ts.push_back(copy);
+			}
+
+			return *this;
+		}
+
+		AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		{
+			// swap if the other is larger
+			if (indexBegin > indexEnd)
+			{
+				const auto tmp = indexBegin;
+				indexBegin = indexEnd;
+				indexEnd = tmp;
+			}
+
+			if (indexBegin >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				std::vector<const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE*> temporaries;
+				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
+				{
+					temporaries.push_back(ts[i]);
+				}
+				ts.clear();
+				ts = temporaries;
+			}
+
+			return *this;
+		}
+
+		std::vector<const ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE*> GetContent()
+		{
+			return ts;
+		}
+
+	public:
+		
+
+		template<typename FunctionType>
+		AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE>& for_all(FunctionType function)
+		{
+			for (const auto* const t : ts)
+			{
+				function(t);
+			}
+
+			return *this;
+		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
+	};
+
+	template<>
 	struct AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ARROW> : public AccessBase
 	{
 	protected:
@@ -3525,20 +3746,20 @@ AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ARROW> ARROW();
 			return AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::stmts>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmt> AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts>::stmt()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmt>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::stmt>(ts));
-		}
-
 		inline AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts> AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts>::stmts()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::stmts>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmt> AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts>::stmt()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmt>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::stmt>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group> AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmt>::group()
@@ -3579,6 +3800,14 @@ AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ARROW> ARROW();
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::zero_or_more_group>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group> AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>::not_group()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::not_group>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::one_or_more_group> AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>::one_or_more_group()
@@ -3653,20 +3882,20 @@ AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ARROW> ARROW();
 			return AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::RIGHT_PARANTHESIS>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::RIGHT_PARANTHESIS>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group> AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::optional_group>::group()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group>(ts));
-		}
-
 		inline AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts> AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::optional_group>::stmts()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::stmts>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::stmts>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group> AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::optional_group>::group()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::LEFT_SQUARE_BRACKET> AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::optional_group>::LEFT_SQUARE_BRACKET()
@@ -3707,6 +3936,22 @@ AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ARROW> ARROW();
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::STAR>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::STAR>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group> AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group>::group()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::group>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE> AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group>::TILDE()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE>(Get<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::TILDE>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::group> AccessTemplateBase<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::one_or_more_group>::group()

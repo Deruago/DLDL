@@ -701,7 +701,7 @@ extern int yylex (void);
 #undef yyTABLES_NAME
 #endif
 
-#line 61 "./DLDL_IDENTITY_lexer.l"
+#line 72 "./DLDL_IDENTITY_lexer.l"
 
 
 #line 708 "./DLDL_IDENTITY_lexer.h"

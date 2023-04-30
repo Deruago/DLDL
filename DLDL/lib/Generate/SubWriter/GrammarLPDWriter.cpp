@@ -1,6 +1,7 @@
 #include "DLDL/Generate/SubWriter/GrammarLPDWriter.h"
-#include "DLDL/Template/Definition/Grammar/GrammarHTemplate.h"
+#include "DLDL/NameRegistry/NameRegistry.h"
 #include "DLDL/Template/Definition/Grammar/GrammarCPPTemplate.h"
+#include "DLDL/Template/Definition/Grammar/GrammarHTemplate.h"
 #include <Deamer/Deamer.h>
 
 #ifndef DEAMER_CC_V2_RESERVED_MACRO_VALUE_VERSION_NUMBER
@@ -21,7 +22,7 @@ DLDL::generate::sub::GrammarLPDWriter::GetFileContentHeaderFile(ir::Language* la
 
 	for (const auto& nonterminal : grammar->GetNonTerminals())
 	{
-		generator.nonterminal_->Set(nonterminal.name);
+		generator.nonterminal_->Set(NameRegistry::GetName(nonterminal.name));
 
 		generator.nonterminal_declaration_->ExpandVariableField();
 	}
@@ -37,7 +38,7 @@ DLDL::generate::sub::GrammarLPDWriter::GetFileContentHeaderFile(ir::Language* la
 		{
 			name += "_EMPTY";
 		}
-
+		name = NameRegistry::GetName(name);
 		generator.productionrule_->Set(name);
 
 		generator.productionrule_declaration_->ExpandVariableField();
@@ -45,7 +46,7 @@ DLDL::generate::sub::GrammarLPDWriter::GetFileContentHeaderFile(ir::Language* la
 
 	for (const auto& unknownReference : grammar->GetUnknownReferences())
 	{
-		generator.unknown_reference_->Set(unknownReference);
+		generator.unknown_reference_->Set(NameRegistry::GetName(unknownReference));
 		generator.unknown_reference_declaration_->ExpandVariableField();
 	}
 
@@ -85,6 +86,7 @@ DLDL::generate::sub::GrammarLPDWriter::GetFileContentSourceFile(ir::Language* la
 			{
 				name += "_EMPTY";
 			}
+			name = NameRegistry::GetName(name);
 			name += ".Pointer(),";
 
 			productionrule_references += name;
@@ -94,7 +96,7 @@ DLDL::generate::sub::GrammarLPDWriter::GetFileContentSourceFile(ir::Language* la
 			productionrule_references.pop_back();
 		}
 
-		generator.nonterminal_->Set(nonterminal.name);
+		generator.nonterminal_->Set(NameRegistry::GetName(nonterminal.name));
 		generator.productionrule_references_->Set(productionrule_references);
 
 		switch (nonterminal.abstraction)
@@ -134,6 +136,7 @@ DLDL::generate::sub::GrammarLPDWriter::GetFileContentSourceFile(ir::Language* la
 		{
 			name += "_EMPTY";
 		}
+		name = NameRegistry::GetName(name);
 
 		std::string token_references;
 		if (!productionrule.tokens.empty())
@@ -149,7 +152,7 @@ DLDL::generate::sub::GrammarLPDWriter::GetFileContentSourceFile(ir::Language* la
 				{
 					token_references += "Language->";
 				}
-				token_references += token + ".Pointer(),";
+				token_references += NameRegistry::GetName(token) + ".Pointer(),";
 			}
 			token_references.pop_back();
 			token_references += " }";
@@ -164,7 +167,7 @@ DLDL::generate::sub::GrammarLPDWriter::GetFileContentSourceFile(ir::Language* la
 
 	for (const auto& unknownReference : grammar->GetUnknownReferences())
 	{
-		generator.unknown_type_->Set(unknownReference);
+		generator.unknown_type_->Set(NameRegistry::GetName(unknownReference));
 		generator.unknown_reference_->ExpandVariableField();
 		generator.unknown_reference_add_object_->ExpandVariableField();
 	}

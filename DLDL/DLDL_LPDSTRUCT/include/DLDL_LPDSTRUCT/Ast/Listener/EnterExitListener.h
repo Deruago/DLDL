@@ -19,7 +19,9 @@
 #include "DLDL_LPDSTRUCT/Ast/Node/argument.h"
 #include "DLDL_LPDSTRUCT/Ast/Node/argument_name.h"
 #include "DLDL_LPDSTRUCT/Ast/Node/argument_block.h"
-#include "DLDL_LPDSTRUCT/Ast/Node/deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______.h"
+#include "DLDL_LPDSTRUCT/Ast/Node/deamerreserved_long_60.h"
+#include "DLDL_LPDSTRUCT/Ast/Node/deamerreserved_long_63.h"
+#include "DLDL_LPDSTRUCT/Ast/Node/deamerreserved_long_66.h"
 
 #include <Deamer/External/Cpp/Ast/Listener.h>
 #include <Deamer/Algorithm/Tree/DFS.h>
@@ -171,12 +173,30 @@ namespace DLDL_LPDSTRUCT { namespace ast { namespace listener {
 				break;
 			}
 
-			case DLDL_LPDSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______:
+			case DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_60:
 			{
 				// Enter nonterminal
 				EnterAnything(node);
 				EnterNonTerminal(node);
-				ListenEntry(static_cast<const DLDL_LPDSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______*>(node));
+				ListenEntry(static_cast<const DLDL_LPDSTRUCT::ast::node::deamerreserved_long_60*>(node));
+				break;
+			}
+
+			case DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_63:
+			{
+				// Enter nonterminal
+				EnterAnything(node);
+				EnterNonTerminal(node);
+				ListenEntry(static_cast<const DLDL_LPDSTRUCT::ast::node::deamerreserved_long_63*>(node));
+				break;
+			}
+
+			case DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_66:
+			{
+				// Enter nonterminal
+				EnterAnything(node);
+				EnterNonTerminal(node);
+				ListenEntry(static_cast<const DLDL_LPDSTRUCT::ast::node::deamerreserved_long_66*>(node));
 				break;
 			}
 
@@ -310,10 +330,28 @@ namespace DLDL_LPDSTRUCT { namespace ast { namespace listener {
 				break;
 			}
 
-			case DLDL_LPDSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______:
+			case DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_60:
 			{
 				// Exit nonterminal
-				ListenExit(static_cast<const DLDL_LPDSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______*>(node));
+				ListenExit(static_cast<const DLDL_LPDSTRUCT::ast::node::deamerreserved_long_60*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_63:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_LPDSTRUCT::ast::node::deamerreserved_long_63*>(node));
+				ExitNonTerminal(node);
+				ExitAnything(node);
+				break;
+			}
+
+			case DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_66:
+			{
+				// Exit nonterminal
+				ListenExit(static_cast<const DLDL_LPDSTRUCT::ast::node::deamerreserved_long_66*>(node));
 				ExitNonTerminal(node);
 				ExitAnything(node);
 				break;
@@ -406,7 +444,15 @@ namespace DLDL_LPDSTRUCT { namespace ast { namespace listener {
 		{
 		}
 
-		virtual void ListenEntry(const DLDL_LPDSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______* node) 
+		virtual void ListenEntry(const DLDL_LPDSTRUCT::ast::node::deamerreserved_long_60* node) 
+		{
+		}
+
+		virtual void ListenEntry(const DLDL_LPDSTRUCT::ast::node::deamerreserved_long_63* node) 
+		{
+		}
+
+		virtual void ListenEntry(const DLDL_LPDSTRUCT::ast::node::deamerreserved_long_66* node) 
 		{
 		}
 
@@ -435,7 +481,15 @@ namespace DLDL_LPDSTRUCT { namespace ast { namespace listener {
 		{
 		}
 
-		virtual void ListenExit(const DLDL_LPDSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______* node) 
+		virtual void ListenExit(const DLDL_LPDSTRUCT::ast::node::deamerreserved_long_60* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_LPDSTRUCT::ast::node::deamerreserved_long_63* node) 
+		{
+		}
+
+		virtual void ListenExit(const DLDL_LPDSTRUCT::ast::node::deamerreserved_long_66* node) 
 		{
 		}
 

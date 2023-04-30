@@ -11,6 +11,7 @@
 #include "DLDL_LPDDEF_DF/Ast/Node/stmt.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/comment_line.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/vector_variant.h"
+#include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_optional__value_part__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/optional_variant.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/value_part.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/standard_variant.h"
@@ -18,6 +19,7 @@
 #include "DLDL_LPDDEF_DF/Ast/Node/value_type.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_arrow__value_type__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_star__COMMA__value_type__.h"
+#include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_long_54.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/var_type.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_arrow__VARNAME__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_star__COLON__VARNAME__.h"
@@ -142,6 +144,8 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace reference {
 	template<>
 	struct AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::vector_variant>;
 	template<>
+	struct AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__>;
+	template<>
 	struct AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::optional_variant>;
 	template<>
 	struct AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_part>;
@@ -155,6 +159,8 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace reference {
 	struct AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_arrow__value_type__>;
 	template<>
 	struct AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__>;
+	template<>
+	struct AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54>;
 	template<>
 	struct AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::var_type>;
 	template<>
@@ -274,8 +280,8 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace reference {
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__stmt__> deamerreserved_star__stmt__();
-AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::stmt> stmt();
+		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::stmt> stmt();
+AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__stmt__> deamerreserved_star__stmt__();
 
 
 		template<typename FunctionType>
@@ -382,8 +388,8 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::stmt> stmt();
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__stmt__> deamerreserved_star__stmt__();
-AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::stmt> stmt();
+		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::stmt> stmt();
+AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__stmt__> deamerreserved_star__stmt__();
 
 
 		template<typename FunctionType>
@@ -491,8 +497,8 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::stmt> stmt();
 
 	public:
 		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::vector_variant> vector_variant();
-AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::comment_line> comment_line();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::optional_variant> optional_variant();
+AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::comment_line> comment_line();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::standard_variant> standard_variant();
 
 
@@ -708,6 +714,7 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::standard_variant> standard_varia
 
 	public:
 		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::LAB> LAB();
+AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__> deamerreserved_optional__value_part__();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_part> value_part();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::var_type> var_type();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::var_name> var_name();
@@ -719,6 +726,113 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::VECTOR> VECTOR();
 
 		template<typename FunctionType>
 		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::vector_variant>& for_all(FunctionType function)
+		{
+			for (const auto* const t : ts)
+			{
+				function(t);
+			}
+
+			return *this;
+		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
+	};
+
+	template<>
+	struct AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__> : public AccessBase
+	{
+	protected:
+		std::vector<const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__*> ts;
+
+	public:
+		AccessTemplateBase(std::vector<const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__*> ts_) : ts(std::move(ts_))
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__& t) : ts({&t})
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__* t) : ts({t})
+		{
+		}
+
+		AccessTemplateBase() = default;
+
+	public:
+		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__>& operator[](::std::size_t index)
+		{
+			if (index >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				const auto* const copy = ts[index];
+				ts.clear();
+				ts.push_back(copy);
+			}
+
+			return *this;
+		}
+
+		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		{
+			// swap if the other is larger
+			if (indexBegin > indexEnd)
+			{
+				const auto tmp = indexBegin;
+				indexBegin = indexEnd;
+				indexEnd = tmp;
+			}
+
+			if (indexBegin >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				std::vector<const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__*> temporaries;
+				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
+				{
+					temporaries.push_back(ts[i]);
+				}
+				ts.clear();
+				ts = temporaries;
+			}
+
+			return *this;
+		}
+
+		std::vector<const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__*> GetContent()
+		{
+			return ts;
+		}
+
+	public:
+		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_part> value_part();
+
+
+		template<typename FunctionType>
+		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -822,6 +936,7 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::VECTOR> VECTOR();
 
 	public:
 		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::LAB> LAB();
+AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__> deamerreserved_optional__value_part__();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_part> value_part();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::var_type> var_type();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::var_name> var_name();
@@ -1043,7 +1158,8 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::EQ> EQ();
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_part> value_part();
+		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__> deamerreserved_optional__value_part__();
+AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_part> value_part();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::var_type> var_type();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::var_name> var_name();
 
@@ -1262,6 +1378,7 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::var_name> var_name();
 		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_type> value_type();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_arrow__value_type__> deamerreserved_arrow__value_type__();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__> deamerreserved_star__COMMA__value_type__();
+AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54> deamerreserved_long_54();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::COLON> COLON();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::LB> LB();
 AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::RB> RB();
@@ -1492,6 +1609,116 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::COMMA> COMMA();
 
 		template<typename FunctionType>
 		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__>& for_all(FunctionType function)
+		{
+			for (const auto* const t : ts)
+			{
+				function(t);
+			}
+
+			return *this;
+		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
+	};
+
+	template<>
+	struct AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54> : public AccessBase
+	{
+	protected:
+		std::vector<const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54*> ts;
+
+	public:
+		AccessTemplateBase(std::vector<const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54*> ts_) : ts(std::move(ts_))
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54& t) : ts({&t})
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54* t) : ts({t})
+		{
+		}
+
+		AccessTemplateBase() = default;
+
+	public:
+		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54>& operator[](::std::size_t index)
+		{
+			if (index >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				const auto* const copy = ts[index];
+				ts.clear();
+				ts.push_back(copy);
+			}
+
+			return *this;
+		}
+
+		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		{
+			// swap if the other is larger
+			if (indexBegin > indexEnd)
+			{
+				const auto tmp = indexBegin;
+				indexBegin = indexEnd;
+				indexEnd = tmp;
+			}
+
+			if (indexBegin >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				std::vector<const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54*> temporaries;
+				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
+				{
+					temporaries.push_back(ts[i]);
+				}
+				ts.clear();
+				ts = temporaries;
+			}
+
+			return *this;
+		}
+
+		std::vector<const ::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54*> GetContent()
+		{
+			return ts;
+		}
+
+	public:
+		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_type> value_type();
+AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_arrow__value_type__> deamerreserved_arrow__value_type__();
+AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__> deamerreserved_star__COMMA__value_type__();
+AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::COMMA> COMMA();
+
+
+		template<typename FunctionType>
+		AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -3868,14 +4095,6 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::VARNAME> VARNAME();
 
 
 	
-		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__stmt__> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::program>::deamerreserved_star__stmt__()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__stmt__>(Get<::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__stmt__>(ts));
-		}
-
 		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::stmt> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::program>::stmt()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
@@ -3884,7 +4103,7 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::VARNAME> VARNAME();
 			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::stmt>(Get<::DLDL_LPDDEF_DF::ast::Type::stmt>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__stmt__> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__stmt__>::deamerreserved_star__stmt__()
+		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__stmt__> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::program>::deamerreserved_star__stmt__()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
@@ -3900,6 +4119,14 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::VARNAME> VARNAME();
 			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::stmt>(Get<::DLDL_LPDDEF_DF::ast::Type::stmt>(ts));
 		}
 
+		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__stmt__> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__stmt__>::deamerreserved_star__stmt__()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__stmt__>(Get<::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__stmt__>(ts));
+		}
+
 		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::vector_variant> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::stmt>::vector_variant()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
@@ -3908,20 +4135,20 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::VARNAME> VARNAME();
 			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::vector_variant>(Get<::DLDL_LPDDEF_DF::ast::Type::vector_variant>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::comment_line> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::stmt>::comment_line()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::comment_line>(Get<::DLDL_LPDDEF_DF::ast::Type::comment_line>(ts));
-		}
-
 		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::optional_variant> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::stmt>::optional_variant()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::optional_variant>(Get<::DLDL_LPDDEF_DF::ast::Type::optional_variant>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::comment_line> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::stmt>::comment_line()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::comment_line>(Get<::DLDL_LPDDEF_DF::ast::Type::comment_line>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::standard_variant> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::stmt>::standard_variant()
@@ -3946,6 +4173,14 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::VARNAME> VARNAME();
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::LAB>(Get<::DLDL_LPDDEF_DF::ast::Type::LAB>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::vector_variant>::deamerreserved_optional__value_part__()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__>(Get<::DLDL_LPDDEF_DF::ast::Type::deamerreserved_optional__value_part__>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_part> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::vector_variant>::value_part()
@@ -4004,12 +4239,28 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::VARNAME> VARNAME();
 			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::VECTOR>(Get<::DLDL_LPDDEF_DF::ast::Type::VECTOR>(ts));
 		}
 
+		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_part> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__>::value_part()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_part>(Get<::DLDL_LPDDEF_DF::ast::Type::value_part>(ts));
+		}
+
 		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::LAB> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::optional_variant>::LAB()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::LAB>(Get<::DLDL_LPDDEF_DF::ast::Type::LAB>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::optional_variant>::deamerreserved_optional__value_part__()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__>(Get<::DLDL_LPDDEF_DF::ast::Type::deamerreserved_optional__value_part__>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_part> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::optional_variant>::value_part()
@@ -4084,6 +4335,14 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::VARNAME> VARNAME();
 			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::EQ>(Get<::DLDL_LPDDEF_DF::ast::Type::EQ>(ts));
 		}
 
+		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::standard_variant>::deamerreserved_optional__value_part__()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__>(Get<::DLDL_LPDDEF_DF::ast::Type::deamerreserved_optional__value_part__>(ts));
+		}
+
 		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_part> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::standard_variant>::value_part()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
@@ -4138,6 +4397,14 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::VARNAME> VARNAME();
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__>(Get<::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__COMMA__value_type__>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_type>::deamerreserved_long_54()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54>(Get<::DLDL_LPDDEF_DF::ast::Type::deamerreserved_long_54>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::COLON> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_type>::COLON()
@@ -4245,6 +4512,38 @@ AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::VARNAME> VARNAME();
 		}
 
 		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::COMMA> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__>::COMMA()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::COMMA>(Get<::DLDL_LPDDEF_DF::ast::Type::COMMA>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_type> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54>::value_type()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::value_type>(Get<::DLDL_LPDDEF_DF::ast::Type::value_type>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_arrow__value_type__> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54>::deamerreserved_arrow__value_type__()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_arrow__value_type__>(Get<::DLDL_LPDDEF_DF::ast::Type::deamerreserved_arrow__value_type__>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54>::deamerreserved_star__COMMA__value_type__()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__>(Get<::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__COMMA__value_type__>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::COMMA> AccessTemplateBase<::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54>::COMMA()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 

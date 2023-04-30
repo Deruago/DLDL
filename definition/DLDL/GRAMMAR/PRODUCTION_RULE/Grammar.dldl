@@ -22,6 +22,7 @@ group
 	one_or_more_group
 	group MINUS
 	or_group
+	not_group
 	min_max_group
 	extension_group
 	VALUE
@@ -35,6 +36,9 @@ optional_group
 
 zero_or_more_group
 	group STAR
+	
+not_group
+	TILDE group
 	
 one_or_more_group
 	group PLUS

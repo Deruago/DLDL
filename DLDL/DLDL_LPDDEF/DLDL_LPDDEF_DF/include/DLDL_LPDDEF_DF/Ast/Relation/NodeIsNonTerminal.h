@@ -33,6 +33,11 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace relation {
 			return true;
 		}
 
+		if (t == ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_optional__value_part__)
+		{
+			return true;
+		}
+
 		if (t == ::DLDL_LPDDEF_DF::ast::Type::optional_variant)
 		{
 			return true;
@@ -64,6 +69,11 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace relation {
 		}
 
 		if (t == ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__COMMA__value_type__)
+		{
+			return true;
+		}
+
+		if (t == ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_long_54)
 		{
 			return true;
 		}

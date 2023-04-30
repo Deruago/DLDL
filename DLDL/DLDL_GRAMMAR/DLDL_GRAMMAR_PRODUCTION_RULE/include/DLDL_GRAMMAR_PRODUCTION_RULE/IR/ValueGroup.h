@@ -29,9 +29,9 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 			return value->name;
 		}
 
-		std::vector<ProductionRule>
-		RetrieveEnvironment(Environment& currentEnvironment,
-							const ProductionRule& productionRule) override
+		std::vector<ProductionRule> RetrieveEnvironment(Environment& currentEnvironment,
+														const ProductionRule& productionRule,
+														DLDL::ir::Grammar* grammar) override
 		{
 			ProductionRule newProductionRule = productionRule.values;
 			newProductionRule.values.emplace_back(value);

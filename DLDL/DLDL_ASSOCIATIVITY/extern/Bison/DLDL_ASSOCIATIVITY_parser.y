@@ -1,10 +1,11 @@
 %define parse.error verbose
-%define parse.lac full
 
+%glr-parser
 
 %{
 #include <iostream>
 #include <vector>
+#include <string>
 #include <cstring>
 #include <stdio.h>
 #include <Deamer/External/Cpp/Lexer/TerminalObject.h>
@@ -28,11 +29,18 @@
 #ifndef YY_parse_LLOC
 #define YY_parse_LLOC DLDL_ASSOCIATIVITYlloc
 #endif //YY_parse_LLOC
-#define YYERROR_VERBOSE
+#define YYERROR_VERBOSE 1
+
+
 
 void DLDL_ASSOCIATIVITYerror(const char* s);
 int DLDL_ASSOCIATIVITYlex();
 static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
+
+extern int DLDL_ASSOCIATIVITYlineno;
+extern int DLDL_ASSOCIATIVITY_column;
+
+static const std::string* DLDL_ASSOCIATIVITY_input_text = nullptr;
 %}
 
 %token<Terminal> ASSOCIATIVITY
@@ -97,11 +105,90 @@ stmt:
 
 void DLDL_ASSOCIATIVITYerror(const char* s)
 {
-	std::cout << "Syntax error on line: " << s << '\n';
+	std::cout << "Error: " << s << "\n";
+	std::cout << "In line: " << DLDL_ASSOCIATIVITYlineno << ", Column: " << DLDL_ASSOCIATIVITY_column << '\n';
+
+	std::size_t currentLineCount = 1;
+	auto index = 0;
+	static constexpr auto offsetShow = 2;
+
+	while (index < DLDL_ASSOCIATIVITY_input_text->size())
+	{
+		if ((*DLDL_ASSOCIATIVITY_input_text)[index] == '\n')
+		{
+			currentLineCount += 1;
+		}
+		index++;
+
+		if (currentLineCount + offsetShow >= DLDL_ASSOCIATIVITYlineno)
+		{
+			break;
+		}
+
+	}
+
+	bool donePreShow = false;
+	while (!donePreShow && offsetShow > 0)
+	{
+		if ((*DLDL_ASSOCIATIVITY_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_ASSOCIATIVITY_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_ASSOCIATIVITY_input_text)[index];
+		}
+
+		if ((*DLDL_ASSOCIATIVITY_input_text)[index] == '\n')
+		{
+			if (currentLineCount + 1 == DLDL_ASSOCIATIVITYlineno)
+			{
+				donePreShow = true;
+			}
+			currentLineCount += 1;
+		}
+
+		index++;
+	}
+	
+	bool endLine = false;
+	while (!endLine && index < DLDL_ASSOCIATIVITY_input_text->size())
+	{
+		if ((*DLDL_ASSOCIATIVITY_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_ASSOCIATIVITY_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_ASSOCIATIVITY_input_text)[index];
+		}
+		
+		if ((*DLDL_ASSOCIATIVITY_input_text)[index] == '\n')
+		{
+			endLine = true;
+		}
+		
+		index++;
+	}
+
+    for(int i = 0; i < DLDL_ASSOCIATIVITY_column - 1; i++)
+	{
+		std::cout << "_";
+	}
+	std::cout << "^\n";
 }
 
 deamer::external::cpp::ast::Tree* DLDL_ASSOCIATIVITY::bison::parser::Parser::Parse(const std::string& text) const
 {
+	DLDL_ASSOCIATIVITY_input_text = &text;
 	outputTree = nullptr;
 	YY_BUFFER_STATE buf;
 	buf = DLDL_ASSOCIATIVITY_scan_string(text.c_str());

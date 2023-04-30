@@ -1,10 +1,11 @@
 %define parse.error verbose
-%define parse.lac full
 
+%glr-parser
 
 %{
 #include <iostream>
 #include <vector>
+#include <string>
 #include <cstring>
 #include <stdio.h>
 #include <Deamer/External/Cpp/Lexer/TerminalObject.h>
@@ -39,6 +40,7 @@
 #include "DLDL_LPDDEF_DF/Ast/Node/stmt.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/comment_line.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/vector_variant.h"
+#include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_optional__value_part__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/optional_variant.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/value_part.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/standard_variant.h"
@@ -46,6 +48,7 @@
 #include "DLDL_LPDDEF_DF/Ast/Node/value_type.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_arrow__value_type__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_star__COMMA__value_type__.h"
+#include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_long_54.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/var_type.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_arrow__VARNAME__.h"
 #include "DLDL_LPDDEF_DF/Ast/Node/deamerreserved_star__COLON__VARNAME__.h"
@@ -58,11 +61,18 @@
 #ifndef YY_parse_LLOC
 #define YY_parse_LLOC DLDL_LPDDEF_DFlloc
 #endif //YY_parse_LLOC
-#define YYERROR_VERBOSE
+#define YYERROR_VERBOSE 1
+
+
 
 void DLDL_LPDDEF_DFerror(const char* s);
 int DLDL_LPDDEF_DFlex();
 static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
+
+extern int DLDL_LPDDEF_DFlineno;
+extern int DLDL_LPDDEF_DF_column;
+
+static const std::string* DLDL_LPDDEF_DF_input_text = nullptr;
 %}
 
 %token<Terminal> LAB
@@ -90,6 +100,7 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %nterm<DLDL_LPDDEF_DF_stmt> stmt
 %nterm<DLDL_LPDDEF_DF_comment_line> comment_line
 %nterm<DLDL_LPDDEF_DF_vector_variant> vector_variant
+%nterm<DLDL_LPDDEF_DF_deamerreserved_optional__value_part__> deamerreserved_optional__value_part__
 %nterm<DLDL_LPDDEF_DF_optional_variant> optional_variant
 %nterm<DLDL_LPDDEF_DF_value_part> value_part
 %nterm<DLDL_LPDDEF_DF_standard_variant> standard_variant
@@ -97,6 +108,7 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 %nterm<DLDL_LPDDEF_DF_value_type> value_type
 %nterm<DLDL_LPDDEF_DF_deamerreserved_arrow__value_type__> deamerreserved_arrow__value_type__
 %nterm<DLDL_LPDDEF_DF_deamerreserved_star__COMMA__value_type__> deamerreserved_star__COMMA__value_type__
+%nterm<DLDL_LPDDEF_DF_deamerreserved_long_54> deamerreserved_long_54
 %nterm<DLDL_LPDDEF_DF_var_type> var_type
 %nterm<DLDL_LPDDEF_DF_deamerreserved_arrow__VARNAME__> deamerreserved_arrow__VARNAME__
 %nterm<DLDL_LPDDEF_DF_deamerreserved_star__COLON__VARNAME__> deamerreserved_star__COLON__VARNAME__
@@ -128,6 +140,7 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_LPDDEF_DF::ast::node::stmt* DLDL_LPDDEF_DF_stmt;
 	::DLDL_LPDDEF_DF::ast::node::comment_line* DLDL_LPDDEF_DF_comment_line;
 	::DLDL_LPDDEF_DF::ast::node::vector_variant* DLDL_LPDDEF_DF_vector_variant;
+	::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__* DLDL_LPDDEF_DF_deamerreserved_optional__value_part__;
 	::DLDL_LPDDEF_DF::ast::node::optional_variant* DLDL_LPDDEF_DF_optional_variant;
 	::DLDL_LPDDEF_DF::ast::node::value_part* DLDL_LPDDEF_DF_value_part;
 	::DLDL_LPDDEF_DF::ast::node::standard_variant* DLDL_LPDDEF_DF_standard_variant;
@@ -135,6 +148,7 @@ static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
 	::DLDL_LPDDEF_DF::ast::node::value_type* DLDL_LPDDEF_DF_value_type;
 	::DLDL_LPDDEF_DF::ast::node::deamerreserved_arrow__value_type__* DLDL_LPDDEF_DF_deamerreserved_arrow__value_type__;
 	::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__* DLDL_LPDDEF_DF_deamerreserved_star__COMMA__value_type__;
+	::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54* DLDL_LPDDEF_DF_deamerreserved_long_54;
 	::DLDL_LPDDEF_DF::ast::node::var_type* DLDL_LPDDEF_DF_var_type;
 	::DLDL_LPDDEF_DF::ast::node::deamerreserved_arrow__VARNAME__* DLDL_LPDDEF_DF_deamerreserved_arrow__VARNAME__;
 	::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COLON__VARNAME__* DLDL_LPDDEF_DF_deamerreserved_star__COLON__VARNAME__;
@@ -211,7 +225,7 @@ comment_line:
 
 
 vector_variant:
-	VECTOR LAB var_type RAB var_name value_part  {
+	VECTOR LAB var_type RAB var_name deamerreserved_optional__value_part__  {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::vector_variant({::DLDL_LPDDEF_DF::ast::Type::vector_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::VECTOR({::DLDL_LPDDEF_DF::ast::Type::VECTOR, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $3, $5, $6 });
 		$$ = newNode;
 
@@ -219,24 +233,8 @@ vector_variant:
 		delete $2;
 		delete $4;
 	}
-	| VECTOR LAB var_type RAB var_name  {
-		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::vector_variant({::DLDL_LPDDEF_DF::ast::Type::vector_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::VECTOR({::DLDL_LPDDEF_DF::ast::Type::VECTOR, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $3, $5 });
-		$$ = newNode;
-
-		// Ignored, Deleted, tokens are deleted
-		delete $2;
-		delete $4;
-	}
-	| VECTOR LSB var_type RSB var_name value_part  {
-		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::vector_variant({::DLDL_LPDDEF_DF::ast::Type::vector_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 2, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::VECTOR({::DLDL_LPDDEF_DF::ast::Type::VECTOR, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $3, $5, $6 });
-		$$ = newNode;
-
-		// Ignored, Deleted, tokens are deleted
-		delete $2;
-		delete $4;
-	}
-	| VECTOR LSB var_type RSB var_name  {
-		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::vector_variant({::DLDL_LPDDEF_DF::ast::Type::vector_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 3, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::VECTOR({::DLDL_LPDDEF_DF::ast::Type::VECTOR, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $3, $5 });
+	| VECTOR LSB var_type RSB var_name deamerreserved_optional__value_part__  {
+		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::vector_variant({::DLDL_LPDDEF_DF::ast::Type::vector_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::VECTOR({::DLDL_LPDDEF_DF::ast::Type::VECTOR, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $3, $5, $6 });
 		$$ = newNode;
 
 		// Ignored, Deleted, tokens are deleted
@@ -246,8 +244,24 @@ vector_variant:
 ;
 
 
+deamerreserved_optional__value_part__:
+	value_part  {
+		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__({::DLDL_LPDDEF_DF::ast::Type::deamerreserved_optional__value_part__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, { $1 });
+		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
+	}
+	|  {
+		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__({::DLDL_LPDDEF_DF::ast::Type::deamerreserved_optional__value_part__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, {  });
+		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
+	}
+;
+
+
 optional_variant:
-	OPTIONAL LAB var_type RAB var_name value_part  {
+	OPTIONAL LAB var_type RAB var_name deamerreserved_optional__value_part__  {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::optional_variant({::DLDL_LPDDEF_DF::ast::Type::optional_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::OPTIONAL({::DLDL_LPDDEF_DF::ast::Type::OPTIONAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $3, $5, $6 });
 		$$ = newNode;
 
@@ -255,24 +269,8 @@ optional_variant:
 		delete $2;
 		delete $4;
 	}
-	| OPTIONAL LAB var_type RAB var_name  {
-		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::optional_variant({::DLDL_LPDDEF_DF::ast::Type::optional_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::OPTIONAL({::DLDL_LPDDEF_DF::ast::Type::OPTIONAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $3, $5 });
-		$$ = newNode;
-
-		// Ignored, Deleted, tokens are deleted
-		delete $2;
-		delete $4;
-	}
-	| OPTIONAL LSB var_type RSB var_name value_part  {
-		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::optional_variant({::DLDL_LPDDEF_DF::ast::Type::optional_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 2, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::OPTIONAL({::DLDL_LPDDEF_DF::ast::Type::OPTIONAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $3, $5, $6 });
-		$$ = newNode;
-
-		// Ignored, Deleted, tokens are deleted
-		delete $2;
-		delete $4;
-	}
-	| OPTIONAL LSB var_type RSB var_name  {
-		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::optional_variant({::DLDL_LPDDEF_DF::ast::Type::optional_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 3, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::OPTIONAL({::DLDL_LPDDEF_DF::ast::Type::OPTIONAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $3, $5 });
+	| OPTIONAL LSB var_type RSB var_name deamerreserved_optional__value_part__  {
+		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::optional_variant({::DLDL_LPDDEF_DF::ast::Type::optional_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::OPTIONAL({::DLDL_LPDDEF_DF::ast::Type::OPTIONAL, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $3, $5, $6 });
 		$$ = newNode;
 
 		// Ignored, Deleted, tokens are deleted
@@ -294,14 +292,8 @@ value_part:
 
 
 standard_variant:
-	var_type var_name value_part  {
+	var_type var_name deamerreserved_optional__value_part__  {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::standard_variant({::DLDL_LPDDEF_DF::ast::Type::standard_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, $2, $3 });
-		$$ = newNode;
-
-		// Ignored, Deleted, tokens are deleted
-	}
-	| var_type var_name  {
-		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::standard_variant({::DLDL_LPDDEF_DF::ast::Type::standard_variant, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { $1, $2 });
 		$$ = newNode;
 
 		// Ignored, Deleted, tokens are deleted
@@ -350,14 +342,8 @@ value_type:
 
 		// Ignored, Deleted, tokens are deleted
 	}
-	| LB deamerreserved_arrow__value_type__ RB  {
+	| LB deamerreserved_long_54 RB  {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::value_type({::DLDL_LPDDEF_DF::ast::Type::value_type, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 5, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::LB({::DLDL_LPDDEF_DF::ast::Type::LB, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), $2, new DLDL_LPDDEF_DF::ast::node::RB({::DLDL_LPDDEF_DF::ast::Type::RB, ::deamer::external::cpp::ast::NodeValue::terminal, $3 }) });
-		$$ = newNode;
-
-		// Ignored, Deleted, tokens are deleted
-	}
-	| LB RB  {
-		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::value_type({::DLDL_LPDDEF_DF::ast::Type::value_type, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 6, ::deamer::external::cpp::ast::ProductionRuleType::user }}, { new DLDL_LPDDEF_DF::ast::node::LB({::DLDL_LPDDEF_DF::ast::Type::LB, ::deamer::external::cpp::ast::NodeValue::terminal, $1 }), new DLDL_LPDDEF_DF::ast::node::RB({::DLDL_LPDDEF_DF::ast::Type::RB, ::deamer::external::cpp::ast::NodeValue::terminal, $2 }) });
 		$$ = newNode;
 
 		// Ignored, Deleted, tokens are deleted
@@ -384,6 +370,22 @@ deamerreserved_star__COMMA__value_type__:
 	}
 	|  {
 		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__({::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__COMMA__value_type__, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, {  });
+		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
+	}
+;
+
+
+deamerreserved_long_54:
+	deamerreserved_arrow__value_type__  {
+		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54({::DLDL_LPDDEF_DF::ast::Type::deamerreserved_long_54, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 0, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, { $1 });
+		$$ = newNode;
+
+		// Ignored, Deleted, tokens are deleted
+	}
+	|  {
+		auto* const newNode = new DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54({::DLDL_LPDDEF_DF::ast::Type::deamerreserved_long_54, ::deamer::external::cpp::ast::NodeValue::nonterminal, { 1, ::deamer::external::cpp::ast::ProductionRuleType::translation }}, {  });
 		$$ = newNode;
 
 		// Ignored, Deleted, tokens are deleted
@@ -448,11 +450,90 @@ var_name:
 
 void DLDL_LPDDEF_DFerror(const char* s)
 {
-	std::cout << "Syntax error on line: " << s << '\n';
+	std::cout << "Error: " << s << "\n";
+	std::cout << "In line: " << DLDL_LPDDEF_DFlineno << ", Column: " << DLDL_LPDDEF_DF_column << '\n';
+
+	std::size_t currentLineCount = 1;
+	auto index = 0;
+	static constexpr auto offsetShow = 2;
+
+	while (index < DLDL_LPDDEF_DF_input_text->size())
+	{
+		if ((*DLDL_LPDDEF_DF_input_text)[index] == '\n')
+		{
+			currentLineCount += 1;
+		}
+		index++;
+
+		if (currentLineCount + offsetShow >= DLDL_LPDDEF_DFlineno)
+		{
+			break;
+		}
+
+	}
+
+	bool donePreShow = false;
+	while (!donePreShow && offsetShow > 0)
+	{
+		if ((*DLDL_LPDDEF_DF_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_LPDDEF_DF_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_LPDDEF_DF_input_text)[index];
+		}
+
+		if ((*DLDL_LPDDEF_DF_input_text)[index] == '\n')
+		{
+			if (currentLineCount + 1 == DLDL_LPDDEF_DFlineno)
+			{
+				donePreShow = true;
+			}
+			currentLineCount += 1;
+		}
+
+		index++;
+	}
+	
+	bool endLine = false;
+	while (!endLine && index < DLDL_LPDDEF_DF_input_text->size())
+	{
+		if ((*DLDL_LPDDEF_DF_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_LPDDEF_DF_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_LPDDEF_DF_input_text)[index];
+		}
+		
+		if ((*DLDL_LPDDEF_DF_input_text)[index] == '\n')
+		{
+			endLine = true;
+		}
+		
+		index++;
+	}
+
+    for(int i = 0; i < DLDL_LPDDEF_DF_column - 1; i++)
+	{
+		std::cout << "_";
+	}
+	std::cout << "^\n";
 }
 
 deamer::external::cpp::ast::Tree* DLDL_LPDDEF_DF::bison::parser::Parser::Parse(const std::string& text) const
 {
+	DLDL_LPDDEF_DF_input_text = &text;
 	outputTree = nullptr;
 	YY_BUFFER_STATE buf;
 	buf = DLDL_LPDDEF_DF_scan_string(text.c_str());

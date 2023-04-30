@@ -701,7 +701,7 @@ extern int yylex (void);
 #undef yyTABLES_NAME
 #endif
 
-#line 66 "./DLDL_PRECEDENCE_lexer.l"
+#line 77 "./DLDL_PRECEDENCE_lexer.l"
 
 
 #line 708 "./DLDL_PRECEDENCE_lexer.h"

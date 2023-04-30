@@ -12,6 +12,7 @@ class group;
 class nested_group;
 class optional_group;
 class zero_or_more_group;
+class not_group;
 class one_or_more_group;
 class or_group;
 class min_max_group;
@@ -26,6 +27,7 @@ class LEFT_SQUARE_BRACKET;
 class RIGHT_SQUARE_BRACKET;
 class QUESTION_MARK;
 class EXCLAMATION_MARK;
+class TILDE;
 class ARROW;
 class STAR;
 class PLUS;
@@ -96,6 +98,13 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace relation {
 	{
 		constexpr static auto value = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::zero_or_more_group;
 		using type = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group;
+	};
+
+	template<>
+	struct NodeTypeToEnum<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group>
+	{
+		constexpr static auto value = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::not_group;
+		using type = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group;
 	};
 
 	template<>
@@ -194,6 +203,13 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace relation {
 	{
 		constexpr static auto value = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::EXCLAMATION_MARK;
 		using type = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::EXCLAMATION_MARK;
+	};
+
+	template<>
+	struct NodeTypeToEnum<::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE>
+	{
+		constexpr static auto value = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::TILDE;
+		using type = ::DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE;
 	};
 
 	template<>

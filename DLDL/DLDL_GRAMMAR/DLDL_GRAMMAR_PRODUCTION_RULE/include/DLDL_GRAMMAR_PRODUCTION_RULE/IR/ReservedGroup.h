@@ -15,15 +15,14 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 	class ReservedGroup : public Group
 	{
 	public:
-		bool inlineExtension;
 		std::string reservedName;
 
 		ReservedGroup(std::string reservedName_, std::vector<Group*> subgroups_ = {},
 					  bool inlineExtension_ = false)
 			: Group(std::move(subgroups_)),
-			  inlineExtension(inlineExtension_),
 			  reservedName(std::move(reservedName_))
 		{
+			SetInline(inlineExtension_);
 		}
 
 		virtual std::string GetReferenceName() const

@@ -10,6 +10,7 @@ class deamerreserved_star__stmt__;
 class stmt;
 class comment_line;
 class vector_variant;
+class deamerreserved_optional__value_part__;
 class optional_variant;
 class value_part;
 class standard_variant;
@@ -17,6 +18,7 @@ class value;
 class value_type;
 class deamerreserved_arrow__value_type__;
 class deamerreserved_star__COMMA__value_type__;
+class deamerreserved_long_54;
 class var_type;
 class deamerreserved_arrow__VARNAME__;
 class deamerreserved_star__COLON__VARNAME__;
@@ -88,6 +90,13 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace relation {
 	};
 
 	template<>
+	struct NodeTypeToEnum<::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__>
+	{
+		constexpr static auto value = ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_optional__value_part__;
+		using type = ::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__;
+	};
+
+	template<>
 	struct NodeTypeToEnum<::DLDL_LPDDEF_DF::ast::node::optional_variant>
 	{
 		constexpr static auto value = ::DLDL_LPDDEF_DF::ast::Type::optional_variant;
@@ -134,6 +143,13 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace relation {
 	{
 		constexpr static auto value = ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__COMMA__value_type__;
 		using type = ::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__;
+	};
+
+	template<>
+	struct NodeTypeToEnum<::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54>
+	{
+		constexpr static auto value = ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_long_54;
+		using type = ::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54;
 	};
 
 	template<>

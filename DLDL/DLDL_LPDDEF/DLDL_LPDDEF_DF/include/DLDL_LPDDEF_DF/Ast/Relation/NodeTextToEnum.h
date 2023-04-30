@@ -27,6 +27,9 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace relation {
 		{ "vector_variant", ::DLDL_LPDDEF_DF::ast::Type::vector_variant },
 	
 
+		{ "deamerreserved_optional__value_part__", ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_optional__value_part__ },
+	
+
 		{ "optional_variant", ::DLDL_LPDDEF_DF::ast::Type::optional_variant },
 	
 
@@ -46,6 +49,9 @@ namespace DLDL_LPDDEF_DF { namespace ast { namespace relation {
 	
 
 		{ "deamerreserved_star__COMMA__value_type__", ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_star__COMMA__value_type__ },
+	
+
+		{ "deamerreserved_long_54", ::DLDL_LPDDEF_DF::ast::Type::deamerreserved_long_54 },
 	
 
 		{ "var_type", ::DLDL_LPDDEF_DF::ast::Type::var_type },

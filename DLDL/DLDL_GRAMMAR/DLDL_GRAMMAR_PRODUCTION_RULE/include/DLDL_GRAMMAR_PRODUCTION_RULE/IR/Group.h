@@ -1,6 +1,7 @@
 #ifndef DLDL_GRAMMAR_PRODUCTIONRULE_GROUP_H
 #define DLDL_GRAMMAR_PRODUCTIONRULE_GROUP_H
 
+#include "DLDL_GRAMMAR/IR/Grammar.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/IR/Environment.h"
 #include <utility>
 #include <vector>
@@ -16,6 +17,9 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 	{
 	private:
 		mutable Value* value;
+
+	public:
+		bool inlineExtension = true;
 
 	public:
 		std::vector<Group*> subgroups;
@@ -36,12 +40,22 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 			}
 		}
 
-		Environment GetEnvironment()
+		void SetInline(bool inlineExtension_)
+		{
+			inlineExtension &= inlineExtension_;
+			for (auto subGroup : subgroups)
+			{
+				subGroup->SetInline(inlineExtension_);
+			}
+		}
+
+		Environment GetEnvironment(DLDL::ir::Grammar* grammar)
 		{
 			Environment currentEnvironment;
 
-			const auto productionRules = RetrieveEnvironment(currentEnvironment, ProductionRule());
-			
+			const auto productionRules =
+				RetrieveEnvironment(currentEnvironment, ProductionRule(), grammar);
+
 			std::vector<ProductionRule> recreatedProductionRules;
 			for (const auto& productionRule : productionRules)
 			{
@@ -54,7 +68,7 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 						alreadyFound = true;
 					}
 				}
-				
+
 				if (!alreadyFound)
 				{
 					recreatedProductionRules.push_back(productionRule);
@@ -63,11 +77,12 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 
 			currentEnvironment.currentProductionRules = recreatedProductionRules;
 
-			return currentEnvironment;
+			return std::move(currentEnvironment);
 		}
 
 		virtual std::vector<ProductionRule>
-		RetrieveEnvironment(Environment& currentEnvironment, const ProductionRule& productionRule)
+		RetrieveEnvironment(Environment& currentEnvironment, const ProductionRule& productionRule,
+							DLDL::ir::Grammar* grammar)
 		{
 			std::vector<ProductionRule> currentProductionRules = {productionRule};
 
@@ -76,8 +91,8 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 				std::vector<ProductionRule> nextStage;
 				for (const auto& currentProductionRule : currentProductionRules)
 				{
-					const auto newProductionRules =
-						subgroup->RetrieveEnvironment(currentEnvironment, currentProductionRule);
+					const auto newProductionRules = subgroup->RetrieveEnvironment(
+						currentEnvironment, currentProductionRule, grammar);
 
 					for (const auto& newProductionRule : newProductionRules)
 					{

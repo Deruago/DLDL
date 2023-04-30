@@ -15,7 +15,9 @@
 #include "DLDL_LPDSTRUCT/Ast/Node/argument.h"
 #include "DLDL_LPDSTRUCT/Ast/Node/argument_name.h"
 #include "DLDL_LPDSTRUCT/Ast/Node/argument_block.h"
-#include "DLDL_LPDSTRUCT/Ast/Node/deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______.h"
+#include "DLDL_LPDSTRUCT/Ast/Node/deamerreserved_long_60.h"
+#include "DLDL_LPDSTRUCT/Ast/Node/deamerreserved_long_63.h"
+#include "DLDL_LPDSTRUCT/Ast/Node/deamerreserved_long_66.h"
 
 
 #include <Deamer/External/Cpp/Ast/Node.h>
@@ -138,8 +140,14 @@ namespace DLDL_LPDSTRUCT { namespace ast { namespace utility {
 			case ::DLDL_LPDSTRUCT::ast::Type::argument_block: {
 				return new ::DLDL_LPDSTRUCT::ast::node::argument_block({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
 			}
-			case ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______: {
-				return new ::DLDL_LPDSTRUCT::ast::node::deamerreserved_star__deamerreserved_or__INDENTED_VALUE__deamerreserved_or__VARNAME_EXT__VARNAME______({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
+			case ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_60: {
+				return new ::DLDL_LPDSTRUCT::ast::node::deamerreserved_long_60({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
+			}
+			case ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_63: {
+				return new ::DLDL_LPDSTRUCT::ast::node::deamerreserved_long_63({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
+			}
+			case ::DLDL_LPDSTRUCT::ast::Type::deamerreserved_long_66: {
+				return new ::DLDL_LPDSTRUCT::ast::node::deamerreserved_long_66({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
 			}
 
 			}

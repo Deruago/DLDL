@@ -15,25 +15,27 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 	class OptionalGroup : public ReservedGroup
 	{
 	public:
-		OptionalGroup(std::vector<Group*> subgroups_ = {}, bool inlineExtension_ = true)
+		OptionalGroup(std::vector<Group*> subgroups_ = {}, bool inlineExtension_ = false)
 			: ReservedGroup("optional", std::move(subgroups_), inlineExtension_)
 		{
 		}
 
-		std::vector<ProductionRule> RetrieveEnvironment(Environment& currentEnvironment, const ProductionRule& productionRule) override
+		std::vector<ProductionRule> RetrieveEnvironment(Environment& currentEnvironment,
+														const ProductionRule& productionRule,
+														DLDL::ir::Grammar* grammar) override
 		{
 			if (inlineExtension)
 			{
 				std::vector<ProductionRule> currentProductionRules = {productionRule};
-				
+
 				for (auto* const subgroup : subgroups)
 				{
 					std::vector<ProductionRule> nextStage;
 					for (const auto& currentProductionRule : currentProductionRules)
 					{
 						const auto newProductionRules = subgroup->RetrieveEnvironment(
-							currentEnvironment, currentProductionRule);
-						
+							currentEnvironment, currentProductionRule, grammar);
+
 						for (const auto& newProductionRule : newProductionRules)
 						{
 							nextStage.push_back(newProductionRule);
@@ -53,13 +55,18 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 
 				for (const auto& subgroup : subgroups)
 				{
-					filledProductionRule.values.push_back(subgroup->GetValue());
+					auto result = subgroup->RetrieveEnvironment(currentEnvironment,
+																filledProductionRule, grammar);
+					filledProductionRule = result[0];
 				}
 
 				currentEnvironment.AddNonTerminal(GetReferenceName(),
 												  {filledProductionRule, emptyProductionRule});
 
-				return {};
+				ProductionRule newProductionRule = productionRule.values;
+				newProductionRule.values.emplace_back(GetValue());
+
+				return {newProductionRule};
 			}
 		}
 	};

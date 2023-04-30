@@ -5,6 +5,7 @@
 %{
 #include <iostream>
 #include <vector>
+#include <string>
 #include <cstring>
 #include <stdio.h>
 #include <Deamer/External/Cpp/Lexer/TerminalObject.h>
@@ -40,11 +41,18 @@
 #ifndef YY_parse_LLOC
 #define YY_parse_LLOC DLDL_GRAMMARlloc
 #endif //YY_parse_LLOC
-#define YYERROR_VERBOSE
+#define YYERROR_VERBOSE 1
+
+
 
 void DLDL_GRAMMARerror(const char* s);
 int DLDL_GRAMMARlex();
 static ::deamer::external::cpp::ast::Tree* outputTree = nullptr;
+
+extern int DLDL_GRAMMARlineno;
+extern int DLDL_GRAMMAR_column;
+
+static const std::string* DLDL_GRAMMAR_input_text = nullptr;
 %}
 
 %token<Terminal> COMMENT
@@ -215,11 +223,90 @@ production_rules:
 
 void DLDL_GRAMMARerror(const char* s)
 {
-	std::cout << "Syntax error on line: " << s << '\n';
+	std::cout << "Error: " << s << "\n";
+	std::cout << "In line: " << DLDL_GRAMMARlineno << ", Column: " << DLDL_GRAMMAR_column << '\n';
+
+	std::size_t currentLineCount = 1;
+	auto index = 0;
+	static constexpr auto offsetShow = 2;
+
+	while (index < DLDL_GRAMMAR_input_text->size())
+	{
+		if ((*DLDL_GRAMMAR_input_text)[index] == '\n')
+		{
+			currentLineCount += 1;
+		}
+		index++;
+
+		if (currentLineCount + offsetShow >= DLDL_GRAMMARlineno)
+		{
+			break;
+		}
+
+	}
+
+	bool donePreShow = false;
+	while (!donePreShow && offsetShow > 0)
+	{
+		if ((*DLDL_GRAMMAR_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_GRAMMAR_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_GRAMMAR_input_text)[index];
+		}
+
+		if ((*DLDL_GRAMMAR_input_text)[index] == '\n')
+		{
+			if (currentLineCount + 1 == DLDL_GRAMMARlineno)
+			{
+				donePreShow = true;
+			}
+			currentLineCount += 1;
+		}
+
+		index++;
+	}
+	
+	bool endLine = false;
+	while (!endLine && index < DLDL_GRAMMAR_input_text->size())
+	{
+		if ((*DLDL_GRAMMAR_input_text)[index] == '\t')
+		{
+			std::cout << ' ';
+		}
+		else if ((*DLDL_GRAMMAR_input_text)[index] == '\r')
+		{
+			// skip
+		}
+		else
+		{
+			std::cout << (*DLDL_GRAMMAR_input_text)[index];
+		}
+		
+		if ((*DLDL_GRAMMAR_input_text)[index] == '\n')
+		{
+			endLine = true;
+		}
+		
+		index++;
+	}
+
+    for(int i = 0; i < DLDL_GRAMMAR_column - 1; i++)
+	{
+		std::cout << "_";
+	}
+	std::cout << "^\n";
 }
 
 deamer::external::cpp::ast::Tree* DLDL_GRAMMAR::bison::parser::Parser::Parse(const std::string& text) const
 {
+	DLDL_GRAMMAR_input_text = &text;
 	outputTree = nullptr;
 	YY_BUFFER_STATE buf;
 	buf = DLDL_GRAMMAR_scan_string(text.c_str());

@@ -1,9 +1,8 @@
 /* A Bison parser, made by GNU Bison 3.8.2.  */
 
-/* Bison interface for Yacc-like parsers in C
+/* Skeleton interface for Bison GLR parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
-   Inc.
+   Copyright (C) 2002-2015, 2018-2021 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,10 +29,6 @@
 
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
-
-/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
-   especially those whose name start with YY_ or yy_.  They are
-   private implementation details that can be changed or removed.  */
 
 #ifndef YY_DLDL_LPDDEF_DF_DLDL_LPDDEF_DF_PARSER_TAB_H_INCLUDED
 # define YY_DLDL_LPDDEF_DF_DLDL_LPDDEF_DF_PARSER_TAB_H_INCLUDED
@@ -80,7 +75,7 @@ extern int DLDL_LPDDEF_DFdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 106 "./DLDL_LPDDEF_DF_parser.y"
+#line 118 "./DLDL_LPDDEF_DF_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_LPDDEF_DF::ast::node::LAB* DLDL_LPDDEF_DF_LAB;
@@ -106,6 +101,7 @@ union YYSTYPE
 	::DLDL_LPDDEF_DF::ast::node::stmt* DLDL_LPDDEF_DF_stmt;
 	::DLDL_LPDDEF_DF::ast::node::comment_line* DLDL_LPDDEF_DF_comment_line;
 	::DLDL_LPDDEF_DF::ast::node::vector_variant* DLDL_LPDDEF_DF_vector_variant;
+	::DLDL_LPDDEF_DF::ast::node::deamerreserved_optional__value_part__* DLDL_LPDDEF_DF_deamerreserved_optional__value_part__;
 	::DLDL_LPDDEF_DF::ast::node::optional_variant* DLDL_LPDDEF_DF_optional_variant;
 	::DLDL_LPDDEF_DF::ast::node::value_part* DLDL_LPDDEF_DF_value_part;
 	::DLDL_LPDDEF_DF::ast::node::standard_variant* DLDL_LPDDEF_DF_standard_variant;
@@ -113,13 +109,14 @@ union YYSTYPE
 	::DLDL_LPDDEF_DF::ast::node::value_type* DLDL_LPDDEF_DF_value_type;
 	::DLDL_LPDDEF_DF::ast::node::deamerreserved_arrow__value_type__* DLDL_LPDDEF_DF_deamerreserved_arrow__value_type__;
 	::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COMMA__value_type__* DLDL_LPDDEF_DF_deamerreserved_star__COMMA__value_type__;
+	::DLDL_LPDDEF_DF::ast::node::deamerreserved_long_54* DLDL_LPDDEF_DF_deamerreserved_long_54;
 	::DLDL_LPDDEF_DF::ast::node::var_type* DLDL_LPDDEF_DF_var_type;
 	::DLDL_LPDDEF_DF::ast::node::deamerreserved_arrow__VARNAME__* DLDL_LPDDEF_DF_deamerreserved_arrow__VARNAME__;
 	::DLDL_LPDDEF_DF::ast::node::deamerreserved_star__COLON__VARNAME__* DLDL_LPDDEF_DF_deamerreserved_star__COLON__VARNAME__;
 	::DLDL_LPDDEF_DF::ast::node::var_name* DLDL_LPDDEF_DF_var_name;
 
 
-#line 123 "DLDL_LPDDEF_DF_parser.tab.h"
+#line 120 "DLDL_LPDDEF_DF_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -130,8 +127,6 @@ typedef union YYSTYPE YYSTYPE;
 
 extern YYSTYPE DLDL_LPDDEF_DFlval;
 
-
 int DLDL_LPDDEF_DFparse (void);
-
 
 #endif /* !YY_DLDL_LPDDEF_DF_DLDL_LPDDEF_DF_PARSER_TAB_H_INCLUDED  */

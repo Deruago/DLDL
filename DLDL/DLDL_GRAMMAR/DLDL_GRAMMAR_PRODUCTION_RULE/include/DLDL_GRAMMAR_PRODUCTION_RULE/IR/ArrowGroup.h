@@ -24,14 +24,14 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 		{
 		}
 
-		std::vector<ProductionRule>
-		RetrieveEnvironment(Environment& currentEnvironment,
-							const ProductionRule& productionRule) override
+		std::vector<ProductionRule> RetrieveEnvironment(Environment& currentEnvironment,
+														const ProductionRule& productionRule,
+														DLDL::ir::Grammar* grammar) override
 		{
 			if (inlineExtension)
 			{
 				std::vector<ProductionRule> newProductionRules =
-					subgroups[0]->RetrieveEnvironment(currentEnvironment, productionRule);
+					subgroups[0]->RetrieveEnvironment(currentEnvironment, productionRule, grammar);
 
 				for (auto& newProductionRule : newProductionRules)
 				{
@@ -42,13 +42,13 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE::ir
 			}
 			else
 			{
-				std::vector<ProductionRule> currentStage =
-					subgroups[0]->RetrieveEnvironment(currentEnvironment, ProductionRule());
+				std::vector<ProductionRule> currentStage = subgroups[0]->RetrieveEnvironment(
+					currentEnvironment, ProductionRule(), grammar);
 				currentStage[0].values.push_back(starGroup.GetValue());
 
 				currentEnvironment.AddNonTerminal(GetReferenceName(), currentStage);
 
-				starGroup.RetrieveEnvironment(currentEnvironment, ProductionRule());
+				starGroup.RetrieveEnvironment(currentEnvironment, ProductionRule(), grammar);
 
 				ProductionRule copyProductionRule(productionRule);
 				copyProductionRule.values.push_back(GetValue());

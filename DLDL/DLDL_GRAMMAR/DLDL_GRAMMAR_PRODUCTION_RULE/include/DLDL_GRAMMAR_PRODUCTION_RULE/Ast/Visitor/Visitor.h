@@ -14,6 +14,7 @@
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/RIGHT_SQUARE_BRACKET.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/QUESTION_MARK.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/EXCLAMATION_MARK.h"
+#include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/TILDE.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/ARROW.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/STAR.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/PLUS.h"
@@ -32,6 +33,7 @@
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/nested_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/optional_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/zero_or_more_group.h"
+#include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/not_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/one_or_more_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/or_group.h"
 #include "DLDL_GRAMMAR_PRODUCTION_RULE/Ast/Node/min_max_group.h"
@@ -99,6 +101,11 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace Visitor {
 			case DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::EXCLAMATION_MARK:
 			{
 				Visit(static_cast<const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::EXCLAMATION_MARK*>(node));
+				break;
+			}
+			case DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::TILDE:
+			{
+				Visit(static_cast<const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE*>(node));
 				break;
 			}
 			case DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::ARROW:
@@ -187,6 +194,11 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace Visitor {
 				Visit(static_cast<const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group*>(node));
 				break;
 			}
+			case DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::not_group:
+			{
+				Visit(static_cast<const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group*>(node));
+				break;
+			}
 			case DLDL_GRAMMAR_PRODUCTION_RULE::ast::Type::one_or_more_group:
 			{
 				Visit(static_cast<const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::one_or_more_group*>(node));
@@ -239,6 +251,9 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace Visitor {
 		virtual void Visit(const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::EXCLAMATION_MARK* node)
 		{
 		}
+		virtual void Visit(const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::TILDE* node)
+		{
+		}
 		virtual void Visit(const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::ARROW* node)
 		{
 		}
@@ -289,6 +304,9 @@ namespace DLDL_GRAMMAR_PRODUCTION_RULE { namespace ast { namespace Visitor {
 		{
 		}
 		virtual void Visit(const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::zero_or_more_group* node)
+		{
+		}
+		virtual void Visit(const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::not_group* node)
 		{
 		}
 		virtual void Visit(const DLDL_GRAMMAR_PRODUCTION_RULE::ast::node::one_or_more_group* node)
