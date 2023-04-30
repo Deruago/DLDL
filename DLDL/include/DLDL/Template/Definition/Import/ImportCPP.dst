@@ -1,0 +1,54 @@
+#include "{{language_full_name_slash}}/Import.h"
+#include "{{language_full_name_slash}}/Value.h"
+#include "{{language_full_name_slash}}/Language.h"
+
+{{language_full_name}}::Import::Import({{language_full_name}}::Language* language)
+			:	::deamer::language::generator::definition::property::user::Import<
+					{{language_full_name}}::Language>(language)
+{
+}
+
+void {{language_full_name}}::Import::GenerateObjects()
+{
+	// Import Specification
+{{implementation_import_specification.Variable_Field}}
+
+	// File Import Rules
+{{implementation_import_file_import_rule.Variable_Field}}
+
+	// File Object Import Rules
+{{implementation_import_file_object_import_rule.Variable_Field}}
+
+	// Import Syntactic Relation
+{{implementation_import_syntactic_relation.Variable_Field}}
+
+	// Import File Target
+{{implementation_import_file_target.Variable_Field}}
+
+	// Import Object Target
+{{implementation_import_object_target.Variable_Field}}
+
+	// Unknown References
+{{unknown_reference_implementation.Variable_Field}}
+
+	// Import Specification
+{{add_import_specification.Variable_Field}}
+
+	// File Import Rules
+{{add_import_file_import_rule.Variable_Field}}
+
+	// File Object Import Rules
+{{add_import_file_object_import_rule.Variable_Field}}
+
+	// Import Syntactic Relation
+{{add_import_syntactic_relation.Variable_Field}}
+
+	// Import File Target
+{{add_import_file_target.Variable_Field}}
+
+	// Import Object Target
+{{add_import_object_target.Variable_Field}}
+
+	// Unknown References
+{{add_unknown_reference.Variable_Field}}
+}

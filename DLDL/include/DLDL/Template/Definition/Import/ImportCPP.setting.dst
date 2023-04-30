@@ -1,0 +1,92 @@
+{{file.target_language}} = @<C++>@
+{{file.file_name}} = @<ImportCPP>@
+{{file.namespace}} = @<DLDL::filetemplate>@
+{{file.extension}} = @<h>@
+
+{{language_full_name_underscore}} = @<>@
+
+{{unknown_reference_implementation}} = @<{{unknown_reference}}.Set(::deamer::language::type::definition::object::special::Uninitialized<::deamer::language::type::definition::object::main::NonTerminal>("NonTerminal", "{{unknown_reference}}", "Unknown reference to (most likely) a NonTerminal!"));>@
+{{add_unknown_reference}} = @<AddObject({{unknown_reference}});>@
+
+{{value_name_impl}} = @<value_object__{{value_object_name}}>@
+
+{{import_type_file_import}} = @<FileImport>@
+{{import_type_type_in_file_import}} = @<TypeInFileImport>@
+{{import_type_module_import}} = @<ModuleImport>@
+{{import_type_type_in_module_import}} = @<TypeInModuleImport>@
+
+{{import_style_type_cpp}} = @<Cpp>@
+{{import_style_type_python}} = @<Python>@
+{{import_style_type_celeste}} = @<Celeste>@
+{{import_style_type_custom}} = @<Custom>@
+
+{{import_style_type_impl}} = @<{{import_style_type_celeste}}>@
+
+{{import_object_value_rule_name_impl}} = @<value_object__{{import_object_value_rule_name}}>@
+
+{{name_import_specification}} = @<import_specification__{{name_import_specification_impl}}>@
+
+{{name_import_file_import_rule}} = @<import_file_import_rule__{{name_import_file_import_rule_impl}}>@
+
+{{name_import_file_object_import_rule}} = @<import_file_object_import_rule__{{name_import_file_object_import_rule_impl}}>@
+
+{{name_import_syntactic_relation}} = @<import_syntactic_relation__{{name_import_syntactic_relation_impl}}>@
+
+{{name_import_file_target}} = @<import_file_target__{{name_import_file_target_impl}}>@
+
+{{name_import_object_target}} = @<import_object_target__{{name_import_object_target_impl}}>@
+
+{{implementation_import_specification}} = 
+@<	{{name_import_specification}}.Set(::deamer::language::type::definition::object::main::ImportSpecification(
+	{{import_specification_underlying_name}}.Pointer(),
+	::deamer::language::type::definition::object::main::ImportType::{{import_type_impl}},
+	::deamer::language::type::definition::object::main::ImportStyleType::{{import_style_type_impl}}
+	));>@
+
+{{implementation_import_file_import_rule}} =
+@<	{{name_import_file_import_rule}}.Set(::deamer::language::type::definition::object::main::FileImport(
+		{{underlying_syntax_relation}}.Pointer(),
+		{{underlying_file_target}}.Pointer()
+	));>@
+
+{{implementation_import_file_object_import_rule}} =
+@<	{{name_import_file_object_import_rule}}.Set(::deamer::language::type::definition::object::main::FileObjectImport(
+		{{underlying_syntax_relation}}.Pointer(),
+		{{underlying_file_target}}.Pointer(),
+		{{underlying_object_target}}.Pointer()
+	));>@
+
+{{next_syntactic_relation}} = @<import_syntactic_relation__{{name_secondary_import_syntactic_relation_impl}}>@
+{{implementation_import_syntactic_relation}} = @<{{implementation_import_syntactic_relation_impl}}>@
+{{implementation_import_syntactic_relation_type_1}} = 
+@<	{{name_import_syntactic_relation}}.Set(::deamer::language::type::definition::object::main::ImportSyntacticRelation(
+	Language->{{terminal_name}}.Pointer(),
+	{{next_syntactic_relation}}.Pointer()
+	));>@
+{{implementation_import_syntactic_relation_type_2}} = 
+@<	{{name_import_syntactic_relation}}.Set(::deamer::language::type::definition::object::main::ImportSyntacticRelation(
+	Language->{{terminal_name}}.Pointer(),
+	nullptr
+	));>@
+
+{{implementation_import_file_target}} =
+@<	{{name_import_file_target}}.Set(::deamer::language::type::definition::object::main::ImportFileTarget(
+	Language->{{import_object_value_rule_name_impl}}.Pointer()
+	));>@
+
+{{implementation_import_object_target}} =
+@<	{{name_import_object_target}}.Set(::deamer::language::type::definition::object::main::ObjectTarget(
+	Language->{{import_object_value_rule_name_impl}}.Pointer()
+	));>@
+
+{{add_import_specification}} = @<	AddObject({{name_import_specification}});>@
+
+{{add_import_file_import_rule}} = @<	AddObject({{name_import_file_import_rule}});>@
+
+{{add_import_file_object_import_rule}} = @<	AddObject({{name_import_file_object_import_rule}});>@
+
+{{add_import_syntactic_relation}} = @<	AddObject({{name_import_syntactic_relation}});>@
+
+{{add_import_file_target}} = @<	AddObject({{name_import_file_target}});>@
+
+{{add_import_object_target}} = @<	AddObject({{name_import_object_target}});>@
