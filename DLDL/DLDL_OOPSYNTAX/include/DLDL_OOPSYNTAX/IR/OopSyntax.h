@@ -21,6 +21,8 @@ namespace DLDL::ir
 	struct DirectAssignment
 	{
 		std::string object;
+		std::vector<std::string> extendedObjects;
+		
 		std::optional<deamer::language::type::definition::object::main::OopSyntaxScope> oopType;
 		deamer::language::type::definition::object::main::OopConceptMemberType oopProperty;
 	};

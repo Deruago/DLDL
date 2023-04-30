@@ -7,17 +7,23 @@
 #include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_star__stmt__.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/stmt.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/nonterminal_conversion.h"
-#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_star__production_rule_conversion__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_69.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/production_rule_conversion.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/numbered_pr_convert.h"
-#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_star__property_assignment__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_72.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/property_assignment.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/direct_property_assignment.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_arrow__property__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_76.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_arrow__terminal_name__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_80.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/direct_any_property_assignment.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/embedded_assignment.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/nonterminal_name.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/oop_type.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/property.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/extended_property.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/extended_terminal_access.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/terminal_name.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/ARROW.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/LEFT_BRACKET.h"
@@ -70,10 +76,10 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 	};
 
 	template<>
-	struct NodeEnumToType<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__production_rule_conversion__>
+	struct NodeEnumToType<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_69>
 	{
-		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__production_rule_conversion__;
-		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__;
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_69;
+		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69;
 	};
 
 	template<>
@@ -91,10 +97,10 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 	};
 
 	template<>
-	struct NodeEnumToType<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__property_assignment__>
+	struct NodeEnumToType<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_72>
 	{
-		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__property_assignment__;
-		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__;
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_72;
+		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72;
 	};
 
 	template<>
@@ -109,6 +115,34 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 	{
 		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::direct_property_assignment;
 		using type = ::DLDL_OOPSYNTAX::ast::node::direct_property_assignment;
+	};
+
+	template<>
+	struct NodeEnumToType<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__property__>
+	{
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__property__;
+		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__;
+	};
+
+	template<>
+	struct NodeEnumToType<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_76>
+	{
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_76;
+		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76;
+	};
+
+	template<>
+	struct NodeEnumToType<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__terminal_name__>
+	{
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__terminal_name__;
+		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__;
+	};
+
+	template<>
+	struct NodeEnumToType<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_80>
+	{
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_80;
+		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80;
 	};
 
 	template<>
@@ -144,6 +178,20 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 	{
 		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::property;
 		using type = ::DLDL_OOPSYNTAX::ast::node::property;
+	};
+
+	template<>
+	struct NodeEnumToType<::DLDL_OOPSYNTAX::ast::Type::extended_property>
+	{
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::extended_property;
+		using type = ::DLDL_OOPSYNTAX::ast::node::extended_property;
+	};
+
+	template<>
+	struct NodeEnumToType<::DLDL_OOPSYNTAX::ast::Type::extended_terminal_access>
+	{
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::extended_terminal_access;
+		using type = ::DLDL_OOPSYNTAX::ast::node::extended_terminal_access;
 	};
 
 	template<>

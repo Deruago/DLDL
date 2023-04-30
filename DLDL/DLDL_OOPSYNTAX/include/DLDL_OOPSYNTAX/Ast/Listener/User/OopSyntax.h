@@ -70,12 +70,19 @@ namespace DLDL_OOPSYNTAX::ast::listener::user
 		{
 			const std::string object =
 				reference::Access(node).terminal_name().GetContent()[0]->GetText();
+			std::vector<std::string> extendedObjects;
+			reference::Access(node).extended_terminal_access().for_all([&](reference::Access<node::extended_terminal_access> node_)
+			{
+					extendedObjects.push_back(node_.GetContent()[0]->GetText());
+			});
+			
 			const std::string oopType =
 				reference::Access(node).oop_type().GetContent()[0]->GetText();
 			const std::string oopPropertyType =
 				reference::Access(node).property().GetContent()[0]->GetText();
 			auto newDirectAssignment = std::make_unique<DLDL::ir::DirectAssignment>();
 			newDirectAssignment->object = object;
+			newDirectAssignment->extendedObjects = extendedObjects;
 			newDirectAssignment->oopType = GetOopType(oopType);
 			newDirectAssignment->oopProperty = GetOopPropertyType(oopPropertyType);
 			GetProductionRule()->directAssignments.push_back(std::move(newDirectAssignment));

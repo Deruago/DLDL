@@ -29,6 +29,7 @@ namespace DLDL::filetemplate
 			add_unknown_reference_,
 			comma_extension_,
 			file_,
+			impl_extended_link_part_,
 			language_full_name_,
 			language_full_name_slash_,
 			language_full_name_underscore_,
@@ -43,12 +44,16 @@ namespace DLDL::filetemplate
 			oop_concept_member_type_,
 			oop_encapsulation_implementation_,
 			oop_encapsulation_name_,
+			oop_link_extended_member_,
+			oop_link_extended_member_name_,
 			oop_link_implementation_,
 			oop_link_member_,
 			oop_link_name_,
 			oop_link_productionrule_name_,
 			oop_syntax_scope_,
 			optional_comma_extension_,
+			optional_extended_link_part_,
+			optional_extended_member_qualification_,
 			productionrule_index_,
 			right_angle_bracket_,
 			right_bracket_,
@@ -85,6 +90,14 @@ namespace DLDL::filetemplate
 		{
 			switch (enumerationValue)
 			{
+			case ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::Unknown: {
+				return "Unknown";
+			}
+
+			case ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::Scope: {
+				return "Scope";
+			}
+
 			case ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::add_concept_link_: {
 				return "add_concept_link";
 			}
@@ -107,6 +120,10 @@ namespace DLDL::filetemplate
 
 			case ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::file_: {
 				return "file";
+			}
+
+			case ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::impl_extended_link_part_: {
+				return "impl_extended_link_part";
 			}
 
 			case ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::language_full_name_: {
@@ -168,6 +185,14 @@ namespace DLDL::filetemplate
 				return "oop_encapsulation_name";
 			}
 
+			case ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::oop_link_extended_member_: {
+				return "oop_link_extended_member";
+			}
+
+			case ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::oop_link_extended_member_name_: {
+				return "oop_link_extended_member_name";
+			}
+
 			case ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::oop_link_implementation_: {
 				return "oop_link_implementation";
 			}
@@ -190,6 +215,15 @@ namespace DLDL::filetemplate
 
 			case ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::optional_comma_extension_: {
 				return "optional_comma_extension";
+			}
+
+			case ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::optional_extended_link_part_: {
+				return "optional_extended_link_part";
+			}
+
+			case ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::
+				optional_extended_member_qualification_: {
+				return "optional_extended_member_qualification";
 			}
 
 			case ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::productionrule_index_: {
@@ -1173,6 +1207,39 @@ namespace DLDL::filetemplate
 			}
 		};
 
+		struct Variable_impl_extended_link_part_ : public VariableScopes
+		{
+			static constexpr auto name = "impl_extended_link_part_";
+
+			Variable_impl_extended_link_part_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::impl_extended_link_part_;
+			}
+
+			virtual ~Variable_impl_extended_link_part_() override = default;
+
+			Variable_impl_extended_link_part_(OopSyntaxCPPTemplate* oopsyntaxcpptemplate_,
+											  const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::impl_extended_link_part_;
+			}
+
+			Variable_impl_extended_link_part_&
+			operator=(const Variable_impl_extended_link_part_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
 		struct Variable_language_full_name_ : public VariableScopes
 		{
 			static constexpr auto name = "language_full_name_";
@@ -1637,6 +1704,74 @@ namespace DLDL::filetemplate
 			}
 		};
 
+		struct Variable_oop_link_extended_member_ : public VariableScopes
+		{
+			static constexpr auto name = "oop_link_extended_member_";
+
+			Variable_oop_link_extended_member_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::oop_link_extended_member_;
+			}
+
+			virtual ~Variable_oop_link_extended_member_() override = default;
+
+			Variable_oop_link_extended_member_(OopSyntaxCPPTemplate* oopsyntaxcpptemplate_,
+											   const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::oop_link_extended_member_;
+			}
+
+			Variable_oop_link_extended_member_&
+			operator=(const Variable_oop_link_extended_member_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
+		struct Variable_oop_link_extended_member_name_ : public VariableScopes
+		{
+			static constexpr auto name = "oop_link_extended_member_name_";
+
+			Variable_oop_link_extended_member_name_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::
+					oop_link_extended_member_name_;
+			}
+
+			virtual ~Variable_oop_link_extended_member_name_() override = default;
+
+			Variable_oop_link_extended_member_name_(OopSyntaxCPPTemplate* oopsyntaxcpptemplate_,
+													const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::
+					oop_link_extended_member_name_;
+			}
+
+			Variable_oop_link_extended_member_name_&
+			operator=(const Variable_oop_link_extended_member_name_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
 		struct Variable_oop_link_implementation_ : public VariableScopes
 		{
 			static constexpr auto name = "oop_link_implementation_";
@@ -1821,6 +1956,77 @@ namespace DLDL::filetemplate
 
 			Variable_optional_comma_extension_&
 			operator=(const Variable_optional_comma_extension_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
+		struct Variable_optional_extended_link_part_ : public VariableScopes
+		{
+			static constexpr auto name = "optional_extended_link_part_";
+
+			Variable_optional_extended_link_part_() : VariableScopes()
+			{
+				type =
+					::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::optional_extended_link_part_;
+			}
+
+			virtual ~Variable_optional_extended_link_part_() override = default;
+
+			Variable_optional_extended_link_part_(OopSyntaxCPPTemplate* oopsyntaxcpptemplate_,
+												  const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type =
+					::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::optional_extended_link_part_;
+			}
+
+			Variable_optional_extended_link_part_&
+			operator=(const Variable_optional_extended_link_part_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
+		struct Variable_optional_extended_member_qualification_ : public VariableScopes
+		{
+			static constexpr auto name = "optional_extended_member_qualification_";
+
+			Variable_optional_extended_member_qualification_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::
+					optional_extended_member_qualification_;
+			}
+
+			virtual ~Variable_optional_extended_member_qualification_() override = default;
+
+			Variable_optional_extended_member_qualification_(
+				OopSyntaxCPPTemplate* oopsyntaxcpptemplate_,
+				const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::OopSyntaxCPPTemplate::Type::
+					optional_extended_member_qualification_;
+			}
+
+			Variable_optional_extended_member_qualification_&
+			operator=(const Variable_optional_extended_member_qualification_& variable)
 			{
 				if (&variable == this)
 				{
@@ -2046,6 +2252,8 @@ namespace DLDL::filetemplate
 			new Variable_add_unknown_reference_();
 		Variable_comma_extension_* comma_extension_ = new Variable_comma_extension_();
 		Variable_file_* file_ = new Variable_file_();
+		Variable_impl_extended_link_part_* impl_extended_link_part_ =
+			new Variable_impl_extended_link_part_();
 		Variable_language_full_name_* language_full_name_ = new Variable_language_full_name_();
 		Variable_language_full_name_slash_* language_full_name_slash_ =
 			new Variable_language_full_name_slash_();
@@ -2068,6 +2276,10 @@ namespace DLDL::filetemplate
 			new Variable_oop_encapsulation_implementation_();
 		Variable_oop_encapsulation_name_* oop_encapsulation_name_ =
 			new Variable_oop_encapsulation_name_();
+		Variable_oop_link_extended_member_* oop_link_extended_member_ =
+			new Variable_oop_link_extended_member_();
+		Variable_oop_link_extended_member_name_* oop_link_extended_member_name_ =
+			new Variable_oop_link_extended_member_name_();
 		Variable_oop_link_implementation_* oop_link_implementation_ =
 			new Variable_oop_link_implementation_();
 		Variable_oop_link_member_* oop_link_member_ = new Variable_oop_link_member_();
@@ -2077,6 +2289,10 @@ namespace DLDL::filetemplate
 		Variable_oop_syntax_scope_* oop_syntax_scope_ = new Variable_oop_syntax_scope_();
 		Variable_optional_comma_extension_* optional_comma_extension_ =
 			new Variable_optional_comma_extension_();
+		Variable_optional_extended_link_part_* optional_extended_link_part_ =
+			new Variable_optional_extended_link_part_();
+		Variable_optional_extended_member_qualification_* optional_extended_member_qualification_ =
+			new Variable_optional_extended_member_qualification_();
 		Variable_productionrule_index_* productionrule_index_ =
 			new Variable_productionrule_index_();
 		Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
@@ -2108,6 +2324,12 @@ namespace DLDL::filetemplate
 			*comma_extension_ = Variable_comma_extension_(
 				this, std::vector<VariableBase*>({GenerateVariable(", ")}));
 			*file_ = Variable_file_(this, std::vector<VariableBase*>({}));
+			*impl_extended_link_part_ = Variable_impl_extended_link_part_(
+				this,
+				std::vector<VariableBase*>(
+					{GenerateVariable(",\n\t\t\t"), GenerateVariable("{"), GenerateVariable(" "),
+					 GenerateVariable(oop_link_extended_member_->Variable_Field()),
+					 GenerateVariable(" "), GenerateVariable("}")}));
 			*language_full_name_ =
 				Variable_language_full_name_(this, std::vector<VariableBase*>({}));
 			*language_full_name_slash_ =
@@ -2130,7 +2352,9 @@ namespace DLDL::filetemplate
 						   GenerateVariable("."), GenerateVariable("Pointer(), "),
 						   GenerateVariable(oop_concept_member_->This()),
 						   GenerateVariable(oop_concept_member_type_->This()),
-						   GenerateVariable("."), GenerateVariable("Pointer()));")}));
+						   GenerateVariable("."), GenerateVariable("Pointer()"),
+						   GenerateVariable(optional_extended_link_part_->This()),
+						   GenerateVariable("));")}));
 			*oop_concept_link_name_ = Variable_oop_concept_link_name_(
 				this,
 				std::vector<VariableBase*>(
@@ -2139,7 +2363,8 @@ namespace DLDL::filetemplate
 					 GenerateVariable("__"), GenerateVariable(object_name_->This()),
 					 GenerateVariable("__"), GenerateVariable(oop_concept_member_type_->This()),
 					 GenerateVariable("__"),
-					 GenerateVariable(oop_concept_member_object_name_->This())}));
+					 GenerateVariable(oop_concept_member_object_name_->This()),
+					 GenerateVariable(optional_extended_member_qualification_->Variable_Field())}));
 			*oop_concept_member_ = Variable_oop_concept_member_(
 				this, std::vector<VariableBase*>({GenerateVariable("oop_concept_member__")}));
 			*oop_concept_member_object_name_ =
@@ -2160,6 +2385,13 @@ namespace DLDL::filetemplate
 												  GenerateVariable(oop_syntax_scope_->This()),
 												  GenerateVariable("__"),
 												  GenerateVariable(object_name_->This())}));
+			*oop_link_extended_member_ = Variable_oop_link_extended_member_(
+				this, std::vector<VariableBase*>(
+						  {GenerateVariable("Language->"),
+						   GenerateVariable(oop_link_extended_member_name_->This()),
+						   GenerateVariable("."), GenerateVariable("Pointer(),")}));
+			*oop_link_extended_member_name_ =
+				Variable_oop_link_extended_member_name_(this, std::vector<VariableBase*>({}));
 			*oop_link_implementation_ = Variable_oop_link_implementation_(
 				this,
 				std::vector<VariableBase*>(
@@ -2185,6 +2417,13 @@ namespace DLDL::filetemplate
 			*oop_syntax_scope_ = Variable_oop_syntax_scope_(this, std::vector<VariableBase*>({}));
 			*optional_comma_extension_ =
 				Variable_optional_comma_extension_(this, std::vector<VariableBase*>({}));
+			*optional_extended_link_part_ =
+				Variable_optional_extended_link_part_(this, std::vector<VariableBase*>({}));
+			*optional_extended_member_qualification_ =
+				Variable_optional_extended_member_qualification_(
+					this, std::vector<VariableBase*>(
+							  {GenerateVariable("__"),
+							   GenerateVariable(oop_link_extended_member_name_->This())}));
 			*productionrule_index_ =
 				Variable_productionrule_index_(this, std::vector<VariableBase*>({}));
 			*right_angle_bracket_ = Variable_right_angle_bracket_(
@@ -2211,6 +2450,7 @@ namespace DLDL::filetemplate
 			variables_.emplace_back(add_unknown_reference_);
 			variables_.emplace_back(comma_extension_);
 			variables_.emplace_back(file_);
+			variables_.emplace_back(impl_extended_link_part_);
 			variables_.emplace_back(language_full_name_);
 			variables_.emplace_back(language_full_name_slash_);
 			variables_.emplace_back(language_full_name_underscore_);
@@ -2225,12 +2465,16 @@ namespace DLDL::filetemplate
 			variables_.emplace_back(oop_concept_member_type_);
 			variables_.emplace_back(oop_encapsulation_implementation_);
 			variables_.emplace_back(oop_encapsulation_name_);
+			variables_.emplace_back(oop_link_extended_member_);
+			variables_.emplace_back(oop_link_extended_member_name_);
 			variables_.emplace_back(oop_link_implementation_);
 			variables_.emplace_back(oop_link_member_);
 			variables_.emplace_back(oop_link_name_);
 			variables_.emplace_back(oop_link_productionrule_name_);
 			variables_.emplace_back(oop_syntax_scope_);
 			variables_.emplace_back(optional_comma_extension_);
+			variables_.emplace_back(optional_extended_link_part_);
+			variables_.emplace_back(optional_extended_member_qualification_);
 			variables_.emplace_back(productionrule_index_);
 			variables_.emplace_back(right_angle_bracket_);
 			variables_.emplace_back(right_bracket_);

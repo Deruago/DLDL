@@ -1,9 +1,8 @@
 /* A Bison parser, made by GNU Bison 3.8.2.  */
 
-/* Bison interface for Yacc-like parsers in C
+/* Skeleton interface for Bison GLR parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
-   Inc.
+   Copyright (C) 2002-2015, 2018-2021 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,10 +29,6 @@
 
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
-
-/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
-   especially those whose name start with YY_ or yy_.  They are
-   private implementation details that can be changed or removed.  */
 
 #ifndef YY_DLDL_OOPSYNTAX_DLDL_OOPSYNTAX_PARSER_TAB_H_INCLUDED
 # define YY_DLDL_OOPSYNTAX_DLDL_OOPSYNTAX_PARSER_TAB_H_INCLUDED
@@ -72,7 +67,7 @@ extern int DLDL_OOPSYNTAXdebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 90 "./DLDL_OOPSYNTAX_parser.y"
+#line 110 "./DLDL_OOPSYNTAX_parser.y"
 
 	::deamer::external::cpp::lexer::TerminalObject* Terminal;
 	::DLDL_OOPSYNTAX::ast::node::ARROW* DLDL_OOPSYNTAX_ARROW;
@@ -89,21 +84,27 @@ union YYSTYPE
 	::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__stmt__* DLDL_OOPSYNTAX_deamerreserved_star__stmt__;
 	::DLDL_OOPSYNTAX::ast::node::stmt* DLDL_OOPSYNTAX_stmt;
 	::DLDL_OOPSYNTAX::ast::node::nonterminal_conversion* DLDL_OOPSYNTAX_nonterminal_conversion;
-	::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__* DLDL_OOPSYNTAX_deamerreserved_star__production_rule_conversion__;
+	::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69* DLDL_OOPSYNTAX_deamerreserved_long_69;
 	::DLDL_OOPSYNTAX::ast::node::production_rule_conversion* DLDL_OOPSYNTAX_production_rule_conversion;
 	::DLDL_OOPSYNTAX::ast::node::numbered_pr_convert* DLDL_OOPSYNTAX_numbered_pr_convert;
-	::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__* DLDL_OOPSYNTAX_deamerreserved_star__property_assignment__;
+	::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72* DLDL_OOPSYNTAX_deamerreserved_long_72;
 	::DLDL_OOPSYNTAX::ast::node::property_assignment* DLDL_OOPSYNTAX_property_assignment;
 	::DLDL_OOPSYNTAX::ast::node::direct_property_assignment* DLDL_OOPSYNTAX_direct_property_assignment;
+	::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__* DLDL_OOPSYNTAX_deamerreserved_arrow__property__;
+	::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76* DLDL_OOPSYNTAX_deamerreserved_long_76;
+	::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__* DLDL_OOPSYNTAX_deamerreserved_arrow__terminal_name__;
+	::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80* DLDL_OOPSYNTAX_deamerreserved_long_80;
 	::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment* DLDL_OOPSYNTAX_direct_any_property_assignment;
 	::DLDL_OOPSYNTAX::ast::node::embedded_assignment* DLDL_OOPSYNTAX_embedded_assignment;
 	::DLDL_OOPSYNTAX::ast::node::nonterminal_name* DLDL_OOPSYNTAX_nonterminal_name;
 	::DLDL_OOPSYNTAX::ast::node::oop_type* DLDL_OOPSYNTAX_oop_type;
 	::DLDL_OOPSYNTAX::ast::node::property* DLDL_OOPSYNTAX_property;
+	::DLDL_OOPSYNTAX::ast::node::extended_property* DLDL_OOPSYNTAX_extended_property;
+	::DLDL_OOPSYNTAX::ast::node::extended_terminal_access* DLDL_OOPSYNTAX_extended_terminal_access;
 	::DLDL_OOPSYNTAX::ast::node::terminal_name* DLDL_OOPSYNTAX_terminal_name;
 
 
-#line 107 "DLDL_OOPSYNTAX_parser.tab.h"
+#line 108 "DLDL_OOPSYNTAX_parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -114,8 +115,6 @@ typedef union YYSTYPE YYSTYPE;
 
 extern YYSTYPE DLDL_OOPSYNTAXlval;
 
-
 int DLDL_OOPSYNTAXparse (void);
-
 
 #endif /* !YY_DLDL_OOPSYNTAX_DLDL_OOPSYNTAX_PARSER_TAB_H_INCLUDED  */

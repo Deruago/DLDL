@@ -19,17 +19,23 @@
 #include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_star__stmt__.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/stmt.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/nonterminal_conversion.h"
-#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_star__production_rule_conversion__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_69.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/production_rule_conversion.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/numbered_pr_convert.h"
-#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_star__property_assignment__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_72.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/property_assignment.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/direct_property_assignment.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_arrow__property__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_76.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_arrow__terminal_name__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_80.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/direct_any_property_assignment.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/embedded_assignment.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/nonterminal_name.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/oop_type.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/property.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/extended_property.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/extended_terminal_access.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/terminal_name.h"
 
 namespace DLDL_OOPSYNTAX { namespace ast { namespace listener { 
@@ -121,9 +127,9 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener {
 				DefaultAction(node);
 				break;
 			}
-			case DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__production_rule_conversion__:
+			case DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_69:
 			{
-				Listen(static_cast<const DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__*>(node));
+				Listen(static_cast<const DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69*>(node));
 				DefaultAction(node);
 				break;
 			}
@@ -139,9 +145,9 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener {
 				DefaultAction(node);
 				break;
 			}
-			case DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__property_assignment__:
+			case DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_72:
 			{
-				Listen(static_cast<const DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__*>(node));
+				Listen(static_cast<const DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72*>(node));
 				DefaultAction(node);
 				break;
 			}
@@ -154,6 +160,30 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener {
 			case DLDL_OOPSYNTAX::ast::Type::direct_property_assignment:
 			{
 				Listen(static_cast<const DLDL_OOPSYNTAX::ast::node::direct_property_assignment*>(node));
+				DefaultAction(node);
+				break;
+			}
+			case DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__property__:
+			{
+				Listen(static_cast<const DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__*>(node));
+				DefaultAction(node);
+				break;
+			}
+			case DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_76:
+			{
+				Listen(static_cast<const DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76*>(node));
+				DefaultAction(node);
+				break;
+			}
+			case DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__terminal_name__:
+			{
+				Listen(static_cast<const DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__*>(node));
+				DefaultAction(node);
+				break;
+			}
+			case DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_80:
+			{
+				Listen(static_cast<const DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80*>(node));
 				DefaultAction(node);
 				break;
 			}
@@ -184,6 +214,18 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener {
 			case DLDL_OOPSYNTAX::ast::Type::property:
 			{
 				Listen(static_cast<const DLDL_OOPSYNTAX::ast::node::property*>(node));
+				DefaultAction(node);
+				break;
+			}
+			case DLDL_OOPSYNTAX::ast::Type::extended_property:
+			{
+				Listen(static_cast<const DLDL_OOPSYNTAX::ast::node::extended_property*>(node));
+				DefaultAction(node);
+				break;
+			}
+			case DLDL_OOPSYNTAX::ast::Type::extended_terminal_access:
+			{
+				Listen(static_cast<const DLDL_OOPSYNTAX::ast::node::extended_terminal_access*>(node));
 				DefaultAction(node);
 				break;
 			}
@@ -238,7 +280,7 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener {
 		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::nonterminal_conversion* node)
 		{
 		}
-		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__* node)
+		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69* node)
 		{
 		}
 		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::production_rule_conversion* node)
@@ -247,13 +289,25 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener {
 		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::numbered_pr_convert* node)
 		{
 		}
-		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__* node)
+		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72* node)
 		{
 		}
 		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::property_assignment* node)
 		{
 		}
 		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::direct_property_assignment* node)
+		{
+		}
+		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__* node)
+		{
+		}
+		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76* node)
+		{
+		}
+		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__* node)
+		{
+		}
+		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80* node)
 		{
 		}
 		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment* node)
@@ -269,6 +323,12 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener {
 		{
 		}
 		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::property* node)
+		{
+		}
+		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::extended_property* node)
+		{
+		}
+		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::extended_terminal_access* node)
 		{
 		}
 		virtual void Listen(const DLDL_OOPSYNTAX::ast::node::terminal_name* node)

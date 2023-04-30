@@ -10,17 +10,23 @@
 #include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_star__stmt__.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/stmt.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/nonterminal_conversion.h"
-#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_star__production_rule_conversion__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_69.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/production_rule_conversion.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/numbered_pr_convert.h"
-#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_star__property_assignment__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_72.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/property_assignment.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/direct_property_assignment.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_arrow__property__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_76.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_arrow__terminal_name__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_80.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/direct_any_property_assignment.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/embedded_assignment.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/nonterminal_name.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/oop_type.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/property.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/extended_property.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/extended_terminal_access.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/terminal_name.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/ARROW.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/LEFT_BRACKET.h"
@@ -132,17 +138,25 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace reference {
 	template<>
 	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::nonterminal_conversion>;
 	template<>
-	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__>;
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69>;
 	template<>
 	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::production_rule_conversion>;
 	template<>
 	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::numbered_pr_convert>;
 	template<>
-	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__>;
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72>;
 	template<>
 	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property_assignment>;
 	template<>
 	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment>;
+	template<>
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__>;
+	template<>
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76>;
+	template<>
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__>;
+	template<>
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80>;
 	template<>
 	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment>;
 	template<>
@@ -153,6 +167,10 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace reference {
 	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::oop_type>;
 	template<>
 	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property>;
+	template<>
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property>;
+	template<>
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access>;
 	template<>
 	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::terminal_name>;
 	template<>
@@ -250,8 +268,8 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace reference {
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__stmt__> deamerreserved_star__stmt__();
-AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::stmt> stmt();
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::stmt> stmt();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__stmt__> deamerreserved_star__stmt__();
 
 
 		template<typename FunctionType>
@@ -358,8 +376,8 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::stmt> stmt();
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__stmt__> deamerreserved_star__stmt__();
-AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::stmt> stmt();
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::stmt> stmt();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__stmt__> deamerreserved_star__stmt__();
 
 
 		template<typename FunctionType>
@@ -574,8 +592,8 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::stmt> stmt();
 
 	public:
 		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::ARROW> ARROW();
-AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__> deamerreserved_star__production_rule_conversion__();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::production_rule_conversion> production_rule_conversion();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69> deamerreserved_long_69();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::nonterminal_name> nonterminal_name();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::oop_type> oop_type();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::LEFT_BRACKET> LEFT_BRACKET();
@@ -615,28 +633,28 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::RIGHT_BRACKET> RIGHT_BRACKET();
 	};
 
 	template<>
-	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__> : public AccessBase
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69> : public AccessBase
 	{
 	protected:
-		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__*> ts;
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69*> ts;
 
 	public:
-		AccessTemplateBase(std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69& t) : ts({&t})
 		{
 		}
 
-		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69* t) : ts({t})
 		{
 		}
 
 		AccessTemplateBase() = default;
 
 	public:
-		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -652,7 +670,7 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::RIGHT_BRACKET> RIGHT_BRACKET();
 			return *this;
 		}
 
-		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -668,7 +686,7 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::RIGHT_BRACKET> RIGHT_BRACKET();
 			}
 			else
 			{
-				std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__*> temporaries;
+				std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69*> temporaries;
 				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
 				{
 					temporaries.push_back(ts[i]);
@@ -680,18 +698,18 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::RIGHT_BRACKET> RIGHT_BRACKET();
 			return *this;
 		}
 
-		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__*> GetContent()
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69*> GetContent()
 		{
 			return ts;
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__> deamerreserved_star__production_rule_conversion__();
-AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::production_rule_conversion> production_rule_conversion();
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::production_rule_conversion> production_rule_conversion();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69> deamerreserved_long_69();
 
 
 		template<typename FunctionType>
-		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -902,7 +920,7 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::production_rule_conversion> prod
 
 	public:
 		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::ARROW> ARROW();
-AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__> deamerreserved_star__property_assignment__();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72> deamerreserved_long_72();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property_assignment> property_assignment();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::LEFT_BRACKET> LEFT_BRACKET();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::RIGHT_BRACKET> RIGHT_BRACKET();
@@ -942,28 +960,28 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::NUMBER> NUMBER();
 	};
 
 	template<>
-	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__> : public AccessBase
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72> : public AccessBase
 	{
 	protected:
-		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__*> ts;
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72*> ts;
 
 	public:
-		AccessTemplateBase(std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__*> ts_) : ts(std::move(ts_))
+		AccessTemplateBase(std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72*> ts_) : ts(std::move(ts_))
 		{
 		}
 
-		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__& t) : ts({&t})
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72& t) : ts({&t})
 		{
 		}
 
-		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__* t) : ts({t})
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72* t) : ts({t})
 		{
 		}
 
 		AccessTemplateBase() = default;
 
 	public:
-		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__>& operator[](::std::size_t index)
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72>& operator[](::std::size_t index)
 		{
 			if (index >= ts.size())
 			{
@@ -979,7 +997,7 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::NUMBER> NUMBER();
 			return *this;
 		}
 
-		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
 		{
 			// swap if the other is larger
 			if (indexBegin > indexEnd)
@@ -995,7 +1013,7 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::NUMBER> NUMBER();
 			}
 			else
 			{
-				std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__*> temporaries;
+				std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72*> temporaries;
 				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
 				{
 					temporaries.push_back(ts[i]);
@@ -1007,18 +1025,18 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::NUMBER> NUMBER();
 			return *this;
 		}
 
-		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__*> GetContent()
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72*> GetContent()
 		{
 			return ts;
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__> deamerreserved_star__property_assignment__();
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72> deamerreserved_long_72();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property_assignment> property_assignment();
 
 
 		template<typename FunctionType>
-		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__>& for_all(FunctionType function)
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1121,9 +1139,9 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property_assignment> property_as
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment> direct_property_assignment();
-AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment> direct_any_property_assignment();
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment> direct_any_property_assignment();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::embedded_assignment> embedded_assignment();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment> direct_property_assignment();
 
 
 		template<typename FunctionType>
@@ -1230,8 +1248,14 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::embedded_assignment> embedded_as
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::oop_type> oop_type();
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76> deamerreserved_long_76();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__> deamerreserved_arrow__terminal_name__();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80> deamerreserved_long_80();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__> deamerreserved_arrow__property__();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::oop_type> oop_type();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property> property();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property> extended_property();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access> extended_terminal_access();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::terminal_name> terminal_name();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::EQ> EQ();
@@ -1239,6 +1263,444 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::EQ> EQ();
 
 		template<typename FunctionType>
 		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment>& for_all(FunctionType function)
+		{
+			for (const auto* const t : ts)
+			{
+				function(t);
+			}
+
+			return *this;
+		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
+	};
+
+	template<>
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__> : public AccessBase
+	{
+	protected:
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__*> ts;
+
+	public:
+		AccessTemplateBase(std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__*> ts_) : ts(std::move(ts_))
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__& t) : ts({&t})
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__* t) : ts({t})
+		{
+		}
+
+		AccessTemplateBase() = default;
+
+	public:
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__>& operator[](::std::size_t index)
+		{
+			if (index >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				const auto* const copy = ts[index];
+				ts.clear();
+				ts.push_back(copy);
+			}
+
+			return *this;
+		}
+
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		{
+			// swap if the other is larger
+			if (indexBegin > indexEnd)
+			{
+				const auto tmp = indexBegin;
+				indexBegin = indexEnd;
+				indexEnd = tmp;
+			}
+
+			if (indexBegin >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__*> temporaries;
+				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
+				{
+					temporaries.push_back(ts[i]);
+				}
+				ts.clear();
+				ts = temporaries;
+			}
+
+			return *this;
+		}
+
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__*> GetContent()
+		{
+			return ts;
+		}
+
+	public:
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76> deamerreserved_long_76();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property> property();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property> extended_property();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
+
+
+		template<typename FunctionType>
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__>& for_all(FunctionType function)
+		{
+			for (const auto* const t : ts)
+			{
+				function(t);
+			}
+
+			return *this;
+		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
+	};
+
+	template<>
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76> : public AccessBase
+	{
+	protected:
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76*> ts;
+
+	public:
+		AccessTemplateBase(std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76*> ts_) : ts(std::move(ts_))
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76& t) : ts({&t})
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76* t) : ts({t})
+		{
+		}
+
+		AccessTemplateBase() = default;
+
+	public:
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76>& operator[](::std::size_t index)
+		{
+			if (index >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				const auto* const copy = ts[index];
+				ts.clear();
+				ts.push_back(copy);
+			}
+
+			return *this;
+		}
+
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		{
+			// swap if the other is larger
+			if (indexBegin > indexEnd)
+			{
+				const auto tmp = indexBegin;
+				indexBegin = indexEnd;
+				indexEnd = tmp;
+			}
+
+			if (indexBegin >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76*> temporaries;
+				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
+				{
+					temporaries.push_back(ts[i]);
+				}
+				ts.clear();
+				ts = temporaries;
+			}
+
+			return *this;
+		}
+
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76*> GetContent()
+		{
+			return ts;
+		}
+
+	public:
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76> deamerreserved_long_76();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property> extended_property();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
+
+
+		template<typename FunctionType>
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76>& for_all(FunctionType function)
+		{
+			for (const auto* const t : ts)
+			{
+				function(t);
+			}
+
+			return *this;
+		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
+	};
+
+	template<>
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__> : public AccessBase
+	{
+	protected:
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__*> ts;
+
+	public:
+		AccessTemplateBase(std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__*> ts_) : ts(std::move(ts_))
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__& t) : ts({&t})
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__* t) : ts({t})
+		{
+		}
+
+		AccessTemplateBase() = default;
+
+	public:
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__>& operator[](::std::size_t index)
+		{
+			if (index >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				const auto* const copy = ts[index];
+				ts.clear();
+				ts.push_back(copy);
+			}
+
+			return *this;
+		}
+
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		{
+			// swap if the other is larger
+			if (indexBegin > indexEnd)
+			{
+				const auto tmp = indexBegin;
+				indexBegin = indexEnd;
+				indexEnd = tmp;
+			}
+
+			if (indexBegin >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__*> temporaries;
+				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
+				{
+					temporaries.push_back(ts[i]);
+				}
+				ts.clear();
+				ts = temporaries;
+			}
+
+			return *this;
+		}
+
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__*> GetContent()
+		{
+			return ts;
+		}
+
+	public:
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80> deamerreserved_long_80();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access> extended_terminal_access();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::terminal_name> terminal_name();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
+
+
+		template<typename FunctionType>
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__>& for_all(FunctionType function)
+		{
+			for (const auto* const t : ts)
+			{
+				function(t);
+			}
+
+			return *this;
+		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
+	};
+
+	template<>
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80> : public AccessBase
+	{
+	protected:
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80*> ts;
+
+	public:
+		AccessTemplateBase(std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80*> ts_) : ts(std::move(ts_))
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80& t) : ts({&t})
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80* t) : ts({t})
+		{
+		}
+
+		AccessTemplateBase() = default;
+
+	public:
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80>& operator[](::std::size_t index)
+		{
+			if (index >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				const auto* const copy = ts[index];
+				ts.clear();
+				ts.push_back(copy);
+			}
+
+			return *this;
+		}
+
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		{
+			// swap if the other is larger
+			if (indexBegin > indexEnd)
+			{
+				const auto tmp = indexBegin;
+				indexBegin = indexEnd;
+				indexEnd = tmp;
+			}
+
+			if (indexBegin >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80*> temporaries;
+				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
+				{
+					temporaries.push_back(ts[i]);
+				}
+				ts.clear();
+				ts = temporaries;
+			}
+
+			return *this;
+		}
+
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80*> GetContent()
+		{
+			return ts;
+		}
+
+	public:
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80> deamerreserved_long_80();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access> extended_terminal_access();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
+
+
+		template<typename FunctionType>
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -1341,7 +1803,13 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::EQ> EQ();
 		}
 
 	public:
-		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property> property();
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76> deamerreserved_long_76();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__> deamerreserved_arrow__terminal_name__();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80> deamerreserved_long_80();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__> deamerreserved_arrow__property__();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property> property();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property> extended_property();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access> extended_terminal_access();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::terminal_name> terminal_name();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::EQ> EQ();
@@ -1453,8 +1921,8 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::STAR> STAR();
 
 	public:
 		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::ARROW> ARROW();
-AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__> deamerreserved_star__production_rule_conversion__();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::production_rule_conversion> production_rule_conversion();
+AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69> deamerreserved_long_69();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::nonterminal_name> nonterminal_name();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::oop_type> oop_type();
 AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::LEFT_BRACKET> LEFT_BRACKET();
@@ -1785,6 +2253,220 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 
 		template<typename FunctionType>
 		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property>& for_all(FunctionType function)
+		{
+			for (const auto* const t : ts)
+			{
+				function(t);
+			}
+
+			return *this;
+		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
+	};
+
+	template<>
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property> : public AccessBase
+	{
+	protected:
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::extended_property*> ts;
+
+	public:
+		AccessTemplateBase(std::vector<const ::DLDL_OOPSYNTAX::ast::node::extended_property*> ts_) : ts(std::move(ts_))
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::extended_property& t) : ts({&t})
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::extended_property* t) : ts({t})
+		{
+		}
+
+		AccessTemplateBase() = default;
+
+	public:
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property>& operator[](::std::size_t index)
+		{
+			if (index >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				const auto* const copy = ts[index];
+				ts.clear();
+				ts.push_back(copy);
+			}
+
+			return *this;
+		}
+
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		{
+			// swap if the other is larger
+			if (indexBegin > indexEnd)
+			{
+				const auto tmp = indexBegin;
+				indexBegin = indexEnd;
+				indexEnd = tmp;
+			}
+
+			if (indexBegin >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				std::vector<const ::DLDL_OOPSYNTAX::ast::node::extended_property*> temporaries;
+				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
+				{
+					temporaries.push_back(ts[i]);
+				}
+				ts.clear();
+				ts = temporaries;
+			}
+
+			return *this;
+		}
+
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::extended_property*> GetContent()
+		{
+			return ts;
+		}
+
+	public:
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::VARNAME> VARNAME();
+
+
+		template<typename FunctionType>
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property>& for_all(FunctionType function)
+		{
+			for (const auto* const t : ts)
+			{
+				function(t);
+			}
+
+			return *this;
+		}
+
+	public:
+		auto begin()
+		{
+			return ts.begin();
+		}
+		auto cbegin()
+		{
+			return ts.cbegin();
+		}
+		
+		auto end()
+		{
+			return ts.end();
+		}
+		
+		auto cend()
+		{
+			return ts.cend();
+		}
+	};
+
+	template<>
+	struct AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access> : public AccessBase
+	{
+	protected:
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::extended_terminal_access*> ts;
+
+	public:
+		AccessTemplateBase(std::vector<const ::DLDL_OOPSYNTAX::ast::node::extended_terminal_access*> ts_) : ts(std::move(ts_))
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::extended_terminal_access& t) : ts({&t})
+		{
+		}
+
+		AccessTemplateBase(const ::DLDL_OOPSYNTAX::ast::node::extended_terminal_access* t) : ts({t})
+		{
+		}
+
+		AccessTemplateBase() = default;
+
+	public:
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access>& operator[](::std::size_t index)
+		{
+			if (index >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				const auto* const copy = ts[index];
+				ts.clear();
+				ts.push_back(copy);
+			}
+
+			return *this;
+		}
+
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access>& operator()(::std::size_t indexBegin, ::std::size_t indexEnd)
+		{
+			// swap if the other is larger
+			if (indexBegin > indexEnd)
+			{
+				const auto tmp = indexBegin;
+				indexBegin = indexEnd;
+				indexEnd = tmp;
+			}
+
+			if (indexBegin >= ts.size())
+			{
+				ts.clear();
+			}
+			else
+			{
+				std::vector<const ::DLDL_OOPSYNTAX::ast::node::extended_terminal_access*> temporaries;
+				for (auto i = indexBegin; i < ts.size() && i <= indexEnd; i++)
+				{
+					temporaries.push_back(ts[i]);
+				}
+				ts.clear();
+				ts = temporaries;
+			}
+
+			return *this;
+		}
+
+		std::vector<const ::DLDL_OOPSYNTAX::ast::node::extended_terminal_access*> GetContent()
+		{
+			return ts;
+		}
+
+	public:
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::VARNAME> VARNAME();
+
+
+		template<typename FunctionType>
+		AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access>& for_all(FunctionType function)
 		{
 			for (const auto* const t : ts)
 			{
@@ -2984,14 +3666,6 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 
 
 	
-		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__stmt__> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::program>::deamerreserved_star__stmt__()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__stmt__>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__stmt__>(ts));
-		}
-
 		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::stmt> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::program>::stmt()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
@@ -3000,7 +3674,7 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::stmt>(Get<::DLDL_OOPSYNTAX::ast::Type::stmt>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__stmt__> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__stmt__>::deamerreserved_star__stmt__()
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__stmt__> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::program>::deamerreserved_star__stmt__()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
@@ -3014,6 +3688,14 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::stmt>(Get<::DLDL_OOPSYNTAX::ast::Type::stmt>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__stmt__> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__stmt__>::deamerreserved_star__stmt__()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__stmt__>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__stmt__>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::nonterminal_conversion> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::stmt>::nonterminal_conversion()
@@ -3032,20 +3714,20 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::ARROW>(Get<::DLDL_OOPSYNTAX::ast::Type::ARROW>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::nonterminal_conversion>::deamerreserved_star__production_rule_conversion__()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__production_rule_conversion__>(ts));
-		}
-
 		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::production_rule_conversion> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::nonterminal_conversion>::production_rule_conversion()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::production_rule_conversion>(Get<::DLDL_OOPSYNTAX::ast::Type::production_rule_conversion>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::nonterminal_conversion>::deamerreserved_long_69()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_69>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::nonterminal_name> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::nonterminal_conversion>::nonterminal_name()
@@ -3080,20 +3762,20 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::RIGHT_BRACKET>(Get<::DLDL_OOPSYNTAX::ast::Type::RIGHT_BRACKET>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__>::deamerreserved_star__production_rule_conversion__()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__production_rule_conversion__>(ts));
-		}
-
-		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::production_rule_conversion> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__>::production_rule_conversion()
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::production_rule_conversion> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69>::production_rule_conversion()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::production_rule_conversion>(Get<::DLDL_OOPSYNTAX::ast::Type::production_rule_conversion>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69>::deamerreserved_long_69()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_69>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::numbered_pr_convert> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::production_rule_conversion>::numbered_pr_convert()
@@ -3112,12 +3794,12 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::ARROW>(Get<::DLDL_OOPSYNTAX::ast::Type::ARROW>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::numbered_pr_convert>::deamerreserved_star__property_assignment__()
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::numbered_pr_convert>::deamerreserved_long_72()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__property_assignment__>(ts));
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_72>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property_assignment> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::numbered_pr_convert>::property_assignment()
@@ -3152,28 +3834,20 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::NUMBER>(Get<::DLDL_OOPSYNTAX::ast::Type::NUMBER>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__>::deamerreserved_star__property_assignment__()
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72>::deamerreserved_long_72()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
-			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__property_assignment__>(ts));
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_72>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property_assignment> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__>::property_assignment()
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property_assignment> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72>::property_assignment()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property_assignment>(Get<::DLDL_OOPSYNTAX::ast::Type::property_assignment>(ts));
-		}
-
-		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property_assignment>::direct_property_assignment()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment>(Get<::DLDL_OOPSYNTAX::ast::Type::direct_property_assignment>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property_assignment>::direct_any_property_assignment()
@@ -3192,6 +3866,46 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::embedded_assignment>(Get<::DLDL_OOPSYNTAX::ast::Type::embedded_assignment>(ts));
 		}
 
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property_assignment>::direct_property_assignment()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment>(Get<::DLDL_OOPSYNTAX::ast::Type::direct_property_assignment>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment>::deamerreserved_long_76()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_76>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment>::deamerreserved_arrow__terminal_name__()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__terminal_name__>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment>::deamerreserved_long_80()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_80>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment>::deamerreserved_arrow__property__()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__property__>(ts));
+		}
+
 		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::oop_type> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment>::oop_type()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
@@ -3206,6 +3920,22 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property>(Get<::DLDL_OOPSYNTAX::ast::Type::property>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment>::extended_property()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property>(Get<::DLDL_OOPSYNTAX::ast::Type::extended_property>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment>::extended_terminal_access()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access>(Get<::DLDL_OOPSYNTAX::ast::Type::extended_terminal_access>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::terminal_name> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_property_assignment>::terminal_name()
@@ -3232,12 +3962,172 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::EQ>(Get<::DLDL_OOPSYNTAX::ast::Type::EQ>(ts));
 		}
 
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__>::deamerreserved_long_76()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_76>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__>::property()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property>(Get<::DLDL_OOPSYNTAX::ast::Type::property>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__>::extended_property()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property>(Get<::DLDL_OOPSYNTAX::ast::Type::extended_property>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__>::DOT()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT>(Get<::DLDL_OOPSYNTAX::ast::Type::DOT>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76>::deamerreserved_long_76()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_76>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76>::extended_property()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property>(Get<::DLDL_OOPSYNTAX::ast::Type::extended_property>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76>::DOT()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT>(Get<::DLDL_OOPSYNTAX::ast::Type::DOT>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__>::deamerreserved_long_80()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_80>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__>::extended_terminal_access()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access>(Get<::DLDL_OOPSYNTAX::ast::Type::extended_terminal_access>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::terminal_name> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__>::terminal_name()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::terminal_name>(Get<::DLDL_OOPSYNTAX::ast::Type::terminal_name>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__>::DOT()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT>(Get<::DLDL_OOPSYNTAX::ast::Type::DOT>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80>::deamerreserved_long_80()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_80>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80>::extended_terminal_access()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access>(Get<::DLDL_OOPSYNTAX::ast::Type::extended_terminal_access>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80>::DOT()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT>(Get<::DLDL_OOPSYNTAX::ast::Type::DOT>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment>::deamerreserved_long_76()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_76>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment>::deamerreserved_arrow__terminal_name__()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__terminal_name__>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment>::deamerreserved_long_80()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_80>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment>::deamerreserved_arrow__property__()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__property__>(ts));
+		}
+
 		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment>::property()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property>(Get<::DLDL_OOPSYNTAX::ast::Type::property>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment>::extended_property()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property>(Get<::DLDL_OOPSYNTAX::ast::Type::extended_property>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment>::extended_terminal_access()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access>(Get<::DLDL_OOPSYNTAX::ast::Type::extended_terminal_access>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::terminal_name> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment>::terminal_name()
@@ -3280,20 +4170,20 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::ARROW>(Get<::DLDL_OOPSYNTAX::ast::Type::ARROW>(ts));
 		}
 
-		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::embedded_assignment>::deamerreserved_star__production_rule_conversion__()
-		{
-			// Optimized search, if it fails continue using unoptimized search.
-
-			// Unoptimized search
-			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__production_rule_conversion__>(ts));
-		}
-
 		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::production_rule_conversion> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::embedded_assignment>::production_rule_conversion()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 
 			// Unoptimized search
 			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::production_rule_conversion>(Get<::DLDL_OOPSYNTAX::ast::Type::production_rule_conversion>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::embedded_assignment>::deamerreserved_long_69()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69>(Get<::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_69>(ts));
 		}
 
 		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::nonterminal_name> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::embedded_assignment>::nonterminal_name()
@@ -3353,6 +4243,22 @@ AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::DOT> DOT();
 		}
 
 		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::VARNAME> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::property>::VARNAME()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::VARNAME>(Get<::DLDL_OOPSYNTAX::ast::Type::VARNAME>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::VARNAME> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_property>::VARNAME()
+		{
+			// Optimized search, if it fails continue using unoptimized search.
+
+			// Unoptimized search
+			return AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::VARNAME>(Get<::DLDL_OOPSYNTAX::ast::Type::VARNAME>(ts));
+		}
+
+		inline AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::VARNAME> AccessTemplateBase<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access>::VARNAME()
 		{
 			// Optimized search, if it fails continue using unoptimized search.
 

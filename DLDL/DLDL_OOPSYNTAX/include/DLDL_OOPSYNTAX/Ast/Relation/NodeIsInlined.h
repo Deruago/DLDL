@@ -28,7 +28,7 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 			return false;
 		}
 
-		if (t == ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__production_rule_conversion__)
+		if (t == ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_69)
 		{
 			return true;
 		}
@@ -43,7 +43,7 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 			return false;
 		}
 
-		if (t == ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__property_assignment__)
+		if (t == ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_72)
 		{
 			return true;
 		}
@@ -56,6 +56,26 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 		if (t == ::DLDL_OOPSYNTAX::ast::Type::direct_property_assignment)
 		{
 			return false;
+		}
+
+		if (t == ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__property__)
+		{
+			return true;
+		}
+
+		if (t == ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_76)
+		{
+			return true;
+		}
+
+		if (t == ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__terminal_name__)
+		{
+			return true;
+		}
+
+		if (t == ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_80)
+		{
+			return true;
 		}
 
 		if (t == ::DLDL_OOPSYNTAX::ast::Type::direct_any_property_assignment)
@@ -79,6 +99,16 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 		}
 
 		if (t == ::DLDL_OOPSYNTAX::ast::Type::property)
+		{
+			return false;
+		}
+
+		if (t == ::DLDL_OOPSYNTAX::ast::Type::extended_property)
+		{
+			return false;
+		}
+
+		if (t == ::DLDL_OOPSYNTAX::ast::Type::extended_terminal_access)
 		{
 			return false;
 		}

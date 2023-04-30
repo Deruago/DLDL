@@ -68,6 +68,12 @@ DLDL::generate::sub::OopSyntaxLPDWriter::GetFileContentHeaderFile(ir::Language* 
 				generator->oop_concept_member_type_->Set(
 					GetOopTypeName(directAssignment->oopType) + "_" +
 					GetOopPropertyName(directAssignment->oopProperty));
+
+				for (auto _ : directAssignment->extendedObjects)
+				{
+					generator->oop_link_extended_member_name_->Set(_);
+				}
+
 				generator->oop_concept_link_declaration_->ExpandVariableField();
 			}
 		}
@@ -140,6 +146,18 @@ DLDL::generate::sub::OopSyntaxLPDWriter::GetFileContentSourceFile(ir::Language* 
 			bool first = true;
 			for (const auto& directAssignment : productionRule->directAssignments)
 			{
+				generator->optional_extended_member_qualification_->variable_field_->Clear();
+				generator->oop_link_extended_member_->variable_field_->Clear();
+				if (directAssignment->extendedObjects.empty())
+				{
+					generator->optional_extended_link_part_->Set("");
+				}
+				else
+				{
+					generator->optional_extended_link_part_->Set(
+						generator->impl_extended_link_part_);
+				}
+
 				if (unknownReferences.find(directAssignment->object) != unknownReferences.end())
 				{
 					continue;
@@ -168,6 +186,12 @@ DLDL::generate::sub::OopSyntaxLPDWriter::GetFileContentSourceFile(ir::Language* 
 				generator->oop_concept_member_type_->Set(
 					GetOopTypeName(directAssignment->oopType) + "_" +
 					GetOopPropertyName(directAssignment->oopProperty));
+				for (auto _ : directAssignment->extendedObjects)
+				{
+					generator->oop_link_extended_member_name_->Set(_);
+					generator->oop_link_extended_member_->ExpandVariableField();
+				}
+
 				generator->oop_concept_link_implementation_->ExpandVariableField();
 				generator->oop_link_member_->ExpandVariableField();
 				generator->add_concept_link_->ExpandVariableField();

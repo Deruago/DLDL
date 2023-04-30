@@ -40,8 +40,10 @@ namespace DLDL::filetemplate
 			oop_encapsulation_declaration_,
 			oop_encapsulation_name_,
 			oop_link_declaration_,
+			oop_link_extended_member_name_,
 			oop_link_name_,
 			oop_syntax_scope_,
+			optional_extended_member_qualification_,
 			productionrule_index_,
 			right_angle_bracket_,
 			right_bracket_,
@@ -78,6 +80,14 @@ namespace DLDL::filetemplate
 		{
 			switch (enumerationValue)
 			{
+			case ::DLDL::filetemplate::OopSyntaxHTemplate::Type::Unknown: {
+				return "Unknown";
+			}
+
+			case ::DLDL::filetemplate::OopSyntaxHTemplate::Type::Scope: {
+				return "Scope";
+			}
+
 			case ::DLDL::filetemplate::OopSyntaxHTemplate::Type::file_: {
 				return "file";
 			}
@@ -146,12 +156,21 @@ namespace DLDL::filetemplate
 				return "oop_link_declaration";
 			}
 
+			case ::DLDL::filetemplate::OopSyntaxHTemplate::Type::oop_link_extended_member_name_: {
+				return "oop_link_extended_member_name";
+			}
+
 			case ::DLDL::filetemplate::OopSyntaxHTemplate::Type::oop_link_name_: {
 				return "oop_link_name";
 			}
 
 			case ::DLDL::filetemplate::OopSyntaxHTemplate::Type::oop_syntax_scope_: {
 				return "oop_syntax_scope";
+			}
+
+			case ::DLDL::filetemplate::OopSyntaxHTemplate::Type::
+				optional_extended_member_qualification_: {
+				return "optional_extended_member_qualification";
 			}
 
 			case ::DLDL::filetemplate::OopSyntaxHTemplate::Type::productionrule_index_: {
@@ -1415,6 +1434,41 @@ namespace DLDL::filetemplate
 			}
 		};
 
+		struct Variable_oop_link_extended_member_name_ : public VariableScopes
+		{
+			static constexpr auto name = "oop_link_extended_member_name_";
+
+			Variable_oop_link_extended_member_name_() : VariableScopes()
+			{
+				type =
+					::DLDL::filetemplate::OopSyntaxHTemplate::Type::oop_link_extended_member_name_;
+			}
+
+			virtual ~Variable_oop_link_extended_member_name_() override = default;
+
+			Variable_oop_link_extended_member_name_(OopSyntaxHTemplate* oopsyntaxhtemplate_,
+													const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type =
+					::DLDL::filetemplate::OopSyntaxHTemplate::Type::oop_link_extended_member_name_;
+			}
+
+			Variable_oop_link_extended_member_name_&
+			operator=(const Variable_oop_link_extended_member_name_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
 		struct Variable_oop_link_name_ : public VariableScopes
 		{
 			static constexpr auto name = "oop_link_name_";
@@ -1466,6 +1520,42 @@ namespace DLDL::filetemplate
 			}
 
 			Variable_oop_syntax_scope_& operator=(const Variable_oop_syntax_scope_& variable)
+			{
+				if (&variable == this)
+				{
+					return *this;
+				}
+
+				value = variable.value;
+				isString = variable.isString;
+
+				return *this;
+			}
+		};
+
+		struct Variable_optional_extended_member_qualification_ : public VariableScopes
+		{
+			static constexpr auto name = "optional_extended_member_qualification_";
+
+			Variable_optional_extended_member_qualification_() : VariableScopes()
+			{
+				type = ::DLDL::filetemplate::OopSyntaxHTemplate::Type::
+					optional_extended_member_qualification_;
+			}
+
+			virtual ~Variable_optional_extended_member_qualification_() override = default;
+
+			Variable_optional_extended_member_qualification_(
+				OopSyntaxHTemplate* oopsyntaxhtemplate_,
+				const std::vector<VariableBase*>& variables)
+				: VariableScopes(variables)
+			{
+				type = ::DLDL::filetemplate::OopSyntaxHTemplate::Type::
+					optional_extended_member_qualification_;
+			}
+
+			Variable_optional_extended_member_qualification_&
+			operator=(const Variable_optional_extended_member_qualification_& variable)
 			{
 				if (&variable == this)
 				{
@@ -1710,8 +1800,12 @@ namespace DLDL::filetemplate
 			new Variable_oop_encapsulation_name_();
 		Variable_oop_link_declaration_* oop_link_declaration_ =
 			new Variable_oop_link_declaration_();
+		Variable_oop_link_extended_member_name_* oop_link_extended_member_name_ =
+			new Variable_oop_link_extended_member_name_();
 		Variable_oop_link_name_* oop_link_name_ = new Variable_oop_link_name_();
 		Variable_oop_syntax_scope_* oop_syntax_scope_ = new Variable_oop_syntax_scope_();
+		Variable_optional_extended_member_qualification_* optional_extended_member_qualification_ =
+			new Variable_optional_extended_member_qualification_();
 		Variable_productionrule_index_* productionrule_index_ =
 			new Variable_productionrule_index_();
 		Variable_right_angle_bracket_* right_angle_bracket_ = new Variable_right_angle_bracket_();
@@ -1757,7 +1851,8 @@ namespace DLDL::filetemplate
 					 GenerateVariable("__"), GenerateVariable(object_name_->This()),
 					 GenerateVariable("__"), GenerateVariable(oop_concept_member_type_->This()),
 					 GenerateVariable("__"),
-					 GenerateVariable(oop_concept_member_object_name_->This())}));
+					 GenerateVariable(oop_concept_member_object_name_->This()),
+					 GenerateVariable(optional_extended_member_qualification_->Variable_Field())}));
 			*oop_concept_member_ = Variable_oop_concept_member_(
 				this, std::vector<VariableBase*>({GenerateVariable("oop_concept_member__")}));
 			*oop_concept_member_object_name_ =
@@ -1780,12 +1875,19 @@ namespace DLDL::filetemplate
 						  {GenerateVariable("::deamer::type::SafeReserve<::deamer::language::type::"
 											"definition::object::main::OopLink>\n\t\t\t"),
 						   GenerateVariable(oop_link_name_->This()), GenerateVariable(";")}));
+			*oop_link_extended_member_name_ =
+				Variable_oop_link_extended_member_name_(this, std::vector<VariableBase*>({}));
 			*oop_link_name_ = Variable_oop_link_name_(
 				this,
 				std::vector<VariableBase*>(
 					{GenerateVariable("oop_link_"), GenerateVariable(productionrule_index_->This()),
 					 GenerateVariable("__"), GenerateVariable(object_name_->This())}));
 			*oop_syntax_scope_ = Variable_oop_syntax_scope_(this, std::vector<VariableBase*>({}));
+			*optional_extended_member_qualification_ =
+				Variable_optional_extended_member_qualification_(
+					this, std::vector<VariableBase*>(
+							  {GenerateVariable("__"),
+							   GenerateVariable(oop_link_extended_member_name_->This())}));
 			*productionrule_index_ =
 				Variable_productionrule_index_(this, std::vector<VariableBase*>({}));
 			*right_angle_bracket_ = Variable_right_angle_bracket_(
@@ -1820,8 +1922,10 @@ namespace DLDL::filetemplate
 			variables_.emplace_back(oop_encapsulation_declaration_);
 			variables_.emplace_back(oop_encapsulation_name_);
 			variables_.emplace_back(oop_link_declaration_);
+			variables_.emplace_back(oop_link_extended_member_name_);
 			variables_.emplace_back(oop_link_name_);
 			variables_.emplace_back(oop_syntax_scope_);
+			variables_.emplace_back(optional_extended_member_qualification_);
 			variables_.emplace_back(productionrule_index_);
 			variables_.emplace_back(right_angle_bracket_);
 			variables_.emplace_back(right_bracket_);

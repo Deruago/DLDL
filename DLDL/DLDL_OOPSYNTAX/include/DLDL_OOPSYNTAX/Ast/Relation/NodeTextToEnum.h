@@ -24,7 +24,7 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 		{ "nonterminal_conversion", ::DLDL_OOPSYNTAX::ast::Type::nonterminal_conversion },
 	
 
-		{ "deamerreserved_star__production_rule_conversion__", ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__production_rule_conversion__ },
+		{ "deamerreserved_long_69", ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_69 },
 	
 
 		{ "production_rule_conversion", ::DLDL_OOPSYNTAX::ast::Type::production_rule_conversion },
@@ -33,13 +33,25 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 		{ "numbered_pr_convert", ::DLDL_OOPSYNTAX::ast::Type::numbered_pr_convert },
 	
 
-		{ "deamerreserved_star__property_assignment__", ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__property_assignment__ },
+		{ "deamerreserved_long_72", ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_72 },
 	
 
 		{ "property_assignment", ::DLDL_OOPSYNTAX::ast::Type::property_assignment },
 	
 
 		{ "direct_property_assignment", ::DLDL_OOPSYNTAX::ast::Type::direct_property_assignment },
+	
+
+		{ "deamerreserved_arrow__property__", ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__property__ },
+	
+
+		{ "deamerreserved_long_76", ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_76 },
+	
+
+		{ "deamerreserved_arrow__terminal_name__", ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__terminal_name__ },
+	
+
+		{ "deamerreserved_long_80", ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_80 },
 	
 
 		{ "direct_any_property_assignment", ::DLDL_OOPSYNTAX::ast::Type::direct_any_property_assignment },
@@ -55,6 +67,12 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 	
 
 		{ "property", ::DLDL_OOPSYNTAX::ast::Type::property },
+	
+
+		{ "extended_property", ::DLDL_OOPSYNTAX::ast::Type::extended_property },
+	
+
+		{ "extended_terminal_access", ::DLDL_OOPSYNTAX::ast::Type::extended_terminal_access },
 	
 
 		{ "terminal_name", ::DLDL_OOPSYNTAX::ast::Type::terminal_name },

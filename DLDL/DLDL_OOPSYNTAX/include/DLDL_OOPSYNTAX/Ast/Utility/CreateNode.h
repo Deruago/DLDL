@@ -16,17 +16,23 @@
 #include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_star__stmt__.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/stmt.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/nonterminal_conversion.h"
-#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_star__production_rule_conversion__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_69.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/production_rule_conversion.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/numbered_pr_convert.h"
-#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_star__property_assignment__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_72.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/property_assignment.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/direct_property_assignment.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_arrow__property__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_76.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_arrow__terminal_name__.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/deamerreserved_long_80.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/direct_any_property_assignment.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/embedded_assignment.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/nonterminal_name.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/oop_type.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/property.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/extended_property.h"
+#include "DLDL_OOPSYNTAX/Ast/Node/extended_terminal_access.h"
 #include "DLDL_OOPSYNTAX/Ast/Node/terminal_name.h"
 
 
@@ -153,8 +159,8 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace utility {
 			case ::DLDL_OOPSYNTAX::ast::Type::nonterminal_conversion: {
 				return new ::DLDL_OOPSYNTAX::ast::node::nonterminal_conversion({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
 			}
-			case ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__production_rule_conversion__: {
-				return new ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
+			case ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_69: {
+				return new ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
 			}
 			case ::DLDL_OOPSYNTAX::ast::Type::production_rule_conversion: {
 				return new ::DLDL_OOPSYNTAX::ast::node::production_rule_conversion({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
@@ -162,14 +168,26 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace utility {
 			case ::DLDL_OOPSYNTAX::ast::Type::numbered_pr_convert: {
 				return new ::DLDL_OOPSYNTAX::ast::node::numbered_pr_convert({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
 			}
-			case ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__property_assignment__: {
-				return new ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
+			case ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_72: {
+				return new ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
 			}
 			case ::DLDL_OOPSYNTAX::ast::Type::property_assignment: {
 				return new ::DLDL_OOPSYNTAX::ast::node::property_assignment({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
 			}
 			case ::DLDL_OOPSYNTAX::ast::Type::direct_property_assignment: {
 				return new ::DLDL_OOPSYNTAX::ast::node::direct_property_assignment({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
+			}
+			case ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__property__: {
+				return new ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
+			}
+			case ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_76: {
+				return new ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
+			}
+			case ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__terminal_name__: {
+				return new ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
+			}
+			case ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_80: {
+				return new ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
 			}
 			case ::DLDL_OOPSYNTAX::ast::Type::direct_any_property_assignment: {
 				return new ::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
@@ -185,6 +203,12 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace utility {
 			}
 			case ::DLDL_OOPSYNTAX::ast::Type::property: {
 				return new ::DLDL_OOPSYNTAX::ast::node::property({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
+			}
+			case ::DLDL_OOPSYNTAX::ast::Type::extended_property: {
+				return new ::DLDL_OOPSYNTAX::ast::node::extended_property({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
+			}
+			case ::DLDL_OOPSYNTAX::ast::Type::extended_terminal_access: {
+				return new ::DLDL_OOPSYNTAX::ast::node::extended_terminal_access({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);
 			}
 			case ::DLDL_OOPSYNTAX::ast::Type::terminal_name: {
 				return new ::DLDL_OOPSYNTAX::ast::node::terminal_name({nodeType, ::deamer::external::cpp::ast::NodeValue::nonterminal, {productionRuleId, productionRuleType}}, nodes);

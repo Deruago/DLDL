@@ -66,14 +66,14 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener { namespace deamer
 			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"nonterminal_conversion\"];\n";
 		}
 
-		void ListenEntry(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__* node) override
+		void ListenEntry(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69* node) override
 		{
 			for (const auto* child : node->GetNodes())
 			{
 				AddConnection(node, child);
 			}
 
-			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_star__production_rule_conversion__\"];\n";
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_long_69\"];\n";
 		}
 
 		void ListenEntry(const ::DLDL_OOPSYNTAX::ast::node::production_rule_conversion* node) override
@@ -96,14 +96,14 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener { namespace deamer
 			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"numbered_pr_convert\"];\n";
 		}
 
-		void ListenEntry(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__* node) override
+		void ListenEntry(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72* node) override
 		{
 			for (const auto* child : node->GetNodes())
 			{
 				AddConnection(node, child);
 			}
 
-			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_star__property_assignment__\"];\n";
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_long_72\"];\n";
 		}
 
 		void ListenEntry(const ::DLDL_OOPSYNTAX::ast::node::property_assignment* node) override
@@ -124,6 +124,46 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener { namespace deamer
 			}
 
 			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"direct_property_assignment\"];\n";
+		}
+
+		void ListenEntry(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__* node) override
+		{
+			for (const auto* child : node->GetNodes())
+			{
+				AddConnection(node, child);
+			}
+
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_arrow__property__\"];\n";
+		}
+
+		void ListenEntry(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76* node) override
+		{
+			for (const auto* child : node->GetNodes())
+			{
+				AddConnection(node, child);
+			}
+
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_long_76\"];\n";
+		}
+
+		void ListenEntry(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__* node) override
+		{
+			for (const auto* child : node->GetNodes())
+			{
+				AddConnection(node, child);
+			}
+
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_arrow__terminal_name__\"];\n";
+		}
+
+		void ListenEntry(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80* node) override
+		{
+			for (const auto* child : node->GetNodes())
+			{
+				AddConnection(node, child);
+			}
+
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"deamerreserved_long_80\"];\n";
 		}
 
 		void ListenEntry(const ::DLDL_OOPSYNTAX::ast::node::direct_any_property_assignment* node) override
@@ -174,6 +214,26 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener { namespace deamer
 			}
 
 			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"property\"];\n";
+		}
+
+		void ListenEntry(const ::DLDL_OOPSYNTAX::ast::node::extended_property* node) override
+		{
+			for (const auto* child : node->GetNodes())
+			{
+				AddConnection(node, child);
+			}
+
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"extended_property\"];\n";
+		}
+
+		void ListenEntry(const ::DLDL_OOPSYNTAX::ast::node::extended_terminal_access* node) override
+		{
+			for (const auto* child : node->GetNodes())
+			{
+				AddConnection(node, child);
+			}
+
+			output += "\t" + std::to_string(::std::size_t(node)) + " [label=\"extended_terminal_access\"];\n";
 		}
 
 		void ListenEntry(const ::DLDL_OOPSYNTAX::ast::node::terminal_name* node) override
@@ -303,7 +363,7 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener { namespace deamer
 		{
 		}
 
-		void ListenExit(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__* node) override
+		void ListenExit(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69* node) override
 		{
 		}
 
@@ -315,7 +375,7 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener { namespace deamer
 		{
 		}
 
-		void ListenExit(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__* node) override
+		void ListenExit(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72* node) override
 		{
 		}
 
@@ -324,6 +384,22 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener { namespace deamer
 		}
 
 		void ListenExit(const ::DLDL_OOPSYNTAX::ast::node::direct_property_assignment* node) override
+		{
+		}
+
+		void ListenExit(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__* node) override
+		{
+		}
+
+		void ListenExit(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76* node) override
+		{
+		}
+
+		void ListenExit(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__* node) override
+		{
+		}
+
+		void ListenExit(const ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80* node) override
 		{
 		}
 
@@ -344,6 +420,14 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace listener { namespace deamer
 		}
 
 		void ListenExit(const ::DLDL_OOPSYNTAX::ast::node::property* node) override
+		{
+		}
+
+		void ListenExit(const ::DLDL_OOPSYNTAX::ast::node::extended_property* node) override
+		{
+		}
+
+		void ListenExit(const ::DLDL_OOPSYNTAX::ast::node::extended_terminal_access* node) override
 		{
 		}
 

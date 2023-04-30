@@ -701,7 +701,7 @@ extern int yylex (void);
 #undef yyTABLES_NAME
 #endif
 
-#line 91 "./DLDL_OOPSYNTAX_lexer.l"
+#line 108 "./DLDL_OOPSYNTAX_lexer.l"
 
 
 #line 708 "./DLDL_OOPSYNTAX_lexer.h"

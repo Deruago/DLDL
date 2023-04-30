@@ -9,17 +9,23 @@ class program;
 class deamerreserved_star__stmt__;
 class stmt;
 class nonterminal_conversion;
-class deamerreserved_star__production_rule_conversion__;
+class deamerreserved_long_69;
 class production_rule_conversion;
 class numbered_pr_convert;
-class deamerreserved_star__property_assignment__;
+class deamerreserved_long_72;
 class property_assignment;
 class direct_property_assignment;
+class deamerreserved_arrow__property__;
+class deamerreserved_long_76;
+class deamerreserved_arrow__terminal_name__;
+class deamerreserved_long_80;
 class direct_any_property_assignment;
 class embedded_assignment;
 class nonterminal_name;
 class oop_type;
 class property;
+class extended_property;
+class extended_terminal_access;
 class terminal_name;
 class ARROW;
 class LEFT_BRACKET;
@@ -73,10 +79,10 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 	};
 
 	template<>
-	struct NodeTypeToEnum<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__>
+	struct NodeTypeToEnum<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69>
 	{
-		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__production_rule_conversion__;
-		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__production_rule_conversion__;
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_69;
+		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_69;
 	};
 
 	template<>
@@ -94,10 +100,10 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 	};
 
 	template<>
-	struct NodeTypeToEnum<::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__>
+	struct NodeTypeToEnum<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72>
 	{
-		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_star__property_assignment__;
-		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_star__property_assignment__;
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_72;
+		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_72;
 	};
 
 	template<>
@@ -112,6 +118,34 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 	{
 		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::direct_property_assignment;
 		using type = ::DLDL_OOPSYNTAX::ast::node::direct_property_assignment;
+	};
+
+	template<>
+	struct NodeTypeToEnum<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__>
+	{
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__property__;
+		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__property__;
+	};
+
+	template<>
+	struct NodeTypeToEnum<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76>
+	{
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_76;
+		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_76;
+	};
+
+	template<>
+	struct NodeTypeToEnum<::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__>
+	{
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_arrow__terminal_name__;
+		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_arrow__terminal_name__;
+	};
+
+	template<>
+	struct NodeTypeToEnum<::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80>
+	{
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::deamerreserved_long_80;
+		using type = ::DLDL_OOPSYNTAX::ast::node::deamerreserved_long_80;
 	};
 
 	template<>
@@ -147,6 +181,20 @@ namespace DLDL_OOPSYNTAX { namespace ast { namespace relation {
 	{
 		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::property;
 		using type = ::DLDL_OOPSYNTAX::ast::node::property;
+	};
+
+	template<>
+	struct NodeTypeToEnum<::DLDL_OOPSYNTAX::ast::node::extended_property>
+	{
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::extended_property;
+		using type = ::DLDL_OOPSYNTAX::ast::node::extended_property;
+	};
+
+	template<>
+	struct NodeTypeToEnum<::DLDL_OOPSYNTAX::ast::node::extended_terminal_access>
+	{
+		constexpr static auto value = ::DLDL_OOPSYNTAX::ast::Type::extended_terminal_access;
+		using type = ::DLDL_OOPSYNTAX::ast::node::extended_terminal_access;
 	};
 
 	template<>

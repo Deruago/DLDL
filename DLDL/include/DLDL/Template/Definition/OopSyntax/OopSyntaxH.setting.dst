@@ -12,7 +12,9 @@
 {{oop_concept_member}} = @<oop_concept_member__>@
 {{oop_encapsulation_name}} = @<oop_encapsulation_{{oop_syntax_scope}}__{{object_name}}>@
 {{oop_link_name}} = @<oop_link_{{productionrule_index}}__{{object_name}}>@
-{{oop_concept_link_name}} = @<oop_concept_link_{{object_name}}_{{productionrule_index}}__{{object_name}}__{{oop_concept_member_type}}__{{oop_concept_member_object_name}}>@
+
+{{oop_concept_link_name}} = @<oop_concept_link_{{object_name}}_{{productionrule_index}}__{{object_name}}__{{oop_concept_member_type}}__{{oop_concept_member_object_name}}{{optional_extended_member_qualification.Variable_Field}}>@
+{{optional_extended_member_qualification}} = @<__{{oop_link_extended_member_name}}>@
 	
 
 {{oop_link_declaration}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::main::OopLink>
