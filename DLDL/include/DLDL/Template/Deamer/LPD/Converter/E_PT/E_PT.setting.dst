@@ -1,0 +1,29 @@
+{{file.target_language}} = <C++>
+{{file.file_name}} = <E_PT>
+{{file.namespace}} = <DLDL::filetemplate::lpd::converter>
+{{file.extension}} = <h>
+
+{{header_guard}} = @<DEAMER_LANGUAGE_CONVERTOR_DEFINITION_PROPERTYENUMTOTYPE_H>@
+
+{{lpd_include}} = @<#include "Deamer/Language/Type/Definition/Property/{{loc_impl}}/{{lpd_name}}.h">@
+
+{{lpd_implementation}} = @<
+	/*!
+	 *	\see deamer::language::convertor::definition::PropertyEnumToType
+	 */
+	template<>
+	class PropertyEnumToType<type::definition::property::Type::{{lpd_name}}>
+	{
+	public:
+		constexpr static auto value = type::definition::property::Type::{{lpd_name}};
+		using type = type::definition::property::{{location}}::{{lpd_name}};
+	};
+>@
+
+{{location}} = @<{{loc_impl.Lower}}>@
+{{loc_impl}} = @<{{loc_main}}>@
+{{loc_main}} = @<Main>@
+{{loc_tool}} = @<Tool>@
+
+{{explicit_lpd_namespace}} = @<{{explicit_lpd_namespace_dispatch}}>@
+{{explicit_lpd_namespace_dispatch}} = @<::{{lpd_name.Lower}}>@

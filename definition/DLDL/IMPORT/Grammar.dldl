@@ -1,0 +1,35 @@
+/ Grammar of DLDL Import LPD
+/ Made by: Thimo Bohmer
+
+program
+	stmt*
+	
+stmt
+	import_declaration
+	
+import_declaration
+	specialization import_rule_name LEFT_PARANTHESIS import_context -> (DOT import_context) RIGHT_PARANTHESIS LEFT_SQUARE_BRACKET import_abstraction* RIGHT_SQUARE_BRACKET
+	
+specialization
+	IMPORT
+	IMPORT_FILE
+	IMPORT_MODULE
+	
+import_abstraction
+	abstraction COLON value
+	
+value
+	TEXT
+	VARNAME
+	[VARNAME] LEFT_SQUARE_BRACKET import_abstraction* RIGHT_SQUARE_BRACKET
+
+abstraction
+	VARNAME
+
+import_context
+	VARNAME
+
+import_rule_name
+	VARNAME
+
+/

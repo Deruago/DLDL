@@ -1,0 +1,10 @@
+{{file.target_language}} = @<C++>@
+{{file.file_name}} = @<Threat>@
+{{file.namespace}} = @<DLDL::filetemplate>@
+{{file.extension}} = @<h>@
+
+{{header_guard}} = <{{language_full_name_underscore.Upper}}_THREAT_H>
+
+{{identity_name}} = <{{language_full_name_underscore}}>
+
+{{language_full_name_slash}} = <>

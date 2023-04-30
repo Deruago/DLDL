@@ -1,0 +1,49 @@
+/ Grammar of OOP Syntax LPD
+/ Created by: Thimo Böhmer
+
+program
+	stmt*
+
+stmt
+	nonterminal_conversion
+
+nonterminal_conversion
+	nonterminal_name ARROW oop_type LEFT_BRACKET production_rule_conversion* RIGHT_BRACKET
+
+production_rule_conversion
+	numbered_pr_convert
+
+numbered_pr_convert
+	NUMBER ARROW LEFT_BRACKET property_assignment* RIGHT_BRACKET
+
+property_assignment
+	direct_property_assignment
+	direct_any_property_assignment
+	embedded_assignment
+	
+direct_property_assignment
+	oop_type DOT property -> (DOT extended_property) EQ DOT terminal_name -> (DOT extended_terminal_access)
+
+direct_any_property_assignment
+	STAR DOT property -> (DOT extended_property) EQ DOT terminal_name -> (DOT extended_terminal_access)
+
+embedded_assignment
+	DOT nonterminal_name ARROW oop_type LEFT_BRACKET production_rule_conversion* RIGHT_BRACKET
+
+nonterminal_name
+	VARNAME
+
+oop_type
+	VARNAME
+
+property
+	VARNAME
+	
+extended_property
+	VARNAME
+	
+extended_terminal_access
+	VARNAME
+
+terminal_name
+	VARNAME

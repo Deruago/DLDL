@@ -1,0 +1,26 @@
+/ Grammar of DLDL lexicon LPD
+/ Made by: Thimo Bohmer
+
+program
+	stmts
+
+stmts
+	stmt stmts
+	EMPTY
+	
+stmt
+	tokendeclaration
+	
+tokendeclaration
+	abstraction TERMINAL REGEX
+	TERMINAL REGEX
+	
+abstraction
+	DELETE_ABSTRACTION
+	IGNORE_ABSTRACTION
+	CRASH_ABSTRACTION
+	NOVALUE_ABSTRACTION
+	STANDARD_ABSTRACTION
+	UNKNOWN_ABSTRACTION
+
+/

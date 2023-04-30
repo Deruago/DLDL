@@ -1,0 +1,1 @@
+ -definition-map="definition" -build-map="build" -extra-map="extra"   -lpd-map="" -activate-lpd-generation=false                  -tool-map="" -activate-tool-generation=false  -target-os=windows    -cmake-output-use-legacy-names="true" 

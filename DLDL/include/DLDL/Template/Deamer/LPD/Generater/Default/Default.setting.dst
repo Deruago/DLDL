@@ -1,0 +1,22 @@
+{{file.target_language}} = <C++>
+{{file.file_name}} = <Default>
+{{file.namespace}} = <DLDL::filetemplate::lpd::generater>
+{{file.extension}} = <h>
+
+{{header_guard}} = @<DEAMER_LANGUAGE_GENERATOR_DEFINITION_PROPERTY_USER_{{location.Upper}}_{{lpd_name.Upper}}_H>@
+
+{{member_type}} = @<type::definition::object::Type::{{ldo_name}}>@
+{{lpd_retrieve_ctor_member}} = @<			const auto {{member_name}} = Base<LanguageDefinitionType, type::definition::property::{{location}}::{{lpd_name}}>::template GetObjects<{{member_type}}>();>@
+{{lpd_ctor_member}} = @<{{optional_comma_extension}}{{member_name}}>@
+
+{{optional_comma_extension}} = @<{{comma_extension}}>@
+{{comma_extension}} = @<,
+				>@
+
+{{location}} = @<{{loc_impl.Lower}}>@
+{{loc_impl}} = @<{{loc_main}}>@
+{{loc_main}} = @<Main>@
+{{loc_tool}} = @<Tool>@
+
+{{explicit_lpd_namespace}} = @<{{explicit_lpd_namespace_dispatch}}>@
+{{explicit_lpd_namespace_dispatch}} = @<::{{lpd_name.Lower}}>@

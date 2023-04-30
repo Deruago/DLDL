@@ -1,0 +1,18 @@
+/ Lexicon of OOP Syntax LPD
+/ Created by: Thimo Böhmer
+
+/ Symbols
+Ignore: ARROW         [-][>]
+Ignore: LEFT_BRACKET  [{]
+Ignore: RIGHT_BRACKET [}]
+Ignore: DOT           [\.]
+Ignore: EQ            [=]
+Ignore: STAR          [*]
+
+/ Values
+Terminal: VARNAME [a-zA-Z_][a-zA-Z0-9_]*
+Terminal: NUMBER  [0-9]+
+
+/ Deleted chars
+Delete: COMMENT [/][^\n\r][\n\r]
+Delete: ESCAPE_CHAR [\n\t\r\b\v\a ]

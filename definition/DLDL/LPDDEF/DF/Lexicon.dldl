@@ -1,0 +1,29 @@
+/ DLDL:LPDDEF:DataFormat Lexicon
+/ Used to parse data format used to define LPD data layout
+/ Designed by Thimo Böhmer
+
+/ Symbols
+Ignore: LAB [<]
+Ignore: RAB [>]
+Ignore: LSB [\[]
+Ignore: RSB [\]]
+Ignore: EQ [=]
+Terminal: COLON [:]
+Terminal: LB [{]
+Terminal: RB [}]
+Terminal: COMMA [,]
+
+/ Keywords
+Terminal: OPTIONAL  [Oo][Pp][Tt][Ii][Oo][Nn][Aa][Ll]
+Terminal: VECTOR    [Vv][Ee][Cc][Tt][Oo][Rr]
+
+/ Variadic vars
+Terminal: DEAMER_VARNAME deamer([:][:][a-zA-Z_][a-zA-Z_0-9]+)+
+Terminal: COMMENT   [/]+[^\n]*[\n]
+Terminal: VARNAME   [a-zA-Z_][a-zA-Z_0-9]*
+Terminal: NUMBER    [-]*[0-9]+
+Terminal: STRING    ["][^"]*["]
+
+/ Delete characters
+Delete: SEMICOLON [;]
+Delete: ESCAPE_CHARS [\n\t\r\b\v\a ]

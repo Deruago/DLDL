@@ -1,0 +1,18 @@
+/ Lexicon of DLDL lexicon LPD
+/ Made by: Thimo Bohmer
+
+NoValue: DELETE_ABSTRACTION [Dd]elete[:][ \t]*
+NoValue: IGNORE_ABSTRACTION [Ii]gnore[:][ \t]*
+NoValue: NOVALUE_ABSTRACTION (([Nn]o[Vv]alue)|([Vv]alue[Ll]ess))[:][ \t]*
+NoValue: CRASH_ABSTRACTION [Cc]rash[:][ \t]*
+NoValue: STANDARD_ABSTRACTION [Ss]tandard[:][ \t]*
+NoValue: UNKNOWN_ABSTRACTION [a-zA-Z0-9_\\$?!-+=]*[:][ \t]*
+
+Terminal: TERMINAL [a-zA-Z_]+[a-zA-Z_0-9]*
+Terminal: REGEX [ \t][^\n\r]*
+
+Delete: ESCAPE_CHARS [\n\r\t\f\b\a\v]
+
+Delete: COMMENT	[/][^\n]*
+
+/

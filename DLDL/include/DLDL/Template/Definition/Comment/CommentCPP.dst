@@ -1,0 +1,23 @@
+#include "{{language_full_name_slash}}/Comment.h"
+#include "{{language_full_name_slash}}/Language.h"
+
+{{language_full_name}}::Comment::Comment({{language_full_name}}::Language* language)
+			:	::deamer::language::generator::definition::property::user::Comment<
+					{{language_full_name}}::Language>(language)
+{
+}
+
+void {{language_full_name}}::Comment::GenerateObjects()
+{
+	// Unknown References
+	{{unknown_reference_implementation.Variable_Field}}
+
+	// Implement Comments
+	{{comment_implementation.Variable_Field}}
+
+	// Unknown References
+	{{add_unknown_reference.Variable_Field}}
+
+	// Add Comment
+	{{add_comment.Variable_Field}}
+}

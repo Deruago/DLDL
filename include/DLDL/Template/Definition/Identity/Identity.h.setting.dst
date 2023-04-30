@@ -1,5 +1,0 @@
-{{file.namespace}} = <DLDL::filetemplate>
-
-{{header_guard}} = <{{language_full_name_underscore.Upper}}_IDENTITY_H>
-
-{{identity_name}} = <{{language_full_name_underscore}}>

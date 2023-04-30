@@ -1,0 +1,20 @@
+/ The grammar of DLDL LPD generation
+/ Made by: Thimo Bohmer
+
+program
+	stmt*
+
+stmt
+	argument
+
+argument
+	argument_name COLON VARNAME_EXT
+	argument_name COLON argument_block
+
+argument_name
+	VARNAME
+
+argument_block
+	LEFT_ANGLE_BRACKET (INDENTED_VALUE|VARNAME_EXT|VARNAME)* RIGHT_ANGLE_BRACKET
+	
+/

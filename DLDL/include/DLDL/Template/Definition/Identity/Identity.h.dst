@@ -1,0 +1,51 @@
+/* 
+ * This file is auto-generated and auto-maintained by DLDL
+ * Do not change code in this as it can be overwritten.
+ *
+ * For more information see the DLDL repo: https://github.com/Deruago/DLDL
+ * For more information about Deamer: https://github.com/Deruago/theDeamerProject
+ */
+
+#ifndef {{header_guard}}
+#define {{header_guard}}
+
+#include "Deamer/Language/Generator/Definition/Property/User/Special/Identity.h"
+
+namespace {{language_full_name}}
+{
+	class Language;
+
+	/*!	\class Identity
+	 *
+	 *	\brief This contains the identity LPD of the language {{language_full_name}}
+	 *
+	 *	\note This is auto-generated via the DLDL definition.
+	 */
+	class Identity : public ::deamer::language::generator::definition::property::user::Identity<
+								::{{language_full_name}}::Language>
+	{
+	public:
+		::deamer::type::SafeReserve<::deamer::language::type::definition::object::main::Name> name;
+
+	public:
+		Identity(::{{language_full_name}}::Language* language)
+			:	::deamer::language::generator::definition::property::user::Identity<
+					::{{language_full_name}}::Language>(language)
+		{
+		}
+
+		void GenerateObjects() override
+		{
+			name.Set(::deamer::language::type::definition::object::main::Name("{{identity_name}}"));
+			
+			AddObject(name);
+
+			// Place higher level operations here.
+			// ReplaceObject(..., ...)
+			// DeleteObject(..., ...)
+			{{high_level_operation.Variable_Field}}
+		}
+	};
+}
+
+#endif // {{header_guard}}

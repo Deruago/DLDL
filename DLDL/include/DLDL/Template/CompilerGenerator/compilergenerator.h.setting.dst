@@ -1,0 +1,20 @@
+{{file.namespace}} = <DLDL::filetemplate>
+
+{{header_guard}} = @<{{language_full_name_underscore.Upper}}_COMPILERGENERATOR_H>@
+
+{{tool_includes}} = @<#include "{{tool_include_path}}">@
+
+{{child_class}} = @<::{{language_full_name}}::{{child}}>@
+
+{{print_threats}} = @<::deamer::language::reference::PropertyDefinition(
+				::deamer::compiler::generator::Compiler<::{{language_full_name}}::Language>::GetLanguageDefinition())
+				.GetDefinition<::deamer::language::type::definition::property::Type::Threat>()
+				.PrintThreats();>@
+
+{{children_compilergenerator_include}} = @<#include "{{language_full_name_slash}}/{{child}}//CompilerGenerator.h">@
+{{children_compilergenerator_bases}} = @<, public {{child_class}}::CompilerGenerator>@
+{{children_compilergenerator_bases_ctor}} = @<, {{child_class}}::CompilerGenerator()>@
+
+{{add_children_compilergenerators}} = @<output.AddCompilerOutput({{child_class}}::CompilerGenerator::Generate());>@
+{{language_output_initialization}} = @<{{tool_namespace}}::{{tool.Lower}}::{{tool}} {{tool}}(::deamer::compiler::generator::Compiler<::{{language_full_name}}::Language>::GetLanguageDefinition());>@
+{{add_language_outputs}} = @<output.AddLanguageToolOutput({{tool}}.Generate());>@

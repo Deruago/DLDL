@@ -1,0 +1,54 @@
+{{file.target_language}} = <C++>
+{{file.file_name}} = <MainSource>
+{{file.namespace}} = <DLDL::filetemplate::ldo::ldo>
+{{file.extension}} = <h>
+
+{{member_full_type}} = @<{{ldo_namespace}}{{member_type}}{{optional_pointer}}>@
+{{ldo_namespace}}    = @<{{default_ldo_namespace}}>@
+{{default_ldo_namespace}}  = @<object::{{location}}{{explicit_lpd_namespace}}::>@
+{{default_std_namespace}}  = @<std::>@
+{{default_none_namespace}} = @<>@
+
+{{ldo_member}} = @<>@
+{{ldo_member_standard}} = @<		{{comment.Variable_Field}}{{member_full_type}} {{member_name}};>@
+{{ldo_member_vector}}   = @<		{{comment.Variable_Field}}std::vector<{{member_full_type}}> {{member_name}};>@
+{{ldo_member_optional}} = @<		{{comment.Variable_Field}}std::optional<{{member_full_type}}> {{member_name}};>@
+
+{{ldo_ctor}} = @<{{ldo_ctor_member.Variable_Field}}>@
+{{ldo_ctor_member}} = @<{{comma_extension}}{{lpd_ctor_member_impl}} {{member_name}}_>@
+{{lpd_ctor_member_impl}} = @<>@
+{{ldo_ctor_standard}}    = @<{{member_full_type}}>@
+{{ldo_ctor_vector}}      = @<std::vector<{{member_full_type}}>>@
+{{ldo_ctor_optional}}    = @<std::optional<{{member_full_type}}>>@
+
+{{ldo_default_ctor_member}}      = @<{{comma_extension}}{{lpd_default_ctor_member_impl}}>@
+{{lpd_default_ctor_member_impl}} = @<{{lpd_default_ctor_member_impl_default}}>@
+{{lpd_default_ctor_member_impl_default}} = @<{{lpd_ctor_member_impl}}{}>@
+{{ldo_default_ctor_ldo}}         = @<nullptr>@
+{{ldo_default_ctor_string}}      = @<"">@
+{{ldo_default_ctor_struct}}      = @<{{lpd_ctor_member_impl}}{}>@
+{{ldo_default_ctor_enum}}        = @<{{lpd_ctor_member_impl}}::reserved_default_enum_option>@
+{{ldo_default_ctor_vector}}      = @<{{lpd_ctor_member_impl}}{}>@
+{{ldo_default_ctor_optional}}    = @<{{lpd_ctor_member_impl}}{}>@
+
+{{ldo_ctor_member_assignment}} = @<,
+	{{member_name}}({{member_name}}_)>@
+
+{{ldo_member_reference}} = @<	references.Add({{member_name}});>@
+
+{{ldo_compare}} = @<this->{{member_name}} == rhs.{{member_name}}>@
+
+{{location}} = @<{{loc_impl.Lower}}>@
+{{loc_impl}} = @<{{loc_main}}>@
+{{loc_main}} = @<Main>@
+{{loc_tool}} = @<Tool>@
+
+{{explicit_lpd_namespace}} = @<{{explicit_lpd_namespace_dispatch}}>@
+{{explicit_lpd_namespace_dispatch}} = @<::{{lpd_name.Lower}}>@
+
+{{optional_default_ctor}} = @<{{default_ctor}}>@
+{{default_ctor}} = @<
+deamer::language::type::definition::object::{{location}}{{explicit_lpd_namespace}}::{{ldo_name}}::{{ldo_name}}() : {{ldo_name}}({{ldo_default_ctor_member.Variable_Field}})
+{
+}
+>@

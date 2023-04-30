@@ -1,0 +1,46 @@
+/* 
+ * This file is auto-generated and auto-maintained by DLDL
+ * Do not change code in this as it can be overwritten.
+ *
+ * For more information see the DLDL repo: https://github.com/Deruago/DLDL
+ * For more information about Deamer: https://github.com/Deruago/theDeamerProject
+ */
+
+#ifndef {{header_guard}}
+#define {{header_guard}}
+
+#include "Deamer/Language/Generator/Definition/Property/User/Main/Grammar.h"
+{{uninitialized_include}}
+
+namespace {{language_full_name}}
+{
+	class Language;
+
+	/*!	\class Grammar
+	 *
+	 *	\brief This contains the grammar LPD of the language {{language_full_name}}
+	 *
+	 *	\note This is auto-generated via the DLDL definition.
+	 */
+	class Grammar : public ::deamer::language::generator::definition::property::user::Grammar<
+								::{{language_full_name}}::Language>
+	{
+	public:
+		// Non-Terminal declarations
+		{{nonterminal_declaration.Variable_Field}}
+	
+		// Production-Rule declarations
+		{{productionrule_declaration.Variable_Field}}
+	
+	private:
+		// Unknown reference declarations
+		{{unknown_reference_declaration.Variable_Field}}
+	
+	public:
+		Grammar({{language_full_name}}::Language* language);
+
+		void GenerateObjects() override;
+	};
+}
+
+#endif // {{header_guard}}

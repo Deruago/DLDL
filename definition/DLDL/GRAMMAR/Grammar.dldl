@@ -1,0 +1,33 @@
+/ The grammar of DLDL grammar lpd
+/ Made by: Thimo Bohmer
+
+program
+	stmts
+
+stmts
+	stmt stmts
+	EMPTY
+
+stmt
+	abstraction_declaration
+	definition
+
+abstraction_declaration
+	abstraction NONTERMINAL
+
+abstraction
+	GROUP_ABSTRACTION
+	INLINE_ABSTRACTION
+	INLINE_GROUP_ABSTRACTION
+	START_ABSTRACTION
+	UNKNOWN_ABSTRACTION
+
+definition
+	abstraction NONTERMINAL production_rules
+	NONTERMINAL production_rules
+	
+production_rules
+	PRODUCTION_RULE production_rules
+	PRODUCTION_RULE
+	
+/

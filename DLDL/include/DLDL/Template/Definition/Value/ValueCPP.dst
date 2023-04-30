@@ -1,0 +1,29 @@
+#include "{{language_full_name_slash}}/Value.h"
+#include "{{language_full_name_slash}}/Language.h"
+
+{{language_full_name}}::Value::Value({{language_full_name}}::Language* language)
+			:	::deamer::language::generator::definition::property::user::Value<
+					{{language_full_name}}::Language>(language)
+{
+}
+
+void {{language_full_name}}::Value::GenerateObjects()
+{
+	// Value Objects (Rules)
+	{{value_object_implementation.Variable_Field}}
+
+	// Value Abstractions
+	{{value_abstraction_implementation.Variable_Field}}
+
+	// Unknown References
+	{{unknown_reference_implementation.Variable_Field}}
+
+	// Add Value Objects (Rules)
+	{{add_value_object_implementation.Variable_Field}}
+	
+	// Add Value Abstractions
+	{{add_value_abstraction_implementation.Variable_Field}}
+
+	// Unknown References
+	{{add_unknown_reference.Variable_Field}}
+}

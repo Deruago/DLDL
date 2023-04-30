@@ -1,0 +1,65 @@
+/*
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+/*
+ * Part of the DeamerProject.
+ * For more information go to: https://github.com/Deruago/theDeamerProject
+ */
+
+#ifndef {{header_guard}}
+#define {{header_guard}}
+
+#include "Deamer/Language/Type/Definition/Object/Base.h"
+{{ldo_include.Variable_Field}}
+{{ldo_special_include}}
+#include "Deamer/Type/Memory/SafeReserve.h"
+#include <string>
+#include <vector>
+#include <optional>
+
+namespace deamer::language::type::definition::object::{{location}}{{explicit_lpd_namespace}}
+{
+	/*! \class {{ldo_name}}
+	 *
+	 *	\brief {{brief_description}}
+	 *	\details {{detailed_description}}
+	 */
+	class {{ldo_name}} : public Base
+	{
+	private:
+		friend deamer::type::SafeReserve<{{ldo_name}}>;
+	
+	public:
+{{ldo_member.Variable_Field}}
+
+	public:
+		{{ldo_name}}({{ldo_ctor}});
+
+		// Compares if two {{ldo_name}} have the same value.
+		//
+		// This means that two identical but different LDOs are equal.
+		// However, pointer equality will fail as they are not the same LDO.
+		// They only have the same value.
+		bool operator==(const {{ldo_name}}& rhs) const noexcept;
+
+	public:
+{{ldo_specific_function.Variable_Field}}
+
+	protected:
+		{{optional_default_ctor}}
+	};
+}
+
+#endif // {{header_guard}}

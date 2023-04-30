@@ -1,0 +1,40 @@
+/ Grammar of DLDL Value LPD
+/ Made by: Thimo Bohmer
+
+program
+	stmt*
+	
+stmt
+	value_charactersitic_declaration
+	value_declaration
+	
+value_charactersitic_declaration
+	VALUE_CHARACTERISTIC value_rule_name LEFT_PARANTHESIS syntactic_context -> (DOT syntactic_context) RIGHT_PARANTHESIS LEFT_SQUARE_BRACKET value_characteristic_abstraction* RIGHT_SQUARE_BRACKET
+
+value_declaration
+	VALUE_RULE value_rule_name LEFT_PARANTHESIS syntactic_context -> (DOT syntactic_context) RIGHT_PARANTHESIS LEFT_SQUARE_BRACKET value_declaration_abstraction* RIGHT_SQUARE_BRACKET
+	
+value_characteristic_abstraction
+	value_abstraction
+
+value_declaration_abstraction
+	value_abstraction
+
+value_abstraction
+	abstraction_name LEFT_PARANTHESIS value RIGHT_PARANTHESIS [LEFT_SQUARE_BRACKET value_abstraction* RIGHT_SQUARE_BRACKET]
+	
+value
+	VARNAME
+	TEXT
+	NUMBER
+	
+syntactic_context
+	VARNAME
+	
+abstraction_name
+	VARNAME
+	
+value_rule_name
+	VARNAME
+
+/

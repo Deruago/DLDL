@@ -1,0 +1,38 @@
+/*
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+/*
+ * Part of the DeamerProject.
+ * For more information go to: https://github.com/Deruago/theDeamerProject
+ */
+
+#include "Deamer/Language/Type/Definition/Object/{{loc_impl}}/{{lpd_name}}/{{ldo_name}}.h"
+{{ldo_specific_include}}
+#include <utility>
+
+deamer::language::type::definition::object::{{location}}{{explicit_lpd_namespace}}::{{ldo_name}}::{{ldo_name}}({{ldo_ctor_member.Variable_Field}})
+	: Base(Type::{{ldo_name}}){{ldo_ctor_member_assignment.Variable_Field}}
+{
+{{ldo_member_reference.Variable_Field}}
+}
+
+bool deamer::language::type::definition::object::{{location}}{{explicit_lpd_namespace}}::{{ldo_name}}::operator==(const {{ldo_name}}& rhs) const noexcept
+{
+	return this == &rhs || ({{ldo_compare.Variable_Field}}true);
+}
+
+{{optional_default_ctor}}
+
+{{ldo_specific_function.Variable_Field}}

@@ -1,0 +1,17 @@
+/* 
+ * This file is auto-generated and auto-maintained by DLDL
+ * Do not change code in this as it can be overwritten.
+ *
+ * For more information see the DLDL repo: https://github.com/Deruago/DLDL
+ * For more information about Deamer: https://github.com/Deruago/theDeamerProject
+ */
+
+{{root_language_includes.Variable_Field}}
+#include "Deamer/File/Generate/Compiler.h"
+
+int main(int argc, char* argv[])
+{
+	{{generate_root_language.Variable_Field}}
+
+	return 0;
+}

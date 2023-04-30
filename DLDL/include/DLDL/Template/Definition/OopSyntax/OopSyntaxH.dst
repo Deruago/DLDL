@@ -1,0 +1,91 @@
+/* 
+ * This file is auto-generated and auto-maintained by DLDL
+ * Do not change code in this as it can be overwritten.
+ *
+ * For more information see the DLDL repo: https://github.com/Deruago/DLDL
+ * For more information about Deamer: https://github.com/Deruago/theDeamerProject
+ */
+
+#ifndef {{header_guard}}
+#define {{header_guard}}
+
+#include "Deamer/Language/Generator/Definition/Property/User/Main/OOPSyntax.h"
+#include "Deamer/Language/Type/Definition/Object/Special/Uninitialized.h"
+
+namespace {{language_full_name}}
+{
+	class Language;
+
+	class OopSyntax : public ::deamer::language::generator::definition::property::user::OOPSyntax<
+								::{{language_full_name}}::Language>
+	{
+	public:
+		// Oop Concept Member Declarations
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}Class_Name;
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}Struct_Name;
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}Interface_Name;
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}Enum_Name;
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}Enum_Member;
+
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}BaseTypes_Type;
+
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}Function_Name;
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}Function_Type;
+
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}FunctionArguments_Name;
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}FunctionArguments_Type;
+
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}Property_Name;
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}Property_Type;
+
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}Any_Name;
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}Any_Type;
+		::deamer::type::SafeReserve<
+			::deamer::language::type::definition::object::main::OopConceptMember>
+			{{oop_concept_member}}Any_Member;
+	
+		{{oop_link_declaration.Variable_Field}}
+
+		{{oop_concept_link_declaration.Variable_Field}}
+		
+		{{oop_encapsulation_declaration.Variable_Field}}
+
+	private:
+		{{unknown_reference_declaration.Variable_Field}}
+
+	public:
+		OopSyntax({{language_full_name}}::Language* language);
+		
+		void GenerateObjects() override;
+	};
+}
+
+#endif // {{header_guard}}

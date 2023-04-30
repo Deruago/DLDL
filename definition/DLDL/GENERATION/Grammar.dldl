@@ -1,0 +1,36 @@
+/
+/ Reserved grammar
+/ Made by: Thimo Bohmer
+
+program
+	stmts
+
+stmts
+	stmt stmts
+	EMPTY
+
+stmt
+	generate_declaration
+	integrate_declaration
+	argument_declaration
+
+generate_declaration
+	GENERATE type tool
+
+integrate_declaration
+	INTEGRATE tool tool
+
+argument_declaration
+	ARGUMENT tool argument_data
+
+type
+	VALUE
+
+tool
+	VALUE
+
+argument_data
+	VALUE argument_data
+	EMPTY
+
+/

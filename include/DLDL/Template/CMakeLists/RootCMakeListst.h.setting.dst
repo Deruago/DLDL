@@ -1,5 +1,0 @@
-{{file.namespace}} = <DLDL::filetemplate>
-
-{{project_name}} = <{{languages}}_LanguageProject>
-
-{{language_directory}} = <add_subdirectory({{language}})>

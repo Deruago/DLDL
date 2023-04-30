@@ -1,0 +1,15 @@
+{{file.target_language}} = @<C++>@
+{{file.file_name}} = @<GrammarH>@
+{{file.namespace}} = @<DLDL::filetemplate>@
+{{file.extension}} = @<h>@
+
+{{header_guard}} = @<{{language_full_name_underscore.Upper}}_GRAMMAR_H>@
+
+{{uninitialized_include}} = @<#include "Deamer/Language/Type/Definition/Object/Special/Uninitialized.h">@
+
+{{nonterminal_declaration}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::main::NonTerminal> {{nonterminal}};>@
+{{productionrule_declaration}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::main::ProductionRule> {{productionrule}};>@
+{{unknown_reference_declaration}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::special::Uninitialized<::deamer::language::type::definition::object::main::NonTerminal>> {{unknown_reference}};>@
+
+{{language_full_name_underscore}} = @<>@
+{{language_full_name_slash}} = @<>@

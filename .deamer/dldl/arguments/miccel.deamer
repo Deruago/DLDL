@@ -1,0 +1,1 @@
+ -target-os=windows    -cmake-output-use-legacy-names="true" 

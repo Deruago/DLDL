@@ -1,0 +1,15 @@
+/
+/ Reserved grammar
+/ Made by: Thimo Bohmer
+
+program
+	stmts
+
+stmts
+	stmt stmts
+	EMPTY
+
+stmt
+	ANY
+
+/

@@ -1,0 +1,42 @@
+{{file.target_language}} = <C++>
+{{file.file_name}} = <PT_OE>
+{{file.namespace}} = <DLDL::filetemplate::lpd::validater>
+{{file.extension}} = <h>
+
+{{lpd_type}} = @<{{lpd_name}}>@
+{{ldo_type}} = @<{{ldo_name}}>@
+
+{{ldo_forward_declaration}} = @<
+namespace deamer::language::type::definition::object::{{location}}{{explicit_lpd_namespace}}
+{
+	{{optional_enumeration_front}}class {{ldo_type}};
+}>@
+{{optional_enumeration_front}} = @<>@
+{{enumeration_front}} = @<enum >@
+
+{{lpd_forward_declaration}} = @<
+namespace deamer::language::type::definition::property::{{location}}{{explicit_lpd_namespace}}
+{
+	class {{lpd_type}};
+}>@
+
+{{ldo_implementation}} = @<
+	/*!
+	 *	\see GetPropertyTypeFromObjectType
+	 */
+	template<>
+	class GetPropertyTypeFromObjectType<type::definition::object::{{location}}{{explicit_lpd_namespace}}::{{ldo_name}}>
+	{
+	public:
+		constexpr static auto value = type::definition::property::Type::{{lpd_name}};
+		using type = type::definition::property::{{location}}::{{lpd_name}};
+	};
+>@
+
+{{location}} = @<{{loc_impl.Lower}}>@
+{{loc_impl}} = @<{{loc_main}}>@
+{{loc_main}} = @<Main>@
+{{loc_tool}} = @<Tool>@
+
+{{explicit_lpd_namespace}} = @<{{explicit_lpd_namespace_dispatch}}>@
+{{explicit_lpd_namespace_dispatch}} = @<::{{lpd_name.Lower}}>@

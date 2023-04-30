@@ -1,0 +1,20 @@
+{{file.target_language}} = <C++>
+{{file.file_name}} = <main>
+{{file.namespace}} = <DLDL::filetemplate>
+{{file.extension}} = <h>
+
+{{root_language_includes}} = <#include "{{root_language}}/CompilerGenerator.h">
+
+{{generate_root_language}} =
+<	// Generate: {{root_language}}
+	::{{root_language}}::CompilerGenerator {{root_language}}_compiler;
+	::deamer::file::generate::Compiler {{root_language}}_WriteToDisk({{root_language}}_compiler.Generate());
+	{{optional_project_type}}
+	{{optional_use_legacy_names}}
+	{{root_language}}_WriteToDisk.Generate();>
+
+{{optional_project_type}} = <{{project_type}}>
+{{project_type}} = <{{root_language}}_WriteToDisk.SetProjectType(::deamer::file::generate::Compiler::ProjectType::{{project_type_value}});>
+
+{{optional_use_legacy_names}} = @<>@
+{{use_legacy_names}} = @<{{root_language}}_WriteToDisk.SetLegacyNaming();>@

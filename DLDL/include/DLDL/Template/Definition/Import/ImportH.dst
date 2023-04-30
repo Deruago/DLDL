@@ -1,0 +1,51 @@
+/* 
+ * This file is auto-generated and auto-maintained by DLDL
+ * Do not change code in this as it can be overwritten.
+ *
+ * For more information see the DLDL repo: https://github.com/Deruago/DLDL
+ * For more information about Deamer: https://github.com/Deruago/theDeamerProject
+ */
+
+#ifndef {{header_guard}}
+#define {{header_guard}}
+
+#include "Deamer/Language/Generator/Definition/Property/User/Main/Import.h"
+#include "Deamer/Language/Type/Definition/Object/Special/Uninitialized.h"
+
+namespace {{language_full_name}}
+{
+	class Language;
+
+	class Import : public ::deamer::language::generator::definition::property::user::Import<
+								::{{language_full_name}}::Language>
+	{
+	public:
+		// Import Specification
+		{{declaration_import_specification.Variable_Field}}
+
+		// File Import Rules
+		{{declaration_import_file_import_rule.Variable_Field}}
+
+		// File Object Import Rules
+		{{declaration_import_file_object_import_rule.Variable_Field}}
+
+		// Import Syntactic Relation
+		{{declaration_import_syntactic_relation.Variable_Field}}
+
+		// Import File Target
+		{{declaration_import_file_target.Variable_Field}}
+
+		// Import Object Target
+		{{declaration_import_object_target.Variable_Field}}
+
+	private:
+		{{unknown_reference_declaration.Variable_Field}}
+
+	public:
+		Import({{language_full_name}}::Language* language);
+		
+		void GenerateObjects() override;
+	};
+}
+
+#endif // {{header_guard}}

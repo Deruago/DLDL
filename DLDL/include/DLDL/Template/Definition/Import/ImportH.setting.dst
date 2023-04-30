@@ -1,0 +1,34 @@
+{{file.target_language}} = @<C++>@
+{{file.file_name}} = @<ImportH>@
+{{file.namespace}} = @<DLDL::filetemplate>@
+{{file.extension}} = @<h>@
+
+{{header_guard}} = @<{{language_full_name_underscore.Upper}}_IMPORT_H>@
+
+{{language_full_name_slash}} = @<>@
+
+{{unknown_reference_declaration}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::special::Uninitialized<::deamer::language::type::definition::object::main::NonTerminal>> {{unknown_reference}};>@
+
+{{name_import_specification}} = @<import_specification__{{name_import_specification_impl}}>@
+
+{{name_import_file_import_rule}} = @<import_file_import_rule__{{name_import_file_import_rule_impl}}>@
+
+{{name_import_file_object_import_rule}} = @<import_file_object_import_rule__{{name_import_file_object_import_rule_impl}}>@
+
+{{name_import_syntactic_relation}} = @<import_syntactic_relation__{{name_import_syntactic_relation_impl}}>@
+
+{{name_import_file_target}} = @<import_file_target__{{name_import_file_target_impl}}>@
+
+{{name_import_object_target}} = @<import_object_target__{{name_import_object_target_impl}}>@
+
+{{declaration_import_specification}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::main::ImportSpecification> {{name_import_specification}};>@
+
+{{declaration_import_file_import_rule}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::main::FileImport> {{name_import_file_import_rule}};>@
+
+{{declaration_import_file_object_import_rule}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::main::FileObjectImport> {{name_import_file_object_import_rule}};>@
+
+{{declaration_import_syntactic_relation}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::main::ImportSyntacticRelation> {{name_import_syntactic_relation}};>@
+
+{{declaration_import_file_target}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::main::ImportFileTarget> {{name_import_file_target}};>@
+
+{{declaration_import_object_target}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::main::ObjectTarget> {{name_import_object_target}};>@

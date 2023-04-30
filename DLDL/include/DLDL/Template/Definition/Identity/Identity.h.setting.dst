@@ -1,0 +1,10 @@
+{{file.target_language}} = @<C++>@
+{{file.file_name}} = @<Identity>@
+{{file.namespace}} = @<DLDL::filetemplate>@
+{{file.extension}} = @<h>@
+
+{{header_guard}} = @<{{language_full_name_underscore.Upper}}_IDENTITY_H>@
+
+{{language_full_name_slash}} = @<>@
+
+{{identity_name}} = @<{{language_full_name_underscore}}>@

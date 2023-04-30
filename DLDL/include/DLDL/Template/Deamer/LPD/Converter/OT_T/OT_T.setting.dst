@@ -1,0 +1,27 @@
+{{file.target_language}} = <C++>
+{{file.file_name}} = <OT_T>
+{{file.namespace}} = <DLDL::filetemplate::lpd::converter>
+{{file.extension}} = <h>
+
+{{ldo_include}} = @<#include "Deamer/Language/Type/Definition/Object/{{loc_impl}}/{{lpd_name}}/{{ldo_name}}.h">@
+
+{{ldo_implementation}} = @<
+	/*!
+	 *	\see deamer::language::convertor::definition::ObjectEnumToType
+	 */
+	template<>
+	class ObjectEnumToType<type::definition::object::Type::{{ldo_name}}>
+	{
+	public:
+		constexpr static auto value = type::definition::object::Type::{{ldo_name}};
+		using type = type::definition::object::{{location}}{{explicit_lpd_namespace}}::{{ldo_name}};
+	};
+>@
+
+{{location}} = @<{{loc_impl.Lower}}>@
+{{loc_impl}} = @<{{loc_main}}>@
+{{loc_main}} = @<Main>@
+{{loc_tool}} = @<Tool>@
+
+{{explicit_lpd_namespace}} = @<{{explicit_lpd_namespace_dispatch}}>@
+{{explicit_lpd_namespace_dispatch}} = @<::{{lpd_name.Lower}}>@

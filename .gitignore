@@ -1,8 +1,4 @@
-*.o
-*.out
-CppProperties.json
-.vs/*
-
-*build/*
-*out/*
 *build*/*
+**/.vs/*
+**/out/*
+CompilerGenerator/*

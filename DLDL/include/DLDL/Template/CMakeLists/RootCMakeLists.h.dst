@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.16)
+
+project({{project_name}}
+                      DESCRIPTION "Project for the language(s): {{languages}}"
+                      LANGUAGES CXX)
+
+option({{language_name}}_ENABLE_COMPILER_GENERATOR "Enable Compiler Generation" {{option_compiler_generator_value}})
+if ({{language_name}}_ENABLE_COMPILER_GENERATOR)
+	find_package(Deamer REQUIRED)
+	add_subdirectory(CompilerGenerator)
+endif()
+
+option({{language_name}}_ENABLE_LANGUAGE_BUILD "Enable Language CMake Build." {{option_language_build_value}})
+if ({{language_name}}_ENABLE_LANGUAGE_BUILD)
+	{{language_directory.Variable_Field}}
+endif()

@@ -1,0 +1,49 @@
+/ DLDL:LPDDEF:DataFormat Grammar
+/ Used to parse data format used to define LPD data layout
+/ Designed by Thimo Böhmer
+
+program
+	stmt*
+
+stmt
+	comment_line
+	vector_variant
+	optional_variant
+	standard_variant
+
+comment_line
+	COMMENT
+
+vector_variant
+	VECTOR LAB var_type RAB var_name [value_part]
+	VECTOR LSB var_type RSB var_name [value_part]
+
+optional_variant
+	OPTIONAL LAB var_type RAB var_name [value_part]
+	OPTIONAL LSB var_type RSB var_name [value_part]
+
+value_part
+	EQ value
+
+standard_variant
+	var_type var_name [value_part]
+
+value
+	value_type
+
+value_type
+	VARNAME
+	VARNAME COLON COLON VARNAME
+	DEAMER_VARNAME
+	NUMBER
+	STRING
+	LB [value_type -> (COMMA value_type)] RB
+
+var_type
+	DEAMER_VARNAME
+	VARNAME -> (COLON VARNAME)
+	
+var_name
+	VARNAME
+
+/

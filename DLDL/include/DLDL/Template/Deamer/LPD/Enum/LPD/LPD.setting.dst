@@ -1,0 +1,8 @@
+{{file.target_language}} = <C++>
+{{file.file_name}} = <LPD>
+{{file.namespace}} = <DLDL::filetemplate::lpd::enumeration>
+{{file.extension}} = <h>
+
+{{header_guard}} = @<DEAMER_LANGUAGE_DATASTRUCTURE_DEFINITION_PROPERTY_TYPE_H>@
+
+{{lpd_implementation}} = @<		{{lpd_name}},>@

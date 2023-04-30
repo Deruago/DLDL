@@ -1,0 +1,5 @@
+/
+/ Reserved lexicon
+/ Made by: Thimo Bohmer
+
+Terminal: ANY [.]*

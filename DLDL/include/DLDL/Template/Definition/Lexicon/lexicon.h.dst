@@ -1,0 +1,49 @@
+/* 
+ * This file is auto-generated and auto-maintained by DLDL
+ * Do not change code in this as it can be overwritten.
+ *
+ * For more information see the DLDL repo: https://github.com/Deruago/DLDL
+ * For more information about Deamer: https://github.com/Deruago/theDeamerProject
+ */
+
+#ifndef {{header_guard}}
+#define {{header_guard}}
+
+#include "Deamer/Language/Generator/Definition/Property/User/Main/Lexicon.h"
+
+namespace {{language_full_name}}
+{
+	class Language;
+
+	class Lexicon : public ::deamer::language::generator::definition::property::user::Lexicon<
+								::{{language_full_name}}::Language>
+	{
+	public:
+		// Terminal declarations
+		{{variable_declaration.Variable_Field}}
+	
+	public:
+		Lexicon({{language_full_name}}::Language* language)
+			:	::deamer::language::generator::definition::property::user::Lexicon<
+					::{{language_full_name}}::Language>(language)
+		{
+		}
+
+		void GenerateObjects() override
+		{
+			// Terminals
+			{{variable_initialization.Variable_Field}}
+
+			// Add object calls
+			// AddObject(...)
+			{{add_object.Variable_Field}}
+
+			// Place higher level operations here.
+			// ReplaceObject(..., ...)
+			// DeleteObject(..., ...)
+			{{high_level_operation.Variable_Field}}
+		}
+	};
+}
+
+#endif // {{header_guard}}
