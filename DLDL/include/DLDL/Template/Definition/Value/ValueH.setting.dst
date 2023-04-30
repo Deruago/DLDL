@@ -1,0 +1,16 @@
+{{file.target_language}} = @<C++>@
+{{file.file_name}} = @<ValueH>@
+{{file.namespace}} = @<DLDL::filetemplate>@
+{{file.extension}} = @<h>@
+
+{{header_guard}} = @<{{language_full_name_underscore.Upper}}_VALUE_H>@
+
+{{language_full_name_slash}} = @<>@
+
+{{unknown_reference_declaration}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::special::Uninitialized<::deamer::language::type::definition::object::main::NonTerminal>> {{unknown_reference}};>@
+
+{{value_rule_name}}          = @<value_object__{{value_object_name}}>@
+{{value_object_declaration}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::main::ValueObject> {{value_rule_name}};>@
+
+{{value_abstraction_name}}   = @<value_abstraction__{{value_abstraction_primary_name}}>@
+{{value_abstraction_declaration}} = @<::deamer::type::SafeReserve<::deamer::language::type::definition::object::main::ValueAbstraction> {{value_abstraction_name}};>@

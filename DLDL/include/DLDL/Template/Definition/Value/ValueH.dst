@@ -1,0 +1,38 @@
+/* 
+ * This file is auto-generated and auto-maintained by DLDL
+ * Do not change code in this as it can be overwritten.
+ *
+ * For more information see the DLDL repo: https://github.com/Deruago/DLDL
+ * For more information about Deamer: https://github.com/Deruago/theDeamerProject
+ */
+
+#ifndef {{header_guard}}
+#define {{header_guard}}
+
+#include "Deamer/Language/Generator/Definition/Property/User/Main/Value.h"
+#include "Deamer/Language/Type/Definition/Object/Special/Uninitialized.h"
+
+namespace {{language_full_name}}
+{
+	class Language;
+
+	class Value : public ::deamer::language::generator::definition::property::user::Value<
+								::{{language_full_name}}::Language>
+	{
+	public:
+	// Value Objects (Rules)
+{{value_object_declaration.Variable_Field}}
+
+	// Value Abstractions
+{{value_abstraction_declaration.Variable_Field}}
+	private:
+		{{unknown_reference_declaration.Variable_Field}}
+
+	public:
+		Value({{language_full_name}}::Language* language);
+		
+		void GenerateObjects() override;
+	};
+}
+
+#endif // {{header_guard}}
